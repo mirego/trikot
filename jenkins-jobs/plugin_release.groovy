@@ -1,4 +1,5 @@
 @GrabResolver('https://s3.amazonaws.com/mirego-maven/public')
+@GrabExclude('org.codehaus.groovy:groovy-all')
 @Grab('com.mirego.jenkins:jenkins-jobs:1.2')
 import com.mirego.jenkins.jobs.Context
 
