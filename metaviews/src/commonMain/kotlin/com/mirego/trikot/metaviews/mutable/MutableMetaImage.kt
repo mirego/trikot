@@ -15,12 +15,12 @@ import org.reactivestreams.Publisher
  */
 typealias ImageFlowProvider = (width: ImageWidth, height: ImageHeight) -> Publisher<ImageFlow>
 
-open class MutableMetaImage(var imageFlowProvider: ImageFlowProvider = { _, _ -> PublisherFactory.create(null) }) : MutableMetaView(), MetaImage {
+open class MutableMetaImage(var imageFlowProvider: ImageFlowProvider) : MutableMetaView(), MetaImage {
     override fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow> {
         return imageFlowProvider(width, height)
     }
 }
 
-fun simpleImageFlowProvider(url: String? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
-    return { _, _ -> PublisherFactory.create(SimpleImageFlow(URL = url, imageResource = imageResource, tintColor = tintColor)) }
+fun simpleImageFlowProvider(url: String? = null, placeholderImageResource: ImageResource? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
+    return { _, _ -> PublisherFactory.create(SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor)) }
 }
