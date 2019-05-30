@@ -1,10 +1,10 @@
-package com.mirego.trikot.metaview.mutable
+package com.mirego.trikot.metaviews.mutable
 
-import com.mirego.trikot.metaview.MetaView
-import com.mirego.trikot.metaview.factory.PropertyFactory
-import com.mirego.trikot.metaview.properties.Color
-import com.mirego.trikot.metaview.properties.MetaSelector
-import com.mirego.trikot.metaview.properties.MetaAction
+import com.mirego.trikot.metaviews.MetaView
+import com.mirego.trikot.metaviews.factory.PropertyFactory
+import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.MetaSelector
+import com.mirego.trikot.metaviews.properties.MetaAction
 
 abstract class MutableMetaView : MetaView {
     override var alpha = PropertyFactory.create(1f)

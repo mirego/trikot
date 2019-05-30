@@ -1,4 +1,4 @@
-package com.mirego.trikot.metaview.factory
+package com.mirego.trikot.metaviews.factory
 
 import com.mirego.trikot.streams.reactive.MutablePublisher
 import com.mirego.trikot.streams.reactive.PublisherFactory

@@ -1,4 +1,4 @@
-package com.mirego.trikot.metaview.properties
+package com.mirego.trikot.metaviews.properties
 
 import com.mirego.trikot.streams.concurrent.freeze
 import kotlin.math.roundToInt

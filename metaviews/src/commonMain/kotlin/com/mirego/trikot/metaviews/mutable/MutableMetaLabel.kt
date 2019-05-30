@@ -1,10 +1,10 @@
-package com.mirego.trikot.metaview.mutable
+package com.mirego.trikot.metaviews.mutable
 
-import com.mirego.trikot.metaview.MetaLabel
-import com.mirego.trikot.metaview.factory.PropertyFactory
-import com.mirego.trikot.metaview.properties.Color
-import com.mirego.trikot.metaview.properties.MetaSelector
-import com.mirego.trikot.metaview.resource.Font
+import com.mirego.trikot.metaviews.MetaLabel
+import com.mirego.trikot.metaviews.factory.PropertyFactory
+import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.MetaSelector
+import com.mirego.trikot.metaviews.resource.Font
 
 open class MutableMetaLabel : MutableMetaView(), MetaLabel {
     override var text = PropertyFactory.create("")

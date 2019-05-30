@@ -1,4 +1,4 @@
-package com.mirego.trikot.metaview.resource
+package com.mirego.trikot.metaviews.resource
 
 import com.mirego.trikot.streams.concurrent.freeze
 

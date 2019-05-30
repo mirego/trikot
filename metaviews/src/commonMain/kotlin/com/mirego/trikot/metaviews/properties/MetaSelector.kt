@@ -1,4 +1,4 @@
-package com.mirego.trikot.metaview.properties
+package com.mirego.trikot.metaviews.properties
 
 data class MetaSelector<T>(
     val default: T? = null,

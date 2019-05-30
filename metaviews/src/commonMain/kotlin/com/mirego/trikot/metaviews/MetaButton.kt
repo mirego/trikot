@@ -1,9 +1,9 @@
-package com.mirego.trikot.metaview
+package com.mirego.trikot.metaviews
 
-import com.mirego.trikot.metaview.properties.Alignment
-import com.mirego.trikot.metaview.properties.Color
-import com.mirego.trikot.metaview.properties.MetaSelector
-import com.mirego.trikot.metaview.resource.ImageResource
+import com.mirego.trikot.metaviews.properties.Alignment
+import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.MetaSelector
+import com.mirego.trikot.metaviews.resource.ImageResource
 import org.reactivestreams.Publisher
 
 interface MetaButton : MetaLabel {

@@ -1,11 +1,11 @@
-package com.mirego.trikot.metaview.mutable
+package com.mirego.trikot.metaviews.mutable
 
-import com.mirego.trikot.metaview.MetaButton
-import com.mirego.trikot.metaview.factory.PropertyFactory
-import com.mirego.trikot.metaview.properties.Alignment
-import com.mirego.trikot.metaview.properties.Color
-import com.mirego.trikot.metaview.properties.MetaSelector
-import com.mirego.trikot.metaview.resource.ImageResource
+import com.mirego.trikot.metaviews.MetaButton
+import com.mirego.trikot.metaviews.factory.PropertyFactory
+import com.mirego.trikot.metaviews.properties.Alignment
+import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.MetaSelector
+import com.mirego.trikot.metaviews.resource.ImageResource
 
 open class MutableMetaButton : MutableMetaLabel(), MetaButton {
     override var backgroundImageResource = PropertyFactory.create(MetaSelector<ImageResource>())

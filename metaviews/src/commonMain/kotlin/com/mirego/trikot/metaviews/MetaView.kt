@@ -1,8 +1,8 @@
-package com.mirego.trikot.metaview
+package com.mirego.trikot.metaviews
 
-import com.mirego.trikot.metaview.properties.Color
-import com.mirego.trikot.metaview.properties.MetaSelector
-import com.mirego.trikot.metaview.properties.MetaAction
+import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.MetaSelector
+import com.mirego.trikot.metaviews.properties.MetaAction
 import org.reactivestreams.Publisher
 
 interface MetaView {

@@ -1,11 +1,11 @@
-package com.mirego.trikot.metaview.mutable
+package com.mirego.trikot.metaviews.mutable
 
-import com.mirego.trikot.metaview.ImageHeight
-import com.mirego.trikot.metaview.ImageWidth
-import com.mirego.trikot.metaview.MetaImage
-import com.mirego.trikot.metaview.factory.PropertyFactory
-import com.mirego.trikot.metaview.properties.Color
-import com.mirego.trikot.metaview.resource.ImageResource
+import com.mirego.trikot.metaviews.ImageHeight
+import com.mirego.trikot.metaviews.ImageWidth
+import com.mirego.trikot.metaviews.MetaImage
+import com.mirego.trikot.metaviews.factory.PropertyFactory
+import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.resource.ImageResource
 import com.mirego.trikot.streams.reactive.PublisherFactory
 import org.reactivestreams.Publisher
 

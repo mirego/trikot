@@ -1,4 +1,4 @@
-package com.mirego.trikot.metaview.properties
+package com.mirego.trikot.metaviews.properties
 
 enum class Alignment {
     BOTTOM,
