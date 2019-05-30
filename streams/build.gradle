@@ -15,7 +15,6 @@ repositories {
 }
 
 group 'com.mirego.trikot'
-version '0.0.1'
 
 kotlin {
     targets {
