@@ -10,18 +10,34 @@ inline class ImageWidth(val value: Int)
 inline class ImageHeight(val value: Int)
 
 interface MetaImage : MetaView {
-    /**
-     * Online URL of the image to fetch according to the view Size
-     */
-    fun URL(width: ImageWidth, height: ImageHeight): Publisher<String?>
+    fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow>
+}
 
+interface ImageFlow {
     /**
-     * Image resource to display in the image
+     * Image resource to display as placeholder/static image
      */
-    val imageResource: Publisher<ImageResource>
-
+    val imageResource: ImageResource?
     /**
-     * Tint color to apply to the image resource
+     * Tint color to apply to the imageResource
      */
-    val tintColor: Publisher<Color>
+    val tintColor: Color?
+    /**
+     * Accessibility text
+     */
+    val accessibilityText: String?
+    /**
+     * URL to download the image from. When downloaded, it will replace the imageResource if any
+     */
+    val URL: String?
+    /**
+     * Next image flow to use when an URL is provided and the image is successfully displayed. Usefull when a low
+     * quality image needs to be displayed before a full quality image.
+     */
+    val onSuccess: Publisher<ImageFlow>?
+    /**
+     * Next image flow to use when an URL is provided and the image could not be downloaded/displayed. Usefull when a low
+     * quality image needs to be displayed before a full quality image.
+     */
+    val onError: Publisher<ImageFlow>?
 }
