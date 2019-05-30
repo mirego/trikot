@@ -6,6 +6,7 @@ import org.reactivestreams.Publisher
 
 open class SimpleImageFlow(
     override val imageResource: ImageResource? = null,
+    override val placeholderImageResource: ImageResource? = null,
     override val tintColor: Color? = null,
     override val accessibilityText: String? = null,
     override val url: String? = null,

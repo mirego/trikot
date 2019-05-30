@@ -15,9 +15,13 @@ interface MetaImage : MetaView {
 
 interface ImageFlow {
     /**
-     * Image resource to display as placeholder/static image
+     * Image resource to display
      */
     val imageResource: ImageResource?
+    /**
+     * Image resource to display as placeholder
+     */
+    val placeholderImageResource: ImageResource?
     /**
      * Tint color to apply to the imageResource
      */

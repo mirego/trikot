@@ -21,6 +21,6 @@ open class MutableMetaImage(var imageFlowProvider: ImageFlowProvider) : MutableM
     }
 }
 
-fun simpleImageFlowProvider(url: String? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
-    return { _, _ -> PublisherFactory.create(SimpleImageFlow(url = url, imageResource = imageResource, tintColor = tintColor)) }
+fun simpleImageFlowProvider(url: String? = null, placeholderImageResource: ImageResource? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
+    return { _, _ -> PublisherFactory.create(SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor)) }
 }
