@@ -51,3 +51,9 @@ kotlin {
         }
     }
 }
+
+release {
+   checkTasks = ['check']
+   buildTasks = ['publish']
+   updateVersionPart = 1
+}
