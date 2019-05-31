@@ -4,6 +4,7 @@ import com.mirego.trikot.streams.cancelable.CancelableManager
 import com.mirego.trikot.streams.cancelable.ResettableCancelableManager
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 
 typealias WithChildCancelableManagerProcessorBlock<T> = (T, CancelableManager) -> T
 
@@ -24,6 +25,11 @@ class WithChildCancelableManagerProcessor<T>(
 
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
             subscriber.onNext(block(t, resettableCancelableManager.reset()))
+        }
+
+        override fun onCancel(s: Subscription) {
+            super.onCancel(s)
+            resettableCancelableManager.cancel()
         }
     }
 }
