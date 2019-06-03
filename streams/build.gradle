@@ -20,10 +20,7 @@ kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
-
-        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
-                              ? presets.iosArm64 : presets.iosX64
-        fromPreset(iOSTarget, 'ios')
+        fromPreset(presets.iosArm64, 'ios')
     }
     sourceSets {
         commonMain {
