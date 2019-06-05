@@ -20,7 +20,8 @@ kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
-        fromPreset(presets.iosArm64, 'ios')
+        fromPreset(presets.iosArm64, 'iosArm64')
+        fromPreset(presets.iosX64, 'iosX64')
     }
     sourceSets {
         commonMain {
@@ -44,9 +45,17 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
-        iosMain {
-            dependencies {
-            }
+
+        nativeMain {
+            dependsOn(commonMain)
+        }
+
+        iosArm64Main {
+            dependsOn(nativeMain)
+        }
+
+        iosX64Main {
+            dependsOn(nativeMain)
         }
     }
 }
