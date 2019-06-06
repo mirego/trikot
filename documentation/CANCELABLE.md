@@ -7,7 +7,7 @@ One key concept of Trikot is the `Cancelable`s.  `Cancelable` are meant to be ad
 * Once cancelled are not meant to be reuse after cancel has been called.
 
 
-```
+```kotlin
 class Bar: Cancelable {
 	override fun cancel() {
 		// Terminate all operations
@@ -23,3 +23,18 @@ class Foo {
 	}
 }
 ```
+
+### ResettableCancelableManager
+Its a common pattern to cancel a CancelableManager and create a new CancelableManager to replace it when reseting a state. This is the main use case of ResettableCancelableManager.
+
+*Implementation detail*
+- `ResettableCancelableManager` is a cancelable so it can be added to any other CancelableManager
+- Once cancelled it cannot be resetted
+
+Calling reset will cancel any previous `CancelableManager` returned and provide a new one
+```kotlin
+val resettableCancelableManager = ResettableCancelableManager()
+val cancelableManager = resettableCancelableManager.reset()
+cancelableManager.add(...)
+```
+
