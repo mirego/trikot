@@ -181,7 +181,7 @@ val uppercasePublisher = fooPublisher
 	.shared()
 
 uppercasePublisher.subsribe(...)
-uppercasePublisher.subsribe(...)
+uppercasePublisher.subscribe(...)
 uppercasePublisher.subsribe(...)
 ```
 In this case,  when fooPublisher emit a new value, the maps will only be executed once.
