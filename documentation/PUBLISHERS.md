@@ -63,7 +63,7 @@ val publisher = object: BaseExecutablePublisher<String>() {
 publisher.execute()
 ```
 
-In this case,  executablePublisher will emit `foo` once executed.
+In this case, executablePublisher will emit `foo` once executed.
 
 **Result methods**
 - `dispatchSuccess("successValue")`
