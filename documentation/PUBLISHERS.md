@@ -98,12 +98,10 @@ Example without destructuring.
 ```kotlin
 CombineLatest.combine4(publisher1, publisher2, publisher3, publisher4)
 	.subscribe(cancelableManager) { combineLatestResult4 ->
-	val publisher1Value = combineLatestResult4._1
-	val publisher3Value = combineLatestResult4._3
+	val publisher1Value = combineLatestResult4.component1
+	val publisher3Value = combineLatestResult4.component3
 }
 ```
-
-
 
 ## Processors
 Processors alter the emission chain of publishers. 
@@ -180,7 +178,7 @@ val uppercasePublisher = fooPublisher
 	.map { it.toUppercase() }
 	.shared()
 
-uppercasePublisher.subsribe(...)
+uppercasePublisher.subscribe(...)
 uppercasePublisher.subscribe(...)
 uppercasePublisher.subscribe(...)
 ```

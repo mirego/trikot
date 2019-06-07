@@ -53,8 +53,8 @@ Foundation of trikot.streams is based on a immutable and concurrent implementati
 
 See the documentation [here](./documentation/PUBLISHERS.md)
 
-## [Cancelables](./documentation/CANCELABLE.md)
-Subscription and unsubscription are managed trough `Cancelable` and `CancelableManager`.
+## [Cancellables](./documentation/CANCELLABLE.md)
+Subscription and unsubscription are managed trough `Cancellable` and `CancellableManager`.
 
 See the documentation [here](./documentation/CANCELABLE.md)
 

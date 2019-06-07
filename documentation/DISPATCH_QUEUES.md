@@ -17,7 +17,7 @@ By default, trikot provide those dispatch queues available trough the Configurat
 * Configuration.publisherExecutionDispatchQueue -> Default queue used by `ExecutablePublisher` to execute code
 * Configuration.serialSubscriptionDispatchQueue -> Single not shared thread useful to subscribe concurrently to publishers.
 
-*Note on using coroutines*: You can easily switch the 
+*Note on using coroutines*: Use the following code to run ExecutablePublisher on coroutines instead of threads
 
 ```kotlin
 class MyCoroutineDispatcher(val context: CoroutineContext = Dispatchers.unconfined): DispatchQueue, CoroutineScope {
