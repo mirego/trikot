@@ -182,6 +182,6 @@ val uppercasePublisher = fooPublisher
 
 uppercasePublisher.subsribe(...)
 uppercasePublisher.subscribe(...)
-uppercasePublisher.subsribe(...)
+uppercasePublisher.subscribe(...)
 ```
 In this case,  when fooPublisher emit a new value, the maps will only be executed once.
