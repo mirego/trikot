@@ -25,7 +25,7 @@ class Foo {
 ```
 
 ### ResettableCancelableManager
-Its a common pattern to cancel a CancelableManager and create a new CancelableManager to replace it when reseting a state. This is the main use case of ResettableCancelableManager.
+It's a common pattern to cancel a CancelableManager and create a new CancelableManager to replace it when reseting a state. This is the main use case of ResettableCancelableManager.
 
 *Implementation detail*
 - `ResettableCancelableManager` is a cancelable so it can be added to any other CancelableManager
