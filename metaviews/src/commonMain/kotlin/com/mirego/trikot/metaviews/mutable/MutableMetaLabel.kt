@@ -11,7 +11,7 @@ import org.reactivestreams.Publisher
 open class MutableMetaLabel : MutableMetaView(), MetaLabel {
     override var text = PropertyFactory.create("")
 
-    override var richTexts: Publisher<RichText>? = null
+    override var richText: Publisher<RichText>? = null
 
     override var fontFace = PropertyFactory.create(Font.None)
 
