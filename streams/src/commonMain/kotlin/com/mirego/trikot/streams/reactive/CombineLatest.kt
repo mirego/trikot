@@ -4,64 +4,70 @@ import com.mirego.trikot.streams.cancelable.Cancelable
 import com.mirego.trikot.streams.cancelable.CancelableManager
 import com.mirego.trikot.streams.concurrent.AtomicReference
 import org.reactivestreams.Publisher
+import kotlin.js.JsName
 
 abstract class CombineLatestResult<A, B, C, D, E>(
-    open var _1: A? = null,
-    open var _2: B? = null,
-    open var _3: C? = null,
-    open var _4: D? = null,
-    open var _5: E? = null
+    @JsName("c1")
+    open var component1: A? = null,
+    @JsName("c2")
+    open var component2: B? = null,
+    @JsName("c3")
+    open var component3: C? = null,
+    @JsName("c4")
+    open var component4: D? = null,
+    @JsName("c5")
+    open var component5: E? = null
 ) {
     abstract fun shouldDispatch(): Boolean
     abstract fun copyForUpdate(): CombineLatestResult<A, B, C, D, E>
 }
 
-data class CombineLatestResult2<A, B>(override var _1: A? = null, override var _2: B? = null) :
+data class CombineLatestResult2<A, B>(override var component1: A? = null, override var component2: B? = null) :
     CombineLatestResult<A, B, Any, Any, Any>() {
     override fun copyForUpdate(): CombineLatestResult<A, B, Any, Any, Any> {
         return copy()
     }
 
-    override fun shouldDispatch(): Boolean = _1 != null && _2 != null
+    override fun shouldDispatch(): Boolean = component1 != null && component2 != null
 }
 
 data class CombineLatestResult3<A, B, C>(
-    override var _1: A? = null,
-    override var _2: B? = null,
-    override var _3: C? = null
+    override var component1: A? = null,
+    override var component2: B? = null,
+    override var component3: C? = null
 ) : CombineLatestResult<A, B, C, Any, Any>() {
     override fun copyForUpdate(): CombineLatestResult<A, B, C, Any, Any> {
         return copy()
     }
 
-    override fun shouldDispatch(): Boolean = _1 != null && _2 != null && _3 != null
+    override fun shouldDispatch(): Boolean = component1 != null && component2 != null && component3 != null
 }
 
 data class CombineLatestResult4<A, B, C, D>(
-    override var _1: A? = null,
-    override var _2: B? = null,
-    override var _3: C? = null,
-    override var _4: D? = null
+    override var component1: A? = null,
+    override var component2: B? = null,
+    override var component3: C? = null,
+    override var component4: D? = null
 ) : CombineLatestResult<A, B, C, D, Any>() {
     override fun copyForUpdate(): CombineLatestResult<A, B, C, D, Any> {
         return copy()
     }
 
-    override fun shouldDispatch(): Boolean = _1 != null && _2 != null && _3 != null && _4 != null
+    override fun shouldDispatch(): Boolean = component1 != null && component2 != null && component3 != null && component4 != null
 }
 
 data class CombineLatestResult5<A, B, C, D, E>(
-    override var _1: A? = null,
-    override var _2: B? = null,
-    override var _3: C? = null,
-    override var _4: D? = null,
-    override var _5: E? = null
+    override var component1: A? = null,
+    override var component2: B? = null,
+    override var component3: C? = null,
+    override var component4: D? = null,
+    override var component5: E? = null
 ) : CombineLatestResult<A, B, C, D, E>() {
     override fun copyForUpdate(): CombineLatestResult<A, B, C, D, E> {
         return copy()
     }
 
-    override fun shouldDispatch(): Boolean = _1 != null && _2 != null && _3 != null && _4 != null && _5 != null
+    override fun shouldDispatch(): Boolean = component1 != null && component2 != null && component3 != null && component4 != null && component5 != null
 }
 
 class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
@@ -84,23 +90,23 @@ class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
 
         pub1.subscribe(
             newCancelableManager,
-            onNext = { onNewValue { newResult -> newResult._1 = it } },
+            onNext = { onNewValue { newResult -> newResult.component1 = it } },
             onError = { dispatchError(it) })
         pub2.subscribe(
             newCancelableManager,
-            onNext = { onNewValue { newResult -> newResult._2 = it } },
+            onNext = { onNewValue { newResult -> newResult.component2 = it } },
             onError = { dispatchError(it) })
         pub3?.subscribe(
             newCancelableManager,
-            onNext = { onNewValue { newResult -> newResult._3 = it } },
+            onNext = { onNewValue { newResult -> newResult.component3 = it } },
             onError = { dispatchError(it) })
         pub4?.subscribe(
             newCancelableManager,
-            onNext = { onNewValue { newResult -> newResult._4 = it } },
+            onNext = { onNewValue { newResult -> newResult.component4 = it } },
             onError = { dispatchError(it) })
         pub5?.subscribe(
             newCancelableManager,
-            onNext = { onNewValue { newResult -> newResult._5 = it } },
+            onNext = { onNewValue { newResult -> newResult.component5 = it } },
             onError = { dispatchError(it) })
     }
 
