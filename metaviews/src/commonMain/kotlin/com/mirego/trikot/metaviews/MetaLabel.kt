@@ -13,9 +13,9 @@ interface MetaLabel : MetaView {
     val text: Publisher<String>
 
     /**
-     * Label rich texts. Use this instead of {@link #text text} when not null
+      * Label rich text. Use this instead of {@link #text text} when not null
      */
-    val richTexts: Publisher<RichText>?
+    val richText: Publisher<RichText>?
     /**
      * Label font. FontManager should be configured by platform.
      */
