@@ -43,8 +43,8 @@ class CombineLatestTests extends Specification {
         }
 
         then:
-        result._1 == "a"
-        result._2 == 1
+        result.component1 == "a"
+        result.component2 == 1
     }
 
     def '''
@@ -64,8 +64,8 @@ class CombineLatestTests extends Specification {
         stringPublisher.value = "b"
 
         then:
-        result._1 == "a"
-        result._2 == 1
+        result.component1 == "a"
+        result.component2 == 1
     }
 
     def '''
@@ -84,8 +84,8 @@ class CombineLatestTests extends Specification {
         stringPublisher.value = "b"
 
         then:
-        result._1 == "b"
-        result._2 == 1
+        result.component1 == "b"
+        result.component2 == 1
     }
 
 }
