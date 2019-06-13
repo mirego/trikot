@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.streams.reactive.processors.FilterProcessor
 import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
@@ -21,16 +21,16 @@ typealias SubscriptionBlock<T> = (T) -> Unit
 typealias SubscriptionErrorBlock = (Throwable) -> Unit
 typealias SubscriptionCompletedBlock = () -> Unit
 
-fun <T> Publisher<T>.subscribe(cancelableManager: CancelableManager, onNext: SubscriptionBlock<T>) {
+fun <T> Publisher<T>.subscribe(cancelableManager: CancellableManager, onNext: SubscriptionBlock<T>) {
     subscribe(cancelableManager, onNext, null, null)
 }
 
-fun <T> Publisher<T>.subscribe(cancelableManager: CancelableManager, onNext: SubscriptionBlock<T>, onError: SubscriptionErrorBlock?) {
+fun <T> Publisher<T>.subscribe(cancelableManager: CancellableManager, onNext: SubscriptionBlock<T>, onError: SubscriptionErrorBlock?) {
     subscribe(cancelableManager, onNext, onError, null)
 }
 
 fun <T> Publisher<T>.subscribe(
-    cancelableManager: CancelableManager,
+    cancelableManager: CancellableManager,
     onNext: SubscriptionBlock<T>,
     onError: SubscriptionErrorBlock?,
     onCompleted: SubscriptionCompletedBlock?

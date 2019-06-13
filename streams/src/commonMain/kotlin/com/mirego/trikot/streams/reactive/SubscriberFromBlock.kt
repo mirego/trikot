@@ -1,18 +1,18 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.Cancelable
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.Cancellable
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
 class SubscriberFromBlock<T>(
-    private val cancelableManager: CancelableManager,
+    private val cancelableManager: CancellableManager,
     private val subscriptionBlock: SubscriptionBlock<T>,
     private val subscriptionErrorBlock: SubscriptionErrorBlock?,
     private val onCompleted: SubscriptionCompletedBlock?
 ) : Subscriber<T> {
     override fun onSubscribe(s: Subscription) {
-        cancelableManager.add(object : Cancelable {
+        cancelableManager.add(object : Cancellable {
             override fun cancel() {
                 s.cancel()
             }

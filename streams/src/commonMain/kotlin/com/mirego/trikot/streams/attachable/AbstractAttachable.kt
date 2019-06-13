@@ -1,15 +1,15 @@
 package com.mirego.trikot.streams.attachable
 
-import com.mirego.trikot.streams.cancelable.Cancelable
-import com.mirego.trikot.streams.cancelable.CancelableManager
-import com.mirego.trikot.streams.cancelable.ResettableCancelableManager
+import com.mirego.trikot.streams.cancellable.Cancellable
+import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.concurrent.AtomicReference
 
 abstract class AbstractAttachable(private val maxSimultaneousAttachCount: Int = Int.MAX_VALUE) : Attachable {
     private val attachCountRef = AtomicReference(0)
-    private val resetableCancelableManager = ResettableCancelableManager()
+    private val cancellableManagerProvider = CancellableManagerProvider()
 
-    override fun attach(): Cancelable {
+    override fun attach(): Cancellable {
         var attachCount = attachCountRef.value
         attachCount += 1
         attachCountRef.setOrThrow(attachCount - 1, attachCount)
@@ -17,9 +17,9 @@ abstract class AbstractAttachable(private val maxSimultaneousAttachCount: Int = 
         if (attachCount > maxSimultaneousAttachCount) throw IllegalStateException("attach() can only be called $maxSimultaneousAttachCount time(s) on this instance")
 
         if (attachCount == 1) {
-            doAttach(resetableCancelableManager.reset())
+            doAttach(cancellableManagerProvider.cancelPreviousAndCreate())
         }
-        return object : Cancelable {
+        return object : Cancellable {
             var isDetached = AtomicReference(false)
             override fun cancel() {
                 if (isDetached.compareAndSet(false, true)) {
@@ -36,11 +36,11 @@ abstract class AbstractAttachable(private val maxSimultaneousAttachCount: Int = 
 
         if (newattachCount == 0) {
             doDetach()
-            resetableCancelableManager.cancel()
+            cancellableManagerProvider.cancel()
         }
     }
 
-    protected open fun doAttach(cancelableManager: CancelableManager) {
+    protected open fun doAttach(cancelableManager: CancellableManager) {
     }
 
     protected open fun doDetach() {

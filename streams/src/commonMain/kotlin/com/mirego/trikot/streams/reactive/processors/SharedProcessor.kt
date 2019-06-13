@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.cancelable.ResettableCancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.SimplePublisher
 import org.reactivestreams.Processor
 import org.reactivestreams.Publisher
@@ -8,7 +8,7 @@ import org.reactivestreams.Subscription
 
 class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : SimplePublisher<T>(), Processor<T, T> {
 
-    private val resettableCancelableManager = ResettableCancelableManager()
+    private val cancellableManagerProvider = CancellableManagerProvider()
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
@@ -17,10 +17,10 @@ class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : SimplePubl
 
     override fun onNoSubscription() {
         super.onNoSubscription()
-        resettableCancelableManager.cancel()
+        cancellableManagerProvider.cancel()
     }
 
-    override fun onSubscribe(s: Subscription) = with(resettableCancelableManager.reset()) { add { s.cancel() } }
+    override fun onSubscribe(s: Subscription) = with(cancellableManagerProvider.cancelPreviousAndCreate()) { add { s.cancel() } }
 
     override fun onNext(t: T) = let { value = t }
 

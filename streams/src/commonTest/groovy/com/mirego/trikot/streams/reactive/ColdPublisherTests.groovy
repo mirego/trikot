@@ -1,20 +1,20 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.Cancelable
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.Cancellable
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import spock.lang.Specification
 
 class ColdPublisherTests extends Specification {
 
-    CancelableManager cancelableManager = new CancelableManager()
+    CancellableManager cancellableManager = new CancellableManager()
     String expectedValue = "a"
     String receivedValue = null
     Boolean executed = false
-    FakeCancelable cancelable = new FakeCancelable()
+    FakeCancellable cancellable = new FakeCancellable()
 
-    def executionBlock = { cancelableManager ->
+    def executionBlock = { cancellableManager ->
         executed = true
-        cancelableManager.add(cancelable)
+        cancellableManager.add(cancellable)
         return executionPublisher
     }
 
@@ -30,30 +30,30 @@ class ColdPublisherTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            coldPublisher.subscribe(cancelableManager, {})
+            coldPublisher.subscribe(cancellableManager, {})
         }
 
         then:
         executed
-        !cancelable.isCancelled
+        !cancellable.isCancelled
     }
 
     def '''
         given cold publisher
         when unsubscribing
-        then cancelable is called
+        then cancellable is called
         '''() {
         given:
 
         when:
         use(PublisherExtensionsKt) {
-            coldPublisher.subscribe(cancelableManager, {})
+            coldPublisher.subscribe(cancellableManager, {})
         }
-        cancelableManager.cancel()
+        cancellableManager.cancel()
 
         then:
         executed
-        cancelable.isCancelled
+        cancellable.isCancelled
     }
 
     def '''
@@ -65,7 +65,7 @@ class ColdPublisherTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            coldPublisher.subscribe(cancelableManager, { receivedValue = it })
+            coldPublisher.subscribe(cancellableManager, { receivedValue = it })
         }
         executionPublisher.value = expectedValue
 
@@ -82,17 +82,17 @@ class ColdPublisherTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            coldPublisher.subscribe(cancelableManager, { receivedValue = it })
-            cancelableManager.cancel()
+            coldPublisher.subscribe(cancellableManager, { receivedValue = it })
+            cancellableManager.cancel()
             executed = false
-            coldPublisher.subscribe(new CancelableManager(), { receivedValue = it })
+            coldPublisher.subscribe(new CancellableManager(), { receivedValue = it })
         }
 
         then:
         executed
     }
 
-    class FakeCancelable implements Cancelable {
+    class FakeCancellable implements Cancellable {
         boolean isCancelled = false
         @Override
         void cancel() {

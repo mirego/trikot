@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.Cancelable
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.Cancellable
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.concurrent.AtomicReference
 import org.reactivestreams.Publisher
 import kotlin.js.JsName
@@ -77,15 +77,15 @@ class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
     private var pub3: Publisher<C>? = null,
     private var pub4: Publisher<D>? = null,
     private var pub5: Publisher<E>? = null
-) : SimplePublisher<R>(null), Cancelable {
-    private var masterCancelableManager = CancelableManager()
-    private var cancelableManager = AtomicReference(CancelableManager())
+) : SimplePublisher<R>(null), Cancellable {
+    private var masterCancelableManager = CancellableManager()
+    private var cancelableManager = AtomicReference(CancellableManager())
     private var result = AtomicReference(result)
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
         cancelableManager.value.cancel()
-        val newCancelableManager = CancelableManager().also { masterCancelableManager.add(it) }
+        val newCancelableManager = CancellableManager().also { masterCancelableManager.add(it) }
         cancelableManager.setOrThrow(cancelableManager.value, newCancelableManager)
 
         pub1.subscribe(
