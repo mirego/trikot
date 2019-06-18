@@ -6,13 +6,13 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
 class SubscriberFromBlock<T>(
-    private val cancelableManager: CancellableManager,
+    private val cancellableManager: CancellableManager,
     private val subscriptionBlock: SubscriptionBlock<T>,
     private val subscriptionErrorBlock: SubscriptionErrorBlock?,
     private val onCompleted: SubscriptionCompletedBlock?
 ) : Subscriber<T> {
     override fun onSubscribe(s: Subscription) {
-        cancelableManager.add(object : Cancellable {
+        cancellableManager.add(object : Cancellable {
             override fun cancel() {
                 s.cancel()
             }

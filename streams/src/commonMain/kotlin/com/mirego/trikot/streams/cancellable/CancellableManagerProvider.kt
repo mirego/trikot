@@ -3,18 +3,18 @@ package com.mirego.trikot.streams.cancellable
 import com.mirego.trikot.streams.concurrent.AtomicReference
 
 class CancellableManagerProvider : Cancellable {
-    private val cancelableManager = CancellableManager()
-    private val internalCancelableManagerRef = AtomicReference(CancellableManager())
+    private val cancellableManager = CancellableManager()
+    private val internalCancellableManagerRef = AtomicReference(CancellableManager())
 
     fun cancelPreviousAndCreate(): CancellableManager {
-        internalCancelableManagerRef.value.cancel()
+        internalCancellableManagerRef.value.cancel()
         return CancellableManager().also {
-            internalCancelableManagerRef.setOrThrow(internalCancelableManagerRef.value, it)
-            cancelableManager.add(it)
+            internalCancellableManagerRef.setOrThrow(internalCancellableManagerRef.value, it)
+            cancellableManager.add(it)
         }
     }
 
     override fun cancel() {
-        cancelableManager.cancel()
+        cancellableManager.cancel()
     }
 }

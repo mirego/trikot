@@ -7,19 +7,19 @@ class CancellableManager : Cancellable {
     private val queueList = AtomicListReference<Cancellable>()
     private val isCancelled = AtomicReference(false)
 
-    fun <T : Cancellable> add(cancelable: T): T {
-        queueList.add(cancelable)
+    fun <T : Cancellable> add(cancellable: T): T {
+        queueList.add(cancellable)
 
         if (isCancelled.value) {
             doCancelAll()
         }
-        return cancelable
+        return cancellable
     }
 
-    fun add(cancelableBlock: () -> Unit) {
+    fun add(cancellableBlock: () -> Unit) {
         add(object : Cancellable {
             override fun cancel() {
-                cancelableBlock()
+                cancellableBlock()
             }
         })
     }
@@ -32,8 +32,8 @@ class CancellableManager : Cancellable {
     private fun doCancelAll() {
         val value = queueList.value
         queueList.removeAll(value)
-        for (cancelable in value) {
-            cancelable.cancel()
+        for (cancellable in value) {
+            cancellable.cancel()
         }
     }
 }

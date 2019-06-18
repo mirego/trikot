@@ -40,7 +40,7 @@ abstract class AbstractAttachable(private val maxSimultaneousAttachCount: Int = 
         }
     }
 
-    protected open fun doAttach(cancelableManager: CancellableManager) {
+    protected open fun doAttach(cancellableManager: CancellableManager) {
     }
 
     protected open fun doDetach() {

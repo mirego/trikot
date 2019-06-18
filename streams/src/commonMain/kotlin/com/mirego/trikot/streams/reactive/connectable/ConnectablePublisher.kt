@@ -17,10 +17,10 @@ class ConnectablePublisher<T>(private val executionBlock: ConnectablePublisherEx
             throw AlreadyConnectedException()
         }
 
-        val cancelableManager = CancellableManager()
-        executionBlock(value).subscribe(cancelableManager) { executionValue -> value = executionValue }
-        cancelableManager.add { isConnectedRef.setOrThrow(true, false) }
+        val cancellableManager = CancellableManager()
+        executionBlock(value).subscribe(cancellableManager) { executionValue -> value = executionValue }
+        cancellableManager.add { isConnectedRef.setOrThrow(true, false) }
 
-        return cancelableManager
+        return cancellableManager
     }
 }

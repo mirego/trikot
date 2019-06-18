@@ -7,7 +7,7 @@ import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.streams.reactive.SimplePublisher
 
 abstract class BaseExecutablePublisher<T>(private val executionQueue: DispatchQueue = Configuration.publisherExecutionDispatchQueue) : ExecutablePublisher<T>, SimplePublisher<T>(null) {
-    protected val cancelableManager = CancellableManager()
+    protected val cancellableManager = CancellableManager()
     private val isStarted = AtomicReference(false)
 
     final override fun execute() {
@@ -16,14 +16,14 @@ abstract class BaseExecutablePublisher<T>(private val executionQueue: DispatchQu
         }
 
         executionQueue.dispatch {
-            internalRun(cancelableManager)
+            internalRun(cancellableManager)
         }
     }
 
-    abstract fun internalRun(cancelableManager: CancellableManager)
+    abstract fun internalRun(cancellableManager: CancellableManager)
 
     override fun cancel() {
-        cancelableManager.cancel()
+        cancellableManager.cancel()
     }
 
     fun dispatchSuccess(successValue: T) {

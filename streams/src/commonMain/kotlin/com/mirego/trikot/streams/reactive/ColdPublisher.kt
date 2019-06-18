@@ -7,11 +7,11 @@ import org.reactivestreams.Publisher
 typealias ColdPublisherExecutionBlock<T> = (CancellableManager) -> Publisher<T>
 
 class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T>, value: T? = null) : SimplePublisher<T>(value) {
-    private val cancelableManagerRef = AtomicReference(CancellableManager())
+    private val cancellableManagerRef = AtomicReference(CancellableManager())
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
-        cancelableManagerRef.value.let {
+        cancellableManagerRef.value.let {
             executionBlock(it).subscribe(it) {
                     executionValue -> value = executionValue
             }
@@ -20,7 +20,7 @@ class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T
 
     override fun onNoSubscription() {
         super.onNoSubscription()
-        cancelableManagerRef.value.cancel()
-        cancelableManagerRef.setOrThrow(cancelableManagerRef.value, CancellableManager())
+        cancellableManagerRef.value.cancel()
+        cancellableManagerRef.setOrThrow(cancellableManagerRef.value, CancellableManager())
     }
 }

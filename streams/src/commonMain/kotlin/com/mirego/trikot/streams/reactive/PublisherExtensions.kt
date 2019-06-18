@@ -12,8 +12,8 @@ import com.mirego.trikot.streams.reactive.processors.SharedProcessor
 import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.WithChildCancelableManagerProcessor
-import com.mirego.trikot.streams.reactive.processors.WithChildCancelableManagerProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.WithChildCancellableManagerProcessor
+import com.mirego.trikot.streams.reactive.processors.WithChildCancellableManagerProcessorBlock
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
@@ -21,21 +21,21 @@ typealias SubscriptionBlock<T> = (T) -> Unit
 typealias SubscriptionErrorBlock = (Throwable) -> Unit
 typealias SubscriptionCompletedBlock = () -> Unit
 
-fun <T> Publisher<T>.subscribe(cancelableManager: CancellableManager, onNext: SubscriptionBlock<T>) {
-    subscribe(cancelableManager, onNext, null, null)
+fun <T> Publisher<T>.subscribe(cancellableManager: CancellableManager, onNext: SubscriptionBlock<T>) {
+    subscribe(cancellableManager, onNext, null, null)
 }
 
-fun <T> Publisher<T>.subscribe(cancelableManager: CancellableManager, onNext: SubscriptionBlock<T>, onError: SubscriptionErrorBlock?) {
-    subscribe(cancelableManager, onNext, onError, null)
+fun <T> Publisher<T>.subscribe(cancellableManager: CancellableManager, onNext: SubscriptionBlock<T>, onError: SubscriptionErrorBlock?) {
+    subscribe(cancellableManager, onNext, onError, null)
 }
 
 fun <T> Publisher<T>.subscribe(
-    cancelableManager: CancellableManager,
+    cancellableManager: CancellableManager,
     onNext: SubscriptionBlock<T>,
     onError: SubscriptionErrorBlock?,
     onCompleted: SubscriptionCompletedBlock?
 ) {
-    subscribe(SubscriberFromBlock(cancelableManager, onNext, onError, onCompleted))
+    subscribe(SubscriberFromBlock(cancellableManager, onNext, onError, onCompleted))
 }
 
 fun <T, R> Publisher<T>.map(block: MapProcessorBlock<T, R>): Publisher<R> {
@@ -86,8 +86,8 @@ fun <T> Publisher<T>.asMutable(): MutablePublisher<T> {
     }
 }
 
-fun <T> Publisher<T>.withChildCancelableManager(block: WithChildCancelableManagerProcessorBlock<T>): Publisher<T> {
-    return WithChildCancelableManagerProcessor(this, block)
+fun <T> Publisher<T>.withChildCancellableManager(block: WithChildCancellableManagerProcessorBlock<T>): Publisher<T> {
+    return WithChildCancellableManagerProcessor(this, block)
 }
 
 fun <T> Publisher<T>.filter(block: FilterProcessorBlock<T>): Publisher<T> {

@@ -78,34 +78,34 @@ class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
     private var pub4: Publisher<D>? = null,
     private var pub5: Publisher<E>? = null
 ) : SimplePublisher<R>(null), Cancellable {
-    private var masterCancelableManager = CancellableManager()
-    private var cancelableManager = AtomicReference(CancellableManager())
+    private var masterCancellableManager = CancellableManager()
+    private var cancellableManager = AtomicReference(CancellableManager())
     private var result = AtomicReference(result)
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
-        cancelableManager.value.cancel()
-        val newCancelableManager = CancellableManager().also { masterCancelableManager.add(it) }
-        cancelableManager.setOrThrow(cancelableManager.value, newCancelableManager)
+        cancellableManager.value.cancel()
+        val newCancellableManager = CancellableManager().also { masterCancellableManager.add(it) }
+        cancellableManager.setOrThrow(cancellableManager.value, newCancellableManager)
 
         pub1.subscribe(
-            newCancelableManager,
+            newCancellableManager,
             onNext = { onNewValue { newResult -> newResult.component1 = it } },
             onError = { dispatchError(it) })
         pub2.subscribe(
-            newCancelableManager,
+            newCancellableManager,
             onNext = { onNewValue { newResult -> newResult.component2 = it } },
             onError = { dispatchError(it) })
         pub3?.subscribe(
-            newCancelableManager,
+            newCancellableManager,
             onNext = { onNewValue { newResult -> newResult.component3 = it } },
             onError = { dispatchError(it) })
         pub4?.subscribe(
-            newCancelableManager,
+            newCancellableManager,
             onNext = { onNewValue { newResult -> newResult.component4 = it } },
             onError = { dispatchError(it) })
         pub5?.subscribe(
-            newCancelableManager,
+            newCancellableManager,
             onNext = { onNewValue { newResult -> newResult.component5 = it } },
             onError = { dispatchError(it) })
     }
@@ -117,7 +117,7 @@ class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
     }
 
     fun dispatchError(error: Throwable) {
-        masterCancelableManager.cancel()
+        masterCancellableManager.cancel()
         this.error = error
     }
 
@@ -131,11 +131,11 @@ class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
 
     override fun onNoSubscription() {
         super.onNoSubscription()
-        cancelableManager.value.cancel()
+        cancellableManager.value.cancel()
     }
 
     override fun cancel() {
-        masterCancelableManager.cancel()
+        masterCancellableManager.cancel()
     }
 
     companion object {

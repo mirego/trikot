@@ -6,20 +6,20 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-typealias WithChildCancelableManagerProcessorBlock<T> = (T, CancellableManager) -> T
+typealias WithChildCancellableManagerProcessorBlock<T> = (T, CancellableManager) -> T
 
-class WithChildCancelableManagerProcessor<T>(
+class WithChildCancellableManagerProcessor<T>(
     parentPublisher: Publisher<T>,
-    private val block: WithChildCancelableManagerProcessorBlock<T>
+    private val block: WithChildCancellableManagerProcessorBlock<T>
 ) :
     AbstractProcessor<T, T>(parentPublisher) {
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {
-        return WithChildCancelableManagerSubscription(subscriber, block)
+        return WithChildCancellableManagerSubscription(subscriber, block)
     }
 
-    class WithChildCancelableManagerSubscription<T>(
+    class WithChildCancellableManagerSubscription<T>(
         subscriber: Subscriber<in T>,
-        private val block: WithChildCancelableManagerProcessorBlock<T>
+        private val block: WithChildCancellableManagerProcessorBlock<T>
     ) : ProcessorSubscription<T, T>(subscriber) {
         private val cancellableManagerProvider = CancellableManagerProvider()
 
