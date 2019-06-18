@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive.connectable
 
-import com.mirego.trikot.streams.cancelable.Cancelable
+import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.reactive.SimplePublisher
 import spock.lang.Specification
 
@@ -39,11 +39,11 @@ class ConnectablePublisherTests extends Specification {
         then publisher is unsubscribed
         '''() {
         given:
-        Cancelable cancelable = connectablePublisher.connect()
+        Cancellable cancellable = connectablePublisher.connect()
 
         when:
         internalPublisher.value = expectedValue
-        cancelable.cancel()
+        cancellable.cancel()
         internalPublisher.value = "Value not received"
 
         then:
@@ -56,10 +56,10 @@ class ConnectablePublisherTests extends Specification {
         then block is reexecuted
         '''() {
         given:
-        Cancelable cancelable = connectablePublisher.connect()
+        Cancellable cancellable = connectablePublisher.connect()
 
         when:
-        cancelable.cancel()
+        cancellable.cancel()
         executed = false
         connectablePublisher.connect()
 

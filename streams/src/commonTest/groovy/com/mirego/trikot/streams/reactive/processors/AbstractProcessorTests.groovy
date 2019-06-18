@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.PublisherExtensionsKt
 import com.mirego.trikot.streams.reactive.SimplePublisher
 import org.jetbrains.annotations.NotNull
@@ -12,7 +12,7 @@ import spock.lang.Specification
 class AbstractProcessorTests extends Specification {
     Publisher<String> publisherMock = Mock(Publisher)
     TestProcessor processor = new TestProcessor(publisherMock)
-    CancelableManager cancelableManager = new CancelableManager()
+    CancellableManager cancellableManager = new CancellableManager()
 
     String input = "input"
     String output = input.toUpperCase()
@@ -24,7 +24,7 @@ class AbstractProcessorTests extends Specification {
         '''() {
         when:
         use(PublisherExtensionsKt) {
-            processor.subscribe(cancelableManager) {}
+            processor.subscribe(cancellableManager) {}
         }
 
         then:
@@ -41,10 +41,10 @@ class AbstractProcessorTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            processor.subscribe(cancelableManager) {}
+            processor.subscribe(cancellableManager) {}
         }
         processor.onSubscribe(subscription)
-        cancelableManager.cancel()
+        cancellableManager.cancel()
 
         then:
         1 * publisherMock.subscribe(_)
@@ -63,7 +63,7 @@ class AbstractProcessorTests extends Specification {
         when:
         publisher.value = input
         use(PublisherExtensionsKt) {
-            processor.subscribe(cancelableManager) { receivedValue = it }
+            processor.subscribe(cancellableManager) { receivedValue = it }
         }
 
         then:

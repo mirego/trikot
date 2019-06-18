@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.cancelable.ResettableCancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
@@ -19,15 +19,15 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
         subscriber: Subscriber<in R>,
         private val block: SwitchMapProcessorBlock<T, R>
     ) : ProcessorSubscription<T, R>(subscriber) {
-        private val resetableCancelableManager = ResettableCancelableManager()
+        private val cancellableManagerProvider = CancellableManagerProvider()
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
-            resetableCancelableManager.cancel()
+            cancellableManagerProvider.cancel()
         }
 
         override fun onNext(t: T, subscriber: Subscriber<in R>) {
-            block(t).subscribe(resetableCancelableManager.reset(),
+            block(t).subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = { subscriber.onNext(it) },
                 onError = { subscriber.onError(it) })
         }

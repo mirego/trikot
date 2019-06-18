@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.attachable
 
-import com.mirego.trikot.streams.cancelable.Cancelable
+import com.mirego.trikot.streams.cancellable.Cancellable
 
 interface Attachable {
-    fun attach(): Cancelable
+    fun attach(): Cancellable
 }

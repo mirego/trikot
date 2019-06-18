@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import org.reactivestreams.Publisher
 import spock.lang.Specification
 
@@ -8,7 +8,7 @@ class CombineLatestTests extends Specification {
     SimplePublisher<String> stringPublisher = new SimplePublisher(null)
     SimplePublisher<Integer> intPublisher = new SimplePublisher(null)
     Publisher combineLatest = CombineLatest.@Companion.combine2(stringPublisher, intPublisher)
-    CancelableManager cancelableManager = new CancelableManager()
+    CancellableManager cancellableManager = new CancellableManager()
     CombineLatestResult2 result = null
 
     def '''
@@ -21,7 +21,7 @@ class CombineLatestTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            combineLatest.subscribe(cancelableManager) { result = it }
+            combineLatest.subscribe(cancellableManager) { result = it }
         }
 
         then:
@@ -39,7 +39,7 @@ class CombineLatestTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            combineLatest.subscribe(cancelableManager) { result = it }
+            combineLatest.subscribe(cancellableManager) { result = it }
         }
 
         then:
@@ -56,11 +56,11 @@ class CombineLatestTests extends Specification {
         stringPublisher.value = "a"
         intPublisher.value = 1
         use(PublisherExtensionsKt) {
-            combineLatest.subscribe(cancelableManager) { result = it }
+            combineLatest.subscribe(cancellableManager) { result = it }
         }
 
         when:
-        cancelableManager.cancel()
+        cancellableManager.cancel()
         stringPublisher.value = "b"
 
         then:
@@ -77,7 +77,7 @@ class CombineLatestTests extends Specification {
         stringPublisher.value = "a"
         intPublisher.value = 1
         use(PublisherExtensionsKt) {
-            combineLatest.subscribe(cancelableManager) { result = it }
+            combineLatest.subscribe(cancellableManager) { result = it }
         }
 
         when:

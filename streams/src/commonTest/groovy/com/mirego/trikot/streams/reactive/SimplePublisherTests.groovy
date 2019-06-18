@@ -1,11 +1,11 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import org.jetbrains.annotations.Nullable
 import spock.lang.Specification
 
 class SimplePublisherTests extends Specification {
-    CancelableManager cancelableManager = new CancelableManager()
+    CancellableManager cancellableManager = new CancellableManager()
     String expectedValue = "a"
     Exception expectedError = new Exception("expected exception")
 
@@ -21,7 +21,7 @@ class SimplePublisherTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, { receivedValue = it })
+            publisher.subscribe(cancellableManager, { receivedValue = it })
         }
 
         then:
@@ -40,7 +40,7 @@ class SimplePublisherTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, {}, { receivedError = it })
+            publisher.subscribe(cancellableManager, {}, { receivedError = it })
         }
 
         then:
@@ -57,7 +57,7 @@ class SimplePublisherTests extends Specification {
         publisher.value = "first value"
         String receivedValue = null
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, { receivedValue = it })
+            publisher.subscribe(cancellableManager, { receivedValue = it })
         }
 
         when:
@@ -78,11 +78,11 @@ class SimplePublisherTests extends Specification {
         publisher.value = expectedValue
         String receivedValue = null
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, { receivedValue = it })
+            publisher.subscribe(cancellableManager, { receivedValue = it })
         }
 
         when:
-        cancelableManager.cancel()
+        cancellableManager.cancel()
         publisher.value = "you shall not pass"
 
         then:
@@ -100,9 +100,9 @@ class SimplePublisherTests extends Specification {
         String receivedValue = null
 
         when:
-        cancelableManager.cancel()
+        cancellableManager.cancel()
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, { receivedValue = it })
+            publisher.subscribe(cancellableManager, { receivedValue = it })
         }
 
         then:
@@ -119,7 +119,7 @@ class SimplePublisherTests extends Specification {
 
         when:
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, {})
+            publisher.subscribe(cancellableManager, {})
         }
 
         then:
@@ -134,11 +134,11 @@ class SimplePublisherTests extends Specification {
         given:
         SimplePublisherImplementation publisher = new SimplePublisherImplementation("")
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, {})
+            publisher.subscribe(cancellableManager, {})
         }
 
         when:
-        cancelableManager.cancel()
+        cancellableManager.cancel()
 
         then:
         publisher.noSubscriptionCalled
@@ -153,7 +153,7 @@ class SimplePublisherTests extends Specification {
         SimplePublisher publisher = createPublisher()
         Boolean isCompleted = false
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, {}, {}, { isCompleted = true } )
+            publisher.subscribe(cancellableManager, {}, {}, { isCompleted = true } )
         }
 
         when:
@@ -187,11 +187,11 @@ class SimplePublisherTests extends Specification {
         '''() {
         given:
         SimplePublisherImplementation publisher = new SimplePublisherImplementation("")
-        cancelableManager.cancel()
+        cancellableManager.cancel()
 
         when:
         use(PublisherExtensionsKt) {
-            publisher.subscribe(cancelableManager, {})
+            publisher.subscribe(cancellableManager, {})
         }
 
         then:

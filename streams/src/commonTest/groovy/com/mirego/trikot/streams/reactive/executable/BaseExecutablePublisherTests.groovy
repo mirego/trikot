@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive.executable
 
-import com.mirego.trikot.streams.cancelable.Cancelable
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.Cancellable
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.concurrent.dispatchQueue.SynchronousDispatchQueue
 import org.jetbrains.annotations.NotNull
 import spock.lang.Specification
@@ -27,7 +27,7 @@ class BaseExecutablePublisherTests extends Specification {
     def '''
         given operation
         when cancelled
-        then cancelable manager is called
+        then cancellable manager is called
         '''() {
         given:
         FakeExecutablePublisher executable = new FakeExecutablePublisher(null, null)
@@ -83,14 +83,14 @@ class BaseExecutablePublisherTests extends Specification {
         }
 
         @Override
-        void internalRun(@NotNull CancelableManager cancelableManager) {
+        void internalRun(@NotNull CancellableManager cancellableManager) {
             if (successValue != null) {
                 dispatchSuccess(successValue)
             } else if (errorValue != null) {
                 dispatchError(errorValue)
             }
 
-            cancelableManager.add(new Cancelable() {
+            cancellableManager.add(new Cancellable() {
                 @Override
                 void cancel() {
                     isCancelled = true

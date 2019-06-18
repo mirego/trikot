@@ -1,13 +1,13 @@
-package com.mirego.trikot.streams.cancelable
+package com.mirego.trikot.streams.cancellable
 
 import com.mirego.trikot.streams.concurrent.AtomicListReference
 import com.mirego.trikot.streams.concurrent.AtomicReference
 
-class CancelableManager : Cancelable {
-    private val queueList = AtomicListReference<Cancelable>()
+class CancellableManager : Cancellable {
+    private val queueList = AtomicListReference<Cancellable>()
     private val isCancelled = AtomicReference(false)
 
-    fun <T : Cancelable> add(cancelable: T): T {
+    fun <T : Cancellable> add(cancelable: T): T {
         queueList.add(cancelable)
 
         if (isCancelled.value) {
@@ -17,7 +17,7 @@ class CancelableManager : Cancelable {
     }
 
     fun add(cancelableBlock: () -> Unit) {
-        add(object : Cancelable {
+        add(object : Cancellable {
             override fun cancel() {
                 cancelableBlock()
             }

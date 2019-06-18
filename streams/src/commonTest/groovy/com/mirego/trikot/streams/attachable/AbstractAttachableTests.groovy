@@ -1,6 +1,6 @@
 import com.mirego.trikot.streams.attachable.AbstractAttachable
-import com.mirego.trikot.streams.cancelable.Cancelable
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.Cancellable
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import org.jetbrains.annotations.NotNull
 import spock.lang.Specification
 
@@ -38,12 +38,12 @@ class AbstractAttachableTests extends Specification {
         then doDetach is called only once
         '''() {
         given:
-        Cancelable cancelable1 = attachable.attach()
-        Cancelable cancelable2 = attachable.attach()
+        Cancellable cancellable1 = attachable.attach()
+        Cancellable cancellable2 = attachable.attach()
 
         when:
-        cancelable1.cancel()
-        cancelable2.cancel()
+        cancellable1.cancel()
+        cancellable2.cancel()
 
         then:
         attachable.doAttachCount == 1
@@ -56,12 +56,12 @@ class AbstractAttachableTests extends Specification {
         then doDetach is never called
         '''() {
         given:
-        Cancelable cancelable1 = attachable.attach()
+        Cancellable cancellable1 = attachable.attach()
         attachable.attach()
 
         when:
-        cancelable1.cancel()
-        cancelable1.cancel()
+        cancellable1.cancel()
+        cancellable1.cancel()
 
         then:
         attachable.doAttachCount == 1
@@ -74,10 +74,10 @@ class AbstractAttachableTests extends Specification {
         then do attach is recalled
         '''() {
         given:
-        Cancelable cancelable1 = attachable.attach()
+        Cancellable cancellable1 = attachable.attach()
 
         when:
-        cancelable1.cancel()
+        cancellable1.cancel()
         attachable.attach()
 
         then:
@@ -110,7 +110,7 @@ class AbstractAttachableTests extends Specification {
         }
         
         @Override
-        void doAttach(@NotNull CancelableManager cancelableManager) {
+        void doAttach(@NotNull CancellableManager cancellableManager) {
             doAttachCount++
         }
 

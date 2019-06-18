@@ -1,12 +1,12 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.cancelable.CancelableManager
-import com.mirego.trikot.streams.cancelable.ResettableCancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-typealias WithChildCancelableManagerProcessorBlock<T> = (T, CancelableManager) -> T
+typealias WithChildCancelableManagerProcessorBlock<T> = (T, CancellableManager) -> T
 
 class WithChildCancelableManagerProcessor<T>(
     parentPublisher: Publisher<T>,
@@ -21,15 +21,15 @@ class WithChildCancelableManagerProcessor<T>(
         subscriber: Subscriber<in T>,
         private val block: WithChildCancelableManagerProcessorBlock<T>
     ) : ProcessorSubscription<T, T>(subscriber) {
-        private val resettableCancelableManager = ResettableCancelableManager()
+        private val cancellableManagerProvider = CancellableManagerProvider()
 
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
-            subscriber.onNext(block(t, resettableCancelableManager.reset()))
+            subscriber.onNext(block(t, cancellableManagerProvider.cancelPreviousAndCreate()))
         }
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
-            resettableCancelableManager.cancel()
+            cancellableManagerProvider.cancel()
         }
     }
 }

@@ -1,13 +1,13 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancelable.CancelableManager
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.concurrent.AtomicReference
 import org.reactivestreams.Publisher
 
-typealias ColdPublisherExecutionBlock<T> = (CancelableManager) -> Publisher<T>
+typealias ColdPublisherExecutionBlock<T> = (CancellableManager) -> Publisher<T>
 
 class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T>, value: T? = null) : SimplePublisher<T>(value) {
-    private val cancelableManagerRef = AtomicReference(CancelableManager())
+    private val cancelableManagerRef = AtomicReference(CancellableManager())
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
@@ -21,6 +21,6 @@ class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T
     override fun onNoSubscription() {
         super.onNoSubscription()
         cancelableManagerRef.value.cancel()
-        cancelableManagerRef.setOrThrow(cancelableManagerRef.value, CancelableManager())
+        cancelableManagerRef.setOrThrow(cancelableManagerRef.value, CancellableManager())
     }
 }
