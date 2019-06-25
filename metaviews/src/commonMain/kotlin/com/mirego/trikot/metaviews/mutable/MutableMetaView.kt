@@ -6,7 +6,7 @@ import com.mirego.trikot.metaviews.properties.Color
 import com.mirego.trikot.metaviews.properties.MetaSelector
 import com.mirego.trikot.metaviews.properties.MetaAction
 
-abstract class MutableMetaView : MetaView {
+open class MutableMetaView : MetaView {
     override var alpha = PropertyFactory.create(1f)
 
     override var backgroundColor = PropertyFactory.create(MetaSelector<Color>())
