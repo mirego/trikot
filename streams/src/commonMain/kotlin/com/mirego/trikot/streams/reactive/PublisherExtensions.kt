@@ -2,18 +2,21 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
-import com.mirego.trikot.streams.reactive.processors.FilterProcessor
-import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.FirstProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.ObserveOnProcessor
-import com.mirego.trikot.streams.reactive.processors.SharedProcessor
-import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.WithChildCancellableManagerProcessor
-import com.mirego.trikot.streams.reactive.processors.WithChildCancellableManagerProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.ObserveOnProcessor
+import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
+import com.mirego.trikot.streams.reactive.processors.FirstProcessor
+import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
+import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessorResultType
+import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.FilterProcessor
+import com.mirego.trikot.streams.reactive.processors.SharedProcessor
+import com.mirego.trikot.streams.reactive.processors.MapErrorAsNextProcessor
+import com.mirego.trikot.streams.reactive.processors.MapErrorAsNextProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
@@ -58,6 +61,26 @@ fun <T> Publisher<T>.first(): Publisher<T> {
     return FirstProcessor(this)
 }
 
+fun <T> Publisher<T>.withCancellableManager(): Publisher<WithCancellableManagerProcessorResultType<T>> {
+    return WithCancellableManagerProcessor(this)
+}
+
+fun <T> Publisher<T>.filter(block: FilterProcessorBlock<T>): Publisher<T> {
+    return FilterProcessor(this, block)
+}
+
+fun <T> Publisher<T>.shared(): Publisher<T> {
+    return SharedProcessor(this)
+}
+
+fun <T> Publisher<T>.mapErrorAsNext(block: MapErrorAsNextProcessorBlock<T>): Publisher<T> {
+    return MapErrorAsNextProcessor(this, block)
+}
+
+fun <T> Publisher<T>.distinctUntilChanged(): Publisher<T> {
+    return DistinctUntilChangedProcessor(this)
+}
+
 fun <T> Publisher<T>.asMutable(): MutablePublisher<T> {
     val referencePublisher = this
     return object : MutablePublisher<T> {
@@ -84,18 +107,6 @@ fun <T> Publisher<T>.asMutable(): MutablePublisher<T> {
             referencePublisher.subscribe(s)
         }
     }
-}
-
-fun <T> Publisher<T>.withChildCancellableManager(block: WithChildCancellableManagerProcessorBlock<T>): Publisher<T> {
-    return WithChildCancellableManagerProcessor(this, block)
-}
-
-fun <T> Publisher<T>.filter(block: FilterProcessorBlock<T>): Publisher<T> {
-    return FilterProcessor(this, block)
-}
-
-fun <T> Publisher<T>.shared(): Publisher<T> {
-    return SharedProcessor(this)
 }
 
 fun <T> T.asPublisher(): Publisher<T> {

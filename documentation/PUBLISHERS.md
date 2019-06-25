@@ -63,14 +63,28 @@ val publisher = object: BaseExecutablePublisher<String>() {
 publisher.execute()
 ```
 
-In this case, executablePublisher will emit `foo` once executed.
+### RefreshablePublisher
+Refreshable publisher are specialized publisher that are reexecuted when calling `refresh`.
 
-**Result methods**
-- `dispatchSuccess("successValue")`
-- `diapatchError(throwable)`
+The callback block provides a cancellableManager and a boolean
+- `cancellableManager`
+	- A new cancellableManager is created on the first subscription and on any `refresh` call
+	- Previous cancellableManager are cancelled when there is no subscription and on any `refresh` call
+- `boolean`
+	- `false`: when the block is triggered with the first subscription
+	- `true`: when the block is triggered with the `refresh` method
 
-In both cases, `onCompleted` will be emitted afterward and subscription will be cancelled.
+```kotlin
+val publisher = RefreshablePublisher({ cancellableManager, isRefreshing ->
+	if (isRefreshing) {
+		PublisherFactory.create("I am refreshing")
+	} else {
+		PublisherFactory.create("I am not refreshing")
+	}
+}
 
+publisher.refresh()
+```
 
 ### ColdPublisher
 Cold publisher are specialized publishers that execute a block to create a publisher once subscribed too. 
@@ -127,7 +141,6 @@ Dispatch value only if it match the filter
 ```kotlin
 publisher.filter { it.length > 2 }
 ```
-Dispatch the value only if the value match the filter
 
 #### SwitchMap
 *Input* - Value from previous processor
@@ -143,11 +156,11 @@ connectivityPublisher.switchMap { isConnected ->
 
 Transform a value to a new publisher. When a new value is received, previous publisher is unsubscribed and new publisher is subscribed.
 
-#### WithChildCancelableManager
-Every time the publisher is notified, a `CancelableManager` is provided with the value. Previous `CancelableManager` are cancelled upon receiving a value
+#### WithCancellableManager
+Every time the publisher is notified, a `CancellableManager` is provided with the value. Previous `CancellableManager` are cancelled upon receiving a value
 ```kotlin
-publisher.withChildCancelableManager { value, cancelableManager ->
-  cancelableManager.add(...)
+publisher.withCancellableManager().subscribe() { cancellableManager, value  ->
+  cancellableManager.add(...)
 }
 ```
 
@@ -168,6 +181,28 @@ publisher.subscribeOn(myQueue).subscribe(...)
 This will subscribe and cancel on the  myQueue  Worker/OperationQueue 
 
 *Note*: `Configuration.serialSubscriptionDispatchQueue` make sure that only one subscription can be made. Useful to use when Thread safety need to be handled.
+
+#### DistinctUntilChanged
+Dispatch value only if it is not `equals` to the previous value
+```kotlin
+	publisher.distinctUntilChanged()
+	publisher.value = "foo"	
+	publisher.value = "foo"	
+```
+In this case, `foo` will only be emitted once.
+
+#### MapErrorAsNextProcessor
+This processors convert the error dispatched by a publisher in a result. This allows subscription to stay open when an error is dispatched by the publisher.
+
+```kotlin
+	publisher.mapErrorAsNext { throwable ->
+		Pair(null, throwable)
+	}.map { successValue ->
+		Pair(successValue, null)
+	}.subscribe { successValue, error ->
+		...
+	}
+```
 
 #### Shared
 Allows to share the result of previous transformation
