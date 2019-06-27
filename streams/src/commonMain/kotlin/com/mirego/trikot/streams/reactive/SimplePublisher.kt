@@ -12,6 +12,8 @@ open class SimplePublisher<T>(
     private val atomicValue = AtomicReference(value)
     private val atomicError = AtomicReference<Throwable?>(null)
     private val isCompleted = AtomicReference(false)
+    protected val hasSubscriptions
+        get() = subscriptions.value.count() > 0
 
     protected val onPublisherSubscriptionCancelled: OnPublisherSubscriptionCancelled<T> = { publisherSubscription ->
         removeSubscription(publisherSubscription)
