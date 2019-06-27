@@ -25,7 +25,7 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
         if (hasSubscriptions) {
             doExecuteBlock(true)
         } else {
-            shouldRefresh.setOrThrow(shouldRefresh.value,true)
+            shouldRefresh.setOrThrow(shouldRefresh.value, true)
         }
     }
 
