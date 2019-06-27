@@ -26,6 +26,10 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
             cancellableManagerProvider.cancel()
         }
 
+        override fun onComplete() {
+            // By design, completion should be handled by a subclass of SwitchMapProcessor
+        }
+
         override fun onNext(t: T, subscriber: Subscriber<in R>) {
             block(t).subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = { subscriber.onNext(it) },

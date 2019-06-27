@@ -9,6 +9,7 @@ typealias RefreshablePublisherExecutionBlock<T> = (CancellableManager, Boolean) 
 class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherExecutionBlock<T>, value: T? = null) : SimplePublisher<T>(value) {
     private val cancellableManagerProvider = CancellableManagerProvider()
 
+
     override fun onFirstSubscription() {
         super.onFirstSubscription()
         doExecuteBlock(false)

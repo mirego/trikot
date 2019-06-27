@@ -17,7 +17,7 @@ class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : SimplePubl
 
     override fun onNoSubscription() {
         super.onNoSubscription()
-        cancellableManagerProvider.cancel()
+        cancellableManagerProvider.cancelPreviousAndCreate()
     }
 
     override fun onSubscribe(s: Subscription) = with(cancellableManagerProvider.cancelPreviousAndCreate()) { add { s.cancel() } }
