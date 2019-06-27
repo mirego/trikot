@@ -2,7 +2,6 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
-import com.mirego.trikot.streams.concurrent.AtomicReference
 import org.reactivestreams.Publisher
 
 typealias ColdPublisherExecutionBlock<T> = (CancellableManager) -> Publisher<T>
