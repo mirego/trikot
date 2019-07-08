@@ -218,3 +218,22 @@ uppercasePublisher.subscribe(...)
 uppercasePublisher.subscribe(...)
 ```
 In this case,  when fooPublisher emit a new value, the maps will only be executed once.
+
+#### WithPreviousValue
+Transform the new value in a oldValue -> newValue pair
+```kotlin
+val fooPublisher = PublisherFactory.create("foo")
+
+val fooPublisher.withPreviousValue().subscribe(...) { (oldValue, newValue) ->
+	print("${oldValue} - ${newValue}")
+}
+
+fooPublisher.value = "bar"
+
+```
+Result:
+```
+null - foo
+foo - bar
+```
+
