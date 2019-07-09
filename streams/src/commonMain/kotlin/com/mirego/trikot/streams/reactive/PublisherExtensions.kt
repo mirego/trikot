@@ -17,6 +17,7 @@ import com.mirego.trikot.streams.reactive.processors.SharedProcessor
 import com.mirego.trikot.streams.reactive.processors.MapErrorAsNextProcessor
 import com.mirego.trikot.streams.reactive.processors.MapErrorAsNextProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
+import com.mirego.trikot.streams.reactive.processors.WithPreviousValueProcessor
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
@@ -79,6 +80,10 @@ fun <T> Publisher<T>.mapErrorAsNext(block: MapErrorAsNextProcessorBlock<T>): Pub
 
 fun <T> Publisher<T>.distinctUntilChanged(): Publisher<T> {
     return DistinctUntilChangedProcessor(this)
+}
+
+fun <T> Publisher<T>.withPreviousValue(): Publisher<Pair<T?, T>> {
+    return WithPreviousValueProcessor(this)
 }
 
 fun <T> Publisher<T>.asMutable(): MutablePublisher<T> {
