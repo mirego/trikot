@@ -36,7 +36,7 @@ abstract class AbstractAttachable(private val maxSimultaneousAttachCount: Int = 
 
         if (newattachCount == 0) {
             doDetach()
-            cancellableManagerProvider.cancel()
+            cancellableManagerProvider.cancelPreviousAndCreate()
         }
     }
 
