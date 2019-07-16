@@ -6,12 +6,19 @@ import org.reactivestreams.Publisher
 interface MetaInputText : MetaLabel {
 
     /**
+     * Text input by the user
+     */
+    val userInput: Publisher<String>
+
+    /**
      * Type of data being placed in an EditText
      */
     val inputType: Publisher<InputType>
 
     /**
-     * Hint text to display when the text is empty.
+     * Text to display when the text is empty.
      */
-    val hint: Publisher<String>?
+    val placeholderText: Publisher<String>
+
+    fun setUserInput(value: String)
 }

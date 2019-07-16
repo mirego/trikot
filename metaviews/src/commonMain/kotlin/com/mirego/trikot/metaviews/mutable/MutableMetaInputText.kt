@@ -6,7 +6,13 @@ import com.mirego.trikot.metaviews.properties.InputType
 import com.mirego.trikot.streams.reactive.MutablePublisher
 
 open class MutableMetaInputText : MutableMetaLabel(), MetaInputText {
+    override var userInput: MutablePublisher<String> = PropertyFactory.create("")
+
     override var inputType: MutablePublisher<InputType> = PropertyFactory.create(InputType.TEXT)
 
-    override var hint: MutablePublisher<String> = PropertyFactory.create("")
+    override var placeholderText: MutablePublisher<String> = PropertyFactory.create("")
+
+    override fun setUserInput(value: String) {
+        userInput.value = value
+    }
 }
