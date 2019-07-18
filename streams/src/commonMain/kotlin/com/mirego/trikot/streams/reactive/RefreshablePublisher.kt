@@ -22,6 +22,7 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
     }
 
     fun refresh() {
+        value = null
         if (hasSubscriptions) {
             doExecuteBlock(true)
         } else {
