@@ -27,11 +27,13 @@ class SearchController() {
 ```
 
 #### iOS
-Binding helpers uses object lifecycle to manage subscription and unsubscription (Subscription is automatically cancelled when the binded object is destroyed).
+See [swift extensions](./swift-extensions/README.md) for more information.
+
+Helps connect a publisher to a variable in a reactive environment.
 ```kotlin
-let controller = SearchController()
+let aStringPublisher = ...
 let label = UILabel()
-bind(controller.searchResultCount, \UILabel.text)
+bind(aStringPublisher, \UILabel.text)
 ```
 
 #### Android
@@ -39,7 +41,7 @@ Binding helpers relies on AndroidViewModel and uses lifecycleOwner to manage sub
 ```kotlin
  <TextView
             ...
-            android:text="@{controller.searchResultCount}"
+            android:text="@{aStringPublisher}"
             tools:text="0" />
 ```
 
