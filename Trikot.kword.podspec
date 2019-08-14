@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
-  spec.name          = "kword"
+  spec.name          = "Trikot.kword"
   spec.version       = "0.0.1"
-  spec.summary       = "Kword swift extensions"
-  spec.description   = "Kword swift extensions"
+  spec.summary       = "Trikot.kword swift extensions"
+  spec.description   = "Trikot.kword swift extensions"
   spec.homepage      = "https://github.com/mirego/kword"
   spec.license       = "MIT license"
   spec.author        = { "Martin Gagnon" => "mgagnon@mirego.com" }
