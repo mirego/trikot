@@ -1,15 +1,14 @@
 import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
-class TrikotHttpResponse: NSObject, HttpResponse {
-    var bodyStream: Kotlinx_serialization_runtimeInputStream?
-    var bodyString: String?
+public class TrikotHttpResponse: NSObject, HttpResponse {
+    public var bodyString: String?
 
-    var headers: [String: String]
+    public var headers: [String: String]
 
-    var source: HttpResponseResponseSource
+    public var source: HttpResponseResponseSource
 
-    var statusCode: Int32 = 0
+    public var statusCode: Int32 = 0
 
     init(data: Data?, response: URLResponse?) {
         var headers = [String: String]()

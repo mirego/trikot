@@ -1,14 +1,14 @@
 import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
-class TrikotHttpRequest: NSObject, HttpRequest {
+public class TrikotHttpRequest: NSObject, HttpRequest {
     let requestBuilder: RequestBuilder
 
     init(_ requestBuilder: RequestBuilder) {
         self.requestBuilder = requestBuilder
     }
 
-    func execute(cancellableManager: CancellableManager) -> Publisher {
+    public func execute(cancellableManager: CancellableManager) -> Publisher {
         let resultPublisher = SimplePublisher(value: nil)
 
         if let url = URL(string: (requestBuilder.baseUrl ?? "") + (requestBuilder.path ?? "")) {

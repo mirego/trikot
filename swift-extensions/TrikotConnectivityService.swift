@@ -2,9 +2,11 @@ import Foundation
 import Reachability
 import TRIKOT_FRAMEWORK_NAME
 
-class TrikotConnectivityService {
+public class TrikotConnectivityService {
+    public static let shared = TrikotConnectivityService()
+    public let publisher = PublisherFactory().create(value: ConnectivityState.wifi)
+
     let reachability = Reachability()!
-    let publisher = PublisherFactory().create(value: ConnectivityState.wifi)
 
     init() {
         reachability.whenReachable = {[weak self] reachability in
@@ -19,7 +21,7 @@ class TrikotConnectivityService {
         }
     }
 
-    func start() {
+    public func start() {
         do {
             try reachability.startNotifier()
         } catch {
@@ -27,7 +29,7 @@ class TrikotConnectivityService {
         }
     }
 
-    func stop() {
+    public func stop() {
         reachability.stopNotifier()
     }
 }
