@@ -1,0 +1,85 @@
+plugins {
+    id 'kotlin-multiplatform'
+    id 'org.jlleitschuh.gradle.ktlint'
+    id 'mirego.release' version '1.13'
+    id 'mirego.publish' version '1.0'
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url 'https://jitpack.io' }
+    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+}
+
+group 'com.mirego.trikot'
+
+kotlin {
+    targets {
+        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.js, 'js')
+
+        fromPreset(presets.iosArm64, 'iosArm64')
+        fromPreset(presets.iosX64, 'iosX64')
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "com.mirego.trikot:streams:$trikot_streams_version"
+                implementation "com.mirego.trikot:http:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources:$trikot_datasources_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
+                implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+            }
+        }
+        jsMain {
+            dependencies {
+                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
+                implementation "com.mirego.trikot:http-js:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
+            }
+        }
+        nativeMain {
+            dependsOn(commonMain)
+        }
+
+        iosArm64Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
+                implementation "com.mirego.trikot:http-iosarm64:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-iosarm64:$trikot_datasources_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+            }
+        }
+
+        iosX64Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
+                implementation "com.mirego.trikot:http-iosx64:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-iosx64:$trikot_datasources_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+            }
+        }
+    }
+}
+
+release {
+   checkTasks = ['check']
+   buildTasks = ['publish']
+   updateVersionPart = 1
+}
