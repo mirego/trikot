@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
   spec.source_files  = "swift-extensions/*.swift"
   spec.static_framework = true
   
-  spec.framework = 'Reachability'
+  spec.ios.frameworks = 'MobileCoreServices', 'SystemConfiguration'
 
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
