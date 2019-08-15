@@ -6,7 +6,7 @@ import com.mirego.jenkins.jobs.Context
 Context context = Context.load(this)
 context.standardFolders()
 
-job(context.jobFullName) {
+job("Trikot.kword-plugin") {
     description("Make a release of trikot.kword-plugin")
     logRotator(5)
     scm {
