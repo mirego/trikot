@@ -3,14 +3,10 @@
 @Grab('com.mirego.jenkins:jenkins-jobs:1.2')
 import com.mirego.jenkins.jobs.Context
 
-String projectName = 'Trikot.kword'
-String folderName = 'Mirego'
-
-
 Context context = Context.load(this)
 context.standardFolders()
 
-job("$folderName/$projectName-plugin") {
+job("$client/$project-plugin") {
     description("Make a release of trikot.kword-plugin")
     logRotator(5)
     scm {
@@ -49,7 +45,7 @@ job("$folderName/$projectName-plugin") {
     }
 }
 
-job("$folderName/$projectName") {
+job("$client/$project") {
     description("Make a release of trikot.kword")
     logRotator(5)
     scm {
