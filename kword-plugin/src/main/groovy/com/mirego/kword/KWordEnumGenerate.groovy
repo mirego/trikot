@@ -34,7 +34,7 @@ class KWordEnumGenerate extends DefaultTask {
                 PropertySpec.builder("translationKey", KOTLIN_STRING)
                     .initializer("translationKey")
                     .build())
-            .addSuperinterface(ClassName.bestGuess('com.mirego.skratch.kword.KWordKey'), CodeBlock.EMPTY)
+            .addSuperinterface(ClassName.bestGuess('com.mirego.trikot.kword.KWordKey'), CodeBlock.EMPTY)
     }
 
     private void addEnumConstants(enumBuilder) {
