@@ -1,6 +1,6 @@
 package com.mirego.trikot.metaviews
 
-import com.mirego.trikot.metaviews.properties.InputType
+import com.mirego.trikot.metaviews.properties.MetaInputType
 import org.reactivestreams.Publisher
 
 interface MetaInputText : MetaLabel {
@@ -11,7 +11,7 @@ interface MetaInputText : MetaLabel {
     /**
      * Type of data being placed in an EditText
      */
-    val inputType: Publisher<InputType>
+    val inputType: Publisher<MetaInputType>
     /**
      * Text to display when the text is empty.
      */

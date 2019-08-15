@@ -21,16 +21,16 @@ extension UITextField {
                     self?.metaInputText?.setUserInput(value: text)
                 }
 
-                observe(metaInputText.inputType) {[weak self] (inputType: InputType_) in
+                observe(metaInputText.inputType) {[weak self] (inputType: MetaInputType) in
                     switch inputType {
-                    case InputType_.email:
+                    case MetaInputType.email:
                         self?.autocapitalizationType = .none
                         self?.keyboardType = .emailAddress
                         self?.isSecureTextEntry = false
-                    case InputType_.text:
+                    case MetaInputType.text:
                         self?.keyboardType = .default
                         self?.isSecureTextEntry = false
-                    case InputType_.password:
+                    case MetaInputType.password:
                         self?.keyboardType = .default
                         self?.isSecureTextEntry = true
                     default:

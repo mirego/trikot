@@ -1,6 +1,6 @@
 package com.mirego.trikot.metaviews.properties
 
-enum class InputType {
+enum class MetaInputType {
     TEXT,
     PASSWORD,
     EMAIL
