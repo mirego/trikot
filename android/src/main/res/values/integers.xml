@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="schedules_anim_duration">400</integer>
+    <integer name="channel_picker_nav_delay">250</integer>
+    <integer name="header_description_max_line">3</integer>
+    <integer name="product_set_grid_span_count">1</integer>
+
+    <integer name="item_tile_portrait_title_text_shadow_radius">14</integer>
+    <integer name="item_tile_portrait_grid_title_text_shadow_radius">21</integer>
+
+    <integer name="item_tile_portrait_subtitle_text_shadow_radius">7</integer>
+    <integer name="item_tile_portrait_grid_subtitle_text_shadow_radius">12</integer>
+    <integer name="product_additionnal_info_column_count">1</integer>
+</resources>

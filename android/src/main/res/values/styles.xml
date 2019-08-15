@@ -1,0 +1,214 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/wigrum_bold</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="mediaRouteTheme">@style/CustomMediaRouterTheme</item>
+        <item name="castIntroOverlayStyle">@style/CustomCastIntroOverlay</item>
+        <item name="castMiniControllerStyle">@style/CustomCastMiniController</item>
+        <item name="castExpandedControllerStyle">@style/CustomCastExpandedController</item>
+        <item name="castExpandedControllerToolbarStyle">
+            @style/ThemeOverlay.AppCompat.Dark.ActionBar
+        </item>
+    </style>
+
+    <!-- Customize Cast Button -->
+    <style name="CustomMediaRouterTheme" parent="Theme.MediaRouter">
+        <item name="mediaRouteButtonStyle">@style/CustomMediaRouteButtonStyle</item>
+    </style>
+
+    <style name="CustomMediaRouteButtonStyle" parent="Widget.MediaRouter.MediaRouteButton">
+        <item name="mediaRouteButtonTint">@color/white</item>
+    </style>
+
+    <!-- Customize Introductory Overlay -->
+    <style name="CustomCastIntroOverlay" parent="CastIntroOverlay">
+        <item name="castButtonTextAppearance">@style/TextAppearance.CustomCastIntroOverlay.Button
+        </item>
+        <item name="castTitleTextAppearance">@style/TextAppearance.CustomCastIntroOverlay.Title
+        </item>
+    </style>
+
+    <style name="TextAppearance.CustomCastIntroOverlay.Button" parent="android:style/TextAppearance">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="TextAppearance.CustomCastIntroOverlay.Title" parent="android:style/TextAppearance.Large">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!-- Customize Mini Controller -->
+    <style name="CustomCastMiniController" parent="CastMiniController">
+        <item name="castShowImageThumbnail">true</item>
+        <item name="castTitleTextAppearance">@style/CastMiniControllerTitle</item>
+        <item name="castSubtitleTextAppearance">@style/CastMiniControllerSubtitle</item>
+        <item name="castBackground">@color/colorPrimaryMedium</item>
+        <item name="castProgressBarColor">@color/colorAccent</item>
+        <item name="castMiniControllerLoadingIndicatorColor">@color/white_50_percent</item>
+        <item name="castButtonColor">@color/white</item>
+        <item name="castLargePauseButtonDrawable">@drawable/ic_cast_pause</item>
+        <item name="castPauseButtonDrawable">@drawable/ic_cast_pause</item>
+        <item name="castLargePlayButtonDrawable">@drawable/ic_cast_play</item>
+        <item name="castPlayButtonDrawable">@drawable/ic_cast_play</item>
+
+    </style>
+
+    <style name="CastMiniControllerTitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">#2f161e27</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="fontFamily">@font/wigrum_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:lineSpacingExtra">-9.5sp</item>
+    </style>
+
+    <style name="CastMiniControllerSubtitle" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">#2f161e27</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="fontFamily">@font/wigrum_bold</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:lineSpacingExtra">-2.5sp</item>
+    </style>
+
+    <!-- Customize Expanded Controller -->
+    <style name="CustomCastExpandedController" parent="CastExpandedController">
+        <item name="castButtonColor">#FFFFFF</item>
+        <item name="castPlayButtonDrawable">@drawable/ic_cast_play_large</item>
+        <item name="castPauseButtonDrawable">@drawable/ic_cast_pause_large</item>
+        <item name="castForward30ButtonDrawable">@drawable/ic_cast_forward_30</item>
+        <item name="castRewind30ButtonDrawable">@drawable/ic_cast_rewind_30</item>
+        <item name="castClosedCaptionsButtonDrawable">@drawable/ic_cast_cc</item>
+        <item name="castControlButtons">@array/cast_expanded_controller_control_buttons</item>
+        <item name="castExpandedControllerLoadingIndicatorColor">@color/white_50_percent</item>
+        <item name="castMuteToggleButtonDrawable">@drawable/ic_cast_mute</item>
+        <item name="castSeekBarProgressAndThumbColor">@color/colorAccent</item>
+        <item name="castSeekBarProgressDrawable">@drawable/cast_expanded_controller_seekbar_track
+        </item>
+        <item name="castSeekBarThumbDrawable">@drawable/cast_expanded_controller_seekbar_thumb
+        </item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:colorBackground">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ThemeOverlay.ChannelSelector" parent="ThemeOverlay.AppCompat">
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/channel_picker_background</item>
+    </style>
+
+    <style name="ThemeOverlay.PlayerButton" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">#1D466A</item>
+    </style>
+
+    <style name="ThemeOverlay.DialogButton" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">#32699e</item>
+    </style>
+
+    <style name="ProductSectionDetail">
+        <item name="android:textColor">@color/schedule_item_time_labels</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="ProductSectionDetailInfoName" parent="ProductSectionDetail">
+        <item name="fontFamily">@font/wigrum_bold</item>
+    </style>
+
+    <style name="ProductSectionDetailInfoDescription" parent="ProductSectionDetail">
+        <item name="android:textColor">@color/schedule_item_time_labels</item>
+        <item name="fontFamily">@font/wigrum_regular</item>
+    </style>
+
+    <style name="ProductAdditionalInformationTitle">
+        <item name="fontFamily">@font/wigrum_regular</item>
+        <item name="android:color">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.13</item>
+    </style>
+
+    <style name="ProductAdditionalInformationName">
+        <item name="fontFamily">@font/wigrum_bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ProductAdditionalInformationValue">
+        <item name="fontFamily">@font/wigrum_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="BottomNavigationTheme" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/wigrum_bold</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="actionMenuTextColor">@color/colorAccent</item>
+    </style>
+
+    <style name="DialogCurrentText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:lineSpacingExtra">32sp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:shadowColor">#2f161e27</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">25</item>
+        <item name="android:textColor">@color/dialog_text_color</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="CastDialogButton" parent="android:style/TextAppearance">
+        <item name="fontFamily">@font/wigrum_medium</item>
+        <item name="android:letterSpacing">0.09</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="FinancialPartnersTitle">
+        <item name="android:lineSpacingExtra">7.2sp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TileArtwork" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
+
+    <style name="LoginFullScreenDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@drawable/gradient_dark_to_light_blue</item>
+        <item name="android:windowEnterAnimation">@anim/nav_default_pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/nav_default_pop_exit_anim</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+</resources>

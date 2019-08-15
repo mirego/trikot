@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>181788686119-gsii2t10c5aem69p1n2or0kcmsgprf1s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.181788686119-gsii2t10c5aem69p1n2or0kcmsgprf1s</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>181788686119-3jj598ns2hb9djo7p9ihdns3s486iucm.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDb-k9VfnDxqcRZpmldRmRkCCKufULZdr0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>181788686119</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ca.tv5.video.staging</string>
+	<key>PROJECT_ID</key>
+	<string>tv5-unis-staging</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tv5-unis-staging.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:181788686119:ios:68f8b50866c7cecf</string>
+	<key>DATABASE_URL</key>
+	<string>https://tv5-unis-staging.firebaseio.com</string>
+</dict>
+</plist>

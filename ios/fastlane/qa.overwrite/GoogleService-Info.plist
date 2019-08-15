@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>308331828785-qau7potl0qpnpl579e7pg52sjmpn4kt5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.308331828785-qau7potl0qpnpl579e7pg52sjmpn4kt5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA-_-4MdtHFkcF3_jpu5Ds0h9waSIy3ykQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>308331828785</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ca.tv5.video.qa</string>
+	<key>PROJECT_ID</key>
+	<string>tv5-unis-qa</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tv5-unis-qa.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:308331828785:ios:5c5dd0f5639c4efb</string>
+	<key>DATABASE_URL</key>
+	<string>https://tv5-unis-qa.firebaseio.com</string>
+</dict>
+</plist>

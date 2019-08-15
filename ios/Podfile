@@ -1,0 +1,18 @@
+platform :ios, '11.3'
+
+ENV['TRIKOT_FRAMEWORK_NAME']='TrikotFrameworkName' 
+
+target 'iosApp' do
+  use_frameworks!
+  pod 'SwiftLint'
+  pod 'TrikotFrameworkName', :path => '../common'
+  pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git'
+  pod 'Trikot.metaviews', :git => 'git@github.com:mirego/trikot.metaviews.git'
+  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git'
+  pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git'
+    
+  target 'iosAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
