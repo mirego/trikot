@@ -13,6 +13,7 @@ repositories {
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
+    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
 
 group 'com.mirego.trikot'
@@ -32,7 +33,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation project(path: ':streams', configuration: 'jvmDefault')
+    implementation 'com.mirego.trikot:streams:0.19.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.0.0'
 }
