@@ -1,6 +1,6 @@
 package com.mirego.trikot.metaviews.properties
 
-import com.mirego.trikot.streams.concurrent.freeze
+import com.mirego.trikot.foundation.concurrent.freeze
 import kotlin.math.roundToInt
 
 class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f) {

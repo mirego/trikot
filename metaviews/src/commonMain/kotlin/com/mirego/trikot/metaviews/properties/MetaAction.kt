@@ -1,6 +1,6 @@
 package com.mirego.trikot.metaviews.properties
 
-import com.mirego.trikot.streams.concurrent.freeze
+import com.mirego.trikot.foundation.concurrent.freeze
 
 typealias MetaActionBlock = (actionContext: Any?) -> Unit
 

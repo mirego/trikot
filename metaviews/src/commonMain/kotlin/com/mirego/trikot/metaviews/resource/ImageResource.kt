@@ -1,6 +1,6 @@
 package com.mirego.trikot.metaviews.resource
 
-import com.mirego.trikot.streams.concurrent.freeze
+import com.mirego.trikot.foundation.concurrent.freeze
 
 interface ImageResource {
     companion object {
