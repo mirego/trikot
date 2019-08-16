@@ -1,7 +1,7 @@
 package com.trikot.sample
 
 import com.mirego.trikot.http.HttpConfiguration
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 
 object Environment {
     private val internalFlavor = AtomicReference(Environment.Flavor.RELEASE)

@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
     }
 
     spec.prepare_command = <<-CMD
-        mkdir -p build/bin/ios/TrikotFrameworkName.framework
+        ../gradlew :common:copyFramework -Pkotlin.build.type=RELEASE
       CMD
 
     spec.script_phases = [

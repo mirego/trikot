@@ -40,16 +40,16 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Trikot.http:
-    :commit: 4b6c172dde90f1a7222eb8c63d0c487c83cf1a88
+    :commit: 7a7a709e27c59dc3dc9ff0837391fe322915493e
     :git: "git@github.com:mirego/trikot.http.git"
   Trikot.kword:
-    :commit: 11af2426107a975386546473522c00d2d2779bfe
+    :commit: 21a5b1da042ca7768ba6f645c4bed8170826e6ec
     :git: "git@github.com:mirego/trikot.kword.git"
   Trikot.metaviews:
-    :commit: 2ef97c76e29462f6e897f82bac0939c263bea819
+    :commit: 645a6c4726af74e8acf18b1526aa67fcc4be0455
     :git: "git@github.com:mirego/trikot.metaviews.git"
   Trikot.streams:
-    :commit: ef6ad44165107eed309f2359782155ffff7f218b
+    :commit: 814c88fe399f24aed91ed2263bf45e92e106c3bc
     :git: "git@github.com:mirego/trikot.streams.git"
 
 SPEC CHECKSUMS:
@@ -59,7 +59,7 @@ SPEC CHECKSUMS:
   Trikot.kword: 4021e56410368c6227bcd2cf7cfac6986135ea26
   Trikot.metaviews: b0cad572c2643a98357fb1a621630f7efc4a4e77
   Trikot.streams: 08e0de7d1bfb22eb7531cb01a88e3a19cd50d6c8
-  TrikotFrameworkName: 2887674ced09c23ece338d88742207829a504460
+  TrikotFrameworkName: 230c3900b9910a375138afc18bfc12fb0f86163d
 
 PODFILE CHECKSUM: 37dee959b61d60f7757758133c8cf96bbb15d1b0
 

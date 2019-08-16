@@ -1,7 +1,7 @@
 package com.trikot.sample.domain.impl
 
 import com.mirego.trikot.datasources.DataSourceState
-import com.mirego.trikot.streams.Configuration
+import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.reactive.shared
 import com.mirego.trikot.streams.reactive.subscribeOn
 import com.trikot.sample.domain.FetchFromGraphqlRepoUseCase
@@ -13,7 +13,7 @@ class FetchFromGraphqlRepoUseCaseImpl(private val graphqlRepo: SampleGraphqlRepo
     FetchFromGraphqlRepoUseCase {
     override fun fetchCanadianCountry(): Publisher<DataSourceState<Country>> {
         return graphqlRepo.country("CA")
-            .subscribeOn(Configuration.serialSubscriptionDispatchQueue)
+            .subscribeOn(StreamsConfiguration.serialSubscriptionDispatchQueue)
             .shared()
     }
 }
