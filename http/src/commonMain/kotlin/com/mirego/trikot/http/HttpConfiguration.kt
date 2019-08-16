@@ -1,11 +1,11 @@
 package com.mirego.trikot.http
 
 import com.mirego.trikot.http.connectivity.ConnectivityState
-import com.mirego.trikot.streams.concurrent.AtomicReference
-import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
-import com.mirego.trikot.streams.concurrent.dispatchQueue.OperationDispatchQueue
-import com.mirego.trikot.streams.concurrent.freeze
-import com.mirego.trikot.streams.reactive.PublisherFactory
+import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.OperationDispatchQueue
+import com.mirego.trikot.foundation.concurrent.freeze
+import com.mirego.trikot.streams.reactive.Publishers
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import org.reactivestreams.Publisher
@@ -16,7 +16,7 @@ object HttpConfiguration {
     private val internalHttpRequestFactory = AtomicReference<HttpRequestFactory>(KtorHttpRequestFactory())
     private val internalNetworkDispatchQueue = AtomicReference<DispatchQueue>(OperationDispatchQueue())
     private val internalDefaultHeaderProvider = AtomicReference<HttpHeaderProvider>(DefaultHttpHeaderProvider())
-    private val internalConnectivityStatePublisher = AtomicReference<Publisher<ConnectivityState>>(PublisherFactory.create(
+    private val internalConnectivityStatePublisher = AtomicReference<Publisher<ConnectivityState>>(Publishers.behaviorSubject(
         ConnectivityState.WIFI))
     private val internalBaseUrl = AtomicReference("")
 

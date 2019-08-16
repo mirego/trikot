@@ -5,7 +5,7 @@ import com.mirego.trikot.http.HttpRequestFactory
 import com.mirego.trikot.http.HttpResponse
 import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.PublisherFactory
+import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.request
@@ -28,7 +28,7 @@ class KtorHttpRequestFactory : HttpRequestFactory {
         override val coroutineContext: CoroutineContext = Dispatchers.Unconfined
 
         override fun execute(cancellableManager: CancellableManager): Publisher<HttpResponse> {
-            val publisher = PublisherFactory.create<HttpResponse>()
+            val publisher = Publishers.behaviorSubject<HttpResponse>()
 
             launch {
                 val client = HttpClient()

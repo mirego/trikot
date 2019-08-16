@@ -1,0 +1,27 @@
+# Trikot.http swift extensions
+To use `Trikot.http` swift extensions, you must export `http` and `http-iosx64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle) for a sample use case.
+
+##### Setup Pod dependency
+```groovy
+ pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git'
+```
+
+##### An HTTP Implementation based on `URLSession`
+`ktor` does not work that well on iOS as it relies on Coroutines on the mainThread (as of today). Trikot.http provides its own implementation based on `URLSession`
+
+```swift
+import Trikot_http
+...
+HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
+```
+
+##### Setup connectivity publisher
+```swift
+import Trikot_http
+...
+HttpConfiguration().connectivityPublisher = TrikotConnectivityService.shared.publisher
+...
+TrikotConnectivityService.shared.start() // When app is running
+...
+TrikotConnectivityService.shared.stop() // When app is in background
+```

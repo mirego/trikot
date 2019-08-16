@@ -4,7 +4,7 @@ import TRIKOT_FRAMEWORK_NAME
 
 public class TrikotConnectivityService {
     public static let shared = TrikotConnectivityService()
-    public let publisher = PublisherFactory().create(value: ConnectivityState.wifi)
+    public let publisher = Publishers().behaviorSubject(value: ConnectivityState.wifi)
 
     let reachability = Reachability()!
 

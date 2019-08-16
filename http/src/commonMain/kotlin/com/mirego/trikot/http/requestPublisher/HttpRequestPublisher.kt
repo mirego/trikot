@@ -5,9 +5,9 @@ import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.http.HttpRequestFactory
 import com.mirego.trikot.http.HttpResponse
 import com.mirego.trikot.http.RequestBuilder
-import com.mirego.trikot.streams.Configuration
+import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.streams.reactive.executable.BaseExecutablePublisher
 import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.subscribe
@@ -15,7 +15,7 @@ import org.reactivestreams.Publisher
 
 abstract class HttpRequestPublisher<T>(
     networkQueue: DispatchQueue = HttpConfiguration.networkDispatchQueue,
-    private val operationQueue: DispatchQueue = Configuration.publisherExecutionDispatchQueue,
+    private val operationQueue: DispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue,
     private val httpRequestFactory: HttpRequestFactory = HttpConfiguration.httpRequestFactory,
     private val headerProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider
 ) : BaseExecutablePublisher<T>(networkQueue) {

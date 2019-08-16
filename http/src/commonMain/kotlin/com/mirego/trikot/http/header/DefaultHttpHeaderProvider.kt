@@ -3,7 +3,7 @@ package com.mirego.trikot.http.header
 import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.PublisherFactory
+import com.mirego.trikot.streams.reactive.Publishers
 import org.reactivestreams.Publisher
 
 class DefaultHttpHeaderProvider : HttpHeaderProvider {
@@ -14,6 +14,6 @@ class DefaultHttpHeaderProvider : HttpHeaderProvider {
         cancellableManager: CancellableManager,
         requestBuilder: RequestBuilder
     ): Publisher<Map<String, String>> {
-        return PublisherFactory.create(HashMap())
+        return Publishers.behaviorSubject(HashMap())
     }
 }
