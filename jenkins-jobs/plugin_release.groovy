@@ -32,7 +32,7 @@ job(context.jobFullName) {
         gradle {
             useWrapper()
             makeExecutable()
-            tasks(':streams:release')
+            tasks(':streams:release :android-ktx:release')
             switches('-i -s')
         }
     }
