@@ -76,24 +76,6 @@ release {
    updateVersionPart = 1
 }
 
-sourceSets {
-    test {
-        groovy {
-            srcDirs += 'src/commonTest/groovy'
-        }
-        dependencies {
-            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            implementation 'org.spockframework:spock-core:1.2-groovy-2.4'
-
-            // Workaround for Android Studio Bug: https://issuetracker.google.com/issues/65712492
-            runtimeOnly files("build/classes/groovy/test")
-            implementation files("build/classes/kotlin/jvm/main")
-        }
-    }
-}
-
-test.dependsOn compileKotlinJvm
-
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170
 configurations {
     compileClasspath
