@@ -1,8 +1,8 @@
 package com.mirego.trikot.datasources
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.concurrent.AtomicReference
-import com.mirego.trikot.streams.reactive.PublisherFactory
+import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.RefreshablePublisher
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
 import com.mirego.trikot.streams.reactive.map
@@ -62,7 +62,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
                 previousDataSourceState.error != null && cacheDataSource != null -> cacheDataSource.read(request).map {
                     DataSourceState(false, it.data, previousDataSourceState.error)
                 }
-                else -> PublisherFactory.create(previousDataSourceState)
+                else -> Publishers.behaviorSubject(previousDataSourceState)
             }
         }
     }
@@ -75,7 +75,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
             .switchMap { (cancellableManager, dataSourceState) ->
                 when {
                     !dataSourceState.isLoading && dataSourceState.data == null || dataSourceState.error != null -> readData(request, cancellableManager)
-                    else -> PublisherFactory.create(dataSourceState)
+                    else -> Publishers.behaviorSubject(dataSourceState)
                 }
             }
     }
