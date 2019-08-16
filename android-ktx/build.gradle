@@ -42,6 +42,7 @@ release {
     checkTasks = ['check']
     buildTasks = ['publish']
     updateVersionPart = 1
+    tagPrefix = 'android-ktx-'
 }
 
 publishing {
