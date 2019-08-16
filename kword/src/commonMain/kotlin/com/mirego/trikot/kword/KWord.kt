@@ -1,7 +1,7 @@
 package com.mirego.trikot.kword
 
 import kotlin.js.JsName
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 
 interface KWordKey {
     val translationKey: String

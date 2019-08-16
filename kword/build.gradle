@@ -26,7 +26,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation "com.mirego.trikot:streams:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
@@ -38,13 +38,13 @@ kotlin {
         }
         jvmMain {
             dependencies {
-                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
         jsMain {
             dependencies {
-                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
@@ -56,14 +56,14 @@ kotlin {
         iosArm64Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
             }
         }
 
         iosX64Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
             }
         }
     }
