@@ -27,6 +27,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation "com.mirego.trikot:foundation:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:http:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources:$trikot_datasources_version"
@@ -36,6 +37,7 @@ kotlin {
         }
         jvmMain {
             dependencies {
+                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
@@ -45,6 +47,7 @@ kotlin {
         }
         jsMain {
             dependencies {
+                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-js:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
@@ -59,6 +62,7 @@ kotlin {
         iosArm64Main {
             dependsOn(nativeMain)
             dependencies {
+                implementation "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-iosarm64:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-iosarm64:$trikot_datasources_version"
@@ -69,6 +73,7 @@ kotlin {
         iosX64Main {
             dependsOn(nativeMain)
             dependencies {
+                implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-iosx64:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-iosx64:$trikot_datasources_version"

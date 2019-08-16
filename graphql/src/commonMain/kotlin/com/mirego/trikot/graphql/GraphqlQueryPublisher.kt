@@ -7,7 +7,6 @@ import com.mirego.trikot.http.HttpMethod
 import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.http.requestPublisher.DeserializableHttpRequestPublisher
 import com.mirego.trikot.http.HttpConfiguration
-import com.mirego.trikot.streams.concurrent.freeze
 
 class GraphqlQueryPublisher<T>(
     query: GraphqlQuery<T>,
