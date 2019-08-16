@@ -7,7 +7,7 @@ import com.mirego.trikot.metaviews.MetaImage
 import com.mirego.trikot.metaviews.properties.Color
 import com.mirego.trikot.metaviews.properties.SimpleImageFlow
 import com.mirego.trikot.metaviews.resource.ImageResource
-import com.mirego.trikot.streams.reactive.PublisherFactory
+import com.mirego.trikot.streams.reactive.Publishers
 import org.reactivestreams.Publisher
 
 /**
@@ -22,5 +22,5 @@ open class MutableMetaImage(var imageFlowProvider: ImageFlowProvider) : MutableM
 }
 
 fun simpleImageFlowProvider(url: String? = null, placeholderImageResource: ImageResource? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
-    return { _, _ -> PublisherFactory.create(SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor)) }
+    return { _, _ -> Publishers.behaviorSubject(SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor)) }
 }
