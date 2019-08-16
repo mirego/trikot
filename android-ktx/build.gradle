@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-platform-android'
+    id 'digital.wup.android-maven-publish' version '3.6.2'
+    id 'mirego.release' version '1.13'
+    id 'mirego.publish' version '1.0'
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url 'https://jitpack.io' }
+}
+
+group 'com.mirego.trikot'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "29.0.0"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+    }
+}
+
+configurations.all {
+    exclude group: "org.reactivestreams"
+}
+
+dependencies {
+    implementation project(path: ':streams', configuration: 'jvmDefault')
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.0.0'
+}
+
+release {
+    checkTasks = ['check']
+    buildTasks = ['publish']
+    updateVersionPart = 1
+}
+
+publishing {
+    publications {
+        mavenAar(MavenPublication) {
+            from components.android
+        }
+    }
+}
