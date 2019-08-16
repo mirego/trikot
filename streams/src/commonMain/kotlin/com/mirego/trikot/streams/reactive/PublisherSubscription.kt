@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 

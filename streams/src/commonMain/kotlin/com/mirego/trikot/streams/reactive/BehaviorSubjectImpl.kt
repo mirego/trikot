@@ -1,12 +1,12 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.concurrent.AtomicListReference
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicListReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Subscriber
 
-open class SimplePublisher<T>(
+open class BehaviorSubjectImpl<T>(
     value: T? = null
-) : MutablePublisher<T> {
+) : BehaviorSubject<T> {
 
     private val subscriptions = AtomicListReference<PublisherSubscription<T>>()
     private val atomicValue = AtomicReference(value)

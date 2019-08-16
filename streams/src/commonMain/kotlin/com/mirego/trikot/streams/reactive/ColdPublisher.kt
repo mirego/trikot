@@ -6,7 +6,7 @@ import org.reactivestreams.Publisher
 
 typealias ColdPublisherExecutionBlock<T> = (CancellableManager) -> Publisher<T>
 
-class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T>, value: T? = null) : SimplePublisher<T>(value) {
+class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T>, value: T? = null) : BehaviorSubjectImpl<T>(value) {
     private val cancellableManagerProvider = CancellableManagerProvider()
 
     override fun onFirstSubscription() {

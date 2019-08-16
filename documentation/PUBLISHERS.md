@@ -11,10 +11,10 @@
 ## Publishers
 Multiple publisher implementation can be instantiated depending on the use case you need to achieve.  
 
-### SimplePublisher
-**Create a publisher**
+### behaviorSubject
+**Create a BehaviorSubject**
 ```kotlin
-val publisher = PublisherFactory.create<String>()
+val publisher = Publishers.behaviorSubject<String>()
 ```
 
 **Dispatch a new value to subscribers**
@@ -25,7 +25,7 @@ publisher.value = "new value"
 **Subscribe to a publisher values**
 ```kotlin
 val cancelableManager = CancelableManager()
-val publisher = PublisherFactory.create<String>()
+val publisher = Publishers.behaviorSubject<String>()
 
 publisher.subscribe(cancelableManager) { println(it) }
 publisher.value = "foo"
@@ -77,9 +77,9 @@ The callback block provides a cancellableManager and a boolean
 ```kotlin
 val publisher = RefreshablePublisher({ cancellableManager, isRefreshing ->
 	if (isRefreshing) {
-		PublisherFactory.create("I am refreshing")
+		Publishers.behaviorSubject("I am refreshing")
 	} else {
-		PublisherFactory.create("I am not refreshing")
+		Publishers.behaviorSubject("I am not refreshing")
 	}
 }
 
@@ -146,8 +146,8 @@ publisher.filter { it.length > 2 }
 *Input* - Value from previous processor
 *Output* - Publisher
 ```kotlin
-val publisherWhenOffline = PublisherFactory.create<...>()
-val publisherWhenOnline = PublisherFactory.create<...>()
+val publisherWhenOffline = Publishers.behaviorSubject<...>()
+val publisherWhenOnline = Publishers.behaviorSubject<...>()
 
 connectivityPublisher.switchMap { isConnected ->
 	if (isConnected) publisherWhenOnline else publisherWhenOffline
@@ -207,7 +207,7 @@ This processors convert the error dispatched by a publisher in a result. This al
 #### Shared
 Allows to share the result of previous transformation
 ```kotlin
-val fooPublisher = PublisherFactory.create("foo")
+val fooPublisher = Publishers.behaviorSubject("foo")
 val uppercasePublisher = fooPublisher
 	.map { it.toUppercase() }
 	.map { it.toUppercase() }
@@ -222,7 +222,7 @@ In this case,  when fooPublisher emit a new value, the maps will only be execute
 #### WithPreviousValue
 Transform the new value in a oldValue -> newValue pair
 ```kotlin
-val fooPublisher = PublisherFactory.create("foo")
+val fooPublisher = Publishers.behaviorSubject("foo")
 
 val fooPublisher.withPreviousValue().subscribe(...) { (oldValue, newValue) ->
 	print("${oldValue} - ${newValue}")

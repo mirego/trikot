@@ -2,7 +2,7 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Publisher
 import kotlin.js.JsName
 
@@ -77,7 +77,7 @@ class CombineLatest<R : CombineLatestResult<A, B, C, D, E>, A, B, C, D, E>(
     private var pub3: Publisher<C>? = null,
     private var pub4: Publisher<D>? = null,
     private var pub5: Publisher<E>? = null
-) : SimplePublisher<R>(null), Cancellable {
+) : BehaviorSubjectImpl<R>(null), Cancellable {
     private var masterCancellableManager = CancellableManager()
     private var cancellableManager = AtomicReference(CancellableManager())
     private var result = AtomicReference(result)

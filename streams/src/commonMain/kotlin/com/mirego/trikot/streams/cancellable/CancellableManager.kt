@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.cancellable
 
-import com.mirego.trikot.streams.concurrent.AtomicListReference
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicListReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 
 class CancellableManager : Cancellable {
     private val queueList = AtomicListReference<Cancellable>()

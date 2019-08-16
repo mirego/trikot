@@ -12,6 +12,7 @@ repositories {
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
+    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
 
 group 'com.mirego.trikot'
@@ -26,6 +27,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation "com.mirego.trikot:foundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
@@ -37,11 +39,13 @@ kotlin {
         }
         jvmMain {
             dependencies {
+                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
         jsMain {
             dependencies {
+                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
@@ -52,10 +56,16 @@ kotlin {
 
         iosArm64Main {
             dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
+            }
         }
 
         iosX64Main {
             dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
+            }
         }
     }
 }

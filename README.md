@@ -12,7 +12,7 @@ Elegant implementation of ReactiveStreams for Kotlin Multiplatform.
 #### Common code
 ```kotlin
 class SearchController() {
-    private val searchKeywordPublisher = PublisherFactory.create<String>("keyword")
+    private val searchKeywordPublisher = Publishers.behaviorSubject<String>("keyword")
     private val searchResultsPublisher = searchKeywordPublisher.switchMap { keyword ->
         searchService.search(keyword)
     }.shared()
@@ -59,8 +59,3 @@ See the documentation [here](./documentation/PUBLISHERS.md)
 Subscription and unsubscription are managed trough `Cancellable` and `CancellableManager`.
 
 See the documentation [here](./documentation/CANCELABLE.md)
-
-## [Dispatch Queues](./documentation/DISPATCH_QUEUES.md)
-Dispatch queues are the threading model of Trikot.streams
-
-See the documentation [here](./documentation/DISPATCH_QUEUES.md)

@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
@@ -10,6 +10,7 @@ abstract class ProcessorSubscription<T, R>(private val subscriber: Subscriber<in
         Subscription {
         override fun cancel() {
         }
+
         override fun request(n: Long) {
         }
     })

@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Processor
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
@@ -10,7 +10,8 @@ abstract class AbstractProcessor<T, R>(
     val parentPublisher: Publisher<T>
 ) :
     Processor<T, R> {
-    private val subscription: AtomicReference<Subscription?> = AtomicReference(null)
+    private val subscription: AtomicReference<Subscription?> =
+        AtomicReference(null)
 
     abstract fun createSubscription(subscriber: Subscriber<in R>): ProcessorSubscription<T, R>
 

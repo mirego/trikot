@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.streams.reactive.processors.MapProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
@@ -86,9 +86,9 @@ fun <T> Publisher<T>.withPreviousValue(): Publisher<Pair<T?, T>> {
     return WithPreviousValueProcessor(this)
 }
 
-fun <T> Publisher<T>.asMutable(): MutablePublisher<T> {
+fun <T> Publisher<T>.asMutable(): BehaviorSubject<T> {
     val referencePublisher = this
-    return object : MutablePublisher<T> {
+    return object : BehaviorSubject<T> {
         override var value: T?
             get() {
                 throw IllegalArgumentException("Cannot use get value on publisher of type on ${referencePublisher::class}.")
@@ -115,5 +115,5 @@ fun <T> Publisher<T>.asMutable(): MutablePublisher<T> {
 }
 
 fun <T> T.asPublisher(): Publisher<T> {
-    return PublisherFactory.create(this)
+    return Publishers.behaviorSubject(this)
 }

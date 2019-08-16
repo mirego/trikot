@@ -1,12 +1,12 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
-import com.mirego.trikot.streams.reactive.SimplePublisher
+import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import org.reactivestreams.Processor
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscription
 
-class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : SimplePublisher<T>(), Processor<T, T> {
+class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : BehaviorSubjectImpl<T>(), Processor<T, T> {
 
     private val cancellableManagerProvider = CancellableManagerProvider()
 

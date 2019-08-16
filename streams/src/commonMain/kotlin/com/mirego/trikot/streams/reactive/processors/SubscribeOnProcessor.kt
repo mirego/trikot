@@ -1,15 +1,16 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.concurrent.dispatchQueue.DispatchQueue
-import com.mirego.trikot.streams.concurrent.dispatchQueue.QueueDispatcher
-import com.mirego.trikot.streams.concurrent.dispatchQueue.dispatch
-import com.mirego.trikot.streams.concurrent.freeze
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.QueueDispatcher
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
+import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
 class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispatchQueue: DispatchQueue) :
-    AbstractProcessor<T, T>(parentPublisher = parentPublisher), QueueDispatcher {
+    AbstractProcessor<T, T>(parentPublisher = parentPublisher),
+    QueueDispatcher {
 
     override fun subscribe(s: Subscriber<in T>) {
         freeze(s)
