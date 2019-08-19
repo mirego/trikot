@@ -38,7 +38,7 @@ kotlin {
             binaries {
                 framework {
                     embedBitcode("disable")
-                    baseName = "TrikotFrameworkName"
+                    baseName = "$trikot_framework_name"
                     export "com.mirego.trikot:foundation:$trikot_foundation_version"
                     export "com.mirego.trikot:foundation-$iosArchLibrarySuffix:$trikot_foundation_version"
                     export "com.mirego.trikot:streams:$trikot_streams_version"
@@ -132,7 +132,7 @@ task copyFramework() {
     dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
 
     doLast {
-        def frameworkFilename = "TrikotFrameworkName.framework"
+        def frameworkFilename = "${trikot_framework_name}.framework"
         def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
         def targetDir = file("build/bin/ios").toString()
         def frameworkDir = "${targetDir}/${frameworkFilename}"

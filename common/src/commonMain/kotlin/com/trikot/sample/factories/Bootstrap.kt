@@ -7,7 +7,6 @@ import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KWord
 import com.mirego.trikot.foundation.concurrent.freeze
 import com.trikot.sample.domain.impl.FetchFromGraphqlRepoUseCaseImpl
-import com.trikot.sample.localization.KWordTranslation
 import com.trikot.sample.repositories.impl.SampleGraphqlRepoImpl
 
 class Bootstrap {

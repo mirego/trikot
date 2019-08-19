@@ -12,7 +12,7 @@ import com.trikot.sample.repositories.SampleGraphqlRepo
 import com.trikot.sample.repositories.datasources.queries.SampleQuery
 import org.reactivestreams.Publisher
 
-class SampleGraphqlRepoImpl(private val dataSource: GraphqlDataSourceType<DataResponse<CountryResponse>>):
+class SampleGraphqlRepoImpl(private val dataSource: GraphqlDataSourceType<DataResponse<CountryResponse>>) :
     SampleGraphqlRepo {
     override fun country(code: String): Publisher<DataSourceState<Country>> {
         val cachableId = "cache-$code"

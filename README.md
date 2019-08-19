@@ -1,16 +1,75 @@
 # What to Replace
-patron-project-name -> my-project-name (tv5-multiplatform) - (settings.gradle)
 
-PatronProjectName -> TV5 (android/build.gradle, bundleName)
+## Root
 
-Patron App Name -> Your App Name (values/strings.xml, DisplayNAme)
+- settings.gradle
+`rootProject.name = 'TrikotSample'`
 
-TrikotFrameworkName -> MyFrameworkName (TV5mobile.podspec) (file + content - TrikotFrameworkName.podspec, common/build.gradle, Podfile)
+- gradle.properties
+`trikot_framework_name=TrikotFrameworkName`
 
-com.trikot.project -> com.my-company.project-name 
-    (rename directory to match package name (android + common), 
-    rename packages, android/build.gradle, AndroidManifest, BundleIdentifier)
+- ./jobs/build_jobs.groovy
+- ./jobs/ios_fastlane.groovy
+```
+String clientName = 'SAMPLECLIENT'.toLowerCase().replaceAll(' ','_')
+String projectName = 'SAMPLEPROJECT'.toLowerCase().replaceAll(' ','_')
+String projectGithubPath = 'mirego/SAMPLEREPO'
+String slackNotificationChannel = '#SAMPLESLACKCHANNEL'
+```
 
-Question pour JD:
-- Proguard et Keystore
-- Environment
+## Common
+- `./common/src/commonMain/kotlin/com/trikot/sample`
+Rename package
+
+- ./common/build.gradle
+`group 'com.trikot.sample'`
+`    enumClassName 'com.trikot.sample.localization.KWordTranslation'`
+
+- ./common/TrikotFrameworkName.podspec
+`    spec.name                     = 'TrikotFrameworkName'`
+`    spec.vendored_frameworks      = "build/bin/ios/TrikotFrameworkName.framework"`
+**Rename file to YourFramework.podspec**
+
+
+## Android
+- ./android/build.gradle
+`        applicationId "com.trikot.sample"`
+`        archivesBaseName = "PatronProjectName-$versionCode"`
+
+- `./android/src/main/java/com/trikot/sample`
+Rename packages to match applicationId 
+
+- `./android/src/main/AndroidManifest.xml`
+Rename packages to match applicationId 
+
+- `./android/src/main/res/values/strings.xml`
+```xml
+<string name="app_name">Trikot Sample App</string>
+```
+
+- TODO: Keystores
+
+## iOS
+- `./ios/Podfile`
+```ruby
+ENV['TRIKOT_FRAMEWORK_NAME']='AirthingsCorentium' 
+pod 'TrikotFrameworkName', :path => '../common'
+```
+
+- `./ios/iosApp/Info.plist`
+```
+	<key>CFBundleName</key>
+	<string>TrikotProjectName</string>
+```
+
+- `./ios/iosApp.xcodeproj/project.pbxproj`
+```
+PRODUCT_BUNDLE_IDENTIFIER = com.trikot.project
+PRODUCT_BUNDLE_IDENTIFIER = com.example.iosAppTests
+PRODUCT_BUNDLE_IDENTIFIER = com.example.app
+```
+
+- All project files
+`import TrikotFrameworkName`
+
+- TODO: Fastfiles

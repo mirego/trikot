@@ -26,6 +26,7 @@ class TrikotApplication : Application() {
         MetaImageResourceManager.provider = SampleImageResourceProvider()
         Environment.flavor = Environment.Flavor.valueOf(BuildConfig.BUILD_TYPE.toUpperCase())
 
-        HttpConfiguration.connectivityPublisher = AndroidConnectivityPublisher(this).distinctUntilChanged()
+        HttpConfiguration.connectivityPublisher = AndroidConnectivityPublisher(this)
+            .distinctUntilChanged()
     }
 }

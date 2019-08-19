@@ -10,7 +10,7 @@ import com.trikot.sample.viewmodels.sample.SampleViewModel
 class SampleViewModelImpl(
     fetchFromGraphqlRepoUseCase: FetchFromGraphqlRepoUseCase,
     i18N: I18N
-):
+) :
     SampleViewModel {
     override val helloWorldLabel = MutableMetaLabel().also {
         it.text.value = i18N[KWordTranslation.HELLO_WORLD]

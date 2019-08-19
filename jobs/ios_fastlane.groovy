@@ -1,8 +1,8 @@
-String clientName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
-String projectName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
-String projectGithubPath = 'mirego/sample'
+String clientName = 'SAMPLECLIENT'.toLowerCase().replaceAll(' ','_')
+String projectName = 'SAMPLEPROJECT'.toLowerCase().replaceAll(' ','_')
+String projectGithubPath = 'mirego/SAMPLEREPO'
 String folderName = clientName+'-'+projectName
-String slackNotificationChannel = '#sample'
+String slackNotificationChannel = '#SAMPLESLACKCHANNEL'
 String projectDisplayName = projectName
 
 folder("$folderName") {

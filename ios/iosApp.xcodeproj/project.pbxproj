@@ -10,7 +10,6 @@
 		1AC9C498E6E5F2EFCEC3A3B4 /* Pods_iosAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8E32C92C1B117E25CD10D3 /* Pods_iosAppTests.framework */; };
 		403F9B4422539E0B00239F8B /* SharedBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403F9B4322539E0B00239F8B /* SharedBootstrap.swift */; };
 		403F9B4A2253D46800239F8B /* image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 403F9B492253D46800239F8B /* image.xcassets */; };
-		404270FB22A16B7300C0E402 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 404270FA22A16B7300C0E402 /* GoogleService-Info.plist */; };
 		40C6799D2304B3C5003BB391 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799C2304B3C5003BB391 /* SampleViewController.swift */; };
 		40C6799F2304B3CE003BB391 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799E2304B3CE003BB391 /* SampleView.swift */; };
 		40C679A123059D75003BB391 /* SampleImageResourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */; };
@@ -57,7 +56,6 @@
 		403F9B492253D46800239F8B /* image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = image.xcassets; sourceTree = "<group>"; };
 		403F9B4D2253FC1500239F8B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		403F9B4F2253FCC200239F8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		404270FA22A16B7300C0E402 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40C6799C2304B3C5003BB391 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		40C6799E2304B3CE003BB391 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
 		40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageResourceProvider.swift; sourceTree = "<group>"; };
@@ -116,13 +114,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		40AFD58C226147D500C64F38 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		40C6799B2304B3B2003BB391 /* sample */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,8 +161,6 @@
 			children = (
 				40C6799B2304B3B2003BB391 /* sample */,
 				1F52612822CF84FE000BB651 /* iosApp.entitlements */,
-				404270FA22A16B7300C0E402 /* GoogleService-Info.plist */,
-				40AFD58C226147D500C64F38 /* Resources */,
 				403F9B492253D46800239F8B /* image.xcassets */,
 				F861D7E0207FA40F0085E80D /* AppDelegate.swift */,
 				F861D7E4207FA40F0085E80D /* Main.storyboard */,
@@ -307,7 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				403F9B4A2253D46800239F8B /* image.xcassets in Resources */,
-				404270FB22A16B7300C0E402 /* GoogleService-Info.plist in Resources */,
 				F861D7EB207FA4100085E80D /* LaunchScreen.storyboard in Resources */,
 				F861D7E6207FA40F0085E80D /* Main.storyboard in Resources */,
 			);

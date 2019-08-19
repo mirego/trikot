@@ -2,11 +2,11 @@
 // You'll need to setup a Jenkins Seed Jobs to load the jobs below
 // in Jenkins. See: https://github.com/mirego/jenkins-jobs
 
-String clientName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
-String projectName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
-String projectGithubPath = 'mirego/sample'
+String clientName = 'SAMPLECLIENT'.toLowerCase().replaceAll(' ','_')
+String projectName = 'SAMPLEPROJECT'.toLowerCase().replaceAll(' ','_')
+String projectGithubPath = 'mirego/SAMPLEREPO'
 String folderName = clientName+'-'+projectName
-String slackNotificationChannel = '#sample'
+String slackNotificationChannel = '#SAMPLESLACKCHANNEL'
 
 // Create folder that will contains all the jobs
 folder("$folderName") {

@@ -6,6 +6,4 @@ import com.trikot.sample.AndroidBootstrap
 
 class AndroidAppViewModel(application: Application) : AndroidViewModel(application) {
     val vm = AndroidBootstrap.bootstrap.viewModelFactory.sampleViewModel
-
-
 }
