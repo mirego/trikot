@@ -45,17 +45,18 @@ Binding helpers relies on AndroidViewModel and uses lifecycleOwner to manage sub
             tools:text="0" />
 ```
 
-#### JS
-```
-Not implemented yet
-```
-
 ## [Publishers and Processors](./documentation/PUBLISHERS.md)
 Foundation of trikot.streams is based on a immutable and concurrent implementation of [Reactive-Streams](https://www.reactive-streams.org/).
-
-See the documentation [here](./documentation/PUBLISHERS.md)
 
 ## [Cancellables](./documentation/CANCELLABLE.md)
 Subscription and unsubscription are managed trough `Cancellable` and `CancellableManager`.
 
-See the documentation [here](./documentation/CANCELABLE.md)
+## Installation
+##### Import dependencies
+```groovy
+    api "com.mirego.trikot:streams:$trikot_streams_version"
+    jvm "com.mirego.trikot:streams-jvm:$trikot_streams_version"
+    js "com.mirego.trikot:streams-js:$trikot_streams_version"
+    iosx64 "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
+    iosarm64 "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
+```
