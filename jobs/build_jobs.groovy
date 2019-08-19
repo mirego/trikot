@@ -2,11 +2,11 @@
 // You'll need to setup a Jenkins Seed Jobs to load the jobs below
 // in Jenkins. See: https://github.com/mirego/jenkins-jobs
 
-String clientName = 'TV5'.toLowerCase().replaceAll(' ','_')
-String projectName = 'TV5Unis'.toLowerCase().replaceAll(' ','_')
-String projectGithubPath = 'mirego/tv5-asterix-multiplatform'
+String clientName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
+String projectName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
+String projectGithubPath = 'mirego/sample'
 String folderName = clientName+'-'+projectName
-String slackNotificationChannel = '#asterix'
+String slackNotificationChannel = '#sample'
 
 // Create folder that will contains all the jobs
 folder("$folderName") {
@@ -53,119 +53,40 @@ mirego-builds
         useWrapper()
         makeExecutable()
         tasks('clean assembleQA')
-        //switches('-S -PincrementVersion=true')
+        switches('-S -PincrementVersion=true')
     }
-    //shell('''#!/bin/sh
-//${TOOLBOX_DIR}/git-push-changes "origin/master"
-//''')
+    shell('''#!/bin/sh
+      ${TOOLBOX_DIR}/git-push-changes "origin/master"
+    ''')
   }
   publishers {
           hockeyappRecorder {
             applications {
-                hockeyappApplication {
-                    apiToken('')
-                    appId('8912fb78af2c4e3da0182afc37d19ab0')
-                    dsymPath('')
-                    libsPath('')
-                    uploadMethod {
-                        versionCreation {
-                            appId('8912fb78af2c4e3da0182afc37d19ab0')
-                        }
-                    }
-                    filePath('android/build/outputs/apk/QA/TV5-*-QA.apk')
-                    releaseNotesMethod {
-                        changelogReleaseNotes()
-                    }
-                    tags('')
-                    teams('')
-                    mandatory(false)
-                    notifyTeam(false)
-                    downloadAllowed(true)
-                    oldVersionHolder {
-                        numberOldVersions('')
-                        sortOldVersions('')
-                        strategyOldVersions('')
-                    }
-                }
-            }
-            debugMode(false)
-            failGracefully(false)
-        }
-    slackNotifier {
-      notifyFailure(false)
-      notifyBackToNormal(false)
-      room(slackNotificationChannel)
-    }
-  }
-}
-
-job("$folderName/$projectName-android-staging") {
-  description('Android Staging Build')
-  logRotator(5)
-  concurrentBuild()
-  scm {
-    git {
-      branch('*/master')
-      remote {
-        github(projectGithubPath, 'ssh')
-        credentials('github')
-      }
-      extensions {
-        submoduleOptions {
-          recursive()
-        }
-        userExclusion {
-          excludedUsers('''jenkins
-Jenkins
-jenkins@mirego.com
-mirego-builds
-''')
-        }
-      }
-    }
-  }
-  triggers {
-    //scm('@midnight')
-  }
-  steps {
-    gradle {
-        useWrapper()
-        makeExecutable()
-        tasks('clean assembleStaging')
-        //switches('-S -PincrementVersion=true')
-    }
-    //shell('''#!/bin/sh
-//${TOOLBOX_DIR}/git-push-changes "origin/master"
-//''')
-  }
-  publishers {
-          hockeyappRecorder {
-            applications {
-                hockeyappApplication {
-                    apiToken('')
-                    appId('1fccc844d3b04b57b81a49f9dd5ed059')
-                    dsymPath('')
-                    libsPath('')
-                    uploadMethod {
-                        versionCreation {
-                            appId('1fccc844d3b04b57b81a49f9dd5ed059')
-                        }
-                    }
-                    filePath('android/build/outputs/apk/staging/TV5-*-staging.apk')
-                    releaseNotesMethod {
-                        changelogReleaseNotes()
-                    }
-                    tags('')
-                    teams('')
-                    mandatory(false)
-                    notifyTeam(false)
-                    downloadAllowed(true)
-                    oldVersionHolder {
-                        numberOldVersions('')
-                        sortOldVersions('')
-                        strategyOldVersions('')
-                    }
-                }
+                //hockeyappApplication {
+                //    apiToken('')
+                //    appId('SAMPLE')
+                //    dsymPath('')
+                //    libsPath('')
+                //    uploadMethod {
+                //        versionCreation {
+                //            appId('SAMPLE')
+                //        }
+                //    }
+                //    filePath('android/build/outputs/apk/QA/SAMPLE-*-QA.apk')
+                //    releaseNotesMethod {
+                //        changelogReleaseNotes()
+                //    }
+                //    tags('')
+                //    teams('')
+                //    mandatory(false)
+                //    notifyTeam(false)
+                //    downloadAllowed(true)
+                //    oldVersionHolder {
+                //        numberOldVersions('')
+                //        sortOldVersions('')
+                //        strategyOldVersions('')
+                //    }
+                //}
             }
             debugMode(false)
             failGracefully(false)

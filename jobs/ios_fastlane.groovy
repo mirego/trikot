@@ -1,8 +1,8 @@
-String clientName = 'TV5'.toLowerCase().replaceAll(' ','_')
-String projectName = 'TV5Unis'.toLowerCase().replaceAll(' ','_')
-String projectGithubPath = 'mirego/tv5-asterix-multiplatform'
+String clientName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
+String projectName = 'SAMPLE'.toLowerCase().replaceAll(' ','_')
+String projectGithubPath = 'mirego/sample'
 String folderName = clientName+'-'+projectName
-String slackNotificationChannel = '#asterix'
+String slackNotificationChannel = '#sample'
 String projectDisplayName = projectName
 
 folder("$folderName") {

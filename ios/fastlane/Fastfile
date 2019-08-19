@@ -25,11 +25,10 @@ platform :ios do
     infoPlistPath: "./iosApp/Info.plist",
     scheme: "iosApp",
     target: "iosApp",
-    bundleIdentifier: "ca.tv5.video"
+    bundleIdentifier: "com.trikot.sample"
   )
 
-  provisioning_profile_qa = Model::ProvisioningProfile.new(path: "./fastlane/profiles/TV5_QA.mobileprovision")
-  provisioning_profile_staging = Model::ProvisioningProfile.new(path: "./fastlane/profiles/TV5_Staging.mobileprovision")
+  #provisioning_profile_qa = Model::ProvisioningProfile.new(path: "./fastlane/profiles/...")
 
   certificate = Model::Certificate.new(
     path: "#{strip_quotes(ENV["PROVISIONING_DIR"])}/#{strip_quotes(ENV["PROVISIONING_CERTIFICATE_FILE"])}",
@@ -38,42 +37,24 @@ platform :ios do
   )
 
   # QA Configuration
-  enterpriseQAConfig = Model::Configuration.new(certificate: certificate, provisioningProfile: provisioning_profile_qa, buildConfiguration: 'Release', exportMethod: 'enterprise', bundleIdentifierOverride: 'ca.tv5.video.qa')
-
-  # Staging Configuration
-  enterpriseStagingConfig = Model::Configuration.new(certificate: certificate, provisioningProfile: provisioning_profile_staging, buildConfiguration: 'Release', exportMethod: 'enterprise', bundleIdentifierOverride: 'ca.tv5.video.staging')
+  enterpriseQAConfig = Model::Configuration.new(certificate: certificate, provisioningProfile: provisioning_profile_qa, buildConfiguration: 'Release', exportMethod: 'enterprise', bundleIdentifierOverride: 'com.trikot.sample.qa')
 
   #-------------------------
   # Public lanes
   #-------------------------
 
   lane :qa do
-    replace_file(path_to_old_file: "./iosApp/GoogleService-Info.plist", path_to_new_file: "./fastlane/qa.overwrite/GoogleService-Info.plist")
     set_info_plist_value(path: mainProject.infoPlistPath, key: "Environment", value: "qa")
     cocoapods(clean: true, use_bundle_exec: true, try_repo_update_on_error: true)
     build(project: mainProject, configuration: enterpriseQAConfig)
     changelog_from_git_commits(commits_count: 10, pretty: "- (%h) %s%n")
-    hockey(
-      api_token: strip_quotes(ENV["HOCKEYAPP_API_TOKEN"]),
-      public_identifier: "0af158b3e3864fc4a772bdeac4cb6e49",
-      bypass_cdn: true,
-      notify: "0"
-    )
-    upload_symbols_to_crashlytics(gsp_path: "./iosApp/GoogleService-Info.plist")
+    # hockey(
+    #  api_token: strip_quotes(ENV["HOCKEYAPP_API_TOKEN"]),
+    #  public_identifier: "SAMPLE",
+    #  bypass_cdn: true,
+    #  notify: "0"
+    #)
+    # upload_symbols_to_crashlytics(gsp_path: "./iosApp/GoogleService-Info.plist")
   end
 
-  lane :staging do
-    replace_file(path_to_old_file: "./iosApp/GoogleService-Info.plist", path_to_new_file: "./fastlane/staging.overwrite/GoogleService-Info.plist")
-    set_info_plist_value(path: mainProject.infoPlistPath, key: "Environment", value: "staging")
-    cocoapods(clean: true, use_bundle_exec: true, try_repo_update_on_error: true)
-    build(project: mainProject, configuration: enterpriseStagingConfig)
-    changelog_from_git_commits(commits_count: 10, pretty: "- (%h) %s%n")
-    hockey(
-      api_token: strip_quotes(ENV["HOCKEYAPP_API_TOKEN"]),
-      public_identifier: "75b9ed622a1a436a89b0dabc4e9b6d3f",
-      bypass_cdn: true,
-      notify: "0"
-    )
-    upload_symbols_to_crashlytics(gsp_path: "./iosApp/GoogleService-Info.plist")
-  end
 end
