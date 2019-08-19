@@ -3,6 +3,16 @@
 - Easily manage Trikot.streams publisher subscription lifecycle. 
 - Adds sugar coating to Publisher Subscriptions and DataBinding
 
+## Installation
+To use `Trikot.streams` swift extensions, you must export `streams` and `streams-iosarm64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle) for a sample use case.
+
+##### Setup Pod dependency
+```groovy
+  ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
+  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git'
+```
+Then, run `pod install`.
+
 ### Observe
 ```swift
 public func observe<V>(_ publisher: Publisher, toClosure closure: @escaping ((V) -> Void))
@@ -47,19 +57,3 @@ class SampleView: UIView {
 
 ### Unsubscribing
 If needed, you can unsubscribe from all publisher by calling `unsubscribeFromAllPublisher`. 
-
-# Installation
-### CocoaPods
-
-To use the swift extensions, your kotlin native framework must be installed via CocoaPods. How to -> [CocoaPods Integration - Kotlin Programming Language](https://kotlinlang.org/docs/reference/native/cocoapods.html).
-
-Specify the Kotlin Native framework name (The one imported by CocoaPods) and the `Trikot.streams` Pod in your Podfile
-
-```
-ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-
-target 'iosApp' do
-  pod 'trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git'
-```
-
-Then, run `pod install`.
