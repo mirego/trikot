@@ -24,4 +24,4 @@ pluginManagement {
 rootProject.name = 'trikot.http'
 enableFeaturePreview("GRADLE_METADATA")
 
-include ':http'
+include ':http', ':android-ktx'
