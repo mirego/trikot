@@ -16,7 +16,7 @@ repositories {
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
 
-group 'com.mirego.trikot'
+group 'com.mirego.trikot.kword'
 
 android {
     compileSdkVersion 28
