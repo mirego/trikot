@@ -2,6 +2,14 @@
 
 - Easily use Trikot.streams publisher as Android's `LiveData`.
 
+### Installation
+Add dependency
+```groovy
+dependencies {
+    implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
+}
+```
+
 ### Observe
 ```kotlin
 fun <T> Publisher<T>.observe(lifecycleOwner: LifecycleOwner, observeBlock: ObserveBlock<T>)
