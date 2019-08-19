@@ -20,6 +20,9 @@ object HttpConfiguration {
         ConnectivityState.WIFI))
     private val internalBaseUrl = AtomicReference("")
 
+    /**
+     * Shared HTTPRequestFactory
+     */
     var httpRequestFactory: HttpRequestFactory
         get() {
             return internalHttpRequestFactory.value
@@ -28,6 +31,9 @@ object HttpConfiguration {
             internalHttpRequestFactory.setOrThrow(internalHttpRequestFactory.value, value)
         }
 
+    /**
+     * DispatchQueue where the request will be launched
+     */
     var networkDispatchQueue: DispatchQueue
         get() {
             return internalNetworkDispatchQueue.value
@@ -36,6 +42,9 @@ object HttpConfiguration {
             internalNetworkDispatchQueue.setOrThrow(internalNetworkDispatchQueue.value, value)
         }
 
+    /**
+     * Default headerProvider used by HttpRequestPublisher
+     */
     var defaultHttpHeaderProvider: HttpHeaderProvider
         get() {
             return internalDefaultHeaderProvider.value
@@ -44,6 +53,9 @@ object HttpConfiguration {
             internalDefaultHeaderProvider.setOrThrow(internalDefaultHeaderProvider.value, value)
         }
 
+    /**
+     * Shared Connectivity publisher
+     */
     var connectivityPublisher: Publisher<ConnectivityState>
         get() {
             return internalConnectivityStatePublisher.value
@@ -52,6 +64,9 @@ object HttpConfiguration {
             internalConnectivityStatePublisher.setOrThrow(internalConnectivityStatePublisher.value, value)
         }
 
+    /**
+     * Default BaseUrl used by HttpRequestPublisher
+     */
     var baseUrl: String
         get() {
             return internalBaseUrl.value
@@ -60,6 +75,9 @@ object HttpConfiguration {
             internalBaseUrl.setOrThrow(internalBaseUrl.value, value)
         }
 
+    /**
+     * Shared JSON parser used by DeserializableHttpRequestPublisher
+     */
     @UseExperimental(UnstableDefault::class)
     val json = freeze(Json.nonstrict)
 }

@@ -6,7 +6,7 @@ To use `Trikot.http` swift extensions, you must export `http` and `http-iosx64` 
  pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git'
 ```
 
-##### An HTTP Implementation based on `URLSession`
+##### HTTPRequestFactory Implementation based on `URLSession`
 `ktor` does not work that well on iOS as it relies on Coroutines on the mainThread (as of today). Trikot.http provides its own implementation based on `URLSession`
 
 ```swift
