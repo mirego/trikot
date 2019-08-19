@@ -4,19 +4,7 @@ sudo: false
 
 jobs:
   include:
-    - name: Kword
-      env:
-        - JAVA_OPTS="-XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx2048m"
-      language: java
-      jdk:
-        - openjdk8
-      dist: trusty
-      before_script:
-        - chmod +x gradlew
-        - chmod +x gradle/wrapper/gradle-wrapper.jar
-      script:
-        - ./gradlew jvmTest ktlintCheck
-    - name: Android Kotlin Extensions
+    - name: KWord
         env:
           - JAVA_OPTS="-XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx2048m"
         language: android
