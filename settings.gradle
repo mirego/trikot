@@ -24,4 +24,4 @@ pluginManagement {
 rootProject.name = 'trikot.metaviews'
 enableFeaturePreview("GRADLE_METADATA")
 
-include ':metaviews'
+include ':metaviews', ':android-ktx'
