@@ -1,4 +1,4 @@
-# Trikot.http Android Kotlin extensions
+# Trikot.http Android Kotlin Extensions
 
 Add dependency
 ```groovy
