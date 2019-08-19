@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'kotlinx-serialization'
-    id 'io.fabric'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'androidx.navigation.safeargs.kotlin'
 }
@@ -13,7 +12,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.company.trikot-project"
+        applicationId "com.trikot.sample"
         versionCode 1
         versionName "1.0"
         archivesBaseName = "PatronProjectName-$versionCode"
@@ -74,6 +73,7 @@ android {
     }
     repositories {
         maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+        mavenLocal()
     }
 
     kotlinOptions {
@@ -95,6 +95,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.0.0'
 
+    implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
+    implementation "com.mirego.trikot.metaviews:android-ktx:$trikot_metaviews_android_ktx_version"
+    implementation "com.mirego.trikot.http:android-ktx:$trikot_http_android_ktx_version"
+    implementation "com.mirego.trikot.kword:android-ktx:$trikot_kword_android_ktx_version"
+
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -103,5 +108,3 @@ dependencies {
 ktlint {
     android = true
 }
-
-apply plugin: 'com.google.gms.google-services'
