@@ -10,8 +10,13 @@ extension UITextField {
             if let metaInputText = value {
                 addTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
 
-                bind(metaInputText.userInput.first(), \UITextField.text)
                 bindColorSelectorDefaultValue(metaInputText.textColor, \UITextField.textColor)
+
+                observe(metaInputText.userInput) {[weak self] (text: String) in
+                    if self?.text != text {
+                        self?.text = text
+                    }
+                }
 
                 observe(metaInputText.placeholderText) {[weak self] (placeholder: String) in
                     self?.placeholder = placeholder
