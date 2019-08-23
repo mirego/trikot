@@ -40,7 +40,7 @@ configurations.all {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.mirego.trikot:metaviews:0.18.1'
+    api 'com.mirego.trikot:metaviews:0.20.1'
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
