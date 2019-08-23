@@ -33,7 +33,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation 'com.mirego.trikot:kword:0.1.2'
+    implementation 'com.mirego.trikot:kword:0.2.2'
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinx_serialization_version"
 }
 
