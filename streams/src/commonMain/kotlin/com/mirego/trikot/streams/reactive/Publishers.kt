@@ -4,4 +4,8 @@ object Publishers {
     fun <T> behaviorSubject(value: T? = null): BehaviorSubject<T> {
         return BehaviorSubjectImpl(value)
     }
+
+    fun <T> publishSubject(): PublishSubject<T> {
+        return PublishSubjectImpl()
+    }
 }

@@ -1,6 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
-interface BehaviorSubject<T> : MutablePublisher<T> {
+interface PublishSubject<T> : MutablePublisher<T> {
     override var value: T?
     override var error: Throwable?
     override fun complete()

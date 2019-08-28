@@ -11,10 +11,18 @@
 ## Publishers
 Multiple publisher implementation can be instantiated depending on the use case you need to achieve.  
 
-### behaviorSubject
-**Create a BehaviorSubject**
+### BehaviorSubject
+**Creates a [BehaviorSubject](http://reactivex.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html)**
+
 ```kotlin
 val publisher = Publishers.behaviorSubject<String>()
+```
+
+### PublishSubject
+**Creates a [PublishSubject](http://reactivex.io/RxJava/javadoc/rx/subjects/PublishSubject.html)**
+
+```kotlin
+val publisher = Publishers.publishSubject<String>()
 ```
 
 **Dispatch a new value to subscribers**

@@ -32,6 +32,12 @@ abstract class BaseExecutablePublisher<T>(private val executionQueue: DispatchQu
     }
 
     fun dispatchError(error: Throwable) {
+        cancel()
         this.error = error
+    }
+
+    override fun complete() {
+        cancel()
+        super.complete()
     }
 }
