@@ -8,7 +8,7 @@ To use `Trikot.http` swift extensions, you must export `http` and `http-iosx64` 
 ```
 Then, run `pod install`.
 
-##### HTTPRequestFactory Implementation based on `URLSession`
+##### Setup HTTPRequestFactory Implementation based on `URLSession`
 `ktor` does not work that well on iOS as it relies on Coroutines on the mainThread (as of today). Trikot.http provides its own implementation based on `URLSession`
 
 ```swift

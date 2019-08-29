@@ -1,4 +1,4 @@
-package com.mirego.trikot.http.requestFactory
+package com.mirego.trikot.http.android.ktx.requestFactory
 
 import com.mirego.trikot.http.HttpRequest
 import com.mirego.trikot.http.HttpRequestFactory

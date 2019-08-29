@@ -9,11 +9,13 @@ import com.mirego.trikot.streams.reactive.Publishers
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import org.reactivestreams.Publisher
-import com.mirego.trikot.http.requestFactory.KtorHttpRequestFactory
 import com.mirego.trikot.http.header.DefaultHttpHeaderProvider
+import com.mirego.trikot.http.requestFactory.EmptyHttpRequestFactory
 
 object HttpConfiguration {
-    private val internalHttpRequestFactory = AtomicReference<HttpRequestFactory>(KtorHttpRequestFactory())
+    private val internalHttpRequestFactory = AtomicReference<HttpRequestFactory>(
+        EmptyHttpRequestFactory()
+    )
     private val internalNetworkDispatchQueue = AtomicReference<DispatchQueue>(OperationDispatchQueue())
     private val internalDefaultHeaderProvider = AtomicReference<HttpHeaderProvider>(DefaultHttpHeaderProvider())
     private val internalConnectivityStatePublisher = AtomicReference<Publisher<ConnectivityState>>(Publishers.behaviorSubject(

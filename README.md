@@ -1,4 +1,5 @@
 # Trikot.http
+**Incubating**
 
 Multiplaform http networking abstraction.
 - Default implementation uses [ktor](https://ktor.io/) underneath
@@ -39,11 +40,11 @@ Values are `WIFI`, `CELLULAR`, `NONE`
 ## Installation
 ##### Import dependencies
 ```groovy
-    api "com.mirego.trikot:http:$trikot_kword_version"
-    jvm "com.mirego.trikot:http-jvm:$trikot_kword_version"
-    js "com.mirego.trikot:http-js:$trikot_kword_version"
-    iosx64 "com.mirego.trikot:http-iosx64:$trikot_kword_version"
-    iosarm64 "com.mirego.trikot:http-iosarm64:$trikot_kword_version"
+    api "com.mirego.trikot:http:$trikot_http_version"
+    jvm "com.mirego.trikot:http-jvm:$trikot_http_version"
+    js "com.mirego.trikot:http-js:$trikot_http_version"
+    iosx64 "com.mirego.trikot:http-iosx64:$trikot_http_version"
+    iosarm64 "com.mirego.trikot:http-iosarm64:$trikot_http_version"
 ```
 
 ##### Setup platforms
