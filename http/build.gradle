@@ -31,7 +31,6 @@ kotlin {
                 implementation "com.mirego.trikot:foundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-                implementation "io.ktor:ktor-client-core:$ktor_version"
             }
         }
         jvmMain {
@@ -40,7 +39,6 @@ kotlin {
                 implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation "io.ktor:ktor-client-android:$ktor_version"
             }
         }
         jsMain {
@@ -48,7 +46,6 @@ kotlin {
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
                 implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
-                implementation "io.ktor:ktor-client-js:$ktor_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
             }
         }
@@ -61,7 +58,6 @@ kotlin {
             dependencies {
                 implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
                 implementation "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
-                implementation "io.ktor:ktor-client-ios:$ktor_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
             }
         }
@@ -71,7 +67,6 @@ kotlin {
             dependencies {
                 implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
                 implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
-                implementation "io.ktor:ktor-client-ios:$ktor_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
             }
         }
