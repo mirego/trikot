@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.mirego.trikot.http.HttpConfiguration
 import com.mirego.trikot.http.android.ktx.AndroidConnectivityPublisher
+import com.mirego.trikot.http.android.ktx.requestFactory.KtorHttpRequestFactory
 import com.mirego.trikot.kword.android.ktx.AndroidKWord
 import com.mirego.trikot.metaviews.resources.MetaImageResourceManager
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
@@ -28,5 +29,6 @@ class TrikotApplication : Application() {
 
         HttpConfiguration.connectivityPublisher = AndroidConnectivityPublisher(this)
             .distinctUntilChanged()
+        HttpConfiguration.httpRequestFactory = KtorHttpRequestFactory()
     }
 }
