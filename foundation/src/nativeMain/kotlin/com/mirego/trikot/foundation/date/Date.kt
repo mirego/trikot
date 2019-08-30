@@ -33,9 +33,6 @@ actual class Date(val nsDate: NSDate) {
     }
 
     actual operator fun compareTo(other: Date): Int {
-        val delta = epoch - other.epoch
-        if (delta > 0) return 1
-        if (delta < 0) return -1
-        return 0
+        return (epoch - other.epoch).toInt()
     }
 }

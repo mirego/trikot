@@ -1,7 +1,6 @@
 package com.mirego.trikot.foundation.date
 
 import com.mirego.trikot.foundation.concurrent.duration.Duration
-import com.mirego.trikot.foundation.concurrent.duration.milliseconds
 
 expect class Date {
     val epoch: Long
