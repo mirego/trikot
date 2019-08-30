@@ -32,6 +32,10 @@ class MyDataSource<T>(
         val myExecutablePublisher = new MyExecutablePublisher(request.query)
         return myExecutablePublisher
     }
+    
+    override fun save(request: MyDataSourceRequest<T>, data: T?) {
+        // Save content to cache if needed
+    }
 }
 ```
 

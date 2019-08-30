@@ -32,11 +32,23 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
+        commonTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test-common'
+                implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+            }
+        }
         jvmMain {
             dependencies {
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
                 implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
         jsMain {
