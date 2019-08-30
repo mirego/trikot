@@ -60,7 +60,11 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
 
     protected open fun addSubscription(subscription: PublisherSubscription<T>) {
         if (!subscription.isCancelled) {
-            if (subscriptions.add(subscription).count() == 1) onFirstSubscription()
+            if (this.completed) {
+                subscription.dispatchCompleted()
+            } else if (subscriptions.add(subscription).count() == 1) {
+                onFirstSubscription()
+            }
         }
     }
 

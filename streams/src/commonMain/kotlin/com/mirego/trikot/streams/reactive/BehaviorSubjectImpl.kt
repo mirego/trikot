@@ -13,7 +13,6 @@ open class BehaviorSubjectImpl<T>(
         if (!subscription.isCancelled) {
             this.value?.let { subscription.dispatchValue(it) }
             this.error?.let { subscription.dispatchError(it) }
-            if (this.completed) { subscription.dispatchCompleted() }
         }
     }
 }

@@ -42,6 +42,12 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+            }
+        }
         jsMain {
             dependencies {
                 implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
