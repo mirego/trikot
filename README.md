@@ -2,7 +2,7 @@
 **Incubating**
 
 Multiplaform http networking abstraction.
-- Default implementation uses [ktor](https://ktor.io/) underneath
+- Default implementation for each platform
 - Advanced Http Header management
 - Connectivity (Reachability) management
 - Deserialization of results using [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
