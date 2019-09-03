@@ -14,7 +14,7 @@ Trikot.http android-ktx provides its own implementation based on `Ktor`
 class MyAndroidApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        HttpConfiguration().httpRequestFactory = KtorHttpRequestFactory()
+        HttpConfiguration.httpRequestFactory = KtorHttpRequestFactory()
     }
 }
 ```
