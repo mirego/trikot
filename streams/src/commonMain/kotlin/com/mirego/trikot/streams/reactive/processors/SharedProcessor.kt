@@ -17,8 +17,10 @@ class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : BehaviorSu
 
     override fun onNoSubscription() {
         super.onNoSubscription()
-        value = null
-        error = null
+        if (!completed) {
+            value = null
+            error = null
+        }
         cancellableManagerProvider.cancelPreviousAndCreate()
     }
 

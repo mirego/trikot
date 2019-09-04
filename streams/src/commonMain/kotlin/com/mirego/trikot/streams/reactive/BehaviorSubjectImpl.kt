@@ -8,8 +8,8 @@ open class BehaviorSubjectImpl<T>(
         this.value = initialValue
     }
 
-    override fun addSubscription(subscription: PublisherSubscription<T>) {
-        super.addSubscription(subscription)
+    override fun onNewSubscription(subscription: PublisherSubscription<T>) {
+        super.onNewSubscription(subscription)
         if (!subscription.isCancelled) {
             this.value?.let { subscription.dispatchValue(it) }
             this.error?.let { subscription.dispatchError(it) }

@@ -58,7 +58,8 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
         if (subscriptions.remove(publisherSubscription).isEmpty()) onNoSubscription()
     }
 
-    protected open fun addSubscription(subscription: PublisherSubscription<T>) {
+    private fun addSubscription(subscription: PublisherSubscription<T>) {
+        onNewSubscription(subscription)
         if (!subscription.isCancelled) {
             if (this.completed) {
                 subscription.dispatchCompleted()
@@ -66,6 +67,9 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
                 onFirstSubscription()
             }
         }
+    }
+
+    protected open fun onNewSubscription(subscription: PublisherSubscription<T>) {
     }
 
     protected open fun dispatchValueToSubscribers(value: T) {

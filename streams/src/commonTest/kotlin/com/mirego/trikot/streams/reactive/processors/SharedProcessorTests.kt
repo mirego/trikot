@@ -43,4 +43,33 @@ class SharedProcessorTests {
 
         assertEquals(2, executionCount)
     }
+
+    @Test
+    fun resultIsKeptWhenNoSubscriptionsAreActiveAndParentPublisherIsCompleted() {
+        val publisher = Publishers.behaviorSubject("a")
+        var executionCount = 0
+        var firstSubscriptionValueReceived: String? = null
+        var secondSubscriptionValueReceived: String? = null
+        var isCompleted = false
+
+        val cancellableManager = CancellableManager()
+
+        val sharedProcessor = publisher.map {
+            executionCount++
+            it
+        }.shared()
+
+        publisher.complete()
+        sharedProcessor.subscribe(cancellableManager,
+            onNext = { firstSubscriptionValueReceived = it },
+            onError = {},
+            onCompleted = { isCompleted = true })
+        cancellableManager.cancel()
+        sharedProcessor.subscribe(CancellableManager()) { secondSubscriptionValueReceived = it }
+
+        assertEquals(true, isCompleted)
+        assertEquals("a", firstSubscriptionValueReceived)
+        assertEquals(1, executionCount)
+        assertEquals("a", secondSubscriptionValueReceived)
+    }
 }
