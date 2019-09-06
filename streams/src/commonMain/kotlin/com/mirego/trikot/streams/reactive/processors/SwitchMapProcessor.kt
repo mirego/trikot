@@ -48,7 +48,7 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
                 onCompleted = {
                     isChildCompleted.setOrThrow(isChildCompleted.value, true)
                     dispatchCompletedIfNeeded()
-                } )
+                })
 
             onNextValidation.setOrThrow(1, 0)
         }

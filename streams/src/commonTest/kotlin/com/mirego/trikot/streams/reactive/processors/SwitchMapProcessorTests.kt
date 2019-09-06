@@ -1,6 +1,5 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.Publishers
@@ -51,7 +50,7 @@ class SwitchMapProcessorTests {
         val returnedPublisher = Publishers.behaviorSubject("b")
         var isCompleted = false
 
-        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = {isCompleted = true})
+        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { isCompleted = true })
         switchMappedPublisher.complete()
         assertFalse { isCompleted }
     }
@@ -62,7 +61,7 @@ class SwitchMapProcessorTests {
         val returnedPublisher = Publishers.behaviorSubject("b")
         var isCompleted = false
 
-        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = {isCompleted = true})
+        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { isCompleted = true })
         returnedPublisher.complete()
         assertFalse { isCompleted }
     }
@@ -73,7 +72,7 @@ class SwitchMapProcessorTests {
         val returnedPublisher = Publishers.behaviorSubject("b")
         var isCompleted = false
 
-        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = {isCompleted = true})
+        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { isCompleted = true })
         switchMappedPublisher.complete()
         returnedPublisher.complete()
         assertTrue { isCompleted }
