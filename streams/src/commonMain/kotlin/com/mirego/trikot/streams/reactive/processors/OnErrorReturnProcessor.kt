@@ -3,18 +3,18 @@ package com.mirego.trikot.streams.reactive.processors
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
-typealias MapErrorAsNextProcessorBlock<T> = (Throwable) -> T
+typealias OnErrorReturnProcessorBlock<T> = (Throwable) -> T
 
-class MapErrorAsNextProcessor<T>(parentPublisher: Publisher<T>, private val block: MapErrorAsNextProcessorBlock<T>) :
+class OnErrorReturnProcessor<T>(parentPublisher: Publisher<T>, private val block: OnErrorReturnProcessorBlock<T>) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {
-        return MapErrorAsNextProcessorSubscription(subscriber, block)
+        return OnErrorReturnSubscription(subscriber, block)
     }
 
-    class MapErrorAsNextProcessorSubscription<T>(
+    class OnErrorReturnSubscription<T>(
         private val subscriber: Subscriber<in T>,
-        private val block: MapErrorAsNextProcessorBlock<T>
+        private val block: OnErrorReturnProcessorBlock<T>
     ) : ProcessorSubscription<T, T>(subscriber) {
 
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
@@ -23,7 +23,6 @@ class MapErrorAsNextProcessor<T>(parentPublisher: Publisher<T>, private val bloc
 
         override fun onError(t: Throwable) {
             subscriber.onNext(block(t))
-            subscriber.onComplete()
         }
     }
 }

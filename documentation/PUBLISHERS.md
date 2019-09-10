@@ -199,11 +199,11 @@ Dispatch value only if it is not `equals` to the previous value
 ```
 In this case, `foo` will only be emitted once.
 
-#### MapErrorAsNextProcessor
+#### OnErrorReturn
 This processors convert the error dispatched by a publisher in a result. This allows subscription to stay open when an error is dispatched by the publisher.
 
 ```kotlin
-	publisher.mapErrorAsNext { throwable ->
+	publisher.onErrorReturn { throwable ->
 		Pair(null, throwable)
 	}.map { successValue ->
 		Pair(successValue, null)

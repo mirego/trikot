@@ -14,8 +14,8 @@ import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProce
 import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.FilterProcessor
 import com.mirego.trikot.streams.reactive.processors.SharedProcessor
-import com.mirego.trikot.streams.reactive.processors.MapErrorAsNextProcessor
-import com.mirego.trikot.streams.reactive.processors.MapErrorAsNextProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessor
+import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
 import com.mirego.trikot.streams.reactive.processors.WithPreviousValueProcessor
 import org.reactivestreams.Publisher
@@ -74,8 +74,8 @@ fun <T> Publisher<T>.shared(): Publisher<T> {
     return SharedProcessor(this)
 }
 
-fun <T> Publisher<T>.mapErrorAsNext(block: MapErrorAsNextProcessorBlock<T>): Publisher<T> {
-    return MapErrorAsNextProcessor(this, block)
+fun <T> Publisher<T>.onErrorReturn(block: OnErrorReturnProcessorBlock<T>): Publisher<T> {
+    return OnErrorReturnProcessor(this, block)
 }
 
 fun <T> Publisher<T>.distinctUntilChanged(): Publisher<T> {
