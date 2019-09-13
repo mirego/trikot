@@ -1,17 +1,19 @@
 package com.mirego.trikot.foundation.date
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
 import org.threeten.bp.Instant
 import java.text.SimpleDateFormat
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 import java.util.TimeZone
 import org.threeten.bp.OffsetDateTime.from
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 private val dateFormat =
     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         .also { it.timeZone = TimeZone.getTimeZone("UTC") }
 
+@ExperimentalTime
 actual class Date(val instant: Instant) {
     actual val epoch: Long
         get() {
@@ -19,7 +21,7 @@ actual class Date(val instant: Instant) {
         }
 
     actual operator fun plus(duration: Duration): Date {
-        return Date(Instant.ofEpochMilli(instant.toEpochMilli() + duration.milliseconds))
+        return Date(Instant.ofEpochMilli(instant.toEpochMilli() + duration.toLongMilliseconds()))
     }
 
     actual operator fun compareTo(other: Date): Int {

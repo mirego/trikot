@@ -1,7 +1,9 @@
 package com.mirego.trikot.foundation.timers
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class DefaultTimerFactory : TimerFactory {
     override fun single(delay: Duration, block: () -> Unit): Timer {
         return PlatformTimer(delay, false, block)

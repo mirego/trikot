@@ -1,14 +1,16 @@
 package com.mirego.trikot.foundation.timers
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
+import kotlin.time.Duration
 import kotlin.browser.window
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 actual class PlatformTimer actual constructor(delay: Duration, private val repeat: Boolean, block: () -> Unit) :
     Timer {
     private val timeoutId = if (repeat) {
-        window.setInterval({ block }, delay.milliseconds.toInt())
+        window.setInterval({ block }, delay.toLongMilliseconds().toInt())
     } else {
-        window.setTimeout({ block }, delay.milliseconds.toInt())
+        window.setTimeout({ block }, delay.toLongMilliseconds().toInt())
     }
 
     actual override fun cancel() {

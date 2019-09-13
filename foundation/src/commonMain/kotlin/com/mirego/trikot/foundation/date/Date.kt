@@ -1,7 +1,9 @@
 package com.mirego.trikot.foundation.date
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 expect class Date {
     val epoch: Long
 

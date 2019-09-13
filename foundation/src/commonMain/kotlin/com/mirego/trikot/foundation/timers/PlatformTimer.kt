@@ -1,7 +1,8 @@
 package com.mirego.trikot.foundation.timers
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
-expect class PlatformTimer(delay: Duration, repeat: Boolean, block: () -> Unit) : Timer {
+expect class PlatformTimer @ExperimentalTime constructor(delay: Duration, repeat: Boolean, block: () -> Unit) : Timer {
     override fun cancel()
 }

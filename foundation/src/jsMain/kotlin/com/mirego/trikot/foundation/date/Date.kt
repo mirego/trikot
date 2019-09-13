@@ -1,7 +1,9 @@
 package com.mirego.trikot.foundation.date
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 actual class Date(val date: kotlin.js.Date) {
     actual val epoch: Long = date.getTime().toLong()
 
@@ -10,7 +12,7 @@ actual class Date(val date: kotlin.js.Date) {
     }
 
     actual operator fun plus(duration: Duration): Date {
-        return Date(kotlin.js.Date(date.getTime() + duration.milliseconds))
+        return Date(kotlin.js.Date(date.getTime() + duration.toLongMilliseconds()))
     }
 
     actual operator fun compareTo(other: Date): Int {

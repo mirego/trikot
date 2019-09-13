@@ -1,11 +1,13 @@
 package com.mirego.trikot.foundation.timers
 
-import com.mirego.trikot.foundation.concurrent.duration.Duration
+import kotlin.time.Duration
 import kotlin.concurrent.schedule
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 actual class PlatformTimer actual constructor(delay: Duration, repeat: Boolean, block: () -> Unit) :
     Timer {
-    val timer = java.util.Timer(repeat).schedule(delay.milliseconds) {
+    val timer = java.util.Timer(repeat).schedule(delay.toLongMilliseconds()) {
         block()
     }
 
