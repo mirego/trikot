@@ -1,12 +1,15 @@
-package com.mirego.trikot.streams.reactive
+package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import kotlin.test.assertNull
+import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import com.mirego.trikot.streams.reactive.subscribe
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
-import kotlin.test.Test
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
-class CombineLatestTests {
+class CombineLatestProcessorTests {
     @Test
     fun noValueAreDispatchedWhenMissing() {
         val firstPublisher = MockPublisher("a")
@@ -14,10 +17,11 @@ class CombineLatestTests {
         var firstValueReceived: String? = null
         var secondValueReceived: String? = null
 
-        CombineLatest.combine2(firstPublisher, secondPublisher).subscribe(CancellableManager()) {
-            firstValueReceived = it.component1
-            secondValueReceived = it.component2
-        }
+        firstPublisher.combine(secondPublisher)
+            .subscribe(CancellableManager()) { (value1, value2) ->
+                firstValueReceived = value1
+                secondValueReceived = value2
+            }
 
         assertNull(firstValueReceived)
         assertNull(secondValueReceived)
@@ -30,13 +34,37 @@ class CombineLatestTests {
         var firstValueReceived: String? = null
         var secondValueReceived: String? = null
 
-        CombineLatest.combine2(firstPublisher, secondPublisher).subscribe(CancellableManager()) {
-            firstValueReceived = it.component1
-            secondValueReceived = it.component2
-        }
+        firstPublisher.combine(secondPublisher)
+            .subscribe(CancellableManager()) { (value1, value2) ->
+                firstValueReceived = value1
+                secondValueReceived = value2
+            }
 
         assertEquals("a", firstValueReceived)
         assertEquals("b", secondValueReceived)
+    }
+
+    @Test
+    fun completedStateValidationPublishersEmits() {
+        val firstPublisher = MockPublisher("a")
+        val secondPublisher = MockPublisher()
+        val thirdPublisher = MockPublisher("b")
+
+        var valuesReceived: List<String?>? = null
+        var completed = false
+
+        combine(listOf(firstPublisher, secondPublisher, thirdPublisher)).subscribe(CancellableManager(),
+            onNext = { valuesReceived = it },
+            onError = {},
+            onCompleted = { completed = true }
+        )
+
+        firstPublisher.complete()
+        secondPublisher.complete()
+        thirdPublisher.complete()
+
+        assertEquals(listOf("a", null, "b"), valuesReceived)
+        assertTrue(completed)
     }
 
     @Test
@@ -46,10 +74,11 @@ class CombineLatestTests {
         var firstValueReceived: String? = null
         var secondValueReceived: String? = null
 
-        CombineLatest.combine2(firstPublisher, secondPublisher).subscribe(CancellableManager()) {
-            firstValueReceived = it.component1
-            secondValueReceived = it.component2
-        }
+        firstPublisher.combine(secondPublisher)
+            .subscribe(CancellableManager()) { (value1, value2) ->
+                firstValueReceived = value1
+                secondValueReceived = value2
+            }
         secondPublisher.value = "c"
 
         assertEquals("a", firstValueReceived)
@@ -62,7 +91,7 @@ class CombineLatestTests {
         val secondPublisher = MockPublisher("b")
         val cancellableManager = CancellableManager()
 
-        CombineLatest.combine2(firstPublisher, secondPublisher).subscribe(cancellableManager) {}
+        firstPublisher.combine(secondPublisher).subscribe(cancellableManager) {}
         cancellableManager.cancel()
 
         assertFalse { firstPublisher.getHasSubscriptions }
@@ -74,7 +103,7 @@ class CombineLatestTests {
         val firstPublisher = MockPublisher("a")
         val secondPublisher = MockPublisher("b")
 
-        CombineLatest.combine2(firstPublisher, secondPublisher)
+        firstPublisher.combine(secondPublisher)
 
         assertFalse { firstPublisher.getHasSubscriptions }
         assertFalse { secondPublisher.getHasSubscriptions }
@@ -87,14 +116,14 @@ class CombineLatestTests {
         val expectedError = Exception()
         var receivedError: Throwable? = null
 
-        CombineLatest.combine2(firstPublisher, secondPublisher).subscribe(CancellableManager(), onNext = {}) {
+        firstPublisher.combine(secondPublisher).subscribe(CancellableManager(), onNext = {}) {
             receivedError = it
         }
         secondPublisher.error = expectedError
 
+        assertEquals(expectedError, receivedError)
         assertFalse { firstPublisher.getHasSubscriptions }
         assertFalse { secondPublisher.getHasSubscriptions }
-        assertEquals(expectedError, receivedError)
     }
 
     class MockPublisher(initialValue: String? = null) : BehaviorSubjectImpl<String>(initialValue) {

@@ -10,9 +10,7 @@ open class BehaviorSubjectImpl<T>(
 
     override fun onNewSubscription(subscription: PublisherSubscription<T>) {
         super.onNewSubscription(subscription)
-        if (!subscription.isCancelled) {
-            this.value?.let { subscription.dispatchValue(it) }
-            this.error?.let { subscription.dispatchError(it) }
-        }
+        this.value?.let { subscription.dispatchValue(it) }
+        this.error?.let { subscription.dispatchError(it) }
     }
 }

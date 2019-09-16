@@ -105,26 +105,6 @@ ColdPublisher({ cancelableManager ->
 })
 ```
 
-### CombineLatest
-CombineLatest combines the result of up to 5 publishers and dispatch them when all publishers have a value. CombineLatest values are destructurizable data class. Use the provided companion object to create a new CombineLatest publisher: `CombineLatest.combine[X](...): CombineLatest`
-
-Example with destructuring.
-```kotlin
-CombineLatest.combine2(publisher1, publisher2)
-	.subscribe(cancelableManager) { (publisher1Value, publisher2Value) ->
-	// Do something with the result
-}
-```
-
-Example without destructuring.
-```kotlin
-CombineLatest.combine4(publisher1, publisher2, publisher3, publisher4)
-	.subscribe(cancelableManager) { combineLatestResult4 ->
-	val publisher1Value = combineLatestResult4.component1
-	val publisher3Value = combineLatestResult4.component3
-}
-```
-
 ## Processors
 Processors alter the emission chain of publishers. 
 
@@ -245,3 +225,34 @@ null - foo
 foo - bar
 ```
 
+### CombineLatest
+CombineLatest combines the result of many publishers together. Is the list of publishers are the same type, emitted values will be typed. If not, emitted results will be of the Any? type.
+
+**Combine 2 publishers**
+```kotlin
+val publisher1 = Publishers.behaviorSubject("a")
+val publisher2 = Publishers.behaviorSubject("b")
+publisher1.combine(publisher2).subscribe(cancellableManager) { (pub1Res, pub2Res) ->
+	print("$pub1Res $pub2Res")
+}
+```
+-> "a b"
+
+**Combine many publishers**
+```kotlin
+val publisher1 = Publishers.behaviorSubject("a")
+val publisher2 = Publishers.behaviorSubject("b")
+val publisher3 = Publishers.behaviorSubject("c")
+publisher1.combine(listOf(publisher2, publisher3)).subscribe(cancellableManager) { (pub1Res, pub2Res, pub3Res) ->
+	print("$pub1Res $pub2Res $pub3Res")
+}
+```
+-> "a b c"
+
+**Combine a list of publishers**
+```kotlin
+combine(listOf(publisher1, publisher2, publisher3)).subscribe(cancellableManager) { (pub1Res, pub2Res, pub3Res) ->
+	print("$pub1Res $pub2Res $pub3Res")
+}
+```
+-> "a b c"
