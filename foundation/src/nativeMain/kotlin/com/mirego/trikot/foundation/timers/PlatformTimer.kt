@@ -1,5 +1,6 @@
 package com.mirego.trikot.foundation.timers
 
+import com.mirego.trikot.foundation.concurrent.freeze
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import platform.Foundation.NSTimer
@@ -8,11 +9,10 @@ import platform.Foundation.NSDefaultRunLoopMode
 
 @ExperimentalTime
 actual class PlatformTimer actual constructor(delay: Duration, repeat: Boolean, block: () -> Unit) : Timer {
-    private val timer: NSTimer
-    init {
-        timer = NSTimer.timerWithTimeInterval((delay.toLongMilliseconds() / 1000.0), repeat) {
-            block()
-        }
+    private val timerBlock: (NSTimer?) -> Unit = { _ -> block() }
+    private val frozenTimerBlock = freeze(timerBlock)
+    private val timer = NSTimer.timerWithTimeInterval((delay.toLongMilliseconds() / 1000.0), repeat, frozenTimerBlock)
+            init {
         NSRunLoop.mainRunLoop.addTimer(timer, NSDefaultRunLoopMode)
     }
 
