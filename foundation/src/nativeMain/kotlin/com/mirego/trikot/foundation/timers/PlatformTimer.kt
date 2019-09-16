@@ -13,7 +13,7 @@ actual class PlatformTimer actual constructor(delay: Duration, repeat: Boolean, 
         timer = NSTimer.timerWithTimeInterval((delay.toLongMilliseconds() / 1000.0), repeat) {
             block()
         }
-        NSRunLoop.currentRunLoop.addTimer(timer, NSDefaultRunLoopMode)
+        NSRunLoop.mainRunLoop.addTimer(timer, NSDefaultRunLoopMode)
     }
 
     actual override fun cancel() {
