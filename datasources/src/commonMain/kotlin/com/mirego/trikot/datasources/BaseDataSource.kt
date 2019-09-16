@@ -2,12 +2,16 @@ package com.mirego.trikot.datasources
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.RefreshablePublisher
+
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
 import com.mirego.trikot.streams.reactive.map
-import com.mirego.trikot.streams.reactive.mapErrorAsNext
+import com.mirego.trikot.streams.reactive.observeOn
+import com.mirego.trikot.streams.reactive.onErrorReturn
 import com.mirego.trikot.streams.reactive.shared
+import com.mirego.trikot.streams.reactive.subscribeOn
 import com.mirego.trikot.streams.reactive.switchMap
 import com.mirego.trikot.streams.reactive.withCancellableManager
 import org.reactivestreams.Publisher
@@ -103,10 +107,14 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
             .also {
                 cancellableManager.add(it)
                 it.execute()
-            }.map { readCacheResult ->
+            }
+            .observeOn(StreamsConfiguration.publisherExecutionDispatchQueue)
+            .subscribeOn(StreamsConfiguration.serialSubscriptionDispatchQueue)
+            .map { readCacheResult ->
                 cacheDataSource?.save(request, readCacheResult)
                 DataSourceState(false, readCacheResult)
-            }.mapErrorAsNext { throwable ->
+            }
+            .onErrorReturn { throwable ->
                 DataSourceState(false, null, throwable)
             }
     }

@@ -1,5 +1,7 @@
 package com.mirego.trikot.datasources
 
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousDispatchQueue
+import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
@@ -16,6 +18,8 @@ class BaseDataSourceTests {
 
     @BeforeTest
     fun before() {
+        StreamsConfiguration.publisherExecutionDispatchQueue = SynchronousDispatchQueue()
+        StreamsConfiguration.serialSubscriptionDispatchQueue = SynchronousDispatchQueue()
         cancellableManager = CancellableManager()
     }
 
