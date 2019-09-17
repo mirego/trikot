@@ -38,9 +38,19 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
             return stringBuilder.toString()
         }
 
-    private fun entryJson(entry: Map.Entry<String, Any>) =
-        when (entry.value) {
-            is Int -> "${entry.value}"
-            else -> "\"${entry.value}\""
+    private fun entryJson(entry: Map.Entry<String, Any>): String {
+        return anyToJson(entry.value)
+    }
+
+    private fun anyToJson(any: Any): String {
+        return when (any) {
+            is List<*> -> listJson(any)
+            is Int -> "$any"
+            else -> "\"${any}\""
         }
+    }
+
+    private fun listJson(list: List<*>): String {
+        return "[${list.filterNotNull().joinToString { anyToJson(it) }}]"
+    }
 }
