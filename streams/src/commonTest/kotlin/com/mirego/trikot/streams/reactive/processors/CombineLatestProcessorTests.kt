@@ -31,17 +31,21 @@ class CombineLatestProcessorTests {
     fun valuesAreDispatchedWhenAllPublishersEmits() {
         val firstPublisher = MockPublisher("a")
         val secondPublisher = MockPublisher("b")
+        val thirdPublisher = MockPublisher("c")
         var firstValueReceived: String? = null
         var secondValueReceived: String? = null
+        var thirdValueReceived: String? = null
 
-        firstPublisher.combine(secondPublisher)
-            .subscribe(CancellableManager()) { (value1, value2) ->
+        firstPublisher.combine(listOf(secondPublisher, thirdPublisher))
+            .subscribe(CancellableManager()) { (value1, value2, value3) ->
                 firstValueReceived = value1
                 secondValueReceived = value2
+                thirdValueReceived = value3
             }
 
         assertEquals("a", firstValueReceived)
         assertEquals("b", secondValueReceived)
+        assertEquals("c", thirdValueReceived)
     }
 
     @Test
@@ -53,7 +57,8 @@ class CombineLatestProcessorTests {
         var valuesReceived: List<String?>? = null
         var completed = false
 
-        combine(listOf(firstPublisher, secondPublisher, thirdPublisher)).subscribe(CancellableManager(),
+        combine(listOf(firstPublisher, secondPublisher, thirdPublisher)).subscribe(
+            CancellableManager(),
             onNext = { valuesReceived = it },
             onError = {},
             onCompleted = { completed = true }

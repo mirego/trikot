@@ -3,13 +3,15 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
-import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-class CombineLatestProcessor<T>(parentPublisher: Publisher<T>, private val publishers: List<Publisher<T>>) :
+class CombineLatestProcessor<T>(
+    parentPublisher: Publisher<T>,
+    private val publishers: List<Publisher<T>>
+) :
     AbstractProcessor<T, List<T?>>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in List<T?>>): ProcessorSubscription<T, List<T?>> {
@@ -34,10 +36,12 @@ class CombineLatestProcessor<T>(parentPublisher: Publisher<T>, private val publi
             publishersResult.removeAll(publishersResult.value)
 
             publishersResult.add(PublisherResult<T>().also { it.value = t })
+            repeat(publishers.size) {
+                publishersResult.add(PublisherResult())
+            }
 
             publishers.forEachIndexed { index, publisher ->
                 val publisherResultIndex = index + 1
-                publishersResult.add(PublisherResult())
                 publisher.subscribe(cancellableManager,
                     onNext = { updatePublisherResultValue(publisherResultIndex, it) },
                     onError = { onError(it) },
