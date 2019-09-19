@@ -27,6 +27,9 @@ class AtomicListReference<T> {
         do {
             oldList = value
             newList = block(oldList)
+            if (oldList == newList) {
+                return oldList
+            }
         } while (!internalReference.compareAndSet(oldList, newList))
 
         return newList
