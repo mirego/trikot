@@ -34,10 +34,11 @@ extension UIImageView {
 
     func observeImageFlow(cancellableManager: CancellableManager, imageFlowPublisher: Publisher) {
         guard let metaImage = metaImage else { return }
-        let cancellableManagerProvider = CancellableManagerProvider()
-        cancellableManager.add(cancellable: cancellableManagerProvider)
 
         DispatchQueue.main.async {[weak self] in
+            let cancellableManagerProvider = CancellableManagerProvider()
+            cancellableManager.add(cancellable: cancellableManagerProvider)
+
             self?.observe(cancellableManager: cancellableManager, publisher: metaImage.imageFlow(width: Int32(self?.frame.width ?? 0) * 2, height: Int32(self?.frame.height ?? 0) * 2)) {[weak self] (imageFlow: ImageFlow) in
                 self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow)
             }
@@ -67,25 +68,28 @@ extension UIImageView {
 
     func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, imageFlow: ImageFlow) {
         guard let url = imageFlow.url, let URL = URL(string: url) else { return }
+        MrFreeze().freeze(objectToFreeze: cancellableManager)
 
         URLSession.shared.dataTask(with: URL) {[weak self] data, response, error in
-                if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                    let data = data, error == nil,
-                    let image = UIImage(data: data) {
+            if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data) {
 
-                    DispatchQueue.main.async {
-                        guard let self = self else { return }
-                        self.contentMode = objc_getAssociatedObject(self, USER_CONTENT_MODE_KEY) as? ContentMode ?? .scaleToFill
-                        self.image = image
-                    }
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.contentMode = objc_getAssociatedObject(self, USER_CONTENT_MODE_KEY) as? ContentMode ?? .scaleToFill
+                    self.image = image
 
                     if let onSuccess = imageFlow.onSuccess {
-                        self?.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onSuccess)
+                        self.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onSuccess)
                     }
-                } else if let onError = imageFlow.onError {
+                }
+            } else if let onError = imageFlow.onError {
+                DispatchQueue.main.async {
                     self?.observeImageFlow(cancellableManager: cancellableManager, imageFlowPublisher: onError)
                 }
+            }
         }.resume()
     }
 
