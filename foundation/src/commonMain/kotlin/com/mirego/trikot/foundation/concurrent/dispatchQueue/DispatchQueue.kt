@@ -5,6 +5,7 @@ import com.mirego.trikot.foundation.concurrent.freeze
 typealias DispatchBlock = () -> Unit
 
 interface DispatchQueue {
+    fun isSerial() = false
     fun dispatch(block: DispatchBlock)
 }
 

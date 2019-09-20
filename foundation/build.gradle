@@ -41,6 +41,12 @@ kotlin {
                 implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
             }
         }
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+            }
+        }
         jsMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'

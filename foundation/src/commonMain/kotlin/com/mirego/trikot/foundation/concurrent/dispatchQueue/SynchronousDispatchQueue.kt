@@ -1,7 +1,8 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
 class SynchronousDispatchQueue : DispatchQueue {
-    override fun dispatch(block: DispatchBlock) {
-        block()
-    }
+
+    override fun isSerial() = true
+
+    override fun dispatch(block: DispatchBlock) = block()
 }
