@@ -11,6 +11,10 @@ actual class AtomicReference<T> actual constructor(value: T) {
     }
 
     actual fun setOrThrow(expected: T, new: T) {
+        setOrThrow(expected, new, null)
+    }
+
+    actual fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?) {
         compareAndSet(expected, new)
     }
 

@@ -7,5 +7,7 @@ expect class AtomicReference<T>(value: T) {
 
     fun setOrThrow(expected: T, new: T)
 
+    fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?)
+
     fun compareAndSwap(expected: T, new: T): T
 }

@@ -10,8 +10,13 @@ actual class AtomicReference<T> actual constructor(value: T) {
     }
 
     actual fun setOrThrow(expected: T, new: T) {
+        setOrThrow(expected, new, null)
+    }
+
+    actual fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?) {
         if (!internalRef.compareAndSet(expected, new)) {
-            throw ConcurrentModificationException("Unable to set the new value to AtomicReference. Possible Race Condition. Expected value $expected was ${internalRef.get()}")
+            val debugInformationString = debugInfo?.let { "\n${it()}" }
+            throw ConcurrentModificationException("Unable to set $new to AtomicReference. Possible Race Condition. Expected value $expected was ${internalRef.get()}. $debugInformationString")
         }
     }
 
