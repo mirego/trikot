@@ -27,6 +27,7 @@ object MetaInputTextBinder {
         metaInputText: MetaInputText?,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
+        editText.bindMetaView(metaInputText, lifecycleOwnerWrapper)
         (metaInputText ?: NoMetaInputText).let {
             it.let {
                 addTextWatcher(it, editText)
