@@ -62,7 +62,7 @@ class CombineLatestProcessor<T>(
 
         private fun markPublisherResultCompleted(publisherResultIndex: Int) {
             publishersResult.value[publisherResultIndex].completed = true
-            dispatchResultIfNeeded()
+            dispatchResultIfNeeded(true)
         }
 
         private fun updatePublisherResultValue(publisherResultIndex: Int, value: T) {
@@ -74,7 +74,7 @@ class CombineLatestProcessor<T>(
             markPublisherResultCompleted(parentPublisherResultIndex)
         }
 
-        fun dispatchResultIfNeeded() {
+        private fun dispatchResultIfNeeded(forPublisherCompletion: Boolean = false) {
             var allValues = true
             var allCompleted = true
             publishersResult.value.forEach publishersLoop@{
@@ -84,9 +84,13 @@ class CombineLatestProcessor<T>(
                     return@publishersLoop
                 }
             }
-            if (allValues || allCompleted) {
+
+            if (allValues && !forPublisherCompletion) {
+                dispatchResult()
+            } else if (allCompleted && !allValues) {
                 dispatchResult()
             }
+
             if (allCompleted) {
                 subscriber.onComplete()
             }

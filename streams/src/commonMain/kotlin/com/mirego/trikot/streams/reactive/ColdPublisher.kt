@@ -12,9 +12,16 @@ class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T
     override fun onFirstSubscription() {
         super.onFirstSubscription()
         val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
-        executionBlock(cancellableManager).subscribe(cancellableManager) {
+        executionBlock(cancellableManager).subscribe(cancellableManager,
+            onNext = {
                 executionValue -> value = executionValue
-        }
+            },
+            onError = {
+                error = it
+            },
+            onCompleted = {
+                complete()
+            })
     }
 
     override fun onNoSubscription() {

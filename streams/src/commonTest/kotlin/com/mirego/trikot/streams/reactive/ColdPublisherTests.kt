@@ -61,4 +61,40 @@ class ColdPublisherTests {
 
         assertEquals(2, executionCount)
     }
+
+    @Test
+    fun blockIsNotReexecutedIfResubscribedWhenCompleted() {
+        var executionCount = 0
+
+        val coldPublisher = ColdPublisher({
+            executionCount += 1
+            Publishers.behaviorSubject("value").also { it.complete() }
+        })
+
+        val cancellableManager = CancellableManager()
+        coldPublisher.subscribe(cancellableManager) {}
+        cancellableManager.cancel()
+        var value = "none"
+        coldPublisher.subscribe(CancellableManager()) { value = it }
+
+        assertEquals(1, executionCount)
+        assertEquals("value", value)
+    }
+
+    @Test
+    fun errorIsForwarded() {
+        val expectedError = Exception("Expected")
+
+        val coldPublisher = ColdPublisher<String>({
+            Publishers.behaviorSubject<String>().also { it.error = expectedError }
+        })
+
+        val cancellableManager = CancellableManager()
+        var receivedError: Throwable? = null
+        coldPublisher.subscribe(cancellableManager, {}) {
+            receivedError = it
+        }
+
+        assertEquals(expectedError, receivedError)
+    }
 }

@@ -131,6 +131,20 @@ class CombineLatestProcessorTests {
         assertFalse { secondPublisher.getHasSubscriptions }
     }
 
+    @Test
+    fun valuesAreNotReemittedOnCompletion() {
+        val firstPublisher = MockPublisher("a")
+        val secondPublisher = MockPublisher("b")
+        firstPublisher.complete()
+        secondPublisher.complete()
+
+        var callbackCount = 0
+        firstPublisher.combine(secondPublisher).subscribe(CancellableManager()) {
+            callbackCount++
+        }
+        assertEquals(1, callbackCount)
+    }
+
     class MockPublisher(initialValue: String? = null) : BehaviorSubjectImpl<String>(initialValue) {
         val getHasSubscriptions get() = super.hasSubscriptions
     }
