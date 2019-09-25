@@ -34,6 +34,12 @@ extension UITextField {
                     case MetaInputType.password:
                         self?.keyboardType = .default
                         self?.isSecureTextEntry = true
+                    case MetaInputType.phoneNumber:
+                        self?.keyboardType = .phonePad
+                        self?.isSecureTextEntry = false
+                    case MetaInputType.number:
+                        self?.keyboardType = .numberPad
+                        self?.isSecureTextEntry = false
                     default:
                         break
                     }

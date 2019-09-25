@@ -1,7 +1,12 @@
 package com.mirego.trikot.metaviews.properties
 
 enum class MetaInputType {
-    TEXT,
+    DATE,
+    DATETIME,
+    EMAIL,
+    NUMBER,
     PASSWORD,
-    EMAIL
+    PHONE_NUMBER,
+    TEXT,
+    TIME
 }

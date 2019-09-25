@@ -1,7 +1,13 @@
 package com.mirego.trikot.metaviews
 
 import android.text.Editable
+import android.text.InputType.TYPE_CLASS_DATETIME
+import android.text.InputType.TYPE_CLASS_NUMBER
+import android.text.InputType.TYPE_CLASS_PHONE
 import android.text.InputType.TYPE_CLASS_TEXT
+import android.text.InputType.TYPE_DATETIME_VARIATION_DATE
+import android.text.InputType.TYPE_DATETIME_VARIATION_NORMAL
+import android.text.InputType.TYPE_DATETIME_VARIATION_TIME
 import android.text.InputType.TYPE_NULL
 import android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
 import android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
@@ -42,9 +48,17 @@ object MetaInputTextBinder {
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->
                     editText.inputType =
                         when (inputType) {
+                            MetaInputType.DATE ->
+                                TYPE_DATETIME_VARIATION_DATE or
+                                    TYPE_CLASS_DATETIME
+                            MetaInputType.DATETIME ->
+                                TYPE_DATETIME_VARIATION_NORMAL or
+                                    TYPE_CLASS_DATETIME
                             MetaInputType.EMAIL ->
                                 TYPE_TEXT_VARIATION_EMAIL_ADDRESS or
                                     TYPE_CLASS_TEXT
+                            MetaInputType.NUMBER ->
+                                TYPE_CLASS_NUMBER
                             MetaInputType.TEXT ->
                                 TYPE_TEXT_FLAG_CAP_SENTENCES or
                                     TYPE_CLASS_TEXT or
@@ -52,6 +66,11 @@ object MetaInputTextBinder {
                             MetaInputType.PASSWORD ->
                                 TYPE_TEXT_VARIATION_PASSWORD or
                                     TYPE_CLASS_TEXT
+                            MetaInputType.PHONE_NUMBER ->
+                                TYPE_CLASS_PHONE
+                            MetaInputType.TIME ->
+                                TYPE_DATETIME_VARIATION_TIME or
+                                    TYPE_CLASS_DATETIME
                             else -> TYPE_NULL
                         }
                 }
