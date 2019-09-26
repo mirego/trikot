@@ -55,7 +55,9 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     }
 
     private fun removeSubscription(publisherSubscription: PublisherSubscription<T>) {
-        if (subscriptions.remove(publisherSubscription).isEmpty()) onNoSubscription()
+        if (subscriptions.value.contains(publisherSubscription) && subscriptions.remove(publisherSubscription).isEmpty()) {
+            onNoSubscription()
+        }
     }
 
     private fun addSubscription(subscription: PublisherSubscription<T>) {
