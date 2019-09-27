@@ -21,10 +21,11 @@ import com.mirego.trikot.metaviews.android.ktx.R
 import com.mirego.trikot.metaviews.mutable.MutableMetaInputText
 import com.mirego.trikot.metaviews.properties.MetaInputType
 import com.mirego.trikot.streams.android.ktx.observe
+import com.mirego.trikot.streams.reactive.just
 
 object MetaInputTextBinder {
 
-    val NoMetaInputText = MutableMetaInputText().apply { hidden.value = true } as MetaInputText
+    val NoMetaInputText = MutableMetaInputText().apply { hidden = true.just() } as MetaInputText
 
     @JvmStatic
     @BindingAdapter("meta_view", "lifecycleOwnerWrapper")

@@ -5,9 +5,10 @@ import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaView
 import com.mirego.trikot.metaviews.properties.MetaAction
 import com.mirego.trikot.streams.android.ktx.observe
+import com.mirego.trikot.streams.reactive.just
 
 private val NoMetaView = MutableMetaView()
-    .apply { hidden.value = true } as MetaView
+    .apply { hidden = true.just() } as MetaView
 
 @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
 fun View.bindMetaView(

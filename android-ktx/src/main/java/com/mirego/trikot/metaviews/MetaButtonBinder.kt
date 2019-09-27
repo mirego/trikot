@@ -20,14 +20,11 @@ import com.mirego.trikot.metaviews.resource.ImageResource
 import com.mirego.trikot.metaviews.resources.MetaImageResourceManager
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
-import com.mirego.trikot.streams.reactive.CombineLatest
-import com.mirego.trikot.streams.reactive.Publishers
-import com.mirego.trikot.streams.reactive.distinctUntilChanged
-import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.*
 
 object MetaButtonBinder {
 
-    val NoMetaButton = MutableMetaButton().apply { hidden.value = true } as MetaButton
+    val NoMetaButton = MutableMetaButton().apply { hidden = true.just() } as MetaButton
     val NoMetaAction = Publishers.behaviorSubject(MetaAction {})
 
     @JvmStatic

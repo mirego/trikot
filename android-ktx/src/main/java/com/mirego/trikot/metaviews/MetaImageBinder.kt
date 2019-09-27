@@ -7,6 +7,7 @@ import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.withCancellableManager
 import com.squareup.picasso.Callback
@@ -16,7 +17,7 @@ import com.squareup.picasso.Transformation
 
 object MetaImageBinder {
     private val NoMetaImage = MutableMetaImage { _, _ -> Publishers.behaviorSubject() }
-            .apply { hidden.value = true } as MetaImage
+            .apply { hidden = true.just() } as MetaImage
 
     @JvmStatic
     @BindingAdapter("meta_view", "lifecycleOwnerWrapper")

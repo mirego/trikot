@@ -13,10 +13,11 @@ import com.mirego.trikot.metaviews.mutable.MutableMetaLabel
 import com.mirego.trikot.metaviews.text.RichTextRange
 import com.mirego.trikot.metaviews.text.StyleTransform
 import com.mirego.trikot.streams.android.ktx.observe
+import com.mirego.trikot.streams.reactive.just
 
 object MetaLabelBinder {
 
-    private val NoMetaLabel = MutableMetaLabel().apply { hidden.value = true } as MetaLabel
+    private val NoMetaLabel = MutableMetaLabel().apply { hidden = true.just() } as MetaLabel
 
     @JvmStatic
     @BindingAdapter("meta_view", "hiddenVisibility", "lifecycleOwnerWrapper")
