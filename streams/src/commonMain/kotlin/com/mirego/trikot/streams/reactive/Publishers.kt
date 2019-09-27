@@ -24,6 +24,6 @@ object Publishers {
     }
 }
 
-fun <T> T.asPublisher(): Publisher<T>  = Publishers.behaviorSubject(this)
+fun <T> T.asPublisher(): Publisher<T> = Publishers.behaviorSubject(this)
 
 fun <T> T.just(): Publisher<T> = Publishers.just(this)
