@@ -159,6 +159,6 @@ extension UIButton {
     @objc
     private func onButtonTouchUp() {
         guard let metaButton = metaButton else { return }
-        observe(metaButton.onTap.first()) { (value: MetaAction) in value.execute(actionContext: self) }
+        observe(metaButton.onTap.first()) {[weak self] (value: MetaAction) in value.execute(actionContext: self ?? nil) }
     }
 }

@@ -52,6 +52,6 @@ extension UIView {
     private func trikotOnViewTouchUp() {
         let localMetaView: MetaView? = trikotMetaView()
         guard let metaMetaView = localMetaView else { return }
-        observe(metaMetaView.onTap.first()) { (value: MetaAction) in value.execute(actionContext: self) }
+        observe(metaMetaView.onTap.first()) {[weak self] (value: MetaAction) in value.execute(actionContext: self) }
     }
 }
