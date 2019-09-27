@@ -3,10 +3,9 @@
 Elegant implementation of ReactiveStreams for Kotlin Multiplatform.
 
 - Manage object immutability in native implementation (Object are frozen when switching threads)
-- Provide coroutines compatible queues (Threads) to all platform (except js) (Coroutines are not used by default)
+- Multithread support with ObserveOn and SubscribeOn processors
 - Simplify the management of publishers subscriptions and unsubscriptions
 - Help you focus on what you need to do by hiding Multiplatform complexity
-
 
 ## Sample
 #### Common code
@@ -20,29 +19,28 @@ class SearchController() {
         PublisherFactory.create(results.count).toString()
     }
     val resultUppercaseTitles = searchResultsPublisher.map { it.title.toUpperCase() }
+    val searchResultCountLabel = searchResultsPublisher.map { "${it.results.count()} results" }
     fun searchFor(keyword: String) {
        searchKeywordPublisher.value = keyword 
     }
 }
 ```
 
-#### iOS
+#### Swift
 See [swift extensions](./swift-extensions/README.md) for more information.
 
 Helps connect a publisher to a variable in a reactive environment.
 ```kotlin
-let aStringPublisher = ...
 let label = UILabel()
-bind(aStringPublisher, \UILabel.text)
+label.bind(searchController.searchResultCountLabel, \UILabel.text)
 ```
 
 #### Android
+See [android-ktx](./android-ktx/README.md) for more information.
+
 Binding helpers relies on AndroidViewModel and uses lifecycleOwner to manage subscription and unsubscription. 
 ```kotlin
- <TextView
-            ...
-            android:text="@{aStringPublisher}"
-            tools:text="0" />
+val searchResultLiveData = searchController.searchResultCountLabel.asLiveData()
 ```
 
 ## [Publishers and Processors](./documentation/PUBLISHERS.md)
@@ -54,6 +52,8 @@ Subscription and unsubscription are managed trough `Cancellable` and `Cancellabl
 ## Installation
 ##### Import dependencies
 ```groovy
+    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+
     api "com.mirego.trikot:streams:$trikot_streams_version"
     jvm "com.mirego.trikot:streams-jvm:$trikot_streams_version"
     js "com.mirego.trikot:streams-js:$trikot_streams_version"
