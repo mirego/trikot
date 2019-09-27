@@ -19,7 +19,6 @@ import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
 import com.mirego.trikot.streams.reactive.processors.WithPreviousValueProcessor
 import org.reactivestreams.Publisher
-import org.reactivestreams.Subscriber
 
 typealias SubscriptionBlock<T> = (T) -> Unit
 typealias SubscriptionErrorBlock = (Throwable) -> Unit
@@ -84,36 +83,4 @@ fun <T> Publisher<T>.distinctUntilChanged(): Publisher<T> {
 
 fun <T> Publisher<T>.withPreviousValue(): Publisher<Pair<T?, T>> {
     return WithPreviousValueProcessor(this)
-}
-
-fun <T> Publisher<T>.asMutable(): BehaviorSubject<T> {
-    val referencePublisher = this
-    return object : BehaviorSubject<T> {
-        override var value: T?
-            get() {
-                throw IllegalArgumentException("Cannot use get value on publisher of type on ${referencePublisher::class}.")
-            }
-            set(_) {
-                throw IllegalArgumentException("Cannot use set value on publisher of type on ${referencePublisher::class}.")
-            }
-        override var error: Throwable?
-            get() {
-                throw IllegalArgumentException("Cannot use get error on publisher of type on ${referencePublisher::class}.")
-            }
-            set(_) {
-                throw IllegalArgumentException("Cannot use set error on publisher of type on ${referencePublisher::class}.")
-            }
-
-        override fun complete() {
-            throw IllegalArgumentException("Cannot use complete on publisher of type on ${referencePublisher::class}.")
-        }
-
-        override fun subscribe(s: Subscriber<in T>) {
-            referencePublisher.subscribe(s)
-        }
-    }
-}
-
-fun <T> T.asPublisher(): Publisher<T> {
-    return Publishers.behaviorSubject(this)
 }
