@@ -48,11 +48,12 @@ object MetaLabelBinder {
                 textView.text = it
             }
 
-        label.textColor.asLiveData().observe(lifecycleOwnerWrapper.lifecycleOwner) {
-            if (it.hasAnyValue) {
-                textView.setTextColor(it.toColorStateList())
+        label.textColor.asLiveData()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                selector.default?.let {
+                    textView.setTextColor(it.toIntColor())
+                }
             }
-        }
 
         bindExtraViewProperties(textView, label, hiddenVisibility, lifecycleOwnerWrapper)
     }

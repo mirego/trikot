@@ -1,9 +1,6 @@
 package com.mirego.trikot.metaviews
 
-import android.R
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
@@ -25,6 +22,7 @@ import com.mirego.trikot.metaviews.resources.MetaImageResourceManager
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.*
+import com.mirego.trikot.streams.reactive.processors.combine
 
 object MetaButtonBinder {
 
@@ -62,6 +60,13 @@ object MetaButtonBinder {
                                 drawableBottom = null
                             }
                         }
+                    }
+                }
+
+            it.textColor.asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                    selector.default?.let {
+                        textView.setTextColor(it.toIntColor())
                     }
                 }
         }
@@ -116,7 +121,7 @@ object MetaButtonBinder {
                 .asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { button.text = it }
 
-            CombineLatest.combine2(it.imageAlignment, it.imageResource)
+            it.imageAlignment.combine(it.imageResource)
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { (alignment, selector) ->
                     if (alignment == null || selector == null) return@observe
 

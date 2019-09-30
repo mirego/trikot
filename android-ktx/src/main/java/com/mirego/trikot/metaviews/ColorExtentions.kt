@@ -33,9 +33,8 @@ fun MetaSelector<Color>.toColorStateList(): ColorStateList {
         colors.add(intArrayOf(it.toIntColor()))
         supportedMode.add(-R.attr.state_enabled)
     }
-    @Suppress("UNCHECKED_CAST")
     return ColorStateList(
-        colors.toArray() as Array<IntArray>,
+        Array(colors.count()) { colors[it] },
         supportedMode.toIntArray()
     )
 }
