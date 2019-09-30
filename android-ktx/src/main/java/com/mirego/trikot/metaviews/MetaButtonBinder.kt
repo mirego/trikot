@@ -1,10 +1,14 @@
 package com.mirego.trikot.metaviews
 
+import android.R
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -30,36 +34,36 @@ object MetaButtonBinder {
     @JvmStatic
     @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
     fun bind(
-            textView: TextView,
-            metaButton: MetaButton?,
-            lifecycleOwnerWrapper: LifecycleOwnerWrapper
+        textView: TextView,
+        metaButton: MetaButton?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (metaButton ?: NoMetaButton).let { it ->
             bind(textView as View, it, lifecycleOwnerWrapper)
             it.text
-                    .asLiveData()
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { textView.text = it }
+                .asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { textView.text = it }
 
             CombineLatest.combine2(it.imageAlignment, it.imageResource)
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { (alignment, selector) ->
-                        if (alignment == null || selector == null) return@observe
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { (alignment, selector) ->
+                    if (alignment == null || selector == null) return@observe
 
-                        val drawable = selector.asDrawable(textView.context)
-                        with(textView) {
-                            when (alignment) {
-                                Alignment.LEFT -> drawableStart = drawable
-                                Alignment.TOP -> drawableTop = drawable
-                                Alignment.RIGHT -> drawableEnd = drawable
-                                Alignment.BOTTOM -> drawableBottom = drawable
-                                else -> {
-                                    drawableStart = null
-                                    drawableTop = null
-                                    drawableEnd = null
-                                    drawableBottom = null
-                                }
+                    val drawable = selector.asDrawable(textView.context)
+                    with(textView) {
+                        when (alignment) {
+                            Alignment.LEFT -> drawableStart = drawable
+                            Alignment.TOP -> drawableTop = drawable
+                            Alignment.RIGHT -> drawableEnd = drawable
+                            Alignment.BOTTOM -> drawableBottom = drawable
+                            else -> {
+                                drawableStart = null
+                                drawableTop = null
+                                drawableEnd = null
+                                drawableBottom = null
                             }
                         }
                     }
+                }
         }
     }
 
@@ -71,31 +75,78 @@ object MetaButtonBinder {
             view.bindMetaView(it, lifecycleOwnerWrapper)
 
             it.enabled
-                    .distinctUntilChanged()
-                    .asLiveData()
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isEnabled = it }
+                .distinctUntilChanged()
+                .asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isEnabled = it }
 
             it.selected
-                    .distinctUntilChanged()
-                    .asLiveData()
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isSelected = it }
+                .distinctUntilChanged()
+                .asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isSelected = it }
         }
     }
 
     @JvmStatic
     @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
     fun bind(
-            imageView: ImageView,
-            metaButton: MetaButton?,
-            lifecycleOwnerWrapper: LifecycleOwnerWrapper
+        imageView: ImageView,
+        metaButton: MetaButton?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (metaButton ?: NoMetaButton).let { it ->
             bind(imageView as View, it, lifecycleOwnerWrapper)
             it.imageResource
-                    .map { it.asDrawable(imageView.context) }
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) {
-                        imageView.setImageDrawable(it)
+                .map { it.asDrawable(imageView.context) }
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) {
+                    imageView.setImageDrawable(it)
+                }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
+    fun bind(
+        button: Button,
+        metaButton: MetaButton?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper
+    ) {
+        (metaButton ?: NoMetaButton).let { it ->
+            bind(button as View, it, lifecycleOwnerWrapper)
+            it.text
+                .asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { button.text = it }
+
+            CombineLatest.combine2(it.imageAlignment, it.imageResource)
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { (alignment, selector) ->
+                    if (alignment == null || selector == null) return@observe
+
+                    val drawable = selector.asDrawable(button.context)
+                    with(button) {
+                        when (alignment) {
+                            Alignment.LEFT -> drawableStart =
+                                drawable
+                            Alignment.TOP -> drawableTop =
+                                drawable
+                            Alignment.RIGHT -> drawableEnd =
+                                drawable
+                            Alignment.BOTTOM -> drawableBottom =
+                                drawable
+                            else -> {
+                                drawableStart = null
+                                drawableTop = null
+                                drawableEnd = null
+                                drawableBottom = null
+                            }
+                        }
                     }
+                }
+
+            it.backgroundColor.asLiveData()
+                .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                    if (selector.hasAnyValue) {
+                        button.backgroundTintList = selector.toColorStateList()
+                    }
+                }
         }
     }
 }
