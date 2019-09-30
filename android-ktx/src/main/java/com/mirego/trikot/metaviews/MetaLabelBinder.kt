@@ -12,6 +12,7 @@ import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaLabel
 import com.mirego.trikot.metaviews.text.RichTextRange
 import com.mirego.trikot.metaviews.text.StyleTransform
+import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
 
@@ -46,6 +47,12 @@ object MetaLabelBinder {
             ?.observe(lifecycleOwnerWrapper.lifecycleOwner) {
                 textView.text = it
             }
+
+        label.textColor.asLiveData().observe(lifecycleOwnerWrapper.lifecycleOwner) {
+            if (it.hasAnyValue) {
+                textView.setTextColor(it.toColorStateList())
+            }
+        }
 
         bindExtraViewProperties(textView, label, hiddenVisibility, lifecycleOwnerWrapper)
     }
