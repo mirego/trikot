@@ -5,23 +5,23 @@ sudo: false
 jobs:
   include:
     - name: Streams
-        env:
-          - JAVA_OPTS="-XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx2048m"
-        language: android
-        dist: trusty
-        components:
-          - tools
-          - platform-tools
-          - extra-android-m2repository
-        before_install:
-          - yes | sdkmanager "platforms;android-28"
-          - yes | sdkmanager "build-tools;29.0.0"
-        licenses:
-          - 'android-sdk-preview-license-52d11cd2'
-          - 'android-sdk-license-.+'
-          - 'google-gdk-license-.+'
-        before_script:
-          - chmod +x gradlew
-          - chmod +x gradle/wrapper/gradle-wrapper.jar
-        script:
-          - ./gradlew test jvmTest ktlintCheck --parallel
+      env:
+        - JAVA_OPTS="-XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx2048m"
+      language: android
+      dist: trusty
+      components:
+        - tools
+        - platform-tools
+        - extra-android-m2repository
+      before_install:
+        - yes | sdkmanager "platforms;android-28"
+        - yes | sdkmanager "build-tools;29.0.0"
+      licenses:
+        - 'android-sdk-preview-license-52d11cd2'
+        - 'android-sdk-license-.+'
+        - 'google-gdk-license-.+'
+      before_script:
+        - chmod +x gradlew
+        - chmod +x gradle/wrapper/gradle-wrapper.jar
+      script:
+        - ./gradlew test jvmTest ktlintCheck --parallel
