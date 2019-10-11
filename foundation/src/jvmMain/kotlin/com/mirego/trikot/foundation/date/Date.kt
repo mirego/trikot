@@ -1,17 +1,16 @@
 package com.mirego.trikot.foundation.date
 
 import org.threeten.bp.Instant
-import java.text.SimpleDateFormat
+import org.threeten.bp.OffsetDateTime.from
+import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
-import java.util.TimeZone
-import org.threeten.bp.OffsetDateTime.from
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 private val dateFormat =
-    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
-        .also { it.timeZone = TimeZone.getTimeZone("UTC") }
+    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+        .withZone(ZoneOffset.UTC)
 
 @ExperimentalTime
 actual class Date(val instant: Instant) {
@@ -29,7 +28,7 @@ actual class Date(val instant: Instant) {
     }
 
     actual fun toISO8601(): String {
-        return dateFormat.format(java.util.Date(instant.toEpochMilli()))
+        return dateFormat.format(instant)
     }
 
     actual companion object DateFactory {
