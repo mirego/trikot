@@ -63,10 +63,12 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     private fun addSubscription(subscription: PublisherSubscription<T>) {
         if (!subscription.isCancelled) {
             onNewSubscription(subscription)
-            if (this.completed) {
-                subscription.dispatchCompleted()
-            } else if (subscriptions.add(subscription).count() == 1) {
-                onFirstSubscription()
+            if (!subscription.isCancelled) {
+                if (this.completed) {
+                    subscription.dispatchCompleted()
+                } else if (subscriptions.add(subscription).count() == 1) {
+                    onFirstSubscription()
+                }
             }
         }
     }

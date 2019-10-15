@@ -86,6 +86,29 @@ class PublishSubjectTests {
         }
     }
 
+    @Test
+    fun subscriberIsNotAddedToListWhenIsCancellationOccursInNewSubscriptionCallback() {
+        val publisher1 = PublishSubjectMock<String>()
+        val publisher2 = PublishSubjectMock<String>()
+        var completed = false
+        publisher1
+            .switchMap { publisher2 }
+            .first()
+            .subscribe(CancellableManager(), onNext = {
+            }, onError = {},
+                onCompleted = { completed = true })
+        publisher1.value = "1"
+        publisher2.value = "2"
+
+        assertTrue { completed }
+        assertTrue { publisher1.hasNoSubscription }
+        assertTrue { publisher2.hasNoSubscription }
+    }
+
+    class PublishSubjectMock<T>() : PublishSubjectImpl<T>() {
+        val hasNoSubscription get() = !super.hasSubscriptions
+    }
+
     fun retreiveValue(block: (String) -> Unit, cancellableManager: CancellableManager = CancellableManager()) {
         publishSubject.first().subscribe(cancellableManager, block)
     }
