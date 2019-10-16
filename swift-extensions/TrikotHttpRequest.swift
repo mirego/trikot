@@ -25,7 +25,7 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
 
             let sessionTask = URLSession.shared.dataTask(with: urlRequest as URLRequest) { (data, urlResponse, error) in
                 if let error = error {
-                    resultPublisher.error = KotlinThrowable(message: error.localizedDescription)
+                    resultPublisher.error = MrFreeze().freeze(objectToFreeze: KotlinThrowable(message: error.localizedDescription)) as! KotlinThrowable
                 } else {
                     let iosResponse = TrikotHttpResponse(data: data, response: urlResponse)
                     MrFreeze().freeze(objectToFreeze: iosResponse)
@@ -37,7 +37,7 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
             resultPublisher.error = KotlinThrowable(message: "Unable to create a valid URL")
         }
 
-        return resultPublisher
+        return MrFreeze().freeze(objectToFreeze: resultPublisher) as! Publisher
     }
 }
 
