@@ -151,15 +151,21 @@ object MetaButtonBinder {
 
             it.backgroundColor.asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                    if (!selector.hasAnyValue) {
+                        return@observe
+                    }
+
                     val defaultColor =
                         Color.parseColor(selector.default?.hexARGB("#") ?: "#00000000")
                     val hoveredColor =
                         selector.highlighted?.let { Color.parseColor(it.hexARGB("#")) }
                             ?: defaultColor
                     val selectedColor =
-                        selector.selected?.let { Color.parseColor(it.hexARGB("#")) } ?: defaultColor
+                        selector.selected?.let { Color.parseColor(it.hexARGB("#")) }
+                            ?: defaultColor
                     val disabledColor =
-                        selector.disabled?.let { Color.parseColor(it.hexARGB("#")) } ?: defaultColor
+                        selector.disabled?.let { Color.parseColor(it.hexARGB("#")) }
+                            ?: defaultColor
                     button.backgroundTintList = ColorStateList(
                         arrayOf(
                             intArrayOf(R.attr.state_enabled),
