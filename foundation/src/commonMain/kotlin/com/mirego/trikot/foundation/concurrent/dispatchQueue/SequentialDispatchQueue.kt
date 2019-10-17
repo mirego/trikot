@@ -2,6 +2,7 @@ package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.freeze
 
 /**
  * Ensure dispatch blocks are executed sequentially on a dispatch queue.
@@ -10,13 +11,20 @@ open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : 
     DispatchQueue {
     private val dispatchBlockQueue = AtomicListReference<DispatchBlock>()
     private val noDispatchBlock = {}
+    private val syncDispatchBlock = {}
     private val currentDispatch = AtomicReference(noDispatchBlock)
 
     override fun isSerial() = true
 
     override fun dispatch(block: DispatchBlock) {
-        dispatchBlockQueue.add(block)
-        startNextIfNeeded()
+        if (currentDispatch.compareAndSet(noDispatchBlock, syncDispatchBlock)) {
+            block()
+            currentDispatch.setOrThrow(syncDispatchBlock, noDispatchBlock)
+            startNextIfNeeded()
+        } else {
+            dispatchBlockQueue.add(freeze(block))
+            startNextIfNeeded()
+        }
     }
 
     private fun startNextIfNeeded() {
