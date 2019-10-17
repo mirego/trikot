@@ -1,5 +1,8 @@
 package com.mirego.trikot.metaviews
 
+import android.R
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.ParcelableSpan
 import android.text.SpannableString
@@ -53,6 +56,34 @@ object MetaLabelBinder {
                 selector.default?.let {
                     textView.setTextColor(it.toIntColor())
                 }
+            }
+
+        label.backgroundColor.asLiveData()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                if (!selector.hasAnyValue) {
+                    return@observe
+                }
+
+                val defaultColor =
+                    Color.parseColor(selector.default?.hexARGB("#") ?: "#00000000")
+                val hoveredColor =
+                    selector.highlighted?.let { Color.parseColor(it.hexARGB("#")) }
+                        ?: defaultColor
+                val selectedColor =
+                    selector.selected?.let { Color.parseColor(it.hexARGB("#")) }
+                        ?: defaultColor
+                val disabledColor =
+                    selector.disabled?.let { Color.parseColor(it.hexARGB("#")) }
+                        ?: defaultColor
+                textView.backgroundTintList = ColorStateList(
+                    arrayOf(
+                        intArrayOf(R.attr.state_enabled),
+                        intArrayOf(R.attr.state_hovered),
+                        intArrayOf(R.attr.state_selected),
+                        intArrayOf(-R.attr.state_enabled)
+                    ),
+                    intArrayOf(defaultColor, hoveredColor, selectedColor, disabledColor)
+                )
             }
 
         bindExtraViewProperties(textView, label, hiddenVisibility, lifecycleOwnerWrapper)
