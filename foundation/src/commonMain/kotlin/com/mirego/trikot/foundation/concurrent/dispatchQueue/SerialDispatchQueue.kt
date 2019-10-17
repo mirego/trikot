@@ -1,3 +1,5 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
-class SerialDispatchQueue : SequentialDispatchQueue(SynchronousDispatchQueue())
+class SynchronousSerialQueue: SequentialDispatchQueue(SynchronousDispatchQueue()) {
+    override val isSynchronous = true
+}

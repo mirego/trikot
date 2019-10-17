@@ -9,15 +9,16 @@ import com.mirego.trikot.foundation.concurrent.freeze
  */
 open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : QueueDispatcher,
     DispatchQueue {
+    protected open val isSynchronous = false
     private val dispatchBlockQueue = AtomicListReference<DispatchBlock>()
-    private val noDispatchBlock = {}
-    private val syncDispatchBlock = {}
+    private val noDispatchBlock = freeze {}
+    private val syncDispatchBlock = freeze {}
     private val currentDispatch = AtomicReference(noDispatchBlock)
 
     override fun isSerial() = true
 
     override fun dispatch(block: DispatchBlock) {
-        if (currentDispatch.compareAndSet(noDispatchBlock, syncDispatchBlock)) {
+        if (isSynchronous && currentDispatch.compareAndSet(noDispatchBlock, syncDispatchBlock)) {
             dispatchQueue.dispatch(block)
             currentDispatch.setOrThrow(syncDispatchBlock, noDispatchBlock)
             startNextIfNeeded()
