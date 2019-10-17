@@ -18,7 +18,7 @@ open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : 
 
     override fun dispatch(block: DispatchBlock) {
         if (currentDispatch.compareAndSet(noDispatchBlock, syncDispatchBlock)) {
-            block()
+            dispatchQueue.dispatch(block)
             currentDispatch.setOrThrow(syncDispatchBlock, noDispatchBlock)
             startNextIfNeeded()
         } else {
