@@ -13,11 +13,19 @@ class Foo(val dispatchQueue: DispatchQueue
 }
 ```
 
+### OperationDispatchQueue
+- Dispatch queue for background operations. Number of threads depends on the platform implementation and the number of processors
+
+### SerialDispatchQueue
+- Special queue that ensure than operation will be executed sequentially. Will be executed synchronously if no operation are currently running.
+
+### Default provided queues
 By default, trikot provide those dispatch queues available trough the Configuration object
 * Configuration.publisherExecutionDispatchQueue -> Default queue used by `ExecutablePublisher` to execute code
 * Configuration.serialSubscriptionDispatchQueue -> Single not shared thread useful to subscribe concurrently to publishers.
 
-*Note on using coroutines*: Use the following code to run ExecutablePublisher on coroutines instead of threads
+### Note on using coroutines
+The following code runs ExecutablePublisher on coroutines instead of threads
 
 ```kotlin
 class MyCoroutineDispatcher(val context: CoroutineContext = Dispatchers.unconfined): DispatchQueue, CoroutineScope {

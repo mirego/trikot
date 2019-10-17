@@ -6,7 +6,7 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 /**
  * Ensure dispatch blocks are executed sequentially on a dispatch queue.
  */
-class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : QueueDispatcher,
+open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : QueueDispatcher,
     DispatchQueue {
     private val dispatchBlockQueue = AtomicListReference<DispatchBlock>()
     private val noDispatchBlock = {}
