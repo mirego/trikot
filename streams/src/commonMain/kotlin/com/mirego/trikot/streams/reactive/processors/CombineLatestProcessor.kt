@@ -2,7 +2,10 @@ package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
+import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
+import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
@@ -25,6 +28,7 @@ class CombineLatestProcessor<T>(
         private val cancellableManagerProvider = CancellableManagerProvider()
         private val publishersResult = AtomicListReference<PublisherResult<T>>()
         private val parentPublisherResultIndex = 0
+        private val serialQueue = freeze(SynchronousSerialQueue())
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
@@ -32,6 +36,12 @@ class CombineLatestProcessor<T>(
         }
 
         override fun onNext(t: T, subscriber: Subscriber<in List<T?>>) {
+            serialQueue.dispatch {
+                doOnNext(t)
+            }
+        }
+
+        private fun doOnNext(t: T) {
             val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
             publishersResult.removeAll(publishersResult.value)
 
@@ -42,7 +52,7 @@ class CombineLatestProcessor<T>(
 
             publishers.forEachIndexed { index, publisher ->
                 val publisherResultIndex = index + 1
-                publisher.subscribe(cancellableManager,
+                publisher.observeOn(serialQueue).subscribe(cancellableManager,
                     onNext = { updatePublisherResultValue(publisherResultIndex, it) },
                     onError = { onError(it) },
                     onCompleted = { markPublisherResultCompleted(publisherResultIndex) }

@@ -2,6 +2,8 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
+import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Subscriber
 
 open class PublishSubjectImpl<T> : PublishSubject<T> {
@@ -9,6 +11,8 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     private val atomicValue = AtomicReference<T?>(null)
     private val atomicError = AtomicReference<Throwable?>(null)
     private val isCompleted = AtomicReference(false)
+    private val serialQueue = freeze(SynchronousSerialQueue())
+    private val subscriptionQueue = SynchronousSerialQueue() // Not frozen because we do not want subscriber to impact performance on iOS with freezing time
     protected val hasSubscriptions
         get() = subscriptions.value.count() > 0
 
@@ -23,16 +27,18 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
             return atomicValue.value
         }
         set(value) {
-            atomicValue.setOrThrow(atomicValue.value, value)
+            serialQueue.dispatch {
+                atomicValue.setOrThrow(atomicValue.value, value)
 
-            value?.let {
-                error?.let {
-                    throw IllegalStateException("Value should not be set after an error.")
+                value?.let {
+                    error?.let {
+                        throw IllegalStateException("Value should not be set after an error.")
+                    }
+                    if (isCompleted.value) {
+                        throw IllegalStateException("Value should not be set after publisher has completed.")
+                    }
+                    dispatchValueToSubscribers(it)
                 }
-                if (isCompleted.value) {
-                    throw IllegalStateException("Value should not be set after publisher has completed.")
-                }
-                dispatchValueToSubscribers(it)
             }
         }
 
@@ -41,10 +47,15 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
             return atomicError.value
         }
         set(error) {
-            value = null
-            atomicError.setOrThrow(atomicError.value, error)
-            error?.let {
-                dispatchErrorToSubscribers(it)
+            serialQueue.dispatch {
+                value = null
+                if (isCompleted.value) {
+                    throw IllegalStateException("Error should not be set after publisher has completed.")
+                }
+                atomicError.setOrThrow(null, error) { "Error should not be set after an error has been set" }
+                error?.let {
+                    dispatchErrorToSubscribers(it)
+                }
             }
         }
 
@@ -55,22 +66,29 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     }
 
     private fun removeSubscription(publisherSubscription: PublisherSubscription<T>) {
-        if (subscriptions.value.contains(publisherSubscription) && subscriptions.remove(publisherSubscription).isEmpty()) {
-            onNoSubscription()
+        subscriptionQueue.dispatch {
+            if (subscriptions.value.count() > 0 && subscriptions.remove(
+                    publisherSubscription
+                ).isEmpty()
+            ) {
+                onNoSubscription()
+            }
         }
     }
 
     private fun addSubscription(subscription: PublisherSubscription<T>) {
-        if (!subscription.isCancelled) {
-            onNewSubscription(subscription)
             if (!subscription.isCancelled) {
-                if (this.completed) {
-                    subscription.dispatchCompleted()
-                } else if (subscriptions.add(subscription).count() == 1) {
-                    onFirstSubscription()
+                onNewSubscription(subscription)
+                if (!subscription.isCancelled) {
+                    subscriptionQueue.dispatch {
+                        if (this.completed) {
+                            subscription.dispatchCompleted()
+                        } else if (subscriptions.add(subscription).count() == 1) {
+                            onFirstSubscription()
+                        }
+                    }
                 }
             }
-        }
     }
 
     protected open fun onNewSubscription(subscription: PublisherSubscription<T>) {

@@ -1,7 +1,11 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
+import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
+import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
@@ -25,6 +29,7 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
         private val isChildCompleted = AtomicReference<Boolean>(false)
         private val currentPublisher = AtomicReference<Publisher<R>?>(null)
         private val onNextValidation = AtomicReference(0)
+        private val serialQueue = freeze(SynchronousSerialQueue())
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
@@ -33,7 +38,9 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
 
         override fun onComplete() {
             isCompleted.setOrThrow(false, true)
-            dispatchCompletedIfNeeded()
+            serialQueue.dispatch {
+                dispatchCompletedIfNeeded()
+            }
         }
 
         override fun onNext(t: T, subscriber: Subscriber<in R>) {
@@ -42,7 +49,7 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
 
             val newPublisher = block(t)
             currentPublisher.setOrThrow(currentPublisher.value, newPublisher)
-            newPublisher.subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
+            newPublisher.observeOn(serialQueue).subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = { subscriber.onNext(it) },
                 onError = { subscriber.onError(it) },
                 onCompleted = {
