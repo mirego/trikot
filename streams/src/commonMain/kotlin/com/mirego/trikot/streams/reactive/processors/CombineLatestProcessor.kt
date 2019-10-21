@@ -27,12 +27,14 @@ class CombineLatestProcessor<T>(
     ) : ProcessorSubscription<T, List<T?>>(subscriber) {
         private val cancellableManagerProvider = CancellableManagerProvider()
         private val publishersResult = AtomicListReference<PublisherResult<T>>()
+        private val hasSubscribed = AtomicReference(false)
         private val parentPublisherResultIndex = 0
         private val serialQueue = freeze(SynchronousSerialQueue())
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
             cancellableManagerProvider.cancel()
+            hasSubscribed.compareAndSet(true, false)
         }
 
         override fun onNext(t: T, subscriber: Subscriber<in List<T?>>) {
@@ -42,26 +44,8 @@ class CombineLatestProcessor<T>(
         }
 
         private fun doOnNext(t: T) {
-            val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
-            publishersResult.removeAll(publishersResult.value)
-
-            publishersResult.add(PublisherResult<T>().also { it.value = t })
-            repeat(publishers.size) {
-                publishersResult.add(PublisherResult())
-            }
-
-            publishers.forEachIndexed { index, publisher ->
-                val publisherResultIndex = index + 1
-                publisher.observeOn(serialQueue).subscribe(cancellableManager,
-                    onNext = { updatePublisherResultValue(publisherResultIndex, it) },
-                    onError = { onError(it) },
-                    onCompleted = { markPublisherResultCompleted(publisherResultIndex) }
-                )
-            }
-
-            if (publishers.isEmpty()) {
-                dispatchResultIfNeeded()
-            }
+            subscribeToCombinedPublishersIfNeeded()
+            updatePublisherResultValue(0, t)
         }
 
         override fun onError(t: Throwable) {
@@ -81,7 +65,28 @@ class CombineLatestProcessor<T>(
         }
 
         override fun onComplete() {
+            subscribeToCombinedPublishersIfNeeded()
             markPublisherResultCompleted(parentPublisherResultIndex)
+        }
+
+        private fun subscribeToCombinedPublishersIfNeeded() {
+            if (hasSubscribed.compareAndSet(false, true)) {
+                val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
+                publishersResult.removeAll(publishersResult.value)
+
+                repeat(publishers.size + 1) {
+                    publishersResult.add(PublisherResult())
+                }
+
+                publishers.forEachIndexed { index, publisher ->
+                    val publisherResultIndex = index + 1
+                    publisher.observeOn(serialQueue).subscribe(cancellableManager,
+                        onNext = { updatePublisherResultValue(publisherResultIndex, it) },
+                        onError = { onError(it) },
+                        onCompleted = { markPublisherResultCompleted(publisherResultIndex) }
+                    )
+                }
+            }
         }
 
         private fun dispatchResultIfNeeded(forPublisherCompletion: Boolean = false) {
