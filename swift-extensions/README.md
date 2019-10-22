@@ -9,7 +9,7 @@ To use `Trikot.streams` swift extensions, you must export `streams` and `streams
 ##### Setup Pod dependency
 ```groovy
   ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git'
+  pod 'Trikot.streams', :git => 'https://github.com/mirego/trikot.streams.git'
 ```
 Then, run `pod install`.
 
