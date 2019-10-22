@@ -46,6 +46,7 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
         return when (any) {
             is List<*> -> listJson(any)
             is Int -> "$any"
+            is GraphqlJsonObject -> any.body
             else -> "\"${any}\""
         }
     }
