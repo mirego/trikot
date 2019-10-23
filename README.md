@@ -52,7 +52,7 @@ Rename packages to match applicationId
 ## iOS
 - `./ios/Podfile`
 ```ruby
-ENV['TRIKOT_FRAMEWORK_NAME']='AirthingsCorentium' 
+ENV['TRIKOT_FRAMEWORK_NAME']='TrikotFrameworkName' 
 pod 'TrikotFrameworkName', :path => '../common'
 ```
 
