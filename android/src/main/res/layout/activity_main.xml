@@ -26,11 +26,28 @@
                   android:layout_height="wrap_content"
                   android:textColor="#ffffff"
                   android:textSize="32sp"
+                  android:textAlignment="center"
                   app:layout_constraintTop_toTopOf="parent"
                   app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
                   app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-                  core:meta_view="@{viewModel.helloWorldLabel}"
+                  core:meta_view="@{viewModel.quoteLabel}"
+                tools:text="Quote is going to be there"
         />
+
+
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#020202"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
+                core:meta_view="@{viewModel.refreshButton}"
+                tools:text="Refresh me"
+                />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

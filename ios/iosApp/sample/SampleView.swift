@@ -3,10 +3,12 @@ import TrikotFrameworkName
 
 class SampleView: UIView {
     private let label = UILabel()
+    private let button = UIButton()
 
     var viewModel: SampleViewModel? {
         didSet {
-            label.metaLabel = viewModel?.helloWorldLabel
+            label.metaLabel = viewModel?.quoteLabel
+            button.metaButton = viewModel?.refreshButton
         }
     }
 
@@ -14,11 +16,20 @@ class SampleView: UIView {
         super.init(frame: frame)
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(button)
+        button.backgroundColor = .gray
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 50),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor)
+            label.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
+            label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            button.centerXAnchor.constraint(equalTo: centerXAnchor),
+            button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
             ])
     }
 

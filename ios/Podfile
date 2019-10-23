@@ -1,15 +1,17 @@
 platform :ios, '11.3'
 
+install! 'cocoapods', :disable_input_output_paths => true
+
 ENV['TRIKOT_FRAMEWORK_NAME']='TrikotFrameworkName' 
 
 target 'iosApp' do
   use_frameworks!
   pod 'SwiftLint'
   pod 'TrikotFrameworkName', :path => '../common'
-  pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git'
-  pod 'Trikot.metaviews', :git => 'git@github.com:mirego/trikot.metaviews.git'
-  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git'
-  pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git'
+  pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git', :inhibit_warnings => true
+  pod 'Trikot.metaviews', :git => 'git@github.com:mirego/trikot.metaviews.git', :inhibit_warnings => true
+  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :inhibit_warnings => true
+  pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git', :inhibit_warnings => true
     
   target 'iosAppTests' do
     inherit! :search_paths
