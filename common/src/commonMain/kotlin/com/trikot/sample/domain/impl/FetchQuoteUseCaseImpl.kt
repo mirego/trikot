@@ -1,6 +1,6 @@
 package com.trikot.sample.domain.impl
 
-import com.mirego.trikot.streams.reactive.*
+import com.mirego.trikot.streams.reactive.Publishers
 import com.trikot.sample.domain.FetchQuoteUseCase
 import com.trikot.sample.repositories.QuoteRepository
 import org.reactivestreams.Publisher
