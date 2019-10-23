@@ -63,7 +63,7 @@ kotlin {
                 api "com.mirego.trikot:datasources:$trikot_datasources_version"
                 api "com.mirego.trikot:graphql:$trikot_graphql_version"
                 api "com.mirego.trikot:kword:$trikot_kword_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
             kotlin.srcDir(kword.generatedDir)
@@ -83,6 +83,7 @@ kotlin {
                 implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
                 implementation "com.mirego.trikot:graphql-jvm:$trikot_graphql_version"
                 implementation "com.mirego.trikot:kword-jvm:$trikot_kword_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
