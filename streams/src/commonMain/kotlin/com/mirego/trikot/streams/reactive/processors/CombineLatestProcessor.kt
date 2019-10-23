@@ -31,6 +31,10 @@ class CombineLatestProcessor<T>(
         private val parentPublisherResultIndex = 0
         private val serialQueue = freeze(SynchronousSerialQueue())
 
+        init {
+            subscribeToCombinedPublishersIfNeeded()
+        }
+
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
             cancellableManagerProvider.cancel()
