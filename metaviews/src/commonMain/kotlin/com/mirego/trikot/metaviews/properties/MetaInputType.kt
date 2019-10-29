@@ -4,6 +4,7 @@ enum class MetaInputType {
     DATE,
     DATETIME,
     EMAIL,
+    MULTILINE,
     NUMBER,
     PASSWORD,
     PHONE_NUMBER,

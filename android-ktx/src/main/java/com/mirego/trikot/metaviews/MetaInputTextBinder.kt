@@ -13,6 +13,7 @@ import android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
 import android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
 import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
@@ -72,6 +73,11 @@ object MetaInputTextBinder {
                             MetaInputType.TIME ->
                                 TYPE_DATETIME_VARIATION_TIME or
                                     TYPE_CLASS_DATETIME
+                            MetaInputType.MULTILINE ->
+                                TYPE_TEXT_FLAG_CAP_SENTENCES or
+                                        TYPE_CLASS_TEXT or
+                                        TYPE_TEXT_FLAG_NO_SUGGESTIONS or
+                                        TYPE_TEXT_FLAG_MULTI_LINE
                             else -> TYPE_NULL
                         }
                 }

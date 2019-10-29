@@ -40,6 +40,9 @@ extension UITextField {
                     case MetaInputType.number:
                         self?.keyboardType = .numberPad
                         self?.isSecureTextEntry = false
+                    case MetaInputType.multiline:
+                        self?.keyboardType = .default
+                        self?.isSecureTextEntry = false
                     default:
                         break
                     }
