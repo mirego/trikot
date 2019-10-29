@@ -5,17 +5,20 @@ import kotlin.native.concurrent.isFrozen
 
 actual class AtomicReference<T> actual constructor(value: T) {
     private val nativeAtomicReference = kotlin.native.concurrent.AtomicReference<T?>(null)
-    private var unfrozenValue: T = value
-    actual val value: T get() = nativeAtomicReference.value ?: unfrozenValue
+    private var expectedUnfrozenValue: T = value
+    actual val value: T get() = nativeAtomicReference.value ?: expectedUnfrozenValue
 
     actual fun compareAndSet(expected: T, new: T): Boolean {
         return if (isFrozen) {
             val freezedNewValue = new.freeze()
-            nativeAtomicReference.compareAndSet(expected, freezedNewValue) ||
-                    nativeAtomicReference.compareAndSet(null, freezedNewValue)
+            if (nativeAtomicReference.compareAndSet(expected, freezedNewValue)) {
+                true
+            } else {
+                (expected === freeze(expectedUnfrozenValue)) && nativeAtomicReference.compareAndSet(null, freezedNewValue)
+            }
         } else {
-            if (expected === unfrozenValue) {
-                unfrozenValue = new
+            if (expected === expectedUnfrozenValue) {
+                expectedUnfrozenValue = new
                 true
             } else {
                 false
@@ -30,7 +33,7 @@ actual class AtomicReference<T> actual constructor(value: T) {
     actual fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?) {
         if (!compareAndSet(expected, new)) {
             val debugInformationString = debugInfo?.let { "\n${it()}" }
-            throw ConcurrentModificationException("($this) Unable to set $new to AtomicReference. Possible Race Condition. Expected value $expected was $value (Unfrozen: $unfrozenValue). (Internal: ${nativeAtomicReference.value}) Is class frozen: $isFrozen. $debugInformationString")
+            throw ConcurrentModificationException("($this) Unable to set $new to AtomicReference. Possible Race Condition. Expected value $expected was $value (Unfrozen: $expectedUnfrozenValue). (Internal: ${nativeAtomicReference.value}) Is class frozen: $isFrozen. $debugInformationString")
         }
     }
 
