@@ -1,9 +1,13 @@
 package com.mirego.trikot.metaviews
 
+import android.R
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.View
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaView
 import com.mirego.trikot.metaviews.properties.MetaAction
+import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
 
@@ -25,6 +29,34 @@ fun View.bindMetaView(
         }
 
         bindOnTap(it, lifecycleOwnerWrapper)
+
+        it.backgroundColor.asLiveData()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                if (!selector.hasAnyValue) {
+                    return@observe
+                }
+
+                val defaultColor =
+                    Color.parseColor(selector.default?.hexARGB("#") ?: "#00000000")
+                val hoveredColor =
+                    selector.highlighted?.let { Color.parseColor(it.hexARGB("#")) }
+                        ?: defaultColor
+                val selectedColor =
+                    selector.selected?.let { Color.parseColor(it.hexARGB("#")) }
+                        ?: defaultColor
+                val disabledColor =
+                    selector.disabled?.let { Color.parseColor(it.hexARGB("#")) }
+                        ?: defaultColor
+                backgroundTintList = ColorStateList(
+                    arrayOf(
+                        intArrayOf(R.attr.state_enabled),
+                        intArrayOf(R.attr.state_hovered),
+                        intArrayOf(R.attr.state_selected),
+                        intArrayOf(-R.attr.state_enabled)
+                    ),
+                    intArrayOf(defaultColor, hoveredColor, selectedColor, disabledColor)
+                )
+            }
     }
 }
 
