@@ -1,15 +1,13 @@
 package com.mirego.trikot.http.android.ktx.requestFactory
 
-import com.mirego.trikot.http.HttpRequest
-import com.mirego.trikot.http.HttpRequestFactory
-import com.mirego.trikot.http.HttpResponse
-import com.mirego.trikot.http.RequestBuilder
+import com.mirego.trikot.http.*
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.url
+import io.ktor.content.ByteArrayContent
 import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
@@ -35,10 +33,23 @@ class KtorHttpRequestFactory : HttpRequestFactory {
                 try {
                     val response = client.request<String> {
                         url(requestBuilder.baseUrl + requestBuilder.path)
-                        requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }.forEach { entry ->
-                            header(entry.key, entry.value)
+                        requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
+                            .forEach { entry ->
+                                header(entry.key, entry.value)
+                            }
+                        requestBuilder.body?.let {
+                            if (it is ByteArray) {
+                                val contentType =
+                                    requestBuilder.headers[com.mirego.trikot.http.ContentType]
+                                        ?: ApplicationOctetStream
+                                body = ByteArrayContent(it, ContentType.parse(contentType))
+                            } else if (it is String) {
+                                val contentType =
+                                    requestBuilder.headers[com.mirego.trikot.http.ContentType]
+                                        ?: ApplicationJSON
+                                body = TextContent(it, ContentType.parse(contentType))
+                            }
                         }
-                        requestBuilder.body?.let { body = TextContent(it as String, ContentType.Application.Json) }
                         method = requestBuilder.method.ktorMethod
                     }
 

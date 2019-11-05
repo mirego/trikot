@@ -19,7 +19,9 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
                 urlRequest.setValue(value, forHTTPHeaderField: key)
             }
 
-            if let body = requestBuilder.body as? String {
+            if let body = requestBuilder.body as? KotlinByteArray {
+                urlRequest.httpBody = ByteArrayNativeUtils().convert(byteArray: body)
+            } else if let body = requestBuilder.body as? String {
                 urlRequest.httpBody = body.data(using: .utf8)
             }
 
