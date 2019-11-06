@@ -3,10 +3,12 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.switchMap
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -76,6 +78,29 @@ class SwitchMapProcessorTests {
         switchMappedPublisher.complete()
         returnedPublisher.complete()
         assertTrue { isCompleted }
+    }
+
+    @Test
+    fun testMappingStreamsProcessorException() {
+        val publisher = Publishers.behaviorSubject("a")
+        val expectedException = StreamsProcessorException()
+        var receivedException: StreamsProcessorException? = null
+
+        publisher.switchMap<String, String> { throw expectedException }.subscribe(CancellableManager(), onNext = {
+        }, onError = { receivedException = it as StreamsProcessorException })
+
+        assertEquals(expectedException, receivedException)
+    }
+
+    @Test
+    fun testMappingAnyException() {
+        val publisher = Publishers.behaviorSubject("a")
+        var receivedException: StreamsProcessorException? = null
+
+        assertFailsWith(IllegalStateException::class) {
+            publisher.switchMap<String, String> { throw IllegalStateException() }.subscribe(CancellableManager(), onNext = {
+            }, onError = { receivedException = it as StreamsProcessorException })
+        }
     }
 
     class MockPublisher : BehaviorSubjectImpl<String>("a") {

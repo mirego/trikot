@@ -1,5 +1,6 @@
 package com.mirego.trikot.streams.reactive.processors
 
+import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
@@ -17,7 +18,13 @@ class MapProcessor<T, R>(parentPublisher: Publisher<T>, private val block: MapPr
         private val block: MapProcessorBlock<T, R>
     ) : ProcessorSubscription<T, R>(subscriber) {
         override fun onNext(t: T, subscriber: Subscriber<in R>) {
-            subscriber.onNext(block(t))
+            val result = try {
+                block(t)
+            } catch (exception: StreamsProcessorException) {
+                onError(exception)
+                return
+            }
+            subscriber.onNext(result)
         }
     }
 }

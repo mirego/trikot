@@ -2,9 +2,9 @@ package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
 import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
+import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
@@ -47,7 +47,13 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
             onNextValidation.setOrThrow(0, 1)
             isChildCompleted.setOrThrow(isChildCompleted.value, false)
 
-            val newPublisher = block(t)
+            val newPublisher = try {
+                block(t)
+            } catch (e: StreamsProcessorException) {
+                onError(e)
+                return
+            }
+
             currentPublisher.setOrThrow(currentPublisher.value, newPublisher)
             newPublisher.observeOn(serialQueue).subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = { subscriber.onNext(it) },

@@ -256,3 +256,33 @@ combine(listOf(publisher1, publisher2, publisher3)).subscribe(cancellableManager
 }
 ```
 -> "a b c"
+
+## Exceptions
+Exceptions are not handled by default in `Trikot.streams`. To enforce that developers are handling exceptions the right way, they must explicitly catch their exceptions in the processors block and throw a  
+`StreamsProcessorException`. This will result in dispatching an OnError to all Subscribers.    
+
+Following code will crash
+```kotlin
+publisher1
+    .map { throw Exception() }
+    .subscribe(cancellableManager, 
+            onNext = {}, 
+            onError = { println(it) } 
+        )
+```
+
+Following code will print the exception
+```kotlin
+publisher1
+    .map { 
+        try { 
+            throw Exception() 
+        } catch(e: Exception) { 
+            throw StreamsProcessorException(e) 
+        } 
+    }
+    .subscribe(cancellableManager, 
+        onNext = {}, 
+        onError = { println(it) } 
+    )
+```
