@@ -24,7 +24,21 @@ actual class Date(val instant: Instant) {
     }
 
     actual operator fun compareTo(other: Date): Int {
-        return (epoch - other.epoch).toInt()
+        val difference = epoch - other.epoch
+
+        if (difference == 0L) {
+            return 0
+        }
+
+        return if (difference > 0L) 1 else -1
+    }
+
+    actual override fun equals(other: Any?): Boolean {
+        if (other is Date) {
+            return epoch == other.epoch
+        }
+
+        return false
     }
 
     actual fun toISO8601(): String {

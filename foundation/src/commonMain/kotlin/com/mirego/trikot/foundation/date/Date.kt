@@ -13,6 +13,8 @@ expect class Date {
 
     operator fun compareTo(other: Date): Int
 
+    override fun equals(other: Any?): Boolean
+
     companion object DateFactory {
         val now: Date
         fun fromISO8601(isoDate: String): Date
