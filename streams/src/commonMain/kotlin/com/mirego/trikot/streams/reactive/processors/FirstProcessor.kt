@@ -14,9 +14,9 @@ class FirstProcessor<T>(parentPublisher: Publisher<T>) :
 
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
             if (t != null) {
+                cancelActiveSubscription()
                 subscriber.onNext(t)
                 subscriber.onComplete()
-                cancelActiveSubscription()
             }
         }
     }

@@ -21,17 +21,23 @@ open class PublisherSubscription<T>(
     }
 
     fun dispatchValue(value: T) {
-        subscriber.onNext(value)
+        if (!isCancelled) {
+            subscriber.onNext(value)
+        }
     }
 
     fun dispatchError(error: Throwable) {
-        cancel()
-        subscriber.onError(error)
+        if (!isCancelled) {
+            cancel()
+            subscriber.onError(error)
+        }
     }
 
     fun dispatchCompleted() {
-        cancel()
-        subscriber.onComplete()
+        if (!isCancelled) {
+            cancel()
+            subscriber.onComplete()
+        }
     }
 
     override fun request(n: Long) {
