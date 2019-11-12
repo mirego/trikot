@@ -2,6 +2,7 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.streams.reactive.processors.ConcatProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
@@ -83,4 +84,16 @@ fun <T> Publisher<T>.distinctUntilChanged(): Publisher<T> {
 
 fun <T> Publisher<T>.withPreviousValue(): Publisher<Pair<T?, T>> {
     return WithPreviousValueProcessor(this)
+}
+
+fun <T> Publisher<T>.concat(publisher: Publisher<T>): Publisher<T> {
+    return ConcatProcessor(this, publisher)
+}
+
+fun <T> Publisher<T>.startWith(value: T): Publisher<T> {
+    return ConcatProcessor(value.just(), this)
+}
+
+fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
+    return this.filter { block(it) != null }.map { block(it)!! }
 }

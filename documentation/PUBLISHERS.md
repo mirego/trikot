@@ -207,6 +207,21 @@ uppercasePublisher.subscribe(...)
 ```
 In this case,  when fooPublisher emit a new value, the maps will only be executed once.
 
+
+#### Concat processor
+Emits the values of the first publisher until it completes. Then emits the values for the nextPublisher.
+```kotlin
+val firstPublisher = Publishers.behaviorSubject("i")
+val nextPublisher = Publishers.behaviorSubject("concat")
+
+firstPublisher.concat(nextPublisher).subscribe(...) { println(it) }
+
+firstPublisher.value = "love"
+firstPublisher.complete()
+
+```
+Output will be "i" then "love" then "concat".
+
 #### WithPreviousValue
 Transform the new value in a oldValue -> newValue pair
 ```kotlin
