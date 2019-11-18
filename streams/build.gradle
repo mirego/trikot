@@ -22,6 +22,8 @@ kotlin {
         fromPreset(presets.js, 'js')
         fromPreset(presets.iosArm64, 'iosArm64')
         fromPreset(presets.iosX64, 'iosX64')
+        fromPreset(presets.tvosArm64, 'tvosArm64')
+        fromPreset(presets.tvosX64, 'tvosX64')
     }
     sourceSets {
         commonMain {
@@ -70,6 +72,19 @@ kotlin {
             dependsOn(nativeMain)
             dependencies {
                 implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
+            }
+        }
+        tvosArm64Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:foundation-tvosarm64:$trikot_foundation_version"
+            }
+        }
+
+        tvosX64Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:foundation-tvosx64:$trikot_foundation_version"
             }
         }
     }
