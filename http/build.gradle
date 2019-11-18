@@ -23,6 +23,8 @@ kotlin {
 
         fromPreset(presets.iosArm64, 'iosArm64')
         fromPreset(presets.iosX64, 'iosX64')
+        fromPreset(presets.tvosArm64, 'tvosArm64')
+        fromPreset(presets.tvosX64, 'tvosX64')
     }
     sourceSets {
         commonMain {
@@ -70,6 +72,24 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
             }
         }
+
+        tvosArm64Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:streams-tvosarm64:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation-tvosarm64:$trikot_foundation_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+            }
+        }
+
+        tvosX64Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:streams-tvosx64:$trikot_streams_version"
+                implementation "com.mirego.trikot:foundation-tvosx64:$trikot_foundation_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+            }
+        }    
     }
 }
 
