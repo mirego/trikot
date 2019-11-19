@@ -3,18 +3,12 @@ package com.mirego.trikot.metaviews
 import android.R
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.Typeface
-import android.text.ParcelableSpan
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.style.StyleSpan
-import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaLabel
-import com.mirego.trikot.metaviews.text.RichTextRange
-import com.mirego.trikot.metaviews.text.StyleTransform
 import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
@@ -34,16 +28,7 @@ object MetaLabelBinder {
         val label = metaLabel ?: NoMetaLabel
 
         label.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-            textView.text = SpannableString(richText.text).apply {
-                richText.ranges.forEach {
-                    setSpan(
-                        it.asSpan(),
-                        it.range.first,
-                        it.range.last,
-                        Spanned.SPAN_EXCLUSIVE_INCLUSIVE
-                    )
-                }
-            }
+            textView.text = richText.asSpannableString()
         }
 
         label.takeUnless { it.richText != null }?.text
@@ -126,6 +111,13 @@ object MetaLabelBinder {
         }
 
         textView.bindOnTap(metaLabel, lifecycleOwnerWrapper)
+
+        metaLabel.backgroundColor.asLiveData()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+                selector.default?.toIntColor()?.let {
+                    textView.setBackgroundColor(it)
+                }
+            }
     }
 }
 
@@ -134,17 +126,3 @@ enum class HiddenVisibility(val value: Int) {
     INVISIBLE(View.INVISIBLE);
 }
 
-private fun RichTextRange.asSpan(): ParcelableSpan {
-    return when (transform) {
-        is StyleTransform -> {
-            when ((transform as StyleTransform).style) {
-                StyleTransform.Style.NORMAL -> StyleSpan(Typeface.NORMAL)
-                StyleTransform.Style.BOLD -> StyleSpan(Typeface.BOLD)
-                StyleTransform.Style.ITALIC -> StyleSpan(Typeface.ITALIC)
-                StyleTransform.Style.UNDERLINE -> UnderlineSpan()
-                StyleTransform.Style.BOLD_ITALIC -> StyleSpan(Typeface.BOLD_ITALIC)
-            }
-        }
-        else -> TODO("RichTextRange $transform not implemented")
-    }
-}

@@ -3,6 +3,7 @@ package com.mirego.trikot.metaviews
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaImage
+import com.mirego.trikot.metaviews.properties.MetaSelector
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
@@ -64,7 +65,7 @@ object MetaImageBinder {
             transformation: Transformation?,
             cancellableManager: CancellableManager
     ) {
-        imageFlow.imageResource?.asDrawable(imageView.context)?.let {
+        imageFlow.imageResource?.asDrawable(imageView.context, imageFlow.tintColor?.let { MetaSelector(imageFlow.tintColor) })?.let {
             imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             imageView.setImageDrawable(it)
         } ?: run {

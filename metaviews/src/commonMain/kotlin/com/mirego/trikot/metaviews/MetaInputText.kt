@@ -1,9 +1,10 @@
 package com.mirego.trikot.metaviews
 
+import com.mirego.trikot.metaviews.properties.Color
 import com.mirego.trikot.metaviews.properties.MetaInputType
 import org.reactivestreams.Publisher
 
-interface MetaInputText : MetaLabel {
+interface MetaInputText : MetaView {
     /**
      * Text input by the user
      */
@@ -16,6 +17,10 @@ interface MetaInputText : MetaLabel {
      * Text to display when the text is empty.
      */
     val placeholderText: Publisher<String>
+    /**
+     * Input text color
+     */
+    val textColor: Publisher<Color>
     /**
      * Set the text entered by the platform InputText.
      */

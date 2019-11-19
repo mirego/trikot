@@ -1,0 +1,132 @@
+plugins {
+    id 'kotlin-multiplatform'
+    id 'kotlinx-serialization'
+    id 'org.jlleitschuh.gradle.ktlint'
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url 'https://jitpack.io' }
+    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+}
+
+group 'com.trikot.metaviews.sample'
+version '0.0.1'
+
+apply plugin: 'maven-publish'
+
+def iosArchLibrarySuffix = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? "iosarm64" : "iosx64"
+
+kotlin {
+    targets {
+        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.js, 'js')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
+
+        fromPreset(iOSTarget, 'ios') {
+            binaries {
+                framework {
+                    embedBitcode("disable")
+                    baseName = "$trikot_framework_name"
+                    export "com.mirego.trikot:foundation:$trikot_foundation_version"
+                    export "com.mirego.trikot:foundation-$iosArchLibrarySuffix:$trikot_foundation_version"
+                    export "com.mirego.trikot:streams:$trikot_streams_version"
+                    export "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
+                    export "com.mirego.trikot:metaviews:$trikot_metaviews_version"
+                    export "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
+                    export "com.mirego.trikot:http:$trikot_http_version"
+                    export "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
+                }
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                api "com.mirego.trikot:foundation:$trikot_foundation_version"
+                api "com.mirego.trikot:streams:$trikot_streams_version"
+                api "com.mirego.trikot:metaviews:$trikot_metaviews_version"
+                api "com.mirego.trikot:http:$trikot_http_version"
+                api "com.mirego.trikot:datasources:$trikot_datasources_version"
+                api "com.mirego.trikot:graphql:$trikot_graphql_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test-common'
+                implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
+                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
+                implementation "com.mirego.trikot:metaviews-jvm:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
+                implementation "com.mirego.trikot:graphql-jvm:$trikot_graphql_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+                implementation 'com.github.ntrrgc:ts-generator:1.1.1'
+            }
+        }
+        jsMain {
+            dependencies {
+                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
+                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
+                implementation "com.mirego.trikot:metaviews-js:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:http-js:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
+                implementation "com.mirego.trikot:graphql-js:$trikot_graphql_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation "com.mirego.trikot:foundation-$iosArchLibrarySuffix:$trikot_foundation_version"
+                implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
+                implementation "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
+                implementation "com.mirego.trikot:datasources-$iosArchLibrarySuffix:$trikot_datasources_version"
+                implementation "com.mirego.trikot:graphql-$iosArchLibrarySuffix:$trikot_graphql_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+            }
+        }
+    }
+}
+
+// This task attaches native framework built from ios module to Xcode project
+// (see iosApp directory). Don't run this task directly,
+// Xcode runs this task itself during its build process.
+// Before opening the project from iosApp directory in Xcode,
+// make sure all Gradle infrastructure exists (gradle.wrapper, gradlew).
+task copyFramework() {
+    def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
+
+    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
+
+    doLast {
+        def frameworkFilename = "${trikot_framework_name}.framework"
+        def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
+        def targetDir = file("build/bin/ios").toString()
+        copy {
+            from srcFile.parent
+            into targetDir
+            include "${frameworkFilename}/**"
+            include "${frameworkFilename}.dSYM"
+        }
+    }
+}

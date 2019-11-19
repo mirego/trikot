@@ -20,4 +20,13 @@ extension NSObject {
             }
         }
     }
+
+    public func bindColor<T>(_ publisher: Publisher, _ keyPath: ReferenceWritableKeyPath<T, UIColor?>) {
+        observe(publisher) {[weak self] (color: Color) in
+            guard let strongSelf = self as? T else { return }
+            if let newColor = color.safeColor() {
+                strongSelf[keyPath: keyPath] = newColor
+            }
+        }
+    }
 }

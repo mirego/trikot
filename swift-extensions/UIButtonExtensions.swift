@@ -75,8 +75,16 @@ extension UIButton {
                     }
                 }
 
-                observe(metaButton.text) {[weak self] (string: String) in
-                    self?.setTitle(string, for: .normal)
+                if let richText = metaButton.richText {
+                    observe(richText) {[weak self] (richText: RichText) in
+                        guard let self = self else { return }
+                        let font = self.titleLabel?.font ?? UIFont.systemFont(ofSize: 12)
+                        self.setAttributedTitle(self.richTextToAttributedString(richText, referenceFont: font), for: .normal)
+                    }
+                } else {
+                    observe(metaButton.text) {[weak self] (string: String) in
+                        self?.setTitle(string, for: .normal)
+                    }                
                 }
 
                 observe(metaButton.textColor) {[weak self] (colorSelector: MetaSelector) in

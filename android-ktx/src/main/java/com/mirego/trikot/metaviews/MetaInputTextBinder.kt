@@ -20,6 +20,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
 import com.mirego.trikot.metaviews.android.ktx.R
 import com.mirego.trikot.metaviews.mutable.MutableMetaInputText
+import com.mirego.trikot.metaviews.properties.Color
 import com.mirego.trikot.metaviews.properties.MetaInputType
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
@@ -45,6 +46,12 @@ object MetaInputTextBinder {
 
                 it.userInput.observe(lifecycleOwnerWrapper.lifecycleOwner) { textValue ->
                     if (textValue != editText.text.toString()) editText.setText(textValue)
+                }
+
+                it.textColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { textColor ->
+                    if (textColor != Color.None) {
+                        editText.setTextColor(textColor.toIntColor())
+                    }
                 }
 
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->
@@ -82,9 +89,7 @@ object MetaInputTextBinder {
                         }
                 }
 
-                MetaLabelBinder.bindWithoutTextPublishers(
-                    editText, metaInputText, lifecycleOwnerWrapper
-                )
+                editText.bindMetaView(it, lifecycleOwnerWrapper)
             }
         }
     }

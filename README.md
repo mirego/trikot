@@ -1,20 +1,31 @@
 # Trikot.metaviews
 
-Meta abstraction of visual components
+Functionnal Meta abstraction of visual components.
+
+Kotlin multiplatform [Trikot.streams](https://github.com/mirego/trikot.streams) 
 
 ## Sample
 #### Common code
 ```kotlin
 class SearchViewModel() {
+    private val labelTextPublisher = Publishers.behaviorSubject("Not clicked")
     private val metaLabel = MutableMetaLabel().also {
-        it.text.value = "Not clicked"
+        it.text = labelTextPublisher
     }
     private val metaButton = MutableMetaButton().also {
-        it.text.value = "Click Me"
-        it.onTap.value = MetaAction { titleLabel.text.value = "Clicked" }
+        it.text = "Click Me".just() // Transform text into Single value publisher
+        it.onTap.value = MetaAction { labelTextPublisher.value = "Clicked" }
     }
 }
 ```
+
+### Interfaces provides documentation
+- [MetaView](https://github.com/mirego/trikot.metaviews/blob/master/metaviews/src/commonMain/kotlin/com/mirego/trikot/metaviews/MetaView.kt)
+- [MetaButton](https://github.com/mirego/trikot.metaviews/blob/master/metaviews/src/commonMain/kotlin/com/mirego/trikot/metaviews/MetaButton.kt)
+- [MetaLabel](https://github.com/mirego/trikot.metaviews/blob/master/metaviews/src/commonMain/kotlin/com/mirego/trikot/metaviews/MetaLabel.kt)
+- [MetaImage](https://github.com/mirego/trikot.metaviews/blob/master/metaviews/src/commonMain/kotlin/com/mirego/trikot/metaviews/MetaImage.kt)
+- [MetaInputText](https://github.com/mirego/trikot.metaviews/blob/master/metaviews/src/commonMain/kotlin/com/mirego/trikot/metaviews/MetaInputText.kt)
+
 
 #### iOS
 See [swift extensions](./swift-extensions/README.md) for more information.
@@ -33,10 +44,12 @@ See [android extensions](./android-ktx/README.md) for more information.
  <TextView
             ...
             core:meta_view="@{searchViewModel.metaLabel}"
+            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             />
  <Button
             ...
             core:meta_view="@{searchViewModel.metaButton}"
+            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             />
 ```
 

@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.1'
+        classpath 'io.fabric.tools:gradle:1.29.0'
+        classpath 'org.jlleitschuh.gradle:ktlint-gradle:8.0.0'
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenLocal()
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+    }
+}

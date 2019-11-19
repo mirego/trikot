@@ -7,7 +7,7 @@ import org.reactivestreams.Publisher
 
 interface MetaView {
     /**
-     * Alpha value of the view. 0 - 1
+     * Alpha value of the view. 0.0 to 1.0
      */
     val alpha: Publisher<Float>
     /**
@@ -20,11 +20,7 @@ interface MetaView {
      */
     val hidden: Publisher<Boolean>
     /**
-     * Android only, determine if the ripple effect will have borders
-     */
-    val isHighlightedBorderless: Publisher<Color>
-    /**
-     * Action to execute when the user tap the view
+     * Action to execute when the view is tapped
      */
     val onTap: Publisher<MetaAction>
 }

@@ -1,0 +1,39 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:core="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.trikot.metaviews.sample.metaviews.MetaHeaderListItem" />
+
+        <variable
+            name="lifecycleOwnerWrapper"
+            type="com.mirego.trikot.metaviews.LifecycleOwnerWrapper" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="15dp"
+        app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
+        core:meta_view="@{item}">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
+            core:meta_view="@{item.text}"
+            tools:text="Header" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

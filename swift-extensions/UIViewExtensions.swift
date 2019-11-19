@@ -54,4 +54,37 @@ extension UIView {
         guard let metaMetaView = localMetaView else { return }
         observe(metaMetaView.onTap.first()) {[weak self] (value: MetaAction) in value.execute(actionContext: self) }
     }
+
+    func richTextToAttributedString(_ richText: RichText, referenceFont: UIFont) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: richText.text)
+        richText.ranges.forEach { (richTextRange) in
+
+            let range = NSRange(location: richTextRange.range.start.intValue, length: richTextRange.range.endInclusive.intValue - richTextRange.range.start.intValue)
+            if let transform = richTextRange.transform as? StyleTransform {
+                switch transform.style {
+                case .bold:
+                    attributedString.addAttribute(.font, value: fontWithTrait(.traitBold, referenceFont: referenceFont), range: range)
+                case .italic:
+                    attributedString.addAttribute(.font, value: fontWithTrait(.traitItalic, referenceFont: referenceFont), range: range)
+                case .boldItalic:
+                    attributedString.addAttribute(.font, value: fontWithTrait([ .traitBold, .traitItalic ], referenceFont: referenceFont), range: range)
+                case .underline:
+                    attributedString.addAttribute(.underlineStyle, value: 1, range: range)
+                case .normal:
+                    break
+                default:
+                    fatalError("MetaLabel RichText StyleTransform unsupported: \(transform.style)")
+                }
+            }
+        }
+        return attributedString
+    }
+
+    private func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits, referenceFont: UIFont) -> UIFont {
+        if let fontDescriptor = referenceFont.fontDescriptor.withSymbolicTraits(trait) {
+            return UIFont(descriptor: fontDescriptor, size: referenceFont.pointSize)
+        } else {
+            return referenceFont
+        }
+    }    
 }

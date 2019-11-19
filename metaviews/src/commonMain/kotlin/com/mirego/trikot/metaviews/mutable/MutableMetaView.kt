@@ -13,7 +13,5 @@ open class MutableMetaView : MetaView {
 
     override var hidden = PropertyFactory.create(false)
 
-    override var isHighlightedBorderless = PropertyFactory.create(Color.None)
-
     override var onTap = PropertyFactory.create(MetaAction.None)
 }
