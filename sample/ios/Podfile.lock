@@ -10,7 +10,7 @@ PODS:
 DEPENDENCIES:
   - MetaviewsSample (from `../common`)
   - SwiftLint
-  - Trikot.metaviews (from `../../`)
+  - "Trikot.metaviews (from `git@github.com:mirego/trikot.metaviews.git`, tag `0.35.1`)"
   - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`)"
 
 SPEC REPOS:
@@ -21,11 +21,15 @@ EXTERNAL SOURCES:
   MetaviewsSample:
     :path: "../common"
   Trikot.metaviews:
-    :path: "../../"
+    :git: "git@github.com:mirego/trikot.metaviews.git"
+    :tag: 0.35.1
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
 
 CHECKOUT OPTIONS:
+  Trikot.metaviews:
+    :git: "git@github.com:mirego/trikot.metaviews.git"
+    :tag: 0.35.1
   Trikot.streams:
     :commit: 7487c7da1edd46f74f8c1f7f988bec95fe990580
     :git: "git@github.com:mirego/trikot.streams.git"
@@ -36,6 +40,6 @@ SPEC CHECKSUMS:
   Trikot.metaviews: 1ba37e30ef599a5a2366b964d57539366018b5c6
   Trikot.streams: 17dcc8d50181f6cdcb2159af98bbac28dbe9c496
 
-PODFILE CHECKSUM: 993c2791efb993cf164dc99dcdb0750de067b676
+PODFILE CHECKSUM: 0ba1c1fa0a1a7ca6c9ced3fb95c162fdd0fc3067
 
 COCOAPODS: 1.7.3

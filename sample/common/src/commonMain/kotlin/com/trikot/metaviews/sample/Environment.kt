@@ -1,6 +1,5 @@
 package com.trikot.sample
 
-import com.mirego.trikot.http.HttpConfiguration
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 
 object Environment {
@@ -10,7 +9,6 @@ object Environment {
         get() = internalFlavor.value
         set(value) {
             internalFlavor.setOrThrow(internalFlavor.value, value)
-            HttpConfiguration.baseUrl = value.baseUrl
         }
 
     enum class Flavor(

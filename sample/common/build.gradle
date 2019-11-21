@@ -38,8 +38,6 @@ kotlin {
                     export "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
                     export "com.mirego.trikot:metaviews:$trikot_metaviews_version"
                     export "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
-                    export "com.mirego.trikot:http:$trikot_http_version"
-                    export "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
                 }
             }
         }
@@ -50,10 +48,6 @@ kotlin {
                 api "com.mirego.trikot:foundation:$trikot_foundation_version"
                 api "com.mirego.trikot:streams:$trikot_streams_version"
                 api "com.mirego.trikot:metaviews:$trikot_metaviews_version"
-                api "com.mirego.trikot:http:$trikot_http_version"
-                api "com.mirego.trikot:datasources:$trikot_datasources_version"
-                api "com.mirego.trikot:graphql:$trikot_graphql_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
@@ -68,10 +62,6 @@ kotlin {
                 implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
                 implementation "com.mirego.trikot:metaviews-jvm:$trikot_metaviews_version"
-                implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
-                implementation "com.mirego.trikot:graphql-jvm:$trikot_graphql_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
@@ -87,11 +77,7 @@ kotlin {
                 implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
                 implementation "com.mirego.trikot:metaviews-js:$trikot_metaviews_version"
-                implementation "com.mirego.trikot:http-js:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
-                implementation "com.mirego.trikot:graphql-js:$trikot_graphql_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
             }
         }
         iosMain {
@@ -99,10 +85,6 @@ kotlin {
                 implementation "com.mirego.trikot:foundation-$iosArchLibrarySuffix:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
                 implementation "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
-                implementation "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-$iosArchLibrarySuffix:$trikot_datasources_version"
-                implementation "com.mirego.trikot:graphql-$iosArchLibrarySuffix:$trikot_graphql_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
             }
         }
     }
