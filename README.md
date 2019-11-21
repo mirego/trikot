@@ -30,13 +30,14 @@ iOS UILabel             |  Android TextView
 #### Common code
 ```kotlin
 class SearchViewModel() {
-    private val labelTextPublisher = Publishers.behaviorSubject("Not clicked")
+    private val numberOfClickPublisher = Publishers.behaviorSubject(0)
+    private val labelTextPublisher = numberOfClickPublisher.map { "Clicked $it times" }
     private val metaLabel = MutableMetaLabel().also {
         it.text = labelTextPublisher
     }
     private val metaButton = MutableMetaButton().also {
-        it.text = "Click Me".just() // Transform text into Single value publisher
-        it.onTap.value = MetaAction { labelTextPublisher.value = "Clicked" }
+        it.text = "Click Me".just() // .just() Transform any value into Single Publisher of this value
+        it.onTap.value = MetaAction { numberOfClickPublisher.value += 1 }.just()
     }
 }
 ```
