@@ -35,20 +35,10 @@ actual class Date(val nsDate: NSDate) {
     }
 
     actual operator fun compareTo(other: Date): Int {
-        val difference = epoch - other.epoch
-
-        if (difference == 0L) {
-            return 0
-        }
-
-        return if (difference > 0L) 1 else -1
+        return DateHelper.compare(this, other)
     }
 
     actual override fun equals(other: Any?): Boolean {
-        if (other is Date) {
-            return epoch == other.epoch
-        }
-
-        return false
+        return DateHelper.equals(this, other)
     }
 }
