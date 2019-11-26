@@ -1,8 +1,8 @@
 # Trikot.http
 
-Multiplaform http networking abstraction.
+Kotlin Multiplaform http networking abstraction.
 - Default Http request implementation for each platform
-- Solid Http Header management and Error management
+- Http header management and Error management
 - Connectivity (Reachability) management
 - Deserialization of results using [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
 - Abstract network in Kotlin Multiplatform making sure every bit of network code is testable. 
