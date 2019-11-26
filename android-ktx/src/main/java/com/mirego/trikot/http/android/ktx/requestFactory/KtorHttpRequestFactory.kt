@@ -1,16 +1,24 @@
 package com.mirego.trikot.http.android.ktx.requestFactory
 
-import com.mirego.trikot.http.*
+import com.mirego.trikot.http.ApplicationJSON
+import com.mirego.trikot.http.ApplicationOctetStream
+import com.mirego.trikot.http.HttpRequest
+import com.mirego.trikot.http.HttpRequestFactory
+import com.mirego.trikot.http.HttpResponse
+import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
+import io.ktor.client.features.ResponseException
 import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.url
+import io.ktor.client.response.readText
 import io.ktor.content.ByteArrayContent
 import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
+import io.ktor.util.flattenEntries
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +30,7 @@ class KtorHttpRequestFactory : HttpRequestFactory {
         return KTorCoreHttpRequest(requestBuilder)
     }
 
-    class KTorCoreHttpRequest(val requestBuilder: RequestBuilder) : HttpRequest, CoroutineScope {
+    class KTorCoreHttpRequest(private val requestBuilder: RequestBuilder) : HttpRequest, CoroutineScope {
         override val coroutineContext: CoroutineContext = Dispatchers.Unconfined
 
         override fun execute(cancellableManager: CancellableManager): Publisher<HttpResponse> {
@@ -31,7 +39,7 @@ class KtorHttpRequestFactory : HttpRequestFactory {
             launch {
                 val client = HttpClient()
                 try {
-                    val response = client.request<String> {
+                    val response = client.request<io.ktor.client.response.HttpResponse> {
                         url(requestBuilder.baseUrl + requestBuilder.path)
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
@@ -53,9 +61,14 @@ class KtorHttpRequestFactory : HttpRequestFactory {
                         method = requestBuilder.method.ktorMethod
                     }
 
-                    publisher.value = KTorHttpResponse(response)
+                    publisher.value = KTorHttpResponse(response, response.call.response.readText())
                 } catch (ex: Exception) {
-                    publisher.error = ex
+                    val response = (ex as? ResponseException)?.response
+                    if (response != null) {
+                        publisher.value = KTorHttpResponse(response, response.call.response.readText())
+                    } else {
+                        throw ex
+                    }
                 }
             }
 
@@ -63,10 +76,10 @@ class KtorHttpRequestFactory : HttpRequestFactory {
         }
     }
 
-    class KTorHttpResponse(value: String) : HttpResponse {
-        override val statusCode: Int = 200
-        override val bodyString: String? = value
-        override val headers: Map<String, String> = HashMap()
+    class KTorHttpResponse(response: io.ktor.client.response.HttpResponse, body: String?) : HttpResponse {
+        override val statusCode: Int = response.status.value
+        override val bodyString: String? = body
+        override val headers: Map<String, String> = response.headers.flattenEntries().toMap()
         override val source: HttpResponse.ResponseSource = HttpResponse.ResponseSource.UNKNOWN
     }
 }
