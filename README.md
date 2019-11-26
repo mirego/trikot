@@ -46,7 +46,8 @@ MrFreezeKt.freeze(objectToFreeze: objectToFreeze)
 ```
 
 ## Dispatch Queues
-Trikot threading model
+While waiting for [Sharing of coroutines across threads in Kotlin/Native](https://github.com/Kotlin/kotlinx.coroutines/pull/1648) to work correctly. Trikot.foundation provide a standard Thread model based on queues.
+
 See: [Dispatch Queues](./documentation/DISPATCH_QUEUES.md) 
 
 ## Installation
