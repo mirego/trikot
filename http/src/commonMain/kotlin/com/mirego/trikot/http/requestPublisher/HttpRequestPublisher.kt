@@ -1,13 +1,15 @@
 package com.mirego.trikot.http.requestPublisher
 
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.http.HttpConfiguration
 import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.http.HttpRequestFactory
 import com.mirego.trikot.http.HttpResponse
 import com.mirego.trikot.http.RequestBuilder
+import com.mirego.trikot.http.connectivity.ConnectivityState
+import com.mirego.trikot.http.exception.HttpResponseNoInternetConnectionException
 import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.streams.reactive.executable.BaseExecutablePublisher
 import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.subscribe
@@ -17,7 +19,8 @@ abstract class HttpRequestPublisher<T>(
     networkQueue: DispatchQueue = HttpConfiguration.networkDispatchQueue,
     private val operationQueue: DispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue,
     private val httpRequestFactory: HttpRequestFactory = HttpConfiguration.httpRequestFactory,
-    private val headerProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider
+    private val headerProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider,
+    private val connectivityPublisher: Publisher<ConnectivityState> = HttpConfiguration.connectivityPublisher
 ) : BaseExecutablePublisher<T>(networkQueue) {
 
     abstract val builder: RequestBuilder
@@ -41,10 +44,17 @@ abstract class HttpRequestPublisher<T>(
                             }
                         }
                     },
-                    onError = {
-                        headerProvider.processHttpError(requestBuilder, it)
-                        operationQueue.dispatch {
-                            dispatchError(it)
+                    onError = { sourceError ->
+                        headerProvider.processHttpError(requestBuilder, sourceError)
+
+                        connectivityPublisher.first().subscribe(cancellableManager) { connectivityState ->
+                            val exceptionToDispatch = when (connectivityState) {
+                                ConnectivityState.NONE -> HttpResponseNoInternetConnectionException(sourceError)
+                                else -> sourceError
+                            }
+                            operationQueue.dispatch {
+                                dispatchError(exceptionToDispatch)
+                            }
                         }
                     })
             },

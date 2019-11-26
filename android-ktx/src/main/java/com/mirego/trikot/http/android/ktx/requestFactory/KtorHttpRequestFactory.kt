@@ -67,7 +67,7 @@ class KtorHttpRequestFactory : HttpRequestFactory {
                     if (response != null) {
                         publisher.value = KTorHttpResponse(response, response.call.response.readText())
                     } else {
-                        throw ex
+                        publisher.error = ex
                     }
                 }
             }
