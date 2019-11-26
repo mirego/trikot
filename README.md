@@ -3,8 +3,6 @@ Metaviews expose properties that can be binded to Android or iOS UI components. 
 
 Its a functionnal Meta abstraction of visual components.
 
-This library does not provide platform specific attributes (layout, caps, borders, corners). We have decided to draw the line at simple color properties.
-
 ## The basics
 Both iOS and Android comes with a binding library that supports basics UI components (View, Label, Button, Input, Image) designed to be bound to their meta equivalent (`MetaView`, `MetaLabel`, `MetaButton`, `MetaImage`, ect...). Since `MetaViews` are interfaces that are not meant to be modified, Mutable implementations are included to create each type of MetaView (`MutableMetaView`, `MutableMetaLabel`, `MutableMetaButton`, `MutableMetaImage`, ect...). We suggest that custom MetaView definition and implementation follow the same pattern.
 
