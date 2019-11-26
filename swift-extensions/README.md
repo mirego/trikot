@@ -9,7 +9,7 @@ To use `Trikot.http` swift extensions, you must export `http` and `http-iosx64` 
 Then, run `pod install`.
 
 ##### Setup HTTPRequestFactory Implementation based on `URLSession`
-`ktor` does not work that well on iOS as it relies on Coroutines on the mainThread (as of today). Trikot.http provides its own implementation based on `URLSession`
+Trikot.http provides its own implementation based on `URLSession`.
 
 ```swift
 import Trikot_http
@@ -27,3 +27,6 @@ TrikotConnectivityService.shared.start() // When app is running
 ...
 TrikotConnectivityService.shared.stop() // When app is in background
 ```
+
+##### Notes on Ktor
+As of Kotlin 1.3.50, `Ktor` only runs on the mainThread limiting how requests are processed and content parsed. When Coroutines multithreading issues will be adressed in Kotlin Native, TrikotHttpRequestFactory might switch to a Ktor implementation.
