@@ -10,7 +10,7 @@ The goal of the Code of Conduct is to specify a baseline standard of behavior so
 
 ## Our Values
 
-These are the values Dispatch developers should aspire to:
+These are the values Trikot developers should aspire to:
 
   * Be friendly and welcoming
   * Be patient
