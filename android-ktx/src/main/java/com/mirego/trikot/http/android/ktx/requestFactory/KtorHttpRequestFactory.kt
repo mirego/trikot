@@ -10,6 +10,10 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
 import io.ktor.client.features.ResponseException
+import io.ktor.client.features.logging.DEFAULT
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.url
@@ -25,19 +29,31 @@ import kotlinx.coroutines.launch
 import org.reactivestreams.Publisher
 import kotlin.coroutines.CoroutineContext
 
-class KtorHttpRequestFactory : HttpRequestFactory {
+class KtorHttpRequestFactory(
+    private val httpLogLevel: LogLevel = LogLevel.NONE,
+    private val httpLogger: Logger = Logger.DEFAULT
+) : HttpRequestFactory {
     override fun request(requestBuilder: RequestBuilder): HttpRequest {
-        return KTorCoreHttpRequest(requestBuilder)
+        return KTorCoreHttpRequest(requestBuilder, httpLogLevel, httpLogger)
     }
 
-    class KTorCoreHttpRequest(private val requestBuilder: RequestBuilder) : HttpRequest, CoroutineScope {
+    class KTorCoreHttpRequest(
+        private val requestBuilder: RequestBuilder,
+        private val httpLogLevel: LogLevel,
+        private val httpLogger: Logger
+    ) : HttpRequest, CoroutineScope {
         override val coroutineContext: CoroutineContext = Dispatchers.Unconfined
 
         override fun execute(cancellableManager: CancellableManager): Publisher<HttpResponse> {
             val publisher = Publishers.behaviorSubject<HttpResponse>()
 
             launch {
-                val client = HttpClient()
+                val client = HttpClient {
+                    install(Logging) {
+                        logger = httpLogger
+                        level = httpLogLevel
+                    }
+                }
                 try {
                     val response = client.request<io.ktor.client.response.HttpResponse> {
                         url(requestBuilder.baseUrl + requestBuilder.path)
