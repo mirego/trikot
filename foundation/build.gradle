@@ -20,6 +20,7 @@ kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
+        fromPreset(presets.iosArm32, 'iosArm32')
         fromPreset(presets.iosArm64, 'iosArm64')
         fromPreset(presets.iosX64, 'iosX64')
         fromPreset(presets.tvosArm64, 'tvosArm64')
@@ -59,20 +60,32 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        iosArm64Main {
+        nativeMain32 {
             dependsOn(nativeMain)
+        }
+
+        nativeMain64 {
+            dependsOn(nativeMain)
+        }
+
+        iosArm32Main {
+            dependsOn(nativeMain32)
+        }
+
+        iosArm64Main {
+            dependsOn(nativeMain64)
         }
 
         iosX64Main {
-            dependsOn(nativeMain)
+            dependsOn(nativeMain64)
         }
 
         tvosArm64Main {
-            dependsOn(nativeMain)
+            dependsOn(nativeMain64)
         }
 
         tvosX64Main {
-            dependsOn(nativeMain)
+            dependsOn(nativeMain64)
         }
     }
 }
