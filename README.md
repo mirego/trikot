@@ -58,6 +58,9 @@ See: [Dispatch Queues](./documentation/DISPATCH_QUEUES.md)
     js "com.mirego.trikot:foundation-js:$trikot_foundation_version"
     iosx64 "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
     iosarm64 "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
+    iosarm32 "com.mirego.trikot:foundation-iosarm32:$trikot_foundation_version"
+    tvosx64 "com.mirego.trikot:foundation-tvosx64:$trikot_foundation_version"
+    tvosarm64 "com.mirego.trikot:foundation-tvosarm64:$trikot_foundation_version"
 ```
 ## License
 
