@@ -20,6 +20,7 @@ kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
+        fromPreset(presets.iosArm32, 'iosArm32')
         fromPreset(presets.iosArm64, 'iosArm64')
         fromPreset(presets.iosX64, 'iosX64')
         fromPreset(presets.tvosArm64, 'tvosArm64')
@@ -59,6 +60,13 @@ kotlin {
 
         nativeMain {
             dependsOn(commonMain)
+        }
+
+        iosArm32Main {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation "com.mirego.trikot:foundation-iosarm32:$trikot_foundation_version"
+            }
         }
 
         iosArm64Main {
