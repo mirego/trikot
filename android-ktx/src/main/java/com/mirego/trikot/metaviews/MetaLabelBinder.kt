@@ -3,6 +3,7 @@ package com.mirego.trikot.metaviews
 import android.R
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.text.SpannableString
 import android.text.Spanned
 import android.view.View
@@ -86,6 +87,10 @@ object MetaLabelBinder {
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (!selector.hasAnyValue) {
                     return@observe
+                }
+
+                textView.background ?: run {
+                    textView.background = ColorDrawable(Color.WHITE)
                 }
 
                 textView.backgroundTintList = selector.toColorStateList()

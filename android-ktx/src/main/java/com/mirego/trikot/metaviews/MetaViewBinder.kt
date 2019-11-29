@@ -3,6 +3,7 @@ package com.mirego.trikot.metaviews
 import android.R
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaView
@@ -36,26 +37,11 @@ fun View.bindMetaView(
                     return@observe
                 }
 
-                val defaultColor =
-                    Color.parseColor(selector.default?.hexARGB("#") ?: "#00000000")
-                val hoveredColor =
-                    selector.highlighted?.let { Color.parseColor(it.hexARGB("#")) }
-                        ?: defaultColor
-                val selectedColor =
-                    selector.selected?.let { Color.parseColor(it.hexARGB("#")) }
-                        ?: defaultColor
-                val disabledColor =
-                    selector.disabled?.let { Color.parseColor(it.hexARGB("#")) }
-                        ?: defaultColor
-                backgroundTintList = ColorStateList(
-                    arrayOf(
-                        intArrayOf(R.attr.state_enabled),
-                        intArrayOf(R.attr.state_hovered),
-                        intArrayOf(R.attr.state_selected),
-                        intArrayOf(-R.attr.state_enabled)
-                    ),
-                    intArrayOf(defaultColor, hoveredColor, selectedColor, disabledColor)
-                )
+                background ?: run {
+                    background = ColorDrawable(Color.WHITE)
+                }
+
+                backgroundTintList = selector.toColorStateList()
             }
     }
 }
