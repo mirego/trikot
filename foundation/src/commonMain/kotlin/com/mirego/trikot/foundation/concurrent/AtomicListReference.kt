@@ -30,6 +30,7 @@ class AtomicListReference<T> {
             if (oldList == newList) {
                 return oldList
             }
+            freeze(newList)
         } while (!internalReference.compareAndSet(oldList, newList))
 
         return newList

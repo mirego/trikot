@@ -16,6 +16,7 @@ object ByteArrayNativeUtils {
         }
         return byteArray
     }
+
     @ExperimentalUnsignedTypes
     fun convert(byteArray: ByteArray): NSData {
         return byteArray.usePinned {

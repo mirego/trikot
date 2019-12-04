@@ -14,5 +14,6 @@ interface QueueDispatcher {
 }
 
 fun QueueDispatcher.dispatch(block: DispatchBlock) {
-    dispatchQueue.dispatch(freeze(block))
+    freeze(block)
+    dispatchQueue.dispatch(block)
 }

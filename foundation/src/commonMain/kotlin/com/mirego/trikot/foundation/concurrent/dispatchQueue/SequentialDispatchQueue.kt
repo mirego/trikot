@@ -11,27 +11,25 @@ open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : 
     DispatchQueue {
     protected open val isSynchronous = false
     private val dispatchBlockQueue = AtomicListReference<DispatchBlock>()
-    private val noDispatchBlock = freeze {}
-    private val syncDispatchBlock = freeze {}
-    private val currentDispatch = AtomicReference(noDispatchBlock)
+    private val currentDispatch = AtomicReference(NoDispatchBlock)
 
     override fun isSerial() = true
 
     override fun dispatch(block: DispatchBlock) {
-        if (isSynchronous && currentDispatch.compareAndSet(noDispatchBlock, syncDispatchBlock)) {
+        if (isSynchronous && currentDispatch.compareAndSet(NoDispatchBlock, SyncDispatchBlock)) {
             dispatchQueue.dispatch(block)
-            currentDispatch.setOrThrow(syncDispatchBlock, noDispatchBlock)
+            currentDispatch.setOrThrow(SyncDispatchBlock, NoDispatchBlock)
             startNextIfNeeded()
         } else {
-            dispatchBlockQueue.add(freeze(block))
+            dispatchBlockQueue.add(block)
             startNextIfNeeded()
         }
     }
 
     private fun startNextIfNeeded() {
-        if (currentDispatch.value == noDispatchBlock) {
+        if (currentDispatch.value == NoDispatchBlock) {
             dispatchBlockQueue.value.firstOrNull()?.let { nextDispatchBlock ->
-                if (currentDispatch.compareAndSet(noDispatchBlock, nextDispatchBlock)) {
+                if (currentDispatch.compareAndSet(NoDispatchBlock, nextDispatchBlock)) {
                     dispatchBlockQueue.remove(nextDispatchBlock)
                     (this as QueueDispatcher).dispatch {
                         nextDispatchBlock()
@@ -44,6 +42,11 @@ open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : 
     }
 
     private fun markDispatchBlockCompleted(block: DispatchBlock) {
-        currentDispatch.setOrThrow(block, noDispatchBlock)
+        currentDispatch.setOrThrow(block, NoDispatchBlock)
+    }
+
+    companion object {
+        private val NoDispatchBlock = freeze {}
+        private val SyncDispatchBlock = freeze {}
     }
 }
