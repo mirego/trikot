@@ -45,7 +45,8 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
             resultPublisher.error = KotlinThrowable(message: "Unable to create a valid URL")
         }
 
-        return MrFreeze().freeze(objectToFreeze: resultPublisher) as! Publisher
+        MrFreeze().freeze(objectToFreeze: resultPublisher)
+        return resultPublisher
     }
 }
 

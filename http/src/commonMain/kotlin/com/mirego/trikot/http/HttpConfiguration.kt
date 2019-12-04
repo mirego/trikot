@@ -81,5 +81,5 @@ object HttpConfiguration {
      * Shared JSON parser used by DeserializableHttpRequestPublisher
      */
     @UseExperimental(UnstableDefault::class)
-    val json = freeze(Json.nonstrict)
+    val json = Json.nonstrict.also { freeze(it) }
 }
