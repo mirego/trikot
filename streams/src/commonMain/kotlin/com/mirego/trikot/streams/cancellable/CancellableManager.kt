@@ -3,10 +3,9 @@ package com.mirego.trikot.streams.cancellable
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
-import com.mirego.trikot.foundation.concurrent.freeze
 
 class CancellableManager : Cancellable {
-    private val serialQueue = freeze(SynchronousSerialQueue())
+    private val serialQueue = SynchronousSerialQueue()
     private val queueList = AtomicListReference<Cancellable>()
     private val isCancelled = AtomicReference(false)
 
@@ -33,7 +32,7 @@ class CancellableManager : Cancellable {
     }
 
     private fun doCancelAll() {
-        serialQueue.dispatchQueue.dispatch {
+        serialQueue.dispatch {
             val value = queueList.value
             queueList.removeAll(value)
             for (cancellable in value) {

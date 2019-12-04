@@ -3,7 +3,6 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
-import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
@@ -29,7 +28,7 @@ class CombineLatestProcessor<T>(
         private val publishersResult = AtomicListReference<PublisherResult<T>>()
         private val hasSubscribed = AtomicReference(false)
         private val parentPublisherResultIndex = 0
-        private val serialQueue = freeze(SynchronousSerialQueue())
+        private val serialQueue = SynchronousSerialQueue()
 
         init {
             subscribeToCombinedPublishersIfNeeded()

@@ -3,7 +3,6 @@ package com.mirego.trikot.streams.reactive
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
-import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Subscriber
 
 open class PublishSubjectImpl<T> : PublishSubject<T> {
@@ -11,8 +10,8 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     private val atomicValue = AtomicReference<T?>(null)
     private val atomicError = AtomicReference<Throwable?>(null)
     private val isCompleted = AtomicReference(false)
-    private val serialQueue = freeze(SynchronousSerialQueue())
-    private val subscriptionQueue = SynchronousSerialQueue() // Not frozen because we do not want subscriber to impact performance on iOS with freezing time
+    private val serialQueue = SynchronousSerialQueue()
+    private val subscriptionQueue = SynchronousSerialQueue()
     protected val hasSubscriptions
         get() = subscriptions.value.count() > 0
 

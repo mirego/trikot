@@ -2,7 +2,6 @@ package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
-import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.observeOn
@@ -29,7 +28,7 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
         private val isChildCompleted = AtomicReference<Boolean>(false)
         private val currentPublisher = AtomicReference<Publisher<R>?>(null)
         private val onNextValidation = AtomicReference(0)
-        private val serialQueue = freeze(SynchronousSerialQueue())
+        private val serialQueue = SynchronousSerialQueue()
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)

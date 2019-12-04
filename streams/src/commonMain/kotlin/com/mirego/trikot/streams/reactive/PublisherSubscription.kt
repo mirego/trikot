@@ -16,8 +16,9 @@ open class PublisherSubscription<T>(
     val isCancelled get() = privateIsCancelled.value
 
     override fun cancel() {
-        privateIsCancelled.setOrThrow(privateIsCancelled.value, true)
-        onCancel(this)
+        if (privateIsCancelled.compareAndSet(false, true)) {
+            onCancel(this)
+        }
     }
 
     fun dispatchValue(value: T) {

@@ -1,10 +1,10 @@
 package com.mirego.trikot.streams.cancellable
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
-import com.mirego.trikot.foundation.concurrent.MrFreeze
+import com.mirego.trikot.foundation.concurrent.freeze
 
 class CancellableManagerProvider : Cancellable {
-    private val cancellableManager = MrFreeze.freeze(CancellableManager())
+    private val cancellableManager = CancellableManager().also { freeze(it) }
     private val internalCancellableManagerRef =
         AtomicReference(CancellableManager())
 
