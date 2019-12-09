@@ -22,17 +22,12 @@ class AtomicListReference<T> {
     }
 
     private fun mutateWhenReady(block: (value: List<T>) -> List<T>): List<T> {
-        var oldList: List<T>
-        var newList: List<T>
-        do {
-            oldList = value
-            newList = block(oldList)
-            if (oldList == newList) {
-                return oldList
-            }
-            freeze(newList)
-        } while (!internalReference.compareAndSet(oldList, newList))
-
-        return newList
+        val oldList = value
+        val newList = block(oldList)
+        return if (internalReference.compareAndSet(oldList, newList)) {
+            newList
+        } else {
+            mutateWhenReady(block)
+        }
     }
 }
