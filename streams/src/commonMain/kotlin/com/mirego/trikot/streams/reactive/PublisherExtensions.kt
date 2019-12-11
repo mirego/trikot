@@ -1,35 +1,47 @@
 package com.mirego.trikot.streams.reactive
 
-import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.timers.TimerFactory
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.processors.ConcatProcessor
+import com.mirego.trikot.streams.reactive.processors.DebounceProcessor
+import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
+import com.mirego.trikot.streams.reactive.processors.FilterProcessor
+import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.FirstProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
-import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.ObserveOnProcessor
-import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
-import com.mirego.trikot.streams.reactive.processors.FirstProcessor
-import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
-import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessorResultType
-import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.FilterProcessor
-import com.mirego.trikot.streams.reactive.processors.SharedProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
-import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
+import com.mirego.trikot.streams.reactive.processors.SharedProcessor
+import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
+import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
+import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
+import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessorResultType
 import com.mirego.trikot.streams.reactive.processors.WithPreviousValueProcessor
 import org.reactivestreams.Publisher
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 typealias SubscriptionBlock<T> = (T) -> Unit
 typealias SubscriptionErrorBlock = (Throwable) -> Unit
 typealias SubscriptionCompletedBlock = () -> Unit
 
-fun <T> Publisher<T>.subscribe(cancellableManager: CancellableManager, onNext: SubscriptionBlock<T>) {
+fun <T> Publisher<T>.subscribe(
+    cancellableManager: CancellableManager,
+    onNext: SubscriptionBlock<T>
+) {
     subscribe(cancellableManager, onNext, null, null)
 }
 
-fun <T> Publisher<T>.subscribe(cancellableManager: CancellableManager, onNext: SubscriptionBlock<T>, onError: SubscriptionErrorBlock?) {
+fun <T> Publisher<T>.subscribe(
+    cancellableManager: CancellableManager,
+    onNext: SubscriptionBlock<T>,
+    onError: SubscriptionErrorBlock?
+) {
     subscribe(cancellableManager, onNext, onError, null)
 }
 
@@ -96,4 +108,12 @@ fun <T> Publisher<T>.startWith(value: T): Publisher<T> {
 
 fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
     return this.filter { block(it) != null }.map { block(it)!! }
+}
+
+@ExperimentalTime
+fun <T> Publisher<T>.debounce(
+    timeout: Duration,
+    timerFactory: TimerFactory = FoundationConfiguration.timerFactory
+): Publisher<T> {
+    return DebounceProcessor(this, timeout, timerFactory)
 }

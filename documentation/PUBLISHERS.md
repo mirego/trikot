@@ -240,6 +240,15 @@ null - foo
 foo - bar
 ```
 
+#### Debounce
+Emit the new value only when a timeout has been reached. The timer resets on each emission.
+```kotlin
+val fooPublisher = Publishers.behaviorSubject("foo")
+fooPublisher.debounce(500.milliseconds).subscribe(...) { println(it) }
+fooPublisher.value = "bar"
+```
+In this case, "bar" will emit after 500 milliseconds.
+
 ### CombineLatest
 CombineLatest combines the result of many publishers together. Is the list of publishers are the same type, emitted values will be typed. If not, emitted results will be of the Any? type.
 
