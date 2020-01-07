@@ -34,15 +34,13 @@ extension NSObject {
 
     public func observe<V>(cancellableManager: CancellableManager, publisher: Publisher, toClosure closure: @escaping ((V) -> Void)) {
         PublisherExtensionsKt.subscribe(publisher, cancellableManager: cancellableManager) { (value: Any?) in
-            MrFreezeKt.freeze(objectToFreeze: value)
-            guard let typedValue = value as? V else {
-                print("Incorrect binding value type" + (value is NSNull ? " received NSNull, property should be marked as optional" : ""))
-                return
-            }
             if Thread.current.isMainThread {
+                assert(value is V, "Incorrect binding value type in \(self) - Cannot cast \(value.self) to \(V.self)")
                 closure(typedValue)
             } else {
+                MrFreezeKt.freeze(objectToFreeze: value)
                 DispatchQueue.main.async {
+                    assert(value is V, "Incorrect binding value type in \(self) - Cannot cast \(value.self) to \(V.self)")
                     closure(typedValue)
                 }
             }
