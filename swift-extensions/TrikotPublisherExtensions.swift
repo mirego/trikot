@@ -36,12 +36,12 @@ extension NSObject {
         PublisherExtensionsKt.subscribe(publisher, cancellableManager: cancellableManager) { (value: Any?) in
             if Thread.current.isMainThread {
                 assert(value is V, "Incorrect binding value type in \(self) - Cannot cast \(value.self) to \(V.self)")
-                closure(typedValue)
+                closure(value as! V)
             } else {
                 MrFreezeKt.freeze(objectToFreeze: value)
                 DispatchQueue.main.async {
                     assert(value is V, "Incorrect binding value type in \(self) - Cannot cast \(value.self) to \(V.self)")
-                    closure(typedValue)
+                    closure(value as! V)
                 }
             }
         }
