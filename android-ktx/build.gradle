@@ -60,11 +60,7 @@ publishing {
     }
 }
 
-task sourcesJar(type: Jar) {
+task androidSourcesJar(type: Jar) {
     archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
-}
-
-artifacts {
-    archives sourcesJar
 }
