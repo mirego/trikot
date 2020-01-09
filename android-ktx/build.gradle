@@ -52,15 +52,16 @@ release {
     tagPrefix = 'android-ktx-'
 }
 
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
 publishing {
     publications {
         mavenAar(MavenPublication) {
             from components.android
+            artifact sourcesJar
         }
     }
-}
-
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
 }
