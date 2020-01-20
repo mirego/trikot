@@ -76,29 +76,39 @@ extension UIButton {
                 }
 
                 if let richText = metaButton.richText {
-                    observe(richText) {[weak self] (richText: RichText) in
+                    let observable = CombineLatestProcessorExtensionsKt.combine(metaButton.textColor, publishers: [richText])
+
+                    observe(observable) {[weak self] (value: [Any?]) in
+                        let colorSelector = value[0] as! MetaSelector
+                        let richText = value[1] as! RichText
+
                         guard let self = self else { return }
                         let font = self.titleLabel?.font ?? UIFont.systemFont(ofSize: 12)
-                        self.setAttributedTitle(self.richTextToAttributedString(richText, referenceFont: font), for: .normal)
+                        let attributedString = self.richTextToAttributedString(richText, referenceFont: font)
+
+                        self.setColoredAttributedTitle(attributedString, colorSelector.default_, forState: .normal)
+                        self.setColoredAttributedTitle(attributedString, colorSelector.selected, forState: .selected)
+                        self.setColoredAttributedTitle(attributedString, colorSelector.disabled, forState: .disabled)
+                        self.setColoredAttributedTitle(attributedString, colorSelector.highlighted, forState: .highlighted)
                     }
                 } else {
                     observe(metaButton.text) {[weak self] (string: String) in
                         self?.setTitle(string, for: .normal)
-                    }                
-                }
+                    }
 
-                observe(metaButton.textColor) {[weak self] (colorSelector: MetaSelector) in
-                    if let color = (colorSelector.default_ as? Color)?.safeColor() {
-                        self?.setTitleColor(color, for: .normal)
-                    }
-                    if let color = (colorSelector.selected as? Color)?.safeColor() {
-                        self?.setTitleColor(color, for: .selected)
-                    }
-                    if let color = (colorSelector.disabled as? Color)?.safeColor() {
-                        self?.setTitleColor(color, for: .disabled)
-                    }
-                    if let color = (colorSelector.highlighted as? Color)?.safeColor() {
-                        self?.setTitleColor(color, for: .highlighted)
+                    observe(metaButton.textColor) {[weak self] (colorSelector: MetaSelector) in
+                        if let color = (colorSelector.default_ as? Color)?.safeColor() {
+                            self?.setTitleColor(color, for: .normal)
+                        }
+                        if let color = (colorSelector.selected as? Color)?.safeColor() {
+                            self?.setTitleColor(color, for: .selected)
+                        }
+                        if let color = (colorSelector.disabled as? Color)?.safeColor() {
+                            self?.setTitleColor(color, for: .disabled)
+                        }
+                        if let color = (colorSelector.highlighted as? Color)?.safeColor() {
+                            self?.setTitleColor(color, for: .highlighted)
+                        }
                     }
                 }
 
@@ -106,6 +116,14 @@ extension UIButton {
                     self?.positionSubviews(alignment)
                 }
             }
+        }
+    }
+
+    private func setColoredAttributedTitle(_ attributedString: NSAttributedString, _ colorSelector: Any?, forState state: UIControl.State) {
+        if let color = (colorSelector as? Color)?.safeColor() {
+            let coloredAttribuedString = NSMutableAttributedString(attributedString: attributedString)
+            coloredAttribuedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attributedString.length))
+            self.setAttributedTitle(coloredAttribuedString, for: state)
         }
     }
 

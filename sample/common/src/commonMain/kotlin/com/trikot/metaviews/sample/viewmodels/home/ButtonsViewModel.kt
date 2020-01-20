@@ -28,6 +28,18 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
         MutableMetaButtonListItem().also {
             it.button.richText = RichText("normal, bold, underlined, italic, bold italic",
                 listOf(
+                    RichTextRange(0..8, StyleTransform(StyleTransform.Style.NORMAL)),
+                    RichTextRange(8..14, StyleTransform(StyleTransform.Style.BOLD)),
+                    RichTextRange(14.. 26, StyleTransform(StyleTransform.Style.UNDERLINE)),
+                    RichTextRange(26..34, StyleTransform(StyleTransform.Style.ITALIC)),
+                    RichTextRange(34..45, StyleTransform(StyleTransform.Style.BOLD_ITALIC))
+                )).just()
+        },
+        MutableHeaderListItem(".richText with color"),
+        MutableMetaButtonListItem().also {
+            it.button.textColor = MetaSelector(Color(123, 123, 123), Color(0   , 0, 0)).just()
+            it.button.richText = RichText("normal, bold, underlined, italic, bold italic",
+                listOf(
                     RichTextRange(IntRange(0, 8), StyleTransform(StyleTransform.Style.NORMAL)),
                     RichTextRange(IntRange(8, 14), StyleTransform(StyleTransform.Style.BOLD)),
                     RichTextRange(IntRange(14, 26), StyleTransform(StyleTransform.Style.UNDERLINE)),
