@@ -4,8 +4,8 @@
 # Configuration
 # -----------------------------------------------------------------------------
 
-pascalCaseRegex='^[A-Z][a-z]+(?:[A-Z][a-z]+)*$'
-packageNameRegex='^com|ca\.[a-z]+\.[a-z]+$'
+pascalCaseRegex="^[A-Z][a-z]+([A-Z][a-z]+)*$"
+packageNameRegex="^([a-z]+\.){2}[a-z]+$"
 
 # The identifiers above will be replaced in the content of the files found below
 content=$(find . -type f \( \
@@ -30,7 +30,7 @@ content=$(find . -type f \( \
 # -----------------------------------------------------------------------------
 
 isPascalCase() {
-  if [[ $1 =~ [pascalCaseRegex] ]]; then
+  if [[ "$1" =~ $pascalCaseRegex ]]; then
     argumentIsPascalCase=true
   else
     echo 'You must specify a name in PascalCase.'
@@ -38,7 +38,7 @@ isPascalCase() {
 }
 
 isPackageNameValid() {
-  if [[ $1 =~ [packageNameRegex] ]]; then
+  if [[ $1 =~ $packageNameRegex ]]; then
     argumentIsPascalCase=true
   else
     echo 'You must specify a valid package name format (ex: com.example.project)'
@@ -92,6 +92,7 @@ PACKAGE_NAME=${USER_INPUT}
 
 header "Updating project name in project"
 run "sed -i .bak 's/TrikotSample/$PROJECT_NAME/g' settings.gradle"
+run "sed -i .bak 's/Trikot Sample App/$PROJECT_NAME/g' android/src/main/res/values/strings.xml"
 run "sed -i .bak 's/TrikotProjectName/$PROJECT_NAME/g' ios/iosApp/Info.plist"
 success "Done!\n"
 
@@ -103,7 +104,7 @@ mv common/TrikotFrameworkName.podspec "common/${FRAMEWORK_NAME}.podspec"
 success "Done!\n"
 
 header "Updating project.pbxproj product bundle identifiers"
-run "sed -i .bak s/com.trikot.project/$PACKAGE_NAME.project/g ios/iosApp.xcodeproj/project.pbxproj"
+run "sed -i .bak s/com.trikot.project/$PACKAGE_NAME.dev/g ios/iosApp.xcodeproj/project.pbxproj"
 run "sed -i .bak s/com.example.iosAppTests/$PACKAGE_NAME.tests/g ios/iosApp.xcodeproj/project.pbxproj"
 run "sed -i .bak s/com.example.app/$PACKAGE_NAME/g ios/iosApp.xcodeproj/project.pbxproj"
 success "Done!\n"
