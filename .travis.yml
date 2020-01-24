@@ -26,6 +26,8 @@ jobs:
       script:
         - ./gradlew test jvmTest ktlintCheck --parallel
     - name: iOS
+      os: osx
+      osx_image: xcode10.2
       language: swift
       before_cache:
         - brew cleanup
