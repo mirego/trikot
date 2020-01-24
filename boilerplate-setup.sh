@@ -91,27 +91,27 @@ done
 PACKAGE_NAME=${USER_INPUT}
 
 header "Updating project name in project"
-run "sed -i .bak 's/TrikotSample/$PROJECT_NAME/g' settings.gradle"
-run "sed -i .bak 's/Trikot Sample App/$PROJECT_NAME/g' android/src/main/res/values/strings.xml"
-run "sed -i .bak 's/TrikotProjectName/$PROJECT_NAME/g' ios/iosApp/Info.plist"
+run "/usr/bin/sed -i .bak 's/TrikotSample/$PROJECT_NAME/g' settings.gradle"
+run "/usr/bin/sed -i .bak 's/Trikot Sample App/$PROJECT_NAME/g' android/src/main/res/values/strings.xml"
+run "/usr/bin/sed -i .bak 's/TrikotProjectName/$PROJECT_NAME/g' ios/iosApp/Info.plist"
 success "Done!\n"
 
 header "Updating iOS Framework name"
 for file in $content; do
-  run "sed -i .bak s/TrikotFrameworkName/$FRAMEWORK_NAME/g $file"
+  run "/usr/bin/sed -i .bak s/TrikotFrameworkName/$FRAMEWORK_NAME/g $file"
 done
 mv common/TrikotFrameworkName.podspec "common/${FRAMEWORK_NAME}.podspec"
 success "Done!\n"
 
 header "Updating project.pbxproj product bundle identifiers"
-run "sed -i .bak s/com.trikot.project/$PACKAGE_NAME.dev/g ios/iosApp.xcodeproj/project.pbxproj"
-run "sed -i .bak s/com.example.iosAppTests/$PACKAGE_NAME.tests/g ios/iosApp.xcodeproj/project.pbxproj"
-run "sed -i .bak s/com.example.app/$PACKAGE_NAME/g ios/iosApp.xcodeproj/project.pbxproj"
+run "/usr/bin/sed -i .bak s/com.trikot.project/$PACKAGE_NAME.dev/g ios/iosApp.xcodeproj/project.pbxproj"
+run "/usr/bin/sed -i .bak s/com.example.iosAppTests/$PACKAGE_NAME.tests/g ios/iosApp.xcodeproj/project.pbxproj"
+run "/usr/bin/sed -i .bak s/com.example.app/$PACKAGE_NAME/g ios/iosApp.xcodeproj/project.pbxproj"
 success "Done!\n"
 
 header "Replacing package name in all files"
 for file in $content; do
-  run "sed -i .bak s/com.trikot.sample/$PACKAGE_NAME/g $file"
+  run "/usr/bin/sed -i .bak s/com.trikot.sample/$PACKAGE_NAME/g $file"
 done
 success "Done!\n"
 
@@ -135,6 +135,10 @@ header "cleaning bak files"
   done
 success "Done!\n"
 
+header "Importing project README.md and README.fr.md"
+run "rm -fr README.md && mv BOILERPLATE_README.md README.md"
+success "Done!\n"
+
 header "Removing boilerplate setup script"
-run rm -fr boilerplate-setup.sh README.md
+run rm -fr boilerplate-setup.sh
 success "Done!\n"
