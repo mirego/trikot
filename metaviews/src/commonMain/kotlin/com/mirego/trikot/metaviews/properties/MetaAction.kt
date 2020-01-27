@@ -4,12 +4,12 @@ import com.mirego.trikot.foundation.concurrent.freeze
 
 typealias MetaActionBlock = (actionContext: Any?) -> Unit
 
-class MetaAction(private var metaAction: MetaActionBlock) {
+open class MetaAction(private var metaAction: MetaActionBlock) {
     fun execute() {
         execute(null)
     }
 
-    fun execute(actionContext: Any? = null) {
+    open fun execute(actionContext: Any? = null) {
         metaAction(actionContext)
     }
 
