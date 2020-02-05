@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothProfile
 import android.content.Context
-import com.airthings.corentium.utils.safeCombine
 import com.mirego.trikot.bluetooth.AttributeProfileCharacteristicEvent
 import com.mirego.trikot.bluetooth.AttributeProfileService
 import com.mirego.trikot.bluetooth.BluetoothCharacteristicException
@@ -17,6 +16,7 @@ import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.processors.combine
 import java.util.Timer
 import kotlin.concurrent.schedule
 
@@ -41,12 +41,11 @@ class AndroidBluetoothDevice(
 
     override val isConnected =
         BluetoothConfiguration.bluetoothManager.statePublisher
-            .safeCombine(connectionState)
+            .combine(connectionState)
             .map { (bluetoothState, hasConnection) ->
                 bluetoothState == BluetoothManager.State.ON &&
                     hasConnection == BluetoothProfile.STATE_CONNECTED
             }
-
     init {
         connect()
     }

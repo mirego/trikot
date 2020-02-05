@@ -14,7 +14,7 @@ repositories {
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
 
-group 'com.mirego.trikot'
+group 'com.mirego.trikot.bluetooth'
 
 android {
     compileSdkVersion 29
@@ -29,6 +29,7 @@ android {
 dependencies {
     api 'com.mirego.trikot:bluetooth:0.0.1'
     api "com.mirego.trikot:streams:$trikot_streams_version"
+    api "com.mirego.trikot:foundation:$trikot_foundation_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0'
 }
