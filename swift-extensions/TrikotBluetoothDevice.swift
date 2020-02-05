@@ -1,6 +1,5 @@
 import TRIKOT_FRAMEWORK_NAME
 import CoreBluetooth
-import Trikot_streams
 
 class TrikotBluetoothDevice: NSObject, BluetoothDevice, CBPeripheralDelegate {
     private let centralManager: CBCentralManager
