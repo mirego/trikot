@@ -10,6 +10,7 @@ Pod::Spec.new do |spec|
   spec.source_files  = "swift-extensions/*.swift"
   spec.static_framework = true
   
+  spec.ios.deployment_target  = '10.0'
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
   spec.prepare_command = <<-CMD

@@ -14,7 +14,7 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
 
     private let bluetoothStatePublisher: Publisher = frozenBehaviorSubject()
 
-    lazy var statePublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
+    public lazy var statePublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
         guard let centralManagerState = value as? CBManagerState else { return nil }
 
         switch centralManagerState {
@@ -27,7 +27,7 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         }
     }
 
-    lazy var hasPermissionPublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
+    public lazy var hasPermissionPublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
         guard let centralManagerState = value as? CBManagerState else { return nil }
         return centralManagerState != .unauthorized
     }
@@ -52,7 +52,7 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         centralManagerState = centralManager.state
     }
 
-    func scanForDevices(cancellableManager: CancellableManager, serviceUUIDs: [String]) -> Publisher {
+    public func scanForDevices(cancellableManager: CancellableManager, serviceUUIDs: [String]) -> Publisher {
         numberOfScanRequest.mutate {[weak self] in
             $0 += 1
             if ($0 == 1) {
@@ -79,11 +79,11 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         }
     }
 
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         centralManagerState = centralManager.state
     }
 
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if (scanResults[peripheral] == nil) {
             let trikotBluetoothScanResult = TrikotBluetoothScanResult(centralManager: centralManager, peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
             trikotBluetoothScanResult.onHeartBeatLost = {[weak self] in
@@ -97,18 +97,18 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         }
     }
 
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         guard let bluetoothDevice = scanResults[peripheral]?.bluetoothDevice else { return }
         bluetoothDevice.managerIsConnected = true
         connectedDevices[peripheral] = bluetoothDevice
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         connectedDevices[peripheral]?.managerIsConnected = false
         connectedDevices[peripheral] = nil
     }
 
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         connectedDevices[peripheral]?.managerIsConnected = false
         connectedDevices[peripheral] = nil
     }
