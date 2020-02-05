@@ -15,16 +15,16 @@ See [firebase-ktx](./firebase-ktx/README.md) for more information on using with 
 ```groovy
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 
-    api "com.mirego.trikot:bluetooth:$trikot_bluetooth_version"
-    jvm "com.mirego.trikot:bluetooth-jvm:$trikot_bluetooth_version"
-    js "com.mirego.trikot:bluetooth-js:$trikot_bluetooth_version"
-    iosx64 "com.mirego.trikot:bluetooth-iosx64:$trikot_bluetooth_version"
-    iosarm64 "com.mirego.trikot:bluetooth-iosarm64:$trikot_bluetooth_version"
+    api "com.mirego.trikot:analytics:$trikot_analytics_version"
+    jvm "com.mirego.trikot:analytics-jvm:$trikot_analytics_version"
+    js "com.mirego.trikot:analytics-js:$trikot_analytics_version"
+    iosx64 "com.mirego.trikot:analytics-iosx64:$trikot_analytics_version"
+    iosarm64 "com.mirego.trikot:analytics-iosarm64:$trikot_analytics_version"
 ```
 
 ## License
 
-Trikot.bluetooth is © 2018-2019 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot.bluetooth/blob/master/LICENSE.md) file.
+Trikot.analytics is © 2018-2019 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot.analytics/blob/master/LICENSE.md) file.
 
 ## About Mirego
 
