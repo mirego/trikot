@@ -2,6 +2,63 @@
 
 Elegant implementation of Multiplatform Bluetooth in ReactiveStreams.
 
+#### Usage
+Discover devices
+```kotlin
+    BluetoothConfiguration.bluetoothManager.scanForDevice(cancellableManager, listOf("UUIDS")).subscribe(cancellableManager) {
+        // List of BluetoothScanResult
+    }
+```
+
+Connect to device
+```kotlin
+val bluetoothScanResult = ...
+val device = bluetoothScanResult.connect(cancellableManager)
+device.isConnected.subscribe(cancellableManager) {
+    // True when connected
+}
+```
+
+Retrieve AttributeProfileServices
+```kotlin
+val services = device.attributeProfileServices.subscribe(cancellableManager) {
+    // Map of UUIDs - AttributeProfileService
+}
+```
+
+Retrieve AttributeProfileCharacteristics
+```kotlin
+val attributeProfileService = ... attributeProfileService.characteristics.subscribe(cancellableManager) {
+    // Map of UUIDs - AttributeProfileCharacteristic
+}
+```
+
+Receive event (value or error)
+```kotlin
+val attributeProfileCharacteristic = ... attributeProfileCharacteristic.event.subscribe(cancellableManager) {
+    // AttributeProfileCharacteristicEvent
+}
+```
+
+Read value
+```kotlin
+attributeProfileCharacteristic.read()
+```
+
+Write value
+```kotlin
+val byteArray = ...
+attributeProfileCharacteristic.write(byteArray)
+```
+
+Watch value (subscribe for value change). Must call the right method depending on the characteristic type.
+```kotlin
+attributeProfileCharacteristic.watch()
+// OR
+attributeProfileCharacteristic.watchWithIndication()
+```
+
+
 #### Swift
 See [swift extensions](./swift-extensions/README.md) for more information.
 
