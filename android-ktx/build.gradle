@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    api 'com.mirego.trikot:bluetooth:0.0.1'
+    api 'com.mirego.trikot:bluetooth:0.1.1'
     api "com.mirego.trikot:streams:$trikot_streams_version"
     api "com.mirego.trikot:foundation:$trikot_foundation_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
