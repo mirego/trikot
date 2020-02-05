@@ -21,7 +21,7 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'trikot.streams'
+rootProject.name = 'trikot.bluetooth'
 enableFeaturePreview("GRADLE_METADATA")
 
 include ':bluetooth', ':android-ktx'

@@ -26,6 +26,10 @@ android {
     }
 }
 
+configurations.all {
+    exclude group: "org.reactivestreams"
+}
+
 dependencies {
     api 'com.mirego.trikot:bluetooth:0.1.1'
     api "com.mirego.trikot:streams:$trikot_streams_version"
