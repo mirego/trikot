@@ -47,7 +47,7 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         }
     }
 
-    override init() {
+    public override init() {
         super.init()
         centralManagerState = centralManager.state
     }
