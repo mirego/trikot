@@ -1,7 +1,7 @@
 # Trikot.analytics swift extensions
 
 ## Installation
-To use `Trikot.analytics` with iOS, you must export `analytics` and `analytics-iosarm64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle) for a sample use case.
+To use `Trikot.analytics/Firebvase` with iOS, you must export `analytics` and `analytics-iosarm64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle) for a sample use case.
 
 ##### Setup Pod dependency
 Firebase

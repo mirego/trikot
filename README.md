@@ -29,7 +29,6 @@ val button = MutableMetaButton()
 button.onTap = TrackableMetaAction(AnalyticsEvents.myClickEvent) {
     // Code to execute on tap
 }
-
 ```
 
 #### Firebase
