@@ -16,9 +16,9 @@ Pod::Spec.new do |spec|
   spec.subspec 'Firebase' do |firebase|
     firebase.source_files = 'swift-extensions/firebase/*.swift'
     firebase.dependency 'Firebase/Analytics'
+    firebase.prepare_command = <<-CMD
+      sed -i '' "s/TRIKOT_FRAMEWORK_NAME/${TRIKOT_FRAMEWORK_NAME}/g" ./**/*.swift
+    CMD
   end
 
-  spec.prepare_command = <<-CMD
-    sed -i '' "s/TRIKOT_FRAMEWORK_NAME/${TRIKOT_FRAMEWORK_NAME}/g" ./**/*.swift
-  CMD
 end
