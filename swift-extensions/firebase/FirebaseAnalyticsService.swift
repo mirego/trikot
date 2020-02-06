@@ -2,35 +2,35 @@ import Foundation
 import FirebaseAnalytics
 import TRIKOT_FRAMEWORK_NAME
 
-class FirebaseAnalyticsService: AnalyticsService {
-    var name: String = "FirebaseAnalytics"
+public class FirebaseAnalyticsService: AnalyticsService {
+    public var name: String = "FirebaseAnalytics"
     private var superProperties = [String: Any]()
 
-    func identifyUser(userId: String, properties: [String: Any]) {
+    public func identifyUser(userId: String, properties: [String: Any]) {
         Analytics.setUserID(userId)
         properties.forEach { Analytics.setUserProperty(anyToString($0.value), forName: $0.key) }
     }
 
-    func logout() {
+    public func logout() {
         Analytics.setUserID(nil)
     }
 
-    func setSuperProperties(properties: [String: Any]) {
+    public func setSuperProperties(properties: [String: Any]) {
         properties.forEach { superProperties[$0.key] = $0.value }
     }
 
-    func trackEvent(event: AnalyticsEvent, properties: [String: Any]) {
+    public func trackEvent(event: AnalyticsEvent, properties: [String: Any]) {
         var allProperties = [String: Any]()
         properties.forEach { allProperties[$0.key] = $0.value }
         superProperties.forEach { allProperties[$0.key] = $0.value }
         Analytics.logEvent(event.name, parameters: allProperties)
     }
 
-    func unsetAllSuperProperties() {
+    public func unsetAllSuperProperties() {
         superProperties.removeAll()
     }
 
-    func unsetSuperProperties(propertyNames: [String]) {
+    public func unsetSuperProperties(propertyNames: [String]) {
         propertyNames.forEach { superProperties.removeValue(forKey: $0) }
     }
 
