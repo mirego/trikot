@@ -66,13 +66,7 @@ run() {
 # Execution
 # -----------------------------------------------------------------------------
 
-argumentIsPascalCase=false
-while [ ${argumentIsPascalCase} == "false" ]
-do
-  read -p $'\nWhat is your project name? (Should be in PascalCase)\n' USER_INPUT
-  isPascalCase "$USER_INPUT"
-done
-PROJECT_NAME=${USER_INPUT}
+read -p $'\nWhat is your project name?\n' PROJECT_NAME
 
 argumentIsPascalCase=false
 while [ ${argumentIsPascalCase} == "false" ]
