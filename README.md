@@ -3,12 +3,42 @@
 Elegant implementation of Multiplatform Analytics in ReactiveStreams.
 
 #### Usage
+See platform declaration on how to configure which service is used.
 
-#### Swift
-See [swift extensions](./swift-extensions/README.md) for more information.
+Declare your events
+```kotlin
+enum class AnalyticsEvents : AnalyticsEvent {
+    myAppEvent,
+    myClickEvent
+}
+```
 
-#### Android
-See [firebase-ktx](./firebase-ktx/README.md) for more information on using with firebase.
+Identify user
+```kotlin
+AnalyticsService.identifyUser(userId, mapOf("userProperty" to value))
+```
+
+Track an event
+```kotlin
+AnalyticsService.trackEvent(AnalyticsEvents.myAppEvent, mapOf("eventProperty" to value))
+```
+
+Track tap action
+```kotlin
+val button = MutableMetaButton()
+button.onTap = TrackableMetaAction(AnalyticsEvents.myClickEvent) {
+    // Code to execute on tap
+}
+
+```
+
+#### Firebase
+iOS - [swift extensions](./swift-extensions/firebase/README.md)
+Android - [firebase-ktx](./firebase-ktx/README.md)
+
+#### Add more service
+Implement [AnalyticsService](https://github.com/mirego/trikot.analytics/blob/master/analytics/src/commonMain/kotlin/com/mirego/trikot/analytics/AnalyticsService.kt)
+
 
 ## Common
 ##### Import dependencies
