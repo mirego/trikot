@@ -6,6 +6,9 @@ public class FirebaseAnalyticsService: AnalyticsService {
     public var name: String = "FirebaseAnalytics"
     private var superProperties = [String: Any]()
 
+    public init() {        
+    }
+
     public func identifyUser(userId: String, properties: [String: Any]) {
         Analytics.setUserID(userId)
         properties.forEach { Analytics.setUserProperty(anyToString($0.value), forName: $0.key) }
