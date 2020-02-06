@@ -43,7 +43,7 @@ release {
     checkTasks = ['check']
     buildTasks = ['publish']
     updateVersionPart = 1
-    tagPrefix = 'android-ktx-'
+    tagPrefix = 'firebase-ktx-'
 }
 
 publishing {
