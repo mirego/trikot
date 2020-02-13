@@ -15,9 +15,7 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
         get() {
             return query
                 .trimIndent()
-                .replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "")
+                .jsonEscape()
         }
 
     override val requestBody: String
@@ -48,11 +46,17 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
             is Int,
             is Boolean -> "$any"
             is GraphqlJsonObject -> any.body
-            else -> "\"${any}\""
+            else -> "\"${any.toString().jsonEscape()}\""
         }
     }
 
     private fun listJson(list: List<*>): String {
         return "[${list.filterNotNull().joinToString { anyToJson(it) }}]"
     }
+}
+
+fun String.jsonEscape(): String {
+    return this.replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "")
 }
