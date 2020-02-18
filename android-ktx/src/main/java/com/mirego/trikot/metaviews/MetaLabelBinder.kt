@@ -1,13 +1,10 @@
 package com.mirego.trikot.metaviews
 
-import android.R
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.text.SpannableString
-import android.text.Spanned
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaLabel
 import com.mirego.trikot.streams.android.ktx.asLiveData
@@ -90,10 +87,10 @@ object MetaLabelBinder {
                 }
 
                 textView.background ?: run {
-                    textView.background = ColorDrawable(Color.WHITE)
+                    ViewCompat.setBackground(textView, ColorDrawable(Color.WHITE))
                 }
 
-                textView.backgroundTintList = selector.toColorStateList()
+                ViewCompat.setBackgroundTintList(textView, selector.toColorStateList())
             }
 
         textView.bindOnTap(metaLabel, lifecycleOwnerWrapper)

@@ -1,6 +1,5 @@
 package com.mirego.trikot.metaviews
 
-import android.R
 import android.content.res.ColorStateList
 import android.util.StateSet
 import com.mirego.trikot.metaviews.properties.Color
@@ -20,15 +19,15 @@ fun MetaSelector<Color>.toColorStateList(): ColorStateList {
 
     highlighted?.let {
         colors.add(it.toIntColor())
-        supportedMode.add(intArrayOf(R.attr.state_pressed))
+        supportedMode.add(intArrayOf(android.R.attr.state_pressed))
     }
     selected?.let {
         colors.add(it.toIntColor())
-        supportedMode.add(intArrayOf(R.attr.state_selected))
+        supportedMode.add(intArrayOf(android.R.attr.state_selected))
     }
     disabled?.let {
         colors.add(it.toIntColor())
-        supportedMode.add(intArrayOf(-R.attr.state_enabled))
+        supportedMode.add(intArrayOf(-android.R.attr.state_enabled))
     }
     default?.let {
         colors.add(it.toIntColor())

@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.drawableBottom
 import com.mirego.trikot.drawableEnd
@@ -165,7 +166,7 @@ object MetaButtonBinder {
 
             it.backgroundColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (selector.hasAnyValue) {
-                    button.backgroundTintList = selector.toColorStateList()
+                    ViewCompat.setBackgroundTintList(button, selector.toColorStateList())
                 }
             }
 
@@ -177,7 +178,7 @@ object MetaButtonBinder {
 
             it.backgroundImageResource.observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (selector.hasAnyValue) {
-                    button.background = selector.asDrawable(button.context, null)
+                    ViewCompat.setBackground(button, selector.asDrawable(button.context, null))
                 }
             }
         }

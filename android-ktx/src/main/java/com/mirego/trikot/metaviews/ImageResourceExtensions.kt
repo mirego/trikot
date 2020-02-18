@@ -1,10 +1,10 @@
 package com.mirego.trikot.metaviews
 
-import android.R
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.mirego.trikot.metaviews.properties.Color
 import com.mirego.trikot.metaviews.properties.MetaSelector
@@ -19,20 +19,20 @@ fun MetaSelector<ImageResource>.asDrawable(
 
     this.disabled?.let { imageResource ->
         imageResource.asDrawable(context, tintColor).let { drawable ->
-            stateListDrawable.addState(intArrayOf(-R.attr.state_enabled), drawable)
+            stateListDrawable.addState(intArrayOf(-android.R.attr.state_enabled), drawable)
         }
     }
 
     this.highlighted?.let { imageResource ->
         imageResource.asDrawable(context, tintColor).let { drawable ->
-            stateListDrawable.addState(intArrayOf(R.attr.state_pressed), drawable)
-            stateListDrawable.addState(intArrayOf(R.attr.state_focused), drawable)
+            stateListDrawable.addState(intArrayOf(android.R.attr.state_pressed), drawable)
+            stateListDrawable.addState(intArrayOf(android.R.attr.state_focused), drawable)
         }
     }
 
     this.selected?.let { imageResource ->
         imageResource.asDrawable(context, tintColor).let { drawable ->
-            stateListDrawable.addState(intArrayOf(R.attr.state_selected), drawable)
+            stateListDrawable.addState(intArrayOf(android.R.attr.state_selected), drawable)
         }
     }
 
@@ -53,9 +53,9 @@ fun ImageResource.asDrawable(
     context: Context,
     tintColors: MetaSelector<Color>? = null
 ): Drawable? {
-    return resourceId(context)?.let { resourceId -> context.getDrawable(resourceId) }?.also { drawable ->
+    return resourceId(context)?.let { resourceId -> ContextCompat.getDrawable(context, resourceId) }?.also { drawable ->
         if (tintColors?.hasAnyValue == true) {
-            drawable.mutate().setTintList(tintColors.toColorStateList())
+            DrawableCompat.setTintList(drawable.mutate(), tintColors.toColorStateList())
         }
     }
 }

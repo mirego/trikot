@@ -1,10 +1,9 @@
 package com.mirego.trikot.metaviews
 
-import android.R
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
+import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaView
 import com.mirego.trikot.metaviews.properties.MetaAction
@@ -38,10 +37,10 @@ fun View.bindMetaView(
                 }
 
                 background ?: run {
-                    background = ColorDrawable(Color.WHITE)
+                    ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
                 }
 
-                backgroundTintList = selector.toColorStateList()
+                ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
             }
     }
 }

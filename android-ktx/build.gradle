@@ -20,12 +20,12 @@ repositories {
 group 'com.mirego.trikot.metaviews'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.0"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion 14
+        targetSdkVersion 29
     }
 
     dataBinding {
@@ -39,9 +39,10 @@ configurations.all {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.mirego.trikot:metaviews:0.35.1'
+    api 'com.mirego.trikot:metaviews:0.41.1'
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
