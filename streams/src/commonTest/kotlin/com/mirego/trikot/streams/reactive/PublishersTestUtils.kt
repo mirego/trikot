@@ -28,3 +28,7 @@ fun <T> Publisher<T>.assertCompleted() {
     subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { completed = true })
     assertTrue { completed }
 }
+
+class MockPublisher(initialValue: String? = null) : BehaviorSubjectImpl<String>(initialValue) {
+    val getHasSubscriptions get() = super.hasSubscriptions
+}

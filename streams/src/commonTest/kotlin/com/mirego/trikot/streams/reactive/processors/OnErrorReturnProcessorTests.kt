@@ -1,6 +1,7 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.onErrorReturn
 import com.mirego.trikot.streams.reactive.subscribe
@@ -31,5 +32,14 @@ class OnErrorReturnProcessorTests {
         assertEquals(expectedError, receivedError)
         assertEquals(expectedValue, receivedValue)
         assertFalse("Should not be completed") { isCompleted }
+    }
+
+    @Test
+    fun parentIsUnsubscribedOnError() {
+        val parentPublisher = MockPublisher().also { it.error = Throwable() }
+        parentPublisher.onErrorReturn { "a" }.subscribe(CancellableManager()) {
+        }
+
+        assertFalse(parentPublisher.getHasSubscriptions)
     }
 }

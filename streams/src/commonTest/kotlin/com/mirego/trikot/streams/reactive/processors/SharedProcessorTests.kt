@@ -1,7 +1,9 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.shared
 import com.mirego.trikot.streams.reactive.subscribe
@@ -71,5 +73,23 @@ class SharedProcessorTests {
         assertEquals("a", firstSubscriptionValueReceived)
         assertEquals(1, executionCount)
         assertEquals("a", secondSubscriptionValueReceived)
+    }
+
+    @Test
+    fun processorUnsubscribeFromParentOnError() {
+        val masterPublisher = MockPublisher("a")
+        val erroredPublisher = masterPublisher.map { throw StreamsProcessorException() }
+        val sharedPublisher = erroredPublisher.shared()
+        masterPublisher.subscribe(CancellableManager()) {}
+
+        var errorCount = 0
+        sharedPublisher.subscribe(CancellableManager(), {},
+            {
+                errorCount++
+                masterPublisher.value = "b"
+            }
+        )
+
+        assertEquals(1, errorCount)
     }
 }

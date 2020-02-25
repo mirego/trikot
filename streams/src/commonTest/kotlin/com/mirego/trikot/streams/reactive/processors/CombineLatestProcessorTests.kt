@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.subscribe
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -145,7 +145,18 @@ class CombineLatestProcessorTests {
         assertEquals(1, callbackCount)
     }
 
-    class MockPublisher(initialValue: String? = null) : BehaviorSubjectImpl<String>(initialValue) {
-        val getHasSubscriptions get() = super.hasSubscriptions
+    @Test
+    fun onlyOneErrorIsDispatched() {
+        val firstPublisher = MockPublisher("a").also { it.error = Throwable() }
+        val secondPublisher = MockPublisher("b").also { it.error = Throwable() }
+        val thirdPublisher = MockPublisher("b").also { it.error = Throwable() }
+
+        var errorCount = 0
+        combine(listOf(firstPublisher, secondPublisher, thirdPublisher)).subscribe(CancellableManager(),
+            onNext = {},
+            onError = { errorCount ++ }
+        )
+
+        assertEquals(1, errorCount)
     }
 }

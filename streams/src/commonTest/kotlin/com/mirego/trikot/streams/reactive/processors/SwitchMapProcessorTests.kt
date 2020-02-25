@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.subscribe
@@ -101,9 +101,19 @@ class SwitchMapProcessorTests {
             publisher.switchMap<String, String> { throw IllegalStateException() }.subscribe(CancellableManager(), onNext = {
             }, onError = { receivedException = it as StreamsProcessorException })
         }
+
+        assertEquals(null, receivedException)
     }
 
-    class MockPublisher : BehaviorSubjectImpl<String>("a") {
-        val getHasSubscriptions get() = super.hasSubscriptions
+    @Test
+    fun testChildIsDetachedAfterAnError() {
+        val publisher = Publishers.behaviorSubject("a")
+        val childPublisher = Publishers.behaviorSubject("a").also { it.error = Throwable() }
+
+        var errorCallCount = 0
+        publisher.switchMap { childPublisher }.subscribe(CancellableManager(), {}, { errorCallCount ++ })
+        publisher.value = "b"
+
+        assertEquals(1, errorCallCount)
     }
 }

@@ -30,7 +30,8 @@ class CombineLatestProcessor<T>(
         private val parentPublisherResultIndex = 0
         private val serialQueue = SynchronousSerialQueue()
 
-        init {
+        override fun onSubscribe(s: Subscription) {
+            super.onSubscribe(s)
             subscribeToCombinedPublishersIfNeeded()
         }
 

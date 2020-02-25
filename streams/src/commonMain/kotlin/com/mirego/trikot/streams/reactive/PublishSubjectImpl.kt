@@ -11,7 +11,6 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     private val atomicError = AtomicReference<Throwable?>(null)
     private val isCompleted = AtomicReference(false)
     private val serialQueue = SynchronousSerialQueue()
-    private val subscriptionQueue = SynchronousSerialQueue()
     protected val hasSubscriptions
         get() = subscriptions.value.count() > 0
 
@@ -65,7 +64,7 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     }
 
     private fun removeSubscription(publisherSubscription: PublisherSubscription<T>) {
-        subscriptionQueue.dispatch {
+        serialQueue.dispatch {
             if (subscriptions.value.count() > 0 && subscriptions.remove(
                     publisherSubscription
                 ).isEmpty()
@@ -79,7 +78,7 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
             if (!subscription.isCancelled) {
                 onNewSubscription(subscription)
                 if (!subscription.isCancelled) {
-                    subscriptionQueue.dispatch {
+                    serialQueue.dispatch {
                         if (this.completed) {
                             subscription.dispatchCompleted()
                         } else if (subscriptions.add(subscription).count() == 1) {
@@ -110,8 +109,10 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     }
 
     override fun complete() {
-        isCompleted.setOrThrow(false, true)
-        subscriptions.value.forEach { it.dispatchCompleted() }
+        serialQueue.dispatch {
+            isCompleted.setOrThrow(false, true)
+            subscriptions.value.forEach { it.dispatchCompleted() }
+        }
     }
 
     protected open fun onFirstSubscription() {

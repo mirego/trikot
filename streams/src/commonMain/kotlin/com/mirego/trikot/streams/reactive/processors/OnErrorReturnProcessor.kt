@@ -22,6 +22,7 @@ class OnErrorReturnProcessor<T>(parentPublisher: Publisher<T>, private val block
         }
 
         override fun onError(t: Throwable) {
+            cancelActiveSubscription()
             subscriber.onNext(block(t))
         }
     }

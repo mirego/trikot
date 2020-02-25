@@ -6,15 +6,15 @@ import org.reactivestreams.Publisher
 
 typealias ColdPublisherExecutionBlock<T> = (CancellableManager) -> Publisher<T>
 
-class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T>, value: T? = null) : BehaviorSubjectImpl<T>(value) {
+class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T>) : BehaviorSubjectImpl<T>() {
     private val cancellableManagerProvider = CancellableManagerProvider()
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
         val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
         executionBlock(cancellableManager).subscribe(cancellableManager,
-            onNext = {
-                executionValue -> value = executionValue
+            onNext = { executionValue ->
+                value = executionValue
             },
             onError = {
                 error = it
@@ -27,5 +27,8 @@ class ColdPublisher<T>(private val executionBlock: ColdPublisherExecutionBlock<T
     override fun onNoSubscription() {
         super.onNoSubscription()
         cancellableManagerProvider.cancelPreviousAndCreate()
+        if (!completed) {
+            cleanupValues()
+        }
     }
 }

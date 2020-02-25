@@ -22,17 +22,20 @@ class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : BehaviorSu
 
     override fun onNoSubscription() {
         super.onNoSubscription()
+        cancellableManagerProvider.cancelPreviousAndCreate()
         if (!completed) {
             cleanupValues()
         }
-        cancellableManagerProvider.cancelPreviousAndCreate()
     }
 
     override fun onSubscribe(s: Subscription) = with(subscriptionCancellableManager.value) { add { s.cancel() } }
 
     override fun onNext(t: T) = let { value = t }
 
-    override fun onError(t: Throwable) = let { error = t }
+    override fun onError(t: Throwable) = let {
+        cancellableManagerProvider.cancelPreviousAndCreate()
+        error = t
+    }
 
     override fun onComplete() {
         cancellableManagerProvider.cancelPreviousAndCreate()
