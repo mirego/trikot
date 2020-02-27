@@ -9,11 +9,10 @@ import kotlin.reflect.KProperty
  * It can only be used in initialize of read-write optional property, like this:
  *
  * ```
- * val weakType : Type? by weakReference()
+ * val weakType : Type? by weakAtomicReference()
  * ```
  */
-fun <T : Any> weakAtomicReference() =
-    WeakProperty<T>()
+fun <T : Any> weakAtomicReference() = WeakProperty<T>()
 
 /**
  * Weak atomic reference to a variable of type [T].
