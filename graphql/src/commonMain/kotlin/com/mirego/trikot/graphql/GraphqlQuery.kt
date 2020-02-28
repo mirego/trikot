@@ -58,5 +58,8 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
 fun String.jsonEscape(): String {
     return this.replace("\\", "\\\\")
         .replace("\"", "\\\"")
-        .replace("\n", "")
+        .replace("\n", " ")
+        .replace("\b", " ")
+        .replace("\r", " ")
+        .replace("\t", " ")
 }
