@@ -1,6 +1,7 @@
 package com.mirego.trikot.metaviews
 
 import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.ImageState
 import com.mirego.trikot.metaviews.resource.ImageResource
 import org.reactivestreams.Publisher
 
@@ -11,6 +12,9 @@ inline class ImageHeight(val value: Int)
 
 interface MetaImage : MetaView {
     fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow>
+    val imageState: Publisher<ImageState>
+
+    fun setImageState(imageState: ImageState)
 }
 
 interface ImageFlow {

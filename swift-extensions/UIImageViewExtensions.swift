@@ -111,11 +111,11 @@ public class DefaultMetaImageHandler: MetaImageHandler {
             let imageFlowPublisher = meta.imageFlow(width: Int32(imageView.frame.width * UIScreen.main.scale), height: Int32(imageView.frame.height * UIScreen.main.scale))
 
             imageView.restoreContentMode()
-            observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView)
+            observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), metaImage: meta, imageView: imageView)
 
             if isImageDependantOnViewSize {
                 let sizeObservationCancellation = KeyValueObservationHolder(imageView.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
-                    if change.newValue?.size != change.oldValue?.size { self?.observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageView: imageView) }
+                    if change.newValue?.size != change.oldValue?.size { self?.observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), metaImage: meta, imageView: imageView) }
                 })
 
                 imageView.trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
@@ -127,19 +127,20 @@ public class DefaultMetaImageHandler: MetaImageHandler {
         }
     }
 
-    private func observeImageFlow(_ imageFlowPublisher: Publisher, cancellableManager: CancellableManager, imageView: UIImageView) {
+    private func observeImageFlow(_ imageFlowPublisher: Publisher, cancellableManager: CancellableManager, metaImage: MetaImage, imageView: UIImageView) {
         let cancellableManagerProvider = CancellableManagerProvider()
         cancellableManager.add(cancellable: cancellableManagerProvider)
 
         imageView.observe(cancellableManager: cancellableManager, publisher: imageFlowPublisher) {[weak self] (imageFlow: ImageFlow) in
-            self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageFlow: imageFlow, imageView: imageView)
+            self?.doLoadImageFlow(cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), metaImage: metaImage, imageFlow: imageFlow, imageView: imageView)
         }
     }
 
-    private func doLoadImageFlow(cancellableManager: CancellableManager, imageFlow: ImageFlow, imageView: UIImageView) {
+    private func doLoadImageFlow(cancellableManager: CancellableManager, metaImage: MetaImage, imageFlow: ImageFlow, imageView: UIImageView) {
         var unProcessedImage: UIImage?
         if let imageResource = imageFlow.imageResource {
             unProcessedImage = MetaImageResourceManager.shared.image(fromResource: imageResource)
+            metaImage.setImageState(imageState: ImageState.success)
         }
         if let imageResource = imageFlow.placeholderImageResource {
             if let placeholderContentMode = imageView.placeholderContentMode {
@@ -156,10 +157,10 @@ public class DefaultMetaImageHandler: MetaImageHandler {
             }
         }
 
-        downloadImageFlowIfNeeded(cancellableManager: cancellableManager, imageFlow: imageFlow, imageView: imageView)
+        downloadImageFlowIfNeeded(cancellableManager: cancellableManager, metaImage: metaImage, imageFlow: imageFlow, imageView: imageView)
     }
 
-    private func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, imageFlow: ImageFlow, imageView: UIImageView) {
+    private func downloadImageFlowIfNeeded(cancellableManager: CancellableManager, metaImage: MetaImage, imageFlow: ImageFlow, imageView: UIImageView) {
         guard let urlString = imageFlow.url, let url = URL(string: urlString) else { return }
 
         if isImageCacheEnabled, let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
@@ -167,7 +168,7 @@ public class DefaultMetaImageHandler: MetaImageHandler {
             imageView.image = cachedImage
 
             if let onSuccess = imageFlow.onSuccess {
-                observeImageFlow(onSuccess, cancellableManager: cancellableManager, imageView: imageView)
+                observeImageFlow(onSuccess, cancellableManager: cancellableManager, metaImage: metaImage, imageView: imageView)
             }
         } else {
             MrFreeze().freeze(objectToFreeze: cancellableManager)
@@ -185,10 +186,14 @@ public class DefaultMetaImageHandler: MetaImageHandler {
                         imageView.image = image
 
                         if let onSuccess = imageFlow.onSuccess {
-                            self?.observeImageFlow(onSuccess, cancellableManager: cancellableManager, imageView: imageView)
+                            self?.observeImageFlow(onSuccess, cancellableManager: cancellableManager, metaImage: metaImage, imageView: imageView)
+                        } else {
+                            metaImage.setImageState(imageState: ImageState.success)
                         }
                     } else if let onError = imageFlow.onError {
-                        self?.observeImageFlow(onError, cancellableManager: cancellableManager, imageView: imageView)
+                        self?.observeImageFlow(onError, cancellableManager: cancellableManager, metaImage: metaImage, imageView: imageView)
+                    } else {
+                        metaImage.setImageState(imageState: ImageState.error)
                     }
                 }
             }

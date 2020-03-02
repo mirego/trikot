@@ -5,6 +5,7 @@ import com.mirego.trikot.metaviews.ImageHeight
 import com.mirego.trikot.metaviews.ImageWidth
 import com.mirego.trikot.metaviews.MetaImage
 import com.mirego.trikot.metaviews.properties.Color
+import com.mirego.trikot.metaviews.properties.ImageState
 import com.mirego.trikot.metaviews.properties.SimpleImageFlow
 import com.mirego.trikot.metaviews.resource.ImageResource
 import com.mirego.trikot.streams.reactive.Publishers
@@ -18,6 +19,12 @@ typealias ImageFlowProvider = (width: ImageWidth, height: ImageHeight) -> Publis
 open class MutableMetaImage(var imageFlowProvider: ImageFlowProvider) : MutableMetaView(), MetaImage {
     override fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow> {
         return imageFlowProvider(width, height)
+    }
+
+    override val imageState = Publishers.behaviorSubject(ImageState.NONE)
+
+    override fun setImageState(imageState: ImageState) {
+        this.imageState.value = imageState
     }
 }
 

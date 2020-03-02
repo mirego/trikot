@@ -3,6 +3,7 @@ package com.mirego.trikot.metaviews
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.metaviews.mutable.MutableMetaImage
+import com.mirego.trikot.metaviews.properties.ImageState
 import com.mirego.trikot.metaviews.properties.MetaSelector
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.cancellable.CancellableManager
@@ -18,14 +19,14 @@ import com.squareup.picasso.Transformation
 
 object MetaImageBinder {
     private val NoMetaImage = MutableMetaImage { _, _ -> Publishers.behaviorSubject() }
-            .apply { hidden = true.just() } as MetaImage
+        .apply { hidden = true.just() } as MetaImage
 
     @JvmStatic
     @BindingAdapter("meta_view", "lifecycleOwnerWrapper")
     fun bind(
-            imageView: ImageView,
-            metaImage: MetaImage?,
-            lifecycleOwnerWrapper: LifecycleOwnerWrapper
+        imageView: ImageView,
+        metaImage: MetaImage?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         bind(imageView, metaImage, null, lifecycleOwnerWrapper)
     }
@@ -33,41 +34,46 @@ object MetaImageBinder {
     @JvmStatic
     @BindingAdapter("meta_view", "transformation", "lifecycleOwnerWrapper")
     fun bind(
-            imageView: ImageView,
-            metaImage: MetaImage?,
-            transformation: Transformation?,
-            lifecycleOwnerWrapper: LifecycleOwnerWrapper
+        imageView: ImageView,
+        metaImage: MetaImage?,
+        transformation: Transformation?,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (metaImage ?: NoMetaImage).let {
 
             imageView.bindMetaView(metaImage, lifecycleOwnerWrapper)
 
             imageView.viewTreeObserver.addOnPreDrawListener(
-                    ViewLoaderPreDrawListener(imageView) { width: ImageWidth, height: ImageHeight ->
-                        it.imageFlow(width, height)
-                                .withCancellableManager()
-                                .observe(lifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
-                                    processImageFlow(
-                                            imageFlow,
-                                            imageView,
-                                            transformation,
-                                            manager
-                                    )
-                                }
-                    }
+                ViewLoaderPreDrawListener(imageView) { width: ImageWidth, height: ImageHeight ->
+                    it.imageFlow(width, height)
+                        .withCancellableManager()
+                        .observe(lifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
+                            processImageFlow(
+                                it,
+                                imageFlow,
+                                imageView,
+                                transformation,
+                                manager
+                            )
+                        }
+                }
             )
         }
     }
 
     private fun processImageFlow(
-            imageFlow: ImageFlow,
-            imageView: ImageView,
-            transformation: Transformation?,
-            cancellableManager: CancellableManager
+        metaImage: MetaImage,
+        imageFlow: ImageFlow,
+        imageView: ImageView,
+        transformation: Transformation?,
+        cancellableManager: CancellableManager
     ) {
-        imageFlow.imageResource?.asDrawable(imageView.context, imageFlow.tintColor?.let { MetaSelector(imageFlow.tintColor) })?.let {
+        imageFlow.imageResource?.asDrawable(
+            imageView.context,
+            imageFlow.tintColor?.let { MetaSelector(imageFlow.tintColor) })?.let {
             imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             imageView.setImageDrawable(it)
+            metaImage.setImageState(ImageState.SUCCESS)
         } ?: run {
             imageFlow.url?.let { url ->
                 var requestCreator: RequestCreator? = null
@@ -83,37 +89,43 @@ object MetaImageBinder {
                     override fun onSuccess() {
                         imageFlow.onSuccess?.let { onSuccessPublisher ->
                             val cancellableManagerProvider =
-                                    CancellableManagerProvider()
-                                            .also { cancellable ->
-                                                cancellableManager.add(cancellable)
-                                            }
+                                CancellableManagerProvider()
+                                    .also { cancellable ->
+                                        cancellableManager.add(cancellable)
+                                    }
                             onSuccessPublisher.subscribe(cancellableManager) {
                                 processImageFlow(
-                                        it,
-                                        imageView,
-                                        transformation,
-                                        cancellableManagerProvider.cancelPreviousAndCreate()
+                                    metaImage,
+                                    it,
+                                    imageView,
+                                    transformation,
+                                    cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
+                        } ?: run {
+                            metaImage.setImageState(ImageState.SUCCESS)
                         }
                     }
 
                     override fun onError(e: Exception?) {
                         imageFlow.onError?.let { onErrorPublisher ->
                             val cancellableManagerProvider =
-                                    CancellableManagerProvider()
-                                            .also { cancellable ->
-                                                cancellableManager.add(cancellable)
-                                            }
+                                CancellableManagerProvider()
+                                    .also { cancellable ->
+                                        cancellableManager.add(cancellable)
+                                    }
 
                             onErrorPublisher.subscribe(cancellableManager) {
                                 processImageFlow(
-                                        it,
-                                        imageView,
-                                        transformation,
-                                        cancellableManagerProvider.cancelPreviousAndCreate()
+                                    metaImage,
+                                    it,
+                                    imageView,
+                                    transformation,
+                                    cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
+                        } ?: run {
+                            metaImage.setImageState(ImageState.ERROR)
                         }
                     }
                 })
