@@ -76,6 +76,10 @@ extension UIView {
                     fatalError("MetaLabel RichText StyleTransform unsupported: \(transform.style)")
                 }
             }
+
+            if let transform = richTextRange.transform as? ColorTransform {
+                attributedString.addAttribute(.foregroundColor, value: transform.color.safeColor(), range: range)
+            }
         }
         return attributedString
     }

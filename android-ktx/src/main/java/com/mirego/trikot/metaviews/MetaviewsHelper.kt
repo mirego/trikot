@@ -2,11 +2,12 @@ package com.mirego.trikot.metaviews
 
 import android.graphics.Typeface
 import android.text.ParcelableSpan
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
+import com.mirego.trikot.metaviews.text.ColorTransform
 import com.mirego.trikot.metaviews.text.RichText
 import com.mirego.trikot.metaviews.text.RichTextRange
 import com.mirego.trikot.metaviews.text.StyleTransform
@@ -34,6 +35,9 @@ private fun RichTextRange.asSpan(): ParcelableSpan {
                 StyleTransform.Style.UNDERLINE -> UnderlineSpan()
                 StyleTransform.Style.BOLD_ITALIC -> StyleSpan(Typeface.BOLD_ITALIC)
             }
+        }
+        is ColorTransform -> {
+            ForegroundColorSpan((transform as ColorTransform).color.toIntColor())
         }
         else -> TODO("RichTextRange $transform not implemented")
     }

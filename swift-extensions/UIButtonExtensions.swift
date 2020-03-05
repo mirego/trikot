@@ -124,6 +124,8 @@ extension UIButton {
             let coloredAttribuedString = NSMutableAttributedString(attributedString: attributedString)
             coloredAttribuedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attributedString.length))
             self.setAttributedTitle(coloredAttribuedString, for: state)
+        }  else {
+            self.setAttributedTitle(attributedString, for: state)
         }
     }
 
