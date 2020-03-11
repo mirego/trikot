@@ -6,7 +6,7 @@ import org.reactivestreams.Publisher
 
 class EmptyBluetoothManager : BluetoothManager {
     override val statePublisher = Publishers.behaviorSubject<BluetoothManager.State>()
-    override val hasPermissionPublisher = Publishers.behaviorSubject<Boolean>()
+    override val missingPermissionsPublisher = Publishers.behaviorSubject<List<BluetoothManager.Permission>>()
 
     override fun scanForDevices(
         cancellableManager: CancellableManager,

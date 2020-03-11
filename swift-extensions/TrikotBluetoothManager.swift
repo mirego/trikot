@@ -27,9 +27,9 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         }
     }
 
-    public lazy var hasPermissionPublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
+    public lazy var missingPermissionsPublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
         guard let centralManagerState = value as? CBManagerState else { return nil }
-        return centralManagerState != .unauthorized
+        return centralManagerState != .unauthorized ? [] : [BluetoothManagerPermission.bluetooth]
     }
 
     func refreshLocationPermission() {

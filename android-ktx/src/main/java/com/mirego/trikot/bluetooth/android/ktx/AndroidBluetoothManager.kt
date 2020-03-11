@@ -1,4 +1,4 @@
-package mirego.trikot.bluetooth
+package com.mirego.trikot.bluetooth.android.ktx
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -18,6 +18,8 @@ import com.mirego.trikot.bluetooth.BluetoothManager
 import com.mirego.trikot.bluetooth.BluetoothScanResult
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
+import mirego.trikot.bluetooth.AndroidBluetoothScanResult
+import mirego.trikot.bluetooth.toBluetoothScanResult
 import org.reactivestreams.Publisher
 import java.util.Timer
 import java.util.UUID
@@ -27,13 +29,17 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
     override val statePublisher = Publishers.behaviorSubject<BluetoothManager.State>()
-    override val hasPermissionPublisher = Publishers.behaviorSubject<Boolean>()
+    override val missingPermissionsPublisher = Publishers.behaviorSubject<List<BluetoothManager.Permission>>()
 
     fun refreshLocationPermission() {
-        hasPermissionPublisher.value = ContextCompat.checkSelfPermission(
+        missingPermissionsPublisher.value = if (ContextCompat.checkSelfPermission(
             context,
             Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+        ) == PackageManager.PERMISSION_GRANTED) {
+            listOf(BluetoothManager.Permission.LOCATION)
+        } else {
+            emptyList()
+        }
     }
 
     init {
