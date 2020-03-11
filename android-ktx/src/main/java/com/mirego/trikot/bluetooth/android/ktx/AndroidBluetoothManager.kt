@@ -36,9 +36,9 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
             context,
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED) {
-            listOf(BluetoothManager.Permission.LOCATION)
-        } else {
             emptyList()
+        } else {
+            listOf(BluetoothManager.Permission.LOCATION)
         }
     }
 
