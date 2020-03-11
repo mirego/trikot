@@ -5,12 +5,17 @@ import org.reactivestreams.Publisher
 
 interface BluetoothManager {
     val statePublisher: Publisher<State>
-    val hasPermissionPublisher: Publisher<Boolean>
+    val missingPermissionsPublisher: Publisher<List<Permission>>
 
     fun scanForDevices(cancellableManager: CancellableManager, serviceUUIDs: List<String>): Publisher<List<BluetoothScanResult>>
 
     enum class State {
         ON,
         OFF
+    }
+
+    enum class Permission {
+        BLUETOOTH,
+        LOCATION
     }
 }
