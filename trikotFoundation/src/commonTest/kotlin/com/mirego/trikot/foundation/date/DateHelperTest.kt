@@ -2,7 +2,6 @@ package com.mirego.trikot.foundation.date
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
 
@@ -27,6 +26,6 @@ class DateHelperTest {
     @Test
     fun testDateFactory() {
         // TODO: Remove due to a bug in kotlin  1.3.70 (Invalid connection: com.apple.coresymbolicationd)
-        //assertTrue(DateHelper.equals(Date.fromISO8601("2020-01-01T00:00:00Z"), Date.fromEpochMillis(1577836800000)))
+        // assertTrue(DateHelper.equals(Date.fromISO8601("2020-01-01T00:00:00Z"), Date.fromEpochMillis(1577836800000)))
     }
 }
