@@ -10,10 +10,10 @@ import android.text.InputType.TYPE_DATETIME_VARIATION_NORMAL
 import android.text.InputType.TYPE_DATETIME_VARIATION_TIME
 import android.text.InputType.TYPE_NULL
 import android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
 import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
@@ -45,7 +45,9 @@ object MetaInputTextBinder {
                 }
 
                 it.userInput.observe(lifecycleOwnerWrapper.lifecycleOwner) { textValue ->
-                    if (textValue != editText.text.toString()) editText.setText(textValue)
+                    editText.noTextWatcher {
+                        if (textValue != editText.text.toString()) editText.setText(textValue)
+                    }
                 }
 
                 it.textColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { textColor ->
@@ -55,42 +57,54 @@ object MetaInputTextBinder {
                 }
 
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->
-                    editText.inputType =
-                        when (inputType) {
-                            MetaInputType.DATE ->
-                                TYPE_DATETIME_VARIATION_DATE or
-                                    TYPE_CLASS_DATETIME
-                            MetaInputType.DATETIME ->
-                                TYPE_DATETIME_VARIATION_NORMAL or
-                                    TYPE_CLASS_DATETIME
-                            MetaInputType.EMAIL ->
-                                TYPE_TEXT_VARIATION_EMAIL_ADDRESS or
-                                    TYPE_CLASS_TEXT
-                            MetaInputType.NUMBER ->
-                                TYPE_CLASS_NUMBER
-                            MetaInputType.TEXT ->
-                                TYPE_TEXT_FLAG_CAP_SENTENCES or
-                                    TYPE_CLASS_TEXT or
-                                    TYPE_TEXT_FLAG_NO_SUGGESTIONS
-                            MetaInputType.PASSWORD ->
-                                TYPE_TEXT_VARIATION_PASSWORD or
-                                    TYPE_CLASS_TEXT
-                            MetaInputType.PHONE_NUMBER ->
-                                TYPE_CLASS_PHONE
-                            MetaInputType.TIME ->
-                                TYPE_DATETIME_VARIATION_TIME or
-                                    TYPE_CLASS_DATETIME
-                            MetaInputType.MULTILINE ->
-                                TYPE_TEXT_FLAG_CAP_SENTENCES or
-                                        TYPE_CLASS_TEXT or
-                                        TYPE_TEXT_FLAG_NO_SUGGESTIONS or
-                                        TYPE_TEXT_FLAG_MULTI_LINE
-                            else -> TYPE_NULL
-                        }
+                    editText.noTextWatcher {
+                        editText.inputType =
+                            when (inputType) {
+                                MetaInputType.DATE ->
+                                    TYPE_DATETIME_VARIATION_DATE or
+                                            TYPE_CLASS_DATETIME
+                                MetaInputType.DATETIME ->
+                                    TYPE_DATETIME_VARIATION_NORMAL or
+                                            TYPE_CLASS_DATETIME
+                                MetaInputType.EMAIL ->
+                                    TYPE_TEXT_VARIATION_EMAIL_ADDRESS or
+                                            TYPE_CLASS_TEXT
+                                MetaInputType.NUMBER ->
+                                    TYPE_CLASS_NUMBER
+                                MetaInputType.TEXT ->
+                                    TYPE_TEXT_FLAG_CAP_SENTENCES or
+                                            TYPE_CLASS_TEXT or
+                                            TYPE_TEXT_FLAG_NO_SUGGESTIONS
+                                MetaInputType.PASSWORD ->
+                                    TYPE_TEXT_VARIATION_PASSWORD or
+                                            TYPE_CLASS_TEXT
+                                MetaInputType.PHONE_NUMBER ->
+                                    TYPE_CLASS_PHONE
+                                MetaInputType.TIME ->
+                                    TYPE_DATETIME_VARIATION_TIME or
+                                            TYPE_CLASS_DATETIME
+                                MetaInputType.MULTILINE ->
+                                    TYPE_TEXT_FLAG_CAP_SENTENCES or
+                                            TYPE_CLASS_TEXT or
+                                            TYPE_TEXT_FLAG_NO_SUGGESTIONS or
+                                            TYPE_TEXT_FLAG_MULTI_LINE
+                                else -> TYPE_NULL
+                            }
+                    }
                 }
 
                 editText.bindMetaView(it, lifecycleOwnerWrapper)
             }
+        }
+    }
+
+    private fun EditText.noTextWatcher(block: () -> Unit) {
+        val textWatcher = ListenerUtil.getListener<TextWatcher>(this, R.id.textWatcher)
+            ?.also { removeTextChangedListener(it) }
+        block()
+        textWatcher?.let {
+            ListenerUtil.trackListener<TextWatcher>(this, it, R.id.textWatcher)
+            addTextChangedListener(it)
         }
     }
 
