@@ -20,6 +20,8 @@ actual class Date(val nsDate: NSDate) {
     }
 
     actual companion object DateFactory {
+        private const val epochReferenceDateDelta: Double = 978307200.0
+
         actual val now: Date
             get() {
                 return Date(NSDate())
@@ -31,6 +33,10 @@ actual class Date(val nsDate: NSDate) {
                     isoDate
                 ) ?: NSDate()
             )
+        }
+
+        actual fun fromEpochMillis(epoch: Long): Date {
+            return Date(NSDate(timeIntervalSinceReferenceDate = (epoch.toDouble() / 1000.0) + epochReferenceDateDelta))
         }
     }
 

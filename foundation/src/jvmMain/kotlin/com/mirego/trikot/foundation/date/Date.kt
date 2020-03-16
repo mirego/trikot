@@ -36,13 +36,12 @@ actual class Date(val instant: Instant) {
     }
 
     actual companion object DateFactory {
+        actual val now: Date get() = Date(Instant.now())
 
         private val dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
-        actual fun fromISO8601(isoDate: String): Date {
-            return Date(dateTimeFormatter.parse(isoDate) { from(it) }.toInstant())
-        }
+        actual fun fromISO8601(isoDate: String): Date = Date(dateTimeFormatter.parse(isoDate) { from(it) }.toInstant())
 
-        actual val now: Date get() = Date(Instant.now())
+        actual fun fromEpochMillis(epoch: Long): Date = Date(Instant.ofEpochMilli(epoch))
     }
 }
