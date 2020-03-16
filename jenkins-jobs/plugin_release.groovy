@@ -32,7 +32,7 @@ job(context.jobFullName) {
         gradle {
             useWrapper()
             makeExecutable()
-            tasks(':foundation:release')
+            tasks(':trikotFoundation:release')
             switches('-i -s')
         }
     }
