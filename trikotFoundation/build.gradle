@@ -27,29 +27,39 @@ kotlin {
         fromPreset(presets.tvosX64, 'tvosX64')
     }
     sourceSets {
+        all {
+            languageSettings {
+                useExperimentalAnnotation('kotlin.time.ExperimentalTime')
+            }
+        }
+
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
+
         commonTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
         }
+
         jvmMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
                 implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
             }
         }
+
         jvmTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
+
         jsMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
@@ -68,24 +78,12 @@ kotlin {
             dependsOn(nativeMain)
         }
 
+        configure([iosX64Main, iosArm64Main, tvosArm64Main, tvosX64Main]) {
+            dependsOn nativeMain64
+        }
+
         iosArm32Main {
             dependsOn(nativeMain32)
-        }
-
-        iosArm64Main {
-            dependsOn(nativeMain64)
-        }
-
-        iosX64Main {
-            dependsOn(nativeMain64)
-        }
-
-        tvosArm64Main {
-            dependsOn(nativeMain64)
-        }
-
-        tvosX64Main {
-            dependsOn(nativeMain64)
         }
     }
 }

@@ -53,14 +53,14 @@ See: [Dispatch Queues](./documentation/DISPATCH_QUEUES.md)
 ## Installation
 ##### Import dependencies
 ```groovy
-    api "com.mirego.trikot:foundation:$trikot_foundation_version"
-    jvm "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
-    js "com.mirego.trikot:foundation-js:$trikot_foundation_version"
-    iosx64 "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
-    iosarm64 "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
-    iosarm32 "com.mirego.trikot:foundation-iosarm32:$trikot_foundation_version"
-    tvosx64 "com.mirego.trikot:foundation-tvosx64:$trikot_foundation_version"
-    tvosarm64 "com.mirego.trikot:foundation-tvosarm64:$trikot_foundation_version"
+    api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
+    jvm "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
+    js "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
+    iosx64 "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
+    iosarm64 "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
+    iosarm32 "com.mirego.trikot:trikotFoundation-iosarm32:$trikot_foundation_version"
+    tvosx64 "com.mirego.trikot:trikotFoundation-tvosx64:$trikot_foundation_version"
+    tvosarm64 "com.mirego.trikot:trikotFoundation-tvosarm64:$trikot_foundation_version"
 ```
 ## License
 
