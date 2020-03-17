@@ -3,7 +3,6 @@
 
 # rule identifiers to exclude from running
 disabled_rules:
-  - implicit_getter # Temporarily disabled because of false positives in Xcode 11.4
   - force_cast
 
 # all opt-in rules are listed, with the ones we do not want commented out so we can know which rules we don't want and which rules are new when upgrading Swiftlint
@@ -119,7 +118,6 @@ opt_in_rules:
 # paths to exclude
 excluded:
   - Pods
-  - third_party
   - Data
   - R.generated.swift
   - .bundle
