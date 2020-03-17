@@ -11,7 +11,7 @@ extension UIButton {
              return objc_getAssociatedObject(self, AssociatedKeys.onTapKey) as? MetaAction
         }
         set {
-            objc_setAssociatedObject(self, AssociatedKeys.onTapKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, AssociatedKeys.onTapKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
