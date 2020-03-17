@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/bin/ios/MetaviewsSample.framework"
-    spec.libraries                = "c++"
+    spec.libraries                = "c++", "System"
     spec.module_name              = "#{spec.name}_umbrella"
 
     spec.pod_target_xcconfig = {
