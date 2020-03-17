@@ -10,7 +10,7 @@ import com.trikot.metaviews.sample.metaviews.MutableHeaderListItem
 import com.trikot.metaviews.sample.metaviews.MutableMetaInputTextListItem
 import com.trikot.metaviews.sample.navigation.NavigationDelegate
 
-class InputTextViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
+class InputTextViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
     override val items: List<MetaListItem> = listOf(
         MutableHeaderListItem(".backgroundColor"),
         MutableMetaInputTextListItem().also {
@@ -34,7 +34,7 @@ class InputTextViewModel(navigationDelegate: NavigationDelegate): ListViewModel 
         },
         MutableHeaderListItem(".textColor"),
         MutableMetaInputTextListItem().also {
-            it.inputText.textColor = Color(255, 0 ,0).just()
+            it.inputText.textColor = Color(255, 0, 0).just()
         },
         MutableHeaderListItem(".inputType = password"),
         MutableMetaInputTextListItem().also {

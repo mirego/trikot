@@ -12,7 +12,7 @@ import com.trikot.metaviews.sample.metaviews.MutableHeaderListItem
 import com.trikot.metaviews.sample.metaviews.MutableMetaLabelListItem
 import com.trikot.metaviews.sample.navigation.NavigationDelegate
 
-class LabelsViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
+class LabelsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
     override val items: List<MetaListItem> = listOf(
         MutableHeaderListItem(".backgroundColor"),
         MutableMetaLabelListItem().also {

@@ -6,11 +6,10 @@ import com.mirego.trikot.metaviews.properties.MetaSelector
 import com.mirego.trikot.streams.reactive.just
 import com.trikot.metaviews.sample.metaviews.MetaListItem
 import com.trikot.metaviews.sample.metaviews.MutableHeaderListItem
-import com.trikot.metaviews.sample.metaviews.MutableMetaLabelListItem
 import com.trikot.metaviews.sample.metaviews.MutableMetaViewListItem
 import com.trikot.metaviews.sample.navigation.NavigationDelegate
 
-class ViewsViewModel(navigationDelegate: NavigationDelegate): ListViewModel {
+class ViewsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
     override val items: List<MetaListItem> = listOf(
         MutableHeaderListItem(".backgroundColor"),
         MutableMetaViewListItem().also {

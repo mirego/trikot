@@ -35,7 +35,7 @@ CHECKOUT OPTIONS:
     :git: "git@github.com:mirego/trikot.streams.git"
 
 SPEC CHECKSUMS:
-  MetaviewsSample: 8a5cbcebc5cf884e63cdf10e41e1e9ee5652f865
+  MetaviewsSample: a10fe542e55ab42a59fda54d6efa4fb4ec99abb2
   SwiftLint: c078a14d7d7ade75e5507795d185e3da41d844d2
   Trikot.metaviews: 1ba37e30ef599a5a2366b964d57539366018b5c6
   Trikot.streams: 17dcc8d50181f6cdcb2159af98bbac28dbe9c496

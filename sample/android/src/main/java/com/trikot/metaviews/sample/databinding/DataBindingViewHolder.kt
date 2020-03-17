@@ -30,18 +30,21 @@ class DataBindingViewHolder<T>(
     }
 
     fun unbind() {
-        detach()
+        binding.unbind()
     }
 
     fun attach() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        binding.invalidateAll()
+        if (lifecycleRegistry.currentState != Lifecycle.State.STARTED) {
+            lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
+            binding.invalidateAll()
+        }
     }
 
     fun detach() {
-        binding.unbind()
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        if (lifecycleRegistry.currentState != Lifecycle.State.DESTROYED) {
+            lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+            lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        }
     }
 }

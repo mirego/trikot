@@ -233,7 +233,7 @@
 				F861D7DB207FA40F0085E80D /* Resources */,
 				40171A17226663B300C0D218 /* Embed Frameworks */,
 				1FBAC30C22A834EF008281E9 /* Run SwiftLint */,
-				9839E6D25EF0FE702EDA0609 /* [CP] Embed Pods Frameworks */,
+				B2C6E31A07E2AB083346BCCE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,7 +391,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ -f \"${PODS_ROOT}/SwiftLint/swiftlint\" ]; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\" --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		9839E6D25EF0FE702EDA0609 /* [CP] Embed Pods Frameworks */ = {
+		B2C6E31A07E2AB083346BCCE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
