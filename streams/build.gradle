@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation "com.mirego.trikot:foundation:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
@@ -41,7 +41,7 @@ kotlin {
         }
         jvmMain {
             dependencies {
-                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
@@ -53,7 +53,7 @@ kotlin {
         }
         jsMain {
             dependencies {
-                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
@@ -65,34 +65,34 @@ kotlin {
         iosArm32Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:foundation-iosarm32:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-iosarm32:$trikot_foundation_version"
             }
         }
 
         iosArm64Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
             }
         }
 
         iosX64Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
             }
         }
         tvosArm64Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:foundation-tvosarm64:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-tvosarm64:$trikot_foundation_version"
             }
         }
 
         tvosX64Main {
             dependsOn(nativeMain)
             dependencies {
-                implementation "com.mirego.trikot:foundation-tvosx64:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-tvosx64:$trikot_foundation_version"
             }
         }
     }

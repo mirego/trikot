@@ -31,7 +31,7 @@ configurations.all {
 }
 
 dependencies {
-    api 'com.mirego.trikot:streams:0.45.1'
+    api 'com.mirego.trikot:streams:0.56.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0'
 }
