@@ -4,7 +4,6 @@ import Trikot_metaviews
 import TrikotFrameworkName
 import UIKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?

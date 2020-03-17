@@ -23,13 +23,14 @@ class SampleView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         addSubview(button)
         button.backgroundColor = .gray
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-            label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
-            button.centerXAnchor.constraint(equalTo: centerXAnchor),
-            button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
+        NSLayoutConstraint.activate(
+            [
+                label.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
+                label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+                label.centerXAnchor.constraint(equalTo: centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: centerYAnchor),
+                button.centerXAnchor.constraint(equalTo: centerXAnchor),
+                button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
             ]
         )
     }

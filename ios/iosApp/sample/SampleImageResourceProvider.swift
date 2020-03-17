@@ -4,6 +4,6 @@ import TrikotFrameworkName
 
 class SampleImageResourceProvider: MetaImageResourceProvider {
     func image(fromResource resource: ImageResource?) -> UIImage? {
-        return nil
+        nil
     }
 }
