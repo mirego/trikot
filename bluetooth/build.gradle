@@ -28,21 +28,21 @@ kotlin {
         commonMain {
             dependencies {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
-                implementation "com.mirego.trikot:foundation:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
         jvmMain {
             dependencies {
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
         jsMain {
             dependencies {
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
@@ -54,7 +54,7 @@ kotlin {
             dependsOn(nativeMain)
             dependencies {
                 implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
-                implementation "com.mirego.trikot:foundation-iosarm64:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
             }
         }
 
@@ -62,7 +62,7 @@ kotlin {
             dependsOn(nativeMain)
             dependencies {
                 implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
-                implementation "com.mirego.trikot:foundation-iosx64:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
             }
         }
     }
