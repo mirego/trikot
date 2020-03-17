@@ -1,15 +1,16 @@
-import UIKit
-import TrikotFrameworkName
-import Trikot_metaviews
 import Trikot_http
 import Trikot_kword
+import Trikot_metaviews
+import TrikotFrameworkName
+import UIKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Environment().flavor = CurrentFlavor()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]) -> Bool {
+        Environment().flavor = currentFlavor()
         HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
         HttpConfiguration().connectivityPublisher = TrikotConnectivityService.shared.publisher
         MetaImageResourceManager.shared = SampleImageResourceProvider()
@@ -40,12 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {}
 
-    func CurrentFlavor() -> Environment.Flavor {
+    func currentFlavor() -> Environment.Flavor {
         switch (Bundle.main.object(forInfoDictionaryKey: "Environment") ?? "debug") as! String {
-        case "debug": return .debug
-        case "qa": return .qa
-        case "staging": return .staging
-        default: return Environment.Flavor.release_
+        case "debug":
+            return .debug
+        case "qa":
+            return .qa
+        case "staging":
+            return .staging
+        default:
+            return Environment.Flavor.release_
         }
     }
 }

@@ -1,5 +1,5 @@
-import UIKit
 import TrikotFrameworkName
+import UIKit
 
 class SampleView: UIView {
     private let label = UILabel()
@@ -30,9 +30,11 @@ class SampleView: UIView {
             label.centerYAnchor.constraint(equalTo: centerYAnchor),
             button.centerXAnchor.constraint(equalTo: centerXAnchor),
             button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
-            ])
+            ]
+        )
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

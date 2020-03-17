@@ -2,8 +2,8 @@ import Foundation
 import TrikotFrameworkName
 
 class Core {
-    static let shared: Core = Core()
-    private var bootstrap: Bootstrap = Bootstrap()
+    static let shared = Core()
+    private var bootstrap = Bootstrap()
     let viewModelFactory: ViewModelFactory
 
     init() {
