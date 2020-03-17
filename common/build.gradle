@@ -39,8 +39,8 @@ kotlin {
                 framework {
                     embedBitcode("disable")
                     baseName = "$trikot_framework_name"
-                    export "com.mirego.trikot:foundation:$trikot_foundation_version"
-                    export "com.mirego.trikot:foundation-$iosArchLibrarySuffix:$trikot_foundation_version"
+                    export "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
+                    export "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
                     export "com.mirego.trikot:streams:$trikot_streams_version"
                     export "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
                     export "com.mirego.trikot:metaviews:$trikot_metaviews_version"
@@ -56,7 +56,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api "com.mirego.trikot:foundation:$trikot_foundation_version"
+                api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 api "com.mirego.trikot:streams:$trikot_streams_version"
                 api "com.mirego.trikot:metaviews:$trikot_metaviews_version"
                 api "com.mirego.trikot:http:$trikot_http_version"
@@ -76,7 +76,7 @@ kotlin {
         }
         jvmMain {
             dependencies {
-                implementation "com.mirego.trikot:foundation-jvm:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
                 implementation "com.mirego.trikot:metaviews-jvm:$trikot_metaviews_version"
                 implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
@@ -96,7 +96,7 @@ kotlin {
         }
         jsMain {
             dependencies {
-                implementation "com.mirego.trikot:foundation-js:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
                 implementation "com.mirego.trikot:metaviews-js:$trikot_metaviews_version"
                 implementation "com.mirego.trikot:http-js:$trikot_http_version"
@@ -109,7 +109,7 @@ kotlin {
         }
         iosMain {
             dependencies {
-                implementation "com.mirego.trikot:foundation-$iosArchLibrarySuffix:$trikot_foundation_version"
+                implementation "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
                 implementation "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
                 implementation "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"

@@ -22,7 +22,7 @@ DEPENDENCIES:
   - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - ReachabilitySwift
     - SwiftLint
 
@@ -63,4 +63,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c838f8db421d6bcf807608c791475b8ba5480d1c
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.8.4
