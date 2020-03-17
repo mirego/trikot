@@ -145,16 +145,20 @@ class BaseDataSourceTests {
 
     data class FakeRequest(override val cachableId: Any, override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE) : DataSourceRequest
 
-    class BasicDataSource(var publishers: MutableMap<Any, ReadFromCachePublisher>, fallbackDataSource: DataSource<FakeRequest, String>? = null) : BaseDataSource<FakeRequest, String>(fallbackDataSource) {
+    class BasicDataSource(publishers: MutableMap<Any, ReadFromCachePublisher>, fallbackDataSource: DataSource<FakeRequest, String>? = null) : BaseDataSource<FakeRequest, String>(fallbackDataSource) {
+        private val internalPublishers = AtomicReference(publishers)
+
         override fun internalRead(request: FakeRequest): ExecutablePublisher<String> {
-            return publishers[request.cachableId]!!
+            return internalPublishers.value[request.cachableId]!!
         }
 
         override fun save(request: FakeRequest, data: String?) {
             super.save(request, data)
             val publisher = ReadFromCachePublisher().also { it.dispatchResult(data) }
-            val hasOldPublisher = publishers[request.cachableId] != null
-            publishers[request.cachableId] = publisher
+            val hasOldPublisher = internalPublishers.value[request.cachableId] != null
+            val mutable = internalPublishers.value.toMutableMap()
+            mutable[request.cachableId] = publisher
+            internalPublishers.compareAndSet(internalPublishers.value, mutable)
 
             if (hasOldPublisher) {
                 refreshPublisherWithId(request.cachableId)
@@ -163,33 +167,33 @@ class BaseDataSourceTests {
     }
 
     class ReadFromCachePublisher : ExecutablePublisher<String>, BehaviorSubjectImpl<String>() {
-        var resultValue: String? = null
-        var errorValue: Throwable? = null
-        var executed = false
+        val resultValue = AtomicReference<String?>(null)
+        val errorValue = AtomicReference<Throwable?>(null)
+        val executed = AtomicReference<Boolean>(false)
 
         override fun cancel() {
         }
 
         override fun execute() {
-            executed = true
+            executed.compareAndSet(executed.value, true)
             dispatchResultIfNeeded()
         }
 
         fun dispatchResult(result: String?) {
-            resultValue = result
+            resultValue.compareAndSet(resultValue.value, result)
             dispatchResultIfNeeded()
         }
 
         fun dispatchError(error: Throwable) {
-            errorValue = error
+            errorValue.compareAndSet(errorValue.value, error)
             dispatchResultIfNeeded()
         }
 
         private fun dispatchResultIfNeeded() {
-            if (executed) {
-                errorValue?.let {
-                    error = errorValue
-                } ?: run { value = resultValue }
+            if (executed.value) {
+                errorValue.value?.let {
+                    error = errorValue.value
+                } ?: run { value = resultValue.value }
             }
         }
     }
