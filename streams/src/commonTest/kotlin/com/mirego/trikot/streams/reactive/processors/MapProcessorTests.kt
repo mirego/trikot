@@ -38,6 +38,7 @@ class MapProcessorTests {
     @Test
     fun testMappingAnyException() {
         val publisher = Publishers.behaviorSubject("a")
+        @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
         var receivedException: StreamsProcessorException? = null
 
         assertFailsWith(IllegalStateException::class) {

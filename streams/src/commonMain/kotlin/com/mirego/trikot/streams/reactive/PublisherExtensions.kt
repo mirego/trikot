@@ -1,5 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
+import com.mirego.trikot.streams.reactive.processors.TimeoutProcessor
 import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
@@ -108,6 +109,10 @@ fun <T> Publisher<T>.startWith(value: T): Publisher<T> {
 
 fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
     return this.filter { block(it) != null }.map { block(it)!! }
+}
+
+fun <T> Publisher<T>.timeout(duration: Duration, message: String = "Default timeout message"): Publisher<T> {
+    return TimeoutProcessor(duration = duration, timeoutMessage = message, parentPublisher = this)
 }
 
 @ExperimentalTime

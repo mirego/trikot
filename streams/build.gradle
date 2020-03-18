@@ -27,6 +27,12 @@ kotlin {
         fromPreset(presets.tvosX64, 'tvosX64')
     }
     sourceSets {
+        all {
+            languageSettings {
+                useExperimentalAnnotation('kotlin.time.ExperimentalTime')
+            }
+        }
+
         commonMain {
             dependencies {
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"

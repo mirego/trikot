@@ -1,14 +1,14 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.foundation.timers.Timer
-import com.mirego.trikot.foundation.timers.TimerFactory
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.debounce
 import com.mirego.trikot.streams.reactive.subscribe
+import com.mirego.trikot.streams.utils.MockTimer
+import com.mirego.trikot.streams.utils.MockTimerFactory
+import com.mirego.trikot.streams.utils.NoBlock
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import kotlin.time.milliseconds
 
@@ -22,7 +22,7 @@ class DebounceProcessorTests {
         val expectedResult = "b"
         var receivedResult: String? = null
         publisher
-            .debounce(600.milliseconds, MockTimerFactory(timer))
+            .debounce(600.milliseconds, MockTimerFactory { _, _ -> timer })
             .subscribe(CancellableManager()) {
                 receivedResult = it
             }
@@ -39,7 +39,7 @@ class DebounceProcessorTests {
         val expectedResult = "b"
         var receivedResult: String? = null
         publisher
-            .debounce(600.milliseconds, MockTimerFactory(timer))
+            .debounce(600.milliseconds, MockTimerFactory { _, _ -> timer })
             .subscribe(CancellableManager().also { it.cancel() }) {
                 receivedResult = it
             }
@@ -48,33 +48,4 @@ class DebounceProcessorTests {
         assertEquals(null, receivedResult)
         assertEquals(NoBlock, timer.block)
     }
-}
-
-@ExperimentalTime
-class MockTimerFactory(private val mockTimer: MockTimer) : TimerFactory {
-    override fun repeatable(delay: Duration, block: () -> Unit): Timer {
-        mockTimer.block = block
-        return mockTimer
-    }
-
-    override fun single(delay: Duration, block: () -> Unit): Timer {
-        mockTimer.block = block
-        return mockTimer
-    }
-}
-
-class MockTimer : Timer {
-
-    var block: () -> Unit = NoBlock
-
-    fun executeBlock() {
-        block.invoke()
-    }
-
-    override fun cancel() {
-    }
-}
-
-object NoBlock : () -> Unit {
-    override fun invoke() {}
 }
