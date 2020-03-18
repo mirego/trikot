@@ -126,11 +126,6 @@ excluded:
 conditional_returns_on_newline:
   if_only: true
 
-deployment_target:
-  iOS_deployment_target: 9.0
-  tvOS_deployment_target: 9.1
-  watchOS_deployment_target: 2.0
-
 file_length:
   ignore_comment_only_lines: true
 
