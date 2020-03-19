@@ -1,4 +1,4 @@
-# Unless otherwise noted, rules are disabled because they reduce the readability of the code
+switch_case_on_newline# Unless otherwise noted, rules are disabled because they reduce the readability of the code
 # See https://realm.github.io/SwiftLint/rule-directory.html for more info on each rule
 
 # Rule identifiers to exclude from running
@@ -99,7 +99,7 @@ opt_in_rules:
   - static_operator
   - strict_fileprivate
   - strong_iboutlet
-  - switch_case_on_newline
+  #- switch_case_on_newline
   - toggle_bool
   - trailing_closure
   #- type_contents_order
