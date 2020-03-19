@@ -150,3 +150,6 @@ file_header:
 identifier_name: # exclude length validation
   min_length: 1
   max_length: 999
+
+cyclomatic_complexity:
+  ignores_case_statements: true
