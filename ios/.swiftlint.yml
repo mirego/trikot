@@ -153,3 +153,6 @@ identifier_name: # exclude length validation
 
 cyclomatic_complexity:
   ignores_case_statements: true
+
+discouraged_object_literal:
+  color_literal: false
