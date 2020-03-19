@@ -4,6 +4,7 @@
 # Rule identifiers to exclude from running
 disabled_rules:
   - force_cast
+  - function_body_length
 
 # All opt-in rules are listed, with the ones we do not want commented out so we can know which rules we don't want and which rules are new when upgrading Swiftlint
 opt_in_rules:
