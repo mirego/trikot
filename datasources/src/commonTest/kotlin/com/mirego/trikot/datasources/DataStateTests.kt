@@ -10,16 +10,16 @@ class DataStateTests {
         val dataState: DataState<String, Error> = DataState.Pending()
 
         assertTrue { dataState.isPending() }
-        assertTrue { dataState.isPending(true) }
         assertTrue { dataState.isPending(false) }
+        assertTrue { dataState.isPending(true) }
         assertTrue { !dataState.hasData() }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = false) }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = true) }
-        assertTrue { !dataState.hasData(ignorePending = true, ignoreError = false) }
-        assertTrue { !dataState.hasData(ignorePending = true, ignoreError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = false) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = true, hasDataIfError = false) }
+        assertTrue { !dataState.hasData(hasDataIfPending = true, hasDataIfError = true) }
         assertTrue { !dataState.isError() }
-        assertTrue { !dataState.isError(true) }
         assertTrue { !dataState.isError(false) }
+        assertTrue { !dataState.isError(true) }
     }
 
     @Test
@@ -27,16 +27,16 @@ class DataStateTests {
         val dataState: DataState<String, Error> = DataState.Pending("data")
 
         assertTrue { dataState.isPending() }
-        assertTrue { dataState.isPending(true) }
         assertTrue { !dataState.isPending(false) }
+        assertTrue { dataState.isPending(true) }
         assertTrue { dataState.hasData() }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = false) }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = true) }
-        assertTrue { dataState.hasData(ignorePending = true, ignoreError = false) }
-        assertTrue { dataState.hasData(ignorePending = true, ignoreError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = false) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = true) }
+        assertTrue { dataState.hasData(hasDataIfPending = true, hasDataIfError = false) }
+        assertTrue { dataState.hasData(hasDataIfPending = true, hasDataIfError = true) }
         assertTrue { !dataState.isError() }
-        assertTrue { !dataState.isError(true) }
         assertTrue { !dataState.isError(false) }
+        assertTrue { !dataState.isError(true) }
     }
 
     @Test
@@ -44,16 +44,16 @@ class DataStateTests {
         val dataState: DataState<String, Error> = DataState.Data("data")
 
         assertTrue { !dataState.isPending() }
-        assertTrue { !dataState.isPending(true) }
         assertTrue { !dataState.isPending(false) }
+        assertTrue { !dataState.isPending(true) }
         assertTrue { dataState.hasData() }
-        assertTrue { dataState.hasData(ignorePending = false, ignoreError = false) }
-        assertTrue { dataState.hasData(ignorePending = false, ignoreError = true) }
-        assertTrue { dataState.hasData(ignorePending = true, ignoreError = false) }
-        assertTrue { dataState.hasData(ignorePending = true, ignoreError = true) }
+        assertTrue { dataState.hasData(hasDataIfPending = false, hasDataIfError = false) }
+        assertTrue { dataState.hasData(hasDataIfPending = false, hasDataIfError = true) }
+        assertTrue { dataState.hasData(hasDataIfPending = true, hasDataIfError = false) }
+        assertTrue { dataState.hasData(hasDataIfPending = true, hasDataIfError = true) }
         assertTrue { !dataState.isError() }
-        assertTrue { !dataState.isError(true) }
         assertTrue { !dataState.isError(false) }
+        assertTrue { !dataState.isError(true) }
     }
 
     @Test
@@ -61,16 +61,16 @@ class DataStateTests {
         val dataState: DataState<String, Error> = DataState.Error(Error(), null)
 
         assertTrue { !dataState.isPending() }
-        assertTrue { !dataState.isPending(true) }
         assertTrue { !dataState.isPending(false) }
+        assertTrue { !dataState.isPending(true) }
         assertTrue { !dataState.hasData() }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = false) }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = true) }
-        assertTrue { !dataState.hasData(ignorePending = true, ignoreError = false) }
-        assertTrue { !dataState.hasData(ignorePending = true, ignoreError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = false) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = true, hasDataIfError = false) }
+        assertTrue { !dataState.hasData(hasDataIfPending = true, hasDataIfError = true) }
         assertTrue { dataState.isError() }
-        assertTrue { dataState.isError(true) }
         assertTrue { dataState.isError(false) }
+        assertTrue { dataState.isError(true) }
     }
 
     @Test
@@ -78,15 +78,15 @@ class DataStateTests {
         val dataState: DataState<String, Error> = DataState.Error(Error(), "data")
 
         assertTrue { !dataState.isPending() }
-        assertTrue { !dataState.isPending(true) }
         assertTrue { !dataState.isPending(false) }
+        assertTrue { !dataState.isPending(true) }
         assertTrue { dataState.hasData() }
-        assertTrue { !dataState.hasData(ignorePending = false, ignoreError = false) }
-        assertTrue { dataState.hasData(ignorePending = false, ignoreError = true) }
-        assertTrue { !dataState.hasData(ignorePending = true, ignoreError = false) }
-        assertTrue { dataState.hasData(ignorePending = true, ignoreError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = false, hasDataIfError = false) }
+        assertTrue { dataState.hasData(hasDataIfPending = false, hasDataIfError = true) }
+        assertTrue { !dataState.hasData(hasDataIfPending = true, hasDataIfError = false) }
+        assertTrue { dataState.hasData(hasDataIfPending = true, hasDataIfError = true) }
         assertTrue { dataState.isError() }
-        assertTrue { dataState.isError(true) }
         assertTrue { !dataState.isError(false) }
+        assertTrue { dataState.isError(true) }
     }
 }
