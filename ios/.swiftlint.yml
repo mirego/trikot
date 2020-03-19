@@ -1,11 +1,11 @@
 # Unless otherwise noted, rules are disabled because they reduce the readability of the code
 # See https://realm.github.io/SwiftLint/rule-directory.html for more info on each rule
 
-# rule identifiers to exclude from running
+# Rule identifiers to exclude from running
 disabled_rules:
   - force_cast
 
-# all opt-in rules are listed, with the ones we do not want commented out so we can know which rules we don't want and which rules are new when upgrading Swiftlint
+# All opt-in rules are listed, with the ones we do not want commented out so we can know which rules we don't want and which rules are new when upgrading Swiftlint
 opt_in_rules:
   - anyobject_protocol
   - array_init
@@ -115,7 +115,7 @@ opt_in_rules:
   - xct_specific_matcher
   - yoda_condition
 
-# paths to exclude
+# Paths to exclude
 excluded:
   - Pods
   - Data
@@ -125,6 +125,12 @@ excluded:
 
 conditional_returns_on_newline:
   if_only: true
+
+# Use the same deployment target as the project
+deployment_target:
+   iOS_deployment_target: 9.0
+   tvOS_deployment_target: 9.1
+   watchOS_deployment_target: 2.0
 
 file_length:
   ignore_comment_only_lines: true
