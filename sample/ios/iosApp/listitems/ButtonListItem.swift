@@ -1,13 +1,13 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class ButtonListItem: UIView {
     private let button = UIButton(frame: .zero)
 
-    var item: MetaButtonListItem? {
+    var item: ButtonListItemViewModel? {
         didSet {
-            metaView = item
-            button.metaButton = item?.button
+            viewModel = item
+            button.buttonViewModel = item?.button
         }
     }
 

@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mirego.trikot.metaviews.android.ktx"/>
+          package="com.mirego.trikot.viewmodels.android.ktx"/>

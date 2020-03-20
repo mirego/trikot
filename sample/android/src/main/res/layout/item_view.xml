@@ -6,11 +6,11 @@
     <data>
         <variable
             name="item"
-            type="com.trikot.metaviews.sample.metaviews.MetaViewListItem" />
+            type="com.trikot.viewmodels.sample.viewmodels.ViewListItemViewModel" />
 
         <variable
             name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.metaviews.LifecycleOwnerWrapper" />
+            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:meta_view="@{item}">
+        core:view_model="@{item}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="50dp"
@@ -30,7 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             android:background="#565656"
-            core:meta_view="@{item.view}">
+            core:view_model="@{item.view}">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

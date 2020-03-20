@@ -1,8 +1,8 @@
 import Foundation
-import MetaviewsSample
-import Trikot_metaviews
+import ViewModelsSample
+import Trikot_viewmodels
 
-class SampleImageResourceProvider: MetaImageResourceProvider {
+class SampleImageResourceProvider: ImageViewModelResourceProvider {
     func image(fromResource resource: ImageResource?) -> UIImage? {
         if (resource as? ImageResources) == ImageResources.icon {
             return #imageLiteral(resourceName: "icon")

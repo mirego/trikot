@@ -6,11 +6,11 @@
     <data>
         <variable
             name="item"
-            type="com.trikot.metaviews.sample.metaviews.MetaNavigableListItem" />
+            type="com.trikot.viewmodels.sample.viewmodels.NavigableListItemViewModel" />
 
         <variable
             name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.metaviews.LifecycleOwnerWrapper" />
+            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:meta_view="@{item}">
+        core:view_model="@{item}">
 
        <TextView
            android:layout_width="match_parent"
@@ -32,7 +32,7 @@
            android:layout_marginStart="16dp"
            android:textSize="30dp"
            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-           core:meta_view="@{item.title}"
+           core:view_model="@{item.title}"
            tools:text="Click me..."/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

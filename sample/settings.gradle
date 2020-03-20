@@ -20,7 +20,7 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'MetaviewsSample'
+rootProject.name = 'ViewModelsSample'
 enableFeaturePreview("GRADLE_METADATA")
 
 include ':android', 'common'

@@ -1,13 +1,13 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class LabelListItem: UIView {
     private let title = UILabel(frame: .zero)
 
-    var item: MetaLabelListItem? {
+    var item: LabelListItemViewModel? {
         didSet {
-            metaView = item
-            title.metaLabel = item?.label
+            viewModel = item
+            title.labelViewModel = item?.label
         }
     }
 

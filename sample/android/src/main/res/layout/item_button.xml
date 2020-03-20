@@ -7,11 +7,11 @@
     <data>
         <variable
             name="item"
-            type="com.trikot.metaviews.sample.metaviews.MetaButtonListItem" />
+            type="com.trikot.viewmodels.sample.viewmodels.ButtonListItemViewModel" />
 
         <variable
             name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.metaviews.LifecycleOwnerWrapper" />
+            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:meta_view="@{item}">
+        core:view_model="@{item}">
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="200dp"
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:meta_view="@{item.button}"
+            core:view_model="@{item.button}"
             tools:text="addasdas"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

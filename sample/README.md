@@ -1,1 +1,1 @@
-# Sample application for Trikot.metaviews
+# Sample application for Trikot.viewmodels

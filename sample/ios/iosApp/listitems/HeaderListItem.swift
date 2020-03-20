@@ -1,13 +1,13 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class HeaderListItem: UIView {
     private let title = UILabel(frame: .zero)
 
-    var item: MetaHeaderListItem? {
+    var item: HeaderListItemViewModel? {
         didSet {
-            metaView = item
-            title.metaLabel = item?.text
+            viewModel = item
+            title.labelViewModel = item?.text
         }
     }
 

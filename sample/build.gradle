@@ -26,7 +26,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        mavenLocal()
         maven { url "https://kotlin.bintray.com/kotlinx" }
     }
 }

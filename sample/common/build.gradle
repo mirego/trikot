@@ -13,7 +13,7 @@ repositories {
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
 
-group 'com.trikot.metaviews.sample'
+group 'com.trikot.viewmodels.sample'
 version '0.0.1'
 
 apply plugin: 'maven-publish'
@@ -36,8 +36,8 @@ kotlin {
                     export "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
                     export "com.mirego.trikot:streams:$trikot_streams_version"
                     export "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
-                    export "com.mirego.trikot:metaviews:$trikot_metaviews_version"
-                    export "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
+                    export "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
+                    export "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
                 }
             }
         }
@@ -47,7 +47,7 @@ kotlin {
             dependencies {
                 api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 api "com.mirego.trikot:streams:$trikot_streams_version"
-                api "com.mirego.trikot:metaviews:$trikot_metaviews_version"
+                api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
@@ -75,7 +75,7 @@ kotlin {
             dependencies {
                 implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews-js:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
@@ -83,7 +83,7 @@ kotlin {
             dependencies {
                 implementation "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews-$iosArchLibrarySuffix:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
             }
         }
     }

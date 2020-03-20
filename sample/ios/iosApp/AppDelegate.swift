@@ -1,6 +1,6 @@
 import UIKit
-import MetaviewsSample
-import Trikot_metaviews
+import ViewModelsSample
+import Trikot_viewmodels
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {
@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Environment().flavor = CurrentFlavor()
-        MetaImageResourceManager.shared = SampleImageResourceProvider()
+        ImageViewModelResourceManager.shared = SampleImageResourceProvider()
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window

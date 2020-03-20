@@ -1,18 +1,18 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class ListView: UIView {
     private let tableView = UITableView()
 
-    var items: [MetaListItem]? {
+    var items: [ListItemViewModel]? {
         didSet {
             tableView.reloadData()
         }
     }
 
-    var viewModel: ListViewModel? {
+    var vm: ListViewModel? {
         didSet {
-            self.items = viewModel?.items
+            self.items = vm?.items
         }
     }
 
@@ -56,31 +56,31 @@ extension ListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let metaListItem = items?[indexPath.row]
 
-        if let metaListItem = metaListItem as? MetaNavigableListItem {
+        if let metaListItem = metaListItem as? NavigableListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<NavigableListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaLabelListItem {
+        } else if let metaListItem = metaListItem as? LabelListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<LabelListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaHeaderListItem {
+        } else if let metaListItem = metaListItem as? HeaderListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<HeaderListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaViewListItem {
+        } else if let metaListItem = metaListItem as? ViewListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ViewListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaButtonListItem {
+        } else if let metaListItem = metaListItem as? ButtonListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ButtonListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaImageListItem {
+        } else if let metaListItem = metaListItem as? ImageListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ImageListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? MetaInputTextListItem {
+        } else if let metaListItem = metaListItem as? InputTextListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<InputTextListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell

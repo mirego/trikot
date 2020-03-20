@@ -3,28 +3,28 @@ import TRIKOT_FRAMEWORK_NAME
 import Trikot_streams
 
 extension UIView {
-    public var metaView: MetaView? {
-        get { return trikotMetaView() }
-        set(metaView) {
+    public var viewModel: ViewModel? {
+        get { return trikotViewModel() }
+        set(viewModel) {
             unsubscribeFromAllPublisher()
-            setTrikotMetaView(metaView: metaView)
-            guard let metaView = metaView else { return }
+            setTrikotViewModel(viewModel: viewModel)
+            guard let viewModel = viewModel else { return }
 
-            bind(metaView.alpha, \UIView.alpha)
+            bind(viewModel.alpha, \UIView.alpha)
 
-            bindColorSelectorDefaultValue(metaView.backgroundColor, \UIView.backgroundColor)
+            bindColorSelectorDefaultValue(viewModel.backgroundColor, \UIView.backgroundColor)
 
-            bind(metaView.hidden, \UIView.isHidden)
+            bind(viewModel.hidden, \UIView.isHidden)
 
             let onTapResetableCancelableManager = CancellableManagerProvider()
             trikotInternalPublisherCancellableManager.add(cancellable: onTapResetableCancelableManager)
 
             if !(self is UIControl) {
-                observe(metaView.onTap) {[weak self] (value: MetaAction) in
+                observe(viewModel.action) {[weak self] (value: ViewModelAction) in
                     guard let self = self else { return }
                     let newCancellableManager = onTapResetableCancelableManager.cancelPreviousAndCreate()
 
-                    if value != MetaAction.Companion().None {
+                    if value != ViewModelAction.Companion().None {
                         let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(self.trikotOnViewTouchUp))
                         self.addGestureRecognizer(tapGestureReconizer)
                         newCancellableManager.add {[weak self] in
@@ -37,22 +37,22 @@ extension UIView {
     }
 
     private struct AssociatedKeys {
-        static var metaViewKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+        static var viewModelKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
 
-    public func trikotMetaView<T>() -> T? {
-        return objc_getAssociatedObject(self, AssociatedKeys.metaViewKey) as? T
+    public func trikotViewModel<T>() -> T? {
+        return objc_getAssociatedObject(self, AssociatedKeys.viewModelKey) as? T
     }
 
-    public func setTrikotMetaView<T>(metaView: T?) {
-        objc_setAssociatedObject(self, AssociatedKeys.metaViewKey, metaView, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    public func setTrikotViewModel<T>(viewModel: T?) {
+        objc_setAssociatedObject(self, AssociatedKeys.viewModelKey, viewModel, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
     @objc
     private func trikotOnViewTouchUp() {
-        let localMetaView: MetaView? = trikotMetaView()
-        guard let metaMetaView = localMetaView else { return }
-        observe(metaMetaView.onTap.first()) {[weak self] (value: MetaAction) in value.execute(actionContext: self) }
+        let localViewModel: ViewModel? = trikotViewModel()
+        guard let viewModelModel = localViewModel else { return }
+        observe(viewModelModel.action.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
     }
 
     func richTextToAttributedString(_ richText: RichText, referenceFont: UIFont) -> NSAttributedString {
@@ -73,12 +73,8 @@ extension UIView {
                 case .normal:
                     break
                 default:
-                    fatalError("MetaLabel RichText StyleTransform unsupported: \(transform.style)")
+                    fatalError("LabelViewModel RichText StyleTransform unsupported: \(transform.style)")
                 }
-            }
-
-            if let transform = richTextRange.transform as? ColorTransform {
-                attributedString.addAttribute(.foregroundColor, value: transform.color.safeColor(), range: range)
             }
         }
         return attributedString

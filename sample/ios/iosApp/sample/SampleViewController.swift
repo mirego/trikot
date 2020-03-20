@@ -1,5 +1,5 @@
 import UIKit
-import MetaviewsSample
+import ViewModelsSample
 
 class ListViewController: UIViewController {
     private let sampleView = ListView(frame: .zero)
@@ -15,7 +15,7 @@ class ListViewController: UIViewController {
     }
 
     override func loadView() {
-        sampleView.viewModel = listViewModel
+        sampleView.vm = listViewModel
         view = sampleView
     }
 }

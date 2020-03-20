@@ -7,7 +7,7 @@ Context context = Context.load(this)
 context.standardFolders()
 
 job(context.jobFullName) {
-    description("Make a release of trikot.metaviews")
+    description("Make a release of trikot.viewmodels")
     logRotator(5)
     scm {
         git {
@@ -32,7 +32,7 @@ job(context.jobFullName) {
         gradle {
             useWrapper()
             makeExecutable()
-            tasks(':metaviews:release')
+            tasks(':viewmodels:release')
             switches('-i -s')
         }
     }
@@ -46,7 +46,7 @@ job(context.jobFullName) {
 }
 
 job("$context.jobFullName-android-ktx") {
-    description("Make a release of trikot.metaviews:android-ktx")
+    description("Make a release of trikot.viewmodels:android-ktx")
     logRotator(5)
     scm {
         git {

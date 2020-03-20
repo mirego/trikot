@@ -2,48 +2,45 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 extension UITextField {
-    public var metaInputText: MetaInputText? {
-        get { return trikotMetaView() }
+    public var inputTextViewModel: InputTextViewModel? {
+        get { return trikotViewModel() }
         set(value) {
             removeTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
-            metaView = value
-            if let metaInputText = value {
+            viewModel = value
+            if let inputTextViewModel = value {
                 addTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
 
-                bindColor(metaInputText.textColor, \UITextField.textColor)
+                bindColor(inputTextViewModel.textColor, \UITextField.textColor)
 
-                observe(metaInputText.userInput) {[weak self] (text: String) in
+                observe(inputTextViewModel.userInput) {[weak self] (text: String) in
                     if self?.text != text {
                         self?.text = text
                     }
                 }
 
-                observe(metaInputText.placeholderText) {[weak self] (placeholder: String) in
+                observe(inputTextViewModel.placeholderText) {[weak self] (placeholder: String) in
                     self?.placeholder = placeholder
                 }
 
-                observe(metaInputText.inputType) {[weak self] (inputType: MetaInputType) in
+                observe(inputTextViewModel.inputType) {[weak self] (inputType: InputTextType) in
                     switch inputType {
-                    case MetaInputType.email:
+                    case InputTextType.email:
                         self?.autocapitalizationType = .none
                         self?.keyboardType = .emailAddress
                         self?.isSecureTextEntry = false
-                    case MetaInputType.text:
+                    case InputTextType.text:
                         self?.keyboardType = .default
                         self?.isSecureTextEntry = false
-                    case MetaInputType.password:
+                    case InputTextType.password:
                         self?.keyboardType = .default
                         self?.isSecureTextEntry = true
-                    case MetaInputType.phoneNumber:
+                    case InputTextType.phoneNumber:
                         self?.keyboardType = .phonePad
                         self?.isSecureTextEntry = false
-                    case MetaInputType.number:
+                    case InputTextType.number:
                         self?.keyboardType = .numberPad
                         self?.isSecureTextEntry = false
-                    case MetaInputType.numberDecimal:
-                        self?.keyboardType = .decimalPad
-                        self?.isSecureTextEntry = false
-                    case MetaInputType.multiline:
+                    case InputTextType.multiline:
                         self?.keyboardType = .default
                         self?.isSecureTextEntry = false
                     default:
@@ -56,6 +53,6 @@ extension UITextField {
 
     @objc
     private func onEditingChanged() {
-        metaInputText?.setUserInput(value: text ?? "")
+        inputTextViewModel?.setUserInput(value: text ?? "")
     }
 }

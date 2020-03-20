@@ -6,11 +6,11 @@
     <data>
         <variable
             name="item"
-            type="com.trikot.metaviews.sample.metaviews.MetaHeaderListItem" />
+            type="com.trikot.viewmodels.sample.viewmodels.HeaderListItemViewModel" />
 
         <variable
             name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.metaviews.LifecycleOwnerWrapper" />
+            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
         android:paddingBottom="15dp"
         android:layout_marginTop="15dp"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:meta_view="@{item}">
+        core:view_model="@{item}">
 
         <TextView
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:fontFamily="sans-serif-black"
             android:textSize="20dp"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:meta_view="@{item.text}"
+            core:view_model="@{item.text}"
             tools:text="Header" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
