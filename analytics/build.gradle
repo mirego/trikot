@@ -28,7 +28,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
@@ -36,7 +36,7 @@ kotlin {
         jvmMain {
             dependencies {
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews-jvm:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels-jvm:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
@@ -44,7 +44,7 @@ kotlin {
         jsMain {
             dependencies {
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews-js:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
@@ -57,7 +57,7 @@ kotlin {
             dependsOn(nativeMain)
             dependencies {
                 implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews-iosarm64:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels-iosarm64:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
             }
         }
@@ -66,7 +66,7 @@ kotlin {
             dependsOn(nativeMain)
             dependencies {
                 implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
-                implementation "com.mirego.trikot:metaviews-iosx64:$trikot_metaviews_version"
+                implementation "com.mirego.trikot:viewmodels-iosx64:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
             }
         }
