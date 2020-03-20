@@ -9,6 +9,7 @@ import android.text.InputType.TYPE_DATETIME_VARIATION_DATE
 import android.text.InputType.TYPE_DATETIME_VARIATION_NORMAL
 import android.text.InputType.TYPE_DATETIME_VARIATION_TIME
 import android.text.InputType.TYPE_NULL
+import android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
 import android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
 import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
@@ -71,6 +72,9 @@ object MetaInputTextBinder {
                                             TYPE_CLASS_TEXT
                                 MetaInputType.NUMBER ->
                                     TYPE_CLASS_NUMBER
+                                MetaInputType.NUMBER_DECIMAL ->
+                                    TYPE_CLASS_NUMBER or
+                                            TYPE_NUMBER_FLAG_DECIMAL
                                 MetaInputType.TEXT ->
                                     TYPE_TEXT_FLAG_CAP_SENTENCES or
                                             TYPE_CLASS_TEXT or

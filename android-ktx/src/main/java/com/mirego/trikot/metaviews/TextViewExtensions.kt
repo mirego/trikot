@@ -1,4 +1,4 @@
-package com.mirego.trikot
+package com.mirego.trikot.metaviews
 
 import android.graphics.drawable.Drawable
 import android.widget.TextView

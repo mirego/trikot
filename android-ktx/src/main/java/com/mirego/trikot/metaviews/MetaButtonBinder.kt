@@ -6,10 +6,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.drawableBottom
-import com.mirego.trikot.drawableEnd
-import com.mirego.trikot.drawableStart
-import com.mirego.trikot.drawableTop
 import com.mirego.trikot.metaviews.mutable.MutableMetaButton
 import com.mirego.trikot.metaviews.properties.Alignment
 import com.mirego.trikot.metaviews.properties.MetaAction

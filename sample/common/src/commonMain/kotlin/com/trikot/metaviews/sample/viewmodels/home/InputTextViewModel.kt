@@ -39,6 +39,10 @@ class InputTextViewModel(navigationDelegate: NavigationDelegate) : ListViewModel
         MutableHeaderListItem(".inputType = password"),
         MutableMetaInputTextListItem().also {
             it.inputText.inputType = MetaInputType.PASSWORD.just()
+        },
+        MutableHeaderListItem(".inputType = number decimal"),
+        MutableMetaInputTextListItem().also {
+            it.inputText.inputType = MetaInputType.NUMBER_DECIMAL.just()
         }
     )
 }

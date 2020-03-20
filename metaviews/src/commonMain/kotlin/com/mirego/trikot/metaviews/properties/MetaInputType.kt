@@ -6,6 +6,7 @@ enum class MetaInputType {
     EMAIL,
     MULTILINE,
     NUMBER,
+    NUMBER_DECIMAL,
     PASSWORD,
     PHONE_NUMBER,
     TEXT,
