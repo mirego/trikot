@@ -1,6 +1,6 @@
 import UIKit
 import TrikotFrameworkName
-import Trikot_metaviews
+import Trikot_viewmodels
 import Trikot_http
 import Trikot_kword
 
@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Environment().flavor = CurrentFlavor()
         HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
         HttpConfiguration().connectivityPublisher = TrikotConnectivityService.shared.publisher
-        MetaImageResourceManager.shared = SampleImageResourceProvider()
+        ImageViewModelResourceManager.shared = SampleImageResourceProvider()
         TrikotKword.shared.setCurrentLanguage("en")
 
         let window = UIWindow(frame: UIScreen.main.bounds)

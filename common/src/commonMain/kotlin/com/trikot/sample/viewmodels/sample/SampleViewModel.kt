@@ -1,9 +1,9 @@
 package com.trikot.sample.viewmodels.sample
 
-import com.mirego.trikot.metaviews.MetaButton
-import com.mirego.trikot.metaviews.MetaLabel
+import com.mirego.trikot.viewmodels.ButtonViewModel
+import com.mirego.trikot.viewmodels.LabelViewModel
 
 interface SampleViewModel {
-    val quoteLabel: MetaLabel
-    val refreshButton: MetaButton
+    val quoteLabel: LabelViewModel
+    val refreshButton: ButtonViewModel
 }

@@ -9,7 +9,7 @@ target 'iosApp' do
   pod 'SwiftLint'
   pod 'TrikotFrameworkName', :path => '../common'
   pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git', :inhibit_warnings => true
-  pod 'Trikot.metaviews', :git => 'git@github.com:mirego/trikot.metaviews.git', :inhibit_warnings => true
+  pod 'Trikot.viewmodels', :git => 'git@github.com:mirego/trikot.metaviews.git', :tag => "0.48.1", :inhibit_warnings => true
   pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :inhibit_warnings => true
   pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git', :inhibit_warnings => true
     

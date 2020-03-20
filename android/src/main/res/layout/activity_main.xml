@@ -12,7 +12,7 @@
 
         <variable
                 name="lifecycleOwnerWrapper"
-                type="com.mirego.trikot.metaviews.LifecycleOwnerWrapper" />
+                type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
 
     </data>
 
@@ -32,7 +32,7 @@
                   app:layout_constraintBottom_toBottomOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-                  core:meta_view="@{viewModel.quoteLabel}"
+                  core:view_model="@{viewModel.quoteLabel}"
                 tools:text="Quote is going to be there"
         />
 
@@ -45,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-                core:meta_view="@{viewModel.refreshButton}"
+                core:view_model="@{viewModel.refreshButton}"
                 tools:text="Refresh me"
                 />
 

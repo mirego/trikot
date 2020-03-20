@@ -82,6 +82,7 @@ android {
 
 configurations.all {
     exclude group: "org.reactivestreams"
+    exclude module: "viewmodels-jvm"
 }
 
 dependencies {
@@ -95,7 +96,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.0.0'
 
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
-    implementation "com.mirego.trikot.metaviews:android-ktx:$trikot_metaviews_android_ktx_version"
+    implementation "com.mirego.trikot.viewmodels:android-ktx:$trikot_viewmodels_android_ktx_version"
     implementation "com.mirego.trikot.http:android-ktx:$trikot_http_android_ktx_version"
     implementation "com.mirego.trikot.kword:android-ktx:$trikot_kword_android_ktx_version"
 

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.mirego.trikot.metaviews.LifecycleOwnerWrapper
+import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
 import com.trikot.sample.viewmodels.AndroidAppViewModel
 import com.trikot.sample.databinding.ActivityMainBinding
 

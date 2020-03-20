@@ -1,8 +1,8 @@
 import Foundation
 import TrikotFrameworkName
-import Trikot_metaviews
+import Trikot_viewmodels
 
-class SampleImageResourceProvider: MetaImageResourceProvider {
+class SampleImageResourceProvider: ImageViewModelResourceProvider {
     func image(fromResource resource: ImageResource?) -> UIImage? {
         return nil
     }
