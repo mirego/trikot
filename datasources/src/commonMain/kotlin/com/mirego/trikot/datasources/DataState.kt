@@ -27,11 +27,4 @@ sealed class DataState<V, E : Throwable> {
             else -> false
         }
     }
-
-    val data: V?
-        get() = when (val result = this) {
-            is Pending -> result.value
-            is Data -> result.value
-            is Error -> result.value
-        }
 }
