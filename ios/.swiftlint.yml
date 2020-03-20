@@ -1,4 +1,4 @@
-switch_case_on_newline# Unless otherwise noted, rules are disabled because they reduce the readability of the code
+# Unless otherwise noted, rules are disabled because they reduce the readability of the code
 # See https://realm.github.io/SwiftLint/rule-directory.html for more info on each rule
 
 # Rule identifiers to exclude from running
