@@ -1,9 +1,9 @@
 import Foundation
-import TrikotFrameworkName
 import Trikot_viewmodels
+import TrikotFrameworkName
 
 class SampleImageResourceProvider: ImageViewModelResourceProvider {
     func image(fromResource resource: ImageResource?) -> UIImage? {
-        return nil
+        nil
     }
 }

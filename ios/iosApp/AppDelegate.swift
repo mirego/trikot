@@ -1,13 +1,14 @@
-import UIKit
-import TrikotFrameworkName
-import Trikot_viewmodels
 import Trikot_http
 import Trikot_kword
+import Trikot_viewmodels
+import TrikotFrameworkName
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+    //swiftlint:disable discouraged_optional_collection
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Environment().flavor = CurrentFlavor()
         HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
@@ -40,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {}
 
-    func CurrentFlavor() -> Environment.Flavor {
+    func currentFlavor() -> Environment.Flavor {
         switch (Bundle.main.object(forInfoDictionaryKey: "Environment") ?? "debug") as! String {
         case "debug": return .debug
         case "qa": return .qa

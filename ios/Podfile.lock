@@ -1,6 +1,6 @@
 PODS:
   - ReachabilitySwift (4.3.1)
-  - SwiftLint (0.34.0)
+  - SwiftLint (0.39.1)
   - Trikot.http (0.0.1):
     - ReachabilitySwift (~> 4.3.1)
     - TrikotFrameworkName
@@ -24,6 +24,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - ReachabilitySwift
+  trunk:
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -55,7 +56,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
+  SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
   Trikot.http: b024e370f089add121ec1aa580e1939d365d998c
   Trikot.kword: 4021e56410368c6227bcd2cf7cfac6986135ea26
   Trikot.streams: 08e0de7d1bfb22eb7531cb01a88e3a19cd50d6c8
