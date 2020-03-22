@@ -6,10 +6,10 @@ PODS:
     - TrikotFrameworkName
   - Trikot.kword (0.0.1):
     - TrikotFrameworkName
-  - Trikot.metaviews (0.0.1):
-    - Trikot.streams
-    - TrikotFrameworkName
   - Trikot.streams (0.0.1):
+    - TrikotFrameworkName
+  - Trikot.viewmodels (0.0.1):
+    - Trikot.streams
     - TrikotFrameworkName
   - TrikotFrameworkName (0.0.1)
 
@@ -17,8 +17,8 @@ DEPENDENCIES:
   - SwiftLint
   - "Trikot.http (from `git@github.com:mirego/trikot.http.git`)"
   - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`)"
-  - "Trikot.metaviews (from `git@github.com:mirego/trikot.metaviews.git`)"
   - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`)"
+  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.metaviews.git`, tag `0.48.1`)"
   - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
@@ -32,10 +32,11 @@ EXTERNAL SOURCES:
     :git: "git@github.com:mirego/trikot.http.git"
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-  Trikot.metaviews:
-    :git: "git@github.com:mirego/trikot.metaviews.git"
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
+  Trikot.viewmodels:
+    :git: "git@github.com:mirego/trikot.metaviews.git"
+    :tag: 0.48.1
   TrikotFrameworkName:
     :path: "../common"
 
@@ -46,22 +47,22 @@ CHECKOUT OPTIONS:
   Trikot.kword:
     :commit: 21a5b1da042ca7768ba6f645c4bed8170826e6ec
     :git: "git@github.com:mirego/trikot.kword.git"
-  Trikot.metaviews:
-    :commit: 645a6c4726af74e8acf18b1526aa67fcc4be0455
-    :git: "git@github.com:mirego/trikot.metaviews.git"
   Trikot.streams:
     :commit: 814c88fe399f24aed91ed2263bf45e92e106c3bc
     :git: "git@github.com:mirego/trikot.streams.git"
+  Trikot.viewmodels:
+    :git: "git@github.com:mirego/trikot.metaviews.git"
+    :tag: 0.48.1
 
 SPEC CHECKSUMS:
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
   Trikot.http: b024e370f089add121ec1aa580e1939d365d998c
   Trikot.kword: 4021e56410368c6227bcd2cf7cfac6986135ea26
-  Trikot.metaviews: b0cad572c2643a98357fb1a621630f7efc4a4e77
   Trikot.streams: 08e0de7d1bfb22eb7531cb01a88e3a19cd50d6c8
+  Trikot.viewmodels: bc1da100dfdc28f261665f3d92e98214ac7e5abf
   TrikotFrameworkName: 729cc9abbecd5a63cfe35a41c1ea42d839ccd66b
 
-PODFILE CHECKSUM: c838f8db421d6bcf807608c791475b8ba5480d1c
+PODFILE CHECKSUM: 427f8be39f8a0b45c96239077430a63fad2a0db5
 
 COCOAPODS: 1.8.4

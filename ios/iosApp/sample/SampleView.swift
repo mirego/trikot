@@ -5,10 +5,10 @@ class SampleView: UIView {
     private let label = UILabel()
     private let button = UIButton()
 
-    var viewModel: SampleViewModel? {
+    var sampleViewModel: SampleViewModel? {
         didSet {
-            label.metaLabel = viewModel?.quoteLabel
-            button.metaButton = viewModel?.refreshButton
+            label.labelViewModel = sampleViewModel?.quoteLabel
+            button.buttonViewModel = sampleViewModel?.refreshButton
         }
     }
 

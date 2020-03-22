@@ -1,6 +1,6 @@
 import Trikot_http
 import Trikot_kword
-import Trikot_metaviews
+import Trikot_viewmodels
 import TrikotFrameworkName
 import UIKit
 
@@ -8,11 +8,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]) -> Bool {
-        Environment().flavor = currentFlavor()
+    //swiftlint:disable discouraged_optional_collection
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Environment().flavor = CurrentFlavor()
         HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
         HttpConfiguration().connectivityPublisher = TrikotConnectivityService.shared.publisher
-        MetaImageResourceManager.shared = SampleImageResourceProvider()
+        ImageViewModelResourceManager.shared = SampleImageResourceProvider()
         TrikotKword.shared.setCurrentLanguage("en")
 
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -42,14 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func currentFlavor() -> Environment.Flavor {
         switch (Bundle.main.object(forInfoDictionaryKey: "Environment") ?? "debug") as! String {
-        case "debug":
-            return .debug
-        case "qa":
-            return .qa
-        case "staging":
-            return .staging
-        default:
-            return Environment.Flavor.release_
+        case "debug": return .debug
+        case "qa": return .qa
+        case "staging": return .staging
+        default: return Environment.Flavor.release_
         }
     }
 }
