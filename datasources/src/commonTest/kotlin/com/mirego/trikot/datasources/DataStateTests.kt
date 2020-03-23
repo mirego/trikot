@@ -123,7 +123,6 @@ class DataStateTests {
         assertNotEquals(error1.hashCode(), error4.hashCode())
         assertEquals(data1.hashCode(), data2.hashCode())
         assertNotEquals(data1.hashCode(), data3.hashCode())
-        // Fixed by disambiguatedHashCode
         assertNotEquals(pending1.hashCode(), data1.hashCode())
     }
 }
