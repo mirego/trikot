@@ -31,7 +31,7 @@ configurations.all {
 }
 
 dependencies {
-    api 'com.mirego.trikot:analytics:0.6.1'
+    api 'com.mirego.trikot:analytics:0.8.1'
     api "com.mirego.trikot:streams:$trikot_streams_version"
     api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
     implementation "com.google.firebase:firebase-analytics:17.2.1"
