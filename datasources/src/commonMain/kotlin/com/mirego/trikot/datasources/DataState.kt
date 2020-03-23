@@ -27,6 +27,12 @@ sealed class DataState<V, E : Throwable> {
         }
     }
 
+    companion object {
+        fun <V, E : Throwable> pending(value: V? = null): DataState<V, E> = Pending(value)
+        fun <V, E : Throwable> data(value: V): DataState<V, E> = Data(value)
+        fun <V, E : Throwable> error(error: E, value: V? = null): DataState<V, E> = Error(error, value)
+    }
+
     fun isPending(pendingIfDataIsAvailable: Boolean = true): Boolean {
         return when (val result = this) {
             is Pending -> pendingIfDataIsAvailable || result.value == null
