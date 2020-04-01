@@ -107,4 +107,31 @@ class RefreshablePublisherTests {
         assertTrue { executed }
         assertTrue { refreshValue }
     }
+
+    @Test
+    fun blockIsExecutedWithRefreshValueWhenRefreshedWithSubscriptionButCancelledBeforeResult() {
+        val refreshedPublisher = Publishers.behaviorSubject<String>()
+        var valueIsRefreshed = false
+        val refreshable = RefreshablePublisher({ _, refreshing ->
+            valueIsRefreshed = refreshing
+            refreshedPublisher
+        })
+        var shouldRefresh = false
+        val masterPublisher = Publishers.behaviorSubject("Initial")
+        val switchMapped = masterPublisher.switchMap {
+            if (shouldRefresh) {
+                refreshable.refresh()
+            }
+            refreshable
+        }
+        var switchMappedReceivedValue = "None!"
+        switchMapped.subscribe(CancellableManager()) {
+            switchMappedReceivedValue = it
+        }
+        shouldRefresh = true
+        masterPublisher.value = "Emit switchmapped value"
+        refreshedPublisher.value = "Second"
+        assertEquals(refreshedPublisher.value, switchMappedReceivedValue)
+        assertTrue { valueIsRefreshed }
+    }
 }

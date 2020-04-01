@@ -13,7 +13,7 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
-        doExecuteBlock(shouldRefresh.value)
+        doExecuteBlock()
     }
 
     override fun onNoSubscription() {
@@ -23,14 +23,13 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
 
     fun refresh() {
         value = null
+        shouldRefresh.compareAndSet(false, true)
         if (hasSubscriptions) {
-            doExecuteBlock(true)
-        } else {
-            shouldRefresh.setOrThrow(shouldRefresh.value, true)
+            doExecuteBlock()
         }
     }
-
-    private fun doExecuteBlock(isRefreshing: Boolean) {
+    private fun doExecuteBlock() {
+        val isRefreshing = shouldRefresh.value
         val cancelPreviousAndCreate = cancellableManagerProvider.cancelPreviousAndCreate()
         executionBlock(cancelPreviousAndCreate, isRefreshing).subscribe(cancelPreviousAndCreate) { executionValue ->
             value = executionValue
