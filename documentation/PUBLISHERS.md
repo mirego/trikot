@@ -281,6 +281,34 @@ combine(listOf(publisher1, publisher2, publisher3)).subscribe(cancellableManager
 ```
 -> "a b c"
 
+### RetryWhen
+The RetryWhen operator responds to an `onError` notification from the source Publisher and emits a value
+on the block input Publisher. If the block returned Publisher then emits any value, it will retry by resubscribing to the source Publisher.
+If the block returned Publisher emits an error or completes, it will error/complete the source Publisher.
+
+Note: This works well with ColdPublishers as resubscribing will re-call the ColdPublisher block and retry the operation.
+
+**Retry on Specific error**
+```kotlin
+retryWhen { errors -> errors.map {
+    when (it) {
+        is SomeDomainException -> it
+        else -> throw it
+    }
+}}
+```
+
+**Retry after refresh token**
+```kotlin
+originalPublisher.retryWhen { 
+    it.switchMap { refresh() }
+}
+```
+
+Other uses
+- Retry after delay
+- Retry after delay with exponential backoff
+
 ## Exceptions
 Exceptions are not handled by default in `Trikot.streams`. To enforce that developers are handling exceptions the right way, they must explicitly catch their exceptions in the processors block and throw a  
 `StreamsProcessorException`. This will result in dispatching an OnError to all Subscribers.    

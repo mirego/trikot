@@ -14,9 +14,10 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     protected val hasSubscriptions
         get() = subscriptions.value.count() > 0
 
-    protected val onPublisherSubscriptionCancelled: OnPublisherSubscriptionCancelled<T> = { publisherSubscription ->
-        removeSubscription(publisherSubscription)
-    }
+    protected val onPublisherSubscriptionCancelled: OnPublisherSubscriptionCancelled<T> =
+        { publisherSubscription ->
+            removeSubscription(publisherSubscription)
+        }
 
     protected val completed get() = isCompleted.value
 
@@ -50,7 +51,10 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
                 if (isCompleted.value) {
                     throw IllegalStateException("Error should not be set after publisher has completed.")
                 }
-                atomicError.setOrThrow(null, error) { "Error should not be set after an error has been set" }
+                atomicError.setOrThrow(
+                    null,
+                    error
+                ) { "Error should not be set after an error has been set" }
                 error?.let {
                     dispatchErrorToSubscribers(it)
                 }
@@ -60,7 +64,9 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     override fun subscribe(s: Subscriber<in T>) {
         val subscription = PublisherSubscription(s, onPublisherSubscriptionCancelled)
         s.onSubscribe(subscription)
-        addSubscription(subscription)
+        serialQueue.dispatch {
+            addSubscription(subscription)
+        }
     }
 
     private fun removeSubscription(publisherSubscription: PublisherSubscription<T>) {
@@ -75,26 +81,22 @@ open class PublishSubjectImpl<T> : PublishSubject<T> {
     }
 
     private fun addSubscription(subscription: PublisherSubscription<T>) {
+        if (!subscription.isCancelled) {
+            onNewSubscription(subscription)
             if (!subscription.isCancelled) {
-                onNewSubscription(subscription)
-                if (!subscription.isCancelled) {
-                    serialQueue.dispatch {
-                        if (this.completed) {
-                            subscription.dispatchCompleted()
-                        } else if (subscriptions.add(subscription).count() == 1) {
-                            onFirstSubscription()
-                        }
-                    }
+                if (this.completed) {
+                    subscription.dispatchCompleted()
+                } else if (subscriptions.add(subscription).count() == 1) {
+                    onFirstSubscription()
                 }
             }
+        }
     }
 
     protected fun cleanupValues() {
         if (hasSubscriptions) throw IllegalStateException("Cannot clean values when publisher has subscribers")
-        serialQueue.dispatch {
-            atomicValue.setOrThrow(atomicValue.value, null)
-            atomicError.setOrThrow(atomicError.value, null)
-        }
+        atomicValue.setOrThrow(atomicValue.value, null)
+        atomicError.setOrThrow(atomicError.value, null)
     }
 
     protected open fun onNewSubscription(subscription: PublisherSubscription<T>) {

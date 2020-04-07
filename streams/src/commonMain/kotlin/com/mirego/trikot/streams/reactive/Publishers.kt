@@ -28,6 +28,11 @@ object Publishers {
     fun <T> completed(): Publisher<T> {
         return PublishSubjectImpl<T>().also { it.complete() }
     }
+
+    @JsName("error")
+    fun <T> error(error: Throwable): Publisher<T> {
+        return behaviorSubject<T>().also { it.error = error }
+    }
 }
 
 fun <T> T.asPublisher(): Publisher<T> = Publishers.behaviorSubject(this)
