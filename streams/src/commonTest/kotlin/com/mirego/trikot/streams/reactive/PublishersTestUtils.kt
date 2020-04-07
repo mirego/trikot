@@ -29,6 +29,22 @@ fun <T> Publisher<T>.assertCompleted() {
     assertTrue { completed }
 }
 
+fun <T> Publisher<T>.verify(value: T?, error: Throwable?, completed: Boolean) {
+    var actualValue: T? = null
+    var actualError: Throwable? = null
+    var actualCompleted = false
+
+    subscribe(CancellableManager(),
+        onNext = { actualValue = it },
+        onError = { actualError = it },
+        onCompleted = { actualCompleted = true }
+    )
+
+    kotlin.test.assertEquals(value, actualValue)
+    kotlin.test.assertEquals(error, actualError)
+    kotlin.test.assertEquals(completed, actualCompleted)
+}
+
 class MockPublisher(initialValue: String? = null) : BehaviorSubjectImpl<String>(initialValue) {
     val getHasSubscriptions get() = super.hasSubscriptions
 }

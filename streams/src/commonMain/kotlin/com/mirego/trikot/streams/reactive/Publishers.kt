@@ -14,24 +14,46 @@ object Publishers {
         return PublishSubjectImpl()
     }
 
+    /**
+     * Create a Publisher that emits a particular item
+     * @see <a href="http://reactivex.io/documentation/operators/just.html">http://reactivex.io/documentation/operators/just.html</a>
+     */
     @JsName("just")
     fun <T> just(value: T): Publisher<T> {
         return behaviorSubject(value).also { it.complete() }
     }
 
+    /**
+     * Create a Publisher that emits no items but terminates normally
+     * @see <a href="http://reactivex.io/documentation/operators/empty-never-throw.html">http://reactivex.io/documentation/operators/empty-never-throw.html</a>
+     */
     @JsName("empty")
     fun <T> empty(): Publisher<T> {
-        return PublishSubjectImpl()
+        return publishSubject<T>().also { it.complete() }
     }
 
+    /**
+     * Create a Publisher that emits no items and does not terminate
+     * @see <a href="http://reactivex.io/documentation/operators/empty-never-throw.html">http://reactivex.io/documentation/operators/empty-never-throw.html</a>
+     */
+    @JsName("never")
+    fun <T> never(): Publisher<T> {
+        return publishSubject()
+    }
+
+    /**
+     * Create a Publisher that emits no items and terminates with an error
+     * @see <a href="http://reactivex.io/documentation/operators/empty-never-throw.html">http://reactivex.io/documentation/operators/empty-never-throw.html</a>
+     */
+    @JsName("error")
+    fun <T> error(throwable: Throwable): Publisher<T> {
+        return behaviorSubject<T>().also { it.error = throwable }
+    }
+
+    @Deprecated("Use empty() instead", ReplaceWith("Publishers.empty<T>()"))
     @JsName("completed")
     fun <T> completed(): Publisher<T> {
-        return PublishSubjectImpl<T>().also { it.complete() }
-    }
-
-    @JsName("error")
-    fun <T> error(error: Throwable): Publisher<T> {
-        return behaviorSubject<T>().also { it.error = error }
+        return publishSubject<T>().also { it.complete() }
     }
 }
 
