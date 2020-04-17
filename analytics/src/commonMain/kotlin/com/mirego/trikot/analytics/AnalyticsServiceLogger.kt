@@ -21,6 +21,15 @@ ${properties.toLog()}
         analyticsService.logout()
     }
 
+    override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) {
+        println("""
+Analytics - Increment user properties (Service: ${analyticsService.name})
+Incremented Properties: ${incrementalProperties.toLog()}
+        """.trimMargin())
+
+        analyticsService.incrementUserProperties(incrementalProperties)
+    }
+
     override fun setSuperProperties(properties: AnalyticsPropertiesType) {
         val newValue = superProperties.value + properties
         updateSuperProperties(newValue, "setSuperProperties")

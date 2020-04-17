@@ -9,6 +9,9 @@ class EmptyAnalyticsService : AnalyticsService {
     override fun logout() {
     }
 
+    override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) {
+    }
+
     override fun setSuperProperties(properties: AnalyticsPropertiesType) {
     }
 

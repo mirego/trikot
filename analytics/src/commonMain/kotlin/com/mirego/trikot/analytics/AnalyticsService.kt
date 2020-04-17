@@ -6,6 +6,7 @@ import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
 
 typealias AnalyticsPropertiesType = Map<String, Any>
+typealias AnalyticsIncrementalProperties = Map<String, Number>
 
 interface AnalyticsService {
     val name: String
@@ -20,6 +21,12 @@ interface AnalyticsService {
     UnIdentify the current logged in user
     */
     fun logout()
+
+    /*
+    properties: Add the given amount to an existing property on the identified user.
+    (Use negative increment to decrement properties)
+     */
+    fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties)
 
     /*
     properties: Properties that will be added to all event tracked
@@ -53,6 +60,10 @@ interface AnalyticsService {
 
         override fun logout() {
             currentAnalyticsService().logout()
+        }
+
+        override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) {
+            currentAnalyticsService().incrementUserProperties(incrementalProperties)
         }
 
         override fun setSuperProperties(properties: AnalyticsPropertiesType) {
