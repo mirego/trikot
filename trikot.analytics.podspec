@@ -9,13 +9,18 @@ Pod::Spec.new do |spec|
   spec.source        = { :git => "https://github.com/mirego/trikot.analytics.git", :tag => "#{spec.version}" }
   spec.source_files  = "swift-extensions/*.swift"
   spec.static_framework = true
-  
+
   spec.ios.deployment_target  = '10.0'
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
   spec.subspec 'Firebase' do |firebase|
     firebase.source_files = 'swift-extensions/firebase/*.swift'
     firebase.dependency 'Firebase/Analytics'
+  end
+
+  spec.subspec 'Mixpanel' do |mixpanel|
+    mixpanel.source_files = 'swift-extensions/mixpanel/*.swift'
+    mixpanel.dependency 'Mixpanel-swift'
   end
 
   spec.prepare_command = <<-CMD

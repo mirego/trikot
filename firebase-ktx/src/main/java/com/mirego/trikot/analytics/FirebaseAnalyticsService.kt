@@ -20,6 +20,9 @@ class FirebaseAnalyticsService(context: Context) : AnalyticsService {
         }
     }
 
+    //This functionality isn't supported with Firebase Analytics
+    override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) = Unit
+
     override fun logout() {
         firebaseAnalytics.setUserId(null)
     }

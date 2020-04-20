@@ -83,3 +83,42 @@ job("$context.jobFullName-analytics-firebase-ktx") {
         }
     }
 }
+
+job("$context.jobFullName-analytics-mixpanel-ktx") {
+    description("Make a release of trikot.analytics.mixpanel-ktx")
+    logRotator(5)
+    scm {
+        git {
+            branch("${GIT_BRANCH}")
+            remote {
+                name('origin')
+                url("${GIT_URL}")
+                credentials('github')
+            }
+        }
+    }
+    wrappers {
+        credentialsBinding {
+            amazonWebServicesCredentialsBinding {
+                accessKeyVariable('MAVEN_AWS_KEY')
+                secretKeyVariable('MAVEN_AWS_SECRET')
+                credentialsId('mirego-maven-aws')
+            }
+        }
+    }
+    steps {
+        gradle {
+            useWrapper()
+            makeExecutable()
+            tasks(':mixpanel-ktx:release')
+            switches('-i -s')
+        }
+    }
+    publishers {
+        slackNotifier {
+            notifyFailure(true)
+            notifyBackToNormal(true)
+            room(context.slackChannel)
+        }
+    }
+}
