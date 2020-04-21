@@ -12,6 +12,11 @@ interface AnalyticsService {
     val name: String
 
     /*
+    Enables/Disables the analytics collection
+     */
+    var enabled: Boolean
+
+    /*
     userId: Id of the logged in user
     properties: Properties associated with the user
      */
@@ -34,6 +39,11 @@ interface AnalyticsService {
     fun setSuperProperties(properties: AnalyticsPropertiesType)
 
     /*
+    properties: Properties that will be added to the identified user profile
+    */
+    fun setUserProperties(properties: AnalyticsPropertiesType)
+
+    /*
     properties: Remove some super properties
      */
     fun unsetSuperProperties(propertyNames: List<String>)
@@ -54,6 +64,12 @@ interface AnalyticsService {
 
         override val name = currentAnalyticsService().name
 
+        override var enabled: Boolean
+            get() = currentAnalyticsService().enabled
+            set(value) {
+                currentAnalyticsService().enabled = value
+            }
+
         override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
             currentAnalyticsService().identifyUser(userId, properties)
         }
@@ -68,6 +84,10 @@ interface AnalyticsService {
 
         override fun setSuperProperties(properties: AnalyticsPropertiesType) {
             currentAnalyticsService().setSuperProperties(properties)
+        }
+
+        override fun setUserProperties(properties: AnalyticsPropertiesType) {
+            currentAnalyticsService().setUserProperties(properties)
         }
 
         override fun unsetSuperProperties(propertyNames: List<String>) {
@@ -88,7 +108,10 @@ interface AnalyticsService {
 event: Event to track, will be store using toString() method
 properties: Publisher of property to store with the event. Publisher MUST return a value.
  */
-fun AnalyticsService.trackEvent(event: AnalyticsEvent, properties: Publisher<AnalyticsPropertiesType>) {
+fun AnalyticsService.trackEvent(
+    event: AnalyticsEvent,
+    properties: Publisher<AnalyticsPropertiesType>
+) {
     properties.first().subscribe(CancellableManager()) {
         trackEvent(event, it)
     }

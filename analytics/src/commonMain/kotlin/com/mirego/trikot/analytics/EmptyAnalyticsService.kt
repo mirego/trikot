@@ -3,6 +3,8 @@ package com.mirego.trikot.analytics
 class EmptyAnalyticsService : AnalyticsService {
     override val name: String = "ANALYTICS SERVICE NOT CONFIGURED"
 
+    override var enabled = false
+
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
     }
 
@@ -13,6 +15,9 @@ class EmptyAnalyticsService : AnalyticsService {
     }
 
     override fun setSuperProperties(properties: AnalyticsPropertiesType) {
+    }
+
+    override fun setUserProperties(properties: AnalyticsPropertiesType) {
     }
 
     override fun unsetSuperProperties(propertyNames: List<String>) {

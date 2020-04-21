@@ -5,14 +5,23 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 class AnalyticsServiceLogger(private val analyticsService: AnalyticsService) : AnalyticsService {
     override val name: String = "AnalyticsServiceLogger"
 
+    override var enabled: Boolean
+        get() = analyticsService.enabled
+        set(value) {
+            println("Analytics - enabled changed to $value (Service: ${analyticsService.name})")
+            analyticsService.enabled = value
+        }
+
     private val superProperties = AtomicReference<AnalyticsPropertiesType>(mapOf())
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
-        println("""
+        println(
+            """
 Analytics - Identify user (Service: ${analyticsService.name})
   userId: $userId
 ${properties.toLog()}
-        """.trimMargin())
+        """.trimMargin()
+        )
         analyticsService.identifyUser(userId, properties)
     }
 
@@ -22,10 +31,12 @@ ${properties.toLog()}
     }
 
     override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) {
-        println("""
+        println(
+            """
 Analytics - Increment user properties (Service: ${analyticsService.name})
 Incremented Properties: ${incrementalProperties.toLog()}
-        """.trimMargin())
+        """.trimMargin()
+        )
 
         analyticsService.incrementUserProperties(incrementalProperties)
     }
@@ -36,10 +47,20 @@ Incremented Properties: ${incrementalProperties.toLog()}
         analyticsService.setSuperProperties(properties)
     }
 
+    override fun setUserProperties(properties: AnalyticsPropertiesType) {
+        println(
+            """
+Analytics - Set user properties (Service: ${analyticsService.name})
+UserProperties Properties: ${properties.toLog()}
+        """.trimMargin()
+        )
+    }
+
     override fun unsetSuperProperties(propertyNames: List<String>) {
-        val newValues = superProperties.value.entries.filter { !propertyNames.contains(it.key) }.fold(emptyMap<String, Any>()) { acc, value ->
-            acc + value.toPair()
-        }
+        val newValues = superProperties.value.entries.filter { !propertyNames.contains(it.key) }
+            .fold(emptyMap<String, Any>()) { acc, value ->
+                acc + value.toPair()
+            }
         updateSuperProperties(newValues, "unsetSuperProperties")
         analyticsService.unsetSuperProperties(propertyNames)
     }
@@ -51,12 +72,14 @@ Incremented Properties: ${incrementalProperties.toLog()}
     }
 
     override fun trackEvent(event: AnalyticsEvent, properties: AnalyticsPropertiesType) {
-        println("""
+        println(
+            """
 Analytics - Track event (Service: ${analyticsService.name})
   event: $event
 ${properties.toLog()}
 ${superProperties.value.toLog()}
-        """.trimMargin())
+        """.trimMargin()
+        )
         analyticsService.trackEvent(event, properties)
     }
 
@@ -66,9 +89,11 @@ ${superProperties.value.toLog()}
 
     private fun updateSuperProperties(newProps: AnalyticsPropertiesType, methodName: String) {
         superProperties.setOrThrow(superProperties.value, newProps)
-        println("""
+        println(
+            """
 Analytics - SuperProperties updated with $methodName (Service: ${analyticsService.name})
 ${newProps.toLog()}
-        """.trimMargin())
+        """.trimMargin()
+        )
     }
 }
