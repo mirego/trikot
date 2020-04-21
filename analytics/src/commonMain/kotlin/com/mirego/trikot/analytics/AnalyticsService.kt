@@ -12,14 +12,9 @@ interface AnalyticsService {
     val name: String
 
     /*
-    Enables the analytics collection
+    Enables/Disables the analytics collection
      */
-    fun enableAnalyticsCollection()
-
-    /*
-    Disables the analytics collection
-     */
-    fun disableAnalyticsCollection()
+    var enabled: Boolean
 
     /*
     userId: Id of the logged in user
@@ -69,13 +64,11 @@ interface AnalyticsService {
 
         override val name = currentAnalyticsService().name
 
-        override fun enableAnalyticsCollection() {
-            currentAnalyticsService().enableAnalyticsCollection()
-        }
-
-        override fun disableAnalyticsCollection() {
-            currentAnalyticsService().disableAnalyticsCollection()
-        }
+        override var enabled: Boolean
+            get() = currentAnalyticsService().enabled
+            set(value) {
+                currentAnalyticsService().enabled = value
+            }
 
         override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
             currentAnalyticsService().identifyUser(userId, properties)

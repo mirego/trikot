@@ -2,11 +2,8 @@ package com.mirego.trikot.analytics
 
 class EmptyAnalyticsService : AnalyticsService {
     override val name: String = "ANALYTICS SERVICE NOT CONFIGURED"
-    override fun enableAnalyticsCollection() {
-    }
 
-    override fun disableAnalyticsCollection() {
-    }
+    override var enabled = false
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
     }
