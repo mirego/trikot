@@ -45,7 +45,7 @@ class MixpanelAnalyticsService(
     }
 
     override fun setUserProperties(properties: AnalyticsPropertiesType) {
-        TODO("Not yet implemented")
+        mixpanelAnalytics.people.set(properties.asJSONProperties())
     }
 
     override fun unsetAllSuperProperties() {
