@@ -7,20 +7,22 @@ import org.json.JSONObject
 class MixpanelAnalyticsService(
     context: Context,
     mixpanelToken: String,
-    optOutTrackingDefault: Boolean = false
+    analyticsEnabled: Boolean = true
 ) : AnalyticsService {
     private val mixpanelAnalytics =
-        MixpanelAPI.getInstance(context, mixpanelToken, optOutTrackingDefault)
+        MixpanelAPI.getInstance(context, mixpanelToken, !analyticsEnabled)
+
+    override var enabled: Boolean
+        get() = !mixpanelAnalytics.hasOptedOutTracking()
+        set(value) {
+            if (value) {
+                mixpanelAnalytics.optInTracking()
+            } else {
+                mixpanelAnalytics.optOutTracking()
+            }
+        }
 
     override val name: String = "MixpanelAnalytics"
-
-    override fun disableAnalyticsCollection() {
-        mixpanelAnalytics.optOutTracking()
-    }
-
-    override fun enableAnalyticsCollection() {
-        mixpanelAnalytics.optInTracking()
-    }
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         mixpanelAnalytics.identify(userId)

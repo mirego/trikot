@@ -1,12 +1,19 @@
-import Foundation
 import FirebaseAnalytics
+import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
 public class FirebaseAnalyticsService: AnalyticsService {
     public var name: String = "FirebaseAnalytics"
     private var superProperties = [String: Any]()
 
-    public init() {        
+    public init(enableAnalytics: Bool = true) {
+        enabled = enableAnalytics
+    }
+
+    public var enabled: Bool {
+        didSet {
+            Analytics.setAnalyticsCollectionEnabled(enabled)
+        }
     }
 
     public func identifyUser(userId: String, properties: [String: Any]) {

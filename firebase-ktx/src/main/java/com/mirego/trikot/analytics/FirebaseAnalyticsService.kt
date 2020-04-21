@@ -4,18 +4,21 @@ import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class FirebaseAnalyticsService(context: Context) : AnalyticsService {
+class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = true) :
+    AnalyticsService {
+
     private var firebaseAnalytics = FirebaseAnalytics.getInstance(context)
 
+    private var isEnabled: Boolean = analyticsEnabled
+
+    override var enabled: Boolean
+        get() = isEnabled
+        set(value) {
+            isEnabled = value
+            firebaseAnalytics.setAnalyticsCollectionEnabled(value)
+        }
+
     override val name: String = "FirebaseAnalytics"
-
-    override fun disableAnalyticsCollection() {
-        firebaseAnalytics.setAnalyticsCollectionEnabled(false)
-    }
-
-    override fun enableAnalyticsCollection() {
-        firebaseAnalytics.setAnalyticsCollectionEnabled(true)
-    }
 
     private var superProperties = emptyMap<String, Any>()
 
