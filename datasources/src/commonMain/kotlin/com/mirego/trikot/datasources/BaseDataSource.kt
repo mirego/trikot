@@ -15,14 +15,14 @@ import com.mirego.trikot.streams.reactive.switchMap
 import com.mirego.trikot.streams.reactive.withCancellableManager
 import org.reactivestreams.Publisher
 
-typealias DataSourcePublisherPair<T> = Pair<RefreshablePublisher<DataSourceState<T>>, Publisher<DataSourceState<T>>>
+typealias DataSourcePublisherPair<T> = Pair<RefreshablePublisher<DataState<T, Throwable>>, Publisher<DataState<T, Throwable>>>
 
 abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSource: DataSource<R, T>? = null) :
     DataSource<R, T> {
     private val mapAtomicReference =
         AtomicReference<Map<Any, DataSourcePublisherPair<T>>>(HashMap())
 
-    override fun read(request: R): Publisher<DataSourceState<T>> {
+    override fun read(request: R): Publisher<DataState<T, Throwable>> {
         val refreshablePublisher = getRefreshablePublisherPair(request)
         if (request.requestType == DataSourceRequest.Type.REFRESH_CACHE) {
             refreshablePublisher.refreshablePublisher().refresh()
@@ -37,7 +37,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
             publisherPair != null -> publisherPair
             else -> {
                 val publisher =
-                    RefreshablePublisher<DataSourceState<T>>({ cancellableManager, isRefreshing ->
+                    RefreshablePublisher({ cancellableManager, isRefreshing ->
                         when {
                             isRefreshing || cacheDataSource == null -> readDataOrFallbackToCacheOnError(
                                 request,
@@ -45,7 +45,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
                             )
                             else -> readDataFromCache(cacheDataSource, request)
                         }
-                    }, DataSourceState(true, null))
+                    }, DataState.pending())
 
                 savePublisherToRegistry(cachableId, publisher, request)
             }
@@ -65,15 +65,19 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     private fun readDataOrFallbackToCacheOnError(
         request: R,
         cancellableManager: CancellableManager
-    ): Publisher<DataSourceState<T>> {
-        return readData(request, cancellableManager).switchMap { previousDataSourceState ->
+    ): Publisher<DataState<T, Throwable>> {
+        return readData(request, cancellableManager).switchMap { previousDataState ->
             when {
-                previousDataSourceState.error != null && cacheDataSource != null -> cacheDataSource.read(
+                previousDataState is DataState.Error && cacheDataSource != null -> cacheDataSource.read(
                     request
                 ).map {
-                    DataSourceState(false, it.data, previousDataSourceState.error)
+                    if (it is DataState.Data) {
+                        DataState.error(previousDataState.error, it.value)
+                    } else {
+                        previousDataState
+                    }
                 }
-                else -> Publishers.behaviorSubject(previousDataSourceState)
+                else -> Publishers.behaviorSubject(previousDataState)
             }
         }
     }
@@ -81,22 +85,22 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     private fun readDataFromCache(
         cacheDataSource: DataSource<R, T>,
         request: R
-    ): Publisher<DataSourceState<T>> {
+    ): Publisher<DataState<T, Throwable>> {
         return cacheDataSource.read(request).withCancellableManager()
-            .switchMap { (cancellableManager, dataSourceState) ->
+            .switchMap { (cancellableManager, dataState) ->
                 when {
-                    !dataSourceState.isLoading && dataSourceState.data == null || dataSourceState.error != null -> readData(
+                    !dataState.isPending() && !dataState.hasData() || dataState.isError() -> readData(
                         request,
                         cancellableManager
                     )
-                    else -> Publishers.behaviorSubject(dataSourceState)
+                    else -> Publishers.behaviorSubject(dataState)
                 }
             }
     }
 
     private fun savePublisherToRegistry(
         cachableId: Any,
-        publisher: RefreshablePublisher<DataSourceState<T>>,
+        publisher: RefreshablePublisher<DataState<T, Throwable>>,
         request: R
     ): DataSourcePublisherPair<T> {
         val initialMap = mapAtomicReference.value
@@ -112,7 +116,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     private fun readData(
         request: R,
         cancellableManager: CancellableManager
-    ): Publisher<DataSourceState<T>> {
+    ): Publisher<DataState<T, Throwable>> {
         return internalRead(request)
             .also {
                 cancellableManager.add(it)
@@ -120,10 +124,10 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
             }
             .map { readCacheResult ->
                 cacheDataSource?.save(request, readCacheResult)
-                DataSourceState(false, readCacheResult)
+                DataState.data<T, Throwable>(readCacheResult)
             }
             .onErrorReturn { throwable ->
-                DataSourceState(false, null, throwable)
+                DataState.error<T, Throwable>(throwable)
             }
             .subscribeOn(StreamsConfiguration.serialSubscriptionDispatchQueue)
             .observeOn(StreamsConfiguration.publisherExecutionDispatchQueue)
@@ -134,10 +138,10 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     override fun save(request: R, data: T?) {}
 }
 
-fun <T> DataSourcePublisherPair<T>.refreshablePublisher(): RefreshablePublisher<DataSourceState<T>> {
+fun <T> DataSourcePublisherPair<T>.refreshablePublisher(): RefreshablePublisher<DataState<T, Throwable>> {
     return first
 }
 
-fun <T> DataSourcePublisherPair<T>.sharedPublisher(): Publisher<DataSourceState<T>> {
+fun <T> DataSourcePublisherPair<T>.sharedPublisher(): Publisher<DataState<T, Throwable>> {
     return second
 }

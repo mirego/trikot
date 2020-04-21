@@ -1,5 +1,7 @@
 package com.mirego.trikot.datasources
 
+import com.mirego.trikot.datasources.testutils.assertError
+import com.mirego.trikot.datasources.testutils.assertValue
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousDispatchQueue
 import com.mirego.trikot.streams.StreamsConfiguration
@@ -29,14 +31,14 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher))
 
-        val value = AtomicReference<String?>(null)
+        val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
-            value.compareAndSet(value.value, it.data)
+            value.compareAndSet(value.value, it)
         }
 
         networkDataSourceReadPublisher.dispatchResult(networkResult)
 
-        assertTrue { value.value == networkResult }
+        value.value!!.assertValue(networkResult)
     }
 
     @Test
@@ -57,13 +59,13 @@ class BaseDataSourceTests {
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
         val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
-        val value = AtomicReference<String?>(null)
+        val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
-            value.compareAndSet(value.value, it.data)
+            value.compareAndSet(value.value, it)
         }
         networkDataSourceReadPublisher.dispatchResult(networkResult)
 
-        assertTrue { value.value == networkResult }
+        value.value!!.assertValue(networkResult)
     }
 
     @Test
@@ -73,12 +75,12 @@ class BaseDataSourceTests {
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
         val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
-        val value = AtomicReference<String?>(null)
+        val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
-            value.compareAndSet(value.value, it.data)
+            value.compareAndSet(value.value, it)
         }
 
-        assertTrue { value.value == cacheResult }
+        value.value!!.assertValue(cacheResult)
     }
 
     @Test
@@ -88,19 +90,19 @@ class BaseDataSourceTests {
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
         val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
-        val value = AtomicReference<String?>(null)
-        val refreshedValue = AtomicReference<String?>(null)
+        val value = AtomicReference<DataState<String, Throwable>?>(null)
+        val refreshedValue = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
-            value.compareAndSet(value.value, it.data)
+            value.compareAndSet(value.value, it)
         }
         val beforeRefreshValue = value.value
         networkDataSource.read(FakeRequest(simpleCachableId, DataSourceRequest.Type.REFRESH_CACHE)).subscribe(cancellableManager!!) {
-            refreshedValue.compareAndSet(refreshedValue.value, it.data)
+            refreshedValue.compareAndSet(refreshedValue.value, it)
         }
 
-        assertTrue { beforeRefreshValue == cacheResult }
-        assertTrue { value.value == networkResult }
-        assertTrue { refreshedValue.value == networkResult }
+        beforeRefreshValue!!.assertValue(cacheResult)
+        value.value!!.assertValue(networkResult)
+        refreshedValue.value!!.assertValue(networkResult)
     }
 
     @Test
@@ -112,14 +114,14 @@ class BaseDataSourceTests {
 
         networkDataSource.read(FakeRequest(simpleCachableId, DataSourceRequest.Type.REFRESH_CACHE))
 
-        val value = AtomicReference<String?>(null)
+        val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
-            value.compareAndSet(value.value, it.data)
+            value.compareAndSet(value.value, it)
         }
 
         networkDataSourceReadPublisher.dispatchResult(networkResult)
 
-        assertTrue { value.value == networkResult }
+        value.value!!.assertValue(networkResult)
     }
 
     @Test
@@ -130,17 +132,14 @@ class BaseDataSourceTests {
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
         val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
-        val value = AtomicReference<String?>(null)
-        val error = AtomicReference<Throwable?>(null)
+        val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
-            value.compareAndSet(value.value, it.data)
-            error.compareAndSet(error.value, it.error)
+            value.compareAndSet(value.value, it)
         }
 
         networkDataSource.read(FakeRequest(simpleCachableId, DataSourceRequest.Type.REFRESH_CACHE))
 
-        assertTrue { value.value == cacheResult }
-        assertTrue { error.value == expectedError }
+        value.value!!.assertError(expectedError, cacheResult)
     }
 
     data class FakeRequest(override val cachableId: Any, override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE) : DataSourceRequest
