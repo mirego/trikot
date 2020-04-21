@@ -6,7 +6,8 @@ interface DataSource<R : DataSourceRequest, T> {
     /**
      * Send a read request to the Datasource
      */
-    fun read(request: R): Publisher<DataSourceState<T>>
+    fun read(request: R): Publisher<DataState<T, Throwable>>
+
     /**
      * Save data to the datasource
      */
