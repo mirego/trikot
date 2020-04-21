@@ -1,5 +1,5 @@
+import Foundation
 import Mixpanel
-import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 class MixpanelAnalyticsService: AnalyticsService {

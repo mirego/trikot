@@ -14,8 +14,8 @@ public class FirebaseAnalyticsService: AnalyticsService {
         properties.forEach { Analytics.setUserProperty(anyToString($0.value), forName: $0.key) }
     }
 
-    func incrementUserProperties(incrementalProperties: [String: Any]) {
-        //This functionality isn't supported with Firebase Analytics
+    public func incrementUserProperties(incrementalProperties: [String: Any]) {
+        // This functionality isn't supported with Firebase Analytics
     }
 
     public func logout() {
@@ -24,6 +24,10 @@ public class FirebaseAnalyticsService: AnalyticsService {
 
     public func setSuperProperties(properties: [String: Any]) {
         properties.forEach { superProperties[$0.key] = $0.value }
+    }
+
+    public func setUserProperties(properties: [String: Any]) {
+        properties.forEach { Analytics.setUserProperty(anyToString($0.value), forName: $0.key) }
     }
 
     public func trackEvent(event: AnalyticsEvent, properties: [String: Any]) {
