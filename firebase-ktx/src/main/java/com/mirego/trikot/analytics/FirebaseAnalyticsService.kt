@@ -3,14 +3,23 @@ package com.mirego.trikot.analytics
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.mirego.trikot.analytics.AnalyticsEvent
-import com.mirego.trikot.analytics.AnalyticsPropertiesType
-import com.mirego.trikot.analytics.AnalyticsService
 
-class FirebaseAnalyticsService(context: Context) : AnalyticsService {
+class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = true) :
+    AnalyticsService {
+
     private var firebaseAnalytics = FirebaseAnalytics.getInstance(context)
 
+    private var isEnabled: Boolean = analyticsEnabled
+
+    override var enabled: Boolean
+        get() = isEnabled
+        set(value) {
+            isEnabled = value
+            firebaseAnalytics.setAnalyticsCollectionEnabled(value)
+        }
+
     override val name: String = "FirebaseAnalytics"
+
     private var superProperties = emptyMap<String, Any>()
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
@@ -21,7 +30,8 @@ class FirebaseAnalyticsService(context: Context) : AnalyticsService {
     }
 
     //This functionality isn't supported with Firebase Analytics
-    override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) = Unit
+    override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) =
+        Unit
 
     override fun logout() {
         firebaseAnalytics.setUserId(null)
@@ -29,6 +39,12 @@ class FirebaseAnalyticsService(context: Context) : AnalyticsService {
 
     override fun setSuperProperties(properties: AnalyticsPropertiesType) {
         superProperties = superProperties + properties
+    }
+
+    override fun setUserProperties(properties: AnalyticsPropertiesType) {
+        properties.forEach {
+            firebaseAnalytics.setUserProperty(it.key, it.value.toString())
+        }
     }
 
     override fun unsetSuperProperties(propertyNames: List<String>) {

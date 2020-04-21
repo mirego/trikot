@@ -4,8 +4,23 @@ import android.content.Context
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.json.JSONObject
 
-class MixpanelAnalyticsService(context: Context, mixpanelToken: String) : AnalyticsService {
-    private val mixpanelAnalytics = MixpanelAPI.getInstance(context,mixpanelToken)
+class MixpanelAnalyticsService(
+    context: Context,
+    mixpanelToken: String,
+    analyticsEnabled: Boolean = true
+) : AnalyticsService {
+    private val mixpanelAnalytics =
+        MixpanelAPI.getInstance(context, mixpanelToken, !analyticsEnabled)
+
+    override var enabled: Boolean
+        get() = !mixpanelAnalytics.hasOptedOutTracking()
+        set(value) {
+            if (value) {
+                mixpanelAnalytics.optInTracking()
+            } else {
+                mixpanelAnalytics.optOutTracking()
+            }
+        }
 
     override val name: String = "MixpanelAnalytics"
 
@@ -27,6 +42,10 @@ class MixpanelAnalyticsService(context: Context, mixpanelToken: String) : Analyt
 
     override fun setSuperProperties(properties: AnalyticsPropertiesType) {
         mixpanelAnalytics.registerSuperProperties(properties.asJSONProperties())
+    }
+
+    override fun setUserProperties(properties: AnalyticsPropertiesType) {
+        TODO("Not yet implemented")
     }
 
     override fun unsetAllSuperProperties() {

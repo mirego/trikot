@@ -1,40 +1,59 @@
+import Foundation
 import Mixpanel
-import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
-class MixpanelAnalyticsService: AnalyticsService {
-    func identifyUser(userId: String, properties: [String: Any]) {
+public class MixpanelAnalyticsService: AnalyticsService {
+    public init(enableAnalytics: Bool = true) {
+        enabled = enableAnalytics
+    }
+
+    public var enabled: Bool {
+        didSet {
+            if enabled {
+                Mixpanel.mainInstance().optInTracking()
+            }
+            else {
+                Mixpanel.mainInstance().optOutTracking()
+            }
+        }
+    }
+
+    public func identifyUser(userId: String, properties: [String: Any]) {
         Mixpanel.mainInstance().identify(distinctId: userId)
         Mixpanel.mainInstance().people.set(properties: properties.asMixpanelProperties)
     }
 
-    func incrementUserProperties(incrementalProperties: [String: Any]) {
+    public func incrementUserProperties(incrementalProperties: [String: Any]) {
         Mixpanel.mainInstance().people.increment(properties: incrementalProperties.asMixpanelProperties)
     }
 
-    func logout() {
+    public func logout() {
         Mixpanel.mainInstance().reset()
     }
 
-    func setSuperProperties(properties: [String: Any]) {
+    public func setSuperProperties(properties: [String: Any]) {
         Mixpanel.mainInstance().registerSuperProperties(properties.asMixpanelProperties)
     }
 
-    func trackEvent(event: AnalyticsEvent, properties: [String: Any]) {
+    public func setUserProperties(properties: [String: Any]) {
+        Mixpanel.mainInstance().people.set(properties: properties.asMixpanelProperties)
+    }
+
+    public func trackEvent(event: AnalyticsEvent, properties: [String: Any]) {
         Mixpanel.mainInstance().track(event: event.name, properties: properties.asMixpanelProperties)
     }
 
-    func unsetAllSuperProperties() {
+    public func unsetAllSuperProperties() {
         Mixpanel.mainInstance().clearSuperProperties()
     }
 
-    func unsetSuperProperties(propertyNames: [String]) {
+    public func unsetSuperProperties(propertyNames: [String]) {
         propertyNames.forEach { property in
             Mixpanel.mainInstance().unregisterSuperProperty(property)
         }
     }
 
-    var name = "MixpanelAnalytics"
+    public var name = "MixpanelAnalytics"
 }
 
 // This is needed to convert Kotlin type to Swift types for Mixpanel to uses these values
