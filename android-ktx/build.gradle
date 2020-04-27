@@ -18,6 +18,17 @@ repositories {
 
 group 'com.mirego.trikot.kword'
 
+kotlin {
+    sourceSets {
+        all {
+            languageSettings {
+                useExperimentalAnnotation('kotlinx.serialization.UnstableDefault')
+                useExperimentalAnnotation('kotlinx.serialization.ImplicitReflectionSerializer')
+            }
+        }
+    }
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"

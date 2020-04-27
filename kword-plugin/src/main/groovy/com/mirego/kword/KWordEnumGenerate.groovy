@@ -11,11 +11,6 @@ class KWordEnumGenerate extends DefaultTask {
     @Lazy
     KWordExtension extension = { project.extensions.getByType(KWordExtension) }()
 
-    File translationFile
-    String enumClassName
-    File generatedDir
-
-
     @TaskAction
     void generate() {
         ClassName generatedClassName = ClassName.bestGuess(getEnumClassName())
@@ -55,23 +50,27 @@ class KWordEnumGenerate extends DefaultTask {
     }
 
     private List<String> parseKeys() {
-        Map<String, Object> translations = new JsonSlurper().parse(getTranslationFile()) as Map<String, Object>
-        translations.keySet().toList()
+        final Set<String> keys = new HashSet<>()
+        getTranslationFiles().collect {
+            Map<String, Object> translations = new JsonSlurper().parse(it) as Map<String, Object>
+            keys.addAll(translations.keySet())
+        }
+        keys.toList()
     }
 
     static String underscoreKey(String key) {
         key.replaceAll(/([A-Z])/, '_$1').replaceAll(/\./, '_').toUpperCase()
     }
 
-    File getTranslationFile() {
-        return translationFile ?: extension.translationFile
+    List<File> getTranslationFiles() {
+        return extension.translationFile != null ? Arrays.asList(extension.translationFile) : extension.translationFiles
     }
 
     String getEnumClassName() {
-        return enumClassName ?: extension.enumClassName
+        return extension.enumClassName
     }
 
     File getGeneratedDir() {
-        return generatedDir ?: extension.generatedDir
+        return extension.generatedDir
     }
 }

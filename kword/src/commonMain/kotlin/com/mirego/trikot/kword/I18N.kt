@@ -3,7 +3,7 @@ package com.mirego.trikot.kword
 import kotlin.js.JsName
 
 interface I18N {
-    operator fun get(kKey: KWordKey): String
+    operator fun get(key: KWordKey): String
 
     fun changeLocaleStrings(strings: Map<String, String>)
 

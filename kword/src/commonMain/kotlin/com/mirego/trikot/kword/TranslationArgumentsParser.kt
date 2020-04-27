@@ -1,13 +1,10 @@
 package com.mirego.trikot.kword
 
-class TranslationArgumentsParser {
-    fun replaceInTranslation(translation: String, arguments: Array<out Pair<String, String>>): String {
-        var parsedTranslation: String = translation
+internal class TranslationArgumentsParser {
+    private val regex = Regex("\\{\\{([^\\}]+)\\}\\}")
 
-        for (argument in arguments) {
-            parsedTranslation = parsedTranslation.replace("{{${argument.first}}}", argument.second)
+    fun replaceInTranslation(translation: String, arguments: Map<String, String>) =
+        translation.replace(regex) {
+            arguments[it.groupValues[1]] ?: it.value
         }
-
-        return parsedTranslation
-    }
 }
