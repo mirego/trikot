@@ -28,7 +28,7 @@ public class TrikotKword: NSObject {
                 print("Unable to load translation: \(error)")
             }
         }
-        KWord().changeLocaleStrings(strings: allStrings)
+        i18N.changeLocaleStrings(strings: allStrings)
     }
 }
 
