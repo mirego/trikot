@@ -1,9 +1,19 @@
 plugins {
     id 'kotlin-multiplatform'
-    id 'groovy'
+    id 'com.android.library'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.release' version '1.13'
     id 'mirego.publish' version '1.0'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 29
+    }
 }
 
 repositories {
@@ -17,8 +27,13 @@ repositories {
 group 'com.mirego.trikot'
 
 kotlin {
+    android {
+        publishAllLibraryVariants()
+    }
+
     targets {
         fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.android, 'android')
         fromPreset(presets.js, 'js')
         fromPreset(presets.iosArm32, 'iosArm32')
         fromPreset(presets.iosArm64, 'iosArm64')
@@ -46,10 +61,26 @@ kotlin {
             }
         }
 
-        jvmMain {
+        jvmShared {
+            dependsOn(commonMain)
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
                 implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+            }
+        }
+
+        jvmMain {
+            dependsOn(jvmShared)
+        }
+
+        androidMain {
+            dependsOn(jvmShared)
+        }
+
+        androidTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
 
@@ -92,9 +123,4 @@ release {
    checkTasks = ['check']
    buildTasks = ['publish']
    updateVersionPart = 1
-}
-
-// workaround for https://youtrack.jetbrains.com/issue/KT-27170
-configurations {
-    compileClasspath
 }

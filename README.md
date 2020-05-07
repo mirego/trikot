@@ -56,6 +56,7 @@ See: [Dispatch Queues](./documentation/DISPATCH_QUEUES.md)
     api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
     jvm "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
     js "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
+    android "com.mirego.trikot:trikotFoundation-android:$trikot_foundation_version"
     iosx64 "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
     iosarm64 "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
     iosarm32 "com.mirego.trikot:trikotFoundation-iosarm32:$trikot_foundation_version"
