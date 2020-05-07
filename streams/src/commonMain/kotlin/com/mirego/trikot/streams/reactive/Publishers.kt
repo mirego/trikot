@@ -20,7 +20,7 @@ object Publishers {
      */
     @JsName("just")
     fun <T> just(value: T): Publisher<T> {
-        return behaviorSubject(value).also { it.complete() }
+        return JustPublisher(value)
     }
 
     /**
