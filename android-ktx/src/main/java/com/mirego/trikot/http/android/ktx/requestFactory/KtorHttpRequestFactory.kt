@@ -56,7 +56,7 @@ class KtorHttpRequestFactory(
                 }
                 try {
                     val response = client.request<io.ktor.client.response.HttpResponse> {
-                        url(requestBuilder.baseUrl + requestBuilder.path)
+                        url(requestBuilder.baseUrl ?: "" + requestBuilder.path ?: "")
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
                                 header(entry.key, entry.value)
