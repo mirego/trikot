@@ -257,7 +257,7 @@ class PromiseContinuationTests {
     }
 
     @Test
-    fun finallyIsCalledOnSuccess() {
+    fun callingFinallyExecutesProvidedBlockOnSuccess() {
         var finallyCalled = false
 
         Promise.resolve(22)
@@ -267,12 +267,34 @@ class PromiseContinuationTests {
     }
 
     @Test
-    fun finallyIsCalledOnError() {
+    fun callingFinallyExecutesProvidedBlockOnError() {
         var finallyCalled = false
 
         Promise.reject<Int>(Throwable())
             .finally { finallyCalled = true }
 
         assertTrue(finallyCalled)
+    }
+
+    @Test
+    fun finallyReturnSuppliesNewPromiseOnSuccess() {
+        Promise.resolve(22)
+            .finallyReturn { Promise.resolve("Finally!") }
+            .verify(
+                value = "Finally!",
+                error = null,
+                completed = true
+            )
+    }
+
+    @Test
+    fun finallyReturnSuppliesNewPromiseOnError() {
+        Promise.reject<Int>(Throwable())
+            .finallyReturn { Promise.resolve("Finally!") }
+            .verify(
+                value = "Finally!",
+                error = null,
+                completed = true
+            )
     }
 }

@@ -89,9 +89,14 @@ class Promise<T> internal constructor(
         onError = apply
     )
 
-    fun finally(execute: () -> Unit): Publisher<T> = thenReturn(
+    fun finally(execute: () -> Unit): Promise<T> = thenReturn(
         onSuccess = { execute(); resolve(it) },
         onError = { execute(); reject(it) }
+    )
+
+    fun <R> finallyReturn(supply: () -> Promise<R>): Promise<R> = thenReturn(
+        onSuccess = { supply() },
+        onError = { supply() }
     )
 
     fun then(onSuccess: (T) -> Unit, onError: (Throwable) -> Unit): Promise<T> = thenReturn(
