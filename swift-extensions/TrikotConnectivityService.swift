@@ -4,7 +4,7 @@ import TRIKOT_FRAMEWORK_NAME
 
 public class TrikotConnectivityService {
     public static let shared = TrikotConnectivityService()
-    public let publisher = Publishers().publishSubject()
+    public let publisher = Publishers().behaviorSubject(value: nil)
 
     let reachability = Reachability()!
 

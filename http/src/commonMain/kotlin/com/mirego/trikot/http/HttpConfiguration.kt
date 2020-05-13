@@ -18,7 +18,7 @@ object HttpConfiguration {
     )
     private val internalNetworkDispatchQueue = AtomicReference<DispatchQueue>(OperationDispatchQueue())
     private val internalDefaultHeaderProvider = AtomicReference<HttpHeaderProvider>(DefaultHttpHeaderProvider())
-    private val internalConnectivityStatePublisher = AtomicReference<Publisher<ConnectivityState>>(Publishers.publishSubject())
+    private val internalConnectivityStatePublisher = AtomicReference<Publisher<ConnectivityState>>(Publishers.behaviorSubject())
     private val internalBaseUrl = AtomicReference("")
 
     /**
