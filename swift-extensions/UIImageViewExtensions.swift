@@ -65,7 +65,7 @@ extension UIImageView {
     }
 
     public func restoreContentMode() {
-        if let savedContentMode = savedContentMode {
+        if let savedContentMode = savedContentMode, contentMode != savedContentMode {
             contentMode = savedContentMode
         } else {
             savedContentMode = nil
@@ -79,6 +79,8 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
 
     public var isImageCacheEnabled = true
     public var isImageDependantOnViewSize = false
+    public var minimumSizeChange: CGFloat = 50
+    public var sizeMultiplier: CGFloat = UIScreen.main.scale
 
     public var maxNumberOfImagesInCache: Int {
         get {
@@ -108,14 +110,24 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
         if let imageViewModel = imageViewModel {
             let cancellableManagerProvider = CancellableManagerProvider()
 
-            let imageFlowPublisher = imageViewModel.imageFlow(width: Int32(imageView.frame.width * UIScreen.main.scale), height: Int32(imageView.frame.height * UIScreen.main.scale))
-
+            imageView.image = nil
             imageView.restoreContentMode()
-            observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageViewModel: imageViewModel, imageView: imageView)
+            if !isImageDependantOnViewSize || (imageView.frame.width > 0 && imageView.frame.height > 0) {
+                let imageFlowPublisher = imageViewModel.imageFlow(width: Int32(imageView.frame.width * sizeMultiplier), height: Int32(imageView.frame.height * sizeMultiplier))
+                observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageViewModel: imageViewModel, imageView: imageView)
+            }
 
             if isImageDependantOnViewSize {
                 let sizeObservationCancellation = KeyValueObservationHolder(imageView.observe(\UIImageView.bounds, options: [.old, .new]) {[weak self] (_, change) in
-                    if change.newValue?.size != change.oldValue?.size { self?.observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageViewModel: imageViewModel, imageView: imageView) }
+                    guard let self = self, let newValue = change.newValue, newValue != CGRect.zero else { return }
+                    var shouldUpdate = change.oldValue == nil || change.oldValue == CGRect.zero
+                    if let oldValue = change.oldValue, oldValue != CGRect.zero {
+                        shouldUpdate = (abs(newValue.width - oldValue.width) >= self.minimumSizeChange) || (abs(newValue.height - oldValue.height) >= self.minimumSizeChange)
+                    }
+                    if shouldUpdate { 
+                        let imageFlowPublisher = imageViewModel.imageFlow(width: Int32(newValue.width * self.sizeMultiplier), height: Int32(newValue.height * self.sizeMultiplier))
+                        self.observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageViewModel: imageViewModel, imageView: imageView) 
+                    }
                 })
 
                 imageView.trikotInternalPublisherCancellableManager.add(cancellable: sizeObservationCancellation)
@@ -123,7 +135,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
 
             imageView.trikotInternalPublisherCancellableManager.add(cancellable: cancellableManagerProvider)
         } else {
-            imageView.trikotInternalPublisherCancellableManager.cancel()
+            imageView.unsubscribeFromAllPublisher()
         }
     }
 
@@ -175,12 +187,13 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
             MrFreeze().freeze(objectToFreeze: imageFlow)
 
             let dataTask = URLSession.shared.dataTask(with: url) { [weak imageView, weak self] data, response, error in
+                    let image = data != nil ? UIImage(data: data!) : nil
                 DispatchQueue.main.async {
                     guard let imageView = imageView else { return }
                     if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                         let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                        let data = data, error == nil,
-                        let image = UIImage(data: data) {
+                        error == nil,
+                        let image = image {
 
                         self?.imageCache.setObject(image, forKey: url.absoluteString as NSString, cost: image.cacheCost)
                         imageView.restoreContentMode()
