@@ -2,12 +2,9 @@ package com.mirego.trikot.viewmodels
 
 import android.os.Build
 import android.widget.SeekBar
-import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
-import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
-import com.mirego.trikot.viewmodels.SliderViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableSliderViewModel
 
 object SliderViewModelBinder {
