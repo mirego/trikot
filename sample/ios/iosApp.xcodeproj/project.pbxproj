@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1AC9C498E6E5F2EFCEC3A3B4 /* Pods_iosAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8E32C92C1B117E25CD10D3 /* Pods_iosAppTests.framework */; };
+		3D3013CD246D6E0600D0E540 /* SliderListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3013CC246D6E0600D0E540 /* SliderListItem.swift */; };
 		400126FB23821800008FF41E /* ImageListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400126FA23821800008FF41E /* ImageListItem.swift */; };
 		400126FD23822780008FF41E /* InputTextListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400126FC23822780008FF41E /* InputTextListItem.swift */; };
 		403F9B4A2253D46800239F8B /* image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 403F9B492253D46800239F8B /* image.xcassets */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		1F52612822CF84FE000BB651 /* iosApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
+		3D3013CC246D6E0600D0E540 /* SliderListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderListItem.swift; sourceTree = "<group>"; };
 		400126FA23821800008FF41E /* ImageListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListItem.swift; sourceTree = "<group>"; };
 		400126FC23822780008FF41E /* InputTextListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextListItem.swift; sourceTree = "<group>"; };
 		403F9B492253D46800239F8B /* image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = image.xcassets; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				40C4B654237B735E00E86A76 /* ButtonListItem.swift */,
 				400126FA23821800008FF41E /* ImageListItem.swift */,
 				400126FC23822780008FF41E /* InputTextListItem.swift */,
+				3D3013CC246D6E0600D0E540 /* SliderListItem.swift */,
 			);
 			path = listitems;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */,
 				40C4B647237B564B00E86A76 /* NavigableListItem.swift in Sources */,
 				40C4B653237B6F0900E86A76 /* ViewListItem.swift in Sources */,
+				3D3013CD246D6E0600D0E540 /* SliderListItem.swift in Sources */,
 				400126FB23821800008FF41E /* ImageListItem.swift in Sources */,
 				40C4B64B237B660D00E86A76 /* HeaderListItem.swift in Sources */,
 				40C4B655237B735E00E86A76 /* ButtonListItem.swift in Sources */,

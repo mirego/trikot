@@ -33,6 +33,7 @@ class ListView: UIView {
         tableView.register(AutosizingCell<ButtonListItem>.self, forCellReuseIdentifier: AutosizingCell<ButtonListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<ImageListItem>.self, forCellReuseIdentifier: AutosizingCell<ImageListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<InputTextListItem>.self, forCellReuseIdentifier: AutosizingCell<InputTextListItem>.self.defaultReuseIdentifier)
+        tableView.register(AutosizingCell<SliderListItem>.self, forCellReuseIdentifier: AutosizingCell<SliderListItem>.self.defaultReuseIdentifier)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -82,6 +83,10 @@ extension ListView: UITableViewDataSource {
             return cell
         } else if let metaListItem = metaListItem as? InputTextListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<InputTextListItem>.self, for: indexPath)
+            cell.view.item = metaListItem
+            return cell
+        } else if let metaListItem = metaListItem as? SliderListItemViewModel {
+            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<SliderListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
         }

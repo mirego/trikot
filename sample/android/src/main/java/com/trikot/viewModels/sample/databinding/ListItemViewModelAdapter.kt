@@ -17,6 +17,7 @@ class ListItemViewModelAdapter :
             is ButtonListItemViewModel -> R.layout.item_button
             is ImageListItemViewModel -> R.layout.item_image
             is InputTextListItemViewModel -> R.layout.item_input_text
+            is SliderListItemViewModel -> R.layout.item_slider
             else -> TODO()
         }
     }

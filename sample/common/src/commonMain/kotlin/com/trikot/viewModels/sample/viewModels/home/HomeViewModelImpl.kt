@@ -61,6 +61,12 @@ class HomeViewModelImpl(private val delegate: NavigationDelegate) :
             it.title.action = it.action
         } as ListItemViewModel,
 
+        MutableNavigableListItemViewModel().also {
+            it.title.text = "Slider ->".just()
+            it.action = ViewModelAction { delegate.navigateTo(Destination.SLIDERS) }.just()
+            it.title.action = it.action
+        } as ListItemViewModel,
+
         MutableHeaderListItemViewModel("Application state"),
 
         MutableLabelListItemViewModel().apply {
