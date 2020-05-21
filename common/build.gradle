@@ -172,7 +172,7 @@ task copyFramework() {
     }
 }
 
-tasks.findAll { it.name.startsWith('compile') }.each { it.dependsOn('kwordGenerateEnum') }
+tasks.findAll { it.name.startsWith('preBuild') }.each { it.dependsOn('kwordGenerateEnum') }
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170
 configurations {
