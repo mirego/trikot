@@ -4,9 +4,9 @@ import TrikotFrameworkName
 class Core {
     static let shared = Core()
     private var bootstrap = Bootstrap()
-    let viewModelFactory: ViewModelFactory
+    let viewModelControllerFactory: ViewModelControllerFactory
 
     init() {
-        viewModelFactory = bootstrap.viewModelFactory
+        viewModelControllerFactory = bootstrap.viewModelControllerFactory
     }
 }

@@ -15,10 +15,10 @@ PODS:
 
 DEPENDENCIES:
   - SwiftLint
-  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `0.20.1`)"
-  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `0.8.1`)"
-  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `0.61.1`)"
-  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.metaviews.git`, tag `0.49.1`)"
+  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `0.23.1`)"
+  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `0.10.1`)"
+  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `0.63.1`)"
+  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.metaviews.git`, tag `0.51.1`)"
   - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
@@ -29,32 +29,32 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 0.20.1
+    :tag: 0.23.1
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 0.8.1
+    :tag: 0.10.1
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 0.61.1
+    :tag: 0.63.1
   Trikot.viewmodels:
     :git: "git@github.com:mirego/trikot.metaviews.git"
-    :tag: 0.49.1
+    :tag: 0.51.1
   TrikotFrameworkName:
     :path: "../common"
 
 CHECKOUT OPTIONS:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 0.20.1
+    :tag: 0.23.1
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 0.8.1
+    :tag: 0.10.1
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 0.61.1
+    :tag: 0.63.1
   Trikot.viewmodels:
     :git: "git@github.com:mirego/trikot.metaviews.git"
-    :tag: 0.49.1
+    :tag: 0.51.1
 
 SPEC CHECKSUMS:
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b

@@ -10,8 +10,10 @@
 		1AC9C498E6E5F2EFCEC3A3B4 /* Pods_iosAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8E32C92C1B117E25CD10D3 /* Pods_iosAppTests.framework */; };
 		403F9B4422539E0B00239F8B /* SharedBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403F9B4322539E0B00239F8B /* SharedBootstrap.swift */; };
 		403F9B4A2253D46800239F8B /* image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 403F9B492253D46800239F8B /* image.xcassets */; };
-		40C6799D2304B3C5003BB391 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799C2304B3C5003BB391 /* SampleViewController.swift */; };
-		40C6799F2304B3CE003BB391 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799E2304B3CE003BB391 /* SampleView.swift */; };
+		404B05C42475C19B00A38618 /* BaseViewModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B05C32475C19B00A38618 /* BaseViewModelViewController.swift */; };
+		404B05C62475C1AA00A38618 /* BaseViewModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B05C52475C1AA00A38618 /* BaseViewModelView.swift */; };
+		40C6799D2304B3C5003BB391 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799C2304B3C5003BB391 /* HomeViewController.swift */; };
+		40C6799F2304B3CE003BB391 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6799E2304B3CE003BB391 /* HomeView.swift */; };
 		40C679A123059D75003BB391 /* SampleImageResourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */; };
 		747A5D43E1156B17536ADEF1 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E065FF33AE03B70A503C771D /* Pods_iosApp.framework */; };
 		F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861D7E0207FA40F0085E80D /* AppDelegate.swift */; };
@@ -56,8 +58,10 @@
 		403F9B492253D46800239F8B /* image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = image.xcassets; sourceTree = "<group>"; };
 		403F9B4D2253FC1500239F8B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		403F9B4F2253FCC200239F8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		40C6799C2304B3C5003BB391 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
-		40C6799E2304B3CE003BB391 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		404B05C32475C19B00A38618 /* BaseViewModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelViewController.swift; sourceTree = "<group>"; };
+		404B05C52475C1AA00A38618 /* BaseViewModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelView.swift; sourceTree = "<group>"; };
+		40C6799C2304B3C5003BB391 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		40C6799E2304B3CE003BB391 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageResourceProvider.swift; sourceTree = "<group>"; };
 		89052F474DA527550C4CEA89 /* Pods-iosAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAppTests.debug.xcconfig"; path = "Target Support Files/Pods-iosAppTests/Pods-iosAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		92D573B2FF9E5BBCCE1B05AA /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,11 +118,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		404B05C22475C18900A38618 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				404B05C32475C19B00A38618 /* BaseViewModelViewController.swift */,
+				404B05C52475C1AA00A38618 /* BaseViewModelView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		40C6799B2304B3B2003BB391 /* sample */ = {
 			isa = PBXGroup;
 			children = (
-				40C6799C2304B3C5003BB391 /* SampleViewController.swift */,
-				40C6799E2304B3CE003BB391 /* SampleView.swift */,
+				40C6799C2304B3C5003BB391 /* HomeViewController.swift */,
+				40C6799E2304B3CE003BB391 /* HomeView.swift */,
 				40C679A023059D75003BB391 /* SampleImageResourceProvider.swift */,
 			);
 			path = sample;
@@ -159,6 +172,7 @@
 		F861D7DF207FA40F0085E80D /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				404B05C22475C18900A38618 /* UI */,
 				40C6799B2304B3B2003BB391 /* sample */,
 				1F52612822CF84FE000BB651 /* iosApp.entitlements */,
 				403F9B492253D46800239F8B /* image.xcassets */,
@@ -395,10 +409,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40C6799F2304B3CE003BB391 /* SampleView.swift in Sources */,
+				404B05C42475C19B00A38618 /* BaseViewModelViewController.swift in Sources */,
+				40C6799F2304B3CE003BB391 /* HomeView.swift in Sources */,
 				F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */,
 				403F9B4422539E0B00239F8B /* SharedBootstrap.swift in Sources */,
-				40C6799D2304B3C5003BB391 /* SampleViewController.swift in Sources */,
+				40C6799D2304B3C5003BB391 /* HomeViewController.swift in Sources */,
+				404B05C62475C1AA00A38618 /* BaseViewModelView.swift in Sources */,
 				40C679A123059D75003BB391 /* SampleImageResourceProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

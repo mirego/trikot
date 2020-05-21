@@ -1,33 +1,28 @@
-package com.trikot.sample.viewmodels.sample.impl
+package com.trikot.sample.viewmodels.home.impl
 
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.RefreshablePublisher
 import com.mirego.trikot.streams.reactive.just
-import com.mirego.trikot.streams.reactive.switchMap
 import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableViewModel
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
-import com.trikot.sample.domain.FetchQuoteUseCase
 import com.trikot.sample.localization.KWordTranslation
-import com.trikot.sample.viewmodels.sample.SampleViewModel
+import com.trikot.sample.viewmodels.home.HomeViewModel
 
-class SampleViewModelImpl(
-    fetchQuoteUseCase: FetchQuoteUseCase,
+class HomeViewModelImpl(
+    refreshableQuotePublisher: RefreshablePublisher<String>,
     i18N: I18N
 ) :
-    SampleViewModel {
-
-    private val refreshPublisher = Publishers.behaviorSubject(true)
+    HomeViewModel, MutableViewModel() {
 
     override val quoteLabel = MutableLabelViewModel().also {
-        it.text = refreshPublisher.switchMap {
-            fetchQuoteUseCase.fetchQuote()
-        }
+        it.text = refreshableQuotePublisher
     }
 
     override val refreshButton = MutableButtonViewModel().also {
         it.text = i18N[KWordTranslation.REFRESH_BUTTON].just()
         it.action = ViewModelAction {
-            refreshPublisher.value = true
+            refreshableQuotePublisher.refresh()
         }.just()
     } }

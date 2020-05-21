@@ -1,4 +1,5 @@
 plugins {
+    id 'com.android.library'
     id 'kotlin-multiplatform'
     id 'kotlinx-serialization'
     id 'org.jlleitschuh.gradle.ktlint'
@@ -15,11 +16,24 @@ repositories {
 }
 
 group 'com.trikot.sample'
-version '0.0.1'
 
 apply plugin: 'maven-publish'
 
 def iosArchLibrarySuffix = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? "iosarm64" : "iosx64"
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 21
+    }
+    sourceSets {
+        main.resources.srcDir('src/commonMain/resources/')
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
+    }
+}
 
 kword {
     translationFile 'src/commonMain/resources/translations/translation.en.json'
@@ -29,7 +43,7 @@ kword {
 
 kotlin {
     targets {
-        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.android, 'android')
         fromPreset(presets.js, 'js')
 
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
@@ -53,15 +67,26 @@ kotlin {
             }
         }
     }
+
+    android {
+        publishLibraryVariants('release', 'debug')
+    }
+
     sourceSets {
+        all {
+            languageSettings {
+                useExperimentalAnnotation('kotlin.Experimental')
+                useExperimentalAnnotation('kotlinx.serialization.UnstableDefault')
+                useExperimentalAnnotation('kotlinx.serialization.ImplicitReflectionSerializer')
+                useExperimentalAnnotation('kotlin.time.ExperimentalTime')
+            }
+        }
         commonMain {
             dependencies {
                 api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 api "com.mirego.trikot:streams:$trikot_streams_version"
                 api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 api "com.mirego.trikot:http:$trikot_http_version"
-                api "com.mirego.trikot:datasources:$trikot_datasources_version"
-                api "com.mirego.trikot:graphql:$trikot_graphql_version"
                 api "com.mirego.trikot:kword:$trikot_kword_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
@@ -72,25 +97,25 @@ kotlin {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+                implementation "io.mockk:mockk-common:$mokk_version"
             }
         }
-        jvmMain {
+        androidMain {
             dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
-                implementation "com.mirego.trikot:graphql-jvm:$trikot_graphql_version"
-                implementation "com.mirego.trikot:kword-jvm:$trikot_kword_version"
+                implementation "com.mirego.trikot.viewmodels:android-ktx:$trikot_viewmodels_android_ktx_version"
+                implementation "com.mirego.trikot.http:android-ktx:$trikot_http_android_ktx_version"
+                implementation "com.mirego.trikot.kword:android-ktx:$trikot_kword_android_ktx_version"
+                implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
         }
-        jvmTest {
+        androidTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
-                implementation 'com.github.ntrrgc:ts-generator:1.1.1'
+                implementation "io.mockk:mockk:$mokk_version"
             }
         }
         jsMain {
@@ -99,8 +124,6 @@ kotlin {
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
                 implementation "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:http-js:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
-                implementation "com.mirego.trikot:graphql-js:$trikot_graphql_version"
                 implementation "com.mirego.trikot:kword-js:$trikot_kword_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
@@ -112,8 +135,6 @@ kotlin {
                 implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
                 implementation "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-$iosArchLibrarySuffix:$trikot_datasources_version"
-                implementation "com.mirego.trikot:graphql-$iosArchLibrarySuffix:$trikot_graphql_version"
                 implementation "com.mirego.trikot:kword-$iosArchLibrarySuffix:$trikot_kword_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
             }

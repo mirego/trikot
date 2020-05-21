@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //swiftlint:disable discouraged_optional_collection
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Environment().flavor = CurrentFlavor()
+        Environment().flavor = currentFlavor()
         HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
         HttpConfiguration().connectivityPublisher = TrikotConnectivityService.shared.publisher
         ImageViewModelResourceManager.shared = SampleImageResourceProvider()
@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
 
-        window.rootViewController = SampleViewController()
+        window.rootViewController = HomeViewController()
 
         window.makeKeyAndVisible()
 

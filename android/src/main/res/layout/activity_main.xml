@@ -8,12 +8,11 @@
 
         <variable
                 name="viewModel"
-                type="com.trikot.sample.viewmodels.sample.SampleViewModel" />
+                type="com.trikot.sample.viewmodels.home.HomeViewModel" />
 
         <variable
                 name="lifecycleOwnerWrapper"
                 type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

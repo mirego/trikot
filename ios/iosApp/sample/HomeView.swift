@@ -1,18 +1,18 @@
 import TrikotFrameworkName
 import UIKit
 
-class SampleView: UIView {
+class HomeView: BaseViewModelView<HomeViewModel> {
     private let label = UILabel()
     private let button = UIButton()
 
-    var sampleViewModel: SampleViewModel? {
+    override var viewViewModel: HomeViewModel? {
         didSet {
-            label.labelViewModel = sampleViewModel?.quoteLabel
-            button.buttonViewModel = sampleViewModel?.refreshButton
+            label.labelViewModel = viewViewModel?.quoteLabel
+            button.buttonViewModel = viewViewModel?.refreshButton
         }
     }
 
-    override init(frame: CGRect) {
+    required init(frame: CGRect) {
         super.init(frame: frame)
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
@@ -33,10 +33,5 @@ class SampleView: UIView {
                 button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
             ]
         )
-    }
-
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
