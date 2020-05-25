@@ -52,6 +52,8 @@ public class SubscriptionAdapter: Combine.Subscription {
     public func request(_ demand: Subscribers.Demand) {
         if let max = demand.max {
             subscription.request(n: Int64(max))
+        } else {
+            subscription.request(n: Int64.max)
         }
     }
 
@@ -61,7 +63,7 @@ public class SubscriptionAdapter: Combine.Subscription {
 }
 
 extension TRIKOT_FRAMEWORK_NAME.Publisher {
-    public func asCombinePublisher<T>(type: T.Type) -> PublisherAdapter<T> {
-        PublisherAdapter<T>(self)
+    public func asCombinePublisher<T>(type: T.Type) -> AnyPublisher<T, Never> {
+        AnyPublisher(PublisherAdapter<T>(self))
     }
 }
