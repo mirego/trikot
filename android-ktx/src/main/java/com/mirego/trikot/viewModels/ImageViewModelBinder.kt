@@ -71,7 +71,6 @@ object ImageViewModelBinder {
         imageFlow.imageResource?.asDrawable(
             imageView.context,
             imageFlow.tintColor?.let { StateSelector(imageFlow.tintColor) })?.let {
-            imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             imageView.setImageDrawable(it)
             imageViewModel.setImageState(ImageState.SUCCESS)
         } ?: run {
@@ -131,7 +130,6 @@ object ImageViewModelBinder {
                 })
             } ?: run {
                 imageFlow.placeholderImageResource?.asDrawable(imageView.context)?.let {
-                    imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
                     imageView.setImageDrawable(it)
                 }
             }
