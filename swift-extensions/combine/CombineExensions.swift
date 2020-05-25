@@ -2,7 +2,7 @@ import Combine
 import TRIKOT_FRAMEWORK_NAME
 
 public class PublisherAdapter<T>: Combine.Publisher {
-    private let publisher: ShopCastFramework.Publisher
+    private let publisher: TRIKOT_FRAMEWORK_NAME.Publisher
 
     public typealias Output = T
 
@@ -12,12 +12,12 @@ public class PublisherAdapter<T>: Combine.Publisher {
         publisher.subscribe(s: SubscriberAdapter(subscriber))
     }
 
-    public init(_ publisher: ShopCastFramework.Publisher) {
+    public init(_ publisher: TRIKOT_FRAMEWORK_NAME.Publisher) {
         self.publisher = publisher
     }
 }
 
-public class SubscriberAdapter<S: Combine.Subscriber>: ShopCastFramework.Subscriber {
+public class SubscriberAdapter<S: Combine.Subscriber>: TRIKOT_FRAMEWORK_NAME.Subscriber {
     private let subscriber: S
 
     public init(_ subscriber: S) {
@@ -37,15 +37,15 @@ public class SubscriberAdapter<S: Combine.Subscriber>: ShopCastFramework.Subscri
         _ = subscriber.receive(t)
     }
 
-    public func onSubscribe(s: ShopCastFramework.Subscription) {
+    public func onSubscribe(s: TRIKOT_FRAMEWORK_NAME.Subscription) {
         subscriber.receive(subscription: SubscriptionAdapter(s))
     }
 }
 
 public class SubscriptionAdapter: Combine.Subscription {
-    private let subscription: ShopCastFramework.Subscription
+    private let subscription: TRIKOT_FRAMEWORK_NAME.Subscription
 
-    init(_ subscription: ShopCastFramework.Subscription) {
+    init(_ subscription: TRIKOT_FRAMEWORK_NAME.Subscription) {
         self.subscription = subscription
     }
 
@@ -60,7 +60,7 @@ public class SubscriptionAdapter: Combine.Subscription {
     }
 }
 
-extension ShopCastFramework.Publisher {
+extension TRIKOT_FRAMEWORK_NAME.Publisher {
     public func asCombinePublisher<T>(type: T.Type) -> PublisherAdapter<T> {
         PublisherAdapter<T>(self)
     }
