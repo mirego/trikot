@@ -22,26 +22,19 @@ object ImageViewModelBinder {
         .apply { hidden = true.just() } as ImageViewModel
 
     @JvmStatic
-    @BindingAdapter("view_model", "lifecycleOwnerWrapper")
+    @BindingAdapter(value = ["view_model", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"], requireAll = false)
     fun bind(
         imageView: ImageView,
         imageViewModel: ImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper
-    ) {
-        bind(imageView, imageViewModel, null, lifecycleOwnerWrapper)
-    }
-
-    @JvmStatic
-    @BindingAdapter("view_model", "transformation", "lifecycleOwnerWrapper")
-    fun bind(
-        imageView: ImageView,
-        imageViewModel: ImageViewModel?,
-        transformation: Transformation?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper,
+        transformation: Transformation? = null,
+        placeholderScaleType: ImageView.ScaleType? = null
     ) {
         (imageViewModel ?: NoImageViewModel).let {
 
             imageView.bindViewModel(imageViewModel, lifecycleOwnerWrapper)
+
+            val originalScaleType = imageView.scaleType
 
             imageView.viewTreeObserver.addOnPreDrawListener(
                 ViewLoaderPreDrawListener(imageView) { width: ImageWidth, height: ImageHeight ->
@@ -53,6 +46,8 @@ object ImageViewModelBinder {
                                 imageFlow,
                                 imageView,
                                 transformation,
+                                originalScaleType,
+                                placeholderScaleType,
                                 manager
                             )
                         }
@@ -66,6 +61,8 @@ object ImageViewModelBinder {
         imageFlow: ImageFlow,
         imageView: ImageView,
         transformation: Transformation?,
+        originalScaleType: ImageView.ScaleType,
+        placeholderScaleType: ImageView.ScaleType?,
         cancellableManager: CancellableManager
     ) {
         imageFlow.imageResource?.asDrawable(
@@ -78,6 +75,7 @@ object ImageViewModelBinder {
                 var requestCreator: RequestCreator? = null
                 val resourceId = imageFlow.placeholderImageResource?.resourceId(imageView.context)
                 resourceId?.let { placeholderId ->
+                    placeholderScaleType?.let { imageView.scaleType = it }
                     requestCreator = Picasso.get().load(url).placeholder(placeholderId)
                 } ?: run {
                     requestCreator = Picasso.get().load(url)
@@ -86,6 +84,7 @@ object ImageViewModelBinder {
                 transformation?.let { requestCreator?.transform(it) }
                 requestCreator?.into(imageView, object : Callback {
                     override fun onSuccess() {
+                        imageView.scaleType = originalScaleType
                         imageFlow.onSuccess?.let { onSuccessPublisher ->
                             val cancellableManagerProvider =
                                 CancellableManagerProvider()
@@ -98,6 +97,8 @@ object ImageViewModelBinder {
                                     it,
                                     imageView,
                                     transformation,
+                                    originalScaleType,
+                                    placeholderScaleType,
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
@@ -120,6 +121,8 @@ object ImageViewModelBinder {
                                     it,
                                     imageView,
                                     transformation,
+                                    originalScaleType,
+                                    placeholderScaleType,
                                     cancellableManagerProvider.cancelPreviousAndCreate()
                                 )
                             }
@@ -130,6 +133,7 @@ object ImageViewModelBinder {
                 })
             } ?: run {
                 imageFlow.placeholderImageResource?.asDrawable(imageView.context)?.let {
+                    placeholderScaleType?.let { imageView.scaleType = it }
                     imageView.setImageDrawable(it)
                 }
             }

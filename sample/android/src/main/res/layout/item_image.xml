@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.widget.ImageView.ScaleType" />
+
         <variable
             name="item"
             type="com.trikot.viewmodels.sample.viewmodels.ImageListItemViewModel" />
@@ -26,11 +28,13 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:background="@drawable/button_background"
+            android:scaleType="centerInside"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
+            app:placeholderScaleType="@{ScaleType.CENTER_INSIDE}"
             core:view_model="@{item.image}"
             tools:text="addasdas"
             />

@@ -1,4 +1,5 @@
 plugins {
+    id 'com.android.library'
     id 'kotlin-multiplatform'
     id 'kotlinx-serialization'
     id 'org.jlleitschuh.gradle.ktlint'
@@ -20,9 +21,16 @@ apply plugin: 'maven-publish'
 
 def iosArchLibrarySuffix = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? "iosarm64" : "iosx64"
 
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 21
+    }
+}
+
 kotlin {
     targets {
-        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.android, 'android')
         fromPreset(presets.js, 'js')
 
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
@@ -42,6 +50,11 @@ kotlin {
             }
         }
     }
+
+    android {
+        publishLibraryVariants('release', 'debug')
+    }
+
     sourceSets {
         commonMain {
             dependencies {
@@ -57,14 +70,15 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
         }
-        jvmMain {
+        androidMain {
             dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+                implementation "com.mirego.trikot.viewmodels:android-ktx:$trikot_viewmodels_android_ktx_version"
+                implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
             }
         }
-        jvmTest {
+        androidTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
