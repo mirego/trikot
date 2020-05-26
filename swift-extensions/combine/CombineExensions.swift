@@ -33,7 +33,10 @@ public class SubscriberAdapter<S: Combine.Subscriber>: TRIKOT_FRAMEWORK_NAME.Sub
     }
 
     public func onNext(t: Any?) {
-        guard let t = t as? S.Input else { assert(false, "Invalid cast") }
+        guard let t = t as? S.Input else { 
+            assert(false, "Invalid cast")
+            return
+        }
         _ = subscriber.receive(t)
     }
 
