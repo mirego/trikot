@@ -7,12 +7,12 @@ public class FirebaseAnalyticsService: AnalyticsService {
     private var superProperties = [String: Any]()
 
     public init(enableAnalytics: Bool = true) {
-        enabled = enableAnalytics
+        isEnabled = enableAnalytics
     }
 
-    public var enabled: Bool {
+    public var isEnabled: Bool {
         didSet {
-            Analytics.setAnalyticsCollectionEnabled(enabled)
+            Analytics.setAnalyticsCollectionEnabled(isEnabled)
         }
     }
 

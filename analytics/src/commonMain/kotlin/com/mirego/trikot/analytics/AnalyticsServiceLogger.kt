@@ -5,11 +5,11 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 class AnalyticsServiceLogger(private val analyticsService: AnalyticsService) : AnalyticsService {
     override val name: String = "AnalyticsServiceLogger"
 
-    override var enabled: Boolean
-        get() = analyticsService.enabled
+    override var isEnabled: Boolean
+        get() = analyticsService.isEnabled
         set(value) {
             println("Analytics - enabled changed to $value (Service: ${analyticsService.name})")
-            analyticsService.enabled = value
+            analyticsService.isEnabled = value
         }
 
     private val superProperties = AtomicReference<AnalyticsPropertiesType>(mapOf())

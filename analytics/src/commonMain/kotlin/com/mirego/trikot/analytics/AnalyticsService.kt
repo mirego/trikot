@@ -14,7 +14,7 @@ interface AnalyticsService {
     /*
     Enables/Disables the analytics collection
      */
-    var enabled: Boolean
+    var isEnabled: Boolean
 
     /*
     userId: Id of the logged in user
@@ -64,10 +64,10 @@ interface AnalyticsService {
 
         override val name = currentAnalyticsService().name
 
-        override var enabled: Boolean
-            get() = currentAnalyticsService().enabled
+        override var isEnabled: Boolean
+            get() = currentAnalyticsService().isEnabled
             set(value) {
-                currentAnalyticsService().enabled = value
+                currentAnalyticsService().isEnabled = value
             }
 
         override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {

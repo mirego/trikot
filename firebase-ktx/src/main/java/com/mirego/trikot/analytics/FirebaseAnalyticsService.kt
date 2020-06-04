@@ -9,12 +9,12 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
 
     private var firebaseAnalytics = FirebaseAnalytics.getInstance(context)
 
-    private var isEnabled: Boolean = analyticsEnabled
+    private var analyticsEnabled: Boolean = analyticsEnabled
 
-    override var enabled: Boolean
-        get() = isEnabled
+    override var isEnabled: Boolean
+        get() = analyticsEnabled
         set(value) {
-            isEnabled = value
+            analyticsEnabled = value
             firebaseAnalytics.setAnalyticsCollectionEnabled(value)
         }
 

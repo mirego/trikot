@@ -4,12 +4,12 @@ import TRIKOT_FRAMEWORK_NAME
 
 public class MixpanelAnalyticsService: AnalyticsService {
     public init(enableAnalytics: Bool = true) {
-        enabled = enableAnalytics
+        isEnabled = enableAnalytics
     }
 
-    public var enabled: Bool {
+    public var isEnabled: Bool {
         didSet {
-            if enabled {
+            if isEnabled {
                 Mixpanel.mainInstance().optInTracking()
             }
             else {

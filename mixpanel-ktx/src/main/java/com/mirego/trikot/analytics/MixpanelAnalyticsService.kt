@@ -12,7 +12,7 @@ class MixpanelAnalyticsService(
     private val mixpanelAnalytics =
         MixpanelAPI.getInstance(context, mixpanelToken, !analyticsEnabled)
 
-    override var enabled: Boolean
+    override var isEnabled: Boolean
         get() = !mixpanelAnalytics.hasOptedOutTracking()
         set(value) {
             if (value) {
