@@ -13,7 +13,7 @@ open class DeserializableHttpRequestPublisher<T>(
     override val builder: RequestBuilder,
     headerProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider
 ) : HttpRequestPublisher<T>(headerProvider = headerProvider) {
-    
+
     override fun processResponse(response: HttpResponse): T {
         when (response.statusCode) {
             in 200..299 -> return successfulResponse(response)
