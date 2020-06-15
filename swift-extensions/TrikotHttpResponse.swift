@@ -2,7 +2,8 @@ import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
 public class TrikotHttpResponse: NSObject, HttpResponse {
-    public var bodyString: String?
+
+    public var bodyByteArray: KotlinByteArray?
 
     public var headers: [String: String]
 
@@ -22,8 +23,10 @@ public class TrikotHttpResponse: NSObject, HttpResponse {
             }
             statusCode = Int32(response.statusCode)
         }
-        if let data = data {
-            bodyString = String(data: data, encoding: .utf8)
+        if let data = data, data.count > 0 {
+            bodyByteArray = MrFreeze().freeze(objectToFreeze: ByteArrayNativeUtils().convert(data: data)) as? KotlinByteArray
+        } else {
+            bodyByteArray = KotlinByteArray(size: 0)
         }
 
         self.headers = headers

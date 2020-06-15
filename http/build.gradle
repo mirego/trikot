@@ -44,6 +44,12 @@ kotlin {
         fromPreset(presets.tvosX64, 'tvosX64')
     }
     sourceSets {
+        all {
+            languageSettings {
+                useExperimentalAnnotation('kotlin.ExperimentalStdlibApi')
+            }
+        }
+
         commonMain {
             dependencies {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
@@ -126,7 +132,7 @@ kotlin {
 }
 
 release {
-   checkTasks = ['check']
-   buildTasks = ['publish']
-   updateVersionPart = 1
+    checkTasks = ['check']
+    buildTasks = ['publish']
+    updateVersionPart = 1
 }

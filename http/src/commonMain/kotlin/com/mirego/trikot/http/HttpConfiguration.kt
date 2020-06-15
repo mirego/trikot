@@ -1,24 +1,27 @@
 package com.mirego.trikot.http
 
-import com.mirego.trikot.http.connectivity.ConnectivityState
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.OperationDispatchQueue
 import com.mirego.trikot.foundation.concurrent.freeze
+import com.mirego.trikot.http.connectivity.ConnectivityState
+import com.mirego.trikot.http.header.DefaultHttpHeaderProvider
+import com.mirego.trikot.http.requestFactory.EmptyHttpRequestFactory
 import com.mirego.trikot.streams.reactive.Publishers
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import org.reactivestreams.Publisher
-import com.mirego.trikot.http.header.DefaultHttpHeaderProvider
-import com.mirego.trikot.http.requestFactory.EmptyHttpRequestFactory
 
 object HttpConfiguration {
     private val internalHttpRequestFactory = AtomicReference<HttpRequestFactory>(
         EmptyHttpRequestFactory()
     )
-    private val internalNetworkDispatchQueue = AtomicReference<DispatchQueue>(OperationDispatchQueue())
-    private val internalDefaultHeaderProvider = AtomicReference<HttpHeaderProvider>(DefaultHttpHeaderProvider())
-    private val internalConnectivityStatePublisher = AtomicReference<Publisher<ConnectivityState>>(Publishers.behaviorSubject())
+    private val internalNetworkDispatchQueue =
+        AtomicReference<DispatchQueue>(OperationDispatchQueue())
+    private val internalDefaultHeaderProvider =
+        AtomicReference<HttpHeaderProvider>(DefaultHttpHeaderProvider())
+    private val internalConnectivityStatePublisher =
+        AtomicReference<Publisher<ConnectivityState>>(Publishers.behaviorSubject())
     private val internalBaseUrl = AtomicReference("")
 
     /**
@@ -62,7 +65,10 @@ object HttpConfiguration {
             return internalConnectivityStatePublisher.value
         }
         set(value) {
-            internalConnectivityStatePublisher.setOrThrow(internalConnectivityStatePublisher.value, value)
+            internalConnectivityStatePublisher.setOrThrow(
+                internalConnectivityStatePublisher.value,
+                value
+            )
         }
 
     /**
@@ -79,6 +85,6 @@ object HttpConfiguration {
     /**
      * Shared JSON parser used by DeserializableHttpRequestPublisher
      */
-    @UseExperimental(UnstableDefault::class)
+    @OptIn(UnstableDefault::class)
     val json = Json.nonstrict.also { freeze(it) }
 }

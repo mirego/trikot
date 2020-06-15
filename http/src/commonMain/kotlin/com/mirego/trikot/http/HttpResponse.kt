@@ -6,10 +6,9 @@ interface HttpResponse {
      */
     val statusCode: Int
     /**
-     * Body result as String
-     * Note: In the future version, we should have a bodyStream (inputStream) instead of bodyString
+     * Body result as ByteArray
      */
-    val bodyString: String?
+    val bodyByteArray: ByteArray?
     /**
      * Result header
      */
