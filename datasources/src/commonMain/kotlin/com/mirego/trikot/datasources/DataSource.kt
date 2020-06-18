@@ -12,4 +12,9 @@ interface DataSource<R : DataSourceRequest, T> {
      * Save data to the datasource
      */
     fun save(request: R, data: T?)
+
+    /**
+     * Delete data in the datasource
+     */
+    fun delete(cachableId: Any)
 }
