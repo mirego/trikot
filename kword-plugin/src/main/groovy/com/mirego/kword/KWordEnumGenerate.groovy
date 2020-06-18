@@ -3,6 +3,8 @@ package com.mirego.kword
 import com.squareup.kotlinpoet.*
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 
 class KWordEnumGenerate extends DefaultTask {
@@ -62,6 +64,7 @@ class KWordEnumGenerate extends DefaultTask {
         key.replaceAll(/([A-Z])/, '_$1').replaceAll(/\./, '_').toUpperCase()
     }
 
+    @InputFiles
     List<File> getTranslationFiles() {
         return extension.translationFile != null ? Arrays.asList(extension.translationFile) : extension.translationFiles
     }
@@ -72,5 +75,10 @@ class KWordEnumGenerate extends DefaultTask {
 
     File getGeneratedDir() {
         return extension.generatedDir
+    }
+
+    @OutputFile
+    File getGeneratedClassFile() {
+        new File(getGeneratedDir(), getEnumClassName().replaceAll(/\./, '/') + '.kt')
     }
 }
