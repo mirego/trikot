@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-multiplatform'
     id 'kotlinx-serialization'
     id 'org.jlleitschuh.gradle.ktlint'
-    id 'mirego.kword' version '0.2'
+    id 'mirego.kword' version '0.5'
 }
 
 repositories {
