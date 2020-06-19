@@ -30,4 +30,11 @@ class MemoryCacheDataSource<R : DataSourceRequest, T> : BaseDataSource<R, T>() {
             refreshPublisherWithId(request.cachableId)
         }
     }
+
+    override fun delete(cachableId: Any) {
+        val initialValue = memoryCache.value
+        val mutableMap = initialValue.toMutableMap()
+        mutableMap.remove(cachableId)
+        memoryCache.compareAndSet(initialValue, mutableMap)
+    }
 }

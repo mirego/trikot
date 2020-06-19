@@ -58,6 +58,35 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
         }
     }
 
+    fun cachableIds(): List<Any> {
+        return mapAtomicReference.value.keys.toList()
+    }
+
+    fun clean(cachableId: Any) {
+        clean(listOf(cachableId))
+    }
+
+    fun clean(cachableIds: List<Any>) {
+        cachableIds.map { id ->
+            cacheDataSource?.delete(id)
+        }
+
+        val initialMap = mapAtomicReference.value
+        val toMutableMap = initialMap.toMutableMap()
+        cachableIds.map { id ->
+            toMutableMap.remove(id)
+        }
+
+        mapAtomicReference.compareAndSet(initialMap, toMutableMap)
+    }
+
+    fun cleanAll() {
+        mapAtomicReference.value.keys.map {
+            cacheDataSource?.delete(it)
+        }
+        mapAtomicReference.compareAndSet(mapAtomicReference.value, mapOf())
+    }
+
     protected fun refreshPublisherWithId(cachableId: Any) {
         mapAtomicReference.value[cachableId]?.refreshablePublisher()?.refresh()
     }
@@ -136,6 +165,8 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     abstract fun internalRead(request: R): ExecutablePublisher<T>
 
     override fun save(request: R, data: T?) {}
+
+    override fun delete(cachableId: Any) {}
 }
 
 fun <T> DataSourcePublisherPair<T>.refreshablePublisher(): RefreshablePublisher<DataState<T, Throwable>> {

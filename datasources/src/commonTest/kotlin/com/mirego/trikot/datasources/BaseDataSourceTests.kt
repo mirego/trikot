@@ -142,6 +142,61 @@ class BaseDataSourceTests {
         value.value!!.assertError(expectedError, cacheResult)
     }
 
+    @Test
+    fun givenCachedDataWhenFetchingTheCachableIdsThenTheyAreAllReturned() {
+        val networkDataSourceReadPublisher = ReadFromCachePublisher()
+        val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
+        val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
+        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+
+        val cacheId1 = "cacheId1"
+        val cacheId2 = "cacheId2"
+        networkDataSource.read(FakeRequest(cacheId1, DataSourceRequest.Type.REFRESH_CACHE))
+        networkDataSource.read(FakeRequest(cacheId2, DataSourceRequest.Type.REFRESH_CACHE))
+
+        assertTrue {
+            networkDataSource.cachableIds() == listOf(cacheId1, cacheId2)
+        }
+    }
+
+    @Test
+    fun givenCachedDataWhenCleaningOneCachableIdThenTheOthersAreStillPresent() {
+        val networkDataSourceReadPublisher = ReadFromCachePublisher()
+        val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
+        val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
+        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+
+        val cacheId1 = "cacheId1"
+        val cacheId2 = "cacheId2"
+        networkDataSource.read(FakeRequest(cacheId1, DataSourceRequest.Type.REFRESH_CACHE))
+        networkDataSource.read(FakeRequest(cacheId2, DataSourceRequest.Type.REFRESH_CACHE))
+
+        networkDataSource.clean(cacheId1)
+
+        assertTrue {
+            networkDataSource.cachableIds() == listOf(cacheId2)
+        }
+    }
+
+    @Test
+    fun givenCachedDataWhenCleaningAllThenNoPublishersArePresent() {
+        val networkDataSourceReadPublisher = ReadFromCachePublisher()
+        val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
+        val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
+        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+
+        val cacheId1 = "cacheId1"
+        val cacheId2 = "cacheId2"
+        networkDataSource.read(FakeRequest(cacheId1, DataSourceRequest.Type.REFRESH_CACHE))
+        networkDataSource.read(FakeRequest(cacheId2, DataSourceRequest.Type.REFRESH_CACHE))
+
+        networkDataSource.cleanAll()
+
+        assertTrue {
+            networkDataSource.cachableIds() == emptyList<Any>()
+        }
+    }
+
     data class FakeRequest(override val cachableId: Any, override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE) : DataSourceRequest
 
     class BasicDataSource(publishers: MutableMap<Any, ReadFromCachePublisher>, fallbackDataSource: DataSource<FakeRequest, String>? = null) : BaseDataSource<FakeRequest, String>(fallbackDataSource) {
@@ -162,6 +217,13 @@ class BaseDataSourceTests {
             if (hasOldPublisher) {
                 refreshPublisherWithId(request.cachableId)
             }
+        }
+
+        override fun delete(cachableId: Any) {
+            val initialValue = internalPublishers.value
+            val mutableMap = initialValue.toMutableMap()
+            mutableMap.remove(cachableId)
+            internalPublishers.compareAndSet(initialValue, mutableMap)
         }
     }
 
