@@ -37,7 +37,13 @@ public class SubscriberAdapter<S: Combine.Subscriber>: TRIKOT_FRAMEWORK_NAME.Sub
             assert(false, "Invalid cast")
             return
         }
-        _ = subscriber.receive(t)
+        if Thread.current.isMainThread {
+            _ = subscriber.receive(t)
+        } else {
+            DispatchQueue.main.async {
+                _ = self.subscriber.receive(t)
+            }
+        }
     }
 
     public func onSubscribe(s: TRIKOT_FRAMEWORK_NAME.Subscription) {
