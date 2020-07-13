@@ -3,7 +3,8 @@ import CoreBluetooth
 import Dispatch
 
 public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManagerDelegate {
-    private lazy var centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.global(qos: .background))
+    private let dispatchQueue = DispatchQueue.global(qos: .background)
+    private lazy var centralManager = CBCentralManager(delegate: self, queue: dispatchQueue)
 
     private let scanResultpublisher = frozenBehaviorSubject()
     private let numberOfScanRequest = Atomic<Int>(0)
@@ -56,8 +57,10 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         numberOfScanRequest.mutate {[weak self] in
             $0 += 1
             if ($0 == 1) {
-                self?.clearScanResult()
-                self?.centralManager.scanForPeripherals(withServices: serviceUUIDs.map { CBUUID(string:$0) }, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+                dispatchQueue.async {
+                    self?.clearScanResult()
+                    self?.centralManager.scanForPeripherals(withServices: serviceUUIDs.map { CBUUID(string:$0) }, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+                }
             }
         }
 
@@ -87,8 +90,10 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
         if (scanResults[peripheral] == nil) {
             let trikotBluetoothScanResult = TrikotBluetoothScanResult(centralManager: centralManager, peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
             trikotBluetoothScanResult.onHeartBeatLost = {[weak self] in
-                self?.scanResults.removeValue(forKey: peripheral)
-                self?.dispatchScanResult()
+                self?.dispatchQueue.async {
+                    self?.scanResults.removeValue(forKey: peripheral)
+                    self?.dispatchScanResult()
+                }
             }
             scanResults[peripheral] = trikotBluetoothScanResult
             dispatchScanResult()
