@@ -7,6 +7,7 @@ import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
+import android.bluetooth.le.BluetoothLeScanner
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -17,7 +18,9 @@ import androidx.core.content.ContextCompat
 import com.mirego.trikot.bluetooth.BluetoothManager
 import com.mirego.trikot.bluetooth.BluetoothScanResult
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.BehaviorSubject
 import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.subscribe
 import mirego.trikot.bluetooth.AndroidBluetoothScanResult
 import mirego.trikot.bluetooth.toBluetoothScanResult
 import org.reactivestreams.Publisher
@@ -128,14 +131,15 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
             }
         }
 
-        startScanWhenReady(serviceUUIDs, callback, cancellableManager)
+        startScanWhenReady(serviceUUIDs, callback, cancellableManager, devicesPublisher)
         return devicesPublisher
     }
 
     private fun startScanWhenReady(
         serviceUUIDs: List<String>,
         callback: ScanCallback,
-        cancellableManager: CancellableManager
+        cancellableManager: CancellableManager,
+        devicesPublisher: BehaviorSubject<List<BluetoothScanResult>>
     ) {
         val filters = serviceUUIDs.map {
             ScanFilter.Builder().setServiceUuid(ParcelUuid(UUID.fromString(it))).build()
@@ -149,18 +153,66 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
         if (bluetoothScanner != null) {
             bluetoothScanner.startScan(filters.subList(0, 1), scanSettings, callback)
 
+            setupRetryOnTimeout(
+                bluetoothScanner,
+                callback,
+                serviceUUIDs,
+                cancellableManager,
+                devicesPublisher
+            )
+
             cancellableManager.add {
-                if (bluetoothAdapter.state == STATE_ON) {
-                    bluetoothScanner.stopScan(callback)
-                }
+                stopScanIfOpen(bluetoothScanner, callback)
             }
         } else {
             Timer().also {
-                it.schedule(200) {
-                    startScanWhenReady(serviceUUIDs, callback, cancellableManager)
+                it.schedule(RETRY_TIMEOUT) {
+                    startScanWhenReady(serviceUUIDs, callback, cancellableManager, devicesPublisher)
                 }
                 cancellableManager.add { it.cancel() }
             }
         }
     }
+
+    private fun setupRetryOnTimeout(
+        bluetoothScanner: BluetoothLeScanner,
+        callback: ScanCallback,
+        serviceUUIDs: List<String>,
+        cancellableManager: CancellableManager,
+        devicesPublisher: BehaviorSubject<List<BluetoothScanResult>>
+    ) {
+        val retryCancellableManager = CancellableManager().also {
+            cancellableManager.add(it)
+        }
+
+        Timer().also {
+            it.schedule(SCAN_TIMEOUT) {
+                retryCancellableManager.cancel()
+                stopScanIfOpen(bluetoothScanner, callback)
+                startScanWhenReady(serviceUUIDs, callback, cancellableManager, devicesPublisher)
+            }
+        }.also {
+            retryCancellableManager.add { it.cancel() }
+            devicesPublisher.subscribe(retryCancellableManager) {
+                if (it.isNotEmpty()) {
+                    retryCancellableManager.cancel()
+                }
+            }
+        }
+    }
+
+    private fun stopScanIfOpen(
+        bluetoothScanner: BluetoothLeScanner,
+        callback: ScanCallback
+    ) {
+        if (bluetoothAdapter.state == STATE_ON) {
+            bluetoothScanner.stopScan(callback)
+        }
+    }
+
+    companion object {
+        const val RETRY_TIMEOUT: Long = 200
+        const val SCAN_TIMEOUT: Long = 20 * 1000
+    }
+
 }
