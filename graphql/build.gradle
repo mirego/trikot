@@ -1,4 +1,5 @@
 plugins {
+    id 'com.android.library'
     id 'kotlin-multiplatform'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.release' version '1.13'
@@ -16,8 +17,23 @@ repositories {
 
 group 'com.mirego.trikot'
 
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 29
+    }
+}
+
 kotlin {
+    android {
+        publishAllLibraryVariants()
+    }
+
     targets {
+        fromPreset(presets.android, 'android')
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
 
@@ -37,12 +53,30 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
+        commonTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test-common'
+                implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+            }
+        }
         jvmMain {
             dependencies {
                 implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
                 implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+            }
+        }
+        androidMain {
+            dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
