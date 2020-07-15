@@ -14,8 +14,7 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
     private val escapedQuery: String
         get() {
             return query
-                .trimIndent()
-                .jsonEscape()
+                .escapeForGraphql()
         }
 
     override val requestBody: String
@@ -46,27 +45,11 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
             is Int,
             is Boolean -> "$any"
             is GraphqlJsonObject -> any.body
-            else -> "\"${any.toString().jsonEscape()}\""
+            else -> "\"${any.toString().escapeForGraphql()}\""
         }
     }
 
     private fun listJson(list: List<*>): String {
         return "[${list.filterNotNull().joinToString { anyToJson(it) }}]"
     }
-}
-
-fun String.jsonEscape(): String {
-    val chars = (0x00..0x1f).map { it.toChar() }
-
-    val escapedControlChars = chars.fold(this) { current, value ->
-        current.replace(value, 0x20.toChar())
-    }
-
-    return escapedControlChars
-        .replace("\\", "\\\\")
-        .replace("\"", "\\\"")
-        .replace("\n", " ")
-        .replace("\b", " ")
-        .replace("\r", " ")
-        .replace("\t", " ")
 }
