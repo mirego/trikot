@@ -1,4 +1,5 @@
 plugins {
+    id 'com.android.library'
     id 'kotlin-multiplatform'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.release' version '1.13'
@@ -16,8 +17,23 @@ repositories {
 
 group 'com.mirego.trikot'
 
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 29
+    }
+}
+
 kotlin {
+    android {
+        publishAllLibraryVariants()
+    }
+
     targets {
+        fromPreset(presets.android, 'android')
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
 
@@ -30,6 +46,18 @@ kotlin {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+            }
+        }
+        androidTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
         jvmMain {
