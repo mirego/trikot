@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.HeaderListItemViewModel" />
 
         <variable
@@ -21,7 +21,7 @@
         android:paddingBottom="15dp"
         android:layout_marginTop="15dp"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
         <TextView
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:fontFamily="sans-serif-black"
             android:textSize="20dp"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:view_model="@{item.text}"
+            core:view_model="@{viewModel.text}"
             tools:text="Header" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

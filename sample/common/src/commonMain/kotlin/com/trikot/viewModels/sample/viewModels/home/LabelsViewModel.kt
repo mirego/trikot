@@ -7,13 +7,17 @@ import com.mirego.trikot.viewmodels.text.RichText
 import com.mirego.trikot.viewmodels.text.RichTextRange
 import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.streams.reactive.just
-import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.ListViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
+import org.reactivestreams.Publisher
 
-class LabelsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
-    override val items: List<ListItemViewModel> = listOf(
+class LabelsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+
+    override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
         MutableLabelListItemViewModel().also {
             it.label.text = "Text on red background".just()
@@ -55,5 +59,5 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
             it.label.text = "I am red".just()
             it.label.textColor = StateSelector(Color(255, 0, 0)).just()
         }
-    )
+    ).just()
 }

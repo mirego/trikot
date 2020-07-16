@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), NavigationDelegate {
         super.onCreate(savedInstanceState)
         appViewModel = ViewModelProviders.of(this).get(AndroidAppViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.datasets.adapter = ListItemViewModelAdapter()
+        binding.datasets.adapter = ListItemViewModelAdapter(this)
         binding.viewModel = appViewModel.getVm(this)
         binding.lifecycleOwner = this
         binding.lifecycleOwnerWrapper = LifecycleOwnerWrapper(this)

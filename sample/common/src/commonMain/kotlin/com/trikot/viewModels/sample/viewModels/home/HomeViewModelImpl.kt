@@ -10,7 +10,8 @@ import com.mirego.trikot.streams.reactive.filter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.shared
-import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableNavigableListItemViewModel
@@ -19,7 +20,7 @@ import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import org.reactivestreams.Publisher
 
 class HomeViewModelImpl(private val delegate: NavigationDelegate) :
-    ListViewModel {
+    MutableListViewModel<ListItemViewModel>() {
 
     private val applicationStatePublisher = ApplicationStatePublisher()
 
@@ -30,49 +31,49 @@ class HomeViewModelImpl(private val delegate: NavigationDelegate) :
             .incrementCounter(backgroundCount)
             .shared()
 
-    override val items = listOf(
+    override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableNavigableListItemViewModel().also {
             it.title.text = "Views ->".just()
             it.action = ViewModelAction { delegate.navigateTo(Destination.VIEWS) }.just()
             it.title.action = it.action
-        } as ListItemViewModel,
+        },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Labels ->".just()
             it.action = ViewModelAction { delegate.navigateTo(Destination.LABELS) }.just()
             it.title.action = it.action
-        } as ListItemViewModel,
+        },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Buttons ->".just()
             it.action = ViewModelAction { delegate.navigateTo(Destination.BUTTONS) }.just()
             it.title.action = it.action
-        } as ListItemViewModel,
+        },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Images ->".just()
             it.action = ViewModelAction { delegate.navigateTo(Destination.IMAGES) }.just()
             it.title.action = it.action
-        } as ListItemViewModel,
+        },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Input text ->".just()
             it.action = ViewModelAction { delegate.navigateTo(Destination.INPUT_TEXT) }.just()
             it.title.action = it.action
-        } as ListItemViewModel,
+        },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Slider ->".just()
             it.action = ViewModelAction { delegate.navigateTo(Destination.SLIDERS) }.just()
             it.title.action = it.action
-        } as ListItemViewModel,
+        },
 
         MutableHeaderListItemViewModel("Application state"),
 
         MutableLabelListItemViewModel().apply {
             label.text = backgroundStateCounter.map { "Went to foreground $it times" }
         }
-    )
+    ).just()
 }
 
 fun <T> Publisher<T>.incrementCounter(

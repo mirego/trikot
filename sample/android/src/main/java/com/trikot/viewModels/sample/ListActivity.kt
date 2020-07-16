@@ -28,7 +28,7 @@ class ListActivity: AppCompatActivity(), NavigationDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityListBinding>(this, R.layout.activity_list)
-        binding.datasets.adapter = ListItemViewModelAdapter()
+        binding.datasets.adapter = ListItemViewModelAdapter(this)
         binding.viewModel = Destination.values()[intent.getIntExtra(EXTRA_DESTINATION, 0)].getViewModel(this)
         binding.lifecycleOwner = this
         binding.lifecycleOwnerWrapper = LifecycleOwnerWrapper(this)

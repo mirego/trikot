@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.ViewListItemViewModel" />
 
         <variable
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="50dp"
@@ -30,7 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             android:background="#565656"
-            core:view_model="@{item.view}">
+            core:view_model="@{viewModel.view}">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

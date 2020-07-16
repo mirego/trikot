@@ -10,18 +10,20 @@ import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
-import com.trikot.viewmodels.sample.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableImageListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableViewListItemViewModel
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import com.trikot.viewmodels.sample.resource.ImageResources
+import org.reactivestreams.Publisher
 
-class ImagesViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
+class ImagesViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
     private val fallbackImageFlow =
         Publishers.behaviorSubject(SimpleImageFlow(url = "https://www.vokode.com/wp-content/uploads/2019/06/fallback.jpg") as ImageFlow)
 
-    override val items: List<ListItemViewModel> = listOf(
+    override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
         MutableViewListItemViewModel().also {
             it.view.backgroundColor = StateSelector(Color(143, 143, 143)).just()
@@ -86,5 +88,5 @@ class ImagesViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
                 )
             }
         }
-    )
+    ).just()
 }

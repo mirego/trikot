@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.MutableSliderListItemViewModel" />
 
         <variable
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
         <SeekBar
             android:id="@+id/progress_bar"
@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:view_model="@{item.slider}"
+            core:view_model="@{viewModel.slider}"
             />
 
         <TextView
@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:view_model="@{item.valueLabel}"
+            core:view_model="@{viewModel.valueLabel}"
             tools:text="slider value" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

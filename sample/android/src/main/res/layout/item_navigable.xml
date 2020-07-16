@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.NavigableListItemViewModel" />
 
         <variable
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
        <TextView
            android:layout_width="match_parent"
@@ -32,7 +32,7 @@
            android:layout_marginStart="16dp"
            android:textSize="30dp"
            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-           core:view_model="@{item.title}"
+           core:view_model="@{viewModel.title}"
            tools:text="Click me..."/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,6 +1,7 @@
 package com.trikot.viewmodels.sample.viewmodels
 
 import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableSliderViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableViewModel

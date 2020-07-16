@@ -1,6 +1,7 @@
 package com.trikot.viewmodels.sample.navigation
 
-import com.trikot.viewmodels.sample.viewmodels.home.ListViewModel
+import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.ListViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.*
 
 interface NavigationDelegate {
@@ -8,7 +9,7 @@ interface NavigationDelegate {
     fun showAlert(text: String)
 }
 
-enum class Destination(val getViewModel: (NavigationDelegate) -> ListViewModel) {
+enum class Destination(val getViewModel: (NavigationDelegate) -> ListViewModel<ListItemViewModel>) {
     VIEWS({ ViewsViewModel(it) }),
     LABELS({ LabelsViewModel(it) }),
     BUTTONS({ ButtonsViewModel(it) }),

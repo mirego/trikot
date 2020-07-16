@@ -9,12 +9,15 @@ import com.mirego.trikot.viewmodels.text.RichText
 import com.mirego.trikot.viewmodels.text.RichTextRange
 import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
 import com.trikot.viewmodels.sample.viewmodels.*
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import com.trikot.viewmodels.sample.resource.ImageResources
+import org.reactivestreams.Publisher
 
-class ButtonsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
-    override val items: List<ListItemViewModel> = listOf(
+class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+    override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor (normal + highlighted)"),
         MutableButtonListItemViewModel().also {
             it.button.action = ViewModelAction { }.just()
@@ -100,5 +103,5 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate) : ListViewModel {
             it.button.tintColor = StateSelector(Color(255, 0, 0), Color(123, 123, 123)).just()
             it.button.action = ViewModelAction {}.just()
         }
-    )
+    ).just()
 }

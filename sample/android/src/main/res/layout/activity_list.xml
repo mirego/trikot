@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.trikot.viewmodels.sample.viewmodels.home.ListViewModel" />
+            type="com.mirego.trikot.viewmodels.ListViewModel" />
 
         <variable
             name="lifecycleOwnerWrapper"
@@ -31,7 +31,8 @@
             android:background="#FFFFFF"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            app:items="@{viewModel.items}"
+            app:view_model="@{viewModel}"
+            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

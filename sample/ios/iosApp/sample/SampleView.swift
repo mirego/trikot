@@ -12,7 +12,10 @@ class ListView: UIView {
 
     var vm: ListViewModel? {
         didSet {
-            self.items = vm?.items
+            guard let vm = vm else { return }
+            observe(vm.elements) {[weak self] (elements: [ListItemViewModel]) in
+                self?.items = elements
+            }
         }
     }
 

@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.ButtonListItemViewModel" />
 
         <variable
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="200dp"
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:view_model="@{item.button}"
+            core:view_model="@{viewModel.button}"
             tools:text="addasdas"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

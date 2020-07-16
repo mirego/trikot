@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.InputTextListItemViewModel" />
 
         <variable
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -31,6 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:view_model="@{item.inputText}"/>
+            core:view_model="@{viewModel.inputText}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

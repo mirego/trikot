@@ -8,7 +8,7 @@
         <import type="android.widget.ImageView.ScaleType" />
 
         <variable
-            name="item"
+            name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.ImageListItemViewModel" />
 
         <variable
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-        core:view_model="@{item}">
+        core:view_model="@{viewModel}">
 
         <ImageView
             android:layout_width="200dp"
@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             app:placeholderScaleType="@{ScaleType.CENTER_INSIDE}"
-            core:view_model="@{item.image}"
+            core:view_model="@{viewModel.image}"
             tools:text="addasdas"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
