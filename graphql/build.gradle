@@ -49,7 +49,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:http:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
@@ -93,7 +93,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-js:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
@@ -108,7 +108,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-iosarm64:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-iosarm64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
 
@@ -119,7 +119,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-iosx64:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-iosx64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
 
@@ -130,7 +130,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams-tvosarm64:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-tvosarm64:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-tvosarm64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
 
@@ -141,7 +141,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams-tvosx64:$trikot_streams_version"
                 implementation "com.mirego.trikot:http-tvosx64:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources-tvosx64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
     }
