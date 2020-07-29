@@ -26,22 +26,30 @@ import io.ktor.util.flattenEntries
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.io.charsets.MalformedInputException
 import org.reactivestreams.Publisher
 import kotlin.coroutines.CoroutineContext
 
 class KtorHttpRequestFactory(
-    private val httpLogLevel: LogLevel = LogLevel.NONE,
-    private val httpLogger: Logger = Logger.DEFAULT
+    httpLogLevel: LogLevel = LogLevel.NONE,
+    httpLogger: Logger = Logger.DEFAULT,
+    private var httpClient: HttpClient = HttpClient()
 ) : HttpRequestFactory {
+    init {
+        httpClient = httpClient.config  {
+            install(Logging) {
+                logger = httpLogger
+                level = httpLogLevel
+            }
+        }
+    }
+
     override fun request(requestBuilder: RequestBuilder): HttpRequest {
-        return KTorCoreHttpRequest(requestBuilder, httpLogLevel, httpLogger)
+        return KTorCoreHttpRequest(requestBuilder, httpClient)
     }
 
     class KTorCoreHttpRequest(
         private val requestBuilder: RequestBuilder,
-        private val httpLogLevel: LogLevel,
-        private val httpLogger: Logger
+        private val httpClient: HttpClient
     ) : HttpRequest, CoroutineScope {
         override val coroutineContext: CoroutineContext = Dispatchers.Unconfined
 
@@ -49,14 +57,8 @@ class KtorHttpRequestFactory(
             val publisher = Publishers.behaviorSubject<HttpResponse>()
 
             launch {
-                val client = HttpClient {
-                    install(Logging) {
-                        logger = httpLogger
-                        level = httpLogLevel
-                    }
-                }
                 try {
-                    val response = client.request<io.ktor.client.response.HttpResponse> {
+                    val response = httpClient.request<io.ktor.client.response.HttpResponse> {
                         url((requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: ""))
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
@@ -82,7 +84,8 @@ class KtorHttpRequestFactory(
                 } catch (ex: Exception) {
                     val response = (ex as? ResponseException)?.response
                     if (response != null) {
-                        publisher.value = KTorHttpResponse(response, response.call.response.readBytes())
+                        publisher.value =
+                            KTorHttpResponse(response, response.call.response.readBytes())
                     } else {
                         publisher.error = ex
                     }
@@ -93,7 +96,8 @@ class KtorHttpRequestFactory(
         }
     }
 
-    class KTorHttpResponse(response: io.ktor.client.response.HttpResponse, bytes: ByteArray?) : HttpResponse {
+    class KTorHttpResponse(response: io.ktor.client.response.HttpResponse, bytes: ByteArray?) :
+        HttpResponse {
         override val statusCode: Int = response.status.value
         override val bodyByteArray: ByteArray? = bytes
         override val headers: Map<String, String> = response.headers.flattenEntries().toMap()
