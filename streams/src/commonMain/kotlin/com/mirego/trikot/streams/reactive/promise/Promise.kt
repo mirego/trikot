@@ -17,8 +17,8 @@ class Promise<T> internal constructor(
     cancellableManager: CancellableManager? = null
 ) : Publisher<T> {
 
-    private val result = BehaviorSubjectImpl<T>()
     private val serialQueue = SynchronousSerialQueue()
+    private val result = BehaviorSubjectImpl<T>(serialQueue = serialQueue)
 
     private val isCancelled: AtomicReference<Boolean> = AtomicReference(false)
     private val internalCancellableManager: CancellableManager = CancellableManager().also {
@@ -54,7 +54,7 @@ class Promise<T> internal constructor(
                 }
             )
 
-        internalCancellableManager.add {
+        cancellableManager?.add {
             serialQueue.dispatch {
                 isCancelled.setOrThrow(false, true)
 

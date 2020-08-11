@@ -5,12 +5,12 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
 import org.reactivestreams.Subscriber
 
-open class PublishSubjectImpl<T> : PublishSubject<T> {
+open class PublishSubjectImpl<T>(private val serialQueue: SynchronousSerialQueue = SynchronousSerialQueue()) :
+    PublishSubject<T> {
     private val subscriptions = AtomicListReference<PublisherSubscription<T>>()
     private val atomicValue = AtomicReference<T?>(null)
     private val atomicError = AtomicReference<Throwable?>(null)
     private val isCompleted = AtomicReference(false)
-    private val serialQueue = SynchronousSerialQueue()
     protected val hasSubscriptions
         get() = subscriptions.value.count() > 0
 
