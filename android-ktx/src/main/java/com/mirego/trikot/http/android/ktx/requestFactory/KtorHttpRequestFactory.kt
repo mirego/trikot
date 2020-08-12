@@ -17,7 +17,8 @@ import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.url
-import io.ktor.client.response.readBytes
+import io.ktor.client.statement.HttpStatement
+import io.ktor.client.statement.readBytes
 import io.ktor.content.ByteArrayContent
 import io.ktor.content.TextContent
 import io.ktor.http.ContentType
@@ -35,7 +36,7 @@ class KtorHttpRequestFactory(
     private var httpClient: HttpClient = HttpClient()
 ) : HttpRequestFactory {
     init {
-        httpClient = httpClient.config  {
+        httpClient = httpClient.config {
             install(Logging) {
                 logger = httpLogger
                 level = httpLogLevel
@@ -58,7 +59,7 @@ class KtorHttpRequestFactory(
 
             launch {
                 try {
-                    val response = httpClient.request<io.ktor.client.response.HttpResponse> {
+                    httpClient.request<HttpStatement> {
                         url((requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: ""))
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
@@ -78,10 +79,10 @@ class KtorHttpRequestFactory(
                             }
                         }
                         method = requestBuilder.method.ktorMethod
+                    }.execute { response ->
+                        publisher.value = KTorHttpResponse(response, response.call.response.readBytes())
                     }
-
-                    publisher.value = KTorHttpResponse(response, response.call.response.readBytes())
-                } catch (ex: Exception) {
+                } catch (ex: Throwable) {
                     val response = (ex as? ResponseException)?.response
                     if (response != null) {
                         publisher.value =
@@ -96,7 +97,7 @@ class KtorHttpRequestFactory(
         }
     }
 
-    class KTorHttpResponse(response: io.ktor.client.response.HttpResponse, bytes: ByteArray?) :
+    class KTorHttpResponse(response: io.ktor.client.statement.HttpResponse, bytes: ByteArray?) :
         HttpResponse {
         override val statusCode: Int = response.status.value
         override val bodyByteArray: ByteArray? = bytes

@@ -47,6 +47,7 @@ kotlin {
         all {
             languageSettings {
                 useExperimentalAnnotation('kotlin.ExperimentalStdlibApi')
+                useExperimentalAnnotation('kotlinx.serialization.UnstableDefault')
             }
         }
 

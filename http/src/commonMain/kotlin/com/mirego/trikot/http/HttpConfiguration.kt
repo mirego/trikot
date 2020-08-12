@@ -7,7 +7,6 @@ import com.mirego.trikot.http.connectivity.ConnectivityState
 import com.mirego.trikot.http.header.DefaultHttpHeaderProvider
 import com.mirego.trikot.http.requestFactory.EmptyHttpRequestFactory
 import com.mirego.trikot.streams.reactive.Publishers
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import org.reactivestreams.Publisher
@@ -25,7 +24,6 @@ object HttpConfiguration {
     private val internalJson =
         AtomicReference(defaultJsonConfiguration())
 
-    @OptIn(UnstableDefault::class)
     private fun defaultJsonConfiguration(): Json {
         return Json(
             JsonConfiguration(
