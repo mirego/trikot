@@ -34,6 +34,7 @@ configurations.all {
 }
 
 dependencies {
+    api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
     api "com.mirego.trikot:streams:$trikot_streams_version"
     api 'com.mirego.trikot:http:0.24.1'
     implementation "io.ktor:ktor-client-android:$ktor_version"
