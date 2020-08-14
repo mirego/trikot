@@ -5,4 +5,5 @@ import org.reactivestreams.Publisher
 
 object PropertyFactory {
     fun <T> create(value: T): Publisher<T> = Publishers.just(value)
+    fun <T> never(): Publisher<T> = Publishers.never()
 }
