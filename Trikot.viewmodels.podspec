@@ -8,7 +8,9 @@ Pod::Spec.new do |spec|
   spec.author        = { "Martin Gagnon" => "mgagnon@mirego.com" }
   spec.source        = { :git => "https://github.com/mirego/trikot.viewmodels.git", :tag => "#{spec.version}" }
   spec.source_files  = "swift-extensions/*.swift"
-  
+  spec.tvos.source_files = "swift-extensions/*.swift"
+  spec.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift"
+
   spec.static_framework = true
   
   spec.dependency 'Trikot.streams'
