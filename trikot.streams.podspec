@@ -16,6 +16,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'streams' do |ss|
     ss.source_files  = "swift-extensions/*.swift"
     ss.ios.deployment_target = '8.0'
+    ss.tvos.deployment_target = '9.0'
   end
 
   spec.subspec 'Combine' do |combine|
