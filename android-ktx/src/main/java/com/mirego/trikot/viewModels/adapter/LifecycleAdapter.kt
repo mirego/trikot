@@ -59,7 +59,7 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
     @Suppress("LeakingThis")
     abstract class LifecycleViewHolder(@JvmField val itemView: View) :
         RecyclerView.ViewHolder(itemView), LifecycleOwner {
-        private val lifecycleRegistry = LifecycleRegistry(this)
+        private var lifecycleRegistry = LifecycleRegistry(this)
 
         init {
             lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
@@ -84,6 +84,7 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 onDetach()
+                lifecycleRegistry = LifecycleRegistry(this)
             }
         }
     }
