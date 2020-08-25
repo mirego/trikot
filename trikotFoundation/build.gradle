@@ -41,6 +41,7 @@ kotlin {
         fromPreset(presets.tvosArm64, 'tvosArm64')
         fromPreset(presets.tvosX64, 'tvosX64')
     }
+
     sourceSets {
         all {
             languageSettings {
@@ -109,8 +110,16 @@ kotlin {
             dependsOn(nativeMain)
         }
 
+        nativeTest {
+            dependsOn commonTest
+        }
+
         configure([iosX64Main, iosArm64Main, tvosArm64Main, tvosX64Main]) {
             dependsOn nativeMain64
+        }
+
+        configure([iosX64Test, iosArm64Test, tvosArm64Test, tvosX64Test, iosArm32Test]) {
+            dependsOn nativeTest
         }
 
         iosArm32Main {

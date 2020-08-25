@@ -11,3 +11,7 @@ expect class AtomicReference<T>(value: T) {
 
     fun compareAndSwap(expected: T, new: T): T
 }
+
+fun <T> AtomicReference<T>.setOrThrow(new: T) {
+    setOrThrow(value, new)
+}
