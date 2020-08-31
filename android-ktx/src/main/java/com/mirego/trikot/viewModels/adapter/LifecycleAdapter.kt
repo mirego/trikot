@@ -57,7 +57,7 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
     }
 
     @Suppress("LeakingThis")
-    abstract class LifecycleViewHolder(@JvmField val itemView: View) :
+    abstract class LifecycleViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView), LifecycleOwner {
         private var lifecycleRegistry = LifecycleRegistry(this)
 
