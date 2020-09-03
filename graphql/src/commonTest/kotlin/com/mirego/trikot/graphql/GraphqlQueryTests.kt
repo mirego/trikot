@@ -1,16 +1,19 @@
 package com.mirego.trikot.graphql
 
-import kotlinx.serialization.builtins.serializer
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.serialization.builtins.serializer
 
 class GraphqlQueryTests {
 
     @Test
-    fun `GIVEN query with control characters, they are escaped`() {
+    fun givenQueryWithControlCharactersTheyAreEscaped() {
         val query = QueryTest()
 
-        assertEquals("{\"query\": \"${expectedString()}\",\"variables\": {\"var\":\"${expectedString()}\"}}", query.requestBody)
+        assertEquals(
+            "{\"query\": \"${expectedString()}\",\"variables\": {\"var\":\"${expectedString()}\"}}",
+            query.requestBody
+        )
     }
 
     class QueryTest : AbstractGraphqlQuery<String>(String.serializer()) {

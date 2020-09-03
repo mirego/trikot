@@ -22,6 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.graphql'
-enableFeaturePreview("GRADLE_METADATA")
 
 include ':graphql'

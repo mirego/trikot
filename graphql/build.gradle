@@ -9,6 +9,7 @@ plugins {
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
@@ -19,7 +20,6 @@ group 'com.mirego.trikot'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -31,17 +31,15 @@ kotlin {
     android {
         publishAllLibraryVariants()
     }
-
-    targets {
-        fromPreset(presets.android, 'android')
-        fromPreset(presets.jvm, 'jvm')
-        fromPreset(presets.js, 'js')
-
-        fromPreset(presets.iosArm64, 'iosArm64')
-        fromPreset(presets.iosX64, 'iosX64')
-        fromPreset(presets.tvosArm64, 'tvosArm64')
-        fromPreset(presets.tvosX64, 'tvosX64')
+    jvm()
+    ios()
+    iosArm32('iosArm32')
+    tvos()
+    js {
+        browser()
+        nodejs()
     }
+
     sourceSets {
         commonMain {
             dependencies {
@@ -49,106 +47,76 @@ kotlin {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:http:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
             }
         }
+
         commonTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
         }
+
         jvmMain {
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-jvm:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-jvm:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            }
+            dependsOn commonMain
         }
+
         jvmTest {
+            dependsOn commonTest
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
+
         androidMain {
-            dependencies {
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            }
+            dependsOn commonMain
         }
+
         androidTest {
+            dependsOn commonTest
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
+
         jsMain {
+            dependsOn commonMain
+        }
+
+        jsTest {
+            dependsOn commonTest
             dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-js:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-js:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
+                implementation 'org.jetbrains.kotlin:kotlin-test-js'
             }
         }
+
         nativeMain {
-            dependsOn(commonMain)
+            dependsOn commonMain
         }
 
         iosArm64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-iosarm64:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-iosarm64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-            }
+            dependsOn nativeMain
         }
 
         iosX64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-iosx64:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-iosx64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-            }
+            dependsOn nativeMain
         }
 
         tvosArm64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-tvosarm64:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-tvosarm64:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-tvosarm64:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-tvosarm64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-            }
+            dependsOn nativeMain
         }
 
         tvosX64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-tvosx64:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-tvosx64:$trikot_streams_version"
-                implementation "com.mirego.trikot:http-tvosx64:$trikot_http_version"
-                implementation "com.mirego.trikot:datasources-tvosx64:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-            }
+            dependsOn nativeMain
         }
     }
 }
 
 release {
-   checkTasks = ['check']
-   buildTasks = ['publish']
-   updateVersionPart = 1
+    checkTasks = ['check']
+    buildTasks = ['publish']
+    updateVersionPart = 2
 }
