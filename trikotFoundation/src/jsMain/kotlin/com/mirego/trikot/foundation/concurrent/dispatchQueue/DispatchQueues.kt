@@ -5,4 +5,5 @@ actual open class OperationDispatchQueue : DispatchQueue {
     override fun dispatch(block: DispatchBlock) = block()
 }
 
+@Deprecated("Streams subscription concurrency is now handled by a serial queue in PublishSubject")
 actual class SerialSubscriptionDispatchQueue : OperationDispatchQueue(), DispatchQueue

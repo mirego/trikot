@@ -1,11 +1,11 @@
 package com.mirego.trikot.foundation.date
 
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 import platform.Foundation.NSDate
 import platform.Foundation.NSISO8601DateFormatter
 import platform.Foundation.dateByAddingTimeInterval
 import platform.Foundation.timeIntervalSince1970
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 actual class Date(val nsDate: NSDate) {

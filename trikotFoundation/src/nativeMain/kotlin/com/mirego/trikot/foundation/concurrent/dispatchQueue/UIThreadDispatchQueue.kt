@@ -1,10 +1,10 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
 import com.mirego.trikot.foundation.concurrent.freeze
+import kotlin.native.concurrent.AtomicInt
 import platform.Foundation.NSThread
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
-import kotlin.native.concurrent.AtomicInt
 
 actual class UIThreadDispatchQueue actual constructor() : DispatchQueue {
     private val count = AtomicInt(0)

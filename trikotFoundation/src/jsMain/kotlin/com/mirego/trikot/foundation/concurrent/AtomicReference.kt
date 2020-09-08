@@ -6,8 +6,12 @@ actual class AtomicReference<T> actual constructor(value: T) {
         get() = internalValue
 
     actual fun compareAndSet(expected: T, new: T): Boolean {
-        internalValue = new
-        return true
+        return if (internalValue == expected) {
+            internalValue = new
+            true
+        } else {
+            false
+        }
     }
 
     actual fun setOrThrow(expected: T, new: T) {
@@ -19,7 +23,9 @@ actual class AtomicReference<T> actual constructor(value: T) {
     }
 
     actual fun compareAndSwap(expected: T, new: T): T {
-        internalValue = new
+        if (internalValue == expected) {
+            internalValue = new
+        }
         return internalValue
     }
 }

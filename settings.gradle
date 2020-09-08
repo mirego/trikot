@@ -22,6 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.foundation'
-enableFeaturePreview("GRADLE_METADATA")
 
 include ':trikotFoundation'

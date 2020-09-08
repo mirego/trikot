@@ -1,13 +1,12 @@
 package com.mirego.trikot.foundation.concurrent
 
-import kotlin.test.Test
 import kotlin.native.concurrent.freeze
 import kotlin.native.concurrent.isFrozen
+import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class AtomicPropertyNativeTest {
-
     private var atomicPropertyNullable: Any? by atomicNullable(Any())
     private var atomicPropertyNullableWithValue: Any by atomic(Any())
     private var atomicPropertyNullableFrozen: Any? by atomicNullable(Any()).freeze()
