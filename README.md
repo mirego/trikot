@@ -77,3 +77,13 @@ invalidatingPublisher.value = true // Will invalidate the whole myDataSource cac
     iosx64 "com.mirego.trikot:datasources-iosx64:$trikot_datasources_version"
     iosarm64 "com.mirego.trikot:datasources-iosarm64:$trikot_datasources_version"
 ```
+
+## License
+
+Trikot.streams is © 2019-2020 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot.datasources/blob/master/LICENSE.md) file.
+
+## About Mirego
+
+[Mirego](https://www.mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We’re a team of [talented people](https://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://www.mirego.org).
+
+We also [love open-source software](https://open.mirego.com) and we try to give back to the community as much as we can.
