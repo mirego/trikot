@@ -124,7 +124,7 @@ kotlin {
 }
 
 release {
-    checkTasks = ['check']
-    buildTasks = ['publish']
+    checkTasks = [':check']
+    buildTasks = [':publish']
     updateVersionPart = 2
 }
