@@ -4,12 +4,17 @@ import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.timers.TimerFactory
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.StreamsTimeoutException
+import kotlin.time.Duration
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
-import kotlin.time.Duration
 
-class TimeoutProcessor<T>(private val duration: Duration, private val timerFactory: TimerFactory = FoundationConfiguration.timerFactory, private val timeoutMessage: String, parentPublisher: Publisher<T>) :
+class TimeoutProcessor<T>(
+    private val duration: Duration,
+    private val timerFactory: TimerFactory = FoundationConfiguration.timerFactory,
+    private val timeoutMessage: String,
+    parentPublisher: Publisher<T>
+) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

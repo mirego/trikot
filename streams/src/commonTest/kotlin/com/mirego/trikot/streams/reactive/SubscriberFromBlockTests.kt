@@ -3,10 +3,10 @@ package com.mirego.trikot.streams.reactive
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.processors.AbstractProcessor
 import com.mirego.trikot.streams.reactive.processors.ProcessorSubscription
-import org.reactivestreams.Publisher
-import org.reactivestreams.Subscriber
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.reactivestreams.Publisher
+import org.reactivestreams.Subscriber
 
 class SubscriberFromBlockTests {
     var behaviorSubject = Publishers.behaviorSubject<String>()

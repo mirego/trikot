@@ -6,11 +6,11 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.subscribeOn
+import kotlin.native.concurrent.ThreadLocal
 import org.reactivestreams.Processor
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
-import kotlin.native.concurrent.ThreadLocal
 
 class ThreadLocalProcessor<T>(
     private val parentPublisher: Publisher<T>,

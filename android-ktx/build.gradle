@@ -10,6 +10,7 @@ plugins {
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
@@ -18,7 +19,6 @@ group 'com.mirego.trikot'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 14
@@ -31,15 +31,15 @@ configurations.all {
 }
 
 dependencies {
-    api 'com.mirego.trikot:streams:0.63.1'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0'
+    api 'com.mirego.trikot:streams:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'
 }
 
 release {
     checkTasks = ['check']
     buildTasks = ['publish']
-    updateVersionPart = 1
+    updateVersionPart = 2
     tagPrefix = 'android-ktx-'
 }
 

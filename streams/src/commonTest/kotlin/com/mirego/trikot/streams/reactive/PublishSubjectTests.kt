@@ -2,10 +2,10 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import kotlin.test.BeforeTest
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFailsWith
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class PublishSubjectTests {
     var publishSubject = Publishers.publishSubject<String>()

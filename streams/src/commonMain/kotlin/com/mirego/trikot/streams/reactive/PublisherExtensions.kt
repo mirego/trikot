@@ -27,9 +27,9 @@ import com.mirego.trikot.streams.reactive.processors.TimeoutProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessorResultType
 import com.mirego.trikot.streams.reactive.processors.WithPreviousValueProcessor
-import org.reactivestreams.Publisher
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
+import org.reactivestreams.Publisher
 
 typealias SubscriptionBlock<T> = (T) -> Unit
 typealias SubscriptionErrorBlock = (Throwable) -> Unit
@@ -115,7 +115,10 @@ fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
     return this.filter { block(it) != null }.map { block(it)!! }
 }
 
-fun <T> Publisher<T>.threadLocal(observeOnQueue: DispatchQueue, subscribeOnQueue: DispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue): Publisher<T> {
+fun <T> Publisher<T>.threadLocal(
+    observeOnQueue: DispatchQueue,
+    subscribeOnQueue: DispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue
+): Publisher<T> {
     return ThreadLocalProcessor(this, observeOnQueue, subscribeOnQueue)
 }
 

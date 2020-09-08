@@ -22,6 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.streams'
-enableFeaturePreview("GRADLE_METADATA")
 
 include ':streams', ':android-ktx'

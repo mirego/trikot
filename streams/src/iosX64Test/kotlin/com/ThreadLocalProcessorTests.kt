@@ -7,14 +7,13 @@ import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.processors.ThreadLocalProcessor
 import com.mirego.trikot.streams.reactive.shared
-import com.mirego.trikot.streams.reactive.subscribe
-import org.reactivestreams.Subscriber
-import org.reactivestreams.Subscription
 import kotlin.native.concurrent.ensureNeverFrozen
 import kotlin.native.concurrent.freeze
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.Test
 import kotlin.test.assertFalse
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 
 class ThreadLocalProcessorTests {
 

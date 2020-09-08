@@ -1,9 +1,9 @@
 package com.mirego.trikot.streams.attachable
 
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
-import com.mirego.trikot.foundation.concurrent.AtomicReference
 
 abstract class AbstractAttachable(private val maxSimultaneousAttachCount: Int = Int.MAX_VALUE) : Attachable {
     private val attachCountRef = AtomicReference(0)

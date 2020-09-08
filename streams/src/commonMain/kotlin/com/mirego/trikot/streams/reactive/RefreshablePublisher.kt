@@ -1,13 +1,14 @@
 package com.mirego.trikot.streams.reactive
 
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
-import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Publisher
 
 typealias RefreshablePublisherExecutionBlock<T> = (CancellableManager, Boolean) -> Publisher<T>
 
-class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherExecutionBlock<T>, value: T? = null) : BehaviorSubjectImpl<T>(value) {
+class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherExecutionBlock<T>, value: T? = null) :
+    BehaviorSubjectImpl<T>(value) {
     private val cancellableManagerProvider = CancellableManagerProvider()
     private val shouldRefresh = AtomicReference(false)
 
@@ -28,6 +29,7 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
             doExecuteBlock()
         }
     }
+
     private fun doExecuteBlock() {
         val isRefreshing = shouldRefresh.value
         val cancelPreviousAndCreate = cancellableManagerProvider.cancelPreviousAndCreate()

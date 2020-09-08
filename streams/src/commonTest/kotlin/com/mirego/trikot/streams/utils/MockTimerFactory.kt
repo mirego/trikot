@@ -27,7 +27,7 @@ class MockTimerFactory(private val creationBlock: (Boolean, Duration) -> MockTim
 
 class MockTimer : Timer {
     var isCancelled = false
-    var block: () -> Unit = NoBlock
+    var block: () -> Unit = noBlock
 
     fun executeBlock() {
         block.invoke()
@@ -38,6 +38,4 @@ class MockTimer : Timer {
     }
 }
 
-object NoBlock : () -> Unit {
-    override fun invoke() {}
-}
+val noBlock = {}

@@ -1,24 +1,15 @@
 plugins {
-    id 'kotlin-multiplatform'
     id 'com.android.library'
+    id 'kotlin-multiplatform'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.release' version '1.13'
     id 'mirego.publish' version '1.0'
 }
 
-android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
-
-    defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 29
-    }
-}
-
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
@@ -27,21 +18,31 @@ repositories {
 
 group 'com.mirego.trikot'
 
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 29
+    }
+}
+
 kotlin {
     android {
         publishAllLibraryVariants()
     }
+    jvm()
+    ios()
+    iosArm32('iosArm32')
+    tvos()
 
-    targets {
-        fromPreset(presets.jvm, 'jvm')
-        fromPreset(presets.android, 'android')
-        fromPreset(presets.js, 'js')
-        fromPreset(presets.iosArm32, 'iosArm32')
-        fromPreset(presets.iosArm64, 'iosArm64')
-        fromPreset(presets.iosX64, 'iosX64')
-        fromPreset(presets.tvosArm64, 'tvosArm64')
-        fromPreset(presets.tvosX64, 'tvosX64')
+    // Restore JS engines when failing tests are fixed
+    js()
+    js {
+        browser()
+        nodejs()
     }
+
     sourceSets {
         all {
             languageSettings {
@@ -52,38 +53,40 @@ kotlin {
         commonMain {
             dependencies {
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
+
         commonTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
         }
+
         jvmMain {
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            }
+            dependsOn commonMain
         }
+
         jvmTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
             }
         }
+
         jsMain {
+            dependsOn commonMain
+        }
+
+        jsTest {
+            dependsOn commonTest
             dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
+                implementation 'org.jetbrains.kotlin:kotlin-test-js'
             }
         }
 
         androidMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            }
+            dependsOn commonMain
         }
 
         androidTest {
@@ -94,52 +97,32 @@ kotlin {
         }
 
         nativeMain {
-            dependsOn(commonMain)
+            dependsOn commonMain
         }
 
         iosArm32Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-iosarm32:$trikot_foundation_version"
-            }
+            dependsOn nativeMain
         }
 
         iosArm64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
-            }
+            dependsOn nativeMain
         }
 
         iosX64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
-            }
+            dependsOn nativeMain
         }
         tvosArm64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-tvosarm64:$trikot_foundation_version"
-            }
+            dependsOn nativeMain
         }
 
         tvosX64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-tvosx64:$trikot_foundation_version"
-            }
+            dependsOn nativeMain
         }
     }
 }
 
 release {
-   checkTasks = ['check']
-   buildTasks = ['publish']
-   updateVersionPart = 1
-}
-
-// workaround for https://youtrack.jetbrains.com/issue/KT-27170
-configurations {
-    compileClasspath
+    checkTasks = ['check']
+    buildTasks = ['publish']
+    updateVersionPart = 2
 }

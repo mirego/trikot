@@ -6,7 +6,7 @@ import com.mirego.trikot.streams.reactive.debounce
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
-import com.mirego.trikot.streams.utils.NoBlock
+import com.mirego.trikot.streams.utils.noBlock
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
@@ -46,6 +46,6 @@ class DebounceProcessorTests {
         timer.executeBlock()
         publisher.value = expectedResult
         assertEquals(null, receivedResult)
-        assertEquals(NoBlock, timer.block)
+        assertEquals(noBlock, timer.block)
     }
 }
