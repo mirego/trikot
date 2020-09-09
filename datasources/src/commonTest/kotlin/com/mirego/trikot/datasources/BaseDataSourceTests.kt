@@ -6,9 +6,9 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousDispatchQueue
 import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
+import com.mirego.trikot.streams.reactive.subscribe
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -57,7 +57,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchError(Throwable()) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
@@ -73,7 +74,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(networkResult) }
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
@@ -88,7 +90,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(networkResult) }
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val value = AtomicReference<DataState<String, Throwable>?>(null)
         val refreshedValue = AtomicReference<DataState<String, Throwable>?>(null)
@@ -96,9 +99,10 @@ class BaseDataSourceTests {
             value.compareAndSet(value.value, it)
         }
         val beforeRefreshValue = value.value
-        networkDataSource.read(FakeRequest(simpleCachableId, DataSourceRequest.Type.REFRESH_CACHE)).subscribe(cancellableManager!!) {
-            refreshedValue.compareAndSet(refreshedValue.value, it)
-        }
+        networkDataSource.read(FakeRequest(simpleCachableId, DataSourceRequest.Type.REFRESH_CACHE))
+            .subscribe(cancellableManager!!) {
+                refreshedValue.compareAndSet(refreshedValue.value, it)
+            }
 
         beforeRefreshValue!!.assertValue(cacheResult)
         value.value!!.assertValue(networkResult)
@@ -110,7 +114,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         networkDataSource.read(FakeRequest(simpleCachableId, DataSourceRequest.Type.REFRESH_CACHE))
 
@@ -130,7 +135,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchError(expectedError) }
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val value = AtomicReference<DataState<String, Throwable>?>(null)
         networkDataSource.read(FakeRequest(simpleCachableId)).subscribe(cancellableManager!!) {
@@ -147,7 +153,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val cacheId1 = "cacheId1"
         val cacheId2 = "cacheId2"
@@ -164,7 +171,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val cacheId1 = "cacheId1"
         val cacheId2 = "cacheId2"
@@ -183,7 +191,8 @@ class BaseDataSourceTests {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
         val cacheDataSource = BasicDataSource(mutableMapOf(simpleCachableId to cacheDataSourceReadPublisher))
-        val networkDataSource = BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCachableId to networkDataSourceReadPublisher), cacheDataSource)
 
         val cacheId1 = "cacheId1"
         val cacheId2 = "cacheId2"
@@ -197,9 +206,15 @@ class BaseDataSourceTests {
         }
     }
 
-    data class FakeRequest(override val cachableId: Any, override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE) : DataSourceRequest
+    data class FakeRequest(
+        override val cachableId: Any,
+        override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE
+    ) : DataSourceRequest
 
-    class BasicDataSource(publishers: MutableMap<Any, ReadFromCachePublisher>, fallbackDataSource: DataSource<FakeRequest, String>? = null) : BaseDataSource<FakeRequest, String>(fallbackDataSource) {
+    class BasicDataSource(
+        publishers: MutableMap<Any, ReadFromCachePublisher>,
+        fallbackDataSource: DataSource<FakeRequest, String>? = null
+    ) : BaseDataSource<FakeRequest, String>(fallbackDataSource) {
         private val internalPublishers = AtomicReference(publishers)
 
         override fun internalRead(request: FakeRequest): ExecutablePublisher<String> {

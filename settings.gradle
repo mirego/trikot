@@ -22,6 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.datasources'
-enableFeaturePreview("GRADLE_METADATA")
 
 include ':datasources'

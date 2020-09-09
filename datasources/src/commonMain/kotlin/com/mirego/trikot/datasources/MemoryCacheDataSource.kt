@@ -1,7 +1,7 @@
 package com.mirego.trikot.datasources
 
-import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.executable.BaseExecutablePublisher
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
 
