@@ -3,7 +3,6 @@ package com.mirego.trikot.streams
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.OperationDispatchQueue
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.SerialSubscriptionDispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
 
 object StreamsConfiguration {
