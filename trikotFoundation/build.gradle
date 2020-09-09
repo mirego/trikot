@@ -128,3 +128,23 @@ release {
     buildTasks = [':publish']
     updateVersionPart = 2
 }
+
+task task1(type: GradleBuild) {
+    buildFile = file('gen/build.gradle')
+    // ...
+//    if(6 <= gradle.gradleVersion.split(Pattern.quote('.'))[0].toInteger() ){
+        buildName = "t1"
+//    }
+}
+
+//task task2(type: GradleBuild) {
+//    buildFile = file('gen/build.gradle')
+//     ...
+//    if(6 <= gradle.gradleVersion.split(Pattern.quote('.'))[0].toInteger() ){
+//        buildName = "t2"
+//    }
+//}
+
+task taskAll() {
+    dependsOn task1
+}
