@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-multiplatform'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.release' version '1.16'
-    id 'mirego.publish' version '1.3'
+    id 'mirego.publish' version '1.0'
 }
 
 repositories {
