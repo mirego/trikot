@@ -131,6 +131,7 @@ release {
 
 task task1(type: GradleBuild) {
     buildFile = file('gen/build.gradle')
+    print('XXX')
     // ...
 //    if(6 <= gradle.gradleVersion.split(Pattern.quote('.'))[0].toInteger() ){
         buildName = "t1"
