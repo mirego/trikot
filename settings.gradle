@@ -22,6 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.kword'
-enableFeaturePreview("GRADLE_METADATA")
 
 include 'kword-plugin', 'kword', 'android-ktx'

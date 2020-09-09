@@ -23,24 +23,24 @@ class DefaultI18NTests {
     }
 
     @Test
-    fun `given string with localized replacements then it replace placeholders`() {
+    fun givenStringWithLocalizedReplacementsThenItReplacePlaceholders() {
         assertEquals("foo", defaultI18N["foo_key".kk])
         assertEquals("bar", defaultI18N["bar_key".kk])
         assertEquals("this is foo bar", defaultI18N["foo_bar_key".kk])
     }
 
     @Test
-    fun `given string with arguments`() {
+    fun givenStringWithArguments() {
         assertEquals("Hi my name is Bob", defaultI18N.t("hi_my_name_is_key".kk, "name" to "Bob"))
     }
 
     @Test
-    fun `given string with missing arguments then it keeps the placeholder`() {
+    fun givenStringWithMissingArgumentsThenItKeepsThePlaceholder() {
         assertEquals("Hi my name is {{name}}", defaultI18N.t("hi_my_name_is_key".kk))
     }
 
     @Test
-    fun `given string with localized replacements and arguments then it uses argument over localized replacement`() {
+    fun givenStringWithLocalizedReplacementsAndArgumentsThenItUsesArgumentOverLocalizedReplacement() {
         assertEquals("this is foo rab", defaultI18N.t("foo_bar_key".kk, "bar_key" to "rab"))
     }
 

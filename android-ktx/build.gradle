@@ -10,6 +10,7 @@ plugins {
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
@@ -18,20 +19,8 @@ repositories {
 
 group 'com.mirego.trikot.kword'
 
-kotlin {
-    sourceSets {
-        all {
-            languageSettings {
-                useExperimentalAnnotation('kotlinx.serialization.UnstableDefault')
-                useExperimentalAnnotation('kotlinx.serialization.ImplicitReflectionSerializer')
-            }
-        }
-    }
-}
-
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -44,14 +33,14 @@ configurations.all {
 }
 
 dependencies {
-    implementation 'com.mirego.trikot:kword:0.10.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinx_serialization_version"
+    implementation 'com.mirego.trikot:kword:1.0.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinx_serialization_version"
 }
 
 release {
     checkTasks = ['check']
     buildTasks = ['publish']
-    updateVersionPart = 1
+    updateVersionPart = 2
     tagPrefix = 'android-ktx-'
 }
 
