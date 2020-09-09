@@ -2,8 +2,8 @@ plugins {
     id 'com.android.library'
     id 'kotlin-multiplatform'
     id 'org.jlleitschuh.gradle.ktlint'
-    id 'mirego.release' version '1.15'
-    id 'mirego.publish' version '1.0'
+    id 'mirego.release' version '1.16'
+    id 'mirego.publish' version '1.3'
 }
 
 repositories {
@@ -124,7 +124,7 @@ kotlin {
 }
 
 release {
-    checkTasks = [':trikotFoundation:check']
-    buildTasks = [':trikotFoundation:publish']
+    checkTasks = [':check']
+    buildTasks = [':publish']
     updateVersionPart = 2
 }
