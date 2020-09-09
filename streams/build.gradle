@@ -35,9 +35,6 @@ kotlin {
     ios()
     iosArm32('iosArm32')
     tvos()
-
-    // Restore JS engines when failing tests are fixed
-    js()
     js {
         browser()
         nodejs()
