@@ -124,7 +124,7 @@ kotlin {
 }
 
 release {
-    checkTasks = [':trikotFoundation:tasks']
-    buildTasks = [':trikotFoundation:publish']
+    checkTasks = [':tasks']
+    buildTasks = [':publish']
     updateVersionPart = 2
 }
