@@ -23,7 +23,7 @@ open class DeserializableHttpRequestPublisher<T>(
 
     private fun successfulResponse(response: HttpResponse): T {
         response.bodyString?.let { bodyString ->
-            return HttpConfiguration.json.parse(deserializer, bodyString)
+            return HttpConfiguration.json.decodeFromString(deserializer, bodyString)
         }
         throw IllegalStateException("Cannot process an empty bodyString response")
     }

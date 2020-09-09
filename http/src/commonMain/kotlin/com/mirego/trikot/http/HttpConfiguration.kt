@@ -8,7 +8,6 @@ import com.mirego.trikot.http.header.DefaultHttpHeaderProvider
 import com.mirego.trikot.http.requestFactory.EmptyHttpRequestFactory
 import com.mirego.trikot.streams.reactive.Publishers
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import org.reactivestreams.Publisher
 
 object HttpConfiguration {
@@ -25,14 +24,12 @@ object HttpConfiguration {
         AtomicReference(defaultJsonConfiguration())
 
     private fun defaultJsonConfiguration(): Json {
-        return Json(
-            JsonConfiguration(
-                isLenient = true,
-                ignoreUnknownKeys = true,
-                serializeSpecialFloatingPointValues = true,
-                useArrayPolymorphism = true
-            )
-        )
+        return Json {
+            isLenient = true
+            ignoreUnknownKeys = true
+            allowSpecialFloatingPointValues = true
+            useArrayPolymorphism = true
+        }
     }
 
     /**
@@ -96,7 +93,6 @@ object HttpConfiguration {
     /**
      * Shared JSON parser used by DeserializableHttpRequestPublisher
      */
-
     var json: Json
         get() {
             return internalJson.value

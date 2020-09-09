@@ -11,6 +11,7 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    mavenLocal()
     maven { url "https://dl.bintray.com/kotlin/ktor" }
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
@@ -21,7 +22,6 @@ group 'com.mirego.trikot.http'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 14
@@ -36,17 +36,17 @@ configurations.all {
 dependencies {
     api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
     api "com.mirego.trikot:streams:$trikot_streams_version"
-    api 'com.mirego.trikot:http:0.24.1'
+    api 'com.mirego.trikot:http:1.0.0'
     implementation "io.ktor:ktor-client-android:$ktor_version"
     api "io.ktor:ktor-client-logging-jvm:$ktor_version"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'
 }
 
 release {
     checkTasks = ['check']
     buildTasks = ['publish']
-    updateVersionPart = 1
+    updateVersionPart = 2
     tagPrefix = 'android-ktx-'
 }
 

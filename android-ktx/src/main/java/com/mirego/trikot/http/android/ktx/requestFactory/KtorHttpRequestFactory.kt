@@ -16,7 +16,6 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.client.request.request
-import io.ktor.client.request.url
 import io.ktor.client.statement.HttpStatement
 import io.ktor.client.statement.readBytes
 import io.ktor.content.ByteArrayContent
@@ -24,11 +23,11 @@ import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.util.flattenEntries
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.reactivestreams.Publisher
-import kotlin.coroutines.CoroutineContext
 
 class KtorHttpRequestFactory(
     httpLogLevel: LogLevel = LogLevel.NONE,
@@ -60,11 +59,13 @@ class KtorHttpRequestFactory(
             launch {
                 try {
                     httpClient.request<HttpStatement> {
-                        url((requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: ""))
+                        url { (requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: "") }
+
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
                                 header(entry.key, entry.value)
                             }
+
                         requestBuilder.body?.let {
                             if (it is ByteArray) {
                                 val contentType =
@@ -97,8 +98,7 @@ class KtorHttpRequestFactory(
         }
     }
 
-    class KTorHttpResponse(response: io.ktor.client.statement.HttpResponse, bytes: ByteArray?) :
-        HttpResponse {
+    class KTorHttpResponse(response: io.ktor.client.statement.HttpResponse, bytes: ByteArray?) : HttpResponse {
         override val statusCode: Int = response.status.value
         override val bodyByteArray: ByteArray? = bytes
         override val headers: Map<String, String> = response.headers.flattenEntries().toMap()
