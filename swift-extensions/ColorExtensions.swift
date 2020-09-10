@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 extension Color {
     public func safeColor() -> UIColor? {
