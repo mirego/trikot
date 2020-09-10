@@ -3,8 +3,8 @@ package com.mirego.trikot.graphql
 import com.mirego.trikot.datasources.BaseDataSource
 import com.mirego.trikot.datasources.DataSource
 import com.mirego.trikot.datasources.DataSourceRequest
-import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.http.HttpConfiguration
+import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
 
 typealias GraphqlDataSourceType<T> = DataSource<GraphqlQueryDataSourceRequest<T>, T>

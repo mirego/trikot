@@ -3,11 +3,11 @@ package com.mirego.trikot.graphql
 import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.http.ApplicationJSON
 import com.mirego.trikot.http.ContentType
+import com.mirego.trikot.http.HttpConfiguration
 import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.http.HttpMethod
 import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.http.requestPublisher.DeserializableHttpRequestPublisher
-import com.mirego.trikot.http.HttpConfiguration
 
 class GraphqlQueryPublisher<T>(
     query: GraphqlQuery<T>,
