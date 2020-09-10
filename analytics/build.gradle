@@ -10,6 +10,7 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    mavenLocal()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
@@ -17,7 +18,6 @@ repositories {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -28,66 +28,62 @@ android {
 group 'com.mirego.trikot'
 
 kotlin {
-    targets {
-        fromPreset(presets.jvm, 'jvm')
-        fromPreset(presets.js, 'js')
-        fromPreset(presets.android, 'android')
-        fromPreset(presets.iosArm64, 'iosArm64')
-        fromPreset(presets.iosX64, 'iosX64')
+    jvm()
+    ios()
+    iosArm32('iosArm32')
+    tvos()
+    js {
+        browser()
+        nodejs()
     }
+
     android {
         publishAllLibraryVariants()
     }
+
     sourceSets {
         commonMain {
             dependencies {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
+
         jvmMain {
-            dependencies {
-                implementation "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-jvm:$trikot_viewmodels_version"
-                implementation "com.mirego.trikot:trikotFoundation-jvm:$trikot_foundation_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            }
+            dependsOn commonMain
         }
+
         androidMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-            }
+            dependsOn commonMain
         }
+
         jsMain {
-            dependencies {
-                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
-                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
-            }
+            dependsOn commonMain
         }
+
         nativeMain {
-            dependsOn(commonMain)
+            dependsOn commonMain
+        }
+
+        iosArm32Main {
+            dependsOn(nativeMain)
         }
 
         iosArm64Main {
-            dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-iosarm64:$trikot_viewmodels_version"
-                implementation "com.mirego.trikot:trikotFoundation-iosarm64:$trikot_foundation_version"
-            }
+            dependsOn nativeMain
         }
 
         iosX64Main {
+            dependsOn nativeMain
+        }
+
+        tvosArm64Main {
             dependsOn(nativeMain)
-            dependencies {
-                implementation "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-iosx64:$trikot_viewmodels_version"
-                implementation "com.mirego.trikot:trikotFoundation-iosx64:$trikot_foundation_version"
-            }
+        }
+
+        tvosX64Main {
+            dependsOn(nativeMain)
         }
     }
 }
@@ -95,5 +91,5 @@ kotlin {
 release {
    checkTasks = ['check']
    buildTasks = ['publish']
-   updateVersionPart = 1
+   updateVersionPart = 2
 }

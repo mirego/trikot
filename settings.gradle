@@ -22,7 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.analytics'
-enableFeaturePreview("GRADLE_METADATA")
 
-include ':analytics', ':firebase-ktx'
-include ':analytics', ':mixpanel-ktx'
+include ':analytics', ':firebase-ktx' , ':mixpanel-ktx'
