@@ -1,7 +1,7 @@
 import TrikotFrameworkName
 import UIKit
 
-class BaseViewModelViewController<V: BaseViewModelView<VM>, VMC: BaseViewModelController, VM: ViewModel>: UIViewController {
+class BaseViewModelViewController<V: BaseViewModelView<VM>, ND: BaseNavigationDelegate, VM: ViewModel, VMC: BaseViewModelController<ND, VM>>: UIViewController {
     var mainView: V {
         view as! V
     }
@@ -20,7 +20,7 @@ class BaseViewModelViewController<V: BaseViewModelView<VM>, VMC: BaseViewModelCo
 
     override func loadView() {
         view = V(frame: .zero)
-        mainView.viewViewModel = (viewModelController.viewModel as! VM)
+        mainView.viewViewModel = viewModelController.viewModel
     }
 
     deinit {

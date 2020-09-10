@@ -10,6 +10,7 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    mavenLocal()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
@@ -76,8 +77,6 @@ kotlin {
         all {
             languageSettings {
                 useExperimentalAnnotation('kotlin.Experimental')
-                useExperimentalAnnotation('kotlinx.serialization.UnstableDefault')
-                useExperimentalAnnotation('kotlinx.serialization.ImplicitReflectionSerializer')
                 useExperimentalAnnotation('kotlin.time.ExperimentalTime')
             }
         }
@@ -88,8 +87,7 @@ kotlin {
                 api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 api "com.mirego.trikot:http:$trikot_http_version"
                 api "com.mirego.trikot:kword:$trikot_kword_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
             }
             kotlin.srcDir(kword.generatedDir)
         }
@@ -107,9 +105,8 @@ kotlin {
                 implementation "com.mirego.trikot.kword:android-ktx:$trikot_kword_android_ktx_version"
                 implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
                 implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
             }
+            dependsOn commonMain
         }
         androidTest {
             dependencies {
@@ -118,26 +115,13 @@ kotlin {
                 implementation "io.mockk:mockk:$mokk_version"
             }
         }
+
         jsMain {
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
-                implementation "com.mirego.trikot:http-js:$trikot_http_version"
-                implementation "com.mirego.trikot:kword-js:$trikot_kword_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
-            }
+            dependsOn commonMain
         }
+
         iosMain {
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
-                implementation "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
-                implementation "com.mirego.trikot:kword-$iosArchLibrarySuffix:$trikot_kword_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
-            }
+            dependsOn commonMain
         }
     }
 }
@@ -173,8 +157,3 @@ task copyFramework() {
 }
 
 tasks.findAll { it.name.startsWith('preBuild') }.each { it.dependsOn('kwordGenerateEnum') }
-
-// workaround for https://youtrack.jetbrains.com/issue/KT-27170
-configurations {
-    compileClasspath
-}

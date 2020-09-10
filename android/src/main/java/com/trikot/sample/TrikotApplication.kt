@@ -8,10 +8,8 @@ import com.mirego.trikot.kword.android.ktx.AndroidKWord
 import com.mirego.trikot.viewmodels.resources.ImageViewModelResourceManager
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.trikot.sample.resource.SampleImageResourceProvider
-import kotlinx.serialization.ImplicitReflectionSerializer
 
 class TrikotApplication : Application() {
-    @ImplicitReflectionSerializer
     override fun onCreate() {
         super.onCreate()
         AndroidKWord.setCurrentLanguageCode("en")

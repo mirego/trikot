@@ -5,6 +5,7 @@ import com.mirego.trikot.http.requestPublisher.DeserializableHttpRequestPublishe
 import com.mirego.trikot.streams.reactive.ColdPublisher
 import com.trikot.sample.models.Quote
 import com.trikot.sample.repositories.QuoteRepository
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.list
 import org.reactivestreams.Publisher
 
@@ -16,7 +17,7 @@ class QuoteRepositoryImpl() : QuoteRepository {
                 it.path = "/v1/quotes/5"
             }
 
-            DeserializableHttpRequestPublisher(Quote.serializer().list, request).also {
+            DeserializableHttpRequestPublisher(ListSerializer(Quote.serializer()), request).also {
                 it.execute()
                 cancellableManager.add(it)
             }

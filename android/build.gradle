@@ -59,6 +59,7 @@ android {
     }
     repositories {
         maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+        mavenLocal()
     }
 
     kotlinOptions {
@@ -73,7 +74,7 @@ configurations.all {
 dependencies {
     api project(':common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
