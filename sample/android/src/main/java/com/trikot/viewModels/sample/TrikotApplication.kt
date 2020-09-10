@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import com.mirego.trikot.viewmodels.resources.ImageViewModelResourceManager
 import com.trikot.viewmodels.sample.resource.SampleImageResourceProvider
 import com.trikot.sample.Environment
-import kotlinx.serialization.ImplicitReflectionSerializer
 
 class TrikotApplication : Application() {
 
@@ -16,7 +15,6 @@ class TrikotApplication : Application() {
         )
     }
 
-    @ImplicitReflectionSerializer
     override fun onCreate() {
         super.onCreate()
         ImageViewModelResourceManager.provider = SampleImageResourceProvider()

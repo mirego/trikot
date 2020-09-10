@@ -22,6 +22,5 @@ pluginManagement {
     }
 }
 rootProject.name = 'trikot.viewmodels'
-enableFeaturePreview("GRADLE_METADATA")
 
 include ':viewmodels', ':android-ktx'

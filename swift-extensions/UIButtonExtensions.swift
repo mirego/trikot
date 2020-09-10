@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import ViewModelsSample
 
 extension UIButton {
     private struct AssociatedKeys {
@@ -47,7 +47,7 @@ extension UIButton {
 
                 bind(buttonViewModel.selected, \UIButton.isSelected)
 
-                observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector) in
+                observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector<ImageResource>) in
                     if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.default_ as? ImageResource)) {
                         self?.setBackgroundImage(image, for: .normal)
                     }
@@ -70,9 +70,9 @@ extension UIButton {
                 }
 
                 let imageResourceCombineLatest = CombineLatest.Companion().combine2(pub1: buttonViewModel.imageResource, pub2: buttonViewModel.tintColor)
-                observe(imageResourceCombineLatest) { [weak self] (result: CombineLatestResult2) in
-                    guard let imageSelector = result.component1() as? StateSelector,
-                        let tintSelector = result.component2() as? StateSelector
+                observe(imageResourceCombineLatest) { [weak self] (result: CombineLatestResult2<StateSelector<ImageResource>, StateSelector<Color>>) in
+                    guard let imageSelector = result.component1() as? StateSelector<ImageResource>,
+                        let tintSelector = result.component2() as? StateSelector<Color>
                         else { return }
 
                     var tintColor = (tintSelector.defaultValue() as Color?)?.safeColor()
@@ -100,7 +100,7 @@ extension UIButton {
                     let observable = CombineLatestProcessorExtensionsKt.combine(buttonViewModel.textColor, publishers: [richText])
 
                     observe(observable) {[weak self] (value: [Any?]) in
-                        let colorSelector = value[0] as! StateSelector
+                        let colorSelector = value[0] as! StateSelector<Color>
                         let richText = value[1] as! RichText
 
                         guard let self = self else { return }
@@ -117,7 +117,7 @@ extension UIButton {
                         self?.setTitle(string, for: .normal)
                     }
 
-                    observe(buttonViewModel.textColor) {[weak self] (colorSelector: StateSelector) in
+                    observe(buttonViewModel.textColor) {[weak self] (colorSelector: StateSelector<Color>) in
                         if let color = (colorSelector.default_ as? Color)?.safeColor() {
                             self?.setTitleColor(color, for: .normal)
                         }
@@ -145,8 +145,6 @@ extension UIButton {
             let coloredAttribuedString = NSMutableAttributedString(attributedString: attributedString)
             coloredAttribuedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attributedString.length))
             self.setAttributedTitle(coloredAttribuedString, for: state)
-        } else {
-            self.setAttributedTitle(attributedString, for: state)
         }
     }
 
@@ -154,7 +152,7 @@ extension UIButton {
         guard let buttonViewModel = buttonViewModel else { return }
         guard let alignment = alignment, [Alignment.right, Alignment.left].contains(alignment) else { resetAlignment() ; return }
 
-        observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector) in
+        observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector<ImageResource>) in
 
             guard let titleLabel = self?.titleLabel, let image = ImageViewModelResourceManager.shared.image(fromResource: imageSelector.defaultValue() as ImageResource?) else { return }
 
@@ -186,7 +184,7 @@ extension UIButton {
         titleEdgeInsets = .zero
     }
 
-    func updateBackgroundColor(_ backgroundColorSelector: StateSelector) {
+    func updateBackgroundColor(_ backgroundColorSelector: StateSelector<Color>) {
         if !isEnabled, let buttonBackgroundColor = (backgroundColorSelector.disabledValue() as Color?)?.safeColor() {
             backgroundColor = buttonBackgroundColor
         } else if isHighlighted, let buttonBackgroundColor = (backgroundColorSelector.highlightedValue() as Color?)?.safeColor() {

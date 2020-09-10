@@ -8,6 +8,7 @@ plugins {
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
@@ -61,7 +62,6 @@ kotlin {
                 api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
                 api "com.mirego.trikot:streams:$trikot_streams_version"
                 api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
             }
         }
         commonTest {
@@ -71,34 +71,16 @@ kotlin {
             }
         }
         androidMain {
+            dependsOn commonMain
             dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
                 implementation "com.mirego.trikot.viewmodels:android-ktx:$trikot_viewmodels_android_ktx_version"
                 implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
                 implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
             }
         }
-        androidTest {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-test'
-                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
-                implementation 'com.github.ntrrgc:ts-generator:1.1.1'
-            }
-        }
-        jsMain {
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-js:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-js:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
-            }
-        }
+
         iosMain {
-            dependencies {
-                implementation "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
-                implementation "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
-                implementation "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
-            }
+            dependsOn commonMain
         }
     }
 }
