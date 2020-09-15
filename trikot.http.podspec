@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = "Trikot.http"
-  spec.version       = "0.0.1"
+  spec.version       = "1.0.1"
   spec.summary       = "Trikot.http swift extensions."
   spec.description   = "Trikot.http swift extensions."
   spec.homepage      = "https://github.com/mirego/trikot.http"
