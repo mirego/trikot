@@ -36,7 +36,7 @@ configurations.all {
 dependencies {
     api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
     api "com.mirego.trikot:streams:$trikot_streams_version"
-    api 'com.mirego.trikot:http:1.0.0'
+    api 'com.mirego.trikot:http:1.0.1'
     implementation "io.ktor:ktor-client-android:$ktor_version"
     api "io.ktor:ktor-client-logging-jvm:$ktor_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
