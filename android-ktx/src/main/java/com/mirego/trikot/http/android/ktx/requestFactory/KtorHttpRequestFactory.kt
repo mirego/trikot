@@ -16,6 +16,7 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.client.request.request
+import io.ktor.client.request.url
 import io.ktor.client.statement.HttpStatement
 import io.ktor.client.statement.readBytes
 import io.ktor.content.ByteArrayContent
@@ -59,7 +60,7 @@ class KtorHttpRequestFactory(
             launch {
                 try {
                     httpClient.request<HttpStatement> {
-                        url { (requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: "") }
+                        url((requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: ""))
 
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
