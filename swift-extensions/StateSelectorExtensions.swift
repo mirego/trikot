@@ -1,4 +1,4 @@
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 extension StateSelector where T == Color {
     public func defaultValue() -> T? {
