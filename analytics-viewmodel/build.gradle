@@ -44,7 +44,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation 'com.mirego.trikot:analytics:1.0.0'
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
+                implementation "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
             }
         }

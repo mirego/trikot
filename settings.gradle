@@ -23,4 +23,4 @@ pluginManagement {
 }
 rootProject.name = 'trikot.analytics'
 
-include ':analytics', ':firebase-ktx' , ':mixpanel-ktx'
+include ':analytics', ':analytics-viewmodel', ':firebase-ktx' , ':mixpanel-ktx'

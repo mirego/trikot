@@ -41,14 +41,17 @@ Implement [AnalyticsService](https://github.com/mirego/trikot.analytics/blob/mas
 
 ## Common
 ##### Import dependencies
+
+Use the code bellow to import the core module of trikot analytics.
 ```groovy
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 
     api "com.mirego.trikot:analytics:$trikot_analytics_version"
-    jvm "com.mirego.trikot:analytics-jvm:$trikot_analytics_version"
-    js "com.mirego.trikot:analytics-js:$trikot_analytics_version"
-    iosx64 "com.mirego.trikot:analytics-iosx64:$trikot_analytics_version"
-    iosarm64 "com.mirego.trikot:analytics-iosarm64:$trikot_analytics_version"
+```
+
+If you wish to use the `trikot.viewmodel` integration, you have to import it from a separate module.
+```groovy
+    api "com.mirego.trikot:analytics-viewmodel:$trikot_analytics_version"
 ```
 
 ## License
