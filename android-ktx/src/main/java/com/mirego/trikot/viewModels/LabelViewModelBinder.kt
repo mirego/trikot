@@ -26,7 +26,7 @@ object LabelViewModelBinder {
         val label = labelViewModel ?: NoLabelViewModel
 
         label.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-            textView.text = richText.asSpannableString()
+            textView.text = richText.asSpannableString(textView.context)
         }
 
         label.takeUnless { it.richText != null }?.text

@@ -3,19 +3,19 @@ package com.trikot.viewmodels.sample.viewmodels.home
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.viewmodels.text.RichText
-import com.mirego.trikot.viewmodels.text.RichTextRange
-import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.ListViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
+import com.mirego.trikot.viewmodels.text.*
+import com.trikot.viewmodels.sample.resource.SampleTextAppearanceResource
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import org.reactivestreams.Publisher
 
-class LabelsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+class LabelsViewModel(navigationDelegate: NavigationDelegate) :
+    MutableListViewModel<ListItemViewModel>() {
 
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
@@ -44,20 +44,52 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewM
         },
         MutableHeaderListItemViewModel(".richText"),
         MutableLabelListItemViewModel().also {
-            it.label.richText = RichText("normal, bold, underlined, italic, bold italic",
+            it.label.richText = RichText(
+                "normal, bold, underlined, italic, bold italic",
                 listOf(
                     RichTextRange(IntRange(0, 8), StyleTransform(StyleTransform.Style.NORMAL)),
                     RichTextRange(IntRange(8, 14), StyleTransform(StyleTransform.Style.BOLD)),
                     RichTextRange(IntRange(14, 26), StyleTransform(StyleTransform.Style.UNDERLINE)),
                     RichTextRange(IntRange(26, 34), StyleTransform(StyleTransform.Style.ITALIC)),
-                    RichTextRange(IntRange(34, 45), StyleTransform(StyleTransform.Style.BOLD_ITALIC))
-                )).just()
+                    RichTextRange(
+                        IntRange(34, 45),
+                        StyleTransform(StyleTransform.Style.BOLD_ITALIC)
+                    )
+                )
+            ).just()
         },
         MutableHeaderListItemViewModel(".textColor"),
         MutableLabelListItemViewModel().also {
             it.label.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
             it.label.text = "I am red".just()
             it.label.textColor = StateSelector(Color(255, 0, 0)).just()
+        },
+        MutableHeaderListItemViewModel(".richTextTransform"),
+        MutableLabelListItemViewModel().also {
+            it.label.richText = RichText(
+                "Text appearance defined by the Client App Theme", listOf(
+                    RichTextRange(
+                        IntRange(0, 10),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_BOLD)
+                    ),
+                    RichTextRange(
+                        IntRange(10, 20),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)
+                    ),
+                    RichTextRange(
+                        IntRange(20, 30),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_ITALIC)
+                    ),
+                    RichTextRange(
+                        IntRange(30, 38),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_GRAYED)
+                    ),
+                    RichTextRange(
+                        IntRange(38, 47),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_HIGHLIGHTED)
+                    )
+                )
+            ).just()
         }
     ).just()
 }

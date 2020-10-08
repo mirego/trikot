@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.text
 
 import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.resource.TextAppearanceResource
 
 data class RichText(val text: String, val ranges: List<RichTextRange>)
 
@@ -19,3 +20,6 @@ data class StyleTransform(val style: Style) : RichTextTransform() {
 }
 
 data class ColorTransform(val color: Color) : RichTextTransform()
+
+data class TextAppearanceResourceTransform(val textAppearanceResource: TextAppearanceResource) :
+    RichTextTransform()

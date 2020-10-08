@@ -30,7 +30,7 @@ object ButtonViewModelBinder {
             bind(textView as View, it, lifecycleOwnerWrapper)
 
             it.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-                textView.text = richText.asSpannableString()
+                textView.text = richText.asSpannableString(textView.context)
             }
 
             it.takeUnless { it.richText != null }?.text
@@ -120,7 +120,7 @@ object ButtonViewModelBinder {
             bind(button as View, it, lifecycleOwnerWrapper)
 
             it.richText?.observe(lifecycleOwnerWrapper.lifecycleOwner) { richText ->
-                button.text = richText.asSpannableString()
+                button.text = richText.asSpannableString(button.context)
             }
 
             it.takeUnless { it.richText != null }?.text

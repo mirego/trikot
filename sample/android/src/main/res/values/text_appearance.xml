@@ -1,0 +1,21 @@
+<resources>
+
+    <style name="SampleTextAppearanceBold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="SampleTextAppearanceItalic">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="SampleTextAppearanceColored">
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
+    <style name="SampleTextAppearanceGrayed">
+        <item name="android:textColor">@color/colorLightGray</item>
+    </style>
+
+</resources>
