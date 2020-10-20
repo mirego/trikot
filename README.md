@@ -39,8 +39,39 @@ This will generate an enum Named KWordTranslation containing all the keys contai
 # KWord usage
 
 ### Common Code
+
+for simple usage:
 ```kotlin
 val myString = KWord[KWordTranslation.HELLO_WORLD]
+```
+
+##### For zero/singular/plural usage
+To support language with multiple plurals, we adopt the interpolation pattern 
+
+Assuming the following translation key
+```json
+{
+  "plural": "{{count}} keys",
+  "plural_0": "No keys",
+  "plural_1": "One key",
+  "plural_17": "Seventeen keys"
+}
+
+```kotlin
+// "No keys"
+KWord.t(KWordTranslation.PLURAL, 0)
+
+// "One key"
+KWord.t(KWordTranslation.PLURAL, 1)
+
+// "2 keys"
+KWord.t(KWordTranslation.PLURAL, 2)
+
+// "3 keys"
+KWord.t(KWordTranslation.PLURAL, 3)
+
+// "Seventeen keys"
+KWord.t(KWordTranslation.PLURAL, 17)
 ```
 
 ## Installation

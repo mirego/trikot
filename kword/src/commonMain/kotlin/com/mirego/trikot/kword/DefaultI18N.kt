@@ -26,9 +26,14 @@ open class DefaultI18N : I18N {
         return this[key]
     }
 
-    override fun t(key: KWordKey, count: Int, vararg arguments: String): String {
-        // TODO: implement zero, one, other
-        return t(key)
+    override fun t(key: KWordKey, count: Int, vararg arguments: Pair<String, String>): String {
+        val keyWithCount = "${key.translationKey}_$count"
+        val targetString = source.getOptional(keyWithCount)
+
+        val argumentsWithCount = arguments.toMutableSet()
+        argumentsWithCount.add(COUNT_ARGUMENT to count.toString())
+        val keyToUse = if (targetString != null) keyWithCount else key.translationKey
+        return translationArgumentsParser.replaceInTranslation(source.get(keyToUse), mapOf(*argumentsWithCount.toTypedArray()))
     }
 
     override fun t(key: KWordKey, vararg arguments: Pair<String, String>): String {
@@ -43,5 +48,8 @@ open class DefaultI18N : I18N {
             source.get(key.translationKey),
             sourceRef.value.strings + arguments
         )
+    }
+    companion object {
+        private const val COUNT_ARGUMENT = "count"
     }
 }

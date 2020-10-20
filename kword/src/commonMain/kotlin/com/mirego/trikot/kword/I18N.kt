@@ -12,7 +12,7 @@ interface I18N {
     @JsName("t")
     fun t(key: KWordKey): String
 
-    fun t(key: KWordKey, count: Int, vararg arguments: String): String
+    fun t(key: KWordKey, count: Int, vararg arguments: Pair<String, String>): String
 
     fun t(key: KWordKey, vararg arguments: Pair<String, String>): String
 }

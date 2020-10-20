@@ -60,6 +60,13 @@ kotlin {
             dependsOn commonMain
         }
 
+        jvmTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test'
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+            }
+        }
+
         jsMain {
             dependsOn commonMain
         }
