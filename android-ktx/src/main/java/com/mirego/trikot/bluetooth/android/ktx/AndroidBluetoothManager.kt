@@ -49,7 +49,7 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
         refreshLocationPermission()
         if (bluetoothAdapter != null) {
             statePublisher.value =
-                if (bluetoothAdapter.enable()) {
+                if (bluetoothAdapter.isEnabled) {
                     BluetoothManager.State.ON
                 } else {
                     BluetoothManager.State.OFF
