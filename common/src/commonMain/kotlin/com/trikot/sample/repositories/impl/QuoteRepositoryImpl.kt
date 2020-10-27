@@ -6,7 +6,6 @@ import com.mirego.trikot.streams.reactive.ColdPublisher
 import com.trikot.sample.models.Quote
 import com.trikot.sample.repositories.QuoteRepository
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.builtins.list
 import org.reactivestreams.Publisher
 
 class QuoteRepositoryImpl() : QuoteRepository {
