@@ -156,4 +156,4 @@ task copyFramework() {
     }
 }
 
-tasks.findAll { it.name.startsWith('preBuild') }.each { it.dependsOn('kwordGenerateEnum') }
+tasks.findAll { it.name.startsWith('preBuild') || it.name.startsWith('copyFramework') }.each { it.dependsOn('kwordGenerateEnum') }
