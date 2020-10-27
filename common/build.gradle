@@ -146,7 +146,7 @@ task copyFramework() {
             from srcFile.parent
             into targetDir
             include "${frameworkFilename}/**"
-            include "${frameworkFilename}.dSYM"
+            include "${frameworkFilename}.dSYM/**"
         }
         copy {
             from translationDir
