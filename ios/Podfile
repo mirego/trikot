@@ -18,8 +18,4 @@ target 'iosApp' do
   pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :tag => properties['trikot_streams_version'], :inhibit_warnings => true
   pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git', :tag => properties['trikot_kword_version'], :inhibit_warnings => true
 
-  target 'iosAppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 end
