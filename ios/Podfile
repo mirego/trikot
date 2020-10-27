@@ -1,6 +1,7 @@
 require_relative 'podspec_versions.rb'
 
-platform :ios, '11.3'
+platformVersion = '11.3'
+platform :ios, platformVersion
 
 install! 'cocoapods', :disable_input_output_paths => true
 
@@ -18,4 +19,11 @@ target 'iosApp' do
   pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :tag => properties['trikot_streams_version'], :inhibit_warnings => true
   pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git', :tag => properties['trikot_kword_version'], :inhibit_warnings => true
 
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = platformVersion
+      end
+    end
+  end
 end
