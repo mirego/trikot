@@ -620,7 +620,7 @@
 				DEVELOPMENT_TEAM = 4Q596JWQC5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$SRCROOT/../common-mobile/build/bin/ios/**",
+					"$SRCROOT/../common/build/bin/ios/**",
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
