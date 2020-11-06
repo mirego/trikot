@@ -8,7 +8,7 @@ target 'iosApp' do
   use_frameworks!
   pod 'SwiftLint'
   pod 'ViewModelsSample', :path => '../common'
-  pod 'Trikot.viewmodels', :git => 'git@github.com:mirego/trikot.metaviews.git', :inhibit_warnings => true
+  pod 'Trikot.viewmodels', :git => 'git@github.com:mirego/trikot.viewmodels.git', :inhibit_warnings => true
   pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :inhibit_warnings => true
     
   target 'iosAppTests' do

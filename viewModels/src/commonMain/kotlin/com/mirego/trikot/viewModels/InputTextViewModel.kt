@@ -1,7 +1,9 @@
 package com.mirego.trikot.viewmodels
 
 import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.mirego.trikot.viewmodels.properties.InputTextType
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
 interface InputTextViewModel : ViewModel {
@@ -25,4 +27,9 @@ interface InputTextViewModel : ViewModel {
      * Set the text entered by the platform InputText.
      */
     fun setUserInput(value: String)
+    /**
+     * Action to execute when keyboard action key is pressed
+     * Return true if you have consumed the action, else false.
+     */
+    val editorAction: Publisher<InputTextEditorAction>
 }

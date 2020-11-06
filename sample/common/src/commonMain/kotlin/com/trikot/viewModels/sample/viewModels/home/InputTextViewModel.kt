@@ -7,6 +7,7 @@ import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
+import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableInputTextListItemViewModel
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
@@ -25,6 +26,13 @@ class InputTextViewModel(navigationDelegate: NavigationDelegate) : MutableListVi
         MutableHeaderListItemViewModel(".hidden"),
         MutableInputTextListItemViewModel().also {
             it.inputText.hidden = true.just()
+        },
+        MutableHeaderListItemViewModel(".editorAction"),
+        MutableInputTextListItemViewModel().also {
+            it.inputText.editorAction = InputTextEditorAction {
+                navigationDelegate.showAlert("Editor action")
+                true
+            }.just()
         },
         MutableHeaderListItemViewModel(".onTap"),
         MutableInputTextListItemViewModel().also {

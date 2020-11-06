@@ -25,6 +25,7 @@ import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextType
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
 object InputTextViewModelBinder {
 
@@ -94,6 +95,17 @@ object InputTextViewModelBinder {
                                             TYPE_TEXT_FLAG_MULTI_LINE
                                 else -> TYPE_NULL
                             }
+                    }
+                }
+
+                it.editorAction.observe(lifecycleOwnerWrapper.lifecycleOwner) { action ->
+                    when (action) {
+                        ViewModelAction.None -> {
+                            editText.setOnEditorActionListener(null)
+                        }
+                        else -> editText.setOnEditorActionListener { v, actionId, event ->
+                            action.execute(v)
+                        }
                     }
                 }
 
