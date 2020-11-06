@@ -4,6 +4,8 @@ plugins {
     id 'kotlinx-serialization'
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.kword' version '0.5'
+    id 'jacoco'
+    id "com.github.nbaztec.coveralls-jacoco" version "1.2.4"
 }
 
 repositories {
@@ -157,3 +159,42 @@ task copyFramework() {
 }
 
 tasks.findAll { it.name.startsWith('preBuild') || it.name.startsWith('copyFramework') }.each { it.dependsOn('kwordGenerateEnum') }
+
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("build/reports")
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "test") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports"
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def excludes = [
+            '**/serializer.class',
+            '**/factories**'
+    ]
+    getClassDirectories().setFrom(fileTree(
+            dir: "build/intermediates/classes/debug",
+            excludes: excludes
+    ) + fileTree(
+            dir: "build/tmp/kotlin-classes/debug",
+            excludes: excludes
+    ))
+    getExecutionData().setFrom(files("build/jacoco/testDebugUnitTest.exec"))
+    getSourceDirectories().setFrom(files([
+            "src/commonMain/kotlin"
+    ]))
+}
+tasks.find { it.name.find('coverallsJacoco') }.mustRunAfter jacocoTestReport
+
+coverallsJacoco {
+    reportPath = "${buildDir}/reports/jacocoTestReport/jacocoTestReport.xml"
+    reportSourceSets = files([
+            "src/commonMain/kotlin"
+    ])
+}
