@@ -3,7 +3,6 @@ package com.mirego.trikot.viewmodels
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.mirego.trikot.viewmodels.properties.InputTextType
-import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
 interface InputTextViewModel : ViewModel {

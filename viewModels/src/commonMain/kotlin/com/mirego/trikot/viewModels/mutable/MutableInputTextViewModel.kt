@@ -6,8 +6,6 @@ import com.mirego.trikot.viewmodels.factory.PropertyFactory
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.mirego.trikot.viewmodels.properties.InputTextType
-import com.mirego.trikot.viewmodels.properties.ViewModelAction
-import org.reactivestreams.Publisher
 
 open class MutableInputTextViewModel : MutableViewModel(), InputTextViewModel {
     override var userInput = Publishers.behaviorSubject("")
