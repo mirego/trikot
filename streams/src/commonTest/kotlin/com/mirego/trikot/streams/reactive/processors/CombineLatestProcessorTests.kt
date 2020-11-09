@@ -159,4 +159,54 @@ class CombineLatestProcessorTests {
 
         assertEquals(1, errorCount)
     }
+
+    @Test
+    fun whenUsingSafeCombineNoValueAreDispatchedWhenMissing() {
+        val firstPublisher = MockPublisher("a")
+        val secondPublisher = MockPublisher()
+        var didDispatch = false
+        firstPublisher.safeCombine(secondPublisher)
+            .subscribe(CancellableManager()) {
+                didDispatch = true
+            }
+        assertFalse(didDispatch)
+    }
+
+    @Test
+    fun whenUsingSafeCombineValuesAreDispatchedWhenAllPublishersEmits() {
+        val firstPublisher = MockPublisher("a")
+        val secondPublisher = MockPublisher("b")
+        var firstValueReceived: String? = null
+        var secondValueReceived: String? = null
+
+        firstPublisher.safeCombine(secondPublisher)
+            .subscribe(CancellableManager()) { (value1, value2) ->
+                firstValueReceived = value1
+                secondValueReceived = value2
+            }
+
+        assertEquals("a", firstValueReceived)
+        assertEquals("b", secondValueReceived)
+    }
+
+    @Test
+    fun whenUsingSafeCombineWith2ArgumentsValuesAreDispatchedWhenAllPublishersEmits() {
+        val firstPublisher = MockPublisher("a")
+        val secondPublisher = MockPublisher("b")
+        val thirdPublisher = MockPublisher("c")
+        var firstValueReceived: String? = null
+        var secondValueReceived: String? = null
+        var thirdValueReceived: String? = null
+
+        firstPublisher.safeCombine(secondPublisher, thirdPublisher)
+            .subscribe(CancellableManager()) { (value1, value2, value3) ->
+                firstValueReceived = value1
+                secondValueReceived = value2
+                thirdValueReceived = value3
+            }
+
+        assertEquals("a", firstValueReceived)
+        assertEquals("b", secondValueReceived)
+        assertEquals("c", thirdValueReceived)
+    }
 }
