@@ -17,7 +17,7 @@ DEPENDENCIES:
   - ViewModelsSample (from `../common`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -30,10 +30,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Trikot.streams:
-    :commit: ebbd2af8e85f982652bbbad5b7ca6df26ec72bf5
+    :commit: b0ab7497c3a6f2a49dd4071e58a20062d19bcf1e
     :git: "git@github.com:mirego/trikot.streams.git"
   Trikot.viewmodels:
-    :commit: 87c9f442077236f4271b334a20dcd4766e752728
+    :commit: a0e36d445d4667bf8f03ee246860b9b12760556e
     :git: "git@github.com:mirego/trikot.viewmodels.git"
 
 SPEC CHECKSUMS:

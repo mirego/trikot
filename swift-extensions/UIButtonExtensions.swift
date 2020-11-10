@@ -48,19 +48,19 @@ extension UIButton {
                 bind(buttonViewModel.selected, \UIButton.isSelected)
 
                 observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector<ImageResource>) in
-                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.default_ as? ImageResource)) {
+                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.default_)) {
                         self?.setBackgroundImage(image, for: .normal)
                     }
 
-                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.selected as? ImageResource)) {
+                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.selected)) {
                         self?.setBackgroundImage(image, for: .selected)
                     }
 
-                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.disabled as? ImageResource)) {
+                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.disabled)) {
                         self?.setBackgroundImage(image, for: .disabled)
                     }
 
-                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.highlighted as? ImageResource)) {
+                    if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageResourceSelector.highlighted)) {
                         self?.setBackgroundImage(image, for: .highlighted)
                     }
                 }
@@ -69,11 +69,10 @@ extension UIButton {
                     self?.updateBackgroundColor(selector)
                 }
 
-                let imageResourceCombineLatest = CombineLatest.Companion().combine2(pub1: buttonViewModel.imageResource, pub2: buttonViewModel.tintColor)
-                observe(imageResourceCombineLatest) { [weak self] (result: CombineLatestResult2<StateSelector<ImageResource>, StateSelector<Color>>) in
-                    guard let imageSelector = result.component1() as? StateSelector<ImageResource>,
-                        let tintSelector = result.component2() as? StateSelector<Color>
-                        else { return }
+                let imageResourceCombineLatest = CombineLatestProcessorExtensionsKt.combine(buttonViewModel.imageResource, publishers: [buttonViewModel.tintColor])
+                observe(imageResourceCombineLatest) { [weak self] (value: [Any?]) in
+                    guard let imageSelector = value[0] as? StateSelector<ImageResource>,
+                        let tintSelector = value[1] as? StateSelector<Color> else { return }
 
                     var tintColor = (tintSelector.defaultValue() as Color?)?.safeColor()
                     if let image = ImageViewModelResourceManager.shared.image(fromResource: (imageSelector.defaultValue() as ImageResource?)) {
@@ -118,16 +117,16 @@ extension UIButton {
                     }
 
                     observe(buttonViewModel.textColor) {[weak self] (colorSelector: StateSelector<Color>) in
-                        if let color = (colorSelector.default_ as? Color)?.safeColor() {
+                        if let color = (colorSelector.default_)?.safeColor() {
                             self?.setTitleColor(color, for: .normal)
                         }
-                        if let color = (colorSelector.selected as? Color)?.safeColor() {
+                        if let color = (colorSelector.selected)?.safeColor() {
                             self?.setTitleColor(color, for: .selected)
                         }
-                        if let color = (colorSelector.disabled as? Color)?.safeColor() {
+                        if let color = (colorSelector.disabled)?.safeColor() {
                             self?.setTitleColor(color, for: .disabled)
                         }
-                        if let color = (colorSelector.highlighted as? Color)?.safeColor() {
+                        if let color = (colorSelector.highlighted)?.safeColor() {
                             self?.setTitleColor(color, for: .highlighted)
                         }
                     }
@@ -144,7 +143,9 @@ extension UIButton {
         if let color = (colorSelector as? Color)?.safeColor() {
             let coloredAttribuedString = NSMutableAttributedString(attributedString: attributedString)
             coloredAttribuedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attributedString.length))
-            self.setAttributedTitle(coloredAttribuedString, for: state)
+            setAttributedTitle(coloredAttribuedString, for: state)
+        } else {
+            setAttributedTitle(attributedString, for: state)
         }
     }
 
@@ -206,6 +207,6 @@ extension UIButton {
     @objc
     private func onButtonTouchUp() {
         guard let tapAction = tapAction else { return }
-        tapAction.execute(actionContext: self ?? nil)
+        tapAction.execute(actionContext: self)
     }
 }

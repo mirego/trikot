@@ -22,7 +22,7 @@ class ListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = .white
+        backgroundColor = .black
         addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
