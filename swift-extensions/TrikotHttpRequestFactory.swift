@@ -1,7 +1,7 @@
 import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
-public class TrikotHttpRequestFactory: NSObject, HttpRequestFactory {
+open class TrikotHttpRequestFactory: NSObject, HttpRequestFactory {
     private let httpLogLevel: TrikotHttpLogLevel
 
     public init(httpLogLevel: TrikotHttpLogLevel = .none) {
@@ -9,7 +9,7 @@ public class TrikotHttpRequestFactory: NSObject, HttpRequestFactory {
         super.init()
     }
 
-    public func request(requestBuilder: RequestBuilder) -> HttpRequest {
+    open func request(requestBuilder: RequestBuilder) -> HttpRequest {
         return TrikotHttpRequest(requestBuilder, httpLogLevel: httpLogLevel)
     }
 }
