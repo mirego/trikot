@@ -11,7 +11,7 @@ typealias GraphqlDataSourceType<T> = DataSource<GraphqlQueryDataSourceRequest<T>
 
 data class GraphqlQueryDataSourceRequest<T>(
     val query: GraphqlQuery<T>,
-    override val cachableId: String,
+    override val cacheableId: String,
     override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE
 ) : DataSourceRequest
 
