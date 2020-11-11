@@ -4,7 +4,7 @@ interface DataSourceRequest {
     /**
      * Identifier use to save data to cache
      */
-    val cachableId: Any
+    val cacheableId: Any
     /**
      * Type of request (See DataSourceRequest.Type)
      */

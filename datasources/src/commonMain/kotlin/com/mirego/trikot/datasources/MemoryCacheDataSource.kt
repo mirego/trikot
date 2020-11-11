@@ -11,7 +11,7 @@ class MemoryCacheDataSource<R : DataSourceRequest, T> : BaseDataSource<R, T>() {
     override fun internalRead(request: R): ExecutablePublisher<T> {
         return object : BaseExecutablePublisher<T>() {
             override fun internalRun(cancellableManager: CancellableManager) {
-                memoryCache.value[request.cachableId]?.let {
+                memoryCache.value[request.cacheableId]?.let {
                     dispatchSuccess(it)
                 } ?: run {
                     dispatchError(NoSuchElementException())
@@ -23,18 +23,18 @@ class MemoryCacheDataSource<R : DataSourceRequest, T> : BaseDataSource<R, T>() {
     override fun save(request: R, data: T?) {
         val initialValue = memoryCache.value
         val mutableMap = initialValue.toMutableMap()
-        mutableMap[request.cachableId] = data
+        mutableMap[request.cacheableId] = data
         if (!memoryCache.compareAndSet(initialValue, mutableMap.toMap())) {
             save(request, data)
         } else {
-            refreshPublisherWithId(request.cachableId)
+            refreshPublisherWithId(request.cacheableId)
         }
     }
 
-    override fun delete(cachableId: Any) {
+    override fun delete(cacheableId: Any) {
         val initialValue = memoryCache.value
         val mutableMap = initialValue.toMutableMap()
-        mutableMap.remove(cachableId)
+        mutableMap.remove(cacheableId)
         memoryCache.compareAndSet(initialValue, mutableMap)
     }
 }

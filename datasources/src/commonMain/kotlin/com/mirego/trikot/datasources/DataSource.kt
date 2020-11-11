@@ -16,5 +16,5 @@ interface DataSource<R : DataSourceRequest, T> {
     /**
      * Delete data in the datasource
      */
-    fun delete(cachableId: Any)
+    fun delete(cacheableId: Any)
 }

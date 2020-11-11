@@ -31,8 +31,8 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     }
 
     private fun getRefreshablePublisherPair(request: R): DataSourcePublisherPair<T> {
-        val cachableId = request.cachableId
-        val publisherPair = mapAtomicReference.value[cachableId]
+        val cacheableId = request.cacheableId
+        val publisherPair = mapAtomicReference.value[cacheableId]
         return when {
             publisherPair != null -> publisherPair
             else -> {
@@ -47,7 +47,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
                         }
                     }, DataState.pending())
 
-                savePublisherToRegistry(cachableId, publisher, request)
+                savePublisherToRegistry(cacheableId, publisher, request)
             }
         }
     }
@@ -58,22 +58,22 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
         }
     }
 
-    fun cachableIds(): List<Any> {
+    fun cacheableIds(): List<Any> {
         return mapAtomicReference.value.keys.toList()
     }
 
-    fun clean(cachableId: Any) {
-        clean(listOf(cachableId))
+    fun clean(cacheableId: Any) {
+        clean(listOf(cacheableId))
     }
 
-    fun clean(cachableIds: List<Any>) {
-        cachableIds.map { id ->
+    fun clean(cacheableIds: List<Any>) {
+        cacheableIds.map { id ->
             cacheDataSource?.delete(id)
         }
 
         val initialMap = mapAtomicReference.value
         val toMutableMap = initialMap.toMutableMap()
-        cachableIds.map { id ->
+        cacheableIds.map { id ->
             toMutableMap.remove(id)
         }
 
@@ -87,8 +87,8 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
         mapAtomicReference.compareAndSet(mapAtomicReference.value, mapOf())
     }
 
-    protected fun refreshPublisherWithId(cachableId: Any) {
-        mapAtomicReference.value[cachableId]?.refreshablePublisher()?.refresh()
+    protected fun refreshPublisherWithId(cacheableId: Any) {
+        mapAtomicReference.value[cacheableId]?.refreshablePublisher()?.refresh()
     }
 
     private fun readDataOrFallbackToCacheOnError(
@@ -128,14 +128,14 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     }
 
     private fun savePublisherToRegistry(
-        cachableId: Any,
+        cacheableId: Any,
         publisher: RefreshablePublisher<DataState<T, Throwable>>,
         request: R
     ): DataSourcePublisherPair<T> {
         val initialMap = mapAtomicReference.value
         val toMutableMap = initialMap.toMutableMap()
         val publisherPair = publisher to publisher.shared()
-        toMutableMap[cachableId] = publisherPair
+        toMutableMap[cacheableId] = publisherPair
         return when {
             mapAtomicReference.compareAndSet(initialMap, toMutableMap.toMap()) -> publisherPair
             else -> getRefreshablePublisherPair(request)
@@ -166,7 +166,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
 
     override fun save(request: R, data: T?) {}
 
-    override fun delete(cachableId: Any) {}
+    override fun delete(cacheableId: Any) {}
 }
 
 fun <T> DataSourcePublisherPair<T>.refreshablePublisher(): RefreshablePublisher<DataState<T, Throwable>> {
