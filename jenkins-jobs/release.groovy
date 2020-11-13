@@ -6,7 +6,7 @@ import com.mirego.jenkins.jobs.Context
 Context context = Context.load(this)
 context.standardFolders()
 
-job("$context.jobFullName-streams") {
+job("$context.jobFullName") {
     description("Make a release of trikot.streams")
     logRotator(5)
     scm {
