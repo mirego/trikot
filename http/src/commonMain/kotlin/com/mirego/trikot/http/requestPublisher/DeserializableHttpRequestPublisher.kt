@@ -7,11 +7,13 @@ import com.mirego.trikot.http.HttpResponseException
 import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.http.bodyString
 import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.json.Json
 
 open class DeserializableHttpRequestPublisher<T>(
     private val deserializer: DeserializationStrategy<T>,
     override val builder: RequestBuilder,
-    headerProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider
+    headerProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider,
+    private val json: Json = HttpConfiguration.json
 ) : HttpRequestPublisher<T>(headerProvider = headerProvider) {
 
     override fun processResponse(response: HttpResponse): T {
@@ -23,7 +25,7 @@ open class DeserializableHttpRequestPublisher<T>(
 
     private fun successfulResponse(response: HttpResponse): T {
         response.bodyString?.let { bodyString ->
-            return HttpConfiguration.json.decodeFromString(deserializer, bodyString)
+            return json.decodeFromString(deserializer, bodyString)
         }
         throw IllegalStateException("Cannot process an empty bodyString response")
     }

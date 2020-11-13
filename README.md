@@ -34,6 +34,9 @@ To deserialize a JSON payload:
 - Create a kotlix.serializable class
 - Create a DeserializableHttpRequestPublisher with the serializer in parameter.
 
+## DeserializableHttpRequestPublisher
+If there is no need to parse the body of the response, use this publisher instead. Only errors will be handled.
+
 ```kotlin
 @Serializable
 data class Foo(val bar: String)
