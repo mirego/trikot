@@ -1,6 +1,7 @@
 package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import kotlin.test.assertNotNull
 import org.reactivestreams.Publisher
 
 fun <T> Publisher<T>.get(block: (T) -> Unit) {
@@ -47,4 +48,28 @@ fun <T> Publisher<T>.verify(value: T?, error: Throwable?, completed: Boolean) {
 
 class MockPublisher(initialValue: String? = null) : BehaviorSubjectImpl<String>(initialValue) {
     val getHasSubscriptions get() = super.hasSubscriptions
+}
+
+fun <T : Any> Publisher<T>.subscribe() {
+    subscribe(CancellableManager(), onNext = {})
+}
+
+fun <T : Any> Publisher<T>.get(): T {
+    var value: T? = null
+    val cancellableManager = CancellableManager()
+    subscribe(cancellableManager, onNext = {
+        value = it
+    })
+    cancellableManager.cancel()
+    return assertNotNull(value, "no value returned in get")
+}
+
+fun <T : Any> Publisher<T>.assertError(expectedError: Throwable) {
+    var error: Throwable? = null
+    val cancellableManager = CancellableManager()
+    subscribe(cancellableManager, {}, {
+        error = it
+    })
+    cancellableManager.cancel()
+    return kotlin.test.assertEquals(expectedError, error)
 }

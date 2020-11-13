@@ -146,3 +146,8 @@ fun <T> Publisher<T>.debounce(
 fun <T> Publisher<T>.retryWhen(block: RetryWhenPublisherBlock): Publisher<T> {
     return RetryWhenProcessor(this, block)
 }
+
+inline fun <T, reified R : T> Publisher<T>.filterIs() =
+    filter { it is R }.map { it as R }
+
+fun Publisher<Boolean>.reverse() = map { !it }
