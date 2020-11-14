@@ -11,7 +11,8 @@ public class TrikotHttpResponse: NSObject, HttpResponse {
 
     public var statusCode: Int32 = 0
 
-    init(data: Data?, response: URLResponse?) {
+    @objc
+    public init(data: Data?, response: URLResponse?) {
         var headers = [String: String]()
         source = HttpResponseResponseSource.unknown
         if let response = response as? HTTPURLResponse {
