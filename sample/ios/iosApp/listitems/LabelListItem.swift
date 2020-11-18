@@ -16,6 +16,7 @@ class LabelListItem: UIView {
         addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
         title.isUserInteractionEnabled = true
+        title.numberOfLines = 0
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: topAnchor),
             title.bottomAnchor.constraint(equalTo: bottomAnchor),

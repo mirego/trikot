@@ -67,7 +67,7 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
         MutableHeaderListItemViewModel(".richTextTransform"),
         MutableLabelListItemViewModel().also {
             it.label.richText = RichText(
-                "Text appearance defined by the Client App Theme", listOf(
+                "Text appearance defined by the Client App Theme. Superscript example: 63", listOf(
                     RichTextRange(
                         IntRange(0, 10),
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_BOLD)
@@ -85,8 +85,20 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_GRAYED)
                     ),
                     RichTextRange(
-                        IntRange(38, 47),
+                        IntRange(38, 48),
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_HIGHLIGHTED)
+                    ),
+                    RichTextRange(
+                        IntRange(49, 70),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_ITALIC)
+                    ),
+                    RichTextRange(
+                        IntRange(71, 72),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)
+                    ),
+                    RichTextRange(
+                        IntRange(72, 73),
+                        TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_SUPERSCRIPT)
                     )
                 )
             ).just()

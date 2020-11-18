@@ -2,14 +2,10 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 public struct TextAppearanceAttributes {
-    let font: UIFont
-    let foregroundColor: UIColor
-    let backgroundColor: UIColor
+    let attributes: [NSAttributedString.Key: Any]
 
-    public init(font: UIFont, foregroundColor: UIColor, backgroundColor: UIColor = .clear) {
-        self.font = font
-        self.foregroundColor = foregroundColor
-        self.backgroundColor = backgroundColor
+    public init(attributes: [NSAttributedString.Key: Any] = [:]) {
+        self.attributes = attributes
     }
 }
 
