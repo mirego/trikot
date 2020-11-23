@@ -40,6 +40,7 @@ fun Char.escapeForGraphql(): String {
         0x1D.toChar() -> "\\u001D"
         0x1E.toChar() -> "\\u001E"
         0x1F.toChar() -> "\\u001F"
+        0x22.toChar() -> "\\u0022"
         0x5C.toChar() -> "\\\\"
         else -> this.toString()
     }
