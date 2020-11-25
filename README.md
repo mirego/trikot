@@ -1,5 +1,5 @@
 # Trikot.foundation
-Kotlin Multiplatform implementation of threads, timers, atomic references and iso8601 dates.
+Kotlin Multiplatform implementation of threads, timers, atomic references, string utilities and iso8601 dates.
 
 ## AtomicReference and AtomicListReference
 AtomicReference implementation on all platform 
@@ -20,6 +20,14 @@ Single and repeatable multiplatform timer implementations
  val doOnceTimer = TimerFactory.single(12.seconds) { doSomething() }
  val repeatTimer = TimerFactory.repeatable(12.seconds) { doSomething() }
  repeatTimer.cancel() // stop the timer
+```
+
+## Strings
+Multiplatform string extensions for formating, normalizing
+
+```kotlin
+val string = "Où sont les bûches de Noël durant l'été?".normalize()
+string == "Ou sont les buches de Noel durant l'ete?" // true
 ```
 
 ## Dates (Basic from and to ISO8601)
