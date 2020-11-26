@@ -9,6 +9,7 @@ plugins {
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://jitpack.io' }
@@ -17,11 +18,11 @@ repositories {
 group 'com.mirego.trikot'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
     }
 }
 
@@ -124,7 +125,7 @@ kotlin {
 }
 
 release {
-    checkTasks = [':tasks']
-    buildTasks = [':publish']
+    checkTasks = ['check']
+    buildTasks = ['publish']
     updateVersionPart = 2
 }
