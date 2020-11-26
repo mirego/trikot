@@ -106,19 +106,23 @@ kotlin {
             iosArm32Test.dependsOn(it)
         }
 
-        iosMain {
-            dependsOn nativeMain
-            iosX64Main.dependsOn(it)
-            iosArm64Main.dependsOn(it)
-        }
-
-        tvosMain {
-            dependsOn nativeMain
-            tvosArm64Main.dependsOn(it)
-            tvosX64Main.dependsOn(it)
-        }
-
         iosArm32Main {
+            dependsOn nativeMain
+        }
+
+        iosArm64Main {
+            dependsOn nativeMain
+        }
+
+        iosX64Main {
+            dependsOn nativeMain
+        }
+
+        tvosArm64Main {
+            dependsOn nativeMain
+        }
+
+        tvosX64Main {
             dependsOn nativeMain
         }
     }
