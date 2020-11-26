@@ -122,6 +122,12 @@ kotlin {
             tvosX64Main.dependsOn(it)
         }
     }
+
+    metadata {
+        compilations.matching { it.name == "nativeMain" }.all {
+            compileKotlinTaskProvider.configure { enabled = false }
+        }
+    }
 }
 
 release {
