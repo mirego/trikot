@@ -121,6 +121,14 @@ kotlin {
             tvosArm64Main.dependsOn(it)
             tvosX64Main.dependsOn(it)
         }
+
+        iosArm64Main {
+            dependsOn nativeMain
+        }
+
+        iosX64Main {
+            dependsOn nativeMain
+        }
     }
 }
 
