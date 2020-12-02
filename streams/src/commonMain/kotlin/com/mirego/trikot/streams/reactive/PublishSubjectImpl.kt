@@ -31,10 +31,10 @@ open class PublishSubjectImpl<T>(private val serialQueue: SynchronousSerialQueue
 
                 value?.let {
                     error?.let {
-                        throw IllegalStateException("Value should not be set after an error.")
+                        throw IllegalStateException("Value should not be set after an error.\nValue: $value\nError:$error")
                     }
                     if (isCompleted.value) {
-                        throw IllegalStateException("Value should not be set after publisher has completed.")
+                        throw IllegalStateException("Value should not be set after publisher has completed.\nValue: $value")
                     }
                     dispatchValueToSubscribers(it)
                 }
@@ -49,7 +49,7 @@ open class PublishSubjectImpl<T>(private val serialQueue: SynchronousSerialQueue
             serialQueue.dispatch {
                 value = null
                 if (isCompleted.value) {
-                    throw IllegalStateException("Error should not be set after publisher has completed.")
+                    throw IllegalStateException("Error should not be set after publisher has completed.\nError: $error\nValue: $value")
                 }
                 atomicError.setOrThrow(
                     null,
