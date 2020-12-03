@@ -29,10 +29,11 @@ job(context.jobFullName) {
         }
     }
     steps {
+        shell('xcode_select $XCODE_PATH')
         gradle {
             useWrapper()
             makeExecutable()
-            tasks(':trikotFoundation:release')
+            tasks(':trikotFoundation:compileNativeMainKotlinMetadata')
             switches('-i -s')
         }
     }
