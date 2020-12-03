@@ -29,7 +29,7 @@ job(context.jobFullName) {
         }
     }
     steps {
-        shell('xcode_select $XCODE_PATH')
+        shell('xcode-select -p $XCODE_PATH')
         gradle {
             useWrapper()
             makeExecutable()
