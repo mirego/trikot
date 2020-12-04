@@ -51,7 +51,7 @@ kotlin {
             dependencies {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
             }
         }
 
