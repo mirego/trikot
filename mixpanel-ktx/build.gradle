@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-platform-android'
     id 'digital.wup.android-maven-publish' version '3.6.2'
-    id 'mirego.release' version '1.13'
+    id 'mirego.release' version '2.0'
     id 'mirego.publish' version '1.0'
 }
 
@@ -18,12 +18,12 @@ repositories {
 group 'com.mirego.trikot.analytics'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
     }
 }
 
