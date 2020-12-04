@@ -5,6 +5,8 @@ import com.mirego.trikot.bluetooth.AttributeProfileCharacteristic
 import com.mirego.trikot.bluetooth.AttributeProfileService
 import com.mirego.trikot.streams.reactive.Publishers
 import org.reactivestreams.Publisher
+import java.util.*
+import kotlin.collections.HashMap
 
 class AndroidAttributeProfileService(
     value: BluetoothGattService,
@@ -15,7 +17,7 @@ class AndroidAttributeProfileService(
             as Map<String, AndroidAttributeProfileCharacteristic>
     ) { result, value ->
         (mutableMapOf(
-            value.uuid.toString().toUpperCase() to AndroidAttributeProfileCharacteristic(
+            value.uuid.toString().toUpperCase(Locale.ROOT) to AndroidAttributeProfileCharacteristic(
                 value,
                 bluetoothDevice
             )

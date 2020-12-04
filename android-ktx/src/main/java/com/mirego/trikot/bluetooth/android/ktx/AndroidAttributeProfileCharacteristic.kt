@@ -5,7 +5,7 @@ import android.bluetooth.BluetoothGattDescriptor
 import com.mirego.trikot.bluetooth.AttributeProfileCharacteristic
 import com.mirego.trikot.bluetooth.AttributeProfileCharacteristicEvent
 import com.mirego.trikot.streams.reactive.Publishers
-import java.util.UUID
+import java.util.*
 
 class AndroidAttributeProfileCharacteristic(
     private val bluetoothGattCharacteristic: BluetoothGattCharacteristic,
@@ -13,7 +13,7 @@ class AndroidAttributeProfileCharacteristic(
 ) : AttributeProfileCharacteristic {
     override val event = Publishers.publishSubject<AttributeProfileCharacteristicEvent>()
 
-    override val uuid: String = bluetoothGattCharacteristic.uuid.toString().toUpperCase()
+    override val uuid: String = bluetoothGattCharacteristic.uuid.toString().toUpperCase(Locale.ROOT)
 
     override fun read() {
         bluetoothDevice.readCharacteristic(bluetoothGattCharacteristic)

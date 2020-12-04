@@ -17,7 +17,8 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.processors.combine
-import java.util.Timer
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.concurrent.schedule
 
 class AndroidBluetoothDevice(
@@ -82,7 +83,7 @@ class AndroidBluetoothDevice(
                             as Map<String, AndroidAttributeProfileService>
                     ) { result, value ->
                         (mutableMapOf(
-                            value.uuid.toString().toUpperCase() to
+                            value.uuid.toString().toUpperCase(Locale.ROOT) to
                                 AndroidAttributeProfileService(
                                     value,
                                     this@AndroidBluetoothDevice
@@ -148,8 +149,8 @@ class AndroidBluetoothDevice(
                 value: ByteArray?,
                 error: Throwable?
             ) {
-                val serviceId = characteristic.service.uuid.toString().toUpperCase()
-                val characteristicId = characteristic.uuid.toString().toUpperCase()
+                val serviceId = characteristic.service.uuid.toString().toUpperCase(Locale.ROOT)
+                val characteristicId = characteristic.uuid.toString().toUpperCase(Locale.ROOT)
                 androidProfiles?.get(serviceId)
                     ?.androidCharacteristic?.get(characteristicId)?.event
                     ?.value = AttributeProfileCharacteristicEvent(value, error)
