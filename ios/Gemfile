@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Use the latest cocoapods gem
 gem 'cocoapods'
 
-gem 'activesupport', '~>4.0.2'
+gem 'activesupport', '~>4.2.11'
 
 gem "fastlane", '~>2.116.1'
 
