@@ -15,10 +15,12 @@ import kotlin.concurrent.schedule
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
 
+@ExperimentalTime
 fun ScanResult.toBluetoothScanResult(context: Context): AndroidBluetoothScanResult {
     return AndroidBluetoothScanResult(this, context)
 }
 
+@ExperimentalTime
 class AndroidBluetoothScanResult(
     private val scanResult: ScanResult,
     private val context: Context
@@ -53,7 +55,6 @@ class AndroidBluetoothScanResult(
         } ?: false
     }
 
-    @UseExperimental(ExperimentalTime::class)
     fun doHeartbeat() {
         timer?.cancel()
         updateManufacturerData()

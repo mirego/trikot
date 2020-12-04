@@ -27,7 +27,9 @@ import org.reactivestreams.Publisher
 import java.util.Timer
 import java.util.UUID
 import kotlin.concurrent.schedule
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class AndroidBluetoothManager(val context: Context) : BluetoothManager {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 

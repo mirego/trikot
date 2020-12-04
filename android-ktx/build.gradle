@@ -3,13 +3,14 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-platform-android'
     id 'digital.wup.android-maven-publish' version '3.6.2'
-    id 'mirego.release' version '1.13'
+    id 'mirego.release' version '2.0'
     id 'mirego.publish' version '1.0'
 }
 
 repositories {
     google()
     jcenter()
+    mavenLocal()
     mavenCentral()
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 }
@@ -17,12 +18,11 @@ repositories {
 group 'com.mirego.trikot.bluetooth'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
     }
 }
 
@@ -34,14 +34,14 @@ dependencies {
     api 'com.mirego.trikot:bluetooth:0.7.1'
     implementation "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'
 }
 
 release {
     checkTasks = ['check']
     buildTasks = ['publish']
-    updateVersionPart = 1
+    updateVersionPart = 2
     tagPrefix = 'android-ktx-'
 }
 
