@@ -28,12 +28,11 @@ job(context.jobFullName) {
             }
         }
     }
-    label('qc-jenkins-12')
     steps {
         gradle {
             useWrapper()
             makeExecutable()
-            tasks(':trikotFoundation:compileNativeMainKotlinMetadata')
+            tasks(':trikotFoundation:release')
             switches('-i -s')
         }
     }
