@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive
 
-import kotlin.js.JsName
 import org.reactivestreams.Publisher
+import kotlin.js.JsName
 
 object Publishers {
     @JsName("behaviorSubject")

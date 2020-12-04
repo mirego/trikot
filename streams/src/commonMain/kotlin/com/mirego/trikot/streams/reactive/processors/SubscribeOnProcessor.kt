@@ -23,7 +23,8 @@ class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispat
         return SubscribeOnProcessorSubscription(subscriber, dispatchQueue)
     }
 
-    class SubscribeOnProcessorSubscription<T>(s: Subscriber<in T>, override val dispatchQueue: DispatchQueue) : ProcessorSubscription<T, T>(s),
+    class SubscribeOnProcessorSubscription<T>(s: Subscriber<in T>, override val dispatchQueue: DispatchQueue) :
+        ProcessorSubscription<T, T>(s),
         QueueDispatcher {
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
             subscriber.onNext(t)

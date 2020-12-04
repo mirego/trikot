@@ -36,7 +36,8 @@ class RetryWhenSubscription<T>(
     init {
         val whenPublisher = block.invoke(errorPublisher)
         whenPublisher.observeOn(serialQueue)
-            .subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
+            .subscribe(
+                cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = {
                     resubscribe()
                 },
@@ -45,7 +46,8 @@ class RetryWhenSubscription<T>(
                 },
                 onCompleted = {
                     subscriber.onComplete()
-                })
+                }
+            )
     }
 
     override fun onNext(t: T, subscriber: Subscriber<in T>) {

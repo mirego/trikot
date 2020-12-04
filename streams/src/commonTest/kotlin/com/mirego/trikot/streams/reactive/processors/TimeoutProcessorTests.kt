@@ -34,7 +34,8 @@ class TimeoutProcessorTests {
         var receivedResult: String? = null
         var receivedError: Throwable? = null
 
-        timeoutProcessor.subscribe(CancellableManager(),
+        timeoutProcessor.subscribe(
+            CancellableManager(),
             onNext = {
                 receivedResult = it
             },
@@ -58,7 +59,8 @@ class TimeoutProcessorTests {
         var receivedResult: String? = null
         var receivedError: Throwable? = null
 
-        timeoutProcessor.subscribe(CancellableManager(),
+        timeoutProcessor.subscribe(
+            CancellableManager(),
             onNext = {
                 receivedResult = it
             },

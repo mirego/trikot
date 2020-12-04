@@ -10,10 +10,11 @@ class JustPublisherTests {
         val publisher = Publishers.just("VALUE")
         var value = ""
         var completion = false
-        publisher.subscribe(CancellableManager(),
-        onNext = { value = it },
-        onError = { throw IllegalStateException() },
-        onCompleted = { completion = true }
+        publisher.subscribe(
+            CancellableManager(),
+            onNext = { value = it },
+            onError = { throw IllegalStateException() },
+            onCompleted = { completion = true }
         )
         kotlin.test.assertEquals("VALUE", value)
         kotlin.test.assertTrue(completion)

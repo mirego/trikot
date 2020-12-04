@@ -1,8 +1,8 @@
 package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.reactive.processors.combine
-import kotlin.js.JsName
 import org.reactivestreams.Publisher
+import kotlin.js.JsName
 
 abstract class CombineLatestResult<A, B, C, D, E>(
     @JsName("c1")

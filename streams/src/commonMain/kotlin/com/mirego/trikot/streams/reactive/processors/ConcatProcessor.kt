@@ -25,7 +25,8 @@ class ConcatProcessor<T>(parentPublisher: Publisher<T>, private val nextPublishe
         }
 
         override fun onComplete() {
-            nextPublisher.subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
+            nextPublisher.subscribe(
+                cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = { subscriber.onNext(it) },
                 onError = { subscriber.onError(it) },
                 onCompleted = { subscriber.onComplete() }

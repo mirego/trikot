@@ -40,7 +40,8 @@ class RetryWhenProcessorTests {
             errors.map {
                 receivedErrorRetryWhen = it
             }
-        }.subscribe(CancellableManager(),
+        }.subscribe(
+            CancellableManager(),
             onNext = {
                 receivedValueSubscription = it
             },
@@ -66,7 +67,8 @@ class RetryWhenProcessorTests {
                     attempt.setOrThrow(attempt.value, attempt.value + 1)
                 }
         }
-        originalPublisher.retryWhen { errors -> errors }.subscribe(CancellableManager(),
+        originalPublisher.retryWhen { errors -> errors }.subscribe(
+            CancellableManager(),
             onNext = {
                 receivedValueSubscription = it
             },
@@ -110,7 +112,8 @@ class RetryWhenProcessorTests {
             Publishers.error<Int>(ERROR_1)
         }
 
-        originalPublisher.retryWhen { Publishers.error(ERROR_2) }.subscribe(CancellableManager(),
+        originalPublisher.retryWhen { Publishers.error(ERROR_2) }.subscribe(
+            CancellableManager(),
             onNext = {
                 receivedValueSubscription = it
             },

@@ -19,11 +19,13 @@ class CancellableManager : Cancellable {
     }
 
     fun add(cancellableBlock: () -> Unit) {
-        add(object : Cancellable {
-            override fun cancel() {
-                cancellableBlock()
+        add(
+            object : Cancellable {
+                override fun cancel() {
+                    cancellableBlock()
+                }
             }
-        })
+        )
     }
 
     override fun cancel() {

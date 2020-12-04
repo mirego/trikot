@@ -71,9 +71,8 @@ open class PublishSubjectImpl<T>(private val serialQueue: SynchronousSerialQueue
 
     private fun removeSubscription(publisherSubscription: PublisherSubscription<T>) {
         serialQueue.dispatch {
-            if (subscriptions.value.count() > 0 && subscriptions.remove(
-                    publisherSubscription
-                ).isEmpty()
+            if (subscriptions.value.count() > 0 && subscriptions.remove(publisherSubscription)
+                .isEmpty()
             ) {
                 onNoSubscription()
             }

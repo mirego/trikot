@@ -37,7 +37,8 @@ class SwitchMapProcessorTests {
         val returnedPublisher = MockPublisher()
         val cancellableManager = CancellableManager()
 
-        switchMappedPublisher.switchMap { returnedPublisher
+        switchMappedPublisher.switchMap {
+            returnedPublisher
         }.subscribe(cancellableManager) {
         }
 
@@ -86,8 +87,12 @@ class SwitchMapProcessorTests {
         val expectedException = StreamsProcessorException()
         var receivedException: StreamsProcessorException? = null
 
-        publisher.switchMap<String, String> { throw expectedException }.subscribe(CancellableManager(), onNext = {
-        }, onError = { receivedException = it as StreamsProcessorException })
+        publisher.switchMap<String, String> { throw expectedException }.subscribe(
+            CancellableManager(),
+            onNext = {
+            },
+            onError = { receivedException = it as StreamsProcessorException }
+        )
 
         assertEquals(expectedException, receivedException)
     }
@@ -98,8 +103,12 @@ class SwitchMapProcessorTests {
         var receivedException: StreamsProcessorException? = null
 
         assertFailsWith(IllegalStateException::class) {
-            publisher.switchMap<String, String> { throw IllegalStateException() }.subscribe(CancellableManager(), onNext = {
-            }, onError = { receivedException = it as StreamsProcessorException })
+            publisher.switchMap<String, String> { throw IllegalStateException() }.subscribe(
+                CancellableManager(),
+                onNext = {
+                },
+                onError = { receivedException = it as StreamsProcessorException }
+            )
         }
 
         assertEquals(null, receivedException)

@@ -11,10 +11,12 @@ class PublisherResultAccumulator<T>(publisher: Publisher<T>) : Cancellable {
     val cancellableManager = CancellableManager()
 
     init {
-        publisher.subscribe(cancellableManager,
+        publisher.subscribe(
+            cancellableManager,
             onNext = { values.add(it) },
             onError = { error = it },
-            onCompleted = { completed = true })
+            onCompleted = { completed = true }
+        )
     }
 
     override fun cancel() {

@@ -4,10 +4,10 @@ import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.timers.TimerFactory
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.StreamsTimeoutException
-import kotlin.time.Duration
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
+import kotlin.time.Duration
 
 class TimeoutProcessor<T>(
     private val duration: Duration,

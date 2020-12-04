@@ -94,9 +94,13 @@ class PublishSubjectTests {
         publisher1
             .switchMap { publisher2 }
             .first()
-            .subscribe(CancellableManager(), onNext = {
-            }, onError = {},
-                onCompleted = { completed = true })
+            .subscribe(
+                CancellableManager(),
+                onNext = {
+                },
+                onError = {},
+                onCompleted = { completed = true }
+            )
         publisher1.value = "1"
         publisher2.value = "2"
 

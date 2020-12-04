@@ -54,7 +54,8 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
             }
 
             currentPublisher.setOrThrow(currentPublisher.value, newPublisher)
-            newPublisher.observeOn(serialQueue).subscribe(cancellableManagerProvider.cancelPreviousAndCreate(),
+            newPublisher.observeOn(serialQueue).subscribe(
+                cancellableManagerProvider.cancelPreviousAndCreate(),
                 onNext = { subscriber.onNext(it) },
                 onError = {
                     onError(it)
@@ -62,7 +63,8 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
                 onCompleted = {
                     isChildCompleted.setOrThrow(isChildCompleted.value, true)
                     dispatchCompletedIfNeeded()
-                })
+                }
+            )
 
             onNextValidation.setOrThrow(1, 0)
         }

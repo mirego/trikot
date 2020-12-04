@@ -29,8 +29,12 @@ class MapProcessorTests {
         val expectedException = StreamsProcessorException()
         var receivedException: StreamsProcessorException? = null
 
-        publisher.map { throw expectedException }.subscribe(CancellableManager(), onNext = {
-        }, onError = { receivedException = it as StreamsProcessorException })
+        publisher.map { throw expectedException }.subscribe(
+            CancellableManager(),
+            onNext = {
+            },
+            onError = { receivedException = it as StreamsProcessorException }
+        )
 
         assertEquals(expectedException, receivedException)
     }
@@ -42,8 +46,12 @@ class MapProcessorTests {
         var receivedException: StreamsProcessorException? = null
 
         assertFailsWith(IllegalStateException::class) {
-            publisher.map { throw IllegalStateException() }.subscribe(CancellableManager(), onNext = {
-            }, onError = { receivedException = it as StreamsProcessorException })
+            publisher.map { throw IllegalStateException() }.subscribe(
+                CancellableManager(),
+                onNext = {
+                },
+                onError = { receivedException = it as StreamsProcessorException }
+            )
         }
     }
 }

@@ -23,7 +23,8 @@ class OnErrorReturnProcessorTests {
         publisher.onErrorReturn {
             receivedError = it
             expectedValue
-        }.subscribe(CancellableManager(),
+        }.subscribe(
+            CancellableManager(),
             onNext = { receivedValue = it },
             onError = { throw IllegalStateException("Should not return an error") }
 

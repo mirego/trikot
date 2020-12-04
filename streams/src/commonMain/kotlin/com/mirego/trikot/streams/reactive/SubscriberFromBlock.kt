@@ -22,11 +22,13 @@ class SubscriberFromBlock<T>(
     }
 
     override fun onSubscribe(s: Subscription) {
-        cancellableManager.add(object : Cancellable {
-            override fun cancel() {
-                s.cancel()
+        cancellableManager.add(
+            object : Cancellable {
+                override fun cancel() {
+                    s.cancel()
+                }
             }
-        })
+        )
     }
 
     override fun onNext(t: T) {

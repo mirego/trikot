@@ -6,14 +6,16 @@ import org.reactivestreams.Subscription
 
 abstract class ProcessorSubscription<T, R>(private val subscriber: Subscriber<in R>) :
     Subscriber<T> {
-    val activeSubscription = AtomicReference<Subscription>(object :
-        Subscription {
-        override fun cancel() {
-        }
+    val activeSubscription = AtomicReference<Subscription>(
+        object :
+            Subscription {
+            override fun cancel() {
+            }
 
-        override fun request(n: Long) {
+            override fun request(n: Long) {
+            }
         }
-    })
+    )
 
     override fun onNext(t: T) {
         onNext(t, subscriber)

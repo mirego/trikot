@@ -62,10 +62,12 @@ class SharedProcessorTests {
         }.shared()
 
         publisher.complete()
-        sharedProcessor.subscribe(cancellableManager,
+        sharedProcessor.subscribe(
+            cancellableManager,
             onNext = { firstSubscriptionValueReceived = it },
             onError = {},
-            onCompleted = { isCompleted = true })
+            onCompleted = { isCompleted = true }
+        )
         cancellableManager.cancel()
         sharedProcessor.subscribe(CancellableManager()) { secondSubscriptionValueReceived = it }
 
@@ -83,7 +85,9 @@ class SharedProcessorTests {
         masterPublisher.subscribe(CancellableManager()) {}
 
         var errorCount = 0
-        sharedPublisher.subscribe(CancellableManager(), {},
+        sharedPublisher.subscribe(
+            CancellableManager(),
+            {},
             {
                 errorCount++
                 masterPublisher.value = "b"

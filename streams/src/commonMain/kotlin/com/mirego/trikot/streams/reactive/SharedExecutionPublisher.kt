@@ -12,39 +12,43 @@ class SharedExecutionPublisher<T>(private val block: () -> Publisher<T>) : Publi
     private val serialQueue = SynchronousSerialQueue()
 
     override fun subscribe(s: Subscriber<in T>) {
-        currentPublisher.value.subscribe(object : Subscriber<T> {
-            private val subscriber = s
+        currentPublisher.value.subscribe(
+            object : Subscriber<T> {
+                private val subscriber = s
 
-            override fun onComplete() {
-                subscriber.onComplete()
-                onFinish()
-            }
-
-            override fun onError(t: Throwable) {
-                subscriber.onError(t)
-                onFinish()
-            }
-
-            override fun onNext(t: T) {
-                subscriber.onNext(t)
-            }
-
-            override fun onSubscribe(s: Subscription) {
-                serialQueue.dispatch {
-                    refCount.setOrThrow(refCount.value, refCount.value + 1)
+                override fun onComplete() {
+                    subscriber.onComplete()
+                    onFinish()
                 }
-                subscriber.onSubscribe(object : Subscription {
-                    override fun cancel() {
-                        s.cancel()
-                        onCancel()
-                    }
 
-                    override fun request(n: Long) {
-                        s.request(n)
+                override fun onError(t: Throwable) {
+                    subscriber.onError(t)
+                    onFinish()
+                }
+
+                override fun onNext(t: T) {
+                    subscriber.onNext(t)
+                }
+
+                override fun onSubscribe(s: Subscription) {
+                    serialQueue.dispatch {
+                        refCount.setOrThrow(refCount.value, refCount.value + 1)
                     }
-                })
+                    subscriber.onSubscribe(
+                        object : Subscription {
+                            override fun cancel() {
+                                s.cancel()
+                                onCancel()
+                            }
+
+                            override fun request(n: Long) {
+                                s.request(n)
+                            }
+                        }
+                    )
+                }
             }
-        })
+        )
     }
 
     private fun onCancel() {

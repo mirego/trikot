@@ -17,10 +17,12 @@ class FirstProcessorTests {
         var value: String? = null
         var completed = false
 
-        publisher.first().subscribe(CancellableManager(),
+        publisher.first().subscribe(
+            CancellableManager(),
             onNext = { value = it },
             onError = {},
-            onCompleted = { completed = true })
+            onCompleted = { completed = true }
+        )
 
         assertEquals("a", value)
         assertTrue { completed }

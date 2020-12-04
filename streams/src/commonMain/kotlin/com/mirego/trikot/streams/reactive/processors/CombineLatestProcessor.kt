@@ -84,7 +84,8 @@ class CombineLatestProcessor<T>(
 
                 publishers.forEachIndexed { index, publisher ->
                     val publisherResultIndex = index + 1
-                    publisher.observeOn(serialQueue).subscribe(cancellableManager,
+                    publisher.observeOn(serialQueue).subscribe(
+                        cancellableManager,
                         onNext = { updatePublisherResultValue(publisherResultIndex, it) },
                         onError = { onError(it) },
                         onCompleted = { markPublisherResultCompleted(publisherResultIndex) }

@@ -152,7 +152,8 @@ class CombineLatestProcessorTests {
         val thirdPublisher = MockPublisher("b").also { it.error = Throwable() }
 
         var errorCount = 0
-        combine(listOf(firstPublisher, secondPublisher, thirdPublisher)).subscribe(CancellableManager(),
+        combine(listOf(firstPublisher, secondPublisher, thirdPublisher)).subscribe(
+            CancellableManager(),
             onNext = {},
             onError = { errorCount ++ }
         )
