@@ -5,7 +5,6 @@ import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KWord
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.parseMap
 import java.io.IOException
 
 object AndroidKWord {
