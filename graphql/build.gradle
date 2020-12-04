@@ -46,7 +46,7 @@ kotlin {
                 implementation "com.mirego.trikot:streams:$trikot_streams_version"
                 implementation "com.mirego.trikot:http:$trikot_http_version"
                 implementation "com.mirego.trikot:datasources:$trikot_datasources_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
             }
         }
 
