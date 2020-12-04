@@ -28,8 +28,8 @@ job(context.jobFullName) {
             }
         }
     }
+    label('qc-jenkins-12')
     steps {
-        shell('xcode-select -p $XCODE_PATH')
         gradle {
             useWrapper()
             makeExecutable()
