@@ -21,12 +21,12 @@ repositories {
 group 'com.mirego.trikot.viewmodels'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
     }
 
     dataBinding {
@@ -40,7 +40,7 @@ configurations.all {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.mirego.trikot:viewmodels:1.0.3'
+    api 'com.mirego.trikot:viewmodels:1.0.5'
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
