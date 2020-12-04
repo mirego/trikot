@@ -35,10 +35,6 @@ kotlin {
     ios()
     iosArm32('iosArm32')
     tvos()
-    js {
-        browser()
-        nodejs()
-    }
 
     sourceSets {
         all {
@@ -69,10 +65,6 @@ kotlin {
         }
 
         jvmMain {
-            dependsOn commonMain
-        }
-
-        jsMain {
             dependsOn commonMain
         }
 
