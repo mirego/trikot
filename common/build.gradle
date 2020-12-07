@@ -5,7 +5,7 @@ plugins {
     id 'org.jlleitschuh.gradle.ktlint'
     id 'mirego.kword' version '0.5'
     id 'jacoco'
-    id "com.github.nbaztec.coveralls-jacoco" version "1.2.4"
+    id 'com.github.nbaztec.coveralls-jacoco' version '1.2.4'
 }
 
 repositories {
@@ -19,10 +19,6 @@ repositories {
 }
 
 group 'com.trikot.sample'
-
-apply plugin: 'maven-publish'
-
-def iosArchLibrarySuffix = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? "iosarm64" : "iosx64"
 
 android {
     compileSdkVersion 29
@@ -45,34 +41,23 @@ kword {
 }
 
 kotlin {
-    targets {
-        fromPreset(presets.android, 'android')
-        fromPreset(presets.js, 'js')
-
-        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
-
-        fromPreset(iOSTarget, 'ios') {
-            binaries {
-                framework {
-                    embedBitcode("disable")
-                    baseName = "$trikot_framework_name"
-                    export "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
-                    export "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
-                    export "com.mirego.trikot:streams:$trikot_streams_version"
-                    export "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
-                    export "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
-                    export "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
-                    export "com.mirego.trikot:http:$trikot_http_version"
-                    export "com.mirego.trikot:http-$iosArchLibrarySuffix:$trikot_http_version"
-                    export "com.mirego.trikot:kword:$trikot_kword_version"
-                    export "com.mirego.trikot:kword-$iosArchLibrarySuffix:$trikot_kword_version"
-                }
-            }
-        }
+    android() {
+        publishLibraryVariants('release', 'debug')
     }
 
-    android {
-        publishLibraryVariants('release', 'debug')
+    ios() {
+        binaries {
+            framework {
+                embedBitcode("disable")
+                baseName = "$trikot_framework_name"
+                transitiveExport = true
+                export "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
+                export "com.mirego.trikot:streams:$trikot_streams_version"
+                export "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
+                export "com.mirego.trikot:http:$trikot_http_version"
+                export "com.mirego.trikot:kword:$trikot_kword_version"
+            }
+        }
     }
 
     sourceSets {
@@ -82,6 +67,7 @@ kotlin {
                 useExperimentalAnnotation('kotlin.time.ExperimentalTime')
             }
         }
+
         commonMain {
             dependencies {
                 api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
@@ -89,18 +75,21 @@ kotlin {
                 api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
                 api "com.mirego.trikot:http:$trikot_http_version"
                 api "com.mirego.trikot:kword:$trikot_kword_version"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
             }
             kotlin.srcDir(kword.generatedDir)
         }
+
         commonTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
-                implementation "io.mockk:mockk-common:$mokk_version"
+                implementation "io.mockk:mockk-common:$mockk_version"
             }
         }
+
         androidMain {
+            dependsOn commonMain
             dependencies {
                 implementation "com.mirego.trikot.viewmodels:android-ktx:$trikot_viewmodels_android_ktx_version"
                 implementation "com.mirego.trikot.http:android-ktx:$trikot_http_android_ktx_version"
@@ -110,16 +99,13 @@ kotlin {
             }
             dependsOn commonMain
         }
+
         androidTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
-                implementation "io.mockk:mockk:$mokk_version"
+                implementation "io.mockk:mockk:$mockk_version"
             }
-        }
-
-        jsMain {
-            dependsOn commonMain
         }
 
         iosMain {
@@ -134,21 +120,20 @@ kotlin {
 // Before opening the project from iosApp directory in Xcode,
 // make sure all Gradle infrastructure exists (gradle.wrapper, gradlew).
 task copyFramework() {
-    def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
-
-    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
+    def buildType = project.findProperty('kotlin.build.type') ?: 'RELEASE'
+    def target = project.findProperty('kotlin.target') ?: 'iosArm64'
+    dependsOn kotlin.targets."$target".binaries.getFramework(buildType).linkTask
 
     doLast {
-        def frameworkFilename = "${trikot_framework_name}.framework"
-        def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
-        def targetDir = file("build/bin/ios").toString()
-        def frameworkDir = "${targetDir}/${frameworkFilename}"
+        def srcFile = kotlin.targets."$target".binaries.getFramework(buildType).outputFile
+        def targetDir = getProperty('configuration.build.dir')
+        def frameworkDir = "${targetDir}/${trikot_framework_name}.framework"
         def translationDir = "${projectDir}/../common/src/commonMain/resources/translations"
         copy {
             from srcFile.parent
             into targetDir
-            include "${frameworkFilename}/**"
-            include "${frameworkFilename}.dSYM/**"
+            include "${trikot_framework_name}.framework/**"
+            include "${trikot_framework_name}.framework.dSYM/**"
         }
         copy {
             from translationDir
@@ -158,7 +143,11 @@ task copyFramework() {
     }
 }
 
-tasks.findAll { it.name.startsWith('preBuild') || it.name.startsWith('copyFramework') }.each { it.dependsOn('kwordGenerateEnum') }
+project.afterEvaluate {
+    project.tasks.findAll { task -> task.name.startsWith('compile') && task.name.contains('Kotlin') }.each { task ->
+        task.dependsOn('kwordGenerateEnum')
+    }
+}
 
 jacoco {
     toolVersion = "0.8.2"

@@ -1,7 +1,7 @@
 PODS:
   - ReachabilitySwift (4.3.1)
   - SwiftLint (0.39.2)
-  - Trikot.http (0.0.1):
+  - Trikot.http (1.0.1):
     - ReachabilitySwift (~> 4.3.1)
     - TrikotFrameworkName
   - Trikot.kword (0.0.1):
@@ -18,10 +18,10 @@ PODS:
 
 DEPENDENCIES:
   - SwiftLint
-  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `1.0.0`)"
-  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `1.0.0`)"
-  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `1.0.0`)"
-  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.metaviews.git`, tag `1.0.0`)"
+  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `1.0.7`)"
+  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `1.0.2`)"
+  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `1.0.8`)"
+  - "Trikot.viewmodels (from `git@github.com:mirego/trikot.metaviews.git`, tag `1.0.6`)"
   - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
@@ -32,42 +32,42 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 1.0.0
+    :tag: 1.0.7
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 1.0.0
+    :tag: 1.0.2
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 1.0.0
+    :tag: 1.0.8
   Trikot.viewmodels:
     :git: "git@github.com:mirego/trikot.metaviews.git"
-    :tag: 1.0.0
+    :tag: 1.0.6
   TrikotFrameworkName:
     :path: "../common"
 
 CHECKOUT OPTIONS:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 1.0.0
+    :tag: 1.0.7
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 1.0.0
+    :tag: 1.0.2
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 1.0.0
+    :tag: 1.0.8
   Trikot.viewmodels:
     :git: "git@github.com:mirego/trikot.metaviews.git"
-    :tag: 1.0.0
+    :tag: 1.0.6
 
 SPEC CHECKSUMS:
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
-  Trikot.http: b024e370f089add121ec1aa580e1939d365d998c
+  Trikot.http: 4eaea61c8e1fffd6c5d425c4a29d7195d4a59098
   Trikot.kword: 4021e56410368c6227bcd2cf7cfac6986135ea26
   Trikot.streams: 4f392f5594d360c83926d0e53155d84d6bfb2aa1
   Trikot.viewmodels: b13076cb7a8a294bd045b78e4bc5d001567ee7d3
-  TrikotFrameworkName: 729cc9abbecd5a63cfe35a41c1ea42d839ccd66b
+  TrikotFrameworkName: 4df9ba5d8f48233ae5bf199b61b46dc50fa733f7
 
-PODFILE CHECKSUM: 281df34af9f2e2f05344145ef9ff512bf11f1c4c
+PODFILE CHECKSUM: 3ec312e870ab7ae117e87ecf30d70c50759135d8
 
 COCOAPODS: 1.8.4

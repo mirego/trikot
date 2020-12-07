@@ -3,10 +3,10 @@ package com.trikot.sample.common
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.trikot.sample.BR
 import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
-import com.trikot.sample.viewmodels.base.BaseViewModelController
+import com.trikot.sample.BR
 import com.trikot.sample.viewmodels.base.BaseNavigationDelegate
+import com.trikot.sample.viewmodels.base.BaseViewModelController
 import com.trikot.sample.viewmodels.base.ViewModelController
 import kotlin.reflect.KClass
 

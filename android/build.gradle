@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'kotlinx-serialization'
     id 'org.jlleitschuh.gradle.ktlint'
@@ -9,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.trikot.sample"
@@ -18,7 +17,7 @@ android {
         archivesBaseName = "PatronProjectName-$versionCode"
 
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 30
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,8 +43,9 @@ android {
         exclude 'META-INF/*.kotlin_module'
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 
     lintOptions {
@@ -57,6 +57,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     repositories {
         maven { url('https://s3.amazonaws.com/mirego-maven/public') }
         mavenLocal()
@@ -74,10 +75,10 @@ configurations.all {
 dependencies {
     api project(':common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
@@ -86,7 +87,7 @@ dependencies {
     implementation "com.mirego.trikot.http:android-ktx:$trikot_http_android_ktx_version"
     implementation "com.mirego.trikot.kword:android-ktx:$trikot_kword_android_ktx_version"
 
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
