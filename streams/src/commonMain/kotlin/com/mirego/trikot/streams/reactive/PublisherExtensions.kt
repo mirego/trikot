@@ -14,6 +14,8 @@ import com.mirego.trikot.streams.reactive.processors.FirstProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.ObserveOnProcessor
+import com.mirego.trikot.streams.reactive.processors.OnErrorResumeNextBlock
+import com.mirego.trikot.streams.reactive.processors.OnErrorResumeNextProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.RetryWhenProcessor
@@ -151,3 +153,11 @@ inline fun <T, reified R : T> Publisher<T>.filterIs() =
     filter { it is R }.map { it as R }
 
 fun Publisher<Boolean>.reverse() = map { !it }
+
+/**
+ * The onErrorResumeNext operator intercepts an onError notification from the source Publisher and,
+ * instead of passing it through to any publishers, replaces it with some other item or sequence of items,
+ * potentially allowing the resulting Publisher to terminate normally or not to terminate at all.
+ */
+fun <T> Publisher<T>.onErrorResumeNext(block: OnErrorResumeNextBlock<T>): Publisher<T> =
+    OnErrorResumeNextProcessor(this, block)
