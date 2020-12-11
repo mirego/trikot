@@ -13,6 +13,7 @@ import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.FirstProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessor
 import com.mirego.trikot.streams.reactive.processors.MapProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.MergeProcessor
 import com.mirego.trikot.streams.reactive.processors.ObserveOnProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorResumeNextBlock
 import com.mirego.trikot.streams.reactive.processors.OnErrorResumeNextProcessor
@@ -161,3 +162,16 @@ fun Publisher<Boolean>.reverse() = map { !it }
  */
 fun <T> Publisher<T>.onErrorResumeNext(block: OnErrorResumeNextBlock<T>): Publisher<T> =
     OnErrorResumeNextProcessor(this, block)
+
+/**
+ * Combine multiple Observables into one by merging their emissions
+ * Merge may interleave the items emitted by the merged Publishers so order is not guaranteed
+ * onError notification from any of the source Publishers will immediately be passed through to subscribers
+ * and will terminate the merged Publisher.
+ * onComplete notification will only be sent if all merged Publishers are completed
+ */
+fun <T> Publisher<T>.merge(publishers: List<Publisher<out T>>): Publisher<T> =
+    MergeProcessor(this, publishers)
+
+fun <T> Publisher<T>.merge(vararg publishers: Publisher<out T>): Publisher<T> =
+    MergeProcessor(this, publishers.toList())
