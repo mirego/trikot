@@ -45,6 +45,45 @@ job("$context.jobFullName-analytics") {
     }
 }
 
+job("$context.jobFullName-analytics-viewmodel") {
+    description("Make a release of trikot.analytics-viewmodel")
+    logRotator(5)
+    scm {
+        git {
+            branch("${GIT_BRANCH}")
+            remote {
+                name('origin')
+                url("${GIT_URL}")
+                credentials('github')
+            }
+        }
+    }
+    wrappers {
+        credentialsBinding {
+            amazonWebServicesCredentialsBinding {
+                accessKeyVariable('MAVEN_AWS_KEY')
+                secretKeyVariable('MAVEN_AWS_SECRET')
+                credentialsId('mirego-maven-aws')
+            }
+        }
+    }
+    steps {
+        gradle {
+            useWrapper()
+            makeExecutable()
+            tasks(':analytics-viewmodel:release')
+            switches('-i -s')
+        }
+    }
+    publishers {
+        slackNotifier {
+            notifyFailure(true)
+            notifyBackToNormal(true)
+            room(context.slackChannel)
+        }
+    }
+}
+
 job("$context.jobFullName-analytics-firebase-ktx") {
     description("Make a release of trikot.analytics.firebase-ktx")
     logRotator(5)
