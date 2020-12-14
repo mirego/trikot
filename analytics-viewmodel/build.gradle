@@ -93,4 +93,5 @@ release {
    checkTasks = ['check']
    buildTasks = ['publish']
    updateVersionPart = 2
+   tagPrefix = 'viewmodel-'
 }
