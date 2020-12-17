@@ -1,6 +1,8 @@
 package com.mirego.trikot.streams.reactive
 
 import org.reactivestreams.Publisher
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 import kotlin.js.JsName
 
 object Publishers {
@@ -38,7 +40,17 @@ object Publishers {
      */
     @JsName("never")
     fun <T> never(): Publisher<T> {
-        return publishSubject()
+        return object : Publisher<T> {
+            override fun subscribe(s: Subscriber<in T>) {
+                s.onSubscribe(object : Subscription {
+                    override fun request(n: Long) {
+                    }
+
+                    override fun cancel() {
+                    }
+                })
+            }
+        }
     }
 
     /**
