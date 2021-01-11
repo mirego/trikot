@@ -8,10 +8,10 @@ import org.reactivestreams.Publisher
 
 typealias RefreshablePublisherExecutionBlock<T> = (CancellableManager, Boolean) -> Publisher<T>
 
-class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherExecutionBlock<T>, value: T? = null, private val serialQueue: SynchronousSerialQueue = SynchronousSerialQueue()) :
+open class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherExecutionBlock<T>, value: T? = null, private val serialQueue: SynchronousSerialQueue = SynchronousSerialQueue()) :
     BehaviorSubjectImpl<T>(value, serialQueue) {
     private val cancellableManagerProvider = CancellableManagerProvider()
-    private val shouldRefresh = AtomicReference(false)
+    protected val shouldRefresh = AtomicReference(false)
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
@@ -23,7 +23,7 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
         doCancel()
     }
 
-    fun refresh() {
+    open fun refresh() {
         value = null
         shouldRefresh.compareAndSet(false, true)
         if (hasSubscriptions) {
@@ -31,7 +31,7 @@ class RefreshablePublisher<T>(private val executionBlock: RefreshablePublisherEx
         }
     }
 
-    private fun doExecuteBlock() {
+    protected fun doExecuteBlock() {
         serialQueue.dispatch {
             val isRefreshing = shouldRefresh.value
             val cancelPreviousAndCreate = cancellableManagerProvider.cancelPreviousAndCreate()
