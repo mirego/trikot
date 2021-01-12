@@ -1,6 +1,7 @@
 package com.mirego.trikot.datasources.testutils
 
 import com.mirego.trikot.datasources.DataState
+import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.subscribe
 import kotlin.test.assertNotNull
@@ -23,11 +24,11 @@ fun <T : Any> Publisher<T>.assertEquals(expectedValue: T?) {
 operator fun <T : Any> Publisher<T>.get(block: (T) -> Unit) = block(get())
 
 fun <T : Any> Publisher<T>.get(): T {
-    var value: T? = null
+    val atomicReference = AtomicReference<T?>(null)
     val cancellableManager = CancellableManager()
     subscribe(cancellableManager, onNext = {
-        value = it
+        atomicReference.compareAndSet(atomicReference.value, it)
     })
     cancellableManager.cancel()
-    return assertNotNull(value, "no value returned in get")
+    return assertNotNull(atomicReference.value, "no value returned in get")
 }
