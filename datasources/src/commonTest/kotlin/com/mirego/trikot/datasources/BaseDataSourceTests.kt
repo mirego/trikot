@@ -1,7 +1,9 @@
 package com.mirego.trikot.datasources
 
 import com.mirego.trikot.datasources.testutils.assertError
+import com.mirego.trikot.datasources.testutils.assertPending
 import com.mirego.trikot.datasources.testutils.assertValue
+import com.mirego.trikot.datasources.testutils.get
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousDispatchQueue
 import com.mirego.trikot.streams.StreamsConfiguration
@@ -204,6 +206,19 @@ class BaseDataSourceTests {
         assertTrue {
             networkDataSource.cacheableIds() == emptyList<Any>()
         }
+    }
+
+    @Test
+    fun givenNetworkDataWhenRefreshingThenPendingWithCurrentData() {
+        val networkDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(networkResult) }
+        val dataSource = BasicDataSource(mutableMapOf(simpleCacheableId to networkDataSourceReadPublisher))
+        val firstDataState = dataSource.read(FakeRequest(simpleCacheableId, DataSourceRequest.Type.REFRESH_CACHE)).get()
+        firstDataState.assertValue(networkResult)
+
+        networkDataSourceReadPublisher.dispatchResult(null)
+
+        val secondDataState = dataSource.read(FakeRequest(simpleCacheableId, DataSourceRequest.Type.REFRESH_CACHE)).get()
+        secondDataState.assertPending(networkResult)
     }
 
     data class FakeRequest(

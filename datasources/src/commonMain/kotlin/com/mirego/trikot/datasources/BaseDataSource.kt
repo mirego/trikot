@@ -37,7 +37,7 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
             publisherPair != null -> publisherPair
             else -> {
                 val publisher =
-                    RefreshablePublisher({ cancellableManager, isRefreshing ->
+                    DataStateRefreshablePublisher({ cancellableManager, isRefreshing ->
                         when {
                             isRefreshing || cacheDataSource == null -> readDataOrFallbackToCacheOnError(
                                 request,
