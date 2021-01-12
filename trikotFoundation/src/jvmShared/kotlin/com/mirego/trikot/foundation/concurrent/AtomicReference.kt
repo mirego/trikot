@@ -24,7 +24,7 @@ actual class AtomicReference<T> actual constructor(value: T) {
         return if (compareAndSet(expected, new)) {
             new
         } else {
-            expected
+            internalRef.get()
         }
     }
 }
