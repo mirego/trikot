@@ -18,7 +18,7 @@ extension UIButton {
     public var buttonViewModel: ButtonViewModel? {
         get { return trikotViewModel() }
         set(value) {
-            removeTarget(self, action: #selector(onButtonTouchUp), for: .touchUpInside)
+            removeTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)
             viewModel = value
             if let buttonViewModel = value {
                 trikotInternalPublisherCancellableManager.add(cancellable: KeyValueObservationHolder(self.observe(\UIButton.isHighlighted) { (button, _) in
@@ -37,9 +37,9 @@ extension UIButton {
                     guard let self = self else { return }
                     self.tapAction = tapAction
                     if tapAction == ViewModelAction.Companion().None {
-                        self.removeTarget(self, action: #selector(self.onButtonTouchUp), for: .touchUpInside)
+                        self.removeTarget(self, action: #selector(self.onPrimaryActionTriggered), for: .primaryActionTriggered)
                     } else {
-                        self.addTarget(self, action: #selector(self.onButtonTouchUp), for: .touchUpInside)
+                        self.addTarget(self, action: #selector(self.onPrimaryActionTriggered), for: .primaryActionTriggered)
                     }
                 }
 
@@ -205,7 +205,7 @@ extension UIButton {
     }
 
     @objc
-    private func onButtonTouchUp() {
+    private func onPrimaryActionTriggered() {
         guard let tapAction = tapAction else { return }
         tapAction.execute(actionContext: self)
     }
