@@ -21,6 +21,8 @@ import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.RetryWhenProcessor
 import com.mirego.trikot.streams.reactive.processors.RetryWhenPublisherBlock
+import com.mirego.trikot.streams.reactive.processors.ScanProcessor
+import com.mirego.trikot.streams.reactive.processors.ScanProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.SharedProcessor
 import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
@@ -175,3 +177,16 @@ fun <T> Publisher<T>.merge(publishers: List<Publisher<out T>>): Publisher<T> =
 
 fun <T> Publisher<T>.merge(vararg publishers: Publisher<out T>): Publisher<T> =
     MergeProcessor(this, publishers.toList())
+
+/**
+ * Apply a function to each item emitted by a Publisher, sequentially,
+ * and emit each successive value
+ * This sort of operator is sometimes called an “accumulator” in other contexts.
+ */
+fun <T> Publisher<T>.scan(block: ScanProcessorBlock<T>): Publisher<T> {
+    return ScanProcessor(this, null, block)
+}
+
+fun <T> Publisher<T>.scan(initialValue: T, block: ScanProcessorBlock<T>): Publisher<T> {
+    return ScanProcessor(this, initialValue, block)
+}
