@@ -29,8 +29,9 @@ class CancellableManager : Cancellable {
     }
 
     override fun cancel() {
-        isCancelled.setOrThrow(isCancelled.value, true)
-        doCancelAll()
+        if (isCancelled.compareAndSet(isCancelled.value, true)) {
+            doCancelAll()
+        }
     }
 
     private fun doCancelAll() {
