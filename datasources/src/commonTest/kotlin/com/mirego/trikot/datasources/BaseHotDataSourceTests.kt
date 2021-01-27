@@ -7,6 +7,7 @@ import com.mirego.trikot.streams.reactive.promise.Promise
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 class BaseHotDataSourceTests {
 
@@ -131,6 +132,45 @@ class BaseHotDataSourceTests {
         assertEquals(2, mainDataSource.internalReadCount)
     }
 
+    @Test
+    fun whenDeleteCacheIdThenInternalReadCalled() {
+        val initialData = DataSourceTestData("value")
+        val cacheDataSource = CacheDataSource(Promise.resolve(initialData))
+        val mainDataSource = MainDataSource(Promise.from(Publishers.behaviorSubject()), cacheDataSource)
+
+        mainDataSource.read(requestUseCache).assertEquals(DataState.data(initialData))
+
+        mainDataSource.delete(requestUseCache.cacheableId)
+
+        mainDataSource.read(requestUseCache).assertEquals(DataState.pending())
+
+        assertEquals(1, cacheDataSource.internalDeleteCount)
+        assertEquals(1, mainDataSource.internalReadCount)
+    }
+
+    @Test
+    fun whenCleanOneCacheIdThenOtherRemains() {
+        val mainDataSource = MainDataSource(Promise.reject(Throwable()), userRequestValue = true)
+
+        mainDataSource.read(requestUseCache).assertEquals(DataState.data(requestUseCache.value))
+        mainDataSource.read(requestUseCache2).assertEquals(DataState.data(requestUseCache2.value))
+
+        mainDataSource.clean(requestUseCache.cacheableId)
+        assertEquals(1, mainDataSource.cacheableIds().size)
+        assertTrue(mainDataSource.cacheableIds().contains(requestUseCache2.cacheableId))
+    }
+
+    @Test
+    fun whenCleanAllThenEmpty() {
+        val mainDataSource = MainDataSource(Promise.reject(Throwable()), userRequestValue = true)
+
+        mainDataSource.read(requestUseCache).assertEquals(DataState.data(requestUseCache.value))
+        mainDataSource.read(requestUseCache2).assertEquals(DataState.data(requestUseCache2.value))
+
+        mainDataSource.cleanAll()
+        assertEquals(0, mainDataSource.cacheableIds().size)
+    }
+
     data class DataSourceTestData(
         val value: String
     )
@@ -158,16 +198,19 @@ class BaseHotDataSourceTests {
                 readPromise
             }
         }
-
-        override fun delete(cacheableId: Any) {
-        }
     }
 
     class CacheDataSource(private val readPromise: Promise<DataSourceTestData>) : BaseHotDataSource<TestDataSourceRequest, DataSourceTestData>() {
         var internalSaveCount = 0
+        var internalDeleteCount = 0
+        var deletedCacheableIds = mutableSetOf<Any>()
 
         override fun internalRead(request: TestDataSourceRequest): Promise<DataSourceTestData> {
-            return readPromise
+            return if (deletedCacheableIds.contains(request.cacheableId)) {
+                Promise.reject(Throwable("The cache was deleted for this request: ${request.cacheableId}"))
+            } else {
+                return readPromise
+            }
         }
 
         override fun save(request: TestDataSourceRequest, data: DataSourceTestData?) {
@@ -175,6 +218,9 @@ class BaseHotDataSourceTests {
         }
 
         override fun delete(cacheableId: Any) {
+            internalDeleteCount++
+            deletedCacheableIds.add(cacheableId)
+            super.delete(cacheableId)
         }
     }
 }
