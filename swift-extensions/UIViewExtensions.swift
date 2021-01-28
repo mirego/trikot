@@ -55,7 +55,7 @@ extension UIView {
         observe(viewModelModel.action.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
     }
 
-    func richTextToAttributedString(_ richText: RichText, referenceFont: UIFont) -> NSAttributedString {
+    public func richTextToAttributedString(_ richText: RichText, referenceFont: UIFont) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: richText.text)
         richText.ranges.forEach { (richTextRange) in
 
@@ -93,7 +93,7 @@ extension UIView {
         return attributedString
     }
 
-    private func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits, referenceFont: UIFont) -> UIFont {
+    public func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits, referenceFont: UIFont) -> UIFont {
         if let fontDescriptor = referenceFont.fontDescriptor.withSymbolicTraits(trait) {
             return UIFont(descriptor: fontDescriptor, size: referenceFont.pointSize)
         } else {

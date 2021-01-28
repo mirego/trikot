@@ -2,7 +2,7 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 public struct TextAppearanceAttributes {
-    let attributes: [NSAttributedString.Key: Any]
+    public let attributes: [NSAttributedString.Key: Any]
 
     public init(attributes: [NSAttributedString.Key: Any] = [:]) {
         self.attributes = attributes
