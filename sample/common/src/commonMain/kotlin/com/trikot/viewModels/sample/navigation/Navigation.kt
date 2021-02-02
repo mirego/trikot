@@ -15,5 +15,6 @@ enum class Destination(val getViewModel: (NavigationDelegate) -> ListViewModel<L
     BUTTONS({ ButtonsViewModel(it) }),
     IMAGES({ ImagesViewModel(it) }),
     INPUT_TEXT({ InputTextViewModel(it) }),
-    SLIDERS({ SlidersViewModel(it) })
+    SLIDERS({ SlidersViewModel(it) }),
+    SWITCHES({ SwitchesViewModel(it) })
 }

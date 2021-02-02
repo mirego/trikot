@@ -12,6 +12,7 @@ Pod::Spec.new do |spec|
   spec.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift"
 
   spec.static_framework = true
+  spec.ios.deployment_target = '9.0'
   
   spec.dependency 'Trikot.streams'
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
