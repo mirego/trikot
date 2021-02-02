@@ -1,13 +1,13 @@
 package com.trikot.viewmodels.sample.viewmodels
 
 import com.mirego.trikot.viewmodels.ListItemViewModel
-import com.mirego.trikot.viewmodels.mutable.MutableSwitchViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableViewModel
 
-class MutableSwitchListItemViewModel(
+class MutableToggleSwitchListItemViewModel(
     override var comparableId: String = ""
-) : SwitchListItemViewModel, MutableViewModel() {
-    override val switch = MutableSwitchViewModel()
+) : ToggleSwitchListItemViewModel, MutableViewModel() {
+    override val toggleSwitch = MutableToggleSwitchViewModel()
 
     override fun isTheSame(other: ListItemViewModel): Boolean {
         return false

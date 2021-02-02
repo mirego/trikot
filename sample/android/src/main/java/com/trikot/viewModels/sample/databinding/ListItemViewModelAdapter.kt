@@ -24,7 +24,7 @@ class ListItemViewModelAdapter(lifecycleOwner: LifecycleOwner) :
                 is ImageListItemViewModel -> R.layout.item_image
                 is InputTextListItemViewModel -> R.layout.item_input_text
                 is SliderListItemViewModel -> R.layout.item_slider
-                is SwitchListItemViewModel -> R.layout.item_switch
+                is ToggleSwitchListItemViewModel -> R.layout.item_switch
                 else -> TODO()
             }
         }

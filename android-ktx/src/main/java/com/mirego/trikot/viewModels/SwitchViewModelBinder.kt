@@ -4,23 +4,23 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
-import com.mirego.trikot.viewmodels.mutable.MutableSwitchViewModel
+import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
 
 object SwitchViewModelBinder {
     private val noSwitchViewModel =
-        MutableSwitchViewModel().apply { hidden = true.just() } as SwitchViewModel
+        MutableToggleSwitchViewModel().apply { hidden = true.just() } as ToggleSwitchViewModel
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")
     fun bind(
         switch: SwitchCompat,
-        switchViewModel: SwitchViewModel,
+        switchViewModel: ToggleSwitchViewModel,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         (switchViewModel ?: noSwitchViewModel).let { viewModel ->
             switch.bindViewModel(viewModel as ViewModel, lifecycleOwnerWrapper)
             switch.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.changeState(isChecked)
+                viewModel.setIsOn(isChecked)
             }
             viewModel.isOn.observe(lifecycleOwnerWrapper.lifecycleOwner) {
                 switch.isChecked = it

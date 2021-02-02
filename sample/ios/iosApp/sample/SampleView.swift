@@ -37,7 +37,7 @@ class ListView: UIView {
         tableView.register(AutosizingCell<ImageListItem>.self, forCellReuseIdentifier: AutosizingCell<ImageListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<InputTextListItem>.self, forCellReuseIdentifier: AutosizingCell<InputTextListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<SliderListItem>.self, forCellReuseIdentifier: AutosizingCell<SliderListItem>.self.defaultReuseIdentifier)
-        tableView.register(AutosizingCell<SwitchListItem>.self, forCellReuseIdentifier: AutosizingCell<SwitchListItem>.self.defaultReuseIdentifier)
+        tableView.register(AutosizingCell<ToggleSwitchListItem>.self, forCellReuseIdentifier: AutosizingCell<ToggleSwitchListItem>.self.defaultReuseIdentifier)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -93,8 +93,8 @@ extension ListView: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<SliderListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
-        } else if let metaListItem = metaListItem as? SwitchListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<SwitchListItem>.self, for: indexPath)
+        } else if let metaListItem = metaListItem as? ToggleSwitchListItemViewModel {
+            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ToggleSwitchListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
         }
@@ -105,7 +105,7 @@ extension ListView: UITableViewDataSource {
 
 extension ListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let metaListItem = items?[indexPath.row]
+        // let metaListItem = items?[indexPath.row]
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

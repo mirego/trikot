@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.trikot.viewmodels.sample.viewmodels.MutableSwitchListItemViewModel" />
+            type="com.trikot.viewmodels.sample.viewmodels.MutableToggleSwitchListItemViewModel" />
 
         <variable
             name="lifecycleOwnerWrapper"
@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            app:view_model="@{viewModel.switch}"
+            app:view_model="@{viewModel.toggleSwitch}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

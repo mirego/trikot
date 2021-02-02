@@ -1,13 +1,13 @@
 import UIKit
 import ViewModelsSample
 
-class SwitchListItem: UIView {
+class ToggleSwitchListItem: UIView {
     private let switchItem = UISwitch()
 
-    var item: SwitchListItemViewModel? {
+    var item: ToggleSwitchListItemViewModel? {
         didSet {
             viewModel = item
-            switchItem.switchViewModel = item?.switch_
+            switchItem.toggleSwitchViewModel = item?.toggleSwitch
         }
     }
 
