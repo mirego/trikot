@@ -34,9 +34,8 @@ kotlin {
     ios()
     iosArm32('iosArm32')
     tvos()
-    js {
+    js(IR) {
         browser()
-        nodejs()
     }
 
     sourceSets {
