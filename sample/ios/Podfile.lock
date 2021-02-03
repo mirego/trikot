@@ -17,7 +17,7 @@ DEPENDENCIES:
   - ViewModelsSample (from `../common`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -42,6 +42,6 @@ SPEC CHECKSUMS:
   Trikot.viewmodels: 68e0bf985360fda5f097a3d3d40aef65cf476ab3
   ViewModelsSample: 29f81b212b7a50e8594c43aba05578c83b8eb4d6
 
-PODFILE CHECKSUM: 2205ff78669d15fd3d2349490c9ff827a892fd2d
+PODFILE CHECKSUM: 785bd6160b7f5efa838834a21f591c487ea090f1
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
