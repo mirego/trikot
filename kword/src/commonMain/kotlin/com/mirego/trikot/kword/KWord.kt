@@ -1,16 +1,12 @@
 package com.mirego.trikot.kword
 
-import kotlin.js.JsName
-
 interface KWordKey {
     val translationKey: String
 }
 
 interface KWordSource {
-    @JsName("get")
     fun get(key: String): String
 
-    @JsName("getOptional")
     fun getOptional(key: String): String?
 
     val strings: Map<String, String>
