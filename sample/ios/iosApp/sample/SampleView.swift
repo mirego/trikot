@@ -104,10 +104,6 @@ extension ListView: UITableViewDataSource {
 }
 
 extension ListView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // let metaListItem = items?[indexPath.row]
-    }
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.endEditing(true)
     }

@@ -19,6 +19,8 @@ extension UISwitch {
             observe(toggleSwitchViewModel.isOn) { [weak self] (value: Bool) in
                 self?.isOn = value
             }
+
+            bind(toggleSwitchViewModel.enabled, \UISwitch.isEnabled)
         }
     }
 

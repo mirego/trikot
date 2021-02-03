@@ -12,6 +12,7 @@ class AutosizingCell<T: UIView>: UITableViewCell, AutosizingCellViewGet {
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
 
+        selectionStyle = .none
         contentView.clipsToBounds = true
 
         NSLayoutConstraint.activate([

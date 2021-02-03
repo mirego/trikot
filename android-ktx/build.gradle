@@ -40,7 +40,7 @@ configurations.all {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.mirego.trikot:viewmodels:1.0.11'
+    api 'com.mirego.trikot:viewmodels:1.0.12'
     implementation "com.mirego.trikot:android-ktx:$trikot_streams_android_ktx_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

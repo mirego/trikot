@@ -19,11 +19,13 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
+import com.mirego.trikot.streams.android.ktx.asLiveData
 import com.mirego.trikot.viewmodels.android.ktx.R
 import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextType
 import com.mirego.trikot.streams.android.ktx.observe
+import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
@@ -57,6 +59,10 @@ object InputTextViewModelBinder {
                         editText.setTextColor(textColor.toIntColor())
                     }
                 }
+
+                it.enabled
+                    .asLiveData()
+                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { editText.isEnabled = it }
 
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->
                     editText.noTextWatcher {

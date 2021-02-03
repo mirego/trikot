@@ -27,6 +27,10 @@ class InputTextViewModel(navigationDelegate: NavigationDelegate) : MutableListVi
         MutableInputTextListItemViewModel().also {
             it.inputText.hidden = true.just()
         },
+        MutableHeaderListItemViewModel(".!enabled"),
+        MutableInputTextListItemViewModel().also {
+            it.inputText.enabled = false.just()
+        },
         MutableHeaderListItemViewModel(".editorAction"),
         MutableInputTextListItemViewModel().also {
             it.inputText.editorAction = InputTextEditorAction {

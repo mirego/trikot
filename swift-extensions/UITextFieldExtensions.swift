@@ -22,6 +22,8 @@ extension UITextField {
                     self?.placeholder = placeholder
                 }
 
+                bind(inputTextViewModel.enabled, \UITextField.isEnabled)
+
                 observe(inputTextViewModel.inputType) {[weak self] (inputType: InputTextType) in
                     switch inputType {
                     case InputTextType.email:
