@@ -1,6 +1,5 @@
 package org.reactivestreams
 
-
 /**
  * A [Publisher] is a provider of a potentially unbounded number of sequenced elements, publishing them according to
  * the demand received from its [Subscriber](s).

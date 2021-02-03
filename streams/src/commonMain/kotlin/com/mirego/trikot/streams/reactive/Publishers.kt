@@ -3,7 +3,6 @@ package com.mirego.trikot.streams.reactive
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
-import kotlin.js.JsName
 
 object Publishers {
     fun <T> behaviorSubject(value: T? = null): BehaviorSubject<T> {
