@@ -31,4 +31,9 @@ interface InputTextViewModel : ViewModel {
      * Return true if you have consumed the action, else false.
      */
     val editorAction: Publisher<InputTextEditorAction>
+
+    /**
+     * If the inputText is enabled or disabled
+     */
+    val enabled: Publisher<Boolean>
 }
