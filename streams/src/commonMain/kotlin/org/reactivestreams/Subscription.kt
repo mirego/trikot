@@ -1,7 +1,5 @@
 package org.reactivestreams
 
-import kotlin.js.JsName
-
 interface Subscription {
     /**
      * No events will be sent by a [Publisher] until demand is signaled via this method.
@@ -19,7 +17,6 @@ interface Subscription {
      *
      * @param n the strictly positive number of elements to requests to the upstream [Publisher]
      */
-    @JsName("request")
     fun request(n: Long)
 
     /**
@@ -28,6 +25,5 @@ interface Subscription {
      *
      * Data may still be sent to meet previously signalled demand after calling cancel.
      */
-    @JsName("cancel")
     fun cancel()
 }
