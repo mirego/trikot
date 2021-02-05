@@ -24,7 +24,7 @@ class JustPublisherTests {
 
     @Test
     fun justPublisherEmitMultipleNextAndCompletion() {
-        val publisher = Publishers.just("VALUE1", "VALUE2")
+        val publisher = Publishers.justMany("VALUE1", "VALUE2")
         val values = mutableListOf<String>()
         var completion = false
         publisher.subscribe(

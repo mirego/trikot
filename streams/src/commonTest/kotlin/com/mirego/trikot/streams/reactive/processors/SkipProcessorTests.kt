@@ -14,7 +14,7 @@ class SkipProcessorTests {
         val values = mutableListOf<String>()
         var completed = false
 
-        Publishers.just("a", "b", "c")
+        Publishers.justMany("a", "b", "c")
             .skip(-99)
             .subscribe(
                 CancellableManager(),
@@ -32,7 +32,7 @@ class SkipProcessorTests {
         val values = mutableListOf<String>()
         var completed = false
 
-        Publishers.just("a", "b", "c")
+        Publishers.justMany("a", "b", "c")
             .skip(0)
             .subscribe(
                 CancellableManager(),
@@ -50,7 +50,7 @@ class SkipProcessorTests {
         val values = mutableListOf<String>()
         var completed = false
 
-        Publishers.just("a", "b", "c")
+        Publishers.justMany("a", "b", "c")
             .skip(1)
             .subscribe(
                 CancellableManager(),
@@ -68,7 +68,7 @@ class SkipProcessorTests {
         val values = mutableListOf<String>()
         var completed = false
 
-        Publishers.just("a", "b", "c")
+        Publishers.justMany("a", "b", "c")
             .skip(2)
             .subscribe(
                 CancellableManager(),
@@ -86,7 +86,7 @@ class SkipProcessorTests {
         val values = mutableListOf<String>()
         var completed = false
 
-        Publishers.just("a", "b", "c")
+        Publishers.justMany("a", "b", "c")
             .skip(3)
             .subscribe(
                 CancellableManager(),
@@ -104,7 +104,7 @@ class SkipProcessorTests {
         val values1 = mutableListOf<String>()
         val values2 = mutableListOf<String>()
 
-        val skipPublisher = Publishers.just("a", "b", "c")
+        val skipPublisher = Publishers.justMany("a", "b", "c")
             .skip(2)
 
         skipPublisher
