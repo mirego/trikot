@@ -2,6 +2,8 @@ package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class JustPublisherTests {
 
@@ -16,7 +18,22 @@ class JustPublisherTests {
             onError = { throw IllegalStateException() },
             onCompleted = { completion = true }
         )
-        kotlin.test.assertEquals("VALUE", value)
-        kotlin.test.assertTrue(completion)
+        assertEquals("VALUE", value)
+        assertTrue(completion)
+    }
+
+    @Test
+    fun justPublisherEmitMultipleNextAndCompletion() {
+        val publisher = Publishers.just("VALUE1", "VALUE2")
+        val values = mutableListOf<String>()
+        var completion = false
+        publisher.subscribe(
+            CancellableManager(),
+            onNext = { values += it },
+            onError = { throw IllegalStateException() },
+            onCompleted = { completion = true }
+        )
+        assertEquals(listOf("VALUE1", "VALUE2"), values)
+        assertTrue(completion)
     }
 }

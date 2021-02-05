@@ -24,6 +24,7 @@ import com.mirego.trikot.streams.reactive.processors.RetryWhenPublisherBlock
 import com.mirego.trikot.streams.reactive.processors.ScanProcessor
 import com.mirego.trikot.streams.reactive.processors.ScanProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.SharedProcessor
+import com.mirego.trikot.streams.reactive.processors.SkipProcessor
 import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
@@ -190,3 +191,6 @@ fun <T> Publisher<T>.scan(block: ScanProcessorBlock<T>): Publisher<T> {
 fun <T> Publisher<T>.scan(initialValue: T, block: ScanProcessorBlock<T>): Publisher<T> {
     return ScanProcessor(this, initialValue, block)
 }
+
+/** Suppress the first n items emitted by a Publisher **/
+fun <T> Publisher<T>.skip(n: Long) = SkipProcessor(this, n)

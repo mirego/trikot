@@ -5,7 +5,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-class JustPublisher<T>(private val value: T) : Publisher<T> {
+class JustPublisher<T>(private val values: Array<out T>) : Publisher<T> {
     override fun subscribe(s: Subscriber<in T>) {
         val isCancelled = AtomicReference(false)
         s.onSubscribe(
@@ -18,7 +18,9 @@ class JustPublisher<T>(private val value: T) : Publisher<T> {
             }
         )
         if (!isCancelled.value) {
-            s.onNext(value)
+            for (value in values) {
+                s.onNext(value)
+            }
         }
         if (!isCancelled.value) {
             s.onComplete()
