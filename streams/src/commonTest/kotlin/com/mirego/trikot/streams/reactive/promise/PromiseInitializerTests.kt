@@ -1,5 +1,6 @@
 package com.mirego.trikot.streams.reactive.promise
 
+import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.startWith
 import com.mirego.trikot.streams.reactive.verify
@@ -62,6 +63,19 @@ class PromiseInitializerTests {
     }
 
     @Test
+    fun testFromCancelledCancellableManager() {
+        val cancellableManager = CancellableManager()
+        cancellableManager.cancel()
+
+        Promise.from(Publishers.just(22), cancellableManager)
+            .verify(
+                value = null,
+                error = CancelledPromiseException,
+                completed = false
+            )
+    }
+
+    @Test
     fun testResolve() {
         val value = 22
 
@@ -81,6 +95,49 @@ class PromiseInitializerTests {
             .verify(
                 value = null,
                 error = throwable,
+                completed = false
+            )
+    }
+
+    @Test
+    fun testCreateWithReject() {
+        val throwable = Throwable()
+
+        Promise.create<String> { _, reject ->
+            reject(throwable)
+        }
+            .verify(
+                value = null,
+                error = throwable,
+                completed = false
+            )
+    }
+
+    @Test
+    fun testCreateWithResolve() {
+        val value = 22
+
+        Promise.create<Int> { resolve, _ ->
+            resolve(value)
+        }
+            .verify(
+                value = value,
+                error = null,
+                completed = true
+            )
+    }
+
+    @Test
+    fun testCreateWithCancelledCancellableManager() {
+        val cancellableManager = CancellableManager()
+        cancellableManager.cancel()
+
+        Promise.create<Int>(cancellableManager) { resolve, _ ->
+            resolve(22)
+        }
+            .verify(
+                value = null,
+                error = CancelledPromiseException,
                 completed = false
             )
     }

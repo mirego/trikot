@@ -48,7 +48,7 @@ When the upstream *publisher* :
 4. emits a completed signal and did not emit any value or error
     - The Promise is rejected with a `EmptyPromiseException`
 
-Using this initializer allows for a `CancellableManager` to be provided optionnally.
+Using this initializer allows for a `CancellableManager` to be provided optionally.
 
 When the provided *cancellableManager* :
 1. Is cancelled **before** the Promise's creation
@@ -65,6 +65,25 @@ Returns a new Promise instance that is resolved with the given value. Shorthand 
 
 #### `Promise.reject(throwable)`
 Returns a new Promise instance that is rejected with the given throwable. Shorthand for `Promise.from(Publishers.error(value))`.
+
+## Creation (part 2.)
+
+Promises can also be created form asynchronous requests that are not publishers, using the following initializer:
+
+#### `Promise.create(cancellableManager?) { resolve, reject -> ... }`
+Returns a new Promise instance that will resolve or reject depending on the provided execution block. The provided block should at least, at any point in time, call resolve() with the desired value or reject() with the desired throwable. The promise will not settle untill the resolve() or reject() blocks have been called, of if the cancellableManager has been cancelled.
+
+Using this initializer allows for a `CancellableManager` to be provided optionally.
+
+When the provided *cancellableManager* :
+1. Is cancelled **before** the Promise's creation
+    - The Promise is rejected with a `CancelledPromiseException`
+2. Is cancelled **after** the Promise's creation, but **before** the resolve() or reject() block have been called
+    - The Promise is rejected with a `CancelledPromiseException`
+3. Is cancelled **after** the Promise's creation, and **after** the resolve() or reject() block have been called
+    - The Promise is not affected and is settled as usual with the resolved value or rejected error.
+4. Is `null`
+    - The Promise is not affected and is settled as usual with the resolved value or rejected error
 
 ## Chaining 
 

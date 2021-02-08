@@ -145,13 +145,27 @@ class Promise<T> internal constructor(
     }
 
     companion object {
+        fun <T> resolve(value: T): Promise<T> = from(Publishers.just(value))
+
+        fun <T> reject(throwable: Throwable): Promise<T> = from(Publishers.error(throwable))
+
         fun <T> from(
             single: Publisher<T>,
             cancellableManager: CancellableManager? = null
         ): Promise<T> = Promise(single, cancellableManager)
 
-        fun <T> resolve(value: T): Promise<T> = from(Publishers.just(value))
+        fun <T> create(
+            cancellableManager: CancellableManager? = null,
+            block: (resolve: ((T) -> Unit), reject: ((Throwable) -> Unit)) -> Unit
+        ): Promise<T> {
+            val deferredResult = Publishers.behaviorSubject<T>()
 
-        fun <T> reject(throwable: Throwable): Promise<T> = from(Publishers.error(throwable))
+            block(
+                { t -> deferredResult.value = t },
+                { e -> deferredResult.error = e }
+            )
+
+            return from(deferredResult, cancellableManager)
+        }
     }
 }
