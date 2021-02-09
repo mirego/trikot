@@ -21,6 +21,7 @@ import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.RetryWhenProcessor
 import com.mirego.trikot.streams.reactive.processors.RetryWhenPublisherBlock
+import com.mirego.trikot.streams.reactive.processors.SampleProcessor
 import com.mirego.trikot.streams.reactive.processors.ScanProcessor
 import com.mirego.trikot.streams.reactive.processors.ScanProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.SharedProcessor
@@ -194,3 +195,11 @@ fun <T> Publisher<T>.scan(initialValue: T, block: ScanProcessorBlock<T>): Publis
 
 /** Suppress the first n items emitted by a Publisher **/
 fun <T> Publisher<T>.skip(n: Long) = SkipProcessor(this, n)
+
+/** Periodically looks at publisher and emits whichever item it has most recently emitted since the previous sampling. **/
+fun <T> Publisher<T>.sample(
+    interval: Duration,
+    timerFactory: TimerFactory = FoundationConfiguration.timerFactory
+): Publisher<T> {
+    return SampleProcessor(this, interval, timerFactory)
+}
