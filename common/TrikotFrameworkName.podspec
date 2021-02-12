@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Awesome library'
 
     spec.static_framework         = true
-    spec.vendored_frameworks      = "build/bin/ios/TrikotFrameworkName.framework"
+    spec.vendored_frameworks      = "build/bin/TrikotFrameworkName.framework"
     spec.libraries                = "c++", "System"
     spec.module_name              = "#{spec.name}_umbrella"
 
@@ -16,7 +16,9 @@ Pod::Spec.new do |spec|
         'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
         'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
         'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosX64',
-        'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64'
+        'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64',
+        'KOTLIN_TARGET[sdk=appletvos*]' => 'tvosArm64',
+        'KOTLIN_TARGET[sdk=appletvsimulator*]' => 'tvosX64'
     }
 
     spec.prepare_command = <<-CMD
@@ -41,7 +43,7 @@ then
   fi
 
   ./gradlew :common:copyFramework \
-    -Pconfiguration.build.dir="build/bin/ios" \
+    -Pconfiguration.build.dir="build/bin" \
     -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" \
     -Pkotlin.target="$KOTLIN_TARGET"
 else
