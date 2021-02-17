@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels.declarative.properties
+package com.mirego.trikot.viewmodels.declarative.internal
 
 import kotlin.reflect.KProperty
 

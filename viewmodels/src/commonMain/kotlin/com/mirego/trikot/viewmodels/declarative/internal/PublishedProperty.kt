@@ -1,13 +1,12 @@
-package com.mirego.trikot.viewmodels.declarative.properties
+package com.mirego.trikot.viewmodels.declarative.internal
 
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.UIThreadDispatchQueue
 import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
+import com.mirego.trikot.viewmodels.declarative.utilities.DispatchQueues
 import com.mirego.trikot.viewmodels.declarative.utilities.valueOrThrow
 import kotlin.properties.ObservableProperty
 import kotlin.reflect.KProperty
@@ -66,9 +65,4 @@ abstract class PublishedProperty<V>(initialValue: V, listener: PropertyChangeLis
                 }
             )
     }
-}
-
-// TODO: Move elsewhere
-object DispatchQueues {
-    val uiQueue: DispatchQueue = UIThreadDispatchQueue()
 }

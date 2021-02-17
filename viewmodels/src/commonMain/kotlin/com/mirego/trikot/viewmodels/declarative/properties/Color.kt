@@ -14,7 +14,7 @@ class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f
     }
 
     fun hexRGBA(prefix: String?): String {
-        return "${prefix ?: ""}${hex()}$alphaHex"
+        return "${hex(prefix)}$alphaHex"
     }
 
     fun hexARGB(prefix: String?): String {

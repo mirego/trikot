@@ -1,23 +1,26 @@
-package com.mirego.trikot.viewmodels.declarative
+package com.mirego.trikot.viewmodels.declarative.mutable
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.PublishSubjectImpl
 import com.mirego.trikot.streams.reactive.filter
 import com.mirego.trikot.streams.reactive.map
-import com.mirego.trikot.viewmodels.declarative.properties.PublishedProperty
+import com.mirego.trikot.viewmodels.declarative.ViewModel
+import com.mirego.trikot.viewmodels.declarative.internal.PropertyChange
+import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
 import com.mirego.trikot.viewmodels.declarative.utilities.ConcretePublisher
 import com.mirego.trikot.viewmodels.declarative.utilities.asConcretePublisher
 import kotlin.reflect.KProperty
 import org.reactivestreams.Publisher
 
-open class ViewModelImpl(protected val cancellableManager: CancellableManager) : ViewModel {
+open class MutableViewModel(protected val cancellableManager: CancellableManager) : ViewModel {
+
     private val propertyWillChangeSubject = PublishSubjectImpl<Unit>()
-    private val propertyDidChangeSubject = PublishSubjectImpl<ViewModelPropertyChange<*>>()
+    private val propertyDidChangeSubject = PublishSubjectImpl<PropertyChange<*>>()
 
     override val propertyWillChange: ConcretePublisher<Unit>
         get() = propertyWillChangeSubject.asConcretePublisher()
 
-    override val propertyDidChange: ConcretePublisher<ViewModelPropertyChange<*>>
+    override val propertyDidChange: ConcretePublisher<PropertyChange<*>>
         get() = propertyDidChangeSubject.asConcretePublisher()
 
     override fun <V> willChange(property: KProperty<V>, oldValue: V, newValue: V) {
@@ -25,7 +28,7 @@ open class ViewModelImpl(protected val cancellableManager: CancellableManager) :
     }
 
     override fun <V> didChange(property: KProperty<V>, oldValue: V, newValue: V) {
-        propertyDidChangeSubject.value = ViewModelPropertyChange(property, oldValue, newValue)
+        propertyDidChangeSubject.value = PropertyChange(property, oldValue, newValue)
     }
 
     @Suppress("UNCHECKED_CAST")
