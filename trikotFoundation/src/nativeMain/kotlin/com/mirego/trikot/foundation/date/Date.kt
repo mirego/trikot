@@ -1,11 +1,15 @@
 package com.mirego.trikot.foundation.date
 
+import kotlin.math.floor
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import platform.Foundation.NSDate
+import platform.Foundation.NSISO8601DateFormatWithFractionalSeconds
+import platform.Foundation.NSISO8601DateFormatWithInternetDateTime
 import platform.Foundation.NSISO8601DateFormatter
 import platform.Foundation.dateByAddingTimeInterval
 import platform.Foundation.timeIntervalSince1970
+import platform.UIKit.UIDevice
 
 @ExperimentalTime
 actual class Date(val nsDate: NSDate) {
@@ -27,17 +31,45 @@ actual class Date(val nsDate: NSDate) {
                 return Date(NSDate())
             }
 
+        @ExperimentalUnsignedTypes
         actual fun fromISO8601(isoDate: String): Date {
-            return Date(
-                NSISO8601DateFormatter().dateFromString(
-                    isoDate
-                ) ?: NSDate()
-            )
+            val systemVersion = UIDevice.currentDevice.systemVersion.toFloat()
+            return when {
+                floor(systemVersion) >= 11 ->
+                    getFormatterWithCorrespondingFormatOptions(isoDate)
+                        .dateFromString(isoDate)
+                else ->
+                    NSISO8601DateFormatter()
+                        .dateFromString(removeFractionalSeconds(isoDate))
+            }
+                ?.let(::Date)
+                ?: throw RuntimeException("Could not parse date $isoDate")
         }
 
         actual fun fromEpochMillis(epoch: Long): Date {
             return Date(NSDate(timeIntervalSinceReferenceDate = (epoch.toDouble() / 1000.0) - epochReferenceDateDelta))
         }
+
+        // NSISO8601DateFormatWithFractionalSeconds is iOS 11+
+        @ExperimentalUnsignedTypes
+        private fun getFormatterWithCorrespondingFormatOptions(date: String): NSISO8601DateFormatter =
+            when {
+                containsFractionalSeconds(date) -> NSISO8601DateFormatter().apply {
+                    formatOptions = NSISO8601DateFormatWithInternetDateTime
+                        .or(NSISO8601DateFormatWithFractionalSeconds)
+                }
+                else -> NSISO8601DateFormatter()
+            }
+
+        private fun removeFractionalSeconds(date: String): String =
+            with(date) {
+                when {
+                    containsFractionalSeconds(this) -> substringBeforeLast(".") + "Z"
+                    else -> this
+                }
+            }
+
+        private fun containsFractionalSeconds(date: String): Boolean = date.lastIndexOf(".") != -1
     }
 
     actual operator fun compareTo(other: Date): Int {
