@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.static_framework = true
 
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
-  spec.dependency 'ReachabilitySwift', '~> 4.3.1'
+  spec.dependency 'ReachabilitySwift', '~> 5.0'
 
   spec.prepare_command = <<-CMD
     sed -i '' "s/TRIKOT_FRAMEWORK_NAME/${TRIKOT_FRAMEWORK_NAME}/g" ./**/*.swift

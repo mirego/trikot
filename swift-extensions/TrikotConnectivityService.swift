@@ -6,10 +6,10 @@ public class TrikotConnectivityService {
     public static let shared = TrikotConnectivityService()
     public let publisher = Publishers().behaviorSubject(value: nil)
 
-    let reachability = Reachability()!
+    let reachability = try! Reachability()
 
     init() {
-        reachability.whenReachable = {[weak self] reachability in
+        reachability.whenReachable = { [weak self] reachability in
             if reachability.connection == .wifi {
                 self?.publisher.value = ConnectivityState.wifi
             } else {
