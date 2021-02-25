@@ -7,6 +7,7 @@ import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.processors.ConcatProcessor
 import com.mirego.trikot.streams.reactive.processors.DebounceProcessor
+import com.mirego.trikot.streams.reactive.processors.DelayProcessor
 import com.mirego.trikot.streams.reactive.processors.DistinctUntilChangedProcessor
 import com.mirego.trikot.streams.reactive.processors.FilterProcessor
 import com.mirego.trikot.streams.reactive.processors.FilterProcessorBlock
@@ -136,6 +137,29 @@ fun <T> Publisher<T>.timeout(
     return TimeoutProcessor(duration = duration, timeoutMessage = message, parentPublisher = this)
 }
 
+/**
+ * Shift the emissions from the Publisher forward in time by the specified duration
+ *
+ * The Delay operator modifies its source Publisher by pausing for a particular increment of time
+ * (that you specify) before emitting each of the source Publisher’s items. This has the effect of
+ * shifting the entire sequence of items emitted by the Publisher forward in time by that
+ * specified increment.
+ *
+ * Marbles diagram :
+ * -------(1)---(2)-------(3)--------(4)---|->
+ * delay()
+ * ----------------(1)---(2)-------(3)-----|->
+ *
+ * @see @see <a href="http://reactivex.io/documentation/operators/delay.html">http://reactivex.io/documentation/operators/delay.html</a>
+ */
+@ExperimentalTime
+fun <T> Publisher<T>.delay(
+    duration: Duration,
+    timerFactory: TimerFactory = FoundationConfiguration.timerFactory
+): Publisher<T> {
+    return DelayProcessor(this, duration, timerFactory)
+}
+
 @ExperimentalTime
 fun <T> Publisher<T>.debounce(
     timeout: Duration,
@@ -144,7 +168,7 @@ fun <T> Publisher<T>.debounce(
     return DebounceProcessor(this, timeout, timerFactory)
 }
 
-/**+
+/**
  * Returns a Publisher that mirrors the source Publisher with the exception of an error.
  * If the source Publisher calls error, this method will emit the Throwable that caused the error to the Publisher returned from notifier.
  * If that Publisher calls complete or error then this method will call complete or error on the child subscription.

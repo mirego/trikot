@@ -26,6 +26,14 @@ object Publishers {
     }
 
     /**
+     * Create a Publisher that emits the provided iterable sequence of items
+     * @see <a href="http://reactivex.io/documentation/operators/from.html">http://reactivex.io/documentation/operators/from.html</a>
+     */
+    fun <T> fromIterable(iterable: Iterable<T>): Publisher<T> {
+        return JustPublisher(iterable)
+    }
+
+    /**
      * Create a Publisher that emits no items but terminates normally
      * @see <a href="http://reactivex.io/documentation/operators/empty-never-throw.html">http://reactivex.io/documentation/operators/empty-never-throw.html</a>
      */
