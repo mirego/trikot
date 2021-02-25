@@ -34,6 +34,14 @@ object Publishers {
     }
 
     /**
+     * Create a Publisher that emits a particular range of sequential integers
+     * @see <a href="http://reactivex.io/documentation/operators/range.html">http://reactivex.io/documentation/operators/range.html</a>
+     */
+    fun range(start: Int, endInclusive: Int): Publisher<Int> {
+        return JustPublisher(start..endInclusive)
+    }
+
+    /**
      * Create a Publisher that emits no items but terminates normally
      * @see <a href="http://reactivex.io/documentation/operators/empty-never-throw.html">http://reactivex.io/documentation/operators/empty-never-throw.html</a>
      */
