@@ -1,4 +1,4 @@
-package com.mirego.trikot.kword.android.ktx
+package com.mirego.trikot.kword.android
 
 import android.util.Log
 import com.mirego.trikot.kword.I18N
