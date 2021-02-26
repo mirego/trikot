@@ -2,7 +2,7 @@ package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
 import java.util.concurrent.Executors
 
-open class JvmDispatchQueue(private val maxConcurrentOperation: Long = 4) : DispatchQueue {
+open class JvmDispatchQueue(private val maxConcurrentOperation: Long = 4) : TrikotDispatchQueue {
 
     override fun isSerial() = maxConcurrentOperation == 1L
 

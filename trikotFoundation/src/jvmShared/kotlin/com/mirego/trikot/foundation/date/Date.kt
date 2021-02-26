@@ -1,12 +1,12 @@
 package com.mirego.trikot.foundation.date
 
-import java.util.Locale
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime.from
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.Locale
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 private val dateFormat =
     DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)

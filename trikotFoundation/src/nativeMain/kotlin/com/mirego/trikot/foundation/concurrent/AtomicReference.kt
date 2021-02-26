@@ -23,10 +23,8 @@ actual class AtomicReference<T> actual constructor(value: T) {
                 shouldReadFromNativeAtomicReference.compareAndSet(false, true)
                 true
             } else {
-                if ((expected === expectedUnfrozenValue) && nativeAtomicReference.compareAndSet(
-                        null,
-                        frozenNewValue
-                    )
+                if ((expected === expectedUnfrozenValue) &&
+                    nativeAtomicReference.compareAndSet(null, frozenNewValue)
                 ) {
                     shouldReadFromNativeAtomicReference.compareAndSet(false, true)
                     true

@@ -10,6 +10,6 @@ object FoundationConfiguration {
     private val internalTimerFactoryRef = AtomicReference<TimerFactory>(DefaultTimerFactory())
 
     var timerFactory: TimerFactory
-            get() = internalTimerFactoryRef.value
-            set(value) = internalTimerFactoryRef.setOrThrow(internalTimerFactoryRef.value, value)
+        get() = internalTimerFactoryRef.value
+        set(value) = internalTimerFactoryRef.setOrThrow(internalTimerFactoryRef.value, value)
 }

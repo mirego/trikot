@@ -1,6 +1,6 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
-class SynchronousDispatchQueue : DispatchQueue {
+class SynchronousDispatchQueue : TrikotDispatchQueue {
 
     override fun isSerial() = false
 

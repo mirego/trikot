@@ -2,15 +2,15 @@ package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
 typealias DispatchBlock = () -> Unit
 
-interface DispatchQueue {
+interface TrikotDispatchQueue {
     fun isSerial() = false
     fun dispatch(block: DispatchBlock)
 }
 
-interface QueueDispatcher {
-    val dispatchQueue: DispatchQueue
+interface TrikotQueueDispatcher {
+    val dispatchQueue: TrikotDispatchQueue
 }
 
-fun QueueDispatcher.dispatch(block: DispatchBlock) {
+fun TrikotQueueDispatcher.dispatch(block: DispatchBlock) {
     dispatchQueue.dispatch(block)
 }

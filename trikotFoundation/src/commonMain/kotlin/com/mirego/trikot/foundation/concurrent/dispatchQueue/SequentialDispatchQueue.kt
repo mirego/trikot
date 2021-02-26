@@ -7,8 +7,9 @@ import com.mirego.trikot.foundation.concurrent.freeze
 /**
  * Ensure dispatch blocks are executed sequentially on a dispatch queue.
  */
-open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : QueueDispatcher,
-    DispatchQueue {
+open class SequentialDispatchQueue(override val dispatchQueue: TrikotDispatchQueue) :
+    TrikotQueueDispatcher,
+    TrikotDispatchQueue {
     protected open val isSynchronous = false
     private val dispatchBlockQueue = AtomicListReference<DispatchBlock>()
     private val currentDispatch = AtomicReference(NoDispatchBlock)
@@ -31,7 +32,7 @@ open class SequentialDispatchQueue(override val dispatchQueue: DispatchQueue) : 
             dispatchBlockQueue.value.firstOrNull()?.let { nextDispatchBlock ->
                 if (currentDispatch.compareAndSet(NoDispatchBlock, nextDispatchBlock)) {
                     dispatchBlockQueue.remove(nextDispatchBlock)
-                    (this as QueueDispatcher).dispatch {
+                    (this as TrikotQueueDispatcher).dispatch {
                         nextDispatchBlock()
                         markDispatchBlockCompleted(nextDispatchBlock)
                         startNextIfNeeded()

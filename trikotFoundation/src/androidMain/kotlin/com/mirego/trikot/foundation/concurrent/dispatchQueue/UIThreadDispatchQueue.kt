@@ -4,7 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import java.util.concurrent.atomic.AtomicInteger
 
-actual class UIThreadDispatchQueue actual constructor() : DispatchQueue {
+actual class UIThreadDispatchQueue actual constructor() : TrikotDispatchQueue {
     private val count: AtomicInteger = AtomicInteger()
 
     private val mainLooperHandler: Handler = Handler(Looper.getMainLooper())

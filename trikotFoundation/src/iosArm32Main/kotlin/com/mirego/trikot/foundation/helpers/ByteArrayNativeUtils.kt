@@ -20,8 +20,10 @@ object ByteArrayNativeUtils {
     @ExperimentalUnsignedTypes
     fun convert(byteArray: ByteArray): NSData {
         return byteArray.usePinned {
-            NSData.create(bytes = it.addressOf(0),
-                length = byteArray.size.toUInt())
+            NSData.create(
+                bytes = it.addressOf(0),
+                length = byteArray.size.toUInt()
+            )
         }
     }
 }
