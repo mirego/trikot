@@ -33,13 +33,19 @@ class WebHttpRequest(
                 xhr.setRequestHeader(entry.key, entry.value)
             }
 
-            xhr.addEventListener("load", { _ ->
-                publisher.value = WebHttpResponse(xhr)
-            })
+            xhr.addEventListener(
+                "load",
+                { _ ->
+                    publisher.value = WebHttpResponse(xhr)
+                }
+            )
 
-            xhr.addEventListener("error", { _ ->
-                publisher.value = WebHttpResponse(xhr)
-            })
+            xhr.addEventListener(
+                "error",
+                { _ ->
+                    publisher.value = WebHttpResponse(xhr)
+                }
+            )
 
             cancellableManager.add { xhr.abort() }
 

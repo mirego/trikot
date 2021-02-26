@@ -1,4 +1,4 @@
-package com.mirego.trikot.http.android.ktx.requestFactory
+package com.mirego.trikot.http.android.requestFactory
 
 import com.mirego.trikot.http.ApplicationJSON
 import com.mirego.trikot.http.ApplicationOctetStream
@@ -24,11 +24,11 @@ import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.util.flattenEntries
-import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.reactivestreams.Publisher
+import kotlin.coroutines.CoroutineContext
 
 class KtorHttpRequestFactory(
     httpLogLevel: LogLevel = LogLevel.NONE,
@@ -82,7 +82,8 @@ class KtorHttpRequestFactory(
                         }
                         method = requestBuilder.method.ktorMethod
                     }.execute { response ->
-                        publisher.value = KTorHttpResponse(response, response.call.response.readBytes())
+                        publisher.value =
+                            KTorHttpResponse(response, response.call.response.readBytes())
                     }
                 } catch (ex: Throwable) {
                     val response = (ex as? ResponseException)?.response
@@ -99,7 +100,8 @@ class KtorHttpRequestFactory(
         }
     }
 
-    class KTorHttpResponse(response: io.ktor.client.statement.HttpResponse, bytes: ByteArray?) : HttpResponse {
+    class KTorHttpResponse(response: io.ktor.client.statement.HttpResponse, bytes: ByteArray?) :
+        HttpResponse {
         override val statusCode: Int = response.status.value
         override val bodyByteArray: ByteArray? = bytes
         override val headers: Map<String, String> = response.headers.flattenEntries().toMap()

@@ -1,8 +1,8 @@
 package com.mirego.trikot.http
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.OperationDispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.http.connectivity.ConnectivityState
 import com.mirego.trikot.http.header.DefaultHttpHeaderProvider
 import com.mirego.trikot.http.requestFactory.EmptyHttpRequestFactory
@@ -14,7 +14,7 @@ object HttpConfiguration {
     private val internalHttpRequestFactory =
         AtomicReference<HttpRequestFactory>(EmptyHttpRequestFactory())
     private val internalNetworkDispatchQueue =
-        AtomicReference<DispatchQueue>(OperationDispatchQueue())
+        AtomicReference<TrikotDispatchQueue>(OperationDispatchQueue())
     private val internalDefaultHeaderProvider =
         AtomicReference<HttpHeaderProvider>(DefaultHttpHeaderProvider())
     private val internalConnectivityStatePublisher =
@@ -46,7 +46,7 @@ object HttpConfiguration {
     /**
      * DispatchQueue where the request will be launched
      */
-    var networkDispatchQueue: DispatchQueue
+    var networkDispatchQueue: TrikotDispatchQueue
         get() {
             return internalNetworkDispatchQueue.value
         }

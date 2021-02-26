@@ -6,7 +6,9 @@ import com.mirego.trikot.http.RequestBuilder
 
 class EmptyHttpRequestFactory : HttpRequestFactory {
     override fun request(requestBuilder: RequestBuilder): HttpRequest {
-        TODO("HTTPConfiguration.httpRequestFactory must be set before sending request." +
-                " See: https://github.com/mirego/trikot.http/blob/master/README.md")
+        TODO(
+            "HTTPConfiguration.httpRequestFactory must be set before sending request." +
+                " See: https://github.com/mirego/trikot.http/blob/master/README.md"
+        )
     }
 }

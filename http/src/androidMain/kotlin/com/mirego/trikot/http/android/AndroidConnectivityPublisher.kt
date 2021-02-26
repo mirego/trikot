@@ -1,4 +1,4 @@
-package com.mirego.trikot.http.android.ktx
+package com.mirego.trikot.http.android
 
 import android.content.Context
 import android.content.ContextWrapper
