@@ -11,9 +11,12 @@ class DataStateRefreshablePublisherTests {
     fun givenDataWhenRefreshingThenPendingWithData() {
         val initialValue = "initial"
 
-        val refreshable = DataStateRefreshablePublisher({ _, _ ->
-            Publishers.behaviorSubject()
-        }, DataState.data(initialValue))
+        val refreshable = DataStateRefreshablePublisher(
+            { _, _ ->
+                Publishers.behaviorSubject()
+            },
+            DataState.data(initialValue)
+        )
 
         refreshable.refresh()
         assertNotNull(refreshable.value).assertPending(initialValue)
@@ -23,9 +26,12 @@ class DataStateRefreshablePublisherTests {
     fun givenErrorWithDataWhenRefreshingThenPendingWithData() {
         val initialValue = "initial"
 
-        val refreshable = DataStateRefreshablePublisher({ _, _ ->
-            Publishers.behaviorSubject()
-        }, DataState.error(Throwable(), initialValue))
+        val refreshable = DataStateRefreshablePublisher(
+            { _, _ ->
+                Publishers.behaviorSubject()
+            },
+            DataState.error(Throwable(), initialValue)
+        )
 
         refreshable.refresh()
         assertNotNull(refreshable.value).assertPending(initialValue)
@@ -35,9 +41,12 @@ class DataStateRefreshablePublisherTests {
     fun givenPendingWithDataWhenRefreshingThenPendingWithData() {
         val initialValue = "initial"
 
-        val refreshable = DataStateRefreshablePublisher({ _, _ ->
-            Publishers.behaviorSubject()
-        }, DataState.pending(initialValue))
+        val refreshable = DataStateRefreshablePublisher(
+            { _, _ ->
+                Publishers.behaviorSubject()
+            },
+            DataState.pending(initialValue)
+        )
 
         refreshable.refresh()
         assertNotNull(refreshable.value).assertPending(initialValue)
@@ -45,9 +54,12 @@ class DataStateRefreshablePublisherTests {
 
     @Test
     fun givenPendingWithoutDataWhenRefreshingThenPendingWithoutData() {
-        val refreshable = DataStateRefreshablePublisher({ _, _ ->
-            Publishers.behaviorSubject()
-        }, DataState.Pending<String, Throwable>())
+        val refreshable = DataStateRefreshablePublisher(
+            { _, _ ->
+                Publishers.behaviorSubject()
+            },
+            DataState.Pending<String, Throwable>()
+        )
 
         refreshable.refresh()
         assertNotNull(refreshable.value).assertPending(null)

@@ -44,11 +44,13 @@ fun <T, R, E : Throwable> Publisher<DataState<T, E>>.switchMapDataState(
         when (it) {
             is DataState.Data -> getSuccessContinuationPublisher(it.value)
             is DataState.Pending -> DataState.Pending<R, E>().just()
-            is DataState.Error -> DataState.Error<R, E>(getErrorTransform?.let { errorTransform ->
-                errorTransform(
-                    it.error
-                )
-            } ?: it.error).just()
+            is DataState.Error -> DataState.Error<R, E>(
+                getErrorTransform?.let { errorTransform ->
+                    errorTransform(
+                        it.error
+                    )
+                } ?: it.error
+            ).just()
         } as Publisher<DataState<R, E>>
     }
 }

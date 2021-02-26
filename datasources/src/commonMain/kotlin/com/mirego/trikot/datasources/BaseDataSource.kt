@@ -37,15 +37,18 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
             publisherPair != null -> publisherPair
             else -> {
                 val publisher =
-                    DataStateRefreshablePublisher({ cancellableManager, isRefreshing ->
-                        when {
-                            isRefreshing || cacheDataSource == null -> readDataOrFallbackToCacheOnError(
-                                request,
-                                cancellableManager
-                            )
-                            else -> readDataFromCache(cacheDataSource, request)
-                        }
-                    }, DataState.pending())
+                    DataStateRefreshablePublisher(
+                        { cancellableManager, isRefreshing ->
+                            when {
+                                isRefreshing || cacheDataSource == null -> readDataOrFallbackToCacheOnError(
+                                    request,
+                                    cancellableManager
+                                )
+                                else -> readDataFromCache(cacheDataSource, request)
+                            }
+                        },
+                        DataState.pending()
+                    )
 
                 savePublisherToRegistry(cacheableId, publisher, request)
             }
@@ -97,15 +100,16 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
     ): Publisher<DataState<T, Throwable>> {
         return readData(request, cancellableManager).switchMap { previousDataState ->
             when {
-                previousDataState is DataState.Error && cacheDataSource != null -> cacheDataSource.read(
-                    request
-                ).map {
-                    if (it is DataState.Data) {
-                        DataState.error(previousDataState.error, it.value)
-                    } else {
-                        previousDataState
+                previousDataState is DataState.Error && cacheDataSource != null ->
+                    cacheDataSource.read(
+                        request
+                    ).map {
+                        if (it is DataState.Data) {
+                            DataState.error(previousDataState.error, it.value)
+                        } else {
+                            previousDataState
+                        }
                     }
-                }
                 else -> Publishers.behaviorSubject(previousDataState)
             }
         }

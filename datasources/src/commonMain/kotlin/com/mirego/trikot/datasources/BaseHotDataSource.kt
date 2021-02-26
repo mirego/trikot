@@ -27,9 +27,12 @@ abstract class BaseHotDataSource<R : DataSourceRequest, T>(private val cacheData
 
     override fun read(request: R): Publisher<DataState<T, Throwable>> {
         val publishers = getPublishers(request)
-        publishers.mergeDataPublisher.first().subscribe(CancellableManager(), onNext = {
-            readIfNeeded(request, it, publishers.dataPublisher)
-        })
+        publishers.mergeDataPublisher.first().subscribe(
+            CancellableManager(),
+            onNext = {
+                readIfNeeded(request, it, publishers.dataPublisher)
+            }
+        )
         return publishers.sharedPublisher
     }
 
@@ -94,17 +97,19 @@ abstract class BaseHotDataSource<R : DataSourceRequest, T>(private val cacheData
 
     private fun buildMergeDataPublisher(request: R, dataPublisher: DataPublisher<T>): ReadPublisher<T> {
         val cachePublisher = cacheDataSource?.read(request)
-        return (cachePublisher?.safeCombine(dataPublisher)?.map { (cacheData: DataState<T, Throwable>, data: NullableDataState<T>) ->
-            if (data.value != null) {
-                data
-            } else {
-                val newValue = NullableValue(cacheData)
-                if (!cacheData.isPending()) {
-                    readIfNeeded(request, newValue, dataPublisher)
+        return (
+            cachePublisher?.safeCombine(dataPublisher)?.map { (cacheData: DataState<T, Throwable>, data: NullableDataState<T>) ->
+                if (data.value != null) {
+                    data
+                } else {
+                    val newValue = NullableValue(cacheData)
+                    if (!cacheData.isPending()) {
+                        readIfNeeded(request, newValue, dataPublisher)
+                    }
+                    newValue
                 }
-                newValue
-            }
-        } ?: dataPublisher)
+            } ?: dataPublisher
+            )
     }
 
     private fun readIfNeeded(request: R, currentData: NullableDataState<T>, dataPublisher: DataPublisher<T>) {
