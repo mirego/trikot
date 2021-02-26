@@ -1,16 +1,16 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.QueueDispatcher
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotQueueDispatcher
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
 import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispatchQueue: DispatchQueue) :
+class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispatchQueue: TrikotDispatchQueue) :
     AbstractProcessor<T, T>(parentPublisher = parentPublisher),
-    QueueDispatcher {
+    TrikotQueueDispatcher {
 
     override fun subscribe(s: Subscriber<in T>) {
         freeze(s)
@@ -23,9 +23,9 @@ class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispat
         return SubscribeOnProcessorSubscription(subscriber, dispatchQueue)
     }
 
-    class SubscribeOnProcessorSubscription<T>(s: Subscriber<in T>, override val dispatchQueue: DispatchQueue) :
+    class SubscribeOnProcessorSubscription<T>(s: Subscriber<in T>, override val dispatchQueue: TrikotDispatchQueue) :
         ProcessorSubscription<T, T>(s),
-        QueueDispatcher {
+        TrikotQueueDispatcher {
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
             subscriber.onNext(t)
         }

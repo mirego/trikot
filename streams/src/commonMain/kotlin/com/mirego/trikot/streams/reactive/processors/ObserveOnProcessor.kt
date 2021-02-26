@@ -1,8 +1,8 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.QueueDispatcher
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SequentialDispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotQueueDispatcher
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
 import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Publisher
@@ -10,7 +10,7 @@ import org.reactivestreams.Subscriber
 
 open class ObserveOnProcessor<T>(
     parentPublisher: Publisher<T>,
-    dispatchQueue: DispatchQueue
+    dispatchQueue: TrikotDispatchQueue
 ) : AbstractProcessor<T, T>(parentPublisher = parentPublisher) {
 
     private val dispatchQueue = when {
@@ -24,8 +24,8 @@ open class ObserveOnProcessor<T>(
 
     class ObserveOnProcessorSubscription<T>(
         s: Subscriber<in T>,
-        override val dispatchQueue: DispatchQueue
-    ) : ProcessorSubscription<T, T>(s), QueueDispatcher {
+        override val dispatchQueue: TrikotDispatchQueue
+    ) : ProcessorSubscription<T, T>(s), TrikotQueueDispatcher {
 
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
             freeze(t)

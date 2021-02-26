@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchBlock
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.subscribe
@@ -20,7 +20,7 @@ class SubscribeOnProcessorTests {
         assertNotNull(dispatchQueueMock.block)
     }
 
-    class DispatchQueueMock : DispatchQueue {
+    class DispatchQueueMock : TrikotDispatchQueue {
         var block: DispatchBlock? = null
         override fun dispatch(block: DispatchBlock) {
             this.block = block

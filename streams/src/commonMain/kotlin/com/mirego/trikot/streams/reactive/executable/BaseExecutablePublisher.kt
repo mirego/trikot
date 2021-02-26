@@ -1,12 +1,12 @@
 package com.mirego.trikot.streams.reactive.executable
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 
-abstract class BaseExecutablePublisher<T>(private val executionQueue: DispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue) :
+abstract class BaseExecutablePublisher<T>(private val executionQueue: TrikotDispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue) :
     ExecutablePublisher<T>, BehaviorSubjectImpl<T>(null) {
     protected val cancellableManager = CancellableManager()
     private val isStarted = AtomicReference(false)

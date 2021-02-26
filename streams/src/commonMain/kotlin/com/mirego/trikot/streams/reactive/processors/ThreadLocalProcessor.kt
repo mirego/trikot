@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.foundation.concurrent.MrFreeze
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
@@ -14,8 +14,8 @@ import kotlin.native.concurrent.ThreadLocal
 
 class ThreadLocalProcessor<T>(
     private val parentPublisher: Publisher<T>,
-    private val observeOnQueue: DispatchQueue,
-    private val subscribeOnQueue: DispatchQueue
+    private val observeOnQueue: TrikotDispatchQueue,
+    private val subscribeOnQueue: TrikotDispatchQueue
 ) : Processor<T, T> {
     override fun onSubscribe(s: Subscription) {
         throw IllegalStateException("Should never be called")
@@ -40,8 +40,8 @@ class ThreadLocalProcessor<T>(
     class ThreadLocalSubscription<T>(
         subscriber: Subscriber<in T>,
         parentPublisher: Publisher<T>,
-        subscriptionQueue: DispatchQueue,
-        private val observeOnQueue: DispatchQueue
+        subscriptionQueue: TrikotDispatchQueue,
+        private val observeOnQueue: TrikotDispatchQueue
     ) : Subscription {
 
         private val cancellableManager = CancellableManager()

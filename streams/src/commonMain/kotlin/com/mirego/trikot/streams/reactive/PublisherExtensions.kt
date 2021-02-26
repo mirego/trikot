@@ -1,7 +1,7 @@
 package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.foundation.FoundationConfiguration
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
 import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
@@ -75,11 +75,11 @@ fun <T, R> Publisher<T>.switchMap(block: SwitchMapProcessorBlock<T, R>): Publish
     return SwitchMapProcessor(this, block)
 }
 
-fun <T> Publisher<T>.observeOn(dispatcher: DispatchQueue): Publisher<T> {
+fun <T> Publisher<T>.observeOn(dispatcher: TrikotDispatchQueue): Publisher<T> {
     return ObserveOnProcessor(this, dispatcher)
 }
 
-fun <T> Publisher<T>.subscribeOn(dispatcher: DispatchQueue): Publisher<T> {
+fun <T> Publisher<T>.subscribeOn(dispatcher: TrikotDispatchQueue): Publisher<T> {
     return SubscribeOnProcessor(this, dispatcher)
 }
 
@@ -124,8 +124,8 @@ fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
 }
 
 fun <T> Publisher<T>.threadLocal(
-    observeOnQueue: DispatchQueue,
-    subscribeOnQueue: DispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue
+    observeOnQueue: TrikotDispatchQueue,
+    subscribeOnQueue: TrikotDispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue
 ): Publisher<T> {
     return ThreadLocalProcessor(this, observeOnQueue, subscribeOnQueue)
 }

@@ -1,20 +1,20 @@
 package com.mirego.trikot.streams
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.OperationDispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 
 object StreamsConfiguration {
-    private val internalOperationDispatchQueue = AtomicReference<DispatchQueue>(
+    private val internalOperationDispatchQueue = AtomicReference<TrikotDispatchQueue>(
         OperationDispatchQueue()
     )
     private val internalSerialSubscriptionDispatchQueue =
-        AtomicReference<DispatchQueue>(
+        AtomicReference<TrikotDispatchQueue>(
             SynchronousSerialQueue()
         )
 
-    var publisherExecutionDispatchQueue: DispatchQueue
+    var publisherExecutionDispatchQueue: TrikotDispatchQueue
         get() {
             return internalOperationDispatchQueue.value
         }
@@ -22,7 +22,7 @@ object StreamsConfiguration {
             internalOperationDispatchQueue.setOrThrow(internalOperationDispatchQueue.value, value)
         }
 
-    var serialSubscriptionDispatchQueue: DispatchQueue
+    var serialSubscriptionDispatchQueue: TrikotDispatchQueue
         get() {
             return internalSerialSubscriptionDispatchQueue.value
         }

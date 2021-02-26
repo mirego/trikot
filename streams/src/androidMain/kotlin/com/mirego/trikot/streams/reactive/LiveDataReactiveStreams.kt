@@ -1,4 +1,4 @@
-package com.mirego.trikot.streams.android.ktx
+package com.mirego.trikot.streams.reactive
 
 import android.annotation.SuppressLint
 import android.os.Looper
@@ -117,9 +117,10 @@ object LiveDataReactiveStreams {
                 ArchTaskExecutor.getInstance().executeOnMainThread {
                     // Errors should be handled upstream, so propagate as a crash.
                     throw RuntimeException(
-                        "LiveData does not handle errors. Errors from "
-                            + "publishers should be handled upstream and propagated as "
-                            + "state", t
+                        "LiveData does not handle errors. Errors from " +
+                            "publishers should be handled upstream and propagated as " +
+                            "state",
+                        t
                     )
                 }
             }

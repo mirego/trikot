@@ -2,7 +2,7 @@ package com
 
 import com.mirego.trikot.foundation.concurrent.MrFreeze
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchBlock
-import com.mirego.trikot.foundation.concurrent.dispatchQueue.DispatchQueue
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.processors.ThreadLocalProcessor
@@ -45,7 +45,7 @@ class ThreadLocalProcessorTests {
         assertFalse { subscriber.isFrozen }
     }
 
-    class FreezingDispatchQueue() : DispatchQueue {
+    class FreezingDispatchQueue() : TrikotDispatchQueue {
         override fun dispatch(block: DispatchBlock) {
             block.freeze()
             block()
