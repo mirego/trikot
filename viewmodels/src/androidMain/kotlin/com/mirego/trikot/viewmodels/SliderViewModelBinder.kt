@@ -3,8 +3,8 @@ package com.mirego.trikot.viewmodels
 import android.os.Build
 import android.widget.SeekBar
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableSliderViewModel
 
 object SliderViewModelBinder {
@@ -24,14 +24,16 @@ object SliderViewModelBinder {
                 seekBar.min = viewModel.minValue
             }
 
-            seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    viewModel.setSelectedValue(progress)
-                }
+            seekBar.setOnSeekBarChangeListener(
+                object : SeekBar.OnSeekBarChangeListener {
+                    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                        viewModel.setSelectedValue(progress)
+                    }
 
-                override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
-                override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
-            })
+                    override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+                    override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+                }
+            )
 
             viewModel.selectedValue.observe(lifecycleOwnerWrapper.lifecycleOwner) {
                 seekBar.progress = it

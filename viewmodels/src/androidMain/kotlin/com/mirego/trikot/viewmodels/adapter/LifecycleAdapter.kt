@@ -20,16 +20,18 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
     private val viewHolders = mutableSetOf<LifecycleViewHolder>()
 
     init {
-        lifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            fun detachAll() {
-                viewHolders.forEach {
-                    it.detach()
+        lifecycleOwner.lifecycle.addObserver(
+            object : LifecycleObserver {
+                @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+                fun detachAll() {
+                    viewHolders.forEach {
+                        it.detach()
+                    }
+                    viewHolders.clear()
+                    lifecycleOwner.lifecycle.removeObserver(this)
                 }
-                viewHolders.clear()
-                lifecycleOwner.lifecycle.removeObserver(this)
             }
-        })
+        )
     }
 
     @CallSuper

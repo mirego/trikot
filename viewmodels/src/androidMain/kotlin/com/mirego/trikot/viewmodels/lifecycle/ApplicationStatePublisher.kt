@@ -7,8 +7,10 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import org.reactivestreams.Publisher
 
-actual class ApplicationStatePublisher : BehaviorSubjectImpl<ApplicationState>(),
-    Publisher<ApplicationState>, LifecycleObserver {
+actual class ApplicationStatePublisher :
+    BehaviorSubjectImpl<ApplicationState>(),
+    Publisher<ApplicationState>,
+    LifecycleObserver {
 
     private val lifecycle = ProcessLifecycleOwner.get().lifecycle
 

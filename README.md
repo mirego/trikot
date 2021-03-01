@@ -8,7 +8,7 @@ All properties are reactive and observed by the platforms. They are ReactiveStre
 
 Additionally, you can easily replace a property with another `org.reactivestreams.Publisher<T>` (Like a Flow Coroutine per example).
 
-See (Sample application)[https://github.com/mirego/trikot.viewmodels/tree/master/sample] for all possibilities. 
+See (Sample application)[https://github.com/mirego/trikot.viewmodels/tree/master/sample] for all possibilities.
 
 iOS UILabel             |  Android TextView
 :-------------------------:|:-------------------------:
@@ -50,7 +50,6 @@ button.buttonViewModel = searchViewModel.buttonViewModel
 ```
 
 #### Android
-See [android extensions](./android-ktx/README.md) for more information.
 ```kotlin
  <TextView
             ...

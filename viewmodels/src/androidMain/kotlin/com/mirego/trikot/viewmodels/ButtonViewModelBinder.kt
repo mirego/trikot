@@ -6,13 +6,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
+import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.asLiveData
+import com.mirego.trikot.streams.reactive.distinctUntilChanged
+import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.streams.reactive.processors.combine
 import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
 import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
-import com.mirego.trikot.streams.android.ktx.asLiveData
-import com.mirego.trikot.streams.android.ktx.observe
-import com.mirego.trikot.streams.reactive.*
-import com.mirego.trikot.streams.reactive.processors.combine
 
 object ButtonViewModelBinder {
 
@@ -128,27 +131,30 @@ object ButtonViewModelBinder {
                     button.text = it
                 }
 
-
             it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { observeResult ->
                     val alignment = observeResult.first?.first
                     val selector = observeResult.first?.second
                     val tintColor = observeResult.second
 
-                    if (alignment == null || (selector == null || selector.isEmpty )) return@observe
+                    if (alignment == null || (selector == null || selector.isEmpty)) return@observe
 
                     val drawable = selector.asDrawable(button.context, tintColor)
 
                     with(button) {
                         when (alignment) {
-                            Alignment.LEFT -> drawableStart =
-                                drawable
-                            Alignment.TOP -> drawableTop =
-                                drawable
-                            Alignment.RIGHT -> drawableEnd =
-                                drawable
-                            Alignment.BOTTOM -> drawableBottom =
-                                drawable
+                            Alignment.LEFT ->
+                                drawableStart =
+                                    drawable
+                            Alignment.TOP ->
+                                drawableTop =
+                                    drawable
+                            Alignment.RIGHT ->
+                                drawableEnd =
+                                    drawable
+                            Alignment.BOTTOM ->
+                                drawableBottom =
+                                    drawable
                             Alignment.CENTER -> drawableStart = drawable
                             else -> {
                                 drawableStart = null

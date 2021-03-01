@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
-import com.mirego.trikot.streams.android.ktx.asLiveData
-import com.mirego.trikot.streams.android.ktx.observe
+import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
 
 object LabelViewModelBinder {
 
@@ -61,7 +61,10 @@ object LabelViewModelBinder {
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         bindExtraViewProperties(
-            textView, labelViewModel ?: NoLabelViewModel, HiddenVisibility.GONE, lifecycleOwnerWrapper
+            textView,
+            labelViewModel ?: NoLabelViewModel,
+            HiddenVisibility.GONE,
+            lifecycleOwnerWrapper
         )
     }
 
@@ -101,4 +104,3 @@ enum class HiddenVisibility(val value: Int) {
     GONE(View.GONE),
     INVISIBLE(View.INVISIBLE);
 }
-

@@ -19,14 +19,13 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
-import com.mirego.trikot.streams.android.ktx.asLiveData
-import com.mirego.trikot.viewmodels.android.ktx.R
+import com.mirego.trikot.streams.reactive.asLiveData
+import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.android.R
 import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextType
-import com.mirego.trikot.streams.android.ktx.observe
-import com.mirego.trikot.streams.reactive.distinctUntilChanged
-import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 
 object InputTextViewModelBinder {
@@ -70,35 +69,35 @@ object InputTextViewModelBinder {
                             when (inputType) {
                                 InputTextType.DATE ->
                                     TYPE_DATETIME_VARIATION_DATE or
-                                            TYPE_CLASS_DATETIME
+                                        TYPE_CLASS_DATETIME
                                 InputTextType.DATETIME ->
                                     TYPE_DATETIME_VARIATION_NORMAL or
-                                            TYPE_CLASS_DATETIME
+                                        TYPE_CLASS_DATETIME
                                 InputTextType.EMAIL ->
                                     TYPE_TEXT_VARIATION_EMAIL_ADDRESS or
-                                            TYPE_CLASS_TEXT
+                                        TYPE_CLASS_TEXT
                                 InputTextType.NUMBER ->
                                     TYPE_CLASS_NUMBER
                                 InputTextType.NUMBER_DECIMAL ->
                                     TYPE_CLASS_NUMBER or
-                                            TYPE_NUMBER_FLAG_DECIMAL
+                                        TYPE_NUMBER_FLAG_DECIMAL
                                 InputTextType.TEXT ->
                                     TYPE_TEXT_FLAG_CAP_SENTENCES or
-                                            TYPE_CLASS_TEXT or
-                                            TYPE_TEXT_FLAG_NO_SUGGESTIONS
+                                        TYPE_CLASS_TEXT or
+                                        TYPE_TEXT_FLAG_NO_SUGGESTIONS
                                 InputTextType.PASSWORD ->
                                     TYPE_TEXT_VARIATION_PASSWORD or
-                                            TYPE_CLASS_TEXT
+                                        TYPE_CLASS_TEXT
                                 InputTextType.PHONE_NUMBER ->
                                     TYPE_CLASS_PHONE
                                 InputTextType.TIME ->
                                     TYPE_DATETIME_VARIATION_TIME or
-                                            TYPE_CLASS_DATETIME
+                                        TYPE_CLASS_DATETIME
                                 InputTextType.MULTILINE ->
                                     TYPE_TEXT_FLAG_CAP_SENTENCES or
-                                            TYPE_CLASS_TEXT or
-                                            TYPE_TEXT_FLAG_NO_SUGGESTIONS or
-                                            TYPE_TEXT_FLAG_MULTI_LINE
+                                        TYPE_CLASS_TEXT or
+                                        TYPE_TEXT_FLAG_NO_SUGGESTIONS or
+                                        TYPE_TEXT_FLAG_MULTI_LINE
                                 else -> TYPE_NULL
                             }
                     }

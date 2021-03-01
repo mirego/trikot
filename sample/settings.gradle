@@ -7,7 +7,6 @@ pluginManagement {
             maven {
                 url('https://s3.amazonaws.com/mirego-maven/public')
             }
-            jcenter()
             maven { url 'https://jitpack.io' }
         }
         eachPlugin {

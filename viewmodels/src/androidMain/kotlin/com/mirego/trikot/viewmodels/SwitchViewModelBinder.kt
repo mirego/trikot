@@ -2,10 +2,9 @@ package com.mirego.trikot.viewmodels
 
 import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.android.ktx.asLiveData
-import com.mirego.trikot.streams.android.ktx.observe
-import com.mirego.trikot.streams.reactive.distinctUntilChanged
+import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableToggleSwitchViewModel
 
 object SwitchViewModelBinder {

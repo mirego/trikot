@@ -54,4 +54,3 @@ private fun RichTextRange.asSpan(context: Context): ParcelableSpan? {
         else -> TODO("RichTextRange $transform not implemented")
     }
 }
-

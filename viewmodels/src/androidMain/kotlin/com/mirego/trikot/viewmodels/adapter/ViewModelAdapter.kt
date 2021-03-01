@@ -75,7 +75,8 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
         lifecycleVariableId,
         lifecycleOwner,
         diffCallback,
-        { layoutId })
+        { layoutId }
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         DataBindingUtil.inflate<ViewDataBinding>(

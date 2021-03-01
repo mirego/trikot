@@ -2,16 +2,16 @@ package com.mirego.trikot.viewmodels
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
-import com.mirego.trikot.viewmodels.properties.ImageState
-import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.streams.android.ktx.observe
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
+import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.withCancellableManager
+import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
+import com.mirego.trikot.viewmodels.properties.ImageState
+import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
@@ -67,7 +67,8 @@ object ImageViewModelBinder {
     ) {
         imageFlow.imageResource?.asDrawable(
             imageView.context,
-            imageFlow.tintColor?.let { StateSelector(imageFlow.tintColor) })?.let {
+            imageFlow.tintColor?.let { StateSelector(imageFlow.tintColor) }
+        )?.let {
             imageView.setImageDrawable(it)
             imageViewModel.setImageState(ImageState.SUCCESS)
         } ?: run {
@@ -82,55 +83,58 @@ object ImageViewModelBinder {
                 }
 
                 transformation?.let { requestCreator?.transform(it) }
-                requestCreator?.into(imageView, object : Callback {
-                    override fun onSuccess() {
-                        imageView.scaleType = originalScaleType
-                        imageFlow.onSuccess?.let { onSuccessPublisher ->
-                            val cancellableManagerProvider =
-                                CancellableManagerProvider()
-                                    .also { cancellable ->
-                                        cancellableManager.add(cancellable)
-                                    }
-                            onSuccessPublisher.subscribe(cancellableManager) {
-                                processImageFlow(
-                                    imageViewModel,
-                                    it,
-                                    imageView,
-                                    transformation,
-                                    originalScaleType,
-                                    placeholderScaleType,
-                                    cancellableManagerProvider.cancelPreviousAndCreate()
-                                )
+                requestCreator?.into(
+                    imageView,
+                    object : Callback {
+                        override fun onSuccess() {
+                            imageView.scaleType = originalScaleType
+                            imageFlow.onSuccess?.let { onSuccessPublisher ->
+                                val cancellableManagerProvider =
+                                    CancellableManagerProvider()
+                                        .also { cancellable ->
+                                            cancellableManager.add(cancellable)
+                                        }
+                                onSuccessPublisher.subscribe(cancellableManager) {
+                                    processImageFlow(
+                                        imageViewModel,
+                                        it,
+                                        imageView,
+                                        transformation,
+                                        originalScaleType,
+                                        placeholderScaleType,
+                                        cancellableManagerProvider.cancelPreviousAndCreate()
+                                    )
+                                }
+                            } ?: run {
+                                imageViewModel.setImageState(ImageState.SUCCESS)
                             }
-                        } ?: run {
-                            imageViewModel.setImageState(ImageState.SUCCESS)
+                        }
+
+                        override fun onError(e: Exception?) {
+                            imageFlow.onError?.let { onErrorPublisher ->
+                                val cancellableManagerProvider =
+                                    CancellableManagerProvider()
+                                        .also { cancellable ->
+                                            cancellableManager.add(cancellable)
+                                        }
+
+                                onErrorPublisher.subscribe(cancellableManager) {
+                                    processImageFlow(
+                                        imageViewModel,
+                                        it,
+                                        imageView,
+                                        transformation,
+                                        originalScaleType,
+                                        placeholderScaleType,
+                                        cancellableManagerProvider.cancelPreviousAndCreate()
+                                    )
+                                }
+                            } ?: run {
+                                imageViewModel.setImageState(ImageState.ERROR)
+                            }
                         }
                     }
-
-                    override fun onError(e: Exception?) {
-                        imageFlow.onError?.let { onErrorPublisher ->
-                            val cancellableManagerProvider =
-                                CancellableManagerProvider()
-                                    .also { cancellable ->
-                                        cancellableManager.add(cancellable)
-                                    }
-
-                            onErrorPublisher.subscribe(cancellableManager) {
-                                processImageFlow(
-                                    imageViewModel,
-                                    it,
-                                    imageView,
-                                    transformation,
-                                    originalScaleType,
-                                    placeholderScaleType,
-                                    cancellableManagerProvider.cancelPreviousAndCreate()
-                                )
-                            }
-                        } ?: run {
-                            imageViewModel.setImageState(ImageState.ERROR)
-                        }
-                    }
-                })
+                )
             } ?: run {
                 imageFlow.placeholderImageResource?.asDrawable(imageView.context)?.let {
                     placeholderScaleType?.let { imageView.scaleType = it }

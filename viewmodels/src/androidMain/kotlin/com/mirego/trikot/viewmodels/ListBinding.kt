@@ -3,8 +3,7 @@ package com.mirego.trikot.viewmodels
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mirego.trikot.streams.android.ktx.asLiveData
-import com.mirego.trikot.streams.android.ktx.observe
+import com.mirego.trikot.streams.reactive.asLiveData
 
 object ListBinding {
     @Suppress("UNCHECKED_CAST")
