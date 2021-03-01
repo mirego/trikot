@@ -26,7 +26,7 @@ class MixpanelAnalyticsService(
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         mixpanelAnalytics.identify(userId)
-        mixpanelAnalytics.people.identify(userId);
+        mixpanelAnalytics.people.identify(userId)
         mixpanelAnalytics.people.set(properties.asJSONProperties())
 
         mixpanelAnalytics

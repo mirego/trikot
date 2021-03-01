@@ -29,7 +29,7 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
         }
     }
 
-    //This functionality isn't supported with Firebase Analytics
+    // This functionality isn't supported with Firebase Analytics
     override fun incrementUserProperties(incrementalProperties: AnalyticsIncrementalProperties) =
         Unit
 
