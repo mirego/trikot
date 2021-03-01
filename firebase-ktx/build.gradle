@@ -9,7 +9,6 @@ plugins {
 
 repositories {
     google()
-    jcenter()
     mavenLocal()
     mavenCentral()
     maven { url('https://s3.amazonaws.com/mirego-maven/public') }
@@ -32,12 +31,12 @@ configurations.all {
 }
 
 dependencies {
-    api 'com.mirego.trikot:analytics:1.0.2'
+    api 'com.mirego.trikot:analytics:1.0.3'
     api "com.mirego.trikot:streams:$trikot_streams_version"
     api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
-    implementation "com.google.firebase:firebase-analytics:17.5.0"
+    implementation "com.google.firebase:firebase-analytics:18.0.2"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0'
 }
 
 release {
