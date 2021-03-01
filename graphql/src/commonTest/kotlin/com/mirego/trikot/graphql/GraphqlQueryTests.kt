@@ -1,8 +1,8 @@
 package com.mirego.trikot.graphql
 
+import kotlinx.serialization.builtins.serializer
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlinx.serialization.builtins.serializer
 
 class GraphqlQueryTests {
 
