@@ -81,12 +81,7 @@ kotlin {
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("com.squareup.picasso:picasso:2.71828")
                 implementation("com.google.android.material:material:1.3.0")
-
-                // Required for Android data binding on JDK 11
                 implementation("javax.annotation:javax.annotation-api:1.3.2")
-                implementation("javax.xml.bind:jaxb-api:2.4.0-b180830.0359")
-                implementation("javax.activation:activation:1.1.1")
-                implementation("org.glassfish.jaxb:jaxb-runtime:2.3.3")
             }
         }
 
