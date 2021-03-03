@@ -53,7 +53,7 @@ job(context.jobFullName) {
     }
 }
 
-job("$context.jobFullName-android-ktx-1_0_*") {
+job("$context.jobFullName-android-ktx-1_0_x") {
     description("Make a release of trikot.viewmodels:android-ktx")
     logRotator(5)
     parameters {
