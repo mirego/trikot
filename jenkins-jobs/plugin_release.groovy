@@ -19,7 +19,7 @@ job(context.jobFullName) {
     }
     scm {
         git {
-            branch("${Branch}")
+            branch('${Branch}')
             remote {
                 name('origin')
                 url("${GIT_URL}")
@@ -66,7 +66,7 @@ job("$context.jobFullName-android-ktx-1_0_*") {
     }
     scm {
         git {
-            branch("${Branch}")
+            branch('${Branch}')
             remote {
                 name('origin')
                 url("${GIT_URL}")
