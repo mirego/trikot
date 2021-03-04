@@ -1,0 +1,71 @@
+package com.mirego.trikot.viewmodels.declarative.controller
+
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.mirego.trikot.viewmodels.declarative.ViewModel
+import com.mirego.trikot.viewmodels.declarative.controller.factory.AndroidViewModelProviderFactory
+import com.mirego.trikot.viewmodels.declarative.lifecycle.LifecycleOwnerWrapper
+import kotlin.reflect.KClass
+
+abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewModel, N : NavigationDelegate> :
+    AppCompatActivity(), NavigationDelegate {
+
+    companion object {
+        private val LOG_TAG = "ViewModelActivity"
+    }
+
+    protected abstract val viewModelController: VMC
+    val viewModel: VM by lazy { viewModelController.viewModel }
+
+    protected lateinit var lifecycleOwnerWrapper: LifecycleOwnerWrapper
+
+    private var created = false
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val navigationDelegate = this as? N
+        if (navigationDelegate != null) {
+            viewModelController.navigationDelegate = navigationDelegate
+        } else {
+            Log.e(
+                LOG_TAG,
+                "ViewModelActivity ${this::class.simpleName} must conform to its navigation delegate"
+            )
+        }
+
+        if (!created) {
+            viewModelController.onCreate()
+            created = true
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModelController.onAppear()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModelController.onDisappear()
+    }
+
+    override fun onDestroy() {
+        viewModelController.navigationDelegate = null
+        super.onDestroy()
+    }
+
+    protected fun <T : ViewModelController<N, VM>> getViewModelController(requestedClass: KClass<T>): T =
+        AndroidViewModelProviderFactory.with(this, null).get(requestedClass.java)
+
+    protected fun <T : ViewModelController<N, VM>> getViewModelController(
+        requestedClass: KClass<T>,
+        navigationData: Any?
+    ): T = if (navigationData == null) {
+        getViewModelController(requestedClass)
+    } else {
+        AndroidViewModelProviderFactory.with(this, navigationData).get(requestedClass.java)
+    }
+}
