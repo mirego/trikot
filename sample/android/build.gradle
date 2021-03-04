@@ -74,6 +74,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     repositories {
+        mavenCentral()
         maven { url('https://s3.amazonaws.com/mirego-maven/public') }
         maven { url "https://kotlin.bintray.com/kotlinx" }
     }
