@@ -10,5 +10,7 @@ interface ViewModel : PropertyChangeListener {
     val propertyWillChange: ConcretePublisher<Unit>
     val propertyDidChange: ConcretePublisher<PropertyChange<*>>
 
+    var hidden: Boolean
+
     fun <V> publisherForProperty(property: KProperty<V>): Publisher<V>
 }

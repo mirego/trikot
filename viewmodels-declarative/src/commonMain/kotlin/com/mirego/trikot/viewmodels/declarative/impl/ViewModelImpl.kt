@@ -7,6 +7,7 @@ import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.viewmodels.declarative.ViewModel
 import com.mirego.trikot.viewmodels.declarative.internal.PropertyChange
 import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
+import com.mirego.trikot.viewmodels.declarative.internal.published
 import com.mirego.trikot.viewmodels.declarative.utilities.ConcretePublisher
 import com.mirego.trikot.viewmodels.declarative.utilities.asConcretePublisher
 import org.reactivestreams.Publisher
@@ -42,7 +43,19 @@ open class ViewModelImpl(protected val cancellableManager: CancellableManager) :
         }
     }
 
-    protected open fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? = null
+    private val hiddenDelegate = published(false, this)
+    override var hidden: Boolean by hiddenDelegate
+
+    fun bindHidden(publisher: Publisher<Boolean>) {
+        updatePropertyPublisher(this::hidden, cancellableManager, publisher)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    protected open fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? =
+        when (property.name) {
+            this::hidden.name -> hiddenDelegate as PublishedProperty<V>
+            else -> null
+        }
 
     protected fun <V> updatePropertyPublisher(
         property: KProperty<V>,
