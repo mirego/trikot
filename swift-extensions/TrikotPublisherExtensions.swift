@@ -55,6 +55,34 @@ extension NSObject {
     }
 }
 
+extension NSObject {
+    extension NSObject {
+        public func observe<V>(_ concretePublisher: ConcretePublisher<V>, toClosure closure: @escaping ((V) -> Void)) {
+            observe(cancellableManager: trikotInternalPublisherCancellableManager, concretePublisher: concretePublisher, toClosure: closure)
+        }
+
+        public func observe<V>(cancellableManager: CancellableManager, concretePublisher: ConcretePublisher<V>, toClosure closure: @escaping ((V) -> Void)) {
+            PublisherExtensionsKt.subscribe(concretePublisher, cancellableManager: cancellableManager) {(value: Any?) in
+                if Thread.current.isMainThread {
+                    closure(value as! V)
+                } else {
+                    MrFreezeKt.freeze(objectToFreeze: value)
+                    DispatchQueue.main.async {
+                        closure(value as! V)
+                    }
+                }
+            }
+        }
+
+        public func bind<T, V>(_ concretePublisher: ConcretePublisher<V>, _ keyPath: ReferenceWritableKeyPath<T, V>) {
+            observe(concretePublisher) {[weak self] (newValue: V) in
+                guard let strongSelf = self as? T else { return }
+                strongSelf[keyPath: keyPath] = newValue
+            }
+        }
+    }
+}
+
 extension Publisher {
     public func first() -> Publisher {
         return PublisherExtensionsKt.first(self)
