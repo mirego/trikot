@@ -77,7 +77,9 @@ kotlin {
                 api("io.ktor:ktor-client-logging-jvm:${project.extra["ktor_version"]}")
                 implementation("io.ktor:ktor-client-android:${project.extra["ktor_version"]}")
                 implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
+                    exclude(group = "org.reactivestreams")
+                }
             }
         }
 
