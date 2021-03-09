@@ -7,7 +7,6 @@ import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
 import com.mirego.trikot.viewmodels.declarative.internal.published
 import com.mirego.trikot.viewmodels.declarative.properties.ProgressDetermination
 import org.reactivestreams.Publisher
-import kotlin.reflect.KProperty
 
 @Suppress("LeakingThis")
 open class ProgressViewModelImpl(cancellableManager: CancellableManager) : ViewModelImpl(cancellableManager), ProgressViewModel {
@@ -19,10 +18,9 @@ open class ProgressViewModelImpl(cancellableManager: CancellableManager) : ViewM
         updatePropertyPublisher(this::determination, cancellableManager, publisher)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? =
-        when (property.name) {
-            this::determination.name -> determinationDelegate as PublishedProperty<V>
-            else -> super.publishedProperty(property)
+    override val propertyMapping: Map<String, PublishedProperty<*>> by lazy {
+        super.propertyMapping.toMutableMap().also {
+            it[this::determination.name] = determinationDelegate
         }
+    }
 }

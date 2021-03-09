@@ -28,10 +28,10 @@ abstract class ViewModelController<VM : ViewModel, N : NavigationDelegate> :
         hasAppeared = true
     }
 
-    open fun onAppearSubsequent() {
+    protected open fun onAppearSubsequent() {
     }
 
-    open fun onAppearFirst() {
+    protected open fun onAppearFirst() {
     }
 
     open fun onDisappear() {

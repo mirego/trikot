@@ -14,7 +14,6 @@ import com.mirego.trikot.viewmodels.declarative.properties.KeyboardType
 import com.mirego.trikot.viewmodels.declarative.properties.TextContentType
 import com.mirego.trikot.viewmodels.declarative.utilities.DispatchQueues
 import org.reactivestreams.Publisher
-import kotlin.reflect.KProperty
 
 @Suppress("LeakingThis")
 open class TextFieldViewModelImpl(cancellableManager: CancellableManager) : ControlViewModelImpl(cancellableManager), TextFieldViewModel {
@@ -102,16 +101,15 @@ open class TextFieldViewModelImpl(cancellableManager: CancellableManager) : Cont
         updatePropertyPublisher(this::autoCapitalization, cancellableManager, publisher)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? =
-        when (property.name) {
-            this::text.name -> textDelegate as PublishedProperty<V>
-            this::placeholder.name -> placeholderDelegate as PublishedProperty<V>
-            this::keyboardType.name -> keyboardTypeDelegate as PublishedProperty<V>
-            this::keyboardReturnKeyType.name -> keyboardReturnKeyTypeDelegate as PublishedProperty<V>
-            this::contentType.name -> contentTypeDelegate as PublishedProperty<V>
-            this::autoCorrect.name -> autoCorrectDelegate as PublishedProperty<V>
-            this::autoCapitalization.name -> autoCapitalizationDelegate as PublishedProperty<V>
-            else -> super.publishedProperty(property)
+    override val propertyMapping: Map<String, PublishedProperty<*>> by lazy {
+        super.propertyMapping.toMutableMap().also {
+            it[this::text.name] = textDelegate
+            it[this::placeholder.name] = placeholderDelegate
+            it[this::keyboardType.name] = keyboardTypeDelegate
+            it[this::keyboardReturnKeyType.name] = keyboardReturnKeyTypeDelegate
+            it[this::contentType.name] = contentTypeDelegate
+            it[this::autoCorrect.name] = autoCorrectDelegate
+            it[this::autoCapitalization.name] = autoCapitalizationDelegate
         }
+    }
 }

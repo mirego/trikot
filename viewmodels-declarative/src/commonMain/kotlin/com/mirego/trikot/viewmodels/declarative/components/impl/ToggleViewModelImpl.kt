@@ -6,7 +6,6 @@ import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
 import com.mirego.trikot.viewmodels.declarative.internal.published
 import com.mirego.trikot.viewmodels.declarative.properties.Content
 import org.reactivestreams.Publisher
-import kotlin.reflect.KProperty
 
 @Suppress("LeakingThis")
 open class ToggleViewModelImpl<C : Content>(cancellableManager: CancellableManager, defaultContent: C) : ToggleViewModel<C>(cancellableManager) {
@@ -25,11 +24,10 @@ open class ToggleViewModelImpl<C : Content>(cancellableManager: CancellableManag
         updatePropertyPublisher(this::content, cancellableManager, publisher)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? =
-        when (property.name) {
-            this::isOn.name -> isOnDelegate as PublishedProperty<V>
-            this::content.name -> contentDelegate as PublishedProperty<V>
-            else -> super.publishedProperty(property)
+    override val propertyMapping: Map<String, PublishedProperty<*>> by lazy {
+        super.propertyMapping.toMutableMap().also {
+            it[this::isOn.name] = isOnDelegate
+            it[this::content.name] = contentDelegate
         }
+    }
 }

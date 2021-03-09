@@ -1,15 +1,14 @@
 package com.mirego.trikot.viewmodels.declarative.impl
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.ConcretePublisher
 import com.mirego.trikot.streams.reactive.PublishSubjectImpl
-import com.mirego.trikot.streams.reactive.filter
-import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.asConcretePublisher
 import com.mirego.trikot.viewmodels.declarative.ViewModel
 import com.mirego.trikot.viewmodels.declarative.internal.PropertyChange
 import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
 import com.mirego.trikot.viewmodels.declarative.internal.published
-import com.mirego.trikot.viewmodels.declarative.utilities.ConcretePublisher
-import com.mirego.trikot.viewmodels.declarative.utilities.asConcretePublisher
 import org.reactivestreams.Publisher
 import kotlin.reflect.KProperty
 
@@ -32,15 +31,15 @@ open class ViewModelImpl(protected val cancellableManager: CancellableManager) :
         propertyDidChangeSubject.value = PropertyChange(property, oldValue, newValue)
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun <V> publisherForProperty(property: KProperty<V>): Publisher<V> {
-        publishedProperty(property)?.let { return it.valuePublisher }
+        return publisherForPropertyName(property.name)
+    }
 
-        return propertyDidChange.filter {
-            it.property.name == property.name
-        }.map {
-            it.newValue as V
-        }
+    @Suppress("UNCHECKED_CAST")
+    override fun <V> publisherForPropertyName(propertyName: String): Publisher<V> {
+        propertyMapping[propertyName]?.let { it as? PublishedProperty<V> }?.let { return it.valuePublisher }
+        println("ViewModelImpl.publisherForPropertyName: propertyName $propertyName is not found or has an invalid type")
+        return Publishers.never()
     }
 
     private val hiddenDelegate = published(false, this)
@@ -50,18 +49,14 @@ open class ViewModelImpl(protected val cancellableManager: CancellableManager) :
         updatePropertyPublisher(this::hidden, cancellableManager, publisher)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    protected open fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? =
-        when (property.name) {
-            this::hidden.name -> hiddenDelegate as PublishedProperty<V>
-            else -> null
-        }
+    protected open val propertyMapping: Map<String, PublishedProperty<*>> by lazy {
+        mapOf(
+            this::hidden.name to hiddenDelegate,
+        )
+    }
 
-    protected fun <V> updatePropertyPublisher(
-        property: KProperty<V>,
-        cancellableManager: CancellableManager,
-        publisher: Publisher<V>
-    ) {
-        publishedProperty(property)?.updatePublisher(property, publisher, cancellableManager)
+    @Suppress("UNCHECKED_CAST")
+    protected fun <V> updatePropertyPublisher(property: KProperty<V>, cancellableManager: CancellableManager, publisher: Publisher<V>) {
+        (propertyMapping[property.name] as? PublishedProperty<V>)?.updatePublisher(property, publisher, cancellableManager)
     }
 }

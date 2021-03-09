@@ -7,7 +7,6 @@ import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
 import com.mirego.trikot.viewmodels.declarative.internal.published
 import com.mirego.trikot.viewmodels.declarative.properties.IdentifiableContent
 import org.reactivestreams.Publisher
-import kotlin.reflect.KProperty
 
 @Suppress("LeakingThis")
 open class ListViewModelImpl<C : IdentifiableContent>(cancellableManager: CancellableManager) : ViewModelImpl(cancellableManager), ListViewModel<C> {
@@ -19,10 +18,9 @@ open class ListViewModelImpl<C : IdentifiableContent>(cancellableManager: Cancel
         updatePropertyPublisher(this::elements, cancellableManager, publisher)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <V> publishedProperty(property: KProperty<V>): PublishedProperty<V>? =
-        when (property.name) {
-            this::elements.name -> elementsDelegate as PublishedProperty<V>
-            else -> super.publishedProperty(property)
+    override val propertyMapping: Map<String, PublishedProperty<*>> by lazy {
+        super.propertyMapping.toMutableMap().also {
+            it[this::elements.name] = elementsDelegate
         }
+    }
 }
