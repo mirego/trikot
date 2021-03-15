@@ -6,7 +6,15 @@ import com.mirego.trikot.viewmodels.adapter.GenericViewModelDiffCallback
 import com.mirego.trikot.viewmodels.adapter.ViewModelAdapter
 import com.trikot.viewmodels.sample.BR
 import com.trikot.viewmodels.sample.R
-import com.trikot.viewmodels.sample.viewmodels.*
+import com.trikot.viewmodels.sample.viewmodels.ButtonListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.HeaderListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.ImageListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.InputTextListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.LabelListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.NavigableListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.SliderListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.ToggleSwitchListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.ViewListItemViewModel
 
 class ListItemViewModelAdapter(lifecycleOwner: LifecycleOwner) :
     ViewModelAdapter<ListItemViewModel>(

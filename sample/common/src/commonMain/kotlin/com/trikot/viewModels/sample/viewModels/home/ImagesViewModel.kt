@@ -1,22 +1,22 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.mirego.trikot.viewmodels.ImageFlow
-import com.mirego.trikot.viewmodels.mutable.simpleImageFlowProvider
-import com.mirego.trikot.viewmodels.properties.Color
-import com.mirego.trikot.viewmodels.properties.ImageState
-import com.mirego.trikot.viewmodels.properties.ViewModelAction
-import com.mirego.trikot.viewmodels.properties.StateSelector
-import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.viewmodels.ImageFlow
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
+import com.mirego.trikot.viewmodels.mutable.simpleImageFlowProvider
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.ImageState
+import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
+import com.trikot.viewmodels.sample.resource.ImageResources
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableImageListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableViewListItemViewModel
-import com.trikot.viewmodels.sample.navigation.NavigationDelegate
-import com.trikot.viewmodels.sample.resource.ImageResources
 import org.reactivestreams.Publisher
 
 class ImagesViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {

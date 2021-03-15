@@ -1,17 +1,19 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
-import com.mirego.trikot.viewmodels.properties.Color
-import com.mirego.trikot.viewmodels.properties.ViewModelAction
-import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
-import com.mirego.trikot.viewmodels.ListViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
-import com.mirego.trikot.viewmodels.text.*
+import com.mirego.trikot.viewmodels.properties.Color
+import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.text.RichText
+import com.mirego.trikot.viewmodels.text.RichTextRange
+import com.mirego.trikot.viewmodels.text.StyleTransform
+import com.mirego.trikot.viewmodels.text.TextAppearanceResourceTransform
+import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import com.trikot.viewmodels.sample.resource.SampleTextAppearanceResource
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
-import com.trikot.viewmodels.sample.navigation.NavigationDelegate
 import org.reactivestreams.Publisher
 
 class LabelsViewModel(navigationDelegate: NavigationDelegate) :
@@ -67,7 +69,8 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
         MutableHeaderListItemViewModel(".richTextTransform"),
         MutableLabelListItemViewModel().also {
             it.label.richText = RichText(
-                "Text appearance defined by the Client App Theme. Superscript example: 63", listOf(
+                "Text appearance defined by the Client App Theme. Superscript example: 63",
+                listOf(
                     RichTextRange(
                         IntRange(0, 10),
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_BOLD)
