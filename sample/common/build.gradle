@@ -86,11 +86,6 @@ kotlin {
     }
 }
 
-// This task attaches native framework built from ios module to Xcode project
-// (see iosApp directory). Don't run this task directly,
-// Xcode runs this task itself during its build process.
-// Before opening the project from iosApp directory in Xcode,
-// make sure all Gradle infrastructure exists (gradle.wrapper, gradlew).
 task copyFramework() {
     def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
 
@@ -100,11 +95,18 @@ task copyFramework() {
         def frameworkFilename = "${trikot_framework_name}.framework"
         def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
         def targetDir = file("build/bin/ios").toString()
+        def frameworkDir = "${targetDir}/${frameworkFilename}"
+        def translationDir = "${projectDir}/../common/src/commonMain/resources/translations"
         copy {
             from srcFile.parent
             into targetDir
             include "${frameworkFilename}/**"
-            include "${frameworkFilename}.dSYM"
+            include "${frameworkFilename}.dSYM/**"
+        }
+        copy {
+            from translationDir
+            into frameworkDir
+            include "**"
         }
     }
 }
