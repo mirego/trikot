@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.mutable
 
 import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ImageFlow
 import com.mirego.trikot.viewmodels.ImageHeight
 import com.mirego.trikot.viewmodels.ImageViewModel
@@ -29,5 +30,5 @@ open class MutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : Mut
 }
 
 fun simpleImageFlowProvider(url: String? = null, placeholderImageResource: ImageResource? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
-    return { _, _ -> Publishers.behaviorSubject(SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor)) }
+    return { _, _ -> SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor).just() }
 }
