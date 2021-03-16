@@ -168,7 +168,7 @@ data class Octuple<out A, out B, out C, out D, out E, out F, out G, out H>(
      * [fourth], [fifth], [sixth], [seventh] and [eighth] values.
      */
     override fun toString(): String = "($first, $second, $third, $fourth, $fifth, " +
-            "$sixth, $seventh, $eighth)"
+        "$sixth, $seventh, $eighth)"
 }
 
 /**
@@ -213,7 +213,7 @@ data class Nonuple<out A, out B, out C, out D, out E, out F, out G, out H, out I
      * [fourth], [fifth], [sixth], [seventh], [eighth] and [ninth] values.
      */
     override fun toString(): String = "($first, $second, $third, $fourth, $fifth, " +
-            "$sixth, $seventh, $eighth, $ninth)"
+        "$sixth, $seventh, $eighth, $ninth)"
 }
 
 /**
@@ -261,5 +261,5 @@ data class Decuple<out A, out B, out C, out D, out E, out F, out G, out H, out I
      * [fourth], [fifth], [sixth], [seventh], [eighth], [ninth] and [tenth] values.
      */
     override fun toString(): String = "($first, $second, $third, $fourth, $fifth, " +
-            "$sixth, $seventh, $eighth, $ninth, $tenth)"
+        "$sixth, $seventh, $eighth, $ninth, $tenth)"
 }

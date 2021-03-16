@@ -4,10 +4,14 @@ import platform.Foundation.NSDate
 import platform.Foundation.NSISO8601DateFormatWithFractionalSeconds
 import platform.Foundation.NSISO8601DateFormatWithInternetDateTime
 import platform.Foundation.NSISO8601DateFormatter
+import platform.Foundation.NSNumericSearch
+import platform.Foundation.NSOrderedAscending
+import platform.Foundation.NSString
+import platform.Foundation.compare
+import platform.Foundation.create
 import platform.Foundation.dateByAddingTimeInterval
 import platform.Foundation.timeIntervalSince1970
 import platform.UIKit.UIDevice
-import kotlin.math.floor
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
@@ -33,9 +37,8 @@ actual class Date(val nsDate: NSDate) {
 
         @ExperimentalUnsignedTypes
         actual fun fromISO8601(isoDate: String): Date {
-            val systemVersion = UIDevice.currentDevice.systemVersion.toFloat()
             return when {
-                floor(systemVersion) >= 11 ->
+                iosVersionGreaterThan(IOSVersion.IOS_11) ->
                     getFormatterWithCorrespondingFormatOptions(isoDate)
                         .dateFromString(isoDate)
                 else ->
@@ -70,6 +73,30 @@ actual class Date(val nsDate: NSDate) {
             }
 
         private fun containsFractionalSeconds(date: String): Boolean = date.lastIndexOf(".") != -1
+
+        private enum class IOSVersion {
+            IOS_10,
+            IOS_11,
+            IOS_12,
+            IOS_13,
+            IOS_14;
+
+            val stringValue: String
+                get() = when (this) {
+                    IOS_10 -> "10.0"
+                    IOS_11 -> "11.0"
+                    IOS_12 -> "12.0"
+                    IOS_13 -> "13.0"
+                    IOS_14 -> "14.0"
+                }
+        }
+
+        private fun iosVersionGreaterThan(version: IOSVersion): Boolean =
+            NSString.create(string = UIDevice.currentDevice.systemVersion)
+                .compare(
+                    string = version.stringValue,
+                    options = NSNumericSearch
+                ) != NSOrderedAscending
     }
 
     actual operator fun compareTo(other: Date): Int {
