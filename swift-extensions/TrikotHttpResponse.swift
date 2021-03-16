@@ -27,7 +27,7 @@ public class TrikotHttpResponse: NSObject, HttpResponse {
         if let data = data, data.count > 0 {
             bodyByteArray = MrFreeze().freeze(objectToFreeze: ByteArrayNativeUtils().convert(data: data)) as? KotlinByteArray
         } else {
-            bodyByteArray = KotlinByteArray(size: 0)
+            bodyByteArray = MrFreeze().freeze(objectToFreeze: KotlinByteArray(size: 0)) as? KotlinByteArray
         }
 
         self.headers = headers
