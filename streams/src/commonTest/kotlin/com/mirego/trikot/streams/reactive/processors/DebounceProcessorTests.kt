@@ -11,6 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
 import kotlin.time.milliseconds
+import kotlin.time.minutes
 
 @ExperimentalTime
 class DebounceProcessorTests {
@@ -47,5 +48,21 @@ class DebounceProcessorTests {
         publisher.value = expectedResult
         assertEquals(null, receivedResult)
         assertEquals(noBlock, timer.block)
+    }
+
+    @Test
+    fun testDebounceCompleted() {
+        val expectedResult = "b"
+        val publisher = Publishers.behaviorSubject(expectedResult)
+        val timer = MockTimer()
+        var receivedResult: String? = null
+        publisher
+            .debounce(600.minutes, MockTimerFactory { _, _ -> timer })
+            .subscribe(CancellableManager()) {
+                receivedResult = it
+            }
+        publisher.value = expectedResult
+        publisher.complete()
+        assertEquals(expectedResult, receivedResult)
     }
 }
