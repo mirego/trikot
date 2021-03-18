@@ -51,7 +51,7 @@ open class ViewModelImpl(protected val cancellableManager: CancellableManager) :
 
     protected open val propertyMapping: Map<String, PublishedProperty<*>> by lazy {
         mapOf(
-            this::hidden.name to hiddenDelegate,
+            this::hidden.name to hiddenDelegate
         )
     }
 

@@ -12,15 +12,13 @@ abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewMode
     AppCompatActivity(), NavigationDelegate {
 
     companion object {
-        private val LOG_TAG = "ViewModelActivity"
+        private const val LOG_TAG = "ViewModelActivity"
     }
 
     protected abstract val viewModelController: VMC
     val viewModel: VM by lazy { viewModelController.viewModel }
 
     protected lateinit var lifecycleOwnerWrapper: LifecycleOwnerWrapper
-
-    private var created = false
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,9 +34,8 @@ abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewMode
             )
         }
 
-        if (!created) {
+        if (savedInstanceState == null) {
             viewModelController.onCreate()
-            created = true
         }
     }
 
@@ -57,10 +54,10 @@ abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewMode
         super.onDestroy()
     }
 
-    protected fun <T : ViewModelController<N, VM>> getViewModelController(requestedClass: KClass<T>): T =
+    protected fun <T : ViewModelController<VM, N>> getViewModelController(requestedClass: KClass<T>): T =
         AndroidViewModelProviderFactory.with(this, null).get(requestedClass.java)
 
-    protected fun <T : ViewModelController<N, VM>> getViewModelController(
+    protected fun <T : ViewModelController<VM, N>> getViewModelController(
         requestedClass: KClass<T>,
         navigationData: Any?
     ): T = if (navigationData == null) {

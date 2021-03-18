@@ -29,6 +29,10 @@ job(context.jobFullName) {
         }
     }
     steps {
+        envInjectBuilder {
+            propertiesContent('JAVA_HOME=$OPENJDK_HOME')
+            propertiesFilePath('')
+        }
         gradle {
             useWrapper()
             makeExecutable()
