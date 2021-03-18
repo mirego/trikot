@@ -44,6 +44,8 @@ open class TextFieldViewModelImpl(cancellableManager: CancellableManager) : Cont
         onReturnKeyTapPublisher.value = Unit
     }
 
+    override var formatText: (text: String) -> String = { text -> text }
+
     override fun onValueChange(text: String) {
         this.text = text
     }

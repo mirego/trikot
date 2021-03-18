@@ -15,5 +15,7 @@ interface TextFieldViewModel : ControlViewModel {
     val autoCapitalization: KeyboardAutoCapitalization
     val onReturnKeyTap: () -> Unit
 
+    val formatText: (text: String) -> String
+
     fun onValueChange(text: String)
 }
