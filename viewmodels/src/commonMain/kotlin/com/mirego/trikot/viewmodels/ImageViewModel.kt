@@ -5,10 +5,8 @@ import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.resource.ImageResource
 import org.reactivestreams.Publisher
 
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
-inline class ImageWidth(val value: Int)
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
-inline class ImageHeight(val value: Int)
+data class ImageWidth(val value: Int)
+data class ImageHeight(val value: Int)
 
 interface ImageViewModel : ViewModel {
     fun imageFlow(width: ImageWidth, height: ImageHeight): Publisher<ImageFlow>
