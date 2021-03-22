@@ -1,8 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
 import org.reactivestreams.Publisher
-import org.reactivestreams.Subscriber
-import org.reactivestreams.Subscription
 
 object Publishers {
     fun <T> behaviorSubject(value: T? = null): BehaviorSubject<T> {
@@ -54,19 +52,7 @@ object Publishers {
      * @see <a href="http://reactivex.io/documentation/operators/empty-never-throw.html">http://reactivex.io/documentation/operators/empty-never-throw.html</a>
      */
     fun <T> never(): Publisher<T> {
-        return object : Publisher<T> {
-            override fun subscribe(s: Subscriber<in T>) {
-                s.onSubscribe(
-                    object : Subscription {
-                        override fun request(n: Long) {
-                        }
-
-                        override fun cancel() {
-                        }
-                    }
-                )
-            }
-        }
+        return NeverPublisher()
     }
 
     /**

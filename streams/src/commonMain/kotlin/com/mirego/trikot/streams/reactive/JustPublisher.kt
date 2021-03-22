@@ -5,7 +5,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-class JustPublisher<T>(private val values: Iterable<T>) : Publisher<T> {
+class JustPublisher<T>(val values: Iterable<T>) : Publisher<T> {
     override fun subscribe(s: Subscriber<in T>) {
         val isCancelled = AtomicReference(false)
         s.onSubscribe(
