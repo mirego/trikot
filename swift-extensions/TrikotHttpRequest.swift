@@ -11,7 +11,7 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
     }
 
     public func execute(cancellableManager: CancellableManager) -> Publisher {
-        let resultPublisher = Publishers().behaviorSubject(value: nil)
+        let resultPublisher = Publishers().frozenBehaviorSubject(value: nil)
 
         if let url = URL(string: (requestBuilder.baseUrl ?? "") + (requestBuilder.path ?? "")) {
             let urlRequest = NSMutableURLRequest(url: url, cachePolicy: requestBuilder.nsCachePolicy(), timeoutInterval: TimeInterval(requestBuilder.timeout))
@@ -45,7 +45,6 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
             resultPublisher.error = KotlinThrowable(message: "Unable to create a valid URL")
         }
 
-        MrFreeze().freeze(objectToFreeze: resultPublisher)
         return resultPublisher
     }
 }
