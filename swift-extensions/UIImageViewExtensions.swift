@@ -113,7 +113,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
             imageView.image = nil
             imageView.restoreContentMode()
             if !isImageDependantOnViewSize || (imageView.frame.width > 0 && imageView.frame.height > 0) {
-                let imageFlowPublisher = imageViewModel.imageFlow(width: Int32(imageView.frame.width * sizeMultiplier), height: Int32(imageView.frame.height * sizeMultiplier))
+                let imageFlowPublisher = imageViewModel.imageFlow(width: ImageWidth(value: Int32(imageView.frame.width * sizeMultiplier)), height: ImageHeight(value: Int32(imageView.frame.height * sizeMultiplier)))
                 observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageViewModel: imageViewModel, imageView: imageView)
             }
 
@@ -125,7 +125,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
                         shouldUpdate = (abs(newValue.width - oldValue.width) >= self.minimumSizeChange) || (abs(newValue.height - oldValue.height) >= self.minimumSizeChange)
                     }
                     if shouldUpdate { 
-                        let imageFlowPublisher = imageViewModel.imageFlow(width: Int32(newValue.width * self.sizeMultiplier), height: Int32(newValue.height * self.sizeMultiplier))
+                        let imageFlowPublisher = imageViewModel.imageFlow(width:  ImageWidth(value: Int32(newValue.width * self.sizeMultiplier)), height: ImageHeight(value: Int32(newValue.height * self.sizeMultiplier)))
                         self.observeImageFlow(imageFlowPublisher, cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(), imageViewModel: imageViewModel, imageView: imageView) 
                     }
                 })

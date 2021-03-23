@@ -38,6 +38,7 @@ class ListView: UIView {
         tableView.register(AutosizingCell<InputTextListItem>.self, forCellReuseIdentifier: AutosizingCell<InputTextListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<SliderListItem>.self, forCellReuseIdentifier: AutosizingCell<SliderListItem>.self.defaultReuseIdentifier)
         tableView.register(AutosizingCell<ToggleSwitchListItem>.self, forCellReuseIdentifier: AutosizingCell<ToggleSwitchListItem>.self.defaultReuseIdentifier)
+        tableView.register(AutosizingCell<PickerListItem>.self, forCellReuseIdentifier: AutosizingCell<PickerListItem>.self.defaultReuseIdentifier)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -95,6 +96,10 @@ extension ListView: UITableViewDataSource {
             return cell
         } else if let metaListItem = metaListItem as? ToggleSwitchListItemViewModel {
             let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ToggleSwitchListItem>.self, for: indexPath)
+            cell.view.item = metaListItem
+            return cell
+        } else if let metaListItem = metaListItem as? PickerListItemViewModel {
+            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<PickerListItem>.self, for: indexPath)
             cell.view.item = metaListItem
             return cell
         }

@@ -6,6 +6,7 @@ import com.trikot.viewmodels.sample.viewmodels.home.ButtonsViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.ImagesViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.InputTextViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.LabelsViewModel
+import com.trikot.viewmodels.sample.viewmodels.home.PickersViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.SlidersViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.SwitchesViewModel
 import com.trikot.viewmodels.sample.viewmodels.home.ViewsViewModel
@@ -22,5 +23,6 @@ enum class Destination(val getViewModel: (NavigationDelegate) -> ListViewModel<L
     IMAGES({ ImagesViewModel(it) }),
     INPUT_TEXT({ InputTextViewModel(it) }),
     SLIDERS({ SlidersViewModel(it) }),
-    SWITCHES({ SwitchesViewModel(it) })
+    SWITCHES({ SwitchesViewModel(it) }),
+    PICKERS({ PickersViewModel(it) })
 }
