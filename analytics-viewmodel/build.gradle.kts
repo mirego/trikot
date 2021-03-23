@@ -33,7 +33,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":analytics"))
+                implementation("com.mirego.trikot:analytics:2.0.2")
                 implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
                 implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
                 implementation("com.mirego.trikot:viewmodels:${project.extra["trikot_viewmodels_version"]}")
@@ -90,4 +90,5 @@ release {
     checkTasks = listOf("check")
     buildTasks = listOf("publish")
     updateVersionPart = 2
+    tagPrefix = "viewmodel-"
 }
