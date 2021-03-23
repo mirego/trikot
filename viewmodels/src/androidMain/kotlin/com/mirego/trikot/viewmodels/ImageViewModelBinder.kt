@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels
 
 import android.widget.ImageView
+import androidx.core.view.OneShotPreDrawListener
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
@@ -36,23 +37,21 @@ object ImageViewModelBinder {
 
             val originalScaleType = imageView.scaleType
 
-            imageView.viewTreeObserver.addOnPreDrawListener(
-                ViewLoaderPreDrawListener(imageView) { width: ImageWidth, height: ImageHeight ->
-                    it.imageFlow(width, height)
-                        .withCancellableManager()
-                        .observe(lifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
-                            processImageFlow(
-                                it,
-                                imageFlow,
-                                imageView,
-                                transformation,
-                                originalScaleType,
-                                placeholderScaleType,
-                                manager
-                            )
-                        }
-                }
-            )
+            OneShotPreDrawListener.add(imageView) {
+                it.imageFlow(ImageWidth(imageView.width), ImageHeight(imageView.height))
+                    .withCancellableManager()
+                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
+                        processImageFlow(
+                            it,
+                            imageFlow,
+                            imageView,
+                            transformation,
+                            originalScaleType,
+                            placeholderScaleType,
+                            manager
+                        )
+                    }
+            }
         }
     }
 
