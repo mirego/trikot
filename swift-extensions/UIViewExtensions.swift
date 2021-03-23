@@ -8,6 +8,7 @@ extension UIView {
         set(viewModel) {
             unsubscribeFromAllPublisher()
             setTrikotViewModel(viewModel: viewModel)
+            removePreviousRegisteredTapAction()
             guard let viewModel = viewModel else { return }
 
             bind(viewModel.alpha, \UIView.alpha)
@@ -16,20 +17,13 @@ extension UIView {
 
             bind(viewModel.hidden, \UIView.isHidden)
 
-            let onTapResetableCancelableManager = CancellableManagerProvider()
-            trikotInternalPublisherCancellableManager.add(cancellable: onTapResetableCancelableManager)
-
             if !(self is UIControl) {
                 observe(viewModel.action) {[weak self] (value: ViewModelAction) in
                     guard let self = self else { return }
-                    let newCancellableManager = onTapResetableCancelableManager.cancelPreviousAndCreate()
-
+                    self.removePreviousRegisteredTapAction()
                     if value != ViewModelAction.Companion().None {
-                        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(self.trikotOnViewTouchUp))
+                        let tapGestureReconizer = TrikotTapGestureRecognizer(target: self, action: #selector(self.trikotOnViewTouchUp))
                         self.addGestureRecognizer(tapGestureReconizer)
-                        newCancellableManager.add {[weak self] in
-                            self?.removeGestureRecognizer(tapGestureReconizer)
-                        }
                     }
                 }
             }
@@ -99,5 +93,13 @@ extension UIView {
         } else {
             return referenceFont
         }
-    }    
+    }
+
+    private func removePreviousRegisteredTapAction() {
+        if let recognizersToRemove = self.gestureRecognizers?.filter { $0 is TrikotTapGestureRecognizer } {
+            recognizersToRemove.forEach { self.removeGestureRecognizer($0) }
+        }
+    }
 }
+
+class TrikotTapGestureRecognizer: UITapGestureRecognizer {}
