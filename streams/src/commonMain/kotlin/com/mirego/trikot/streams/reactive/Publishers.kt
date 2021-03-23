@@ -1,5 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
+import com.mirego.trikot.foundation.concurrent.MrFreeze
 import org.reactivestreams.Publisher
 
 object Publishers {
@@ -7,8 +8,16 @@ object Publishers {
         return BehaviorSubjectImpl(value)
     }
 
+    fun <T> frozenBehaviorSubject(value: T? = null): BehaviorSubject<T> {
+        return MrFreeze.freeze(BehaviorSubjectImpl(value))
+    }
+
     fun <T> publishSubject(): PublishSubject<T> {
         return PublishSubjectImpl()
+    }
+
+    fun <T> frozenPublishSubject(): PublishSubject<T> {
+        return MrFreeze.freeze(PublishSubjectImpl())
     }
 
     /**

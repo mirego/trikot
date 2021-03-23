@@ -19,8 +19,7 @@ class ThreadLocalProcessorTests {
 
     @Test
     fun threadLocalSubscribersAreNotFrozenByFrozenParentPublisher() {
-        val initialPublisher = Publishers.behaviorSubject("a")
-        initialPublisher.freeze()
+        val initialPublisher = Publishers.frozenBehaviorSubject("a")
         val threadLocal =
             ThreadLocalProcessor(initialPublisher, FreezingDispatchQueue(), FreezingDispatchQueue())
         val sharedPublisher = threadLocal.shared().also { MrFreeze.ensureNeverFrozen(it) }
