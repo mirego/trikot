@@ -1,5 +1,7 @@
 package com.mirego.trikot.streams.reactive.processors
 
+import com.mirego.trikot.foundation.concurrent.atomic
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import org.reactivestreams.Publisher
@@ -25,20 +27,41 @@ class DelayProcessor<T>(
         private val timerFactory: TimerFactory
     ) : ProcessorSubscription<T, T>(subscriber) {
 
+        private val serialQueue = SynchronousSerialQueue()
         private val cancellableManagerProvider = CancellableManager()
 
+        private var blocksToRun: List<() -> Unit> by atomic(emptyList())
+
+        private fun runNextBlock() {
+            serialQueue.dispatch {
+                blocksToRun.firstOrNull()?.invoke()
+                blocksToRun = blocksToRun.drop(1)
+            }
+        }
+
+        private fun scheduleTimerForNextBlock(delay: Duration) {
+            timerFactory.single(delay, ::runNextBlock)
+                .also { cancellableManagerProvider.add { it.cancel() } }
+        }
+
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
-            val timer = timerFactory.single(delay) { subscriber.onNext(t) }
-            cancellableManagerProvider.add { timer.cancel() }
+            blocksToRun = blocksToRun + { subscriber.onNext(t) }
+            scheduleTimerForNextBlock(delay)
+        }
+
+        override fun onError(t: Throwable) {
+            blocksToRun = blocksToRun + { super.onError(t) }
+            scheduleTimerForNextBlock(delay)
+        }
+
+        override fun onComplete() {
+            blocksToRun = blocksToRun + { super.onComplete() }
+            scheduleTimerForNextBlock(delay)
         }
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
-            cancellableManagerProvider.cancel()
-        }
-
-        override fun onComplete() {
-            super.onComplete()
+            blocksToRun = emptyList()
             cancellableManagerProvider.cancel()
         }
     }

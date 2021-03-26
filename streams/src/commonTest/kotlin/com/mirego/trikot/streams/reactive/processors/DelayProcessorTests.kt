@@ -8,7 +8,7 @@ import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
@@ -18,8 +18,7 @@ class DelayProcessorTests {
 
     @Test
     fun testEveryUpstreamValueIsDelayedByTheSameAmountOfTime() {
-        val values = listOf("a", "b", "c")
-        val publisher = Publishers.fromIterable(values)
+        val publisher = Publishers.behaviorSubject<String>()
 
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, _ -> MockTimer().also { timers.add(it) } }
@@ -31,12 +30,72 @@ class DelayProcessorTests {
                 receivedResults.add(it)
             }
 
-        timers.forEachIndexed { index, mockTimer ->
-            mockTimer.executeBlock()
-            assertEquals(values[index], receivedResults[index])
-        }
+        publisher.value = "a"
+        publisher.value = "b"
+        publisher.value = "c"
 
-        assertEquals(values.size, timerFactory.singleCall)
+        timers.forEach(MockTimer::executeBlock)
+
+        assertEquals(listOf("a", "b", "c"), receivedResults)
+        assertEquals(3, timerFactory.singleCall)
+    }
+
+    @Test
+    fun testUpstreamErrorIsDelayed() {
+        val publisher = Publishers.behaviorSubject("a")
+        val error = Throwable()
+
+        val timers = mutableListOf<MockTimer>()
+        val timerFactory = MockTimerFactory { _, _ -> MockTimer().also { timers.add(it) } }
+
+        val receivedValues = mutableListOf<String>()
+        val receivedErrors = mutableListOf<Throwable>()
+        publisher
+            .delay(5.seconds, timerFactory)
+            .subscribe(
+                CancellableManager(),
+                onNext = { receivedValues.add(it) },
+                onError = { receivedErrors.add(it) }
+            )
+
+        publisher.value = "b"
+        publisher.error = error
+
+        assertEquals(3, timerFactory.singleCall)
+
+        timers.forEach(MockTimer::executeBlock)
+
+        assertEquals(listOf("a", "b"), receivedValues)
+        assertEquals(listOf(error), receivedErrors)
+    }
+
+    @Test
+    fun testCompletionIsDelayed() {
+        val publisher = Publishers.just("a")
+
+        val timers = mutableListOf<MockTimer>()
+        val timerFactory = MockTimerFactory { _, _ -> MockTimer().also { timers.add(it) } }
+
+        val receivedResults = mutableListOf<String>()
+        var completed = false
+        publisher
+            .delay(5.seconds, timerFactory)
+            .subscribe(
+                CancellableManager(),
+                onNext = { receivedResults.add(it) },
+                onError = { },
+                onCompleted = { completed = true }
+            )
+
+        assertEquals(2, timerFactory.singleCall)
+
+        timers[0].executeBlock()
+        assertEquals(listOf("a"), receivedResults)
+        assertFalse(completed)
+
+        timers[1].executeBlock()
+        assertEquals(listOf("a"), receivedResults)
+        assertTrue(completed)
     }
 
     @Test
@@ -65,48 +124,5 @@ class DelayProcessorTests {
 
         assertEquals(listOf("a", "b"), receivedResults)
         timers.forEach { assertTrue(it.isCancelled) }
-    }
-
-    @Test
-    fun testTimersAreCancelledWhenUpstreamCompletesBeforeTimersCompletion() {
-        val publisher = Publishers.behaviorSubject<String>()
-
-        val timers = mutableListOf<MockTimer>()
-        val timerFactory = MockTimerFactory { _, _ -> MockTimer().also { timers.add(it) } }
-
-        val receivedResults = mutableListOf<String>()
-        var error: Throwable? = null
-        var completed = false
-        publisher
-            .delay(5.seconds, timerFactory)
-            .subscribe(
-                CancellableManager(),
-                onNext = {
-                    receivedResults.add(it)
-                },
-                onError = {
-                    error = it
-                },
-                onCompleted = {
-                    completed = true
-                }
-            )
-
-        publisher.value = "a"
-        timers[0].executeBlock()
-        assertEquals(listOf("a"), receivedResults)
-
-        publisher.value = "b"
-        timers[1].executeBlock()
-        assertEquals(listOf("a", "b"), receivedResults)
-
-        publisher.value = "c"
-        // delayed timer does not fire yet!
-        publisher.complete()
-
-        assertEquals(listOf("a", "b"), receivedResults)
-        assertNull(error)
-        assertTrue(completed)
-        assertTrue(timers[2].isCancelled)
     }
 }
