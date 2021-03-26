@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
   spec.source        = { :git => "https://github.com/mirego/trikot.viewmodels.git", :tag => "#{spec.version}" }
   spec.source_files  = "swift-extensions/*.swift"
   spec.tvos.source_files = "swift-extensions/*.swift"
-  spec.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift", "swift-extensions/UISwitchExtensions.swift"
+  spec.tvos.exclude_files = "swift-extensions/UISliderExtensions.swift", "swift-extensions/UISwitchExtensions.swift", "swift-extensions/UIPickerExtensions.swift"
 
   spec.static_framework = true
   spec.ios.deployment_target = '9.0'
