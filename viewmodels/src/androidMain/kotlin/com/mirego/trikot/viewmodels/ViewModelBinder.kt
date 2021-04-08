@@ -54,13 +54,9 @@ fun View.bindAction(viewModel: ViewModel, lifecycleOwnerWrapper: LifecycleOwnerW
             }
             else -> setOnClickListener { view ->
                 with(view) {
-                    isClickable = false
-                    postDelayed({ isClickable = true }, NEXT_CLICK_THRESHOLD)
                     action.execute(this)
                 }
             }
         }
     }
 }
-
-const val NEXT_CLICK_THRESHOLD = 200L
