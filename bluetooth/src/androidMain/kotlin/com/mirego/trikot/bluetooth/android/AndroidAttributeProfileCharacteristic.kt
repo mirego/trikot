@@ -1,11 +1,12 @@
-package mirego.trikot.bluetooth
+package com.mirego.trikot.bluetooth.android
 
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import com.mirego.trikot.bluetooth.AttributeProfileCharacteristic
 import com.mirego.trikot.bluetooth.AttributeProfileCharacteristicEvent
 import com.mirego.trikot.streams.reactive.Publishers
-import java.util.*
+import java.util.Locale
+import java.util.UUID
 
 class AndroidAttributeProfileCharacteristic(
     private val bluetoothGattCharacteristic: BluetoothGattCharacteristic,

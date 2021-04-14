@@ -63,7 +63,10 @@ attributeProfileCharacteristic.watchWithIndication()
 See [swift extensions](./swift-extensions/README.md) for more information.
 
 #### Android
-See [android-ktx](./android-ktx/README.md) for more information.
+```kotlin
+    val context = this // application context
+    BluetoothConfiguration.bluetoothManager = AndroidBluetoothManager(context)
+```
 
 ## Common
 ##### Import dependencies

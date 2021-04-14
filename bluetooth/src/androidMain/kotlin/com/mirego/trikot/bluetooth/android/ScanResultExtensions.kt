@@ -1,4 +1,4 @@
-package mirego.trikot.bluetooth
+package com.mirego.trikot.bluetooth.android
 
 import android.bluetooth.le.ScanResult
 import android.content.Context

@@ -1,13 +1,13 @@
-package com.mirego.trikot.bluetooth.android.ktx
+package com.mirego.trikot.bluetooth.android
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothAdapter.STATE_ON
+import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
-import android.bluetooth.le.BluetoothLeScanner
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -21,11 +21,10 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.BehaviorSubject
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.subscribe
-import mirego.trikot.bluetooth.AndroidBluetoothScanResult
-import mirego.trikot.bluetooth.toBluetoothScanResult
 import org.reactivestreams.Publisher
 import java.util.Timer
 import java.util.UUID
+import kotlin.collections.set
 import kotlin.concurrent.schedule
 import kotlin.time.ExperimentalTime
 
@@ -34,17 +33,19 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
     override val statePublisher = Publishers.behaviorSubject<BluetoothManager.State>()
-    override val missingPermissionsPublisher = Publishers.behaviorSubject<List<BluetoothManager.Permission>>()
+    override val missingPermissionsPublisher =
+        Publishers.behaviorSubject<List<BluetoothManager.Permission>>()
 
     fun refreshLocationPermission() {
-        missingPermissionsPublisher.value = if (ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED) {
-            emptyList()
-        } else {
-            listOf(BluetoothManager.Permission.LOCATION)
-        }
+        missingPermissionsPublisher.value =
+            if (
+                ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                emptyList()
+            } else {
+                listOf(BluetoothManager.Permission.LOCATION)
+            }
     }
 
     init {
@@ -59,23 +60,26 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
         }
 
         val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        context.registerReceiver(object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                val action = intent.action
-                if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
-                    val state = intent.getIntExtra(
-                        BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR
-                    )
-                    when (state) {
-                        BluetoothAdapter.STATE_OFF ->
-                            statePublisher.value = BluetoothManager.State.OFF
-                        STATE_ON ->
-                            statePublisher.value = BluetoothManager.State.ON
+        context.registerReceiver(
+            object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                    val action = intent.action
+                    if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
+                        val state = intent.getIntExtra(
+                            BluetoothAdapter.EXTRA_STATE,
+                            BluetoothAdapter.ERROR
+                        )
+                        when (state) {
+                            BluetoothAdapter.STATE_OFF ->
+                                statePublisher.value = BluetoothManager.State.OFF
+                            STATE_ON ->
+                                statePublisher.value = BluetoothManager.State.ON
+                        }
                     }
                 }
-            }
-        }, filter)
+            },
+            filter
+        )
     }
 
     override fun scanForDevices(
@@ -216,5 +220,4 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
         const val RETRY_TIMEOUT: Long = 200
         const val SCAN_TIMEOUT: Long = 20 * 1000
     }
-
 }
