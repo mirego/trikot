@@ -57,6 +57,7 @@ class KtorHttpRequestFactory(
                 socketTimeoutMillis = socketTimeoutDuration.toLongMilliseconds()
                 connectTimeoutMillis = connectTimeoutDuration.toLongMilliseconds()
             }
+            expectSuccess = false
         }
     }
 
