@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels.declarative.extensions
+package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
 import androidx.compose.ui.text.input.ImeAction
 import com.mirego.trikot.viewmodels.declarative.properties.KeyboardReturnKeyType

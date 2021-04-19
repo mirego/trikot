@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform")
     id("com.android.library")
+    kotlin("multiplatform")
     id("org.jlleitschuh.gradle.ktlint")
     id("mirego.release").version("2.0")
     id("mirego.publish").version("1.0")
@@ -78,16 +78,6 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlin_version"]}")
-                implementation("androidx.compose.ui:ui:${project.extra["compose_version"]}")
-                implementation("androidx.compose.ui:ui-tooling:${project.extra["compose_version"]}")
-                implementation("androidx.compose.runtime:runtime-livedata:${project.extra["compose_version"]}")
-                implementation("androidx.compose.runtime:runtime-rxjava2:${project.extra["compose_version"]}")
-                implementation("androidx.compose.foundation:foundation:${project.extra["compose_version"]}")
-                implementation("androidx.compose.material:material:${project.extra["compose_version"]}")
-                implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03")
-                implementation("androidx.activity:activity-compose:1.3.0-alpha04")
-                implementation("androidx.lifecycle:lifecycle-process:${project.extra["androidx_lifecycle_version"]}")
                 implementation("androidx.appcompat:appcompat:1.2.0")
             }
         }
@@ -133,22 +123,11 @@ android {
     }
 
     buildFeatures {
-        compose = true
+        buildConfig = false
     }
     compileOptions {
-        // Setting VERSION_11 here causes an error, waiting for AGP fix. https://issuetracker.google.com/issues/181770616
-        sourceCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility(JavaVersion.VERSION_11)
         targetCompatibility(JavaVersion.VERSION_11)
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "${project.extra["compose_version"]}"
-    }
-}
-
-// kotlinOptions is weirdly unavailable in Kotlin without a cast. AGP bug?
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "11"
     }
 }
 
