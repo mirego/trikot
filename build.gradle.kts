@@ -13,8 +13,24 @@ buildscript {
     }
 }
 
+plugins {
+    id("mirego.release").version("2.0")
+}
+
 allprojects {
     repositories {
         google()
     }
+}
+
+release {
+    checkTasks = listOf(
+        ":viewmodels-declarative:check",
+        ":compose:check"
+    )
+    buildTasks = listOf(
+        ":viewmodels-declarative:publish",
+        ":compose:publish"
+    )
+    updateVersionPart = 2
 }

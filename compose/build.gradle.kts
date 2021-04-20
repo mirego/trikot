@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("mirego.release").version("2.0")
     id("mirego.publish").version("1.0")
 }
 
@@ -47,13 +46,6 @@ dependencies {
     implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
     implementation("androidx.compose.foundation:foundation:${project.extra["compose_version"]}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlin_version"]}")
-}
-
-release {
-    checkTasks = listOf("check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
-    tagPrefix = "compose-"
 }
 
 tasks {
