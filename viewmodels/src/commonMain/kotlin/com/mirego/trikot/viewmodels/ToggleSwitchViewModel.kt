@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels
 
+import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
 interface ToggleSwitchViewModel : ViewModel {
@@ -9,12 +10,12 @@ interface ToggleSwitchViewModel : ViewModel {
     val isOn: Publisher<Boolean>
 
     /**
-     * Set the state defined by the platform switch
-     */
-    fun setIsOn(on: Boolean)
-
-    /**
      * If the ToggleSwitch is enabled or disabled
      */
-    val enabled: Publisher<Boolean>
+    val isEnabled: Publisher<Boolean>
+
+    /**
+     * Specific action that activates on value changed instead of on click to handle swiping
+     */
+    val toggleSwitchAction: Publisher<ViewModelAction>
 }
