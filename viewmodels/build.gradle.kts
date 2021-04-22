@@ -85,6 +85,18 @@ kotlin {
             }
         }
 
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.2")
+                implementation("androidx.test:core:1.3.0")
+                implementation("androidx.test.ext:junit:1.1.2")
+                implementation("org.robolectric:robolectric:4.5.1")
+                implementation("androidx.fragment:fragment-testing:1.3.2")
+            }
+        }
+
         val nativeMain by creating {
             dependsOn(commonMain)
         }
@@ -116,13 +128,19 @@ kotlin {
 }
 
 dependencies {
-    configurations.get("kapt").dependencies.add(DefaultExternalModuleDependency("com.android.databinding", "compiler", "3.1.4"))
+    configurations.get("kapt").dependencies.add(
+        DefaultExternalModuleDependency(
+            "com.android.databinding",
+            "compiler",
+            "3.1.4"
+        )
+    )
 }
 
 android {
     defaultConfig {
         compileSdkVersion(30)
-        minSdkVersion(14)
+        minSdkVersion(21)
         targetSdkVersion(30)
     }
 
@@ -133,6 +151,26 @@ android {
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+
+    sourceSets {
+        val test by getting {
+            manifest {
+                srcFile("src/androidTest/AndroidManifest.xml")
+            }
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
