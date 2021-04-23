@@ -1,5 +1,6 @@
 package com.mirego.trikot.kword
 
+import com.mirego.trikot.kword.extensions.toKWordKey
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -24,31 +25,23 @@ class DefaultI18NTests {
 
     @Test
     fun givenStringWithLocalizedReplacementsThenItReplacePlaceholders() {
-        assertEquals("foo", defaultI18N["foo_key".kk])
-        assertEquals("bar", defaultI18N["bar_key".kk])
-        assertEquals("this is foo bar", defaultI18N["foo_bar_key".kk])
+        assertEquals("foo", defaultI18N["foo_key".toKWordKey])
+        assertEquals("bar", defaultI18N["bar_key".toKWordKey])
+        assertEquals("this is foo bar", defaultI18N["foo_bar_key".toKWordKey])
     }
 
     @Test
     fun givenStringWithArguments() {
-        assertEquals("Hi my name is Bob", defaultI18N.t("hi_my_name_is_key".kk, "name" to "Bob"))
+        assertEquals("Hi my name is Bob", defaultI18N.t("hi_my_name_is_key".toKWordKey, "name" to "Bob"))
     }
 
     @Test
     fun givenStringWithMissingArgumentsThenItKeepsThePlaceholder() {
-        assertEquals("Hi my name is {{name}}", defaultI18N.t("hi_my_name_is_key".kk))
+        assertEquals("Hi my name is {{name}}", defaultI18N.t("hi_my_name_is_key".toKWordKey))
     }
 
     @Test
     fun givenStringWithLocalizedReplacementsAndArgumentsThenItUsesArgumentOverLocalizedReplacement() {
-        assertEquals("this is foo rab", defaultI18N.t("foo_bar_key".kk, "bar_key" to "rab"))
+        assertEquals("this is foo rab", defaultI18N.t("foo_bar_key".toKWordKey, "bar_key" to "rab"))
     }
-
-    private val String.kk: KWordKey
-        get() {
-            return object : KWordKey {
-                override val translationKey: String
-                    get() = this@kk
-            }
-        }
 }

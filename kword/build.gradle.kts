@@ -10,6 +10,7 @@ repositories {
     google()
     mavenLocal()
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
     maven("https://kotlin.bintray.com/kotlinx")
     maven("https://jitpack.io")
     maven("https://plugins.gradle.org/m2/")
@@ -57,6 +58,10 @@ kotlin {
 
         val jsMain by getting {
             dependsOn(commonMain)
+            dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+                implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.150-kotlin-1.4.31")
+            }
         }
 
         val jsTest by getting {
