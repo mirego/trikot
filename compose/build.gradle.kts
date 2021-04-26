@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -44,7 +44,12 @@ dependencies {
     implementation(project(":viewmodels-declarative"))
     implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
     implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
+
     implementation("androidx.compose.foundation:foundation:${project.extra["compose_version"]}")
+    implementation("androidx.compose.material:material:${project.extra["compose_version"]}")
+
+    implementation("com.google.accompanist:accompanist-glide:${project.extra["google_accompanist_version"]}")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlin_version"]}")
 }
 

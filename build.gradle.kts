@@ -15,6 +15,7 @@ buildscript {
 
 plugins {
     id("mirego.release").version("2.0")
+    id("mirego.publish").version("1.0")
 }
 
 allprojects {
