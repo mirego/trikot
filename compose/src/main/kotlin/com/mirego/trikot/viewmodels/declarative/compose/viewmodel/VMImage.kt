@@ -77,7 +77,7 @@ fun LocalImage(
 @Composable
 fun RemoteImage(
     imageUrl: String,
-    placeholderImage: ImageResource,
+    placeholderImage: ImageResource = ImageResource.None,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
