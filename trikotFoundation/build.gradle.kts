@@ -25,7 +25,7 @@ kotlin {
     ios()
     iosArm32("iosArm32")
     tvos()
-    js(IR) {
+    js(BOTH) {
         browser()
     }
 
