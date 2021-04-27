@@ -25,14 +25,15 @@ fun <C : Content> VMButton(
     val buttonViewModel: ButtonViewModel<C> by viewModel.observeAsState()
 
     Box(
-        modifier = modifier
+        modifier = Modifier
+            .hidden(buttonViewModel.hidden)
             .clickable(
                 enabled = buttonViewModel.enabled,
                 onClick = viewModel.action,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple()
             )
-            .hidden(buttonViewModel.hidden),
+            .then(modifier),
         contentAlignment = contentAlignment,
         content = { content(buttonViewModel.content) }
     )

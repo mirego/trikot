@@ -42,7 +42,9 @@ fun VMText(
 
     Text(
         text = textViewModel.text,
-        modifier = modifier.hidden(textViewModel.hidden),
+        modifier = Modifier
+            .hidden(textViewModel.hidden)
+            .then(modifier),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,

@@ -19,7 +19,9 @@ fun <C : Content> VMToggleCheckbox(
 ) {
     val toggleViewModel: ToggleViewModel<C> by viewModel.observeAsState()
     Checkbox(
-        modifier = modifier.hidden(toggleViewModel.hidden),
+        modifier = Modifier
+            .hidden(toggleViewModel.hidden)
+            .then(modifier),
         enabled = toggleViewModel.enabled,
         checked = toggleViewModel.isOn,
         colors = colors,

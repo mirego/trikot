@@ -32,7 +32,9 @@ fun VMImage(
 
     if (image is Local) {
         LocalImage(
-            modifier = modifier.hidden(imageViewModel.hidden),
+            modifier = Modifier
+                .hidden(imageViewModel.hidden)
+                .then(modifier),
             imageResource = image.imageResource,
             alignment = alignment,
             contentScale = contentScale,
@@ -42,7 +44,9 @@ fun VMImage(
         )
     } else if (image is Remote) {
         RemoteImage(
-            modifier = modifier.hidden(imageViewModel.hidden),
+            modifier = Modifier
+                .hidden(imageViewModel.hidden)
+                .then(modifier),
             imageUrl = image.url,
             placeholderImage = image.placeholderImageResource,
             alignment = alignment,
