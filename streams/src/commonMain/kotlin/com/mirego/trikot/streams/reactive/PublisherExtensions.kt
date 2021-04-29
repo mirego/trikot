@@ -5,6 +5,9 @@ import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
 import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.backoff.Backoff
+import com.mirego.trikot.streams.reactive.backoff.BackoffPolicy
+import com.mirego.trikot.streams.reactive.backoff.ExponentialBackoffPolicy
 import com.mirego.trikot.streams.reactive.processors.ConcatProcessor
 import com.mirego.trikot.streams.reactive.processors.DebounceProcessor
 import com.mirego.trikot.streams.reactive.processors.DelayProcessor
@@ -226,4 +229,20 @@ fun <T> Publisher<T>.sample(
     timerFactory: TimerFactory = FoundationConfiguration.timerFactory
 ): Publisher<T> {
     return SampleProcessor(this, interval, timerFactory)
+}
+
+/**
+ * Retries all errors with a specific backoff strategy. When backoff strategy returns stop
+ * it will emit the last received error.
+ */
+fun <T> Publisher<T>.retryBackoff(
+    backoffPolicy: BackoffPolicy = ExponentialBackoffPolicy(),
+    timerFactory: TimerFactory = FoundationConfiguration.timerFactory
+) = retryWhen { errors ->
+    errors.switchMap {
+        when (val backoff = backoffPolicy.nextBackoff()) {
+            is Backoff.Stop -> Publishers.error(it)
+            is Backoff.Next -> Publishers.timer(backoff.duration, timerFactory)
+        }
+    }
 }
