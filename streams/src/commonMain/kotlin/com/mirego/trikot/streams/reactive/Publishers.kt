@@ -1,7 +1,10 @@
 package com.mirego.trikot.streams.reactive
 
+import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.MrFreeze
+import com.mirego.trikot.foundation.timers.TimerFactory
 import org.reactivestreams.Publisher
+import kotlin.time.Duration
 
 object Publishers {
     fun <T> behaviorSubject(value: T? = null): BehaviorSubject<T> {
@@ -76,6 +79,15 @@ object Publishers {
     fun <T> completed(): Publisher<T> {
         return publishSubject<T>().also { it.complete() }
     }
+
+    /**
+     * Create a Publisher that emits after delay and terminates.
+     */
+    fun timer(
+        delay: Duration,
+        timerFactory: TimerFactory = FoundationConfiguration.timerFactory
+    ): Publisher<Long> =
+        TimerPublisher(delay, timerFactory)
 }
 
 fun <T> T.asPublisher(): Publisher<T> = Publishers.behaviorSubject(this)
