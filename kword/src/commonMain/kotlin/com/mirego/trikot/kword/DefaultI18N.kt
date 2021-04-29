@@ -46,9 +46,11 @@ open class DefaultI18N : I18N {
     ): String {
         return translationArgumentsParser.replaceInTranslation(
             source.get(key.translationKey),
-            sourceRef.value.strings + arguments
+            arguments,
+            source.strings
         )
     }
+
     companion object {
         private const val COUNT_ARGUMENT = "count"
     }
