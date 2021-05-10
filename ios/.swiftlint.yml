@@ -3,6 +3,7 @@
 
 # Rule identifiers to exclude from running
 disabled_rules:
+  - comment_spacing
   - force_cast
   - function_body_length
 
@@ -10,7 +11,7 @@ disabled_rules:
 opt_in_rules:
   - anyobject_protocol
   - array_init
-  #- attributes # Temporarily disabled because of false positives in Xcode 11.4
+  - attributes
   #- closure_body_length
   - closure_end_indentation
   - closure_spacing
@@ -39,7 +40,7 @@ opt_in_rules:
   - extension_access_modifier
   - fallthrough
   - fatal_error_message
-  #- file_header
+  - file_header
   #- file_name
   - file_name_no_space
   #- file_types_order
@@ -79,6 +80,7 @@ opt_in_rules:
   - override_in_extension
   - pattern_matching_keywords
   - prefer_self_type_over_type_of_self
+  - prefer_zero_over_explicit_init
   - prefixed_toplevel_constant
   - private_action
   - private_outlet
@@ -157,3 +159,6 @@ cyclomatic_complexity:
 
 discouraged_object_literal:
   color_literal: false
+
+attributes:
+  always_on_line_above: ["@objc"]ß
