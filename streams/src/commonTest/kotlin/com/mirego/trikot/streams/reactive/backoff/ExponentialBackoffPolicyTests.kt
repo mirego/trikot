@@ -12,22 +12,22 @@ class ExponentialBackoffPolicyTests {
     @Test
     fun exponentialBackoff_withMaxRetry() {
         val backoffPolicy = ExponentialBackoffPolicy(
-            initialInterval = 1.minutes,
+            initialInterval = Duration.minutes(1),
             maxRetries = 8,
-            maxInterval = 1.hours,
+            maxInterval = Duration.hours(1),
             multiplier = 2.0
         )
 
         (1..2).forEach { _ ->
             val backoffs = (1..10).map { backoffPolicy.nextBackoff() }
-            assertBackoffDuration(1.minutes, backoffs[0])
-            assertBackoffDuration(2.minutes, backoffs[1])
-            assertBackoffDuration(4.minutes, backoffs[2])
-            assertBackoffDuration(8.minutes, backoffs[3])
-            assertBackoffDuration(16.minutes, backoffs[4])
-            assertBackoffDuration(32.minutes, backoffs[5])
-            assertBackoffDuration(1.hours, backoffs[6])
-            assertBackoffDuration(1.hours, backoffs[7])
+            assertBackoffDuration(Duration.minutes(1), backoffs[0])
+            assertBackoffDuration(Duration.minutes(2), backoffs[1])
+            assertBackoffDuration(Duration.minutes(4), backoffs[2])
+            assertBackoffDuration(Duration.minutes(8), backoffs[3])
+            assertBackoffDuration(Duration.minutes(16), backoffs[4])
+            assertBackoffDuration(Duration.minutes(32), backoffs[5])
+            assertBackoffDuration(Duration.hours(1), backoffs[6])
+            assertBackoffDuration(Duration.hours(1), backoffs[7])
             assertBackoffStop(backoffs[8])
             assertBackoffStop(backoffs[9])
 
@@ -38,13 +38,13 @@ class ExponentialBackoffPolicyTests {
     @Test
     fun exponentialBackoff_multiplierIsOneWithoutMaxRetry() {
         val backoffPolicy = ExponentialBackoffPolicy(
-            initialInterval = 1.seconds,
+            initialInterval = Duration.seconds(1),
             maxInterval = Duration.INFINITE,
             multiplier = 1.0
         )
         val backoffs = (1..1000).map { backoffPolicy.nextBackoff() }
         backoffs.forEach {
-            assertBackoffDuration(1.seconds, it)
+            assertBackoffDuration(Duration.seconds(1), it)
         }
     }
 

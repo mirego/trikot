@@ -9,6 +9,7 @@ import com.mirego.trikot.streams.utils.MockTimerFactory
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlin.time.Duration
 import kotlin.time.seconds
 
 class SampleProcessorTests {
@@ -30,7 +31,7 @@ class SampleProcessorTests {
         val publishedValues = mutableListOf<Int>()
 
         publisher
-            .sample(1.seconds, mockTimerFactory)
+            .sample(Duration.seconds(1), mockTimerFactory)
             .subscribe(CancellableManager()) {
                 publishedValues.add(it)
             }
@@ -46,7 +47,7 @@ class SampleProcessorTests {
         val publishedValues = mutableListOf<Int>()
 
         publisher
-            .sample(1.seconds, mockTimerFactory)
+            .sample(Duration.seconds(1), mockTimerFactory)
             .subscribe(CancellableManager()) {
                 publishedValues.add(it)
             }
@@ -65,7 +66,7 @@ class SampleProcessorTests {
         val publishedValues = mutableListOf<Int>()
 
         publisher
-            .sample(1.seconds, mockTimerFactory)
+            .sample(Duration.seconds(1), mockTimerFactory)
             .subscribe(CancellableManager()) {
                 publishedValues.add(it)
             }
@@ -85,7 +86,7 @@ class SampleProcessorTests {
         val publishedValues = mutableListOf<Int>()
 
         publisher
-            .sample(1.seconds, mockTimerFactory)
+            .sample(Duration.seconds(1), mockTimerFactory)
             .subscribe(CancellableManager()) {
                 publishedValues.add(it)
             }
@@ -104,7 +105,7 @@ class SampleProcessorTests {
         val firstSubscriptionPublishedValues = mutableListOf<Int>()
         val secondSubscriptionPublishedValues = mutableListOf<Int>()
 
-        val samplePublisher = publisher.sample(1.seconds, mockTimerFactory)
+        val samplePublisher = publisher.sample(Duration.seconds(1), mockTimerFactory)
 
         samplePublisher.subscribe(CancellableManager()) {
             firstSubscriptionPublishedValues.add(it)
@@ -131,7 +132,7 @@ class SampleProcessorTests {
         val publishedValues = mutableListOf<Int>()
 
         publisher
-            .sample(1.seconds, mockTimerFactory)
+            .sample(Duration.seconds(1), mockTimerFactory)
             .subscribe(CancellableManager()) {
                 publishedValues.add(it)
             }
@@ -150,7 +151,7 @@ class SampleProcessorTests {
         val cancellableManager = CancellableManager()
 
         publisher
-            .sample(1.seconds, mockTimerFactory)
+            .sample(Duration.seconds(1), mockTimerFactory)
             .subscribe(cancellableManager) {
                 publishedValues.add(it)
             }

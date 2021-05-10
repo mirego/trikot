@@ -9,6 +9,7 @@ import com.mirego.trikot.streams.utils.MockTimerFactory
 import com.mirego.trikot.streams.utils.noBlock
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import kotlin.time.milliseconds
 import kotlin.time.minutes
@@ -23,7 +24,7 @@ class DebounceProcessorTests {
         val expectedResult = "b"
         var receivedResult: String? = null
         publisher
-            .debounce(600.milliseconds, MockTimerFactory { _, _ -> timer })
+            .debounce(Duration.milliseconds(600), MockTimerFactory { _, _ -> timer })
             .subscribe(CancellableManager()) {
                 receivedResult = it
             }
@@ -40,7 +41,7 @@ class DebounceProcessorTests {
         val expectedResult = "b"
         var receivedResult: String? = null
         publisher
-            .debounce(600.milliseconds, MockTimerFactory { _, _ -> timer })
+            .debounce(Duration.milliseconds(600), MockTimerFactory { _, _ -> timer })
             .subscribe(CancellableManager().also { it.cancel() }) {
                 receivedResult = it
             }
@@ -57,7 +58,7 @@ class DebounceProcessorTests {
         val timer = MockTimer()
         var receivedResult: String? = null
         publisher
-            .debounce(600.minutes, MockTimerFactory { _, _ -> timer })
+            .debounce(Duration.minutes(600), MockTimerFactory { _, _ -> timer })
             .subscribe(CancellableManager()) {
                 receivedResult = it
             }

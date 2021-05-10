@@ -11,6 +11,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlin.time.Duration
 import kotlin.time.seconds
 
 class TimeoutProcessorTests {
@@ -27,7 +28,7 @@ class TimeoutProcessorTests {
     }
     val publisher = MockPublisher()
 
-    val timeoutProcessor = TimeoutProcessor(2.seconds, mockTimerFactory, "", publisher)
+    val timeoutProcessor = TimeoutProcessor(Duration.seconds(2), mockTimerFactory, "", publisher)
 
     @Test
     fun givenSubscribedProcessorWhenNoValueIsEmittedAndTimerExpireThenErrorIsThrown() {

@@ -7,6 +7,7 @@ import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.Duration
 import kotlin.time.hours
 import kotlin.time.minutes
 import kotlin.time.seconds
@@ -16,7 +17,7 @@ class RetryBackoffTests {
     fun retryBackoff_successAfterFirstRetry() {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, duration ->
-            assertEquals(1.minutes, duration)
+            assertEquals(Duration.minutes(1), duration)
             MockTimer().also { timers.add(it) }
         }
         var attempt: Int by atomic(0)
@@ -30,9 +31,9 @@ class RetryBackoffTests {
         }
         val retryPublisher = upStreamPublisher.retryBackoff(
             ExponentialBackoffPolicy(
-                initialInterval = 1.minutes,
+                initialInterval = Duration.minutes(1),
                 maxRetries = 8,
-                maxInterval = 1.hours,
+                maxInterval = Duration.hours(1),
                 multiplier = 2.0
             ),
             timerFactory
@@ -58,8 +59,8 @@ class RetryBackoffTests {
         var attempt: Int by atomic(0)
         val timerFactory = MockTimerFactory { _, duration ->
             when (timers.size) {
-                0 -> assertEquals(1.minutes, duration)
-                1 -> assertEquals(2.minutes, duration)
+                0 -> assertEquals(Duration.minutes(1), duration)
+                1 -> assertEquals(Duration.minutes(2), duration)
             }
             MockTimer().also { timers.add(it) }
         }
@@ -76,9 +77,9 @@ class RetryBackoffTests {
         }
         val retryPublisher = upStreamPublisher.retryBackoff(
             ExponentialBackoffPolicy(
-                initialInterval = 1.minutes,
+                initialInterval = Duration.minutes(1),
                 maxRetries = 8,
-                maxInterval = 1.hours,
+                maxInterval = Duration.hours(1),
                 multiplier = 2.0
             ),
             timerFactory
@@ -117,26 +118,26 @@ class RetryBackoffTests {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, duration ->
             when (timers.size) {
-                0 -> assertEquals(1.seconds, duration)
-                1 -> assertEquals(1.minutes, duration)
-                2 -> assertEquals(1.seconds, duration)
-                3 -> assertEquals(2.minutes, duration)
-                4 -> assertEquals(1.seconds, duration)
-                5 -> assertEquals(4.minutes, duration)
-                6 -> assertEquals(1.seconds, duration)
-                7 -> assertEquals(8.minutes, duration)
+                0 -> assertEquals(Duration.seconds(1), duration)
+                1 -> assertEquals(Duration.minutes(1), duration)
+                2 -> assertEquals(Duration.seconds(1), duration)
+                3 -> assertEquals(Duration.minutes(2), duration)
+                4 -> assertEquals(Duration.seconds(1), duration)
+                5 -> assertEquals(Duration.minutes(4), duration)
+                6 -> assertEquals(Duration.seconds(1), duration)
+                7 -> assertEquals(Duration.minutes(8), duration)
             }
             MockTimer().also { timers.add(it) }
         }
         val upStreamPublisher = ColdPublisher {
-            Publishers.error<Int>(Throwable()).delay(1.seconds, timerFactory)
+            Publishers.error<Int>(Throwable()).delay(Duration.seconds(1), timerFactory)
         }
 
         val retryPublisher = upStreamPublisher.retryBackoff(
             ExponentialBackoffPolicy(
-                initialInterval = 1.minutes,
+                initialInterval = Duration.minutes(1),
                 maxRetries = 4,
-                maxInterval = 1.hours,
+                maxInterval = Duration.hours(1),
                 multiplier = 2.0
             ),
             timerFactory
