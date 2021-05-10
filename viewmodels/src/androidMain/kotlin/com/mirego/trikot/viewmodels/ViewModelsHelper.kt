@@ -33,7 +33,7 @@ fun RichText.asSpannableString(context: Context): SpannableString {
 private fun RichTextRange.asSpan(context: Context): ParcelableSpan? {
     return when (transform) {
         is StyleTransform -> {
-            when ((transform as StyleTransform).style) {
+            when (transform.style) {
                 StyleTransform.Style.NORMAL -> StyleSpan(Typeface.NORMAL)
                 StyleTransform.Style.BOLD -> StyleSpan(Typeface.BOLD)
                 StyleTransform.Style.ITALIC -> StyleSpan(Typeface.ITALIC)
@@ -42,7 +42,7 @@ private fun RichTextRange.asSpan(context: Context): ParcelableSpan? {
             }
         }
         is ColorTransform -> {
-            ForegroundColorSpan((transform as ColorTransform).color.toIntColor())
+            ForegroundColorSpan(transform.color.toIntColor())
         }
         is TextAppearanceResourceTransform -> {
             TextAppearanceSpanResourceManager.provider.spanFromResource(
@@ -51,6 +51,5 @@ private fun RichTextRange.asSpan(context: Context): ParcelableSpan? {
                 context
             )
         }
-        else -> TODO("RichTextRange $transform not implemented")
     }
 }

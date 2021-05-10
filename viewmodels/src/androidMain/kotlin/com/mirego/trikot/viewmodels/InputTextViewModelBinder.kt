@@ -8,7 +8,6 @@ import android.text.InputType.TYPE_CLASS_TEXT
 import android.text.InputType.TYPE_DATETIME_VARIATION_DATE
 import android.text.InputType.TYPE_DATETIME_VARIATION_NORMAL
 import android.text.InputType.TYPE_DATETIME_VARIATION_TIME
-import android.text.InputType.TYPE_NULL
 import android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
 import android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
 import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
@@ -98,7 +97,6 @@ object InputTextViewModelBinder {
                                         TYPE_CLASS_TEXT or
                                         TYPE_TEXT_FLAG_NO_SUGGESTIONS or
                                         TYPE_TEXT_FLAG_MULTI_LINE
-                                else -> TYPE_NULL
                             }
                     }
                 }
@@ -108,7 +106,7 @@ object InputTextViewModelBinder {
                         ViewModelAction.None -> {
                             editText.setOnEditorActionListener(null)
                         }
-                        else -> editText.setOnEditorActionListener { v, actionId, event ->
+                        else -> editText.setOnEditorActionListener { v, _, _ ->
                             action.execute(v)
                         }
                     }

@@ -22,6 +22,6 @@ class TrikotApplication : Application() {
         super.onCreate()
         ImageViewModelResourceManager.provider = SampleImageResourceProvider()
         TextAppearanceSpanResourceManager.provider = SampleTextAppearanceResourceProvider()
-        Environment.flavor = Environment.Flavor.valueOf(BuildConfig.BUILD_TYPE.toUpperCase())
+        Environment.flavor = Environment.Flavor.valueOf(BuildConfig.BUILD_TYPE.uppercase())
     }
 }
