@@ -19,6 +19,6 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'ViewModelsSample'
+rootProject.name = 'trikot.viewmodels Sample App'
 
 include ':android', 'common'
