@@ -53,12 +53,14 @@ tasks {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("firebaseAar") {
-            artifactId = "firebase-ktx"
-            artifact("$buildDir/outputs/aar/$artifactId-release.aar")
-            artifact(tasks["sourcesJar"])
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("firebaseAar") {
+                from(components["release"])
+                artifactId = "firebase-ktx"
+                artifact(tasks["sourcesJar"])
+            }
         }
     }
 }
