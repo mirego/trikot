@@ -17,7 +17,7 @@ class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel("Switch"),
         MutableToggleSwitchListItemViewModel().apply {
-            toggleSwitch.isOn = mockUseCasePublisher1
+            toggleSwitch.checked = mockUseCasePublisher1
             toggleSwitch.toggleSwitchAction = ViewModelAction {
                 mockUseCasePublisher1.value = mockUseCasePublisher1.value?.let { !it }
             }.just()
@@ -28,12 +28,12 @@ class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
         },
         MutableHeaderListItemViewModel(".!enabled"),
         MutableToggleSwitchListItemViewModel().apply {
-            toggleSwitch.isEnabled = false.just()
+            toggleSwitch.enabled = false.just()
         },
         MutableHeaderListItemViewModel(".alpha"),
         MutableToggleSwitchListItemViewModel().apply {
             toggleSwitch.alpha = 0.5f.just()
-            toggleSwitch.isOn = mockUseCasePublisher2
+            toggleSwitch.checked = mockUseCasePublisher2
             toggleSwitch.toggleSwitchAction = ViewModelAction {
                 mockUseCasePublisher2.value = mockUseCasePublisher2.value?.let { !it }
             }.just()

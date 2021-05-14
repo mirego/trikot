@@ -7,8 +7,8 @@ import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
 open class MutableToggleSwitchViewModel() : MutableViewModel(), ToggleSwitchViewModel {
-    override var isOn: Publisher<Boolean> = Publishers.behaviorSubject(false)
-    override var isEnabled = PropertyFactory.never<Boolean>()
+    override var checked: Publisher<Boolean> = Publishers.behaviorSubject(false)
+    override var enabled = PropertyFactory.never<Boolean>()
     override var toggleSwitchAction = PropertyFactory.create(ViewModelAction.None)
     override var action = Publishers.never<ViewModelAction>()
 }

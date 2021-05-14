@@ -30,7 +30,7 @@ object ToggleSwitchViewModelBinder {
                 }
                 else -> toggleSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
                     with(buttonView) {
-                        Promise.from(toggleSwitchViewModel.isOn).onSuccess {
+                        Promise.from(toggleSwitchViewModel.checked).onSuccess {
                             if (isChecked != it) {
                                 toggleSwitch.isChecked = it
                                 action.execute(this)
@@ -41,13 +41,13 @@ object ToggleSwitchViewModelBinder {
             }
         }
 
-        toggleSwitchViewModel.isOn.distinctUntilChanged()
-            .observe(lifecycleOwnerWrapper.lifecycleOwner) { isOn ->
-                toggleSwitch.isChecked = isOn
+        toggleSwitchViewModel.checked.distinctUntilChanged()
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { checked ->
+                toggleSwitch.isChecked = checked
             }
 
-        toggleSwitchViewModel.isEnabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { isEnabled ->
-            toggleSwitch.isEnabled = isEnabled
+        toggleSwitchViewModel.enabled.observe(lifecycleOwnerWrapper.lifecycleOwner) { enabled ->
+            toggleSwitch.isEnabled = enabled
         }
     }
 }

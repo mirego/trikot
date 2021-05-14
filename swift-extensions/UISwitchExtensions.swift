@@ -15,11 +15,11 @@ extension UISwitch {
             viewModel = value
             guard let toggleSwitchViewModel = value else { return }
 
-            observe(PublisherExtensionsKt.distinctUntilChanged(toggleSwitchViewModel.isOn)) { [weak self] (value: Bool) in
+            observe(PublisherExtensionsKt.distinctUntilChanged(toggleSwitchViewModel.checked)) { [weak self] (value: Bool) in
                 self?.isOn = value
             }
 
-            bind(toggleSwitchViewModel.isEnabled, \UISwitch.isEnabled)
+            bind(toggleSwitchViewModel.enabled, \UISwitch.isEnabled)
             
             observe(toggleSwitchViewModel.toggleSwitchAction) {[weak self] (value: ViewModelAction) in
                 guard let self = self else { return }
@@ -42,7 +42,7 @@ extension UISwitch {
         }
         guard let toggleSwitchViewModel = toggleSwitchViewModel else { return }
         observe(toggleSwitchViewModel.toggleSwitchAction.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
-        PromiseCompanion().from(single: toggleSwitchViewModel.isOn, cancellableManager: nil).onSuccess(accept: { value in
+        PromiseCompanion().from(single: toggleSwitchViewModel.checked, cancellableManager: nil).onSuccess(accept: { value in
             let isOn = (value as! Bool)
             if self.isOn != isOn {
                 self.setOn(isOn, animated: true)
