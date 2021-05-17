@@ -1,4 +1,6 @@
 Pod::Spec.new do |spec|
+  properties = load_properties('gradle.properties')
+
   spec.name          = "Trikot.viewmodels.declarative"
   spec.version       = "0.0.1"
   spec.summary       = "Plugin for trikot.viewmodels.declarative"
@@ -12,7 +14,7 @@ Pod::Spec.new do |spec|
 
   spec.static_framework = true
 
-  spec.dependency 'Trikot.streams'
+  spec.dependency 'Trikot.streams', properties['trikot_streams_version']
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
   spec.prepare_command = <<-CMD

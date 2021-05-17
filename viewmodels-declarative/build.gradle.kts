@@ -40,8 +40,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
+                implementation(Dependencies.trikotFoundation)
+                implementation(Dependencies.trikotStreams)
             }
         }
 
@@ -116,9 +116,9 @@ kotlin {
 
 android {
     defaultConfig {
-        compileSdkVersion(30)
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        compileSdk = 30
+        minSdk = 21
+        targetSdk = 30
     }
 
     buildFeatures {

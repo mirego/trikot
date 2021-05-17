@@ -18,9 +18,9 @@ group = "com.mirego.trikot"
 
 android {
     defaultConfig {
-        compileSdkVersion(30)
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        compileSdk = 30
+        minSdk = 21
+        targetSdk = 30
     }
 
     buildFeatures {
@@ -32,7 +32,7 @@ android {
         targetCompatibility(JavaVersion.VERSION_11)
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "${project.extra["compose_version"]}"
+        kotlinCompilerExtensionVersion = Versions.jetpackCompose
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -42,21 +42,21 @@ android {
 
 dependencies {
     implementation(project(":viewmodels-declarative"))
-    implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-    implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
+    implementation(Dependencies.trikotFoundation)
+    implementation(Dependencies.trikotStreams)
 
-    implementation("androidx.compose.foundation:foundation:${project.extra["compose_version"]}")
-    implementation("androidx.compose.material:material:${project.extra["compose_version"]}")
+    implementation("androidx.compose.foundation:foundation:${Versions.jetpackCompose}")
+    implementation("androidx.compose.material:material:${Versions.jetpackCompose}")
 
-    implementation("com.google.accompanist:accompanist-glide:${project.extra["google_accompanist_version"]}")
+    implementation("com.google.accompanist:accompanist-glide:${Versions.googleAccompanist}")
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlin_version"]}")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}")
 }
 
 tasks {
     val sourcesJar by creating(Jar::class) {
         archiveClassifier.set("sources")
-        from(android.sourceSets.getByName("main").java.srcDirs)
+        from(android.sourceSets.getByName("main").java.srcDirs().toString())
     }
 }
 

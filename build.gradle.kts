@@ -6,9 +6,9 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.0-alpha14")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${project.extra["kotlin_version"]}")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:${project.extra["kotlin_version"]}")
+        classpath("com.android.tools.build:gradle:7.0.0-alpha15")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:10.0.0")
     }
 }
