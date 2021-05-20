@@ -9,12 +9,12 @@ val Project.Dependencies: Dependencies
 class Versions(project: Project) {
 
     val kotlin = "1.4.32"
-
     val trikotStreams = project.property("trikot_streams_version")
     val trikotFoundation = "2.0.2"
 
-    val jetpackCompose = "1.0.0-beta04"
-    val googleAccompanist = "0.7.1"
+    val androidGradlePlugin = "7.0.0-beta01"
+    val jetpackCompose = "1.0.0-beta07"
+    val googleAccompanist = "0.10.0"
 }
 
 class Dependencies(project: Project) {

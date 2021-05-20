@@ -8,7 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
-import com.google.accompanist.glide.GlideImage
+import com.google.accompanist.glide.rememberGlidePainter
+import com.google.accompanist.imageloading.ImageLoadState
 import com.mirego.trikot.viewmodels.declarative.components.ImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.painterResource
@@ -80,27 +81,27 @@ fun LocalImage(
 
 @Composable
 fun RemoteImage(
+    modifier: Modifier = Modifier,
     imageUrl: String,
     placeholderImage: ImageResource = ImageResource.None,
-    modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
 ) {
-    GlideImage(
+    val glidePainter = rememberGlidePainter(imageUrl)
+    Image(
+        painter = glidePainter,
         modifier = modifier,
         alignment = alignment,
         colorFilter = colorFilter,
-        data = imageUrl,
         contentScale = contentScale,
-        contentDescription = contentDescription,
-        fadeIn = true,
-        loading = {
-            LocalImage(placeholderImage)
-        },
-        error = {
-            LocalImage(placeholderImage)
-        }
+        contentDescription = contentDescription
     )
+    when (glidePainter.loadState) {
+        is ImageLoadState.Loading -> LocalImage(imageResource = placeholderImage)
+        is ImageLoadState.Error -> LocalImage(imageResource = placeholderImage)
+        else -> {
+        }
+    }
 }
