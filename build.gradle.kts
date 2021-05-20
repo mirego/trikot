@@ -6,9 +6,9 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.2")
+        classpath("com.android.tools.build:gradle:4.2.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${project.extra["kotlin_version"]}")
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:9.4.1")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:10.0.0")
     }
 }
 

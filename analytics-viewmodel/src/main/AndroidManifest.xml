@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mirego.trikot.analytics"/>
+<manifest package="com.mirego.trikot.analytics.viewmodel" />
