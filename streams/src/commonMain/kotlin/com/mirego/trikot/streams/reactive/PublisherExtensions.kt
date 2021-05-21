@@ -23,6 +23,8 @@ import com.mirego.trikot.streams.reactive.processors.OnErrorResumeNextBlock
 import com.mirego.trikot.streams.reactive.processors.OnErrorResumeNextProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessor
 import com.mirego.trikot.streams.reactive.processors.OnErrorReturnProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.RejectProcessor
+import com.mirego.trikot.streams.reactive.processors.RejectProcessorBlock
 import com.mirego.trikot.streams.reactive.processors.RetryWhenProcessor
 import com.mirego.trikot.streams.reactive.processors.RetryWhenPublisherBlock
 import com.mirego.trikot.streams.reactive.processors.SampleProcessor
@@ -96,6 +98,10 @@ fun <T> Publisher<T>.withCancellableManager(): Publisher<WithCancellableManagerP
 
 fun <T> Publisher<T>.filter(block: FilterProcessorBlock<T>): Publisher<T> {
     return FilterProcessor(this, block)
+}
+
+fun <T> Publisher<T>.reject(block: RejectProcessorBlock<T>): Publisher<T> {
+    return RejectProcessor(this, block)
 }
 
 fun <T> Publisher<T>.shared(): Publisher<T> {

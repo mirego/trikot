@@ -10,21 +10,21 @@ import kotlin.test.assertEquals
 class FilterProcessorTests {
     @Test
     fun filterTrue() {
-        val publisher = Publishers.behaviorSubject("a")
+        val publisher = Publishers.behaviorSubject("a string")
         var value: String? = null
 
-        publisher.filter { true }.subscribe(CancellableManager()) {
+        publisher.filter { it.isNotBlank() }.subscribe(CancellableManager()) {
             value = it
         }
 
-        assertEquals("a", value)
+        assertEquals("a string", value)
     }
 
     @Test
     fun filterFalse() {
-        val publisher = Publishers.behaviorSubject("a")
+        val publisher = Publishers.behaviorSubject("")
         var value: String? = null
-        publisher.filter { false }.subscribe(CancellableManager()) {
+        publisher.filter { it.isNotBlank() }.subscribe(CancellableManager()) {
             value = it
         }
 

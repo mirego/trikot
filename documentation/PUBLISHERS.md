@@ -130,6 +130,12 @@ Dispatch value only if it match the filter
 publisher.filter { it.length > 2 }
 ```
 
+#### Reject
+Dispatch value only if it doesn't match the filter (the opposite of `filter` processor)
+```kotlin
+publisher.reject { it.empty() }
+```
+
 #### SwitchMap
 *Input* - Value from previous processor
 *Output* - Publisher
