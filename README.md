@@ -3,6 +3,10 @@
 This repository is the stable base upon which we build our mobile projects at Mirego.
 We want to share it with the world so you can build awesome mobile applications too.
 
+## Introduction
+
+To learn more about _why_ we created and maintain this boilerplate project, read our [blog post](https://shift.mirego.com/en/boilerplate-projects).
+
 ## Usage
 
 ### Setting up the project
@@ -24,6 +28,7 @@ We want to share it with the world so you can build awesome mobile applications 
 
 - ./jobs/build_jobs.groovy
 - ./jobs/ios_fastlane.groovy
+
 ```
 String clientName = 'SAMPLECLIENT'.toLowerCase().replaceAll(' ','_')
 String projectName = 'SAMPLEPROJECT'.toLowerCase().replaceAll(' ','_')
