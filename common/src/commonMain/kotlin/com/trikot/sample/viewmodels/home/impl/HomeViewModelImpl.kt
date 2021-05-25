@@ -25,4 +25,5 @@ class HomeViewModelImpl(
         it.action = ViewModelAction {
             refreshableQuotePublisher.refresh()
         }.just()
-    } }
+    }
+}

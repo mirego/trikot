@@ -161,4 +161,4 @@ discouraged_object_literal:
   color_literal: false
 
 attributes:
-  always_on_line_above: ["@objc"]ß
+  always_on_line_above: ["@objc"]

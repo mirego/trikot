@@ -29,9 +29,12 @@ class HomeViewModelTests {
     @Test
     fun whenRefreshButtonIsTappedThenANewQuoteIsFetched() {
         viewModel.quoteLabel.text.subscribe(cancellableManager, onNext = {})
-        viewModel.refreshButton.action.subscribe(cancellableManager, onNext = {
-            it.execute()
-        })
+        viewModel.refreshButton.action.subscribe(
+            cancellableManager,
+            onNext = {
+                it.execute()
+            }
+        )
         verify(exactly = 2) { fetchQuoteUseCase.fetchQuote() }
     }
 }
