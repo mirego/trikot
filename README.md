@@ -11,9 +11,18 @@ To learn more about _why_ we created and maintain this boilerplate project, read
 
 ### Setting up the project
 
+#### With GitHub template
+
+1. Click on the [**Use this template**](https://github.com/mirego/trikot.patron/generate) button to create a new repository
+2. Clone your newly created project (`git clone https://github.com/you/repo.git`)
+3. Run the boilerplate setup script (`./boilerplate-setup.sh YourProjectName`)
+4. Commit the changes (`git commit -a -m "Rename Trikot.patron parts"`)
+
+#### Without GitHub template
+
 1. Clone this project (`git clone https://github.com/mirego/trikot.patron.git`)
 2. Delete the internal Git directory (`rm -rf .git`)
-3. Run the boilerplate setup script (`./boilerplate-setup.sh`)
+3. Run the boilerplate setup script (`./boilerplate-setup.sh YourProjectName`)
 4. Create a new Git repository (`git init`)
 5. Create the initial Git commit (`git commit -a -m "Initial commit"`)
 
@@ -26,10 +35,10 @@ To learn more about _why_ we created and maintain this boilerplate project, read
 
 ## Root
 
-- ./jobs/build_jobs.groovy
-- ./jobs/ios_fastlane.groovy
+- `./jobs/build_jobs.groovy`
+- `./jobs/ios_fastlane.groovy`
 
-```
+```groovy
 String clientName = 'SAMPLECLIENT'.toLowerCase().replaceAll(' ','_')
 String projectName = 'SAMPLEPROJECT'.toLowerCase().replaceAll(' ','_')
 String projectGithubPath = 'mirego/SAMPLEREPO'
