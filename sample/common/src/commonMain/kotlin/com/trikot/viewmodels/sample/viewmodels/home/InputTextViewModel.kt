@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
@@ -13,7 +14,9 @@ import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableInputTextListItemViewModel
 import org.reactivestreams.Publisher
 
-class InputTextViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+class InputTextViewModel : MutableListViewModel<ListItemViewModel>() {
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
+
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
         MutableInputTextListItemViewModel().also {
@@ -34,13 +37,13 @@ class InputTextViewModel(navigationDelegate: NavigationDelegate) : MutableListVi
         MutableHeaderListItemViewModel(".editorAction"),
         MutableInputTextListItemViewModel().also {
             it.inputText.editorAction = InputTextEditorAction {
-                navigationDelegate.showAlert("Editor action")
+                navigationDelegate?.showAlert("Editor action")
                 true
             }.just()
         },
         MutableHeaderListItemViewModel(".onTap"),
         MutableInputTextListItemViewModel().also {
-            it.inputText.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
+            it.inputText.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
         },
         MutableHeaderListItemViewModel(".placeholder"),
         MutableInputTextListItemViewModel().also {

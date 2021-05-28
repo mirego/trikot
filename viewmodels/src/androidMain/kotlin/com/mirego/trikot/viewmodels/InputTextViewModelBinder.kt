@@ -18,7 +18,6 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.android.R
@@ -59,7 +58,6 @@ object InputTextViewModelBinder {
                 }
 
                 it.enabled
-                    .asLiveData()
                     .observe(lifecycleOwnerWrapper.lifecycleOwner) { editText.isEnabled = it }
 
                 it.inputType.observe(lifecycleOwnerWrapper.lifecycleOwner) { inputType ->

@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
@@ -10,8 +11,10 @@ import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableToggleSwitchListItemViewModel
 import org.reactivestreams.Publisher
 
-class SwitchesViewModel(navigationDelegate: NavigationDelegate) :
+class SwitchesViewModel :
     MutableListViewModel<ListItemViewModel>() {
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
+
     private val mockUseCasePublisher1 = Publishers.behaviorSubject(true)
     private val mockUseCasePublisher2 = Publishers.behaviorSubject(false)
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(

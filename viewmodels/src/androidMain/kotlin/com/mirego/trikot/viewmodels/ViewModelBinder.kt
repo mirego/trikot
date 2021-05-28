@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableViewModel
@@ -30,7 +29,7 @@ fun View.bindViewModel(
 
         bindAction(it, lifecycleOwnerWrapper)
 
-        it.backgroundColor.asLiveData()
+        it.backgroundColor
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (selector.isEmpty) {
                     return@observe

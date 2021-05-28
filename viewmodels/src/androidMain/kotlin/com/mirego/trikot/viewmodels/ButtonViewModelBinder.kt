@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.Publishers
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
@@ -67,7 +66,7 @@ object ButtonViewModelBinder {
                     }
                 }
 
-            it.textColor.asLiveData()
+            it.textColor
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                     selector.default?.let {
                         textView.setTextColor(it.toIntColor())
@@ -85,12 +84,10 @@ object ButtonViewModelBinder {
 
             it.enabled
                 .distinctUntilChanged()
-                .asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isEnabled = it }
 
             it.selected
                 .distinctUntilChanged()
-                .asLiveData()
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { view.isSelected = it }
         }
     }

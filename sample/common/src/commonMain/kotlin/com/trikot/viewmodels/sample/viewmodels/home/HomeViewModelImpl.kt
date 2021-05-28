@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.PublishSubject
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.distinctUntilChanged
@@ -19,8 +20,10 @@ import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableNavigableListItemViewModel
 import org.reactivestreams.Publisher
 
-class HomeViewModelImpl(private val delegate: NavigationDelegate) :
+class HomeViewModelImpl :
     MutableListViewModel<ListItemViewModel>() {
+
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
 
     private val applicationStatePublisher = ApplicationStatePublisher()
 
@@ -34,49 +37,49 @@ class HomeViewModelImpl(private val delegate: NavigationDelegate) :
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableNavigableListItemViewModel().also {
             it.title.text = "Views ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.VIEWS) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.VIEWS) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Labels ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.LABELS) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.LABELS) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Buttons ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.BUTTONS) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.BUTTONS) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Images ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.IMAGES) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.IMAGES) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Input text ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.INPUT_TEXT) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.INPUT_TEXT) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Slider ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.SLIDERS) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.SLIDERS) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Switch ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.SWITCHES) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.SWITCHES) }.just()
             it.title.action = it.action
         },
 
         MutableNavigableListItemViewModel().also {
             it.title.text = "Picker ->".just()
-            it.action = ViewModelAction { delegate.navigateTo(Destination.PICKERS) }.just()
+            it.action = ViewModelAction { navigationDelegate?.navigateTo(Destination.PICKERS) }.just()
             it.title.action = it.action
         },
 

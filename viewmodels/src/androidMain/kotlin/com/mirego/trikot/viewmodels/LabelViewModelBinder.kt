@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import com.mirego.trikot.streams.reactive.asLiveData
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
@@ -34,7 +33,7 @@ object LabelViewModelBinder {
                 textView.text = it
             }
 
-        label.textColor.asLiveData()
+        label.textColor
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 selector.default?.let {
                     textView.setTextColor(it.toIntColor())
@@ -83,7 +82,7 @@ object LabelViewModelBinder {
             textView.alpha = alpha
         }
 
-        labelViewModel.backgroundColor.asLiveData()
+        labelViewModel.backgroundColor
             .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (selector.isEmpty) {
                     return@observe

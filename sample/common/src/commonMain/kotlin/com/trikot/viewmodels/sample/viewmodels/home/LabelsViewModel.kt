@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
@@ -16,8 +17,10 @@ import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableLabelListItemViewModel
 import org.reactivestreams.Publisher
 
-class LabelsViewModel(navigationDelegate: NavigationDelegate) :
+class LabelsViewModel :
     MutableListViewModel<ListItemViewModel>() {
+
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
 
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
@@ -37,7 +40,7 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
         },
         MutableHeaderListItemViewModel(".onTap"),
         MutableLabelListItemViewModel().also {
-            it.label.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
+            it.label.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
             it.label.text = "Tap me".just()
         },
         MutableHeaderListItemViewModel(".text"),
@@ -62,7 +65,7 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
         },
         MutableHeaderListItemViewModel(".textColor"),
         MutableLabelListItemViewModel().also {
-            it.label.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
+            it.label.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
             it.label.text = "I am red".just()
             it.label.textColor = StateSelector(Color(255, 0, 0)).just()
         },
@@ -100,7 +103,7 @@ class LabelsViewModel(navigationDelegate: NavigationDelegate) :
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_COLORED)
                     ),
                     RichTextRange(
-                        IntRange(72, 73),
+                        IntRange(70, 72),
                         TextAppearanceResourceTransform(SampleTextAppearanceResource.TEXT_APPEARANCE_SUPERSCRIPT)
                     )
                 )

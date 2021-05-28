@@ -3,7 +3,7 @@ package com.mirego.trikot.viewmodels
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mirego.trikot.streams.reactive.asLiveData
+import com.mirego.trikot.streams.reactive.observe
 
 object ListBinding {
     @Suppress("UNCHECKED_CAST")
@@ -15,7 +15,7 @@ object ListBinding {
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
         view.bindViewModel(listViewModel, lifecycleOwnerWrapper)
-        listViewModel?.elements?.asLiveData()
+        listViewModel?.elements
             ?.observe(lifecycleOwnerWrapper.lifecycleOwner) { items ->
                 view.adapter?.let {
                     (it as? ListAdapter<ListItemViewModel, *>)?.submitList(items)

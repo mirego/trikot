@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
@@ -11,7 +12,10 @@ import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableViewListItemViewModel
 import org.reactivestreams.Publisher
 
-class ViewsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+class ViewsViewModel : MutableListViewModel<ListItemViewModel>() {
+
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
+
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
         MutableViewListItemViewModel().also {
@@ -27,7 +31,7 @@ class ViewsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewMo
         },
         MutableHeaderListItemViewModel(".onTap"),
         MutableViewListItemViewModel().also {
-            it.view.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
+            it.view.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
         }
     ).just()
 }

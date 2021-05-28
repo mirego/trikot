@@ -120,11 +120,6 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
             binding.setVariable(lifecycleVariableId, LifecycleOwnerWrapper(this))
         }
 
-        override fun onAttach() {
-            super.onAttach()
-            binding.invalidateAll()
-        }
-
         fun setVariable(item: MLI) {
             binding.setVariable(viewModelVariableId, item)
         }

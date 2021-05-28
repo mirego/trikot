@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
@@ -19,7 +20,9 @@ import com.trikot.viewmodels.sample.viewmodels.MutableButtonListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import org.reactivestreams.Publisher
 
-class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
+
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
 
     private var iconVisible = Publishers.behaviorSubject(true)
 
@@ -72,7 +75,7 @@ class ButtonsViewModel(navigationDelegate: NavigationDelegate) : MutableListView
         },
         MutableHeaderListItemViewModel(".onTap"),
         MutableButtonListItemViewModel().also {
-            it.button.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
+            it.button.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
             it.button.text = "Tap me".just()
         },
         MutableHeaderListItemViewModel(".enabled"),

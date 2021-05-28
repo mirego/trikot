@@ -1,5 +1,6 @@
 package com.trikot.viewmodels.sample.viewmodels.home
 
+import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
@@ -19,7 +20,10 @@ import com.trikot.viewmodels.sample.viewmodels.MutableImageListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableViewListItemViewModel
 import org.reactivestreams.Publisher
 
-class ImagesViewModel(navigationDelegate: NavigationDelegate) : MutableListViewModel<ListItemViewModel>() {
+class ImagesViewModel : MutableListViewModel<ListItemViewModel>() {
+
+    var navigationDelegate: NavigationDelegate? by weakAtomicReference()
+
     private val fallbackImageFlow =
         Publishers.behaviorSubject(SimpleImageFlow(url = "https://www.vokode.com/wp-content/uploads/2019/06/fallback.jpg") as ImageFlow)
 
@@ -38,7 +42,7 @@ class ImagesViewModel(navigationDelegate: NavigationDelegate) : MutableListViewM
         },
         MutableHeaderListItemViewModel(".onTap"),
         MutableImageListItemViewModel(simpleImageFlowProvider()).also {
-            it.image.action = ViewModelAction { navigationDelegate.showAlert("Tapped $it") }.just()
+            it.image.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
         },
         MutableHeaderListItemViewModel(".imageResource"),
         MutableImageListItemViewModel(simpleImageFlowProvider(imageResource = ImageResources.ICON)),

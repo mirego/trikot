@@ -17,12 +17,12 @@ interface NavigationDelegate {
 }
 
 enum class Destination(val getViewModel: (NavigationDelegate) -> ListViewModel<ListItemViewModel>) {
-    VIEWS({ ViewsViewModel(it) }),
-    LABELS({ LabelsViewModel(it) }),
-    BUTTONS({ ButtonsViewModel(it) }),
-    IMAGES({ ImagesViewModel(it) }),
-    INPUT_TEXT({ InputTextViewModel(it) }),
-    SLIDERS({ SlidersViewModel(it) }),
-    SWITCHES({ SwitchesViewModel(it) }),
-    PICKERS({ PickersViewModel(it) })
+    VIEWS({ ViewsViewModel().apply { navigationDelegate = it } }),
+    LABELS({ LabelsViewModel().apply { navigationDelegate = it } }),
+    BUTTONS({ ButtonsViewModel().apply { navigationDelegate = it } }),
+    IMAGES({ ImagesViewModel().apply { navigationDelegate = it } }),
+    INPUT_TEXT({ InputTextViewModel().apply { navigationDelegate = it } }),
+    SLIDERS({ SlidersViewModel().apply { navigationDelegate = it } }),
+    SWITCHES({ SwitchesViewModel().apply { navigationDelegate = it } }),
+    PICKERS({ PickersViewModel().apply { navigationDelegate = it } })
 }
