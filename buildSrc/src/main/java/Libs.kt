@@ -1,5 +1,20 @@
 import org.gradle.api.Project
 
+val Project.SharedLibs: SharedLibs
+    get() = SharedLibs(this)
+
+class SharedLibs(private val project: Project) {
+    val Trikot = InnerTrikot()
+
+    inner class InnerTrikot {
+        val Foundation = "com.mirego.trikot:trikotFoundation:${project.property("trikot_foundation_version")}"
+        val Streams = "com.mirego.trikot:streams:${project.property("trikot_streams_version")}"
+        val Viewmodels = "com.mirego.trikot:viewmodels:${project.property("trikot_viewmodels_version")}"
+        val Http = "com.mirego.trikot:http:${project.property("trikot_http_version")}"
+        val Kword = "com.mirego.trikot:kword:${project.property("trikot_kword_version")}"
+    }
+}
+
 object Libs {
     object AndroidX {
         const val AppCompat = "androidx.appcompat:appcompat:${Versions.ANDROID_APP_COMPAT}"
@@ -17,14 +32,6 @@ object Libs {
     }
 
     const val Picasso = "com.squareup.picasso:picasso:${Versions.PICASSO}"
-
-    class Trikot(project: Project) {
-        val Foundation = "com.mirego.trikot:trikotFoundation:${project.property("trikot_foundation_version")}"
-        val Streams = "com.mirego.trikot:streams:${project.property("trikot_streams_version")}"
-        val Viewmodels = "com.mirego.trikot:viewmodels:${project.property("trikot_viewmodels_version")}"
-        val Http = "com.mirego.trikot:http:${project.property("trikot_http_version")}"
-        val Kword = "com.mirego.trikot:kword:${project.property("trikot_kword_version")}"
-    }
 
     object Kotlin {
         const val Stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}"

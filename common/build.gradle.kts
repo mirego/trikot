@@ -43,9 +43,9 @@ android {
 }
 
 kword {
-    translationFile = file("src/commonMain/resources/translations/translation.en.json")
-    enumClassName = "com.trikot.sample.localization.KWordTranslation"
-    generatedDir = file("src/commonMain/generated")
+    translationFile("src/commonMain/resources/translations/translation.en.json")
+    enumClassName("com.trikot.sample.localization.KWordTranslation")
+    generatedDir("src/commonMain/generated")
 }
 
 kotlin {
@@ -59,11 +59,11 @@ kotlin {
                 embedBitcode("disable")
                 baseName = Const.TRIKOT_FRAMEWORK_NAME
                 transitiveExport = true
-                export(Libs.Trikot(project).Foundation)
-                export(Libs.Trikot(project).Streams)
-                export(Libs.Trikot(project).Viewmodels)
-                export(Libs.Trikot(project).Http)
-                export(Libs.Trikot(project).Kword)
+                export(SharedLibs.Trikot.Foundation)
+                export(SharedLibs.Trikot.Streams)
+                export(SharedLibs.Trikot.Viewmodels)
+                export(SharedLibs.Trikot.Http)
+                export(SharedLibs.Trikot.Kword)
             }
         }
     }
@@ -76,11 +76,11 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                api(Libs.Trikot(project).Foundation)
-                api(Libs.Trikot(project).Streams)
-                api(Libs.Trikot(project).Viewmodels)
-                api(Libs.Trikot(project).Http)
-                api(Libs.Trikot(project).Kword)
+                api(SharedLibs.Trikot.Foundation)
+                api(SharedLibs.Trikot.Streams)
+                api(SharedLibs.Trikot.Viewmodels)
+                api(SharedLibs.Trikot.Http)
+                api(SharedLibs.Trikot.Kword)
                 implementation(Libs.Kotlinx.SerializationJson)
             }
             kotlin.srcDir(kword.generatedDir)
