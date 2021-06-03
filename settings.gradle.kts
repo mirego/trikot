@@ -20,4 +20,4 @@ pluginManagement {
 }
 rootProject.name = "trikot.viewmodels.declarative"
 
-include(":viewmodels-declarative", ":compose")
+include(":viewmodels-declarative", ":compose", ":sample:android", ":sample:common")

@@ -22,7 +22,7 @@ class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f
     }
 
     private fun toHex(int: Int): String {
-        val hex = int.toString(16).toUpperCase()
+        val hex = int.toString(16).uppercase()
         return if (hex.length > 1) hex else "0$hex"
     }
 

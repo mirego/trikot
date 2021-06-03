@@ -36,7 +36,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        useIR = true
     }
 }
 
@@ -45,10 +44,10 @@ dependencies {
     implementation(Dependencies.trikotFoundation)
     implementation(Dependencies.trikotStreams)
 
-    implementation("androidx.compose.foundation:foundation:${Versions.jetpackCompose}")
-    implementation("androidx.compose.material:material:${Versions.jetpackCompose}")
-
-    implementation("com.google.accompanist:accompanist-glide:${Versions.googleAccompanist}")
+    api("androidx.compose.foundation:foundation:${Versions.jetpackCompose}")
+    api("androidx.compose.material:material:${Versions.jetpackCompose}")
+    api("androidx.compose.runtime:runtime:${Versions.jetpackCompose}")
+    api("com.google.accompanist:accompanist-glide:${Versions.googleAccompanist}")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}")
 }
