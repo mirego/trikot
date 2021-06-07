@@ -8,9 +8,9 @@ import kotlin.time.ExperimentalTime
 actual class PlatformTimer actual constructor(delay: Duration, private val repeat: Boolean, block: () -> Unit) :
     Timer {
     private val timeoutId = if (repeat) {
-        window.setInterval({ block() }, delay.toLongMilliseconds().toInt())
+        window.setInterval({ block() }, delay.inWholeMilliseconds.toInt())
     } else {
-        window.setTimeout({ block() }, delay.toLongMilliseconds().toInt())
+        window.setTimeout({ block() }, delay.inWholeMilliseconds.toInt())
     }
 
     actual override fun cancel() {

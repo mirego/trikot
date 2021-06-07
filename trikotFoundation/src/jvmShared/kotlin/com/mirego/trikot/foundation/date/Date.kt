@@ -20,7 +20,7 @@ actual class Date(val instant: Instant) {
         }
 
     actual operator fun plus(duration: Duration): Date {
-        return Date(Instant.ofEpochMilli(instant.toEpochMilli() + duration.toLongMilliseconds()))
+        return Date(Instant.ofEpochMilli(instant.toEpochMilli() + duration.inWholeMilliseconds))
     }
 
     actual operator fun compareTo(other: Date): Int {

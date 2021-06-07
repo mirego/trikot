@@ -12,7 +12,7 @@ actual class Date(val date: kotlin.js.Date) {
     }
 
     actual operator fun plus(duration: Duration): Date {
-        return Date(kotlin.js.Date(date.getTime() + duration.toLongMilliseconds()))
+        return Date(kotlin.js.Date(date.getTime() + duration.inWholeMilliseconds))
     }
 
     actual operator fun compareTo(other: Date): Int {
