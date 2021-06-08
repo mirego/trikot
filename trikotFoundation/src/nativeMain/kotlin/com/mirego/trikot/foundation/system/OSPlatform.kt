@@ -6,5 +6,3 @@ enum class OSPlatform {
     watchOS,
     macOS
 }
-
-expect var currentPlatform: OSPlatform

@@ -37,7 +37,7 @@ enum class OSVersion(val platform: OSPlatform, val majorVersion: Int, val minorV
 }
 
 fun osVersionAtLeast(vararg versions: OSVersion): Boolean {
-    return versions.filter { it.platform == currentPlatform }.any {
+    return versions.filter { it.platform == CurrentPlatform.current }.any {
         NSProcessInfo.processInfo.isOperatingSystemAtLeastVersion(it.operatingSystemVersion)
     }
 }
