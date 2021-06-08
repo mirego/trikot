@@ -32,10 +32,9 @@ import org.reactivestreams.Publisher
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
 
 @ExperimentalTime
-private val DEFAULT_TIMEOUT_DURATION = 10.seconds
+private val DEFAULT_TIMEOUT_DURATION = Duration.seconds(10)
 
 @ExperimentalTime
 class KtorHttpRequestFactory(
@@ -53,9 +52,9 @@ class KtorHttpRequestFactory(
                 level = httpLogLevel
             }
             install(HttpTimeout) {
-                requestTimeoutMillis = requestTimeoutDuration.toLongMilliseconds()
-                socketTimeoutMillis = socketTimeoutDuration.toLongMilliseconds()
-                connectTimeoutMillis = connectTimeoutDuration.toLongMilliseconds()
+                requestTimeoutMillis = requestTimeoutDuration.inWholeMilliseconds
+                socketTimeoutMillis = socketTimeoutDuration.inWholeMilliseconds
+                connectTimeoutMillis = connectTimeoutDuration.inWholeMilliseconds
             }
             expectSuccess = false
         }
