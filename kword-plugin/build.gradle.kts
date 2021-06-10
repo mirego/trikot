@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
-    implementation("com.squareup:kotlinpoet:1.2.0")
+    implementation("com.squareup:kotlinpoet:1.6.0")
 }
 
 tasks {
