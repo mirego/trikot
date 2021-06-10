@@ -65,8 +65,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs +
-                "-Xopt-in=kotlin.time.ExperimentalTime" +
-                "-Xopt-in=kotlin.ExperimentalStdlibApi"
+            "-Xopt-in=kotlin.time.ExperimentalTime" +
+            "-Xopt-in=kotlin.ExperimentalStdlibApi"
     }
 }
 

@@ -191,3 +191,10 @@ coverallsJacoco {
     reportPath = "$buildDir/reports/jacocoTestReport/jacocoTestReport.xml"
     reportSourceSets = files(listOf("src/commonMain/kotlin"))
 }
+
+ktlint {
+    enableExperimentalRules.set(true)
+    filter {
+        exclude { element -> element.file.path.contains("generated/") }
+    }
+}

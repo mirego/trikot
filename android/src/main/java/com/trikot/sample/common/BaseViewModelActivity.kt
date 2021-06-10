@@ -11,7 +11,7 @@ import com.trikot.sample.viewmodels.base.ViewModelController
 import kotlin.reflect.KClass
 
 abstract class BaseViewModelActivity<NavigationDelegate : BaseNavigationDelegate,
-        VM : com.mirego.trikot.viewmodels.ViewModel> :
+    VM : com.mirego.trikot.viewmodels.ViewModel> :
     AppCompatActivity(),
     BaseNavigationDelegate {
 

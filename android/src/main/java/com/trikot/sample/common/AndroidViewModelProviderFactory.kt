@@ -66,14 +66,14 @@ class AndroidViewModelProviderFactory {
             if (getters.isEmpty()) {
                 throw IllegalArgumentException(
                     "Unable to find a method for class: " +
-                            "${internalFactory::class.java.simpleName} with return type: " +
-                            "${modelClass.simpleName} and ${getParametersErrorString()}"
+                        "${internalFactory::class.java.simpleName} with return type: " +
+                        "${modelClass.simpleName} and ${getParametersErrorString()}"
                 )
             } else if (getters.size > 1) {
                 throw IllegalArgumentException(
                     "Found more than one method for class: " +
-                            "${internalFactory::class.java.simpleName} with return type: " +
-                            "${modelClass.simpleName} and ${getParametersErrorString()}"
+                        "${internalFactory::class.java.simpleName} with return type: " +
+                        "${modelClass.simpleName} and ${getParametersErrorString()}"
                 )
             }
 
