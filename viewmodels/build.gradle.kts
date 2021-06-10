@@ -30,7 +30,8 @@ kotlin {
     ios()
     iosArm32("iosArm32")
     tvos()
-
+    watchos()
+    macosX64()
     js(IR) {
         browser()
     }
@@ -123,6 +124,26 @@ kotlin {
 
         val tvosX64Main by getting {
             dependsOn(tvosMain)
+        }
+
+        val watchosMain by getting {
+            dependsOn(nativeMain)
+        }
+
+        val watchos32Main by creating {
+            dependsOn(watchosMain)
+        }
+
+        val watchosArm64Main by getting {
+            dependsOn(watchosMain)
+        }
+
+        val watchosX64Main by getting {
+            dependsOn(watchosMain)
+        }
+
+        val macosX64Main by getting {
+            dependsOn(nativeMain)
         }
     }
 }
