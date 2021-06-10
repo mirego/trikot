@@ -92,7 +92,7 @@ class AndroidBluetoothDevice(
                         ) { result, value ->
                             (
                                 mutableMapOf(
-                                    value.uuid.toString().toUpperCase(Locale.ROOT) to
+                                    value.uuid.toString().uppercase(Locale.ROOT) to
                                         AndroidAttributeProfileService(
                                             value,
                                             this@AndroidBluetoothDevice
@@ -159,8 +159,8 @@ class AndroidBluetoothDevice(
                     value: ByteArray?,
                     error: Throwable?
                 ) {
-                    val serviceId = characteristic.service.uuid.toString().toUpperCase(Locale.ROOT)
-                    val characteristicId = characteristic.uuid.toString().toUpperCase(Locale.ROOT)
+                    val serviceId = characteristic.service.uuid.toString().uppercase(Locale.ROOT)
+                    val characteristicId = characteristic.uuid.toString().uppercase(Locale.ROOT)
                     androidProfiles?.get(serviceId)
                         ?.androidCharacteristic?.get(characteristicId)?.event
                         ?.value = AttributeProfileCharacteristicEvent(value, error)

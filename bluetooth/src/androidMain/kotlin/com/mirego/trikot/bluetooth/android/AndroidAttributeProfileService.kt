@@ -18,7 +18,7 @@ class AndroidAttributeProfileService(
         (
             mutableMapOf(
                 value.uuid.toString()
-                    .toUpperCase(Locale.ROOT) to
+                    .uppercase(Locale.ROOT) to
                     AndroidAttributeProfileCharacteristic(
                         value,
                         bluetoothDevice

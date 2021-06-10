@@ -14,7 +14,7 @@ class AndroidAttributeProfileCharacteristic(
 ) : AttributeProfileCharacteristic {
     override val event = Publishers.publishSubject<AttributeProfileCharacteristicEvent>()
 
-    override val uuid: String = bluetoothGattCharacteristic.uuid.toString().toUpperCase(Locale.ROOT)
+    override val uuid: String = bluetoothGattCharacteristic.uuid.toString().uppercase(Locale.ROOT)
 
     override fun read() {
         bluetoothDevice.readCharacteristic(bluetoothGattCharacteristic)

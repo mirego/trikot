@@ -12,6 +12,8 @@ import com.mirego.trikot.streams.reactive.map
 import org.reactivestreams.Publisher
 import java.util.Timer
 import kotlin.concurrent.schedule
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
 
@@ -60,7 +62,7 @@ class AndroidBluetoothScanResult(
         updateManufacturerData()
         rssiPublisher.value = scanResult.rssi
         timer = Timer().also {
-            it.schedule(1.minutes.inMilliseconds.toLong()) {
+            it.schedule(Duration.minutes(1).toLong(DurationUnit.MILLISECONDS)) {
                 lostHeartbeatCallback?.let {
                     it()
                 }
