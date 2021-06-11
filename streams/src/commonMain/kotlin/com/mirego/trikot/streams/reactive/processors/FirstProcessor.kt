@@ -15,15 +15,16 @@ class FirstProcessor<T>(parentPublisher: Publisher<T>) :
         private val hasReceivedValue = AtomicReference(false)
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
             if (t != null) {
-                hasReceivedValue.compareAndSet(false, true)
-                cancelActiveSubscription()
-                subscriber.onNext(t)
-                subscriber.onComplete()
+                if (hasReceivedValue.compareAndSet(false, true)) {
+                    cancelActiveSubscription()
+                    subscriber.onNext(t)
+                    subscriber.onComplete()
+                }
             }
         }
 
         override fun onComplete() {
-            if (!hasReceivedValue.value) {
+            if (hasReceivedValue.compareAndSet(false, true)) {
                 super.onComplete()
             }
         }
