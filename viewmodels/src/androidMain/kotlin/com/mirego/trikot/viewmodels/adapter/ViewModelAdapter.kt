@@ -115,6 +115,9 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
 
     inner class ViewHolder<out V : ViewDataBinding>(val binding: V) :
         LifecycleViewHolder(binding.root), LifecycleOwner {
+
+        private var detached = false
+
         init {
             binding.lifecycleOwner = this
             binding.setVariable(lifecycleVariableId, LifecycleOwnerWrapper(this))
@@ -122,6 +125,19 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
 
         fun setVariable(item: MLI) {
             binding.setVariable(viewModelVariableId, item)
+        }
+
+        override fun onAttach() {
+            super.onAttach()
+            if (detached) {
+                binding.invalidateAll()
+                detached = false
+            }
+        }
+
+        override fun onDetach() {
+            super.onDetach()
+            detached = true
         }
 
         fun bind(item: MLI) {
