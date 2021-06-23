@@ -14,9 +14,9 @@ class Versions(project: Project) {
     val trikotHttp = project.property("trikot_http_version")
     val trikotKword = project.property("trikot_kword_version")
 
-    val androidGradlePlugin = "7.0.0-beta03"
-    val jetpackCompose = "1.0.0-beta08"
-    val googleAccompanist = "0.10.0"
+    val androidGradlePlugin = "7.0.0-beta04"
+    val jetpackCompose = "1.0.0-beta09"
+    val googleAccompanist = "0.12.0"
 }
 
 class Dependencies(project: Project) {
