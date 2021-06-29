@@ -27,11 +27,11 @@ extension NSObject: ViewModelDeclarativeCompatible { }
 extension ViewModelDeclarativeWrapper where Base : NSObject {
 
     public func getViewModel<T>() -> T? {
-        return objc_getAssociatedObject(self, AssociatedKeys.declarativeViewModelKey) as? T
+        return objc_getAssociatedObject(base, AssociatedKeys.declarativeViewModelKey) as? T
     }
 
     public func setViewModel<T>(viewModel: T?) {
-        objc_setAssociatedObject(self, AssociatedKeys.declarativeViewModelKey, viewModel, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        objc_setAssociatedObject(base, AssociatedKeys.declarativeViewModelKey, viewModel, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
     public func observe<V>(_ publisher: PublisherAdapter<V>, toClosure closure: @escaping ((V) -> Void)) {
