@@ -1,19 +1,18 @@
 require_relative 'podspec_versions.rb'
 
-platformVersion = '11.3'
-platform :ios, platformVersion
+platformVersion = '14.0'
 
-install! 'cocoapods', :disable_input_output_paths => true
+platform :ios, platformVersion
 
 ENV['TRIKOT_FRAMEWORK_NAME']='TrikotViewmodelsDeclarativeSample'
 
-target 'iosApp' do
+target 'Sample' do
   use_frameworks!
 
   properties = load_properties('../../gradle.properties')
 
   pod 'TrikotViewmodelsDeclarativeSample', :path => '../common'
-  #pod 'Trikot.viewmodels.declarative', :path => '../..'
+  pod 'Trikot.viewmodels.declarative', :path => '../..'
   pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git', :tag => properties['trikot_http_version'], :inhibit_warnings => true
   pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :tag => properties['trikot_streams_version'], :inhibit_warnings => true
   pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git', :tag => properties['trikot_kword_version'], :inhibit_warnings => true

@@ -1,4 +1,9 @@
 package com.mirego.sample.factories
 
-class ViewModelControllerFactoryImpl :
-    ViewModelControllerFactory
+import com.mirego.sample.viewmodels.home.HomeViewModelController
+
+class ViewModelControllerFactoryImpl : ViewModelControllerFactory {
+    override fun home(): HomeViewModelController {
+        return HomeViewModelController()
+    }
+}

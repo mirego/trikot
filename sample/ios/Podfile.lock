@@ -11,43 +11,57 @@ PODS:
     - TrikotViewmodelsDeclarativeSample
   - Trikot.streams/streams (0.0.1):
     - TrikotViewmodelsDeclarativeSample
-  - TrikotViewmodelsDeclarativeSample (0.0.1)
+  - Trikot.viewmodels.declarative (1.0.0):
+    - Trikot.streams
+    - Trikot.viewmodels.declarative/Core (= 1.0.0)
+    - Trikot.viewmodels.declarative/SwiftUI (= 1.0.0)
+    - TrikotViewmodelsDeclarativeSample
+  - Trikot.viewmodels.declarative/Core (1.0.0):
+    - Trikot.streams
+    - TrikotViewmodelsDeclarativeSample
+  - Trikot.viewmodels.declarative/SwiftUI (1.0.0):
+    - Trikot.streams
+    - TrikotViewmodelsDeclarativeSample
+  - TrikotViewmodelsDeclarativeSample (1.0.0)
 
 DEPENDENCIES:
   - SwiftLint
-  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `2.1.0`)"
-  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `2.1.0`)"
-  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `2.1.0`)"
+  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `2.2.0`)"
+  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `2.2.0`)"
+  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `2.2.1`)"
+  - Trikot.viewmodels.declarative (from `../..`)
   - TrikotViewmodelsDeclarativeSample (from `../common`)
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - ReachabilitySwift
     - SwiftLint
 
 EXTERNAL SOURCES:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 2.1.0
+    :tag: 2.2.0
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 2.1.0
+    :tag: 2.2.0
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 2.1.0
+    :tag: 2.2.1
+  Trikot.viewmodels.declarative:
+    :path: "../.."
   TrikotViewmodelsDeclarativeSample:
     :path: "../common"
 
 CHECKOUT OPTIONS:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 2.1.0
+    :tag: 2.2.0
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 2.1.0
+    :tag: 2.2.0
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 2.1.0
+    :tag: 2.2.1
 
 SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -55,8 +69,9 @@ SPEC CHECKSUMS:
   Trikot.http: cf5e71ad4ce126ddcb275af5fce080f1f550c005
   Trikot.kword: 58dc4fbc7024e5d072b1fd62a26a651e54af374e
   Trikot.streams: 40458deb1c5daa78144c44e8caf64b28be573f32
-  TrikotViewmodelsDeclarativeSample: 52eb783ca8ea1c65882d6907f0ab96127cd2dca0
+  Trikot.viewmodels.declarative: ec6fad6fca5bfd23360d8443e007a3a26c0b18d9
+  TrikotViewmodelsDeclarativeSample: 4a996ca59e8e83614a51de43e3ac93f5dc24c2a8
 
-PODFILE CHECKSUM: 99c76070862644985e420ab1b6d3d09b40d18d0d
+PODFILE CHECKSUM: 80e4486cff44d9882057f8ceb21cfeba9c5bb595
 
 COCOAPODS: 1.8.4

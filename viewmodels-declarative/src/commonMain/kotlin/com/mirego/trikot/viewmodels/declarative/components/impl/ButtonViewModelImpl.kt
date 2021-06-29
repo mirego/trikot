@@ -7,14 +7,17 @@ import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.switchMap
 import com.mirego.trikot.viewmodels.declarative.components.ButtonViewModel
-import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
-import com.mirego.trikot.viewmodels.declarative.internal.published
-import com.mirego.trikot.viewmodels.declarative.properties.Content
+import com.mirego.trikot.viewmodels.declarative.content.Content
 import com.mirego.trikot.viewmodels.declarative.utilities.DispatchQueues
+import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.PublishedProperty
+import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.published
 import org.reactivestreams.Publisher
 
 @Suppress("LeakingThis")
-open class ButtonViewModelImpl<C : Content>(cancellableManager: CancellableManager, defaultContent: C) : ButtonViewModel<C>(cancellableManager) {
+open class ButtonViewModelImpl<C : Content>(
+    cancellableManager: CancellableManager,
+    defaultContent: C
+) : ButtonViewModel<C>(cancellableManager) {
 
     private val actionPublisher = PublishSubjectImpl<Unit>()
     override val action: () -> Unit = {

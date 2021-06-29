@@ -6,17 +6,18 @@ import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.viewmodels.declarative.components.TextFieldViewModel
-import com.mirego.trikot.viewmodels.declarative.internal.PublishedProperty
-import com.mirego.trikot.viewmodels.declarative.internal.published
 import com.mirego.trikot.viewmodels.declarative.properties.KeyboardAutoCapitalization
 import com.mirego.trikot.viewmodels.declarative.properties.KeyboardReturnKeyType
 import com.mirego.trikot.viewmodels.declarative.properties.KeyboardType
 import com.mirego.trikot.viewmodels.declarative.properties.TextContentType
 import com.mirego.trikot.viewmodels.declarative.utilities.DispatchQueues
+import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.PublishedProperty
+import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.published
 import org.reactivestreams.Publisher
 
 @Suppress("LeakingThis")
-open class TextFieldViewModelImpl(cancellableManager: CancellableManager) : ControlViewModelImpl(cancellableManager), TextFieldViewModel {
+open class TextFieldViewModelImpl(cancellableManager: CancellableManager) :
+    ControlViewModelImpl(cancellableManager), TextFieldViewModel {
 
     private val textDelegate = published("", this)
     override var text: String by textDelegate

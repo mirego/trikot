@@ -15,6 +15,7 @@ repositories {
 }
 
 group = "com.mirego.sample"
+
 val frameworkName = "TrikotViewmodelsDeclarativeSample"
 
 configurations {
@@ -34,9 +35,9 @@ kotlin {
     ios {
         binaries {
             framework {
-                embedBitcode("disable")
                 baseName = frameworkName
                 transitiveExport = true
+                export(project(":viewmodels-declarative"))
                 export(Dependencies.trikotStreams)
                 export(Dependencies.trikotFoundation)
                 export(Dependencies.trikotHttp)
@@ -112,7 +113,8 @@ val copyFramework by tasks.creating {
         copy {
             from(srcFile.parent)
             into(targetDir)
-            include("**")
+            include("$frameworkName.framework/**")
+            include("$frameworkName.framework.dSYM/**")
         }
 
         copy {

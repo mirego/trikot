@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'TrikotViewmodelsDeclarativeSample'
-    spec.version                  = '0.0.1'
+    spec.version                  = '1.0.0'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
@@ -12,6 +12,8 @@ Pod::Spec.new do |spec|
     spec.libraries                = "c++", "System"
     spec.module_name              = "#{spec.name}_umbrella"
 
+    spec.ios.deployment_target  = '13.0'
+
     spec.pod_target_xcconfig = {
         'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
         'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
@@ -20,7 +22,7 @@ Pod::Spec.new do |spec|
     }
 
     spec.prepare_command = <<-CMD
-        ../../gradlew :sample:common:copyFramework -Pconfiguration.build.dir="build/bin/ios"
+        mkdir -p build/bin/ios/TrikotViewmodelsDeclarativeSample.framework
     CMD
 
     spec.script_phases = [
@@ -33,15 +35,10 @@ if [ "$ENABLE_PREVIEWS" = "NO" ]
 then
   echo "Building common framework"
 
-  cd "$SRCROOT/../../.."
-  pwd
-  FILE=.env.sh
-  if [ -f $FILE ]; then
-    source .env.sh
-  fi
+  cd "$SRCROOT/../.."
 
   ./gradlew :sample:common:copyFramework \
-    -Pconfiguration.build.dir="build/bin" \
+    -Pconfiguration.build.dir="build/bin/ios" \
     -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" \
     -Pkotlin.target="$KOTLIN_TARGET"
 else

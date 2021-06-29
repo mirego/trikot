@@ -3,7 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.controller
 import com.mirego.trikot.foundation.concurrent.atomic
 import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.viewmodels.declarative.ViewModel
+import com.mirego.trikot.viewmodels.declarative.viewmodel.ViewModel
 
 abstract class ViewModelController<VM : ViewModel, N : NavigationDelegate> :
     PlatformViewModelController() {

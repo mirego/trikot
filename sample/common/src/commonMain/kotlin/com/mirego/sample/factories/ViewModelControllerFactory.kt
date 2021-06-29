@@ -1,3 +1,7 @@
 package com.mirego.sample.factories
 
-interface ViewModelControllerFactory
+import com.mirego.sample.viewmodels.home.HomeViewModelController
+
+interface ViewModelControllerFactory {
+    fun home(): HomeViewModelController
+}

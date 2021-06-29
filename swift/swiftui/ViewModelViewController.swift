@@ -2,35 +2,34 @@ import UIKit
 import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
-class ViewModelViewController<VMC: ViewModelController<N, VM>, VM, V: RootViewModelView, N: NavigationDelegate>: UIHostingController<V>, NavigationDelegate where VM == V.VM {
+open class ViewModelViewController<VMC: ViewModelController<VM, N>, VM, V: RootViewModelView, N: NavigationDelegate>: UIHostingController<V>, NavigationDelegate where VM == V.VM {
 
-    let viewModelController: VMC
-    var viewControllerFactory: ViewControllerFactory!
+    public let viewModelController: VMC
 
-    init(viewModelController: VMC, createViewClosure: (VMC) -> V = createRootView) {
+    public init(viewModelController: VMC, createViewClosure: (VMC) -> V = createRootView) {
         self.viewModelController = viewModelController
         super.init(rootView: createViewClosure(viewModelController))
         viewModelController.navigationDelegate = self as? N
         viewModelController.onCreate()
     }
 
-    private static func createRootView(viewModelController: VMC) -> V {
+    public static func createRootView(viewModelController: VMC) -> V {
         V.init(viewModel: viewModelController.viewModel)
     }
 
     @available(*, unavailable)
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
+    @objc required dynamic public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModelController.onAppear()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModelController.onDisappear()
 

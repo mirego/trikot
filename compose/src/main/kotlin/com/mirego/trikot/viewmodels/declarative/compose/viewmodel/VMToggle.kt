@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import com.mirego.trikot.viewmodels.declarative.components.ToggleViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.ui.hidden
-import com.mirego.trikot.viewmodels.declarative.properties.Content
+import com.mirego.trikot.viewmodels.declarative.content.Content
 
 @Composable
 fun <C : Content> VMToggleCheckbox(

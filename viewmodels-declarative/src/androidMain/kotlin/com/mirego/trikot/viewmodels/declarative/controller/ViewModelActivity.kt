@@ -3,9 +3,9 @@ package com.mirego.trikot.viewmodels.declarative.controller
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.mirego.trikot.viewmodels.declarative.ViewModel
 import com.mirego.trikot.viewmodels.declarative.controller.factory.AndroidViewModelProviderFactory
 import com.mirego.trikot.viewmodels.declarative.lifecycle.LifecycleOwnerWrapper
+import com.mirego.trikot.viewmodels.declarative.viewmodel.ViewModel
 import kotlin.reflect.KClass
 
 abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewModel, N : NavigationDelegate> :

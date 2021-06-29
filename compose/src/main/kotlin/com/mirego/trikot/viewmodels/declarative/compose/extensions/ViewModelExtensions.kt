@@ -10,9 +10,9 @@ import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.subscribe
-import com.mirego.trikot.viewmodels.declarative.ViewModel
-import org.reactivestreams.Publisher
+import com.mirego.trikot.viewmodels.declarative.viewmodel.ViewModel
 import kotlin.reflect.KProperty
+import org.reactivestreams.Publisher
 
 @Composable
 fun <T : ViewModel> T.observeAsState(): State<T> {

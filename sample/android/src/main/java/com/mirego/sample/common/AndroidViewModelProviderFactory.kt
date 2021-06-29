@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mirego.sample.factories.Bootstrap
-import com.mirego.sample.viewmodels.base.BaseViewModelController
+import com.mirego.trikot.viewmodels.declarative.controller.ViewModelController
 
 class AndroidViewModelProviderFactory {
 
@@ -21,14 +21,14 @@ class AndroidViewModelProviderFactory {
         } ?: with(fragment)
 
         @JvmStatic
-        fun <T : BaseViewModelController<*, *>> get(
+        fun <T : ViewModelController<*, *>> get(
             activity: FragmentActivity,
             constructorParam: Any?,
             clazz: Class<T>
         ) = with(activity, constructorParam).get(clazz)
 
         @JvmStatic
-        fun <T : BaseViewModelController<*, *>> get(
+        fun <T : ViewModelController<*, *>> get(
             fragment: Fragment,
             constructorParam: Any?,
             clazz: Class<T>
