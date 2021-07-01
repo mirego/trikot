@@ -62,7 +62,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.150-kotlin-1.4.31")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:${project.extra["kotlin_wrappers_extensions_version"]}-kotlin-${project.extra["kotlin_version"]}")
             }
         }
 
