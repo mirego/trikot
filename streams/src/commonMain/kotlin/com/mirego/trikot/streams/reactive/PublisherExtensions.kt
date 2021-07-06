@@ -35,6 +35,8 @@ import com.mirego.trikot.streams.reactive.processors.SkipProcessor
 import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.TakeUntilProcessor
+import com.mirego.trikot.streams.reactive.processors.TakeUntilProcessorPredicate
 import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessor
 import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessorPredicate
 import com.mirego.trikot.streams.reactive.processors.ThreadLocalProcessor
@@ -268,4 +270,20 @@ fun <T> Publisher<T>.retryBackoff(
  */
 fun <T> Publisher<T>.takeWhile(predicate: TakeWhileProcessorPredicate<T>): Publisher<T> {
     return TakeWhileProcessor(this, predicate)
+}
+
+/**
+ * The TakeUntil uses a predicate function that evaluates the items emitted by the source Publisher
+ * to terminate if we mirrors the source OR emit one last item and complete immediately after.
+ *
+ * Marbles diagram :
+ * -------(1)---(2)-----(3)-----(4)--|->
+ * takeUntil(==3)
+ * -------(1)---(2)-----(3)/----------->
+ *
+ * @see <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil-rx.functions.Func1-">http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil-rx.functions.Func1-</a>
+ * This is the predicate version, rather than receiving a second Publisher
+ */
+fun <T> Publisher<T>.takeUntil(predicate: TakeUntilProcessorPredicate<T>): Publisher<T> {
+    return TakeUntilProcessor(this, predicate)
 }
