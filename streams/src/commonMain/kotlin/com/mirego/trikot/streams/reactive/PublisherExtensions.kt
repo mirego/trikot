@@ -35,6 +35,8 @@ import com.mirego.trikot.streams.reactive.processors.SkipProcessor
 import com.mirego.trikot.streams.reactive.processors.SubscribeOnProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessor
 import com.mirego.trikot.streams.reactive.processors.SwitchMapProcessorBlock
+import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessor
+import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessorPredicate
 import com.mirego.trikot.streams.reactive.processors.ThreadLocalProcessor
 import com.mirego.trikot.streams.reactive.processors.TimeoutProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
@@ -251,4 +253,19 @@ fun <T> Publisher<T>.retryBackoff(
             is Backoff.Next -> Publishers.timer(backoff.duration, timerFactory)
         }
     }
+}
+
+/**
+ * The TakeWhile mirrors the source Publisher until a specified condition becomes false,
+ * at which point TakeWhile stops mirroring the source Publisher and complete its own Publisher.
+ *
+ * Marbles diagram :
+ * -------(1)---(2)-----(3)-----(4)--|->
+ * takeWhile(!=3)
+ * -------(1)---(2)------|------------->
+ *
+ * @see <a href="http://reactivex.io/documentation/operators/takewhile.html">http://reactivex.io/documentation/operators/takewhile.html</a>
+ */
+fun <T> Publisher<T>.takeWhile(predicate: TakeWhileProcessorPredicate<T>): Publisher<T> {
+    return TakeWhileProcessor(this, predicate)
 }
