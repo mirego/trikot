@@ -200,7 +200,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 release {
-    checkTasks = listOf("check")
+    checkTasks = listOf("build", "check")
     buildTasks = listOf("publish")
     updateVersionPart = 2
 }
