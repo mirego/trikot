@@ -7,10 +7,6 @@
         <variable
             name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.NavigableListItemViewModel" />
-
-        <variable
-            name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +14,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
         core:view_model="@{viewModel}">
 
        <TextView
@@ -31,7 +26,6 @@
            android:layout_marginTop="16dp"
            android:layout_marginStart="16dp"
            android:textSize="30dp"
-           app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
            core:view_model="@{viewModel.title}"
            tools:text="Click me..."/>
     </androidx.constraintlayout.widget.ConstraintLayout>

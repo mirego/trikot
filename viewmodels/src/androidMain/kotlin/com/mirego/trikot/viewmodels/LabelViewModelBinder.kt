@@ -9,10 +9,20 @@ import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableLabelViewModel
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object LabelViewModelBinder {
 
     private val NoLabelViewModel = MutableLabelViewModel().apply { hidden = true.just() } as LabelViewModel
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        textView: TextView,
+        labelViewModel: LabelViewModel?
+    ) {
+        bind(textView, labelViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(textView))
+    }
 
     @JvmStatic
     @BindingAdapter("view_model", "hiddenVisibility", "lifecycleOwnerWrapper")

@@ -15,11 +15,48 @@ import com.mirego.trikot.streams.reactive.processors.combine
 import com.mirego.trikot.viewmodels.mutable.MutableButtonViewModel
 import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object ButtonViewModelBinder {
 
     val NoButtonViewModel = MutableButtonViewModel().apply { hidden = true.just() } as ButtonViewModel
     val NoViewModelAction = Publishers.behaviorSubject(ViewModelAction {})
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        textView: TextView,
+        buttonViewModel: ButtonViewModel?
+    ) {
+        bind(textView, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(textView))
+    }
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        view: View,
+        buttonViewModel: ButtonViewModel?
+    ) {
+        bind(view, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(view))
+    }
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        imageView: ImageView,
+        buttonViewModel: ButtonViewModel?
+    ) {
+        bind(imageView, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(imageView))
+    }
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        button: Button,
+        buttonViewModel: ButtonViewModel?
+    ) {
+        bind(button, buttonViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(button))
+    }
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")

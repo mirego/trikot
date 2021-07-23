@@ -37,7 +37,6 @@ class ListActivity : AppCompatActivity(), NavigationDelegate {
                 this
             )
         binding.lifecycleOwner = this
-        binding.lifecycleOwnerWrapper = LifecycleOwnerWrapper(this)
     }
 }
 

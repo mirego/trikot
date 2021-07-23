@@ -6,8 +6,19 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object PickerViewModelBinder {
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        spinner: Spinner,
+        pickerViewModel: PickerViewModel<*>?
+    ) {
+        bind(spinner, pickerViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(spinner))
+    }
+
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")

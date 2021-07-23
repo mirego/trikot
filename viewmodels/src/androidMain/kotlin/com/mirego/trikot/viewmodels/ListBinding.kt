@@ -4,8 +4,19 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object ListBinding {
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        recyclerView: RecyclerView,
+        listViewModel: ListViewModel<*>?
+    ) {
+        bindList(recyclerView, listViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(recyclerView))
+    }
+
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")

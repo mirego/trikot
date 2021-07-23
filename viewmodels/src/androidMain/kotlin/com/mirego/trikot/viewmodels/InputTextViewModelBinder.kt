@@ -25,10 +25,20 @@ import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextType
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object InputTextViewModelBinder {
 
     val NoInputTextViewModel = MutableInputTextViewModel().apply { hidden = true.just() } as InputTextViewModel
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        editText: EditText,
+        InputTextViewModel: InputTextViewModel?
+    ) {
+        bind(editText, InputTextViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(editText))
+    }
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")

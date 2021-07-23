@@ -7,10 +7,6 @@
         <variable
             name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.LabelListItemViewModel" />
-
-        <variable
-            name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +14,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
         core:view_model="@{viewModel}">
 
         <TextView
@@ -28,7 +23,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             core:view_model="@{viewModel.label}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

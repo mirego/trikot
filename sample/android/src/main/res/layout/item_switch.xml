@@ -6,10 +6,6 @@
         <variable
             name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.MutableToggleSwitchListItemViewModel" />
-
-        <variable
-            name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +13,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
         app:view_model="@{viewModel}">
 
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -27,9 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            app:view_model="@{viewModel.toggleSwitch}"
-            />
+            app:view_model="@{viewModel.toggleSwitch}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

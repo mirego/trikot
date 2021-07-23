@@ -6,10 +6,20 @@ import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
 import com.mirego.trikot.viewmodels.mutable.MutableSliderViewModel
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 
 object SliderViewModelBinder {
     val noSliderViewModel =
         MutableSliderViewModel().apply { hidden = true.just() } as SliderViewModel
+
+    @JvmStatic
+    @BindingAdapter("view_model")
+    fun bind(
+        seekBar: SeekBar,
+        sliderViewModel: SliderViewModel?
+    ) {
+        bind(seekBar, sliderViewModel, BindingUtils.getLifecycleOwnerWrapperFromView(seekBar))
+    }
 
     @JvmStatic
     @BindingAdapter("view_model", "lifecycleOwnerWrapper")

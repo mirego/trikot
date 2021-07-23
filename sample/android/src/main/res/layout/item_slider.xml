@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="com.trikot.viewmodels.sample.viewmodels.MutableSliderListItemViewModel" />
-
-        <variable
-            name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +15,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
         core:view_model="@{viewModel}">
 
         <SeekBar
@@ -28,9 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
-            core:view_model="@{viewModel.slider}"
-            />
+            core:view_model="@{viewModel.slider}" />
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +31,6 @@
             app:layout_constraintTop_toBottomOf="@id/progress_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             core:view_model="@{viewModel.valueLabel}"
             tools:text="slider value" />
     </androidx.constraintlayout.widget.ConstraintLayout>

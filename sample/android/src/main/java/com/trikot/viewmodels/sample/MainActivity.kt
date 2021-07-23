@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), NavigationDelegate {
         binding.datasets.adapter = ListItemViewModelAdapter(this)
         binding.viewModel = appViewModel.getVm(this)
         binding.lifecycleOwner = this
-        binding.lifecycleOwnerWrapper = LifecycleOwnerWrapper(this)
     }
 
     override fun navigateTo(destination: Destination) {

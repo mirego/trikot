@@ -9,10 +9,6 @@
             name="viewModel"
             type="com.mirego.trikot.viewmodels.ListViewModel" />
 
-        <variable
-            name="lifecycleOwnerWrapper"
-            type="com.mirego.trikot.viewmodels.LifecycleOwnerWrapper" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,15 +19,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/datasets"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#FFFFFF"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             app:view_model="@{viewModel}"
-            app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

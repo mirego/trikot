@@ -13,6 +13,7 @@ import com.mirego.trikot.streams.reactive.withCancellableManager
 import com.mirego.trikot.viewmodels.mutable.MutableImageViewModel
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.properties.StateSelector
+import com.mirego.trikot.viewmodels.utils.BindingUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
@@ -27,20 +28,21 @@ object ImageViewModelBinder {
     fun bind(
         imageView: ImageView,
         imageViewModel: ImageViewModel?,
-        lifecycleOwnerWrapper: LifecycleOwnerWrapper,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
         transformation: Transformation? = null,
         placeholderScaleType: ImageView.ScaleType? = null
     ) {
+        val safeLifecycleOwnerWrapper = lifecycleOwnerWrapper ?: BindingUtils.getLifecycleOwnerWrapperFromView(imageView)
         (imageViewModel ?: NoImageViewModel).let {
 
-            imageView.bindViewModel(imageViewModel, lifecycleOwnerWrapper)
+            imageView.bindViewModel(imageViewModel, safeLifecycleOwnerWrapper)
 
             val originalScaleType = imageView.scaleType
 
             OneShotPreDrawListener.add(imageView) {
                 it.imageFlow(ImageWidth(imageView.width), ImageHeight(imageView.height))
                     .withCancellableManager()
-                    .observe(lifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
+                    .observe(safeLifecycleOwnerWrapper.lifecycleOwner) { (manager, imageFlow) ->
                         processImageFlow(
                             it,
                             imageFlow,

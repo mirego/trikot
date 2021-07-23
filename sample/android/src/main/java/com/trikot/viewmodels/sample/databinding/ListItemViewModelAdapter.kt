@@ -20,7 +20,6 @@ import com.trikot.viewmodels.sample.viewmodels.ViewListItemViewModel
 class ListItemViewModelAdapter(lifecycleOwner: LifecycleOwner) :
     ViewModelAdapter<ListItemViewModel>(
         viewModelVariableId = BR.viewModel,
-        lifecycleVariableId = BR.lifecycleOwnerWrapper,
         lifecycleOwner = lifecycleOwner,
         diffCallback = GenericViewModelDiffCallback(),
         layoutMapper = { viewModel ->

@@ -57,7 +57,7 @@ typealias LayoutMapper<MLI> = (viewModel: MLI) -> Int
  */
 open class ViewModelAdapter<MLI : ListItemViewModel>(
     @IdRes private var viewModelVariableId: Int,
-    @IdRes private var lifecycleVariableId: Int,
+    @IdRes private var lifecycleVariableId: Int? = null,
     lifecycleOwner: LifecycleOwner,
     diffCallback: DiffUtil.ItemCallback<MLI> = NoDiffCallback(),
     private val layoutMapper: LayoutMapper<MLI>
@@ -67,7 +67,7 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
     constructor(
         @LayoutRes layoutId: Int,
         @IdRes viewModelVariableId: Int,
-        @IdRes lifecycleVariableId: Int,
+        @IdRes lifecycleVariableId: Int?,
         lifecycleOwner: LifecycleOwner,
         diffCallback: DiffUtil.ItemCallback<MLI> = NoDiffCallback()
     ) : this(
@@ -120,7 +120,9 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
 
         init {
             binding.lifecycleOwner = this
-            binding.setVariable(lifecycleVariableId, LifecycleOwnerWrapper(this))
+            lifecycleVariableId?.let {
+                binding.setVariable(it, LifecycleOwnerWrapper(this))
+            }
         }
 
         fun setVariable(item: MLI) {
