@@ -46,6 +46,8 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
             onNextValidation.setOrThrow(0, 1)
             isChildCompleted.setOrThrow(isChildCompleted.value, false)
 
+            val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
+
             val newPublisher = try {
                 block(t)
             } catch (e: StreamsProcessorException) {
@@ -55,7 +57,7 @@ class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block:
 
             currentPublisher.setOrThrow(currentPublisher.value, newPublisher)
             newPublisher.observeOn(serialQueue).subscribe(
-                cancellableManagerProvider.cancelPreviousAndCreate(),
+                cancellableManager,
                 onNext = { subscriber.onNext(it) },
                 onError = {
                     onError(it)

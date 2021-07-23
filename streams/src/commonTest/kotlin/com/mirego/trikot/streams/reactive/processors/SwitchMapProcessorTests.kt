@@ -3,6 +3,7 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.RefreshablePublisher
 import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.switchMap
@@ -20,12 +21,14 @@ class SwitchMapProcessorTests {
         var receivedValueSwitchMap: String? = null
         var receivedValueSubscription: String? = null
 
-        switchMappedPublisher.switchMap {
-            receivedValueSwitchMap = it
-            returnedPublisher
-        }.subscribe(CancellableManager()) {
-            receivedValueSubscription = it
-        }
+        switchMappedPublisher
+            .switchMap {
+                receivedValueSwitchMap = it
+                returnedPublisher
+            }
+            .subscribe(CancellableManager()) {
+                receivedValueSubscription = it
+            }
 
         assertEquals("a", receivedValueSwitchMap)
         assertEquals("b", receivedValueSubscription)
@@ -37,10 +40,9 @@ class SwitchMapProcessorTests {
         val returnedPublisher = MockPublisher()
         val cancellableManager = CancellableManager()
 
-        switchMappedPublisher.switchMap {
-            returnedPublisher
-        }.subscribe(cancellableManager) {
-        }
+        switchMappedPublisher
+            .switchMap { returnedPublisher }
+            .subscribe(cancellableManager) {}
 
         cancellableManager.cancel()
 
@@ -53,7 +55,14 @@ class SwitchMapProcessorTests {
         val returnedPublisher = Publishers.behaviorSubject("b")
         var isCompleted = false
 
-        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { isCompleted = true })
+        switchMappedPublisher
+            .switchMap { returnedPublisher }
+            .subscribe(
+                CancellableManager(),
+                onNext = {},
+                onError = {},
+                onCompleted = { isCompleted = true }
+            )
         switchMappedPublisher.complete()
         assertFalse { isCompleted }
     }
@@ -64,7 +73,14 @@ class SwitchMapProcessorTests {
         val returnedPublisher = Publishers.behaviorSubject("b")
         var isCompleted = false
 
-        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { isCompleted = true })
+        switchMappedPublisher
+            .switchMap { returnedPublisher }
+            .subscribe(
+                CancellableManager(),
+                onNext = {},
+                onError = {},
+                onCompleted = { isCompleted = true }
+            )
         returnedPublisher.complete()
         assertFalse { isCompleted }
     }
@@ -75,7 +91,14 @@ class SwitchMapProcessorTests {
         val returnedPublisher = Publishers.behaviorSubject("b")
         var isCompleted = false
 
-        switchMappedPublisher.switchMap { returnedPublisher }.subscribe(CancellableManager(), onNext = {}, onError = {}, onCompleted = { isCompleted = true })
+        switchMappedPublisher
+            .switchMap { returnedPublisher }
+            .subscribe(
+                CancellableManager(),
+                onNext = {},
+                onError = {},
+                onCompleted = { isCompleted = true }
+            )
         switchMappedPublisher.complete()
         returnedPublisher.complete()
         assertTrue { isCompleted }
@@ -87,12 +110,13 @@ class SwitchMapProcessorTests {
         val expectedException = StreamsProcessorException()
         var receivedException: StreamsProcessorException? = null
 
-        publisher.switchMap<String, String> { throw expectedException }.subscribe(
-            CancellableManager(),
-            onNext = {
-            },
-            onError = { receivedException = it as StreamsProcessorException }
-        )
+        publisher
+            .switchMap<String, String> { throw expectedException }
+            .subscribe(
+                CancellableManager(),
+                onNext = {},
+                onError = { receivedException = it as StreamsProcessorException }
+            )
 
         assertEquals(expectedException, receivedException)
     }
@@ -103,12 +127,13 @@ class SwitchMapProcessorTests {
         var receivedException: StreamsProcessorException? = null
 
         assertFailsWith(IllegalStateException::class) {
-            publisher.switchMap<String, String> { throw IllegalStateException() }.subscribe(
-                CancellableManager(),
-                onNext = {
-                },
-                onError = { receivedException = it as StreamsProcessorException }
-            )
+            publisher
+                .switchMap<String, String> { throw IllegalStateException() }
+                .subscribe(
+                    CancellableManager(),
+                    onNext = {},
+                    onError = { receivedException = it as StreamsProcessorException }
+                )
         }
 
         assertEquals(null, receivedException)
@@ -120,9 +145,32 @@ class SwitchMapProcessorTests {
         val childPublisher = Publishers.behaviorSubject("a").also { it.error = Throwable() }
 
         var errorCallCount = 0
-        publisher.switchMap { childPublisher }.subscribe(CancellableManager(), {}, { errorCallCount ++ })
+        publisher
+            .switchMap { childPublisher }
+            .subscribe(CancellableManager(), {}, { errorCallCount++ })
         publisher.value = "b"
 
         assertEquals(1, errorCallCount)
+    }
+
+    @Test
+    fun testCancellationHappensBeforeResubscribe() {
+        var executionCount = 0
+        val publisher = Publishers.behaviorSubject("a")
+        val refreshablePublisher = RefreshablePublisher({ _, _ ->
+            executionCount++
+            Publishers.behaviorSubject(1)
+        })
+
+        publisher
+            .switchMap {
+                refreshablePublisher.refresh()
+                refreshablePublisher
+            }
+            .subscribe(CancellableManager()) {}
+
+        publisher.value = "b"
+
+        assertEquals(2, executionCount)
     }
 }
