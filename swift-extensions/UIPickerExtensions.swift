@@ -23,14 +23,19 @@ extension UIPickerView {
             guard let pickerViewModel = value else { return }
 
             self.delegate = self
-            observe(pickerViewModel.selectedElementIndex) { [weak self] (value: Int) in
-                self?.selectRow(value, inComponent: 0, animated: false)
-            }
-
-            observe(pickerViewModel.elements) { [weak self] (value: [PickerItemViewModel]) in
-                self?.elements = value.map {
+            
+            let pickerViewModelCombineLatest = CombineLatestProcessorExtensionsKt.combine(pickerViewModel.elements, publishers: [pickerViewModel.selectedElementIndex])
+            
+            observe(pickerViewModelCombineLatest) { [weak self] (value: [Any?]) in
+                guard let elements = value[0] as? [PickerItemViewModel],
+                      let selectedIndex = value[1] as? Int else { return }
+                
+                self?.elements = elements.map {
                     $0.displayName
                 }
+                
+                self?.selectRow(selectedIndex, inComponent: 0, animated: false)
+                
             }
             
             bind(pickerViewModel.enabled, \UIPickerView.isUserInteractionEnabled)
