@@ -33,7 +33,9 @@ class SampleProcessor<T>(
             val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
 
             val recurringTimer = timerFactory.repeatable(interval) {
-                dispatchSampledValue()
+                synchronousSerialQueue.dispatch {
+                    dispatchSampledValue()
+                }
             }
 
             cancellableManager.add { recurringTimer.cancel() }
