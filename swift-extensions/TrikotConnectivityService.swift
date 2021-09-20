@@ -4,7 +4,7 @@ import TRIKOT_FRAMEWORK_NAME
 
 public class TrikotConnectivityService {
     public static let shared = TrikotConnectivityService()
-    public let publisher = Publishers().behaviorSubject(value: nil)
+    public let publisher = Publishers().behaviorSubject(value: ConnectivityState.undefined)
 
     let reachability = try! Reachability()
 
@@ -25,7 +25,7 @@ public class TrikotConnectivityService {
         do {
             try reachability.startNotifier()
         } catch {
-            publisher.value = ConnectivityState.none
+            publisher.value = ConnectivityState.undefined
             print("Unable to start reachability notifier")
         }
     }
