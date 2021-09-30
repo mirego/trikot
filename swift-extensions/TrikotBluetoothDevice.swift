@@ -29,7 +29,7 @@ class TrikotBluetoothDevice: NSObject, BluetoothDevice, CBPeripheralDelegate {
         physicalAddress = peripheral.identifier.uuidString
         super.init()
 
-        peripheral.delegate = self        
+        peripheral.delegate = self
     }
 
     func connect(cancellableManager: CancellableManager) {
@@ -66,22 +66,28 @@ class TrikotBluetoothDevice: NSObject, BluetoothDevice, CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard let service = characteristic.service else { return }
+
         if let error = error {
-            services[characteristic.service]?.trikotCharacteristics[characteristic]?.newError = error
+            services[service]?.trikotCharacteristics[characteristic]?.newError = error
         } else {
-            services[characteristic.service]?.trikotCharacteristics[characteristic]?.newValue = characteristic.value
+            services[service]?.trikotCharacteristics[characteristic]?.newValue = characteristic.value
         }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard let service = characteristic.service else { return }
+
         if let error = error {
-            services[characteristic.service]?.trikotCharacteristics[characteristic]?.newError = error
+            services[service]?.trikotCharacteristics[characteristic]?.newError = error
         }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        guard let service = characteristic.service else { return }
+
         if let error = error {
-            services[characteristic.service]?.trikotCharacteristics[characteristic]?.newError = error
+            services[service]?.trikotCharacteristics[characteristic]?.newError = error
         }
     }
 }
