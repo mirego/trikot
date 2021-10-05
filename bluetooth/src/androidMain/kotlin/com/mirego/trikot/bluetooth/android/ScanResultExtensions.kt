@@ -31,7 +31,7 @@ class AndroidBluetoothScanResult(
     private val manufacturerDataPublisher = Publishers.behaviorSubject(SparseArray<ByteArray>())
     private val rssiPublisher = Publishers.behaviorSubject(scanResult.rssi)
 
-    override val name: String = scanResult.device.name
+    override val name: String = scanResult.device.name ?: ""
     override val physicalAddress: String = scanResult.device.address
     override val rssi = rssiPublisher.distinctUntilChanged()
 
