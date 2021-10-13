@@ -17,7 +17,7 @@ data class GraphqlQueryDataSourceRequest<T>(
     val query: GraphqlQuery<T>,
     override val cacheableId: String,
     override val requestType: DataSourceRequest.Type = DataSourceRequest.Type.USE_CACHE,
-    val timeout: Duration? = null
+    val requestTimeout: Duration? = null
 ) : DataSourceRequest
 
 @ExperimentalTime
@@ -30,7 +30,7 @@ class GraphqlDataSource<T>(
         return graphqlPublisherFactory.create(
             request.query,
             httpHeaderProvider = httpHeaderProvider,
-            request.timeout
+            request.requestTimeout
         )
     }
 }
