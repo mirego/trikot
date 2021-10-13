@@ -28,9 +28,10 @@ class RequestBuilder {
      */
     var cachePolicy: CachePolicy = CachePolicy.USE_PROTOCOL_CACHE_POLICY
     /**
-     * Unsupported
+     * Timeout (in seconds) that needs to be applied to this specific request.
+     * If null, the default configured timeout will be used
      */
-    var timeout: Int = 30
+    var timeout: Int? = null
     /**
      * Unsupported
      */

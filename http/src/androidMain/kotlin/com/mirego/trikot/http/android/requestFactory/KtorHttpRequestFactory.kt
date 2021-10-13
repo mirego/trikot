@@ -6,6 +6,7 @@ import com.mirego.trikot.http.HttpRequest
 import com.mirego.trikot.http.HttpRequestFactory
 import com.mirego.trikot.http.HttpResponse
 import com.mirego.trikot.http.RequestBuilder
+import com.mirego.trikot.http.exception.HttpRequestTimeoutException
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
@@ -15,6 +16,7 @@ import io.ktor.client.features.logging.DEFAULT
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.timeout
 import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.url
@@ -29,9 +31,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.reactivestreams.Publisher
+import kotlin.ByteArray
+import kotlin.Int
+import kotlin.String
+import kotlin.Throwable
 import kotlin.coroutines.CoroutineContext
+import kotlin.let
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
+import io.ktor.client.features.HttpRequestTimeoutException as KtorRequestTimeoutException
 
 @ExperimentalTime
 private val DEFAULT_TIMEOUT_DURATION = Duration.seconds(10)
@@ -96,6 +104,13 @@ class KtorHttpRequestFactory(
                                 body = TextContent(it, ContentType.parse(contentType))
                             }
                         }
+
+                        requestBuilder.timeout?.takeIf { it > 0 }?.let { timeout ->
+                            timeout {
+                                requestTimeoutMillis = Duration.seconds(timeout).inWholeMilliseconds
+                            }
+                        }
+
                         method = requestBuilder.method.ktorMethod
                     }.execute { response ->
                         publisher.value =
@@ -107,7 +122,10 @@ class KtorHttpRequestFactory(
                         publisher.value =
                             KTorHttpResponse(response, response.call.response.readBytes())
                     } else {
-                        publisher.error = ex
+                        publisher.error = when (ex) {
+                            is KtorRequestTimeoutException -> HttpRequestTimeoutException(ex)
+                            else -> ex
+                        }
                     }
                 }
             }

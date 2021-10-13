@@ -13,6 +13,9 @@ import org.w3c.xhr.XMLHttpRequestResponseType
 class WebHttpRequest(
     private val requestBuilder: RequestBuilder
 ) : HttpRequest {
+
+    private val DEFAULT_TIMEOUT_IN_SECONDS = 30
+
     override fun execute(cancellableManager: CancellableManager): Publisher<HttpResponse> {
         val publisher = Publishers.behaviorSubject<HttpResponse>()
 
@@ -20,7 +23,7 @@ class WebHttpRequest(
             val xhr = XMLHttpRequest()
             val method = requestBuilder.method.toString()
             val url = (requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: "")
-            val timeout = requestBuilder.timeout * 1000
+            val timeout = (requestBuilder.timeout ?: DEFAULT_TIMEOUT_IN_SECONDS) * 1000
 
             xhr.open(method, url, true)
 
