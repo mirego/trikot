@@ -88,6 +88,12 @@ object Publishers {
         timerFactory: TimerFactory = FoundationConfiguration.timerFactory
     ): Publisher<Long> =
         TimerPublisher(delay, timerFactory)
+
+    fun <T> repeat(
+        delay: Duration,
+        timerFactory: TimerFactory = FoundationConfiguration.timerFactory,
+        publisherBlock: () -> Publisher<T>
+    ): Publisher<T> = RepeatablePublisher(delay, timerFactory).switchMap { publisherBlock() }
 }
 
 fun <T> T.asPublisher(): Publisher<T> = Publishers.behaviorSubject(this)

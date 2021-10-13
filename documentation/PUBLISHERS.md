@@ -94,6 +94,15 @@ val publisher = RefreshablePublisher({ cancellableManager, isRefreshing ->
 publisher.refresh()
 ```
 
+### RepeatablePublisher
+Repeatable publisher are specialized publisher that are reexecuted after the specified duration, until cancelled.
+
+```kotlin
+Publishers.repeat(Duration.minutes(1)) {
+    Publishers.behaviorSubject("I will repeat this message in 1 minute")
+}
+```
+
 ### ColdPublisher
 Cold publisher are specialized publishers that execute a block to create a publisher once subscribed too. 
 
