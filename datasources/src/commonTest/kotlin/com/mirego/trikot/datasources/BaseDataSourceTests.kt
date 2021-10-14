@@ -1,5 +1,6 @@
 package com.mirego.trikot.datasources
 
+import com.mirego.trikot.datasources.testutils.assertEquals
 import com.mirego.trikot.datasources.testutils.assertError
 import com.mirego.trikot.datasources.testutils.assertPending
 import com.mirego.trikot.datasources.testutils.assertValue
@@ -11,7 +12,10 @@ import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
+import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.subscribe
+import org.reactivestreams.Publisher
+import org.reactivestreams.Subscriber
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -152,6 +156,17 @@ class BaseDataSourceTests {
     }
 
     @Test
+    fun whenRefreshingWithCachedDataWhenAnErrorOccursAndStateIsPendingReturnPending() {
+        val expectedError = Throwable()
+        val networkDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchError(expectedError) }
+        val cacheDataSource = StateDataSource(DataState.pending("pending"))
+        val networkDataSource =
+            BasicDataSource(mutableMapOf(simpleCacheableId to networkDataSourceReadPublisher), cacheDataSource)
+
+        networkDataSource.read(FakeRequest(simpleCacheableId, DataSourceRequest.Type.REFRESH_CACHE)).assertEquals(DataState.pending("pending"))
+    }
+
+    @Test
     fun givenCachedDataWhenFetchingTheCacheableIdsThenTheyAreAllReturned() {
         val networkDataSourceReadPublisher = ReadFromCachePublisher()
         val cacheDataSourceReadPublisher = ReadFromCachePublisher().also { it.dispatchResult(cacheResult) }
@@ -258,6 +273,18 @@ class BaseDataSourceTests {
             val mutableMap = initialValue.toMutableMap()
             mutableMap.remove(cacheableId)
             internalPublishers.compareAndSet(initialValue, mutableMap)
+        }
+    }
+
+    class StateDataSource<V>(private val dataState: DataState<V, Throwable>) : BaseDataSource<FakeRequest, V>() {
+        override fun read(request: FakeRequest): Publisher<DataState<V, Throwable>> {
+            return dataState.just()
+        }
+
+        override fun internalRead(request: FakeRequest): ExecutablePublisher<V> = object : ExecutablePublisher<V> {
+            override fun cancel() {}
+            override fun execute() {}
+            override fun subscribe(s: Subscriber<in V>) {}
         }
     }
 

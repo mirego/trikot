@@ -104,10 +104,16 @@ abstract class BaseDataSource<R : DataSourceRequest, T>(private val cacheDataSou
                     cacheDataSource.read(
                         request
                     ).map {
-                        if (it is DataState.Data) {
-                            DataState.error(previousDataState.error, it.value)
-                        } else {
-                            previousDataState
+                        when (it) {
+                            is DataState.Pending -> {
+                                DataState.pending(it.value)
+                            }
+                            is DataState.Data -> {
+                                DataState.error(previousDataState.error, it.value)
+                            }
+                            else -> {
+                                previousDataState
+                            }
                         }
                     }
                 else -> Publishers.behaviorSubject(previousDataState)
