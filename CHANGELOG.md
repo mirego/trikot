@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 > 2021-10-13
 
 - It is now possible to specify timeout for specific requests
+- Updated Kotlin version to 1.5.31
 
 ## 2.2.0
 > 2021-06-08
