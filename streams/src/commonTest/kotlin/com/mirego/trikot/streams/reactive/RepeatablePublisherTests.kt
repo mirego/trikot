@@ -1,5 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
+import com.mirego.trikot.foundation.concurrent.atomic
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
@@ -22,7 +23,7 @@ class RepeatablePublisherTests {
 
     @Test
     fun blockIsReexecutedIfResubscribed() {
-        var executionCount = 0
+        var executionCount by atomic(0)
         val repeatable = Publishers.repeat(Duration.minutes(1)) {
             executionCount++
             Publishers.behaviorSubject<String>()
@@ -38,7 +39,7 @@ class RepeatablePublisherTests {
 
     @Test
     fun blockIsReExecutedWhenRepeated() {
-        var executions = 0
+        var executions by atomic(0)
         var timer: MockTimer? = null
         val timerFactory = MockTimerFactory { _, duration ->
             assertEquals(Duration.minutes(1), duration)
@@ -52,6 +53,6 @@ class RepeatablePublisherTests {
         repeatable.subscribe(CancellableManager()) {}
         timer?.executeBlock()
 
-        kotlin.test.assertTrue { executions == 2 }
+        assertEquals(2, executions)
     }
 }
