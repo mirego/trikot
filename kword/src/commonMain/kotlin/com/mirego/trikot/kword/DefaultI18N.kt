@@ -19,11 +19,11 @@ open class DefaultI18N : I18N {
     }
 
     override operator fun get(key: KWordKey): String {
-        return getWithReplacements(key)
+        return t(key)
     }
 
     override fun t(key: KWordKey): String {
-        return this[key]
+        return getWithReplacements(key)
     }
 
     override fun t(key: KWordKey, count: Int, vararg arguments: Pair<String, String>): String {

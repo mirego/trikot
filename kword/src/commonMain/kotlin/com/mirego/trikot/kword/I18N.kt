@@ -10,6 +10,7 @@ interface I18N {
     @JsName("changeLocaleStringsFromSource")
     fun changeLocaleStrings(source: KWordSource)
 
+    @JsName("t")
     fun t(key: KWordKey): String
 
     @JsName("tc")
