@@ -77,8 +77,8 @@ class AndroidConnectivityPublisher(application: ContextWrapper) :
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 private fun NetworkCapabilities.asConnectivityState() = when {
     hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-        hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
-        || hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> ConnectivityState.WIFI
+        hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) ||
+        hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> ConnectivityState.WIFI
     else -> ConnectivityState.CELLULAR
 }
 
