@@ -23,7 +23,7 @@ dependencies {
     api("com.mirego.trikot:analytics:${project.extra["trikot_analytics_version"]}")
     api("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
     api("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-    implementation("com.google.firebase:firebase-analytics:18.0.2")
+    implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
 }
 
