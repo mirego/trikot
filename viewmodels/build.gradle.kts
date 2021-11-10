@@ -1,5 +1,3 @@
-import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
-
 plugins {
     kotlin("multiplatform")
     kotlin("kapt")
@@ -130,36 +128,22 @@ kotlin {
             dependsOn(tvosMain)
         }
 
-        val watchosMain by getting {
+        val watchos32Main by creating {
             dependsOn(nativeMain)
         }
 
-        val watchos32Main by creating {
-            dependsOn(watchosMain)
-        }
-
         val watchosArm64Main by getting {
-            dependsOn(watchosMain)
+            dependsOn(watchos32Main)
         }
 
         val watchosX64Main by getting {
-            dependsOn(watchosMain)
+            dependsOn(watchos32Main)
         }
 
         val macosX64Main by getting {
             dependsOn(nativeMain)
         }
     }
-}
-
-dependencies {
-    configurations.get("kapt").dependencies.add(
-        DefaultExternalModuleDependency(
-            "com.android.databinding",
-            "compiler",
-            "3.1.4"
-        )
-    )
 }
 
 android {
@@ -179,7 +163,7 @@ android {
     }
 
     sourceSets {
-        val test by getting {
+        getByName("test") {
             manifest {
                 srcFile("src/androidTest/AndroidManifest.xml")
             }
@@ -200,7 +184,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 release {
-    checkTasks = listOf("build", "check")
+    checkTasks = listOf("check")
     buildTasks = listOf("publish")
     updateVersionPart = 2
 }
