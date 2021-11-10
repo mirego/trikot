@@ -100,23 +100,35 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val iosArm32Main by getting {
+        val iosMain by getting {
             dependsOn(nativeMain)
+        }
+
+        val iosArm32Main by getting {
+            dependsOn(iosMain)
         }
 
         val iosArm64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val iosX64Main by getting {
+            dependsOn(iosMain)
+        }
+
+        val tvosMain by getting {
             dependsOn(nativeMain)
         }
 
         val tvosArm64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(tvosMain)
         }
 
         val tvosX64Main by getting {
+            dependsOn(tvosMain)
+        }
+
+        val watchosMain by getting {
             dependsOn(nativeMain)
         }
 
@@ -166,6 +178,16 @@ android {
         unitTests {
             isIncludeAndroidResources = true
         }
+    }
+}
+
+// Fixes w: library included more than once: ~/.konan/kotlin-native-prebuilt-macos-XXX/klib/common/stdlib
+afterEvaluate {
+    val compilation = kotlin.targets["metadata"].compilations["iosMain"]
+    compilation.compileKotlinTask.doFirst {
+        compilation.compileDependencyFiles = files(
+            compilation.compileDependencyFiles.filterNot { it.absolutePath.endsWith("klib/common/stdlib") }
+        )
     }
 }
 
