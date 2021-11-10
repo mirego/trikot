@@ -100,32 +100,24 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val iosMain by getting {
+        val iosArm32Main by getting {
             dependsOn(nativeMain)
         }
 
-        val iosArm32Main by getting {
-            dependsOn(iosMain)
-        }
-
         val iosArm64Main by getting {
-            dependsOn(iosMain)
+            dependsOn(nativeMain)
         }
 
         val iosX64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val tvosMain by getting {
             dependsOn(nativeMain)
         }
 
         val tvosArm64Main by getting {
-            dependsOn(tvosMain)
+            dependsOn(nativeMain)
         }
 
         val tvosX64Main by getting {
-            dependsOn(tvosMain)
+            dependsOn(nativeMain)
         }
 
         val watchos32Main by creating {
