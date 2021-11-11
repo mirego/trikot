@@ -116,16 +116,12 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val watchosMain by getting {
+        val watchosArm64Main by getting {
             dependsOn(commonMain)
         }
 
-        val watchosArm64Main by getting {
-            dependsOn(watchosMain)
-        }
-
         val watchosX64Main by getting {
-            dependsOn(watchosMain)
+            dependsOn(commonMain)
         }
 
         val macosX64Main by getting {
