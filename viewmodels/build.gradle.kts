@@ -167,11 +167,15 @@ android {
 
 // Fixes w: library included more than once: ~/.konan/kotlin-native-prebuilt-macos-XXX/klib/common/stdlib
 afterEvaluate {
-    val compilation = kotlin.targets["metadata"].compilations["iosMain"]
-    compilation.compileKotlinTask.doFirst {
-        compilation.compileDependencyFiles = files(
-            compilation.compileDependencyFiles.filterNot { it.absolutePath.endsWith("klib/common/stdlib") }
-        )
+    val compilations = listOf("iosMain", "tvosMain").map {
+        kotlin.targets["metadata"].compilations[it]
+    }
+    compilations.forEach { compilation ->
+        compilation.compileKotlinTask.doFirst {
+            compilation.compileDependencyFiles = files(
+                compilation.compileDependencyFiles.filterNot { it.absolutePath.endsWith("klib/common/stdlib") }
+            )
+        }
     }
 }
 
