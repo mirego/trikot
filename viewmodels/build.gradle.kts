@@ -120,6 +120,10 @@ kotlin {
             dependsOn(commonMain)
         }
 
+        val watchosArm32Main by getting {
+            dependsOn(commonMain)
+        }
+
         val watchosX64Main by getting {
             dependsOn(commonMain)
         }
