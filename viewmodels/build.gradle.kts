@@ -96,12 +96,8 @@ kotlin {
             }
         }
 
-        val nativeMain by creating {
-            dependsOn(commonMain)
-        }
-
         val iosMain by getting {
-            dependsOn(nativeMain)
+            dependsOn(commonMain)
         }
 
         val iosArm32Main by getting {
@@ -117,35 +113,23 @@ kotlin {
         }
 
         val tvosMain by getting {
-            dependsOn(nativeMain)
-        }
-
-        val tvosArm64Main by getting {
-            dependsOn(tvosMain)
-        }
-
-        val tvosX64Main by getting {
-            dependsOn(tvosMain)
+            dependsOn(commonMain)
         }
 
         val watchosMain by getting {
-            dependsOn(nativeMain)
-        }
-
-        val watchos32Main by creating {
-            dependsOn(nativeMain)
+            dependsOn(commonMain)
         }
 
         val watchosArm64Main by getting {
-            dependsOn(watchos32Main)
+            dependsOn(watchosMain)
         }
 
         val watchosX64Main by getting {
-            dependsOn(watchos32Main)
+            dependsOn(watchosMain)
         }
 
         val macosX64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(commonMain)
         }
     }
 }
