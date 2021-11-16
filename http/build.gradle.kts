@@ -35,7 +35,7 @@ kotlin {
 
     sourceSets {
         all {
-            languageSettings.useExperimentalAnnotation("kotlin.ExperimentalStdlibApi")
+            languageSettings.optIn("kotlin.ExperimentalStdlibApi")
         }
 
         val commonMain by getting {

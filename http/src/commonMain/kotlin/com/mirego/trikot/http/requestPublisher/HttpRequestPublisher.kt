@@ -37,13 +37,15 @@ abstract class HttpRequestPublisher<T>(
 
                 executeRequest(cancellableManager, requestBuilder).subscribe(
                     cancellableManager,
-                    onNext = {
+                    onNext = { response ->
                         operationQueue.dispatch {
-                            try {
-                                dispatchSuccess(processResponse(it))
+                            val result = try {
+                                processResponse(response)
                             } catch (e: Exception) {
                                 dispatchError(e)
+                                return@dispatch
                             }
+                            dispatchSuccess(result)
                         }
                     },
                     onError = { sourceError ->
