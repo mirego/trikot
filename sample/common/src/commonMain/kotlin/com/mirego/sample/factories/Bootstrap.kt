@@ -1,7 +1,7 @@
 package com.mirego.sample.factories
 
 class Bootstrap {
-    val viewModelControllerFactory: ViewModelControllerFactory = ViewModelControllerFactoryImpl()
+    val viewModelControllerFactory: SampleViewModelControllerFactory = SampleViewModelControllerFactoryImpl()
 
     companion object {
         val shared = Bootstrap()

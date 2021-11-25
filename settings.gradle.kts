@@ -2,6 +2,7 @@ pluginManagement {
     resolutionStrategy {
         repositories {
             mavenLocal()
+            mavenCentral()
             maven("https://plugins.gradle.org/m2/")
             maven("https://s3.amazonaws.com/mirego-maven/public")
             maven("https://jitpack.io")

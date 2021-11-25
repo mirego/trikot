@@ -3,9 +3,9 @@ import TrikotViewmodelsDeclarativeSample
 import Trikot_viewmodels_declarative
 
 public class ViewControllerFactory {
-    private let viewModelControllerFactory: ViewModelControllerFactory_
+    private let viewModelControllerFactory: SampleViewModelControllerFactory
 
-    init(viewModelControllerFactory: ViewModelControllerFactory_) {
+    init(viewModelControllerFactory: SampleViewModelControllerFactory) {
         self.viewModelControllerFactory = viewModelControllerFactory
     }
 

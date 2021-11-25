@@ -26,9 +26,9 @@ PODS:
 
 DEPENDENCIES:
   - SwiftLint
-  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `2.2.0`)"
-  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `2.2.0`)"
-  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `2.2.1`)"
+  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `2.2.3`)"
+  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `2.3.1`)"
+  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `2.2.5`)"
   - Trikot.viewmodels.declarative (from `../..`)
   - TrikotViewmodelsDeclarativeSample (from `../common`)
 
@@ -40,13 +40,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 2.2.0
+    :tag: 2.2.3
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 2.2.0
+    :tag: 2.3.1
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 2.2.1
+    :tag: 2.2.5
   Trikot.viewmodels.declarative:
     :path: "../.."
   TrikotViewmodelsDeclarativeSample:
@@ -55,13 +55,13 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   Trikot.http:
     :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 2.2.0
+    :tag: 2.2.3
   Trikot.kword:
     :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 2.2.0
+    :tag: 2.3.1
   Trikot.streams:
     :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 2.2.1
+    :tag: 2.2.5
 
 SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
