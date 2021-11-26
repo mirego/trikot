@@ -3,11 +3,11 @@ import TRIKOT_FRAMEWORK_NAME
 
 public extension TrikotViewmodelsDeclarativeSample.Publisher {
     func eraseToAnyPublisher<T>() -> AnyPublisher<T, Never> where Self: ConcretePublisher<T>, T: AnyObject {
-        PublisherAdapter<T>(self).eraseToAnyPublisher()
+        ConcreatePublisherAdapter<T>(self).eraseToAnyPublisher()
     }
 }
 
-public class PublisherAdapter<T: AnyObject>: Combine.Publisher {
+public class ConcreatePublisherAdapter<T: AnyObject>: Combine.Publisher {
     private let publisher: ConcretePublisher<T>
 
     public typealias Output = T
@@ -46,7 +46,7 @@ public class SubscriberAdapter<S: Combine.Subscriber>: TrikotViewmodelsDeclarati
         if Thread.current.isMainThread {
             _ = subscriber.receive(t)
         } else {
-            Foundation.DispatchQueue.main.async {
+            Foundation.DispatchQueue.main.sync {
                 _ = self.subscriber.receive(t)
             }
         }

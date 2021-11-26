@@ -1,4 +1,5 @@
 PODS:
+  - Kingfisher (7.1.1)
   - ReachabilitySwift (5.0.0)
   - SwiftLint (0.43.1)
   - Trikot.http (1.0.1):
@@ -20,6 +21,11 @@ PODS:
     - Trikot.streams
     - TrikotViewmodelsDeclarativeSample
   - Trikot.viewmodels.declarative/SwiftUI (1.0.0):
+    - Kingfisher (~> 7.1)
+    - Trikot.streams
+    - TrikotViewmodelsDeclarativeSample
+  - Trikot.viewmodels.declarative/UIKit (1.0.0):
+    - Kingfisher (>= 5.0)
     - Trikot.streams
     - TrikotViewmodelsDeclarativeSample
   - TrikotViewmodelsDeclarativeSample (1.0.0)
@@ -30,10 +36,13 @@ DEPENDENCIES:
   - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `2.3.1`)"
   - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `2.2.5`)"
   - Trikot.viewmodels.declarative (from `../..`)
+  - Trikot.viewmodels.declarative/SwiftUI (from `../..`)
+  - Trikot.viewmodels.declarative/UIKit (from `../..`)
   - TrikotViewmodelsDeclarativeSample (from `../common`)
 
 SPEC REPOS:
   trunk:
+    - Kingfisher
     - ReachabilitySwift
     - SwiftLint
 
@@ -64,14 +73,15 @@ CHECKOUT OPTIONS:
     :tag: 2.2.5
 
 SPEC CHECKSUMS:
+  Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Trikot.http: cf5e71ad4ce126ddcb275af5fce080f1f550c005
   Trikot.kword: 58dc4fbc7024e5d072b1fd62a26a651e54af374e
   Trikot.streams: 40458deb1c5daa78144c44e8caf64b28be573f32
-  Trikot.viewmodels.declarative: ec6fad6fca5bfd23360d8443e007a3a26c0b18d9
+  Trikot.viewmodels.declarative: 1e0daa609c0470f0d74c47770388a5a8c12b3d15
   TrikotViewmodelsDeclarativeSample: 4a996ca59e8e83614a51de43e3ac93f5dc24c2a8
 
-PODFILE CHECKSUM: 80e4486cff44d9882057f8ceb21cfeba9c5bb595
+PODFILE CHECKSUM: 7aa5b3e9d31bd118c0b156b4d7ea0f86ab27e0dc
 
 COCOAPODS: 1.8.4

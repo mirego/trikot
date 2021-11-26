@@ -1,7 +1,7 @@
 import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
-extension ViewModel {
+extension VMDViewModel {
     public func publisher<T, V>(for property: KeyPath<T, V>) -> PublisherAdapter<V> {
         PublisherAdapter(publisher: publisherForPropertyName(propertyName: NSExpression(forKeyPath: property).keyPath))
     }

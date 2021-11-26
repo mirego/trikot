@@ -1,10 +1,8 @@
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
 
-extension UIButton: ViewModelDeclarativeCompatible { }
-
 extension ViewModelDeclarativeWrapper where Base : UIButton {
-    public var buttonWithTextViewModel: ButtonViewModel<TextContent>? {
+    public var buttonWithTextViewModel: VMDButtonViewModel<VMDTextContent>? {
         get { return base.vmd.getViewModel() }
         set(value) {
             controlViewModel = value
@@ -12,7 +10,7 @@ extension ViewModelDeclarativeWrapper where Base : UIButton {
         }
     }
 
-    public var buttonWithImageViewModel: ButtonViewModel<ImageContent>? {
+    public var buttonWithImageViewModel: VMDButtonViewModel<VMDImageContent>? {
         get { return base.vmd.getViewModel() }
         set(value) {
             controlViewModel = value
@@ -20,7 +18,7 @@ extension ViewModelDeclarativeWrapper where Base : UIButton {
         }
     }
 
-    public var buttonWithTextImageViewModel: ButtonViewModel<TextImagePairContent>? {
+    public var buttonWithTextImageViewModel: VMDButtonViewModel<VMDTextImagePairContent>? {
         get { return base.vmd.getViewModel() }
         set(value) {
             controlViewModel = value
@@ -38,30 +36,30 @@ extension ViewModelDeclarativeWrapper where Base : UIButton {
 }
 
 fileprivate extension UIButton {
-    func bindWithTextViewModel(_ viewModel: ButtonViewModel<TextContent>?) {
+    func bindWithTextViewModel(_ viewModel: VMDButtonViewModel<VMDTextContent>?) {
         removeBindAction()
         if let buttonViewModel = viewModel {
-            vmd.observe(buttonViewModel.publisher(for: \ButtonViewModel<TextContent>.content)) { [weak self] content in
+            vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextContent>.content)) { [weak self] content in
                 self?.setTitle(content.text, for: .normal)
             }
             bindAction(buttonViewModel.action)
         }
     }
 
-    func bindWithImageViewModel(_ viewModel: ButtonViewModel<ImageContent>?) {
+    func bindWithImageViewModel(_ viewModel: VMDButtonViewModel<VMDImageContent>?) {
         removeBindAction()
         if let buttonViewModel = viewModel {
-            vmd.observe(buttonViewModel.publisher(for: \ButtonViewModel<ImageContent>.content)) { [weak self] content in
+            vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
                 self?.setImage(content.image.uiImage, for: .normal)
             }
             bindAction(buttonViewModel.action)
         }
     }
 
-    func bindWithTextImageViewModel(_ viewModel: ButtonViewModel<TextImagePairContent>?) {
+    func bindWithTextImageViewModel(_ viewModel: VMDButtonViewModel<VMDTextImagePairContent>?) {
         removeBindAction()
         if let buttonViewModel = viewModel {
-            vmd.observe(buttonViewModel.publisher(for: \ButtonViewModel<TextImagePairContent>.content)) { [weak self] content in
+            vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextImagePairContent>.content)) { [weak self] content in
                 self?.setTitle(content.text, for: .normal)
                 self?.setImage(content.image.uiImage, for: .normal)
             }

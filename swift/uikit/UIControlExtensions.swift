@@ -1,10 +1,8 @@
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
 
-extension UIControl: ViewModelDeclarativeCompatible { }
-
 extension ViewModelDeclarativeWrapper where Base : UIControl {
-    public var controlViewModel: ControlViewModel? {
+    public var controlViewModel: VMDControlViewModel? {
         get { return base.vmd.getViewModel() }
         set(value) {
             viewModel = value
@@ -14,9 +12,9 @@ extension ViewModelDeclarativeWrapper where Base : UIControl {
 }
 
 fileprivate extension UIControl {
-    func bindViewModel(_ viewModel: ControlViewModel?) {
+    func bindViewModel(_ viewModel: VMDControlViewModel?) {
         if let controlViewModel = viewModel {
-            observe(controlViewModel.publisher(for: \ControlViewModel.enabled)) { [weak self] enabled in
+            observe(controlViewModel.publisher(for: \VMDControlViewModel.enabled)) { [weak self] enabled in
                 self?.isEnabled = enabled
             }
         }

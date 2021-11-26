@@ -1,9 +1,8 @@
-import UIKit
 import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
 public protocol ViewModelView: View {
-    associatedtype VM: ViewModel
+    associatedtype VM: VMDViewModel
 
     var viewModel: VM { get }
 }

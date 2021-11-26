@@ -16,7 +16,7 @@ struct HomeListItemView: ViewModelView {
     }
 
     var body: some View {
-        VMText(viewModel.name)
+        VMDText(viewModel.name)
     }
 }
 

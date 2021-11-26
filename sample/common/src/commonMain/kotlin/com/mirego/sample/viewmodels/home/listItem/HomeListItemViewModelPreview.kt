@@ -1,12 +1,14 @@
 package com.mirego.sample.viewmodels.home.listItem
 
-import com.mirego.sample.viewmodels.preview.TextViewModelPreview
-import com.mirego.sample.viewmodels.preview.ViewModelPreview
-import com.mirego.trikot.viewmodels.declarative.components.TextViewModel
+import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
+import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponentsFactory
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 
 class HomeListItemViewModelPreview(
     componentName: String
-) : ViewModelPreview(), HomeListItemViewModel {
+) : VMDViewModelImpl(CancellableManager()), HomeListItemViewModel {
     override val id: String = componentName
-    override val name: TextViewModel = TextViewModelPreview(text = componentName)
+    override val name: VMDTextViewModel =
+        VMDComponentsFactory.Companion.Text.withContent(componentName, cancellableManager)
 }

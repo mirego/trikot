@@ -1,26 +1,21 @@
 package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.neverEqualPolicy
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.subscribe
-import com.mirego.trikot.viewmodels.declarative.viewmodel.ViewModel
-import kotlin.reflect.KProperty
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 import org.reactivestreams.Publisher
+import kotlin.reflect.KProperty
 
 @Composable
-fun <T : ViewModel> T.observeAsState(): State<T> {
+fun <T : VMDViewModel> T.observeAsState(): State<T> {
     return propertyDidChange.map { this }.subscribeAsState(initial = this)
 }
 
 @Composable
-fun <T, VM : ViewModel> VM.observeAsState(
+fun <T, VM : VMDViewModel> VM.observeAsState(
     property: KProperty<T>,
     initialValue: T? = null
 ): State<T> {

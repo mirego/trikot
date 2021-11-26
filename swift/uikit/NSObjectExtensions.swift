@@ -22,8 +22,6 @@ private enum AssociatedKeys {
     static var declarativeViewModelKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 }
 
-extension NSObject: ViewModelDeclarativeCompatible { }
-
 extension ViewModelDeclarativeWrapper where Base : NSObject {
 
     public func getViewModel<T>() -> T? {
@@ -51,10 +49,17 @@ extension ViewModelDeclarativeWrapper where Base : NSObject {
         }
     }
 
-    public func bind<T, V>(publisher: PublisherAdapter<V>, _ keyPath: ReferenceWritableKeyPath<T, V>) {
+    public func bind<T: NSObject, V>(publisher: PublisherAdapter<V>, _ keyPath: ReferenceWritableKeyPath<T, V>) {
+        guard let base = base as? T else { return }
         base.observe(publisher) { [weak base] (newValue: V) in
-            guard let base = base as? T else { return }
-            base[keyPath: keyPath] = newValue
+            base?[keyPath: keyPath] = newValue
+        }
+    }
+
+    public func bind<T: NSObject, V, I>(publisher: PublisherAdapter<I>, _ keyPath: ReferenceWritableKeyPath<T, V>, transform: @escaping ((I) -> V)) {
+        guard let base = base as? T else { return }
+        base.observe(publisher) { [weak base] (newValue: I) in
+            base?[keyPath: keyPath] = transform(newValue)
         }
     }
 }

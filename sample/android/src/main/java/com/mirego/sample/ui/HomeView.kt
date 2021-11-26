@@ -19,7 +19,7 @@ import com.mirego.sample.R
 import com.mirego.sample.viewmodels.home.HomeViewModel
 import com.mirego.sample.viewmodels.home.listItem.HomeListItemViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMText
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
 fun HomeView(homeViewModel: HomeViewModel) {
@@ -29,7 +29,7 @@ fun HomeView(homeViewModel: HomeViewModel) {
 
         TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) })
 
-        VMText(
+        VMDText(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp),
             viewModel = viewModel.title,
             fontSize = 22.sp
@@ -52,7 +52,7 @@ fun HomeItemView(item: HomeListItemViewModel) {
         elevation = 3.dp,
         backgroundColor = Color.LightGray
     ) {
-        VMText(
+        VMDText(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp, end = 16.dp),
             viewModel = item.name,
             fontSize = 18.sp

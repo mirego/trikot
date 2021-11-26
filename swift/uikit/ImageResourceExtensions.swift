@@ -1,8 +1,12 @@
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
 
-extension ImageResource {
+extension VMDImageResource {
     public var uiImage: UIImage? {
-        ImageViewModelResourceManager.shared.image(fromResource: self)
+        if let imageName = TrikotViewModelDeclarative.shared.imageProvider.imageNameForResource(imageResource: self) {
+            return UIImage(named: imageName)
+        } else {
+            return nil
+        }
     }
 }

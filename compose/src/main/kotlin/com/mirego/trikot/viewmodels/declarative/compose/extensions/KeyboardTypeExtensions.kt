@@ -1,9 +1,9 @@
 package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
 import androidx.compose.ui.text.input.ImeAction
-import com.mirego.trikot.viewmodels.declarative.properties.KeyboardReturnKeyType
+import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardReturnKeyType
 import androidx.compose.ui.text.input.KeyboardType as ComposeKeyboardType
-import com.mirego.trikot.viewmodels.declarative.properties.KeyboardType as TrikotKeyboardType
+import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardType as TrikotKeyboardType
 
 val TrikotKeyboardType.composeValue: ComposeKeyboardType
     get() = when (this) {
@@ -17,12 +17,12 @@ val TrikotKeyboardType.composeValue: ComposeKeyboardType
         TrikotKeyboardType.URL -> ComposeKeyboardType.Uri
     }
 
-val KeyboardReturnKeyType.composeValue: ImeAction
+val VMDKeyboardReturnKeyType.composeValue: ImeAction
     get() = when (this) {
-        KeyboardReturnKeyType.Default -> ImeAction.Default
-        KeyboardReturnKeyType.Done -> ImeAction.Done
-        KeyboardReturnKeyType.Go -> ImeAction.Go
-        KeyboardReturnKeyType.Next -> ImeAction.Next
-        KeyboardReturnKeyType.Search -> ImeAction.Search
-        KeyboardReturnKeyType.Send -> ImeAction.Send
+        VMDKeyboardReturnKeyType.Default -> ImeAction.Default
+        VMDKeyboardReturnKeyType.Done -> ImeAction.Done
+        VMDKeyboardReturnKeyType.Go -> ImeAction.Go
+        VMDKeyboardReturnKeyType.Next -> ImeAction.Next
+        VMDKeyboardReturnKeyType.Search -> ImeAction.Search
+        VMDKeyboardReturnKeyType.Send -> ImeAction.Send
     }

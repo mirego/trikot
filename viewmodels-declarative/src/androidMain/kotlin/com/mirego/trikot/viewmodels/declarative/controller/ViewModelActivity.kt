@@ -5,11 +5,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.mirego.trikot.viewmodels.declarative.controller.factory.AndroidViewModelProviderFactory
 import com.mirego.trikot.viewmodels.declarative.lifecycle.LifecycleOwnerWrapper
-import com.mirego.trikot.viewmodels.declarative.viewmodel.ViewModel
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 import kotlin.reflect.KClass
 
-abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewModel, N : NavigationDelegate> :
-    AppCompatActivity(), NavigationDelegate {
+abstract class ViewModelActivity<VMC : VMDViewModelController<VM, N>, VM : VMDViewModel, N : VMDNavigationDelegate> :
+    AppCompatActivity(), VMDNavigationDelegate {
 
     companion object {
         private const val LOG_TAG = "ViewModelActivity"
@@ -54,10 +54,10 @@ abstract class ViewModelActivity<VMC : ViewModelController<VM, N>, VM : ViewMode
         super.onDestroy()
     }
 
-    protected fun <T : ViewModelController<VM, N>> getViewModelController(requestedClass: KClass<T>): T =
+    protected fun <T : VMDViewModelController<VM, N>> getViewModelController(requestedClass: KClass<T>): T =
         AndroidViewModelProviderFactory.with(this, null).get(requestedClass.java)
 
-    protected fun <T : ViewModelController<VM, N>> getViewModelController(
+    protected fun <T : VMDViewModelController<VM, N>> getViewModelController(
         requestedClass: KClass<T>,
         navigationData: Any?
     ): T = if (navigationData == null) {

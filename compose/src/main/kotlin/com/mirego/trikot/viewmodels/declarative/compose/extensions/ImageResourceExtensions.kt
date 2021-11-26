@@ -6,21 +6,20 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
-import com.mirego.trikot.viewmodels.declarative.controller.ImageViewModelResourceManager
-import com.mirego.trikot.viewmodels.declarative.properties.ImageResource
+import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
+import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 
-fun ImageResource.resourceId(context: Context): Int? {
-    return ImageViewModelResourceManager.provider.resourceIdFromResource(this, context)
+fun VMDImageResource.resourceId(context: Context): Int? {
+    return TrikotViewModelDeclarative.imageProvider.resourceIdForResource(this, context)
 }
 
 @Composable
-fun painterResource(imageResource: ImageResource?): Painter {
+fun painterResource(imageResource: VMDImageResource?): Painter {
     val context = LocalContext.current
     imageResource?.let { resource ->
-        ImageViewModelResourceManager.provider.resourceIdFromResource(resource, context)
-            ?.let { id ->
-                return androidx.compose.ui.res.painterResource(id = id)
-            }
+        resource.resourceId(context)?.let { id ->
+            return androidx.compose.ui.res.painterResource(id = id)
+        }
     }
     return BitmapPainter(ImageBitmap(1, 1))
 }

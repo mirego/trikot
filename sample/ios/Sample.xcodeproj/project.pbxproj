@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C883569D2750339300DA0786 /* SampleImageProvider.swift */; };
 		C8959A6B268AAADF0080732A /* AppBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6A268AAADF0080732A /* AppBootstrap.swift */; };
 		C8959A70268AB1690080732A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6E268AB1690080732A /* HomeViewController.swift */; };
 		C8959A71268AB1690080732A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6F268AB1690080732A /* HomeView.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		041921FF518BA5BA4B3375EC /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		3240D0E8403B18772B9C9D06 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C883569D2750339300DA0786 /* SampleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageProvider.swift; sourceTree = "<group>"; };
 		C8959A6A268AAADF0080732A /* AppBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBootstrap.swift; sourceTree = "<group>"; };
 		C8959A6E268AB1690080732A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C8959A6F268AB1690080732A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				C8D868DB268AA9660054CF44 /* AppDelegate.swift */,
 				C8959A6A268AAADF0080732A /* AppBootstrap.swift */,
 				C8D868DD268AA9660054CF44 /* SceneDelegate.swift */,
+				C883569D2750339300DA0786 /* SampleImageProvider.swift */,
 				C8959A6C268AB1470080732A /* UI */,
 				C8D868DF268AA9660054CF44 /* ContentView.swift */,
 				C8D868E1268AA9670054CF44 /* Assets.xcassets */,
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */,
 				C8959A70268AB1690080732A /* HomeViewController.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
 				C8959A73268AB9D50080732A /* ViewControllerFactory.swift in Sources */,

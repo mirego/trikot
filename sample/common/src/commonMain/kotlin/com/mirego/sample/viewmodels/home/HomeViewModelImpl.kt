@@ -3,13 +3,13 @@ package com.mirego.sample.viewmodels.home
 import com.mirego.sample.viewmodels.home.listItem.HomeListItemViewModel
 import com.mirego.sample.viewmodels.home.listItem.HomeListItemViewModelImpl
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.viewmodels.declarative.components.impl.TextViewModelImpl
-import com.mirego.trikot.viewmodels.declarative.viewmodel.ViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 
 class HomeViewModelImpl(cancellableManager: CancellableManager) :
-    ViewModelImpl(cancellableManager), HomeViewModel {
+    VMDViewModelImpl(cancellableManager), HomeViewModel {
 
-    override val title = TextViewModelImpl(cancellableManager).apply {
+    override val title = VMDTextViewModelImpl(cancellableManager).apply {
         text = "Components"
     }
 

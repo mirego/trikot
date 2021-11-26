@@ -6,10 +6,8 @@ private let IMAGE_VIEW_MODEL_HANDLER_KEY = UnsafeMutablePointer<Int8>.allocate(c
 private let SAVED_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 private let PLACEHOLDER_CONTENT_MODE_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 
-extension UIImageView: ViewModelDeclarativeCompatible { }
-
 extension ViewModelDeclarativeWrapper where Base : UIImageView {
-    public var imageViewModel: ImageViewModel? {
+    public var imageViewModel: VMDImageViewModel? {
         get { return base.vmd.getViewModel() }
         set(value) {
             viewModel = value
@@ -61,7 +59,7 @@ extension ViewModelDeclarativeWrapper where Base : UIImageView {
 }
 
 public protocol ImageViewModelHandler {
-    func handleImage(imageViewModel: ImageViewModel?, on imageView: UIImageView)
+    func handleImage(imageViewModel: VMDImageViewModel?, on imageView: UIImageView)
 }
 
 private class DefaultImageViewModelHandler: ImageViewModelHandler {
@@ -69,13 +67,13 @@ private class DefaultImageViewModelHandler: ImageViewModelHandler {
 
     private init() { }
 
-    public func handleImage(imageViewModel: ImageViewModel?, on imageView: UIImageView) {
+    public func handleImage(imageViewModel: VMDImageViewModel?, on imageView: UIImageView) {
         if let imageViewModel = imageViewModel {
-            imageView.vmd.observe(imageViewModel.publisher(for: \ImageViewModel.image)) { [weak imageView] imageDescriptor in
+            imageView.vmd.observe(imageViewModel.publisher(for: \VMDImageViewModel.image)) { [weak imageView] imageDescriptor in
                 imageView?.vmd.restoreContentMode()
-                if let local = imageDescriptor as? ImageDescriptor.Local {
+                if let local = imageDescriptor as? VMDImageDescriptor.Local {
                     imageView?.image = local.imageResource.uiImage
-                } else if let remote = imageDescriptor as? ImageDescriptor.Remote {
+                } else if let remote = imageDescriptor as? VMDImageDescriptor.Remote {
                     if let placeholderContentMode = imageView?.vmd.placeholderContentMode {
                         imageView?.vmd.saveContentMode()
                         imageView?.contentMode = placeholderContentMode

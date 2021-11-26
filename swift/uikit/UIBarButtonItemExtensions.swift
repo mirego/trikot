@@ -4,7 +4,7 @@ import UIKit
 extension UIBarButtonItem: ViewModelDeclarativeCompatible { }
 
 extension ViewModelDeclarativeWrapper where Base : UIBarButtonItem {
-    public var barButtonWithImageViewModel: ButtonViewModel<ImageContent>? {
+    public var barButtonWithImageViewModel: VMDButtonViewModel<VMDImageContent>? {
         get { return base.vmd.getViewModel() }
         set(value) {
             base.unsubscribeFromAllPublisher()
@@ -15,10 +15,10 @@ extension ViewModelDeclarativeWrapper where Base : UIBarButtonItem {
 }
 
 fileprivate extension UIBarButtonItem {
-    func bindViewModel(_ viewModel: ButtonViewModel<ImageContent>?) {
+    func bindViewModel(_ viewModel: VMDButtonViewModel<VMDImageContent>?) {
         removeBindAction()
         if let buttonViewModel = viewModel {
-            vmd.observe(buttonViewModel.publisher(for: \ButtonViewModel<ImageContent>.content)) { [weak self] content in
+            vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
                 self?.image = content.image.uiImage
             }
             bindAction(buttonViewModel.action)

@@ -2,7 +2,7 @@ import UIKit
 import Combine
 import TRIKOT_FRAMEWORK_NAME
 
-public class ObservableViewModelAdapter<VM: ViewModel>: ObservableObject {
+public class ObservableViewModelAdapter<VM: VMDViewModel>: ObservableObject {
     public let viewModel: VM
     private let propertyWillChangePublisher: AnyPublisher<KotlinUnit, Never>
     private var cancellable: AnyCancellable?
@@ -22,7 +22,7 @@ public class ObservableViewModelAdapter<VM: ViewModel>: ObservableObject {
     }
 }
 
-public extension ViewModel {
+public extension VMDViewModel {
     func asObservable<Self>() -> ObservableViewModelAdapter<Self> {
         return ObservableViewModelAdapter(viewModel: self as! Self)
     }

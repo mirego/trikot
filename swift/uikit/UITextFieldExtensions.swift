@@ -1,10 +1,8 @@
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
 
-extension UITextField: ViewModelDeclarativeCompatible { }
-
 extension ViewModelDeclarativeWrapper where Base : UITextField {
-    public var textFieldViewModel: TextFieldViewModel? {
+    public var textFieldViewModel: VMDTextFieldViewModel? {
         get { return base.vmd.getViewModel() }
         set(value) {
             viewModel = value
@@ -14,34 +12,34 @@ extension ViewModelDeclarativeWrapper where Base : UITextField {
 }
 
 fileprivate extension UITextField {
-    func bindViewModel(_ textFieldViewModel: TextFieldViewModel?) {
+    func bindViewModel(_ textFieldViewModel: VMDTextFieldViewModel?) {
         removeTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
         if let textFieldViewModel = textFieldViewModel {
             addTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.text)) { [weak self] text in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.text)) { [weak self] text in
                 guard let self = self else { return }
                 if self.text != text {
                     self.text = text
                 }
             }
 
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.placeholder)) { [weak self] placeholder in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.placeholder)) { [weak self] placeholder in
                 self?.placeholder = placeholder
             }
 
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.keyboardType)) { [weak self] keyboardType in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.keyboardType)) { [weak self] keyboardType in
                 self?.keyboardType = keyboardType.uiKeyboardType
             }
 
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.keyboardReturnKeyType)) { [weak self] keyboardReturnKeyType in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.keyboardReturnKeyType)) { [weak self] keyboardReturnKeyType in
                 self?.returnKeyType = keyboardReturnKeyType.uiReturnKeyType
             }
 
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.contentType)) { [weak self] contentType in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.contentType)) { [weak self] contentType in
                 self?.textContentType = contentType?.uiTextContentType
             }
 
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.autoCorrect)) { [weak self] autoCorrect in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.autoCorrect)) { [weak self] autoCorrect in
                 if autoCorrect {
                     self?.autocorrectionType = .yes
                 } else {
@@ -49,7 +47,7 @@ fileprivate extension UITextField {
                 }
             }
 
-            vmd.observe(textFieldViewModel.publisher(for: \TextFieldViewModel.autoCapitalization)) { [weak self] keyboardAutoCapitalization in
+            vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.autoCapitalization)) { [weak self] keyboardAutoCapitalization in
                 self?.autocapitalizationType = keyboardAutoCapitalization.uiTextAutocapitalizationType
             }
         }
@@ -62,7 +60,7 @@ fileprivate extension UITextField {
     }
 }
 
-extension KeyboardType {
+extension VMDKeyboardType {
     public var uiKeyboardType: UIKeyboardType {
         switch self {
         case .default_:
@@ -87,7 +85,7 @@ extension KeyboardType {
     }
 }
 
-extension KeyboardReturnKeyType {
+extension VMDKeyboardReturnKeyType {
     public var uiReturnKeyType: UIReturnKeyType {
         switch self {
         case .default_:
@@ -108,7 +106,7 @@ extension KeyboardReturnKeyType {
     }
 }
 
-extension TextContentType {
+extension VMDTextContentType {
     public var uiTextContentType: UITextContentType? {
         switch self {
         case .name:
@@ -171,7 +169,7 @@ extension TextContentType {
     }
 }
 
-extension KeyboardAutoCapitalization {
+extension VMDKeyboardAutoCapitalization {
     public var uiTextAutocapitalizationType: UITextAutocapitalizationType {
         switch self {
         case .none:
