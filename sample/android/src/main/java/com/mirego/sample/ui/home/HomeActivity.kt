@@ -1,8 +1,8 @@
-package com.mirego.sample
+package com.mirego.sample.ui.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.mirego.sample.ui.HomeView
+import com.mirego.sample.ui.showcase.text.TextShowcaseActivity
 import com.mirego.sample.viewmodels.home.HomeNavigationDelegate
 import com.mirego.sample.viewmodels.home.HomeViewModel
 import com.mirego.sample.viewmodels.home.HomeViewModelController
@@ -19,5 +19,29 @@ class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, H
         setContent {
             HomeView(viewModel)
         }
+    }
+
+    override fun navigateToTextShowcase() {
+        startActivity(TextShowcaseActivity.intent(this))
+    }
+
+    override fun navigateToButtonShowcase() {
+        // TODO:
+    }
+
+    override fun navigateToImageShowcase() {
+        // TODO:
+    }
+
+    override fun navigateToTextFieldShowcase() {
+        // TODO:
+    }
+
+    override fun navigateToToggleShowcase() {
+        // TODO:
+    }
+
+    override fun navigateToProgressShowcase() {
+        // TODO:
     }
 }

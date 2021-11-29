@@ -1,11 +1,11 @@
-package com.mirego.sample.viewmodels.home
+package com.mirego.sample.viewmodels.showcase
 
 import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
-import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
+import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 
-interface HomeViewModel : VMDViewModel {
+interface ShowcaseViewModel : VMDViewModel {
     val title: VMDTextViewModel
-    val items: List<VMDButtonViewModel<VMDTextContent>>
+    val closeButton: VMDButtonViewModel<VMDImageContent>
 }

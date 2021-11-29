@@ -9,5 +9,29 @@ class HomeViewController: ViewModelViewController<HomeViewModelController, HomeV
 }
 
 extension HomeViewController: HomeNavigationDelegate {
+    func navigateToButtonShowcase() {
+        //TODO:
+    }
+
+    func navigateToImageShowcase() {
+        //TODO:
+    }
+
+    func navigateToProgressShowcase() {
+        //TODO:
+    }
+
+    func navigateToTextFieldShowcase() {
+        //TODO:
+    }
+
+    func navigateToTextShowcase() {
+        //TODO:
+    }
+
+    func navigateToToggleShowcase() {
+        //TODO: 
+    }
+
 
 }

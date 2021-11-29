@@ -17,8 +17,8 @@ struct HomeView: RootViewModelView {
 
     var body: some View {
         NavigationView {
-            List(viewModel.items, id: \.id) { item in
-                HomeListItemView(viewModel: item)
+            List(viewModel.items, id: \.content.text) { item in
+                Text(item.content.text)
             }
             .listStyle(GroupedListStyle())
             .navigationTitle(viewModel.title.text)

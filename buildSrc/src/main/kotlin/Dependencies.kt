@@ -16,7 +16,8 @@ class Versions(project: Project) {
 
     val androidGradlePlugin = "7.0.2"
     val jetpackCompose = "1.1.0-beta03"
-    val googleAccompanist = "0.12.0"
+    val jetpackComposeToolingPreview = "1.0.5"
+    val googleAccompanist = "0.15.0"
 }
 
 class Dependencies(project: Project) {

@@ -1,3 +1,11 @@
 {
-    "refresh_button": "Gimme another"
+    "home_title": "Components",
+    "home_component_text": "Text",
+    "home_component_button": "Button",
+    "home_component_image": "Image",
+    "home_component_textfield": "TextField",
+    "home_component_toggle": "Toggle",
+    "home_component_progress": "Progress",
+    "text_showcase_title": "Text showcase",
+    "text_showcase_text_normal": "Normal text"
 }

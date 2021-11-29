@@ -47,6 +47,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    sourceSets {
+        getByName("main") {
+            resources.srcDir("../common/src/commonMain/resources/")
+        }
+    }
 }
 
 dependencies {

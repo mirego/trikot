@@ -14,7 +14,6 @@
 		C8959A73268AB9D50080732A /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A72268AB9D50080732A /* ViewControllerFactory.swift */; };
 		C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A75268B5CEB0080732A /* PreviewView.swift */; };
 		C8959A78268B5D1F0080732A /* PreviewPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A77268B5D1F0080732A /* PreviewPadding.swift */; };
-		C8959A7B268B610F0080732A /* HomeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A7A268B610F0080732A /* HomeListItemView.swift */; };
 		C8D868DC268AA9660054CF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D868DB268AA9660054CF44 /* AppDelegate.swift */; };
 		C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D868DD268AA9660054CF44 /* SceneDelegate.swift */; };
 		C8D868E0268AA9660054CF44 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D868DF268AA9660054CF44 /* ContentView.swift */; };
@@ -34,7 +33,6 @@
 		C8959A72268AB9D50080732A /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		C8959A75268B5CEB0080732A /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C8959A77268B5D1F0080732A /* PreviewPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPadding.swift; sourceTree = "<group>"; };
-		C8959A7A268B610F0080732A /* HomeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemView.swift; sourceTree = "<group>"; };
 		C8D868D9268AA9660054CF44 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8D868DB268AA9660054CF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8D868DD268AA9660054CF44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 			children = (
 				C8959A6E268AB1690080732A /* HomeViewController.swift */,
 				C8959A6F268AB1690080732A /* HomeView.swift */,
-				C8959A79268B60FB0080732A /* ListItem */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -103,14 +100,6 @@
 				C8959A77268B5D1F0080732A /* PreviewPadding.swift */,
 			);
 			path = Preview;
-			sourceTree = "<group>";
-		};
-		C8959A79268B60FB0080732A /* ListItem */ = {
-			isa = PBXGroup;
-			children = (
-				C8959A7A268B610F0080732A /* HomeListItemView.swift */,
-			);
-			path = ListItem;
 			sourceTree = "<group>";
 		};
 		C8D868DA268AA9660054CF44 /* Sample */ = {
@@ -278,7 +267,6 @@
 				C8D868DC268AA9660054CF44 /* AppDelegate.swift in Sources */,
 				C8959A71268AB1690080732A /* HomeView.swift in Sources */,
 				C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */,
-				C8959A7B268B610F0080732A /* HomeListItemView.swift in Sources */,
 				C8D868E0268AA9660054CF44 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
