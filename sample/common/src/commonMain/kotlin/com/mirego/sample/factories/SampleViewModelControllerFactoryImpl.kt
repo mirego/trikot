@@ -1,6 +1,7 @@
 package com.mirego.sample.factories
 
 import com.mirego.sample.viewmodels.home.HomeViewModelController
+import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelController
 import com.mirego.trikot.kword.I18N
@@ -20,5 +21,9 @@ class SampleViewModelControllerFactoryImpl : SampleViewModelControllerFactory {
 
     override fun progressShowcase(): ProgressShowcaseViewModelController {
         return ProgressShowcaseViewModelController(i18N)
+    }
+
+    override fun imageShowcase(): ImageShowcaseViewModelController {
+        return ImageShowcaseViewModelController(i18N)
     }
 }

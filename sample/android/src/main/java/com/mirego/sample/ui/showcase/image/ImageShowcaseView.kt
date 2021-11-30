@@ -1,7 +1,8 @@
-package com.mirego.sample.ui.showcase.progress
+package com.mirego.sample.ui.showcase.image
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -11,17 +12,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.theming.sampleTypography
-import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCircularProgressIndicator
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLinearProgressIndicator
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
-fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
-    val viewModel: ProgressShowcaseViewModel by progressShowcaseViewModel.observeAsState()
+fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
+    val viewModel: ImageShowcaseViewModel by imageShowcaseViewModel.observeAsState()
 
     Column(
         modifier = Modifier
@@ -42,51 +43,56 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
 
         VMDText(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.linearDeterminateProgressTitle,
+            viewModel = viewModel.localImageTitle,
             style = sampleTypography.title2
         )
 
-        VMDLinearProgressIndicator(
+        VMDImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.determinateProgress
+            viewModel = viewModel.localImage
         )
 
         VMDText(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.linearIndeterminateProgressTitle,
+            viewModel = viewModel.remoteImageTitle,
             style = sampleTypography.title2
         )
 
-        VMDLinearProgressIndicator(
+        VMDImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            viewModel = viewModel.remoteImage
+        )
+
+        VMDText(
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+            viewModel = viewModel.localImageDescriptorTitle,
+            style = sampleTypography.title2
+        )
+
+        VMDImageDescriptor(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.indeterminateProgress
+            imageDescriptor = viewModel.localImageDescriptor
         )
 
         VMDText(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.circularDeterminateProgressTitle,
+            viewModel = viewModel.remoteImageDescriptorTitle,
             style = sampleTypography.title2
         )
 
-        VMDCircularProgressIndicator(
+        VMDImageDescriptor(
             modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.determinateProgress
-        )
-
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.circularIndeterminateProgressTitle,
-            style = sampleTypography.title2
-        )
-
-        VMDCircularProgressIndicator(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.indeterminateProgress
+                .fillMaxWidth()
+                .height(300.dp)
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
+            imageDescriptor = viewModel.remoteImageDescriptor
         )
     }
 }

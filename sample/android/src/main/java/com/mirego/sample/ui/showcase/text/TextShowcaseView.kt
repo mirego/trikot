@@ -3,6 +3,8 @@ package com.mirego.sample.ui.showcase.text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,7 +21,11 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
     val viewModel: TextShowcaseViewModel by textShowcaseViewModel.observeAsState()
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(state = rememberScrollState())
+    ) {
 
         TopAppBar(
             title = { VMDText(viewModel = viewModel.title) },

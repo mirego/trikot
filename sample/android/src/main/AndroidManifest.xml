@@ -34,5 +34,9 @@
             android:name=".ui.showcase.progress.ProgressShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
+        <activity
+            android:name=".ui.showcase.image.ImageShowcaseActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+
     </application>
 </manifest>

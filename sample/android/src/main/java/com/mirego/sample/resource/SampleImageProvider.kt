@@ -19,6 +19,8 @@ class SampleImageProvider : VMDImageProvider {
     private fun mapSampleImageResource(resource: VMDImageResource): Int? {
         return when (resource) {
             SampleImageResource.ICON_CLOSE -> R.drawable.ic_close
+            SampleImageResource.IMAGE_BRIDGE -> R.drawable.bridge
+            SampleImageResource.IMAGE_PLACEHOLDER -> R.drawable.placeholder
             else -> null
         }
     }

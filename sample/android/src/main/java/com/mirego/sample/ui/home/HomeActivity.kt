@@ -2,6 +2,7 @@ package com.mirego.sample.ui.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.showcase.image.ImageShowcaseActivity
 import com.mirego.sample.ui.showcase.progress.ProgressShowcaseActivity
 import com.mirego.sample.ui.showcase.text.TextShowcaseActivity
 import com.mirego.sample.viewmodels.home.HomeNavigationDelegate
@@ -31,7 +32,7 @@ class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, H
     }
 
     override fun navigateToImageShowcase() {
-        // TODO:
+        startActivity(ImageShowcaseActivity.intent(this))
     }
 
     override fun navigateToTextFieldShowcase() {

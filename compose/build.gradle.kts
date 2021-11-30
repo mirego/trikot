@@ -47,7 +47,7 @@ dependencies {
     api("androidx.compose.material:material:${Versions.jetpackCompose}")
     api("androidx.compose.runtime:runtime:${Versions.jetpackCompose}")
     api("androidx.compose.ui:ui-tooling:${Versions.jetpackCompose}")
-    api("com.google.accompanist:accompanist-glide:${Versions.googleAccompanist}")
+    api("io.coil-kt:coil-compose:${Versions.coil}")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}")
 }

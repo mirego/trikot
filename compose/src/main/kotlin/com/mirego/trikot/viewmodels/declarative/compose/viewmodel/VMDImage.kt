@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -8,8 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
-import com.google.accompanist.glide.rememberGlidePainter
-import com.google.accompanist.imageloading.ImageLoadState
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
@@ -18,6 +20,7 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Lo
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Remote
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 
+@ExperimentalCoilApi
 @Composable
 fun VMDImage(
     modifier: Modifier = Modifier,
@@ -79,6 +82,7 @@ fun LocalImage(
     )
 }
 
+@ExperimentalCoilApi
 @Composable
 fun RemoteImage(
     modifier: Modifier = Modifier,
@@ -89,19 +93,33 @@ fun RemoteImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
 ) {
-    val glidePainter = rememberGlidePainter(imageUrl)
-    Image(
-        painter = glidePainter,
-        modifier = modifier,
-        alignment = alignment,
-        colorFilter = colorFilter,
-        contentScale = contentScale,
-        contentDescription = contentDescription
-    )
-    when (glidePainter.loadState) {
-        is ImageLoadState.Loading -> LocalImage(imageResource = placeholderImage)
-        is ImageLoadState.Error -> LocalImage(imageResource = placeholderImage)
-        else -> {
+    val coilPainter = rememberImagePainter(imageUrl)
+    Box {
+        Image(
+            painter = coilPainter,
+            modifier = modifier,
+            alignment = alignment,
+            colorFilter = colorFilter,
+            contentScale = contentScale,
+            contentDescription = contentDescription
+        )
+        when (coilPainter.state) {
+            is ImagePainter.State.Loading -> LocalImage(
+                imageResource = placeholderImage,
+                modifier = modifier,
+                colorFilter = colorFilter,
+                contentScale = contentScale,
+                contentDescription = contentDescription
+            )
+            is ImagePainter.State.Error -> LocalImage(
+                imageResource = placeholderImage,
+                modifier = modifier,
+                colorFilter = colorFilter,
+                contentScale = contentScale,
+                contentDescription = contentDescription
+            )
+            else -> {
+            }
         }
     }
 }
