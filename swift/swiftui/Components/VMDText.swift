@@ -2,31 +2,30 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
 public struct VMDText: View {
-    public typealias Body = Text
+    public typealias TextConfiguration = (Text) -> Text
 
-    private let viewModel: VMDTextViewModel
-    private let letterSpacing: CGFloat
-    private let underline: Bool
-    @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDTextViewModel>
-
-    public init(_ viewModel: VMDTextViewModel, letterSpacing: CGFloat = 0, underline: Bool = false) {
-        self.viewModel = viewModel
-        self.observableViewModel = viewModel.asObservable()
-        self.letterSpacing = letterSpacing
-        self.underline = underline
+    private var viewModel: VMDTextViewModel {
+        observableViewModel.viewModel
     }
 
-    public var body: Text {
-        var text: Text = Text(viewModel.text)
+    @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDTextViewModel>
 
-        if letterSpacing != 0 {
-            text = text.kerning(letterSpacing)
+    private var configurations = [TextConfiguration]()
+
+    public init(_ viewModel: VMDTextViewModel) {
+        self.observableViewModel = viewModel.asObservable()
+    }
+
+    public var body: some View {
+        configurations.reduce(Text(viewModel.text)) { current, config in
+            config(current)
         }
+        .hidden(viewModel.isHidden)
+    }
 
-        if underline {
-            text = text.underline()
-        }
-
-        return text
+    func configure(_ block: @escaping TextConfiguration) -> VMDText {
+        var result = self
+        result.configurations.append(block)
+        return result
     }
 }

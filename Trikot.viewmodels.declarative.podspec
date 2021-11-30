@@ -23,12 +23,15 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'UIKit' do |uikit|
     uikit.source_files = 'swift/uikit/**/*.swift'
+    uikit.dependency 'Trikot.viewmodels.declarative/Core'
     uikit.dependency 'Kingfisher', '>= 5.0'
   end
 
   spec.subspec 'SwiftUI' do |swiftui|
     swiftui.source_files = 'swift/swiftui/**/*.swift'
+    swiftui.dependency 'Trikot.viewmodels.declarative/Core'
     swiftui.dependency 'Kingfisher', '~> 7.1'
+    swiftui.dependency 'Introspect', '~> 0.1'
   end
 
   spec.prepare_command = <<-CMD

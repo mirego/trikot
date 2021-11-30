@@ -6,6 +6,20 @@
 	objectVersion = 51;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C88356B22756784400DA0786 /* RestoreImports */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C88356B32756784400DA0786 /* Build configuration list for PBXAggregateTarget "RestoreImports" */;
+			buildPhases = (
+				C88356B62756784A00DA0786 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = RestoreImports;
+			productName = RestoreImports;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C883569D2750339300DA0786 /* SampleImageProvider.swift */; };
 		C8959A6B268AAADF0080732A /* AppBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6A268AAADF0080732A /* AppBootstrap.swift */; };
@@ -175,6 +189,9 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					C88356B22756784400DA0786 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					C8D868D8268AA9660054CF44 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -194,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				C8D868D8268AA9660054CF44 /* Sample */,
+				C88356B22756784400DA0786 /* RestoreImports */,
 			);
 		};
 /* End PBXProject section */
@@ -228,6 +246,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sample/Pods-Sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C88356B62756784A00DA0786 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find $PROJECT_DIR/../../swift -regex \".*\\.swift\" -type f -print0 | xargs -0 sed -i '' \"s/import TrikotViewmodelsDeclarativeSample/import TRIKOT_FRAMEWORK_NAME/g\"\n";
 		};
 		F8B9ACECE9BFBFA042492C62 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -401,6 +436,24 @@
 			};
 			name = Release;
 		};
+		C88356B42756784400DA0786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4Q596JWQC5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C88356B52756784400DA0786 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4Q596JWQC5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C8D868EB268AA9670054CF44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCF87A6E6976B4011B629160 /* Pods-Sample.debug.xcconfig */;
@@ -453,6 +506,15 @@
 			buildConfigurations = (
 				C84FAFCD266B177100D5A458 /* Debug */,
 				C84FAFCE266B177100D5A458 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C88356B32756784400DA0786 /* Build configuration list for PBXAggregateTarget "RestoreImports" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C88356B42756784400DA0786 /* Debug */,
+				C88356B52756784400DA0786 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
