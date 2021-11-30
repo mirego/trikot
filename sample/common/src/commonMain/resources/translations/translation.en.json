@@ -7,5 +7,10 @@
     "home_component_toggle": "Toggle",
     "home_component_progress": "Progress",
     "text_showcase_title": "Text showcase",
-    "text_showcase_text_normal": "Normal text"
+    "text_showcase_text_title1": "Title 1",
+    "text_showcase_text_title1_bold": "Title 1 bold",
+    "text_showcase_text_title2": "Title 2",
+    "text_showcase_text_title2_bold": "Title 2 bold",
+    "text_showcase_text_body": "Body",
+    "text_showcase_text_body_medium": "Body medium"
 }

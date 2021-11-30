@@ -1,9 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Text
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponentsFactory

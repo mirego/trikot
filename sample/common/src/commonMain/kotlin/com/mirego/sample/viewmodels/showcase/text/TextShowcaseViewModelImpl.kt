@@ -9,5 +9,10 @@ import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 
 class TextShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableManager) : ShowcaseViewModelImpl(cancellableManager), TextShowcaseViewModel {
     override val title: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TITLE], cancellableManager)
-    override val text: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_NORMAL], cancellableManager)
+    override val title1: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1], cancellableManager)
+    override val title1Bold: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1_BOLD], cancellableManager)
+    override val title2: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2], cancellableManager)
+    override val title2Bold: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2_BOLD], cancellableManager)
+    override val body: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY], cancellableManager)
+    override val bodyMedium: VMDTextViewModel = VMDComponentsFactory.Companion.Text.withContent(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY_MEDIUM], cancellableManager)
 }
