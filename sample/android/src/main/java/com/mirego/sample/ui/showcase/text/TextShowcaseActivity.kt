@@ -15,15 +15,15 @@ class TextShowcaseActivity : ViewModelActivity<TextShowcaseViewModelController, 
         getViewModelController(TextShowcaseViewModelController::class)
     }
 
-    override fun close() {
-        finish()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TextShowcaseView(textShowcaseViewModel = viewModel)
         }
+    }
+
+    override fun close() {
+        finish()
     }
 
     companion object {
