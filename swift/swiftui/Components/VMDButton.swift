@@ -6,11 +6,11 @@ public struct VMDButton<Label, Content: VMDContent>: View where Label: View {
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDButtonViewModel<Content>>
 
-    var viewModel: VMDButtonViewModel<Content> {
+    private var viewModel: VMDButtonViewModel<Content> {
         observableViewModel.viewModel
     }
 
-    init(_ viewModel: VMDButtonViewModel<Content>, @ViewBuilder label: @escaping (Content) -> Label) {
+    public init(_ viewModel: VMDButtonViewModel<Content>, @ViewBuilder label: @escaping (Content) -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
     }

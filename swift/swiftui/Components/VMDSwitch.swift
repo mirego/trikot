@@ -7,7 +7,7 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDToggleViewModel<Content>>
 
-    var viewModel: VMDToggleViewModel<Content> {
+    private var viewModel: VMDToggleViewModel<Content> {
         observableViewModel.viewModel
     }
 
@@ -19,19 +19,19 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
         }
     }
 
-    init(_ viewModel: VMDToggleViewModel<VMDNoContent>) {
+    public init(_ viewModel: VMDToggleViewModel<VMDNoContent>) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = nil
         self.title = ""
     }
 
-    init(_ viewModel: VMDToggleViewModel<VMDTextContent>) {
+    public init(_ viewModel: VMDToggleViewModel<VMDTextContent>) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = nil
-        self.title = viewModel.content.text
+        self.title = viewModel.label.text
     }
 
-    init(_ viewModel: VMDToggleViewModel<Content>, @ViewBuilder label: @escaping (Content) -> Label) {
+    public init(_ viewModel: VMDToggleViewModel<Content>, @ViewBuilder label: @escaping (Content) -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
         self.title = nil
@@ -44,7 +44,7 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
                 .hidden(viewModel.isHidden)
         } else {
             Toggle(isOn: isOn) {
-                labelBuilder?(viewModel.content)
+                labelBuilder?(viewModel.label)
             }
             .disabled(!viewModel.enabled)
             .hidden(viewModel.isHidden)

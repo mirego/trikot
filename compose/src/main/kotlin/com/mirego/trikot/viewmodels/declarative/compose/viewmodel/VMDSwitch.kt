@@ -47,7 +47,7 @@ fun <C : VMDContent> VMDSwitch(
         modifier = Modifier
             .hidden(toggleViewModel.isHidden)
             .then(modifier),
-        label = { label(toggleViewModel.content) },
+        label = { label(toggleViewModel.label) },
         content = {
             Switch(
                 modifier = componentModifier,

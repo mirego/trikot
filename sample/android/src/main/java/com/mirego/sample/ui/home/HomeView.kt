@@ -3,8 +3,6 @@ package com.mirego.sample.ui.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -17,6 +15,7 @@ import com.mirego.sample.R
 import com.mirego.sample.viewmodels.home.HomeViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDList
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
@@ -33,21 +32,19 @@ fun HomeView(homeViewModel: HomeViewModel) {
             fontSize = 22.sp
         )
 
-        LazyColumn {
-            items(viewModel.items) { item ->
-                VMDButton(
-                    modifier = Modifier
-                        .padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 6.dp)
-                        .fillMaxWidth(),
-                    viewModel = item,
-                    content = {
-                        Text(
-                            text = item.content.text,
-                            fontSize = 18.sp
-                        )
-                    }
-                )
-            }
+        VMDList(viewModel = viewModel.items) { item ->
+            VMDButton(
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 6.dp)
+                    .fillMaxWidth(),
+                viewModel = item.content,
+                content = {
+                    Text(
+                        text = item.content.content.text,
+                        fontSize = 18.sp
+                    )
+                }
+            )
         }
     }
 }

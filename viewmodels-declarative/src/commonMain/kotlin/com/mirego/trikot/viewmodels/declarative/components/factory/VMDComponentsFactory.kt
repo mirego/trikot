@@ -233,6 +233,15 @@ class VMDComponentsFactory {
                 ) =
                     VMDListViewModelImpl<C>(cancellableManager)
                         .apply(closure)
+
+                fun <C : VMDIdentifiableContent> of(
+                    vararg listElements: C,
+                    cancellableManager: CancellableManager,
+                    closure: VMDListViewModelImpl<C>.() -> Unit = {}
+                ) =
+                    VMDListViewModelImpl<C>(cancellableManager)
+                        .apply { elements = listElements.asList() }
+                        .apply(closure)
             }
         }
     }

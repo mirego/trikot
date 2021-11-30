@@ -8,13 +8,13 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.published
 import org.reactivestreams.Publisher
 
 @Suppress("LeakingThis")
-open class VMDListViewModelImpl<C : VMDIdentifiableContent>(cancellableManager: CancellableManager) :
-    VMDListViewModel<C>(cancellableManager) {
+open class VMDListViewModelImpl<E : VMDIdentifiableContent>(cancellableManager: CancellableManager) :
+    VMDListViewModel<E>(cancellableManager) {
 
-    private val elementsDelegate: VMDPublishedProperty<List<C>> = published(emptyList(), this)
-    override var elements: List<C> by elementsDelegate
+    private val elementsDelegate: VMDPublishedProperty<List<E>> = published(emptyList(), this)
+    override var elements: List<E> by elementsDelegate
 
-    fun bindElements(publisher: Publisher<List<C>>) {
+    fun bindElements(publisher: Publisher<List<E>>) {
         updatePropertyPublisher(this::elements, cancellableManager, publisher)
     }
 

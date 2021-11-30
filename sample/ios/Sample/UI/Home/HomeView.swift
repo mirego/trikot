@@ -17,8 +17,11 @@ struct HomeView: RootViewModelView {
 
     var body: some View {
         NavigationView {
-            List(viewModel.items, id: \.content.text) { item in
-                Text(item.content.text)
+            VMDList(viewModel.items) { item in
+                VMDButton(item) { textContent in
+                    Text(textContent.text)
+                }
+                .foregroundColor(.black)
             }
             .listStyle(GroupedListStyle())
             .navigationTitle(viewModel.title.text)

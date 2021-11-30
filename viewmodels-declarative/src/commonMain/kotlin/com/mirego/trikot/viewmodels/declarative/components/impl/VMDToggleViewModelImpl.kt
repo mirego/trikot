@@ -17,20 +17,20 @@ open class VMDToggleViewModelImpl<C : VMDContent>(
     override var isOn: Boolean by isOnDelegate
 
     private val contentDelegate = published(defaultContent, this)
-    override var content: C by contentDelegate
+    override var label: C by contentDelegate
 
     override fun onValueChange(isOn: Boolean) {
         this.isOn = isOn
     }
 
     fun bindContent(publisher: Publisher<C>) {
-        updatePropertyPublisher(this::content, cancellableManager, publisher)
+        updatePropertyPublisher(this::label, cancellableManager, publisher)
     }
 
     override val propertyMapping: Map<String, VMDPublishedProperty<*>> by lazy {
         super.propertyMapping.toMutableMap().also {
             it[this::isOn.name] = isOnDelegate
-            it[this::content.name] = contentDelegate
+            it[this::label.name] = contentDelegate
         }
     }
 }

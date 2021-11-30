@@ -15,7 +15,7 @@ struct VMDImage: View {
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDImageViewModel>
 
-    init(_ viewModel: VMDImageViewModel) {
+    public init(_ viewModel: VMDImageViewModel) {
         self.observableViewModel = viewModel.asObservable()
     }
 

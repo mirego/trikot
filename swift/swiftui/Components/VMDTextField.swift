@@ -8,7 +8,7 @@ public struct VMDTextField<Label>: View where Label: View {
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDTextFieldViewModel>
 
-    var viewModel: VMDTextFieldViewModel {
+    private var viewModel: VMDTextFieldViewModel {
         observableViewModel.viewModel
     }
 
@@ -31,13 +31,13 @@ public struct VMDTextField<Label>: View where Label: View {
     @available(iOS 15.0, *)
     @FocusState private var isFocused: Bool
 
-    init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil) {
+    public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = nil
         self.onFocusChange = onFocusChange
     }
 
-    init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, @ViewBuilder label: @escaping () -> Label) {
+    public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, @ViewBuilder label: @escaping () -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
         self.onFocusChange = onFocusChange
