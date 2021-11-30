@@ -9,7 +9,6 @@ repositories {
     google()
     mavenCentral()
     mavenLocal()
-    maven("https://kotlin.bintray.com/kotlinx")
     maven("https://jitpack.io")
     maven("https://s3.amazonaws.com/mirego-maven/public")
 }
