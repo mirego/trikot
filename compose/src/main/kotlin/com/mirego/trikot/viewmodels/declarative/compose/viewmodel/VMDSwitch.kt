@@ -44,9 +44,8 @@ fun <C : VMDContent> VMDSwitch(
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState()
 
     VMDLabeledComponent(
-        modifier = Modifier
-            .hidden(toggleViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier
+            .hidden(toggleViewModel.isHidden),
         label = { label(toggleViewModel.label) },
         content = {
             Switch(

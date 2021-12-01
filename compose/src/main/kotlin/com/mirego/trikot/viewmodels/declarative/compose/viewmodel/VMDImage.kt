@@ -12,10 +12,12 @@ import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import coil.size.OriginalSize
 import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.painterResource
+import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Local
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Remote
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
@@ -32,32 +34,52 @@ fun VMDImage(
     contentDescription: String = ""
 ) {
     val imageViewModel by viewModel.observeAsState()
-    val image = imageViewModel.image
 
-    if (image is Local) {
-        LocalImage(
-            modifier = Modifier
-                .hidden(imageViewModel.isHidden)
-                .then(modifier),
-            imageResource = image.imageResource,
-            alignment = alignment,
-            contentScale = contentScale,
-            alpha = alpha,
-            colorFilter = colorFilter,
-            contentDescription = contentDescription
-        )
-    } else if (image is Remote) {
-        RemoteImage(
-            modifier = Modifier
-                .hidden(imageViewModel.isHidden)
-                .then(modifier),
-            imageUrl = image.url,
-            placeholderImage = image.placeholderImageResource,
-            alignment = alignment,
-            contentScale = contentScale,
-            colorFilter = colorFilter,
-            contentDescription = contentDescription
-        )
+    VMDImage(
+        modifier = modifier.hidden(imageViewModel.isHidden),
+        alpha = alpha,
+        alignment = alignment,
+        contentScale = contentScale,
+        colorFilter = colorFilter,
+        contentDescription = contentDescription,
+        imageDescriptor = imageViewModel.image
+    )
+}
+
+@ExperimentalCoilApi
+@Composable
+fun VMDImage(
+    modifier: Modifier = Modifier,
+    imageDescriptor: VMDImageDescriptor,
+    alignment: Alignment = Alignment.Center,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    contentDescription: String = ""
+) {
+    when (imageDescriptor) {
+        is Local -> {
+            LocalImage(
+                modifier = modifier,
+                imageResource = imageDescriptor.imageResource,
+                alignment = alignment,
+                contentScale = contentScale,
+                alpha = alpha,
+                colorFilter = colorFilter,
+                contentDescription = contentDescription
+            )
+        }
+        is Remote -> {
+            RemoteImage(
+                modifier = modifier,
+                imageUrl = imageDescriptor.url,
+                placeholderImage = imageDescriptor.placeholderImageResource,
+                alignment = alignment,
+                contentScale = contentScale,
+                colorFilter = colorFilter,
+                contentDescription = contentDescription
+            )
+        }
     }
 }
 
@@ -93,7 +115,12 @@ fun RemoteImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
 ) {
-    val coilPainter = rememberImagePainter(imageUrl)
+    val coilPainter = rememberImagePainter(imageUrl,
+        builder = {
+            size(OriginalSize)
+        }
+    )
+
     Box {
         Image(
             painter = coilPainter,

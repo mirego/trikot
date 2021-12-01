@@ -2,7 +2,6 @@ package com.mirego.sample.ui.showcase.image
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -14,10 +13,8 @@ import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.theming.sampleTypography
 import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
@@ -34,8 +31,8 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             title = { VMDText(viewModel = viewModel.title) },
             actions = {
                 VMDButton(viewModel = viewModel.closeButton) {
-                    LocalImage(
-                        imageResource = viewModel.closeButton.content.image
+                    VMDImage(
+                        imageDescriptor = viewModel.closeButton.content.image
                     )
                 }
             }
@@ -63,7 +60,6 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
         VMDImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
             viewModel = viewModel.remoteImage
         )
@@ -74,7 +70,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             style = sampleTypography.title2
         )
 
-        VMDImageDescriptor(
+        VMDImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
@@ -87,10 +83,9 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             style = sampleTypography.title2
         )
 
-        VMDImageDescriptor(
+        VMDImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
             imageDescriptor = viewModel.remoteImageDescriptor
         )

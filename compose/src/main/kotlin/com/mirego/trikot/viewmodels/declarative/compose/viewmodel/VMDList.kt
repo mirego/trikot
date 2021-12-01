@@ -35,9 +35,8 @@ fun <C : VMDIdentifiableContent> VMDList(
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState()
 
     LazyColumn(
-        modifier = Modifier
-            .hidden(listViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier
+            .hidden(listViewModel.isHidden),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,

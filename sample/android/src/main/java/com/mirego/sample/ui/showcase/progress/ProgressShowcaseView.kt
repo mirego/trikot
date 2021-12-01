@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.theming.sampleTypography
 import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCircularProgressIndicator
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLinearProgressIndicator
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
@@ -33,8 +33,8 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             title = { VMDText(viewModel = viewModel.title) },
             actions = {
                 VMDButton(viewModel = viewModel.closeButton) {
-                    LocalImage(
-                        imageResource = viewModel.closeButton.content.image
+                    VMDImage(
+                        imageDescriptor = viewModel.closeButton.content.image
                     )
                 }
             }

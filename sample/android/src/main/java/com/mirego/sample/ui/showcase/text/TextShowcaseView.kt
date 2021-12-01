@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.theming.sampleTypography
 import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
@@ -31,8 +31,8 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
             title = { VMDText(viewModel = viewModel.title) },
             actions = {
                 VMDButton(viewModel = viewModel.closeButton) {
-                    LocalImage(
-                        imageResource = viewModel.closeButton.content.image
+                    VMDImage(
+                        imageDescriptor = viewModel.closeButton.content.image
                     )
                 }
             }

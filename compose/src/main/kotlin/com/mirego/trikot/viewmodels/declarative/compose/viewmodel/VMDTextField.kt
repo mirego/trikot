@@ -35,9 +35,8 @@ fun VMDTextField(
     val keyboardActionsDelegate = buildKeyboardActions(viewModel, keyboardActions)
 
     TextField(
-        modifier = Modifier
-            .hidden(textFieldViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier
+            .hidden(textFieldViewModel.isHidden),
         value = textFieldViewModel.text,
         onValueChange = { value ->
             viewModel.onValueChange(value)

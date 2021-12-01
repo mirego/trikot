@@ -95,7 +95,16 @@ class VMDComponentsFactory {
                     cancellableManager: CancellableManager,
                     closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
                 ) =
-                    VMDButtonViewModelImpl(cancellableManager, VMDImageContent(image))
+                    VMDButtonViewModelImpl(cancellableManager, VMDImageContent(VMDImageDescriptor.Local(image)))
+                        .apply(closure)
+
+                fun withImage(
+                    imageUrl: String,
+                    placeholderImageResource: VMDImageResource = VMDImageResource.None,
+                    cancellableManager: CancellableManager,
+                    closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
+                ) =
+                    VMDButtonViewModelImpl(cancellableManager, VMDImageContent(VMDImageDescriptor.Remote(imageUrl, placeholderImageResource = placeholderImageResource)))
                         .apply(closure)
 
                 fun withTextPair(
@@ -170,7 +179,7 @@ class VMDComponentsFactory {
                     cancellableManager: CancellableManager,
                     closure: VMDToggleViewModelImpl<VMDImageContent>.() -> Unit = {}
                 ) =
-                    VMDToggleViewModelImpl(cancellableManager, VMDImageContent(image))
+                    VMDToggleViewModelImpl(cancellableManager, VMDImageContent(VMDImageDescriptor.Local(image)))
                         .apply { isOn = state }
                         .apply(closure)
             }

@@ -1,7 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.content
 
-import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
+import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
 data class VMDImageContent(
-    val image: VMDImageResource
+    val image: VMDImageDescriptor
 ) : VMDContent
