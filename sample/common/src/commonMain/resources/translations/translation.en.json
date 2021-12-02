@@ -1,4 +1,11 @@
 {
+    "button_showcase_title": "Button showcase",
+    "button_showcase_label": "Label",
+    "button_showcase_subtitle": "Subtitle",
+    "button_showcase_text_title": "Text button",
+    "button_showcase_image_title": "Image button",
+    "button_showcase_text_image_title": "Text image button",
+    "button_showcase_text_pair_title": "Text pair button",
     "home_title": "Components",
     "home_component_text": "Text",
     "home_component_button": "Button",

@@ -1,6 +1,7 @@
 package com.mirego.sample.factories
 
 import com.mirego.sample.viewmodels.home.HomeViewModelController
+import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelController
@@ -25,5 +26,9 @@ class SampleViewModelControllerFactoryImpl : SampleViewModelControllerFactory {
 
     override fun imageShowcase(): ImageShowcaseViewModelController {
         return ImageShowcaseViewModelController(i18N)
+    }
+
+    override fun buttonShowcase(): ButtonShowcaseViewModelController {
+        return ButtonShowcaseViewModelController(i18N)
     }
 }

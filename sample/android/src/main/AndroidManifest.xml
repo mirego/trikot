@@ -38,5 +38,9 @@
             android:name=".ui.showcase.image.ImageShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
+        <activity
+            android:name=".ui.showcase.button.ButtonShowcaseActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+
     </application>
 </manifest>

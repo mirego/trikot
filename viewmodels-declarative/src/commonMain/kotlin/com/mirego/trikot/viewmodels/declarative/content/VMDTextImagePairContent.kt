@@ -1,6 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.content
 
-import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
+import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
 /**
  * Utility class to represent a text and image pair as content of a component.
@@ -8,5 +8,5 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
  */
 data class VMDTextImagePairContent(
     val text: String,
-    val image: VMDImageResource
+    val image: VMDImageDescriptor
 ) : VMDContent

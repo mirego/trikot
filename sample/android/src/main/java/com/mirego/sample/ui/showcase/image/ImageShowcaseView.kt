@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mirego.sample.ui.theming.sampleTypography
+import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
@@ -38,11 +38,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             }
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.localImageTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.localImageTitle)
 
         VMDImage(
             modifier = Modifier
@@ -51,11 +47,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             viewModel = viewModel.localImage
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.remoteImageTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.remoteImageTitle)
 
         VMDImage(
             modifier = Modifier
@@ -64,11 +56,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             viewModel = viewModel.remoteImage
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.localImageDescriptorTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.localImageDescriptorTitle)
 
         VMDImage(
             modifier = Modifier
@@ -77,11 +65,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             imageDescriptor = viewModel.localImageDescriptor
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.remoteImageDescriptorTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.remoteImageDescriptorTitle)
 
         VMDImage(
             modifier = Modifier

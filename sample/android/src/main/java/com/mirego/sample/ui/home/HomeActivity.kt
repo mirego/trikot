@@ -2,6 +2,7 @@ package com.mirego.sample.ui.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.showcase.button.ButtonShowcaseActivity
 import com.mirego.sample.ui.showcase.image.ImageShowcaseActivity
 import com.mirego.sample.ui.showcase.progress.ProgressShowcaseActivity
 import com.mirego.sample.ui.showcase.text.TextShowcaseActivity
@@ -28,7 +29,7 @@ class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, H
     }
 
     override fun navigateToButtonShowcase() {
-        // TODO:
+        startActivity(ButtonShowcaseActivity.intent(this))
     }
 
     override fun navigateToImageShowcase() {

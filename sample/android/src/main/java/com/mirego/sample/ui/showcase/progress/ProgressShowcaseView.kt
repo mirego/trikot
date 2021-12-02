@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mirego.sample.ui.theming.sampleTypography
+import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
@@ -40,11 +40,7 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             }
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.linearDeterminateProgressTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.linearDeterminateProgressTitle)
 
         VMDLinearProgressIndicator(
             modifier = Modifier
@@ -53,11 +49,7 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             progressViewModel = viewModel.determinateProgress
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.linearIndeterminateProgressTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.linearIndeterminateProgressTitle)
 
         VMDLinearProgressIndicator(
             modifier = Modifier
@@ -66,11 +58,7 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             progressViewModel = viewModel.indeterminateProgress
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.circularDeterminateProgressTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.circularDeterminateProgressTitle)
 
         VMDCircularProgressIndicator(
             modifier = Modifier
@@ -78,11 +66,7 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             progressViewModel = viewModel.determinateProgress
         )
 
-        VMDText(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.circularIndeterminateProgressTitle,
-            style = sampleTypography.title2
-        )
+        ComponentShowcaseTitle(viewModel.circularIndeterminateProgressTitle)
 
         VMDCircularProgressIndicator(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
