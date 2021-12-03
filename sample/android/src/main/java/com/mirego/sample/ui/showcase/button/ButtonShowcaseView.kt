@@ -10,19 +10,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
+import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.sampleTypography
 import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
 fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
@@ -34,16 +33,7 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
             .verticalScroll(state = rememberScrollState())
     ) {
 
-        TopAppBar(
-            title = { VMDText(viewModel = viewModel.title) },
-            actions = {
-                VMDButton(viewModel = viewModel.closeButton) {
-                    VMDImage(
-                        imageDescriptor = viewModel.closeButton.content.image
-                    )
-                }
-            }
-        )
+        ComponentShowcaseTopBar(viewModel)
 
         ComponentShowcaseTitle(viewModel.textButtonTitle)
 

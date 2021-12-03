@@ -4,7 +4,7 @@ import com.mirego.sample.KWordTranslation
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponentsFactory
+import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContentAbstract
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContentWrapper
@@ -21,10 +21,10 @@ class HomeViewModelController(i18N: I18N) :
                 text = i18N[KWordTranslation.HOME_TITLE]
             }
             override val items: VMDListViewModel<VMDIdentifiableContentAbstract<VMDButtonViewModel<VMDTextContent>>> =
-                VMDComponentsFactory.Companion.List.of(
+                VMDComponents.List.of(
                     VMDIdentifiableContentWrapper(
                         "text",
-                        VMDComponentsFactory.Companion.Button.withText(
+                        VMDComponents.Button.withText(
                             i18N[KWordTranslation.HOME_COMPONENT_TEXT],
                             cancellableManager
                         ) {
@@ -33,7 +33,7 @@ class HomeViewModelController(i18N: I18N) :
                     ),
                     VMDIdentifiableContentWrapper(
                         "button",
-                        VMDComponentsFactory.Companion.Button.withText(
+                        VMDComponents.Button.withText(
                             i18N[KWordTranslation.HOME_COMPONENT_BUTTON],
                             cancellableManager
                         ) {
@@ -42,7 +42,7 @@ class HomeViewModelController(i18N: I18N) :
                     ),
                     VMDIdentifiableContentWrapper(
                         "image",
-                        VMDComponentsFactory.Companion.Button.withText(
+                        VMDComponents.Button.withText(
                             i18N[KWordTranslation.HOME_COMPONENT_IMAGE],
                             cancellableManager
                         ) {
@@ -51,7 +51,7 @@ class HomeViewModelController(i18N: I18N) :
                     ),
                     VMDIdentifiableContentWrapper(
                         "text_field",
-                        VMDComponentsFactory.Companion.Button.withText(
+                        VMDComponents.Button.withText(
                             i18N[KWordTranslation.HOME_COMPONENT_TEXTFIELD],
                             cancellableManager
                         ) {
@@ -60,7 +60,7 @@ class HomeViewModelController(i18N: I18N) :
                     ),
                     VMDIdentifiableContentWrapper(
                         "toggle",
-                        VMDComponentsFactory.Companion.Button.withText(
+                        VMDComponents.Button.withText(
                             i18N[KWordTranslation.HOME_COMPONENT_TOGGLE],
                             cancellableManager
                         ) {
@@ -69,7 +69,7 @@ class HomeViewModelController(i18N: I18N) :
                     ),
                     VMDIdentifiableContentWrapper(
                         "progress",
-                        VMDComponentsFactory.Companion.Button.withText(
+                        VMDComponents.Button.withText(
                             i18N[KWordTranslation.HOME_COMPONENT_PROGRESS],
                             cancellableManager
                         ) {

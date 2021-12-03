@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.VMDProgressViewModel
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponentsFactory
+import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 
@@ -40,7 +40,7 @@ fun VMDLinearProgressIndicator(
 @Preview
 @Composable
 fun DeterminateLinearProgressIndicatorPreview() {
-    val progressViewModel = VMDComponentsFactory.Companion.Progress.determinate(0.25f, CancellableManager())
+    val progressViewModel = VMDComponents.Progress.determinate(0.25f, CancellableManager())
     VMDLinearProgressIndicator(
         modifier = Modifier.fillMaxWidth(),
         progressViewModel = progressViewModel

@@ -6,6 +6,7 @@ import com.mirego.sample.ui.showcase.button.ButtonShowcaseActivity
 import com.mirego.sample.ui.showcase.image.ImageShowcaseActivity
 import com.mirego.sample.ui.showcase.progress.ProgressShowcaseActivity
 import com.mirego.sample.ui.showcase.text.TextShowcaseActivity
+import com.mirego.sample.ui.showcase.toggle.ToggleShowcaseActivity
 import com.mirego.sample.viewmodels.home.HomeNavigationDelegate
 import com.mirego.sample.viewmodels.home.HomeViewModel
 import com.mirego.sample.viewmodels.home.HomeViewModelController
@@ -41,7 +42,7 @@ class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, H
     }
 
     override fun navigateToToggleShowcase() {
-        // TODO:
+        startActivity(ToggleShowcaseActivity.intent(this))
     }
 
     override fun navigateToProgressShowcase() {

@@ -5,16 +5,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.sampleTypography
 import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
@@ -27,16 +25,7 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
             .verticalScroll(state = rememberScrollState())
     ) {
 
-        TopAppBar(
-            title = { VMDText(viewModel = viewModel.title) },
-            actions = {
-                VMDButton(viewModel = viewModel.closeButton) {
-                    VMDImage(
-                        imageDescriptor = viewModel.closeButton.content.image
-                    )
-                }
-            }
-        )
+        ComponentShowcaseTopBar(viewModel)
 
         VMDText(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),

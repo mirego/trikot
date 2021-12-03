@@ -29,5 +29,16 @@
     "text_showcase_text_title2": "Title 2",
     "text_showcase_text_title2_bold": "Title 2 bold",
     "text_showcase_text_body": "Body",
-    "text_showcase_text_body_medium": "Body medium"
+    "text_showcase_text_body_medium": "Body medium",
+    "toggle_showcase_title": "Toggle showcase",
+    "toggle_showcase_checkbox_title": "Checkbox",
+    "toggle_showcase_text_checkbox_title": "Text checkbox",
+    "toggle_showcase_image_checkbox_title": "Image checkbox",
+    "toggle_showcase_text_image_checkbox_title": "Text image checkbox",
+    "toggle_showcase_text_pair_checkbox_title": "Text pair checkbox",
+    "toggle_showcase_switch_title": "Switch",
+    "toggle_showcase_text_switch_title": "Text switch",
+    "toggle_showcase_image_switch_title": "Image switch",
+    "toggle_showcase_text_image_switch_title": "Text image switch",
+    "toggle_showcase_text_pair_switch_title": "Text pair switch"
 }

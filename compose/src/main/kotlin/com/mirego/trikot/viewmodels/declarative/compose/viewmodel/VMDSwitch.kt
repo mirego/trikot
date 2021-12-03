@@ -1,17 +1,21 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchColors
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponentsFactory
+import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
@@ -61,24 +65,24 @@ fun <C : VMDContent> VMDSwitch(
 
 @Preview
 @Composable
-fun EnabledSwitchCheckboxPreview() {
+fun EnabledSwitchPreview() {
     val toggleViewModel =
-        VMDComponentsFactory.Companion.Toggle.withState(true, CancellableManager())
+        VMDComponents.Toggle.withState(true, CancellableManager())
     VMDSwitch(viewModel = toggleViewModel, label = {})
 }
 
 @Preview
 @Composable
-fun DisabledSwitchCheckboxPreview() {
+fun DisabledSwitchPreview() {
     val toggleViewModel =
-        VMDComponentsFactory.Companion.Toggle.withState(false, CancellableManager())
+        VMDComponents.Toggle.withState(false, CancellableManager())
     VMDSwitch(viewModel = toggleViewModel, label = {})
 }
 
 @Preview
 @Composable
-fun SimpleTextSwitchCheckboxPreview() {
+fun SimpleTextSwitchPreview() {
     val toggleViewModel =
-        VMDComponentsFactory.Companion.Toggle.withText("Label", true, CancellableManager())
+        VMDComponents.Toggle.withText("Label", true, CancellableManager())
     VMDSwitch(viewModel = toggleViewModel)
 }

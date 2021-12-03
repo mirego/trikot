@@ -5,6 +5,7 @@ import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModelContr
 import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.toggle.ToggleShowcaseViewModelController
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KWord
 
@@ -30,5 +31,9 @@ class SampleViewModelControllerFactoryImpl : SampleViewModelControllerFactory {
 
     override fun buttonShowcase(): ButtonShowcaseViewModelController {
         return ButtonShowcaseViewModelController(i18N)
+    }
+
+    override fun toggleShowcase(): ToggleShowcaseViewModelController {
+        return ToggleShowcaseViewModelController(i18N)
     }
 }
