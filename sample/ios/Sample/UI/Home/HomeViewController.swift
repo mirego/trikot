@@ -2,13 +2,17 @@ import UIKit
 import Trikot_viewmodels_declarative
 import TrikotViewmodelsDeclarativeSample
 
-class HomeViewController: ViewModelViewController<HomeViewModelController, HomeViewModel, HomeView, HomeNavigationDelegate> {
+class HomeViewController: BaseViewModelViewController<HomeViewModelController, HomeViewModel, HomeView, HomeNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .darkContent
     }
 }
 
 extension HomeViewController: HomeNavigationDelegate {
+    func navigateToTextShowcase() {
+        present(viewControllerFactory.textShowcase(), animated: true, completion: nil)
+    }
+
     func navigateToButtonShowcase() {
         //TODO:
     }
@@ -25,13 +29,7 @@ extension HomeViewController: HomeNavigationDelegate {
         //TODO:
     }
 
-    func navigateToTextShowcase() {
+    func navigateToToggleShowcase() {
         //TODO:
     }
-
-    func navigateToToggleShowcase() {
-        //TODO: 
-    }
-
-
 }

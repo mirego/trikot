@@ -2,7 +2,7 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 import Kingfisher
 
-struct VMDImage: View {
+public struct VMDImage: View {
     public typealias LocalImageConfiguration = (Image) -> Image
     public typealias RemoteImageConfiguration = (KFImage) -> KFImage
 
@@ -19,7 +19,11 @@ struct VMDImage: View {
         self.observableViewModel = viewModel.asObservable()
     }
 
-    var body: some View {
+    public init(_ imageDescriptor: VMDImageDescriptor) {
+        self.observableViewModel = VMDComponents.Image.companion.withDescriptor(imageDescriptor: imageDescriptor, cancellableManager: CancellableManager(), closure: {_ in }).asObservable()
+    }
+
+    public var body: some View {
         if let localImage = viewModel.image as? VMDImageDescriptor.Local, let image = localImage.imageResource.image {
             localImageConfigurations.reduce(image, { current, config in
                 config(current)

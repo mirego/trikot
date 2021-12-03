@@ -21,19 +21,47 @@ public extension VMDText {
         configure { $0.strikethrough(active, color: color) }
     }
 
-    func bold() -> VMDText {
-        configure { $0.bold() }
-    }
-
-    func italic() -> VMDText {
-        configure { $0.italic() }
-    }
-
     func font(_ font: Font?) -> VMDText {
         configure { $0.font(font) }
     }
 
     func fontWeight(_ weight: Font.Weight?) -> VMDText {
         configure { $0.fontWeight(weight) }
+    }
+
+    func ultraLight() -> VMDText {
+        configure { $0.fontWeight(.ultraLight) }
+    }
+
+    func thin() -> VMDText {
+        configure { $0.fontWeight(.thin) }
+    }
+
+    func regular() -> VMDText {
+        configure { $0.fontWeight(.regular) }
+    }
+
+    func medium() -> VMDText {
+        configure { $0.fontWeight(.medium) }
+    }
+
+    func semibold() -> VMDText {
+        configure { $0.fontWeight(.semibold) }
+    }
+
+    func bold() -> VMDText {
+        configure { $0.fontWeight(.bold) }
+    }
+
+    func heavy() -> VMDText {
+        configure { $0.fontWeight(.heavy) }
+    }
+
+    func black() -> VMDText {
+        configure { $0.fontWeight(.black) }
+    }
+
+    func italic() -> VMDText {
+        configure { $0.italic() }
     }
 }

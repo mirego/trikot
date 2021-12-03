@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
@@ -22,7 +21,6 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Lo
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Remote
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 
-@ExperimentalCoilApi
 @Composable
 fun VMDImage(
     modifier: Modifier = Modifier,
@@ -46,7 +44,6 @@ fun VMDImage(
     )
 }
 
-@ExperimentalCoilApi
 @Composable
 fun VMDImage(
     modifier: Modifier = Modifier,
@@ -104,7 +101,6 @@ fun LocalImage(
     )
 }
 
-@ExperimentalCoilApi
 @Composable
 fun RemoteImage(
     modifier: Modifier = Modifier,

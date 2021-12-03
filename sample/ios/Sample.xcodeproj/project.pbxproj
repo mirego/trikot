@@ -22,6 +22,10 @@
 
 /* Begin PBXBuildFile section */
 		C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C883569D2750339300DA0786 /* SampleImageProvider.swift */; };
+		C88356BE27580F0200DA0786 /* TextShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */; };
+		C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BD27580F0200DA0786 /* TextShowcaseView.swift */; };
+		C88356C1275814AC00DA0786 /* BaseViewModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356C0275814AC00DA0786 /* BaseViewModelViewController.swift */; };
+		C88356C427581D2D00DA0786 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356C327581D2D00DA0786 /* TextStyle.swift */; };
 		C8959A6B268AAADF0080732A /* AppBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6A268AAADF0080732A /* AppBootstrap.swift */; };
 		C8959A70268AB1690080732A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6E268AB1690080732A /* HomeViewController.swift */; };
 		C8959A71268AB1690080732A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8959A6F268AB1690080732A /* HomeView.swift */; };
@@ -41,6 +45,10 @@
 		041921FF518BA5BA4B3375EC /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		3240D0E8403B18772B9C9D06 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C883569D2750339300DA0786 /* SampleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageProvider.swift; sourceTree = "<group>"; };
+		C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseViewController.swift; sourceTree = "<group>"; };
+		C88356BD27580F0200DA0786 /* TextShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseView.swift; sourceTree = "<group>"; };
+		C88356C0275814AC00DA0786 /* BaseViewModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelViewController.swift; sourceTree = "<group>"; };
+		C88356C327581D2D00DA0786 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		C8959A6A268AAADF0080732A /* AppBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBootstrap.swift; sourceTree = "<group>"; };
 		C8959A6E268AB1690080732A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C8959A6F268AB1690080732A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -70,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C8152AB4275930E000A0F681 /* Showcase */ = {
+			isa = PBXGroup;
+			children = (
+				C88356BB27580EC300DA0786 /* Text */,
+			);
+			path = Showcase;
+			sourceTree = "<group>";
+		};
 		C84FAFB7266B177000D5A458 = {
 			isa = PBXGroup;
 			children = (
@@ -88,11 +104,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C88356BB27580EC300DA0786 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */,
+				C88356BD27580F0200DA0786 /* TextShowcaseView.swift */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		C88356C227581D1E00DA0786 /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				C88356C327581D2D00DA0786 /* TextStyle.swift */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
 		C8959A6C268AB1470080732A /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				C8959A72268AB9D50080732A /* ViewControllerFactory.swift */,
+				C88356C0275814AC00DA0786 /* BaseViewModelViewController.swift */,
 				C8959A6D268AB14D0080732A /* Home */,
+				C8152AB4275930E000A0F681 /* Showcase */,
+				C88356C227581D1E00DA0786 /* Bootstrap */,
 				C8959A74268B5CC30080732A /* Preview */,
 			);
 			path = UI;
@@ -295,11 +331,15 @@
 			files = (
 				C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */,
 				C8959A70268AB1690080732A /* HomeViewController.swift in Sources */,
+				C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
+				C88356C1275814AC00DA0786 /* BaseViewModelViewController.swift in Sources */,
 				C8959A73268AB9D50080732A /* ViewControllerFactory.swift in Sources */,
 				C8959A6B268AAADF0080732A /* AppBootstrap.swift in Sources */,
 				C8959A78268B5D1F0080732A /* PreviewPadding.swift in Sources */,
+				C88356BE27580F0200DA0786 /* TextShowcaseViewController.swift in Sources */,
 				C8D868DC268AA9660054CF44 /* AppDelegate.swift in Sources */,
+				C88356C427581D2D00DA0786 /* TextStyle.swift in Sources */,
 				C8959A71268AB1690080732A /* HomeView.swift in Sources */,
 				C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */,
 				C8D868E0268AA9660054CF44 /* ContentView.swift in Sources */,

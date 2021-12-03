@@ -1,3 +1,4 @@
+import Kingfisher
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
 
@@ -20,9 +21,22 @@ public struct ViewModelDeclarativeWrapper<Base> {
 
 private enum AssociatedKeys {
     static var declarativeViewModelKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+    static var imageDescriptorLoaderKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 }
 
 extension ViewModelDeclarativeWrapper where Base : NSObject {
+    public var imageDescriptorLoader: ImageDescriptorLoader {
+        get {
+            if let customHandler = objc_getAssociatedObject(self, AssociatedKeys.imageDescriptorLoaderKey) as? ImageDescriptorLoader {
+                return customHandler
+            } else {
+                return DefaultImageDescriptorLoader.shared
+            }
+        }
+        set(value) {
+            objc_setAssociatedObject(self, AssociatedKeys.imageDescriptorLoaderKey, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
 
     public func getViewModel<T>() -> T? {
         return objc_getAssociatedObject(base, AssociatedKeys.declarativeViewModelKey) as? T
@@ -60,6 +74,39 @@ extension ViewModelDeclarativeWrapper where Base : NSObject {
         guard let base = base as? T else { return }
         base.observe(publisher) { [weak base] (newValue: I) in
             base?[keyPath: keyPath] = transform(newValue)
+        }
+    }
+}
+
+public protocol ImageDescriptorLoader {
+    func loadImage(imageDescriptor: VMDImageDescriptor, completionHandler: @escaping (Result<UIImage?, Error>) -> Void)
+}
+
+private class DefaultImageDescriptorLoader: ImageDescriptorLoader {
+    static let shared = DefaultImageDescriptorLoader()
+
+    private init() { }
+
+    func loadImage(imageDescriptor: VMDImageDescriptor, completionHandler: @escaping (Result<UIImage?, Error>) -> Void) {
+        if let local = imageDescriptor as? VMDImageDescriptor.Local {
+            completionHandler(Result.success(local.imageResource.uiImage))
+        } else if let remote = imageDescriptor as? VMDImageDescriptor.Remote {
+            let placeholderImage = remote.placeholderImageResource.uiImage
+            completionHandler(Result.success(placeholderImage))
+
+            if let url = URL(string: remote.url) {
+                let imageResource = Kingfisher.ImageResource(downloadURL: url)
+                KingfisherManager.shared.retrieveImage(with: imageResource) { result in
+                    switch result {
+                    case .success(let imageResult):
+                        completionHandler(Result.success(imageResult.image))
+                    case .failure(let failure):
+                        completionHandler(Result.failure(failure))
+                    }
+                }
+            } else {
+                completionHandler(Result.failure(KingfisherError.requestError(reason: .emptyRequest)))
+            }
         }
     }
 }

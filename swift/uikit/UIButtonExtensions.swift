@@ -1,5 +1,8 @@
+import Kingfisher
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
+
+private let BUTTON_VIEW_MODEL_IMAGE_HANDLER_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
 
 extension ViewModelDeclarativeWrapper where Base : UIButton {
     public var buttonWithTextViewModel: VMDButtonViewModel<VMDTextContent>? {
@@ -23,6 +26,19 @@ extension ViewModelDeclarativeWrapper where Base : UIButton {
         set(value) {
             controlViewModel = value
             base.bindWithTextImageViewModel(value)
+        }
+    }
+
+    public var buttonViewModelImageHandler: ButtonViewModelImageHandler {
+        get {
+            if let customHandler = objc_getAssociatedObject(self, BUTTON_VIEW_MODEL_IMAGE_HANDLER_KEY) as? ButtonViewModelImageHandler {
+                return customHandler
+            } else {
+                return DefaultButtonViewModelHandler.shared
+            }
+        }
+        set(value) {
+            objc_setAssociatedObject(self, BUTTON_VIEW_MODEL_IMAGE_HANDLER_KEY, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 
@@ -50,7 +66,8 @@ fileprivate extension UIButton {
         removeBindAction()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
-                self?.setImage(content.image.uiImage, for: .normal)
+                guard let strongSelf = self else { return }
+                self?.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
             }
             bindAction(buttonViewModel.action)
         }
@@ -60,8 +77,9 @@ fileprivate extension UIButton {
         removeBindAction()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextImagePairContent>.content)) { [weak self] content in
-                self?.setTitle(content.text, for: .normal)
-                self?.setImage(content.image.uiImage, for: .normal)
+                guard let strongSelf = self else { return }
+                strongSelf.setTitle(content.text, for: .normal)
+                strongSelf.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
             }
             bindAction(buttonViewModel.action)
         }
@@ -93,5 +111,26 @@ fileprivate extension UIButton {
     @objc
     private func onPrimaryActionTriggered() {
         tapAction?()
+    }
+}
+
+public protocol ButtonViewModelImageHandler {
+    func setImageDescriptor(_ imageDescriptor: VMDImageDescriptor?, for state: UIControl.State, on button: UIButton)
+}
+
+private class DefaultButtonViewModelHandler: ButtonViewModelImageHandler {
+    static let shared = DefaultButtonViewModelHandler()
+
+    private init() { }
+
+    public func setImageDescriptor(_ imageDescriptor: VMDImageDescriptor?, for state: UIControl.State, on button: UIButton) {
+        if let local = imageDescriptor as? VMDImageDescriptor.Local {
+            button.setImage(local.imageResource.uiImage, for: state)
+        } else if let remote = imageDescriptor as? VMDImageDescriptor.Remote, let imageURL = URL(string: remote.url) {
+            let placeholderImage = remote.placeholderImageResource.uiImage
+            button.kf.setImage(with: imageURL, for: state, placeholder: placeholderImage, options: [.onFailureImage(placeholderImage)])
+        } else {
+            button.setImage(nil, for: state)
+        }
     }
 }

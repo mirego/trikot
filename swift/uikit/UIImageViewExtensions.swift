@@ -60,6 +60,7 @@ extension ViewModelDeclarativeWrapper where Base : UIImageView {
 
 public protocol ImageViewModelHandler {
     func handleImage(imageViewModel: VMDImageViewModel?, on imageView: UIImageView)
+    func handleImageDescriptor(imageDescriptor: VMDImageDescriptor?, on imageView: UIImageView)
 }
 
 private class DefaultImageViewModelHandler: ImageViewModelHandler {
@@ -69,30 +70,40 @@ private class DefaultImageViewModelHandler: ImageViewModelHandler {
 
     public func handleImage(imageViewModel: VMDImageViewModel?, on imageView: UIImageView) {
         if let imageViewModel = imageViewModel {
-            imageView.vmd.observe(imageViewModel.publisher(for: \VMDImageViewModel.image)) { [weak imageView] imageDescriptor in
-                imageView?.vmd.restoreContentMode()
-                if let local = imageDescriptor as? VMDImageDescriptor.Local {
-                    imageView?.image = local.imageResource.uiImage
-                } else if let remote = imageDescriptor as? VMDImageDescriptor.Remote {
-                    if let placeholderContentMode = imageView?.vmd.placeholderContentMode {
-                        imageView?.vmd.saveContentMode()
-                        imageView?.contentMode = placeholderContentMode
-                    }
-                    let placeholderImage = remote.placeholderImageResource.uiImage
-                    if let url = URL(string: remote.url) {
-                        imageView?.image = nil
-                        let imageResource = Kingfisher.ImageResource(downloadURL: url)
-                        imageView?.kf.setImage(with: imageResource, placeholder: placeholderImage, completionHandler: { [weak imageView] result in
-                            switch result {
-                            case .success:
-                                imageView?.vmd.restoreContentMode()
-                            case .failure:
-                                imageView?.image = placeholderImage
-                            }
-                        })
-                    } else {
-                        imageView?.image = placeholderImage
-                    }
+            imageView.vmd.observe(imageViewModel.publisher(for: \VMDImageViewModel.image)) { [weak imageView, weak self] imageDescriptor in
+                if let imageView = imageView {
+                    self?.handleImageDescriptor(imageDescriptor: imageDescriptor, on: imageView)
+                }
+            }
+        } else {
+            imageView.image = nil
+        }
+    }
+
+    public func handleImageDescriptor(imageDescriptor: VMDImageDescriptor?, on imageView: UIImageView) {
+        if let imageDescriptor = imageDescriptor {
+            imageView.vmd.restoreContentMode()
+            if let local = imageDescriptor as? VMDImageDescriptor.Local {
+                imageView.image = local.imageResource.uiImage
+            } else if let remote = imageDescriptor as? VMDImageDescriptor.Remote {
+                if let placeholderContentMode = imageView.vmd.placeholderContentMode {
+                    imageView.vmd.saveContentMode()
+                    imageView.contentMode = placeholderContentMode
+                }
+                let placeholderImage = remote.placeholderImageResource.uiImage
+                if let url = URL(string: remote.url) {
+                    imageView.image = nil
+                    let imageResource = Kingfisher.ImageResource(downloadURL: url)
+                    imageView.kf.setImage(with: imageResource, placeholder: placeholderImage, completionHandler: { [weak imageView] result in
+                        switch result {
+                        case .success:
+                            imageView?.vmd.restoreContentMode()
+                        case .failure:
+                            imageView?.image = placeholderImage
+                        }
+                    })
+                } else {
+                    imageView.image = placeholderImage
                 }
             }
         } else {

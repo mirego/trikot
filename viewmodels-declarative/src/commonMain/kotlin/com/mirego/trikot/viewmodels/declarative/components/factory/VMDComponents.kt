@@ -69,6 +69,16 @@ object VMDComponents {
                         image = VMDImageDescriptor.Remote(imageURL, placeholderImageResource)
                     }
                     .apply(closure)
+
+            fun withDescriptor(
+                imageDescriptor: VMDImageDescriptor,
+                cancellableManager: CancellableManager,
+                closure: VMDImageViewModelImpl.() -> Unit = {}
+            ) = VMDImageViewModelImpl(cancellableManager)
+                .apply {
+                    image = imageDescriptor
+                }
+                .apply(closure)
         }
     }
 
@@ -94,7 +104,10 @@ object VMDComponents {
                 cancellableManager: CancellableManager,
                 closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
             ) =
-                VMDButtonViewModelImpl(cancellableManager, VMDImageContent(VMDImageDescriptor.Local(image)))
+                VMDButtonViewModelImpl(
+                    cancellableManager,
+                    VMDImageContent(VMDImageDescriptor.Local(image))
+                )
                     .apply(closure)
 
             fun withImage(
@@ -103,7 +116,15 @@ object VMDComponents {
                 cancellableManager: CancellableManager,
                 closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
             ) =
-                VMDButtonViewModelImpl(cancellableManager, VMDImageContent(VMDImageDescriptor.Remote(imageUrl, placeholderImageResource = placeholderImageResource)))
+                VMDButtonViewModelImpl(
+                    cancellableManager,
+                    VMDImageContent(
+                        VMDImageDescriptor.Remote(
+                            imageUrl,
+                            placeholderImageResource = placeholderImageResource
+                        )
+                    )
+                )
                     .apply(closure)
 
             fun withTextPair(
@@ -178,7 +199,10 @@ object VMDComponents {
                 cancellableManager: CancellableManager,
                 closure: VMDToggleViewModelImpl<VMDImageContent>.() -> Unit = {}
             ) =
-                VMDToggleViewModelImpl(cancellableManager, VMDImageContent(VMDImageDescriptor.Local(image)))
+                VMDToggleViewModelImpl(
+                    cancellableManager,
+                    VMDImageContent(VMDImageDescriptor.Local(image))
+                )
                     .apply { isOn = state }
                     .apply(closure)
 

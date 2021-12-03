@@ -1,3 +1,4 @@
+import Kingfisher
 import TRIKOT_FRAMEWORK_NAME
 import UIKit
 
@@ -19,7 +20,14 @@ fileprivate extension UIBarButtonItem {
         removeBindAction()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
-                self?.image = content.image.uiImage
+                self?.vmd.imageDescriptorLoader.loadImage(imageDescriptor: content.image, completionHandler: { result in
+                    switch result {
+                    case .success(let image):
+                        self?.image = image
+                    case .failure(_):
+                        break
+                    }
+                })
             }
             bindAction(buttonViewModel.action)
         }

@@ -1,90 +1,91 @@
 package com.mirego.sample.viewmodels.showcase.text
 
-import com.mirego.sample.KWordTranslation
-import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
-import com.mirego.trikot.kword.I18N
+import com.mirego.sample.resources.SampleImageResource
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 
-class TextShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableManager) :
-    ShowcaseViewModelImpl(cancellableManager), TextShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TITLE],
-        cancellableManager
-    )
+class TextShowcaseViewModelPreview : VMDViewModelImpl(CancellableManager()), TextShowcaseViewModel {
+    override val closeButton: VMDButtonViewModelImpl<VMDImageContent> =
+        VMDComponents.Button.withImage(
+            SampleImageResource.ICON_CLOSE, cancellableManager
+        )
+    override val title =
+        VMDComponents.Text.withContent("Text Showcase", cancellableManager)
 
     override val largeTitle = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE],
+        "Large Title",
         cancellableManager
     )
 
     override val title1 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1],
+        "Title 1",
         cancellableManager
     )
 
     override val title1Bold = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1_BOLD],
+        "Title 1 Bold",
         cancellableManager
     )
 
     override val title2 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2],
+        "Title 2",
         cancellableManager
     )
 
     override val title2Bold = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2_BOLD],
+        "Title 2 Bold",
         cancellableManager
     )
 
     override val title3 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE3],
+        "Title 3",
         cancellableManager
     )
 
     override val headline = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_HEADLINE],
+        "Headline",
         cancellableManager
     )
 
     override val body = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY],
+        "Body",
         cancellableManager
     )
-
     override val bodyMedium = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY_MEDIUM],
+        "Body Medium",
         cancellableManager
     )
 
     override val button = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BUTTON],
+        "Button",
         cancellableManager
     )
 
     override val callout = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CALLOUT],
+        "Callout",
         cancellableManager
     )
 
     override val subheadline = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_SUBHEADLINE],
+        "Subhealine",
         cancellableManager
     )
 
     override val footnote = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_FOOTNOTE],
+        "Footnote",
         cancellableManager
     )
 
     override val caption1 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION1],
+        "Caption 1",
         cancellableManager
     )
 
     override val caption2 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION2],
+        "Caption 2",
         cancellableManager
     )
 }

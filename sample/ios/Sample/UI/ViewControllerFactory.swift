@@ -10,6 +10,17 @@ public class ViewControllerFactory {
     }
 
     func home() -> HomeViewController {
-        HomeViewController(viewModelController: viewModelControllerFactory.home())
+        HomeViewController(viewModelController: viewModelControllerFactory.home()).assignFactory(self)
+    }
+
+    func textShowcase() -> TextShowcaseViewController {
+        TextShowcaseViewController(viewModelController: viewModelControllerFactory.textShowcase()).assignFactory(self)
+    }
+}
+
+private extension BaseViewModelViewController {
+    func assignFactory(_ viewControllerFactory: ViewControllerFactory) -> Self {
+        self.viewControllerFactory = viewControllerFactory
+        return self
     }
 }

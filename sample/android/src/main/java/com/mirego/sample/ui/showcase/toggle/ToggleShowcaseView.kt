@@ -16,7 +16,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
-import com.mirego.sample.ui.theming.sampleTypography
+import com.mirego.sample.ui.theming.SampleTextStyle
+import com.mirego.sample.ui.theming.medium
 import com.mirego.sample.viewmodels.showcase.toggle.ToggleShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCheckbox
@@ -85,7 +86,7 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
                         text = content.text,
-                        style = sampleTypography.bodyMedium
+                        style = SampleTextStyle.body.medium()
                     )
                 }
             }
@@ -104,11 +105,11 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                 ) {
                     Text(
                         text = content.first,
-                        style = sampleTypography.title2
+                        style = SampleTextStyle.title2
                     )
                     Text(
                         text = content.second,
-                        style = sampleTypography.body
+                        style = SampleTextStyle.body
                     )
                 }
             }
@@ -164,7 +165,7 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
                         text = content.text,
-                        style = sampleTypography.bodyMedium
+                        style = SampleTextStyle.body.medium()
                     )
                 }
             }
@@ -183,11 +184,11 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                 ) {
                     Text(
                         text = content.first,
-                        style = sampleTypography.title2
+                        style = SampleTextStyle.title2
                     )
                     Text(
                         text = content.second,
-                        style = sampleTypography.body
+                        style = SampleTextStyle.body
                     )
                 }
             }

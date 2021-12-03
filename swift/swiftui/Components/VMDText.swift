@@ -23,7 +23,7 @@ public struct VMDText: View {
         .hidden(viewModel.isHidden)
     }
 
-    func configure(_ block: @escaping TextConfiguration) -> VMDText {
+    public func configure(_ block: @escaping TextConfiguration) -> VMDText {
         var result = self
         result.configurations.append(block)
         return result

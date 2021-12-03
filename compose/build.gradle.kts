@@ -38,6 +38,12 @@ android {
     }
 }
 
+kotlin {
+    sourceSets.all {
+        languageSettings.optIn("coil.annotation.ExperimentalCoilApi")
+    }
+}
+
 dependencies {
     implementation(project(":viewmodels-declarative"))
     implementation(Dependencies.trikotFoundation)
