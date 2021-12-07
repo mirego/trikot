@@ -40,13 +40,13 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
     public var body: some View {
         if let title = title {
             Toggle(title, isOn: isOn)
-                .disabled(!viewModel.enabled)
+                .disabled(!viewModel.isEnabled)
                 .hidden(viewModel.isHidden)
         } else {
             Toggle(isOn: isOn) {
                 labelBuilder?(viewModel.label)
             }
-            .disabled(!viewModel.enabled)
+            .disabled(!viewModel.isEnabled)
             .hidden(viewModel.isHidden)
         }
     }

@@ -18,6 +18,9 @@ PODS:
     - Trikot.viewmodels.declarative/Core (= 1.0.0)
     - Trikot.viewmodels.declarative/SwiftUI (= 1.0.0)
     - TrikotViewmodelsDeclarativeSample
+  - Trikot.viewmodels.declarative/Combine (1.0.0):
+    - Trikot.streams
+    - TrikotViewmodelsDeclarativeSample
   - Trikot.viewmodels.declarative/Core (1.0.0):
     - Trikot.streams
     - TrikotViewmodelsDeclarativeSample
@@ -25,6 +28,7 @@ PODS:
     - Introspect (~> 0.1)
     - Kingfisher (~> 7.1)
     - Trikot.streams
+    - Trikot.viewmodels.declarative/Combine
     - Trikot.viewmodels.declarative/Core
     - TrikotViewmodelsDeclarativeSample
   - Trikot.viewmodels.declarative/UIKit (1.0.0):
@@ -85,7 +89,7 @@ SPEC CHECKSUMS:
   Trikot.http: cf5e71ad4ce126ddcb275af5fce080f1f550c005
   Trikot.kword: 58dc4fbc7024e5d072b1fd62a26a651e54af374e
   Trikot.streams: 40458deb1c5daa78144c44e8caf64b28be573f32
-  Trikot.viewmodels.declarative: 93cf7568b80dcfcb287491c9a5bb8d267bd2004a
+  Trikot.viewmodels.declarative: 7ceb1bfea8883636990079ee50f53fd268a57f1c
   TrikotViewmodelsDeclarativeSample: 4a996ca59e8e83614a51de43e3ac93f5dc24c2a8
 
 PODFILE CHECKSUM: 7aa5b3e9d31bd118c0b156b4d7ea0f86ab27e0dc

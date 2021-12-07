@@ -55,9 +55,17 @@ extension VMDTextContentType {
         case .password:
             return .password
         case .newpassword:
-            return .newPassword
+            if #available(iOS 12.0, *) {
+                return .newPassword
+            } else {
+                return nil
+            }
         case .onetimecode:
-            return .oneTimeCode
+            if #available(iOS 12.0, *) {
+                return .oneTimeCode
+            } else {
+                return nil
+            }
         default:
             return nil
         }

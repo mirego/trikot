@@ -20,7 +20,7 @@ open class VMDButtonViewModelImpl<C : VMDContent>(
 ) : VMDButtonViewModel<C>(cancellableManager) {
 
     private val actionPublisher = PublishSubjectImpl<Unit>()
-    override val action: () -> Unit = {
+    override val actionBlock: () -> Unit = {
         actionPublisher.value = Unit
     }
 

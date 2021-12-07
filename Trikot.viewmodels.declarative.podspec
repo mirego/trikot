@@ -21,6 +21,10 @@ Pod::Spec.new do |spec|
     core.source_files = 'swift/core/**/*.swift'
   end
 
+  spec.subspec 'Combine' do |core|
+    core.source_files = 'swift/combine/**/*.swift'
+  end
+
   spec.subspec 'UIKit' do |uikit|
     uikit.source_files = 'swift/uikit/**/*.swift'
     uikit.dependency 'Trikot.viewmodels.declarative/Core'
@@ -30,6 +34,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'SwiftUI' do |swiftui|
     swiftui.source_files = 'swift/swiftui/**/*.swift'
     swiftui.dependency 'Trikot.viewmodels.declarative/Core'
+    swiftui.dependency 'Trikot.viewmodels.declarative/Combine'
     swiftui.dependency 'Kingfisher', '~> 7.1'
     swiftui.dependency 'Introspect', '~> 0.1'
   end

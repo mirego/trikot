@@ -29,7 +29,7 @@ fileprivate extension UIBarButtonItem {
                     }
                 })
             }
-            bindAction(buttonViewModel.action)
+            bindAction(buttonViewModel.actionBlock)
         }
     }
 

@@ -1,16 +1,12 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchColors
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.streams.cancellable.CancellableManager
@@ -54,7 +50,7 @@ fun <C : VMDContent> VMDSwitch(
         content = {
             Switch(
                 modifier = componentModifier,
-                enabled = toggleViewModel.enabled,
+                enabled = toggleViewModel.isEnabled,
                 checked = toggleViewModel.isOn,
                 colors = colors,
                 onCheckedChange = { checked -> viewModel.onValueChange(checked) },

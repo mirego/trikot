@@ -7,5 +7,5 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 abstract class VMDButtonViewModel<C : VMDContent>(cancellableManager: CancellableManager) :
     VMDControlViewModelImpl(cancellableManager) {
     abstract val content: C
-    abstract val action: () -> Unit
+    abstract val actionBlock: () -> Unit
 }

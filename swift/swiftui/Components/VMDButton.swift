@@ -17,11 +17,11 @@ public struct VMDButton<Label, Content: VMDContent>: View where Label: View {
 
     public var body: some View {
         Button(action: {
-            self.viewModel.action()
+            self.viewModel.actionBlock()
         }, label: {
             labelBuilder(viewModel.content)
         })
-            .disabled(!viewModel.enabled)
+            .disabled(!viewModel.isEnabled)
             .hidden(viewModel.isHidden)
     }
 }

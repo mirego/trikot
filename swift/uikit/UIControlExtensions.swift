@@ -14,7 +14,7 @@ extension ViewModelDeclarativeWrapper where Base : UIControl {
 fileprivate extension UIControl {
     func bindViewModel(_ viewModel: VMDControlViewModel?) {
         if let controlViewModel = viewModel {
-            observe(controlViewModel.publisher(for: \VMDControlViewModel.enabled)) { [weak self] enabled in
+            observe(controlViewModel.publisher(for: \VMDControlViewModel.isEnabled)) { [weak self] enabled in
                 self?.isEnabled = enabled
             }
         }

@@ -1,7 +1,7 @@
 import Combine
 import TRIKOT_FRAMEWORK_NAME
 
-public extension TrikotViewmodelsDeclarativeSample.Publisher {
+public extension TRIKOT_FRAMEWORK_NAME.Publisher {
     func eraseToAnyPublisher<T>() -> AnyPublisher<T, Never> where Self: ConcretePublisher<T>, T: AnyObject {
         ConcreatePublisherAdapter<T>(self).eraseToAnyPublisher()
     }
@@ -23,7 +23,7 @@ public class ConcreatePublisherAdapter<T: AnyObject>: Combine.Publisher {
     }
 }
 
-public class SubscriberAdapter<S: Combine.Subscriber>: TrikotViewmodelsDeclarativeSample.Subscriber {
+public class SubscriberAdapter<S: Combine.Subscriber>: TRIKOT_FRAMEWORK_NAME.Subscriber {
     private let subscriber: S
 
     public init(_ subscriber: S) {
@@ -52,15 +52,15 @@ public class SubscriberAdapter<S: Combine.Subscriber>: TrikotViewmodelsDeclarati
         }
     }
 
-    public func onSubscribe(s: TrikotViewmodelsDeclarativeSample.Subscription) {
+    public func onSubscribe(s: TRIKOT_FRAMEWORK_NAME.Subscription) {
         subscriber.receive(subscription: SubscriptionAdapter(s))
     }
 }
 
 public class SubscriptionAdapter: Combine.Subscription {
-    private let subscription: TrikotViewmodelsDeclarativeSample.Subscription
+    private let subscription: TRIKOT_FRAMEWORK_NAME.Subscription
 
-    init(_ subscription: TrikotViewmodelsDeclarativeSample.Subscription) {
+    init(_ subscription: TRIKOT_FRAMEWORK_NAME.Subscription) {
         self.subscription = subscription
     }
 

@@ -28,8 +28,8 @@ fun <C : VMDContent> VMDButton(
         modifier = modifier
             .hidden(buttonViewModel.isHidden)
             .clickable(
-                enabled = buttonViewModel.enabled,
-                onClick = viewModel.action,
+                enabled = buttonViewModel.isEnabled,
+                onClick = viewModel.actionBlock,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple()
             ),

@@ -12,15 +12,15 @@ open class VMDControlViewModelImpl(cancellableManager: CancellableManager) : VMD
     VMDViewModelImpl(cancellableManager) {
 
     private val enabledDelegate = published(true, this)
-    override var enabled: Boolean by enabledDelegate
+    override var isEnabled: Boolean by enabledDelegate
 
     fun bindEnabled(publisher: Publisher<Boolean>) {
-        updatePropertyPublisher(this::enabled, cancellableManager, publisher)
+        updatePropertyPublisher(this::isEnabled, cancellableManager, publisher)
     }
 
     override val propertyMapping: Map<String, VMDPublishedProperty<*>> by lazy {
         super.propertyMapping.toMutableMap().also {
-            it[this::enabled.name] = enabledDelegate
+            it[this::isEnabled.name] = enabledDelegate
         }
     }
 }

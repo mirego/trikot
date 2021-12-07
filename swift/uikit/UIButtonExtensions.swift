@@ -58,7 +58,7 @@ fileprivate extension UIButton {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextContent>.content)) { [weak self] content in
                 self?.setTitle(content.text, for: .normal)
             }
-            bindAction(buttonViewModel.action)
+            bindAction(buttonViewModel.actionBlock)
         }
     }
 
@@ -69,7 +69,7 @@ fileprivate extension UIButton {
                 guard let strongSelf = self else { return }
                 self?.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
             }
-            bindAction(buttonViewModel.action)
+            bindAction(buttonViewModel.actionBlock)
         }
     }
 
@@ -81,7 +81,7 @@ fileprivate extension UIButton {
                 strongSelf.setTitle(content.text, for: .normal)
                 strongSelf.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
             }
-            bindAction(buttonViewModel.action)
+            bindAction(buttonViewModel.actionBlock)
         }
     }
 

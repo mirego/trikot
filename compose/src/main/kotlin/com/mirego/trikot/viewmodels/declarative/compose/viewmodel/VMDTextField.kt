@@ -2,7 +2,11 @@ package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -41,7 +45,7 @@ fun VMDTextField(
         onValueChange = { value ->
             viewModel.onValueChange(value)
         },
-        enabled = textFieldViewModel.enabled,
+        enabled = textFieldViewModel.isEnabled,
         placeholder = {
             Text(
                 text = textFieldViewModel.placeholder,
