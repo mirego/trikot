@@ -87,6 +87,7 @@ abstract class HttpRequestPublisher<T>(
             it.headers = builder.headers + headers
             it.method = builder.method
             it.timeout = builder.timeout
+            it.parameters = builder.parameters
         }
     }
 }

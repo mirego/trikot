@@ -43,6 +43,7 @@ kotlin {
                 implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
                 implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.extra["serialization_version"]}")
+                implementation("io.ktor:ktor-http:${project.extra["ktor_version"]}")
             }
         }
 
@@ -50,6 +51,11 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
+                implementation("org.jetbrains.kotlin:kotlin-test")
+                implementation("org.jetbrains.kotlin:kotlin-test-junit")
+                implementation("org.jetbrains.kotlin:kotlin-reflect")
+                implementation("junit:junit:4.13.2")
+                implementation("io.mockk:mockk-common:1.12.1")
             }
         }
 

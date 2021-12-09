@@ -84,7 +84,7 @@ class KtorHttpRequestFactory(
             launch {
                 try {
                     httpClient.request<HttpStatement> {
-                        url((requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: ""))
+                        url(requestBuilder.buildUrl())
 
                         requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->

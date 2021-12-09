@@ -22,7 +22,7 @@ class WebHttpRequest(
         try {
             val xhr = XMLHttpRequest()
             val method = requestBuilder.method.toString()
-            val url = (requestBuilder.baseUrl ?: "") + (requestBuilder.path ?: "")
+            val url = requestBuilder.buildUrl()
             val timeout = (requestBuilder.timeout ?: DEFAULT_TIMEOUT_IN_SECONDS) * 1000
 
             xhr.open(method, url, true)

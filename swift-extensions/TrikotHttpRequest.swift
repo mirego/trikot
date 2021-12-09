@@ -18,7 +18,7 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
     public func execute(cancellableManager: CancellableManager) -> Publisher {
         let resultPublisher = Publishers().frozenBehaviorSubject(value: nil)
 
-        if let url = URL(string: (requestBuilder.baseUrl ?? "") + (requestBuilder.path ?? "")) {
+        if let url = URL(string: requestBuilder.buildUrl()) {
             let urlRequest = NSMutableURLRequest(url: url, cachePolicy: requestBuilder.nsCachePolicy(), timeoutInterval: TimeInterval(requestBuilder.timeout ?? Constants.DEFAULT_TIMEOUT_DURATION_IN_SECONDS))
             urlRequest.httpMethod = requestBuilder.method.name.uppercased()
 
