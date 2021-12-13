@@ -17,7 +17,7 @@ extension ViewModelDeclarativeWrapper where Base : UIBarButtonItem {
 
 fileprivate extension UIBarButtonItem {
     func bindViewModel(_ viewModel: VMDButtonViewModel<VMDImageContent>?) {
-        removeBindAction()
+        unbindActionBlock()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
                 self?.vmd.imageDescriptorLoader.loadImage(imageDescriptor: content.image, completionHandler: { result in
@@ -29,37 +29,37 @@ fileprivate extension UIBarButtonItem {
                     }
                 })
             }
-            bindAction(buttonViewModel.actionBlock)
+            bindActionBlock(buttonViewModel.actionBlock)
         }
     }
 
     private enum AssociatedKeys {
-        static var actionKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+        static var actionBlockKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
 
-     var tapAction: (() -> Void)? {
+     var actionBlock: (() -> Void)? {
         get {
-            return objc_getAssociatedObject(self, AssociatedKeys.actionKey) as? (() -> Void)
+            return objc_getAssociatedObject(self, AssociatedKeys.actionBlockKey) as? (() -> Void)
         }
         set {
-            objc_setAssociatedObject(self, AssociatedKeys.actionKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, AssociatedKeys.actionBlockKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 
     @objc
-    func onButtonTapped() {
-        tapAction?()
+    private func onButtonTapped() {
+        actionBlock?()
     }
 
-    func removeBindAction() {
-        tapAction = nil
-        target = nil
-        action = nil
-    }
-
-    func bindAction(_ action: @escaping () -> Void) {
-        tapAction = action
+    func bindActionBlock(_ action: @escaping () -> Void) {
+        actionBlock = action
         target = self
         self.action = #selector(UIBarButtonItem.onButtonTapped)
+    }
+
+    func unbindActionBlock() {
+        actionBlock = nil
+        target = nil
+        action = nil
     }
 }

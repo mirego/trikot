@@ -42,75 +42,75 @@ extension ViewModelDeclarativeWrapper where Base : UIButton {
         }
     }
 
-    public func removeBindAction() {
-        base.removeBindAction()
+    public func bindActionBlock(_ action: @escaping () -> Void) {
+        base.bindActionBlock(action)
     }
 
-    public func bindAction(_ action: @escaping () -> Void) {
-        base.bindAction(action)
+    public func unbindActionBlock() {
+        base.unbindActionBlock()
     }
 }
 
 fileprivate extension UIButton {
     func bindWithTextViewModel(_ viewModel: VMDButtonViewModel<VMDTextContent>?) {
-        removeBindAction()
+        unbindActionBlock()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextContent>.content)) { [weak self] content in
                 self?.setTitle(content.text, for: .normal)
             }
-            bindAction(buttonViewModel.actionBlock)
+            bindActionBlock(buttonViewModel.actionBlock)
         }
     }
 
     func bindWithImageViewModel(_ viewModel: VMDButtonViewModel<VMDImageContent>?) {
-        removeBindAction()
+        unbindActionBlock()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
                 guard let strongSelf = self else { return }
                 self?.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
             }
-            bindAction(buttonViewModel.actionBlock)
+            bindActionBlock(buttonViewModel.actionBlock)
         }
     }
 
     func bindWithTextImageViewModel(_ viewModel: VMDButtonViewModel<VMDTextImagePairContent>?) {
-        removeBindAction()
+        unbindActionBlock()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextImagePairContent>.content)) { [weak self] content in
                 guard let strongSelf = self else { return }
                 strongSelf.setTitle(content.text, for: .normal)
                 strongSelf.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
             }
-            bindAction(buttonViewModel.actionBlock)
+            bindActionBlock(buttonViewModel.actionBlock)
         }
     }
 
     private enum AssociatedKeys {
-        static var actionKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
+        static var actionBlockKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
 
-    private var tapAction: (() -> Void)? {
+    private var actionBlock: (() -> Void)? {
         get {
-            return objc_getAssociatedObject(self, AssociatedKeys.actionKey) as? (() -> Void)
+            return objc_getAssociatedObject(self, AssociatedKeys.actionBlockKey) as? (() -> Void)
         }
         set {
-            objc_setAssociatedObject(self, AssociatedKeys.actionKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, AssociatedKeys.actionBlockKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 
-    func removeBindAction() {
-        tapAction = nil
+    func unbindActionBlock() {
+        actionBlock = nil
         removeTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)
     }
 
-    func bindAction(_ action: @escaping () -> Void) {
-        tapAction = action
+    func bindActionBlock(_ action: @escaping () -> Void) {
+        actionBlock = action
         addTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)
     }
 
     @objc
     private func onPrimaryActionTriggered() {
-        tapAction?()
+        actionBlock?()
     }
 }
 
