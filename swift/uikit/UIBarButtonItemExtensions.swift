@@ -46,20 +46,20 @@ fileprivate extension UIBarButtonItem {
         }
     }
 
-    @objc
-    private func onButtonTapped() {
-        actionBlock?()
-    }
-
-    func bindActionBlock(_ action: @escaping () -> Void) {
-        actionBlock = action
+    func bindActionBlock(_ actionBlock: @escaping () -> Void) {
+        self.actionBlock = actionBlock
         target = self
-        self.action = #selector(UIBarButtonItem.onButtonTapped)
+        action = #selector(UIBarButtonItem.onActionTriggered)
     }
 
     func unbindActionBlock() {
         actionBlock = nil
         target = nil
         action = nil
+    }
+
+    @objc
+    private func onActionTriggered() {
+        actionBlock?()
     }
 }

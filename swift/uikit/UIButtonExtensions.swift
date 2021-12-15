@@ -100,16 +100,16 @@ fileprivate extension UIButton {
 
     func unbindActionBlock() {
         actionBlock = nil
-        removeTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)
+        removeTarget(self, action: #selector(onActionTriggered), for: .primaryActionTriggered)
     }
 
     func bindActionBlock(_ action: @escaping () -> Void) {
         actionBlock = action
-        addTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)
+        addTarget(self, action: #selector(onActionTriggered), for: .primaryActionTriggered)
     }
 
     @objc
-    private func onPrimaryActionTriggered() {
+    private func onActionTriggered() {
         actionBlock?()
     }
 }

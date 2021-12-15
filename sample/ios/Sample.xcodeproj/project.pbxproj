@@ -298,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "find $PROJECT_DIR/../../swift -regex \".*\\.swift\" -type f -print0 | xargs -0 sed -i '' \"s/import TrikotViewmodelsDeclarativeSample/import TRIKOT_FRAMEWORK_NAME/g\"\n";
+			shellScript = "find $PROJECT_DIR/../../swift -regex \".*\\.swift\" -type f -print0 | xargs -0 sed -i '' \"s/TrikotViewmodelsDeclarativeSample/TRIKOT_FRAMEWORK_NAME/g\"\n";
 		};
 		F8B9ACECE9BFBFA042492C62 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
