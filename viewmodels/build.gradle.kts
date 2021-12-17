@@ -11,7 +11,6 @@ repositories {
     google()
     mavenLocal()
     mavenCentral()
-    maven("https://kotlin.bintray.com/kotlinx")
     maven("https://jitpack.io")
     maven("https://plugins.gradle.org/m2/")
     maven("https://s3.amazonaws.com/mirego-maven/public")
@@ -27,6 +26,7 @@ kotlin {
     jvm()
     ios()
     iosArm32("iosArm32")
+    iosSimulatorArm64()
     tvos()
     watchos()
     macosX64()
@@ -106,6 +106,10 @@ kotlin {
 
         val iosArm64Main by getting {
             dependsOn(iosMain)
+        }
+
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosArm64Main)
         }
 
         val iosX64Main by getting {
