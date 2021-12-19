@@ -31,6 +31,7 @@ kotlin {
     jvm()
     ios()
     iosArm32("iosArm32")
+    iosSimulatorArm64()
     tvos()
     js(IR) {
         browser()
@@ -96,6 +97,10 @@ kotlin {
         }
 
         val iosArm64Main by getting {
+            dependsOn(nativeMain)
+        }
+
+        val iosSimulatorArm64Main by getting {
             dependsOn(nativeMain)
         }
 
