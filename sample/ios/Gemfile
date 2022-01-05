@@ -2,9 +2,9 @@
 source 'https://rubygems.org'
 
 # Use the latest cocoapods gem
-gem 'cocoapods'
+gem 'cocoapods', '1.11.2'
 
-gem 'activesupport', '~>4.2.11'
+gem 'activesupport'
 
 group :test do
   gem 'rspec-expectations', '2.11.2'

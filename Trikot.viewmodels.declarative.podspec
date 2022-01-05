@@ -40,6 +40,6 @@ Pod::Spec.new do |spec|
   end
 
   spec.prepare_command = <<-CMD
-    sed -i '' "s/TRIKOT_FRAMEWORK_NAME/${TRIKOT_FRAMEWORK_NAME}/g" ./**/**/*.swift
+    find . -type f -name "*.swift" -exec sed -i '' -e "s/TRIKOT_FRAMEWORK_NAME/${TRIKOT_FRAMEWORK_NAME}/g" {} +
   CMD
 end
