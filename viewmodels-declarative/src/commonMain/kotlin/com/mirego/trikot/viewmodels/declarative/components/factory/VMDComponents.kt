@@ -11,6 +11,7 @@ import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModel
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDToggleViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
+import com.mirego.trikot.viewmodels.declarative.content.VMDImageDescriptorContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextImagePairContent
@@ -106,19 +107,19 @@ object VMDComponents {
             ) =
                 VMDButtonViewModelImpl(
                     cancellableManager,
-                    VMDImageContent(VMDImageDescriptor.Local(image))
+                    VMDImageContent(image)
                 )
                     .apply(closure)
 
-            fun withImage(
+            fun withImageUrl(
                 imageUrl: String,
                 placeholderImageResource: VMDImageResource = VMDImageResource.None,
                 cancellableManager: CancellableManager,
-                closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
+                closure: VMDButtonViewModelImpl<VMDImageDescriptorContent>.() -> Unit = {}
             ) =
                 VMDButtonViewModelImpl(
                     cancellableManager,
-                    VMDImageContent(
+                    VMDImageDescriptorContent(
                         VMDImageDescriptor.Remote(
                             imageUrl,
                             placeholderImageResource = placeholderImageResource
@@ -201,7 +202,7 @@ object VMDComponents {
             ) =
                 VMDToggleViewModelImpl(
                     cancellableManager,
-                    VMDImageContent(VMDImageDescriptor.Local(image))
+                    VMDImageContent(image)
                 )
                     .apply { isOn = state }
                     .apply(closure)

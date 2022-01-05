@@ -1,7 +1,7 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
-extension VMDTextContentType {
+public extension VMDTextContentType {
     public var uiTextContentType: UITextContentType? {
         switch self {
         case .name:

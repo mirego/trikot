@@ -12,7 +12,6 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextImagePairContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextPairContent
-import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
 class ButtonShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableManager) : ShowcaseViewModelImpl(cancellableManager), ButtonShowcaseViewModel {
     override val title: VMDTextViewModel = VMDComponents.Text.withContent(i18N[KWordTranslation.BUTTON_SHOWCASE_TITLE], cancellableManager)
@@ -23,7 +22,7 @@ class ButtonShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMan
     override val textButton: VMDButtonViewModelImpl<VMDTextContent> = VMDComponents.Button.withText(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], cancellableManager)
     override val imageButton: VMDButtonViewModelImpl<VMDImageContent> = VMDComponents.Button.withImage(SampleImageResource.ICON_CLOSE, cancellableManager)
     override val textImageButton: VMDButtonViewModelImpl<VMDTextImagePairContent> = VMDComponents.Button.withTextImage(
-        VMDTextImagePairContent(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], VMDImageDescriptor.Local(SampleImageResource.ICON_CLOSE)),
+        VMDTextImagePairContent(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], SampleImageResource.ICON_CLOSE),
         cancellableManager
     )
     override val textPairButton: VMDButtonViewModelImpl<VMDTextPairContent> = VMDComponents.Button.withTextPair(

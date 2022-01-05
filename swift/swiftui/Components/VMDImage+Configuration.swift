@@ -1,7 +1,7 @@
 import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
-extension VMDImage {
+public extension VMDImage {
     public func resizable() -> VMDImage {
         configure {
             $0.resizable()

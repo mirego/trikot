@@ -1,7 +1,7 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
-extension VMDKeyboardAutoCapitalization {
+public extension VMDKeyboardAutoCapitalization {
     public var uiTextAutocapitalizationType: UITextAutocapitalizationType {
         switch self {
         case .none:

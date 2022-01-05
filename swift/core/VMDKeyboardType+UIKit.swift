@@ -1,7 +1,7 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
-extension VMDKeyboardType {
+public extension VMDKeyboardType {
     var uiKeyboardType: UIKeyboardType {
         switch self {
         case .default_:

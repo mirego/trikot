@@ -21,8 +21,8 @@ import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.medium
 import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 
 @Composable
 fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
@@ -58,11 +58,11 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             viewModel = viewModel.imageButton
         ) { content ->
-            VMDImage(
+            LocalImage(
                 modifier = Modifier
                     .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
                     .padding(4.dp),
-                imageDescriptor = content.image
+                imageResource = content.image
             )
         }
 
@@ -78,9 +78,9 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
                     .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                VMDImage(
+                LocalImage(
                     modifier = Modifier.padding(end = 8.dp),
-                    imageDescriptor = content.image
+                    imageResource = content.image
                 )
                 Text(
                     text = content.text,

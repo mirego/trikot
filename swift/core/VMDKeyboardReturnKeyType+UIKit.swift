@@ -1,7 +1,7 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
-extension VMDKeyboardReturnKeyType {
+public extension VMDKeyboardReturnKeyType {
     public var uiReturnKeyType: UIReturnKeyType {
         switch self {
         case .default_:

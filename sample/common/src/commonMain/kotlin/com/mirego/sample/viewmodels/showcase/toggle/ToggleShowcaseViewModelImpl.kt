@@ -13,7 +13,6 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextImagePairContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextPairContent
-import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
 class ToggleShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableManager) : ShowcaseViewModelImpl(cancellableManager), ToggleShowcaseViewModel {
     override val title: VMDTextViewModel = VMDComponents.Text.withContent(i18N[KWordTranslation.TOGGLE_SHOWCASE_TITLE], cancellableManager)
@@ -34,7 +33,7 @@ class ToggleShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMan
     override val textToggle: VMDToggleViewModel<VMDTextContent> = VMDComponents.Toggle.withText(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], false, cancellableManager)
     override val imageToggle: VMDToggleViewModel<VMDImageContent> = VMDComponents.Toggle.withImage(SampleImageResource.ICON_CLOSE, false, cancellableManager)
     override val textImageToggle: VMDToggleViewModel<VMDTextImagePairContent> = VMDComponents.Toggle.withTextImage(
-        VMDTextImagePairContent(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], VMDImageDescriptor.Local(SampleImageResource.ICON_CLOSE)),
+        VMDTextImagePairContent(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], SampleImageResource.ICON_CLOSE),
         false,
         cancellableManager
     )

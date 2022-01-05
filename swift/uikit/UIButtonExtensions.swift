@@ -67,7 +67,7 @@ fileprivate extension UIButton {
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
                 guard let strongSelf = self else { return }
-                self?.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
+                self?.vmd.buttonViewModelImageHandler.setImage(content.image, for: .normal, on: strongSelf)
             }
             bindActionBlock(buttonViewModel.actionBlock)
         }
@@ -79,7 +79,7 @@ fileprivate extension UIButton {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDTextImagePairContent>.content)) { [weak self] content in
                 guard let strongSelf = self else { return }
                 strongSelf.setTitle(content.text, for: .normal)
-                strongSelf.vmd.buttonViewModelImageHandler.setImageDescriptor(content.image, for: .normal, on: strongSelf)
+                strongSelf.vmd.buttonViewModelImageHandler.setImage(content.image, for: .normal, on: strongSelf)
             }
             bindActionBlock(buttonViewModel.actionBlock)
         }
@@ -115,7 +115,7 @@ fileprivate extension UIButton {
 }
 
 public protocol ButtonViewModelImageHandler {
-    func setImageDescriptor(_ imageDescriptor: VMDImageDescriptor?, for state: UIControl.State, on button: UIButton)
+    func setImage(_ imageResource: VMDImageResource?, for state: UIControl.State, on button: UIButton)
 }
 
 private class DefaultButtonViewModelHandler: ButtonViewModelImageHandler {
@@ -123,12 +123,9 @@ private class DefaultButtonViewModelHandler: ButtonViewModelImageHandler {
 
     private init() { }
 
-    public func setImageDescriptor(_ imageDescriptor: VMDImageDescriptor?, for state: UIControl.State, on button: UIButton) {
-        if let local = imageDescriptor as? VMDImageDescriptor.Local {
-            button.setImage(local.imageResource.uiImage, for: state)
-        } else if let remote = imageDescriptor as? VMDImageDescriptor.Remote, let imageURL = URL(string: remote.url) {
-            let placeholderImage = remote.placeholderImageResource.uiImage
-            button.kf.setImage(with: imageURL, for: state, placeholder: placeholderImage, options: [.onFailureImage(placeholderImage)])
+    public func setImage(_ imageResource: VMDImageResource?, for state: UIControl.State, on button: UIButton) {
+        if let imageResource = imageResource {
+            button.setImage(imageResource.uiImage, for: state)
         } else {
             button.setImage(nil, for: state)
         }

@@ -20,8 +20,8 @@ import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.medium
 import com.mirego.sample.viewmodels.showcase.toggle.ToggleShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCheckbox
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDSwitch
 
 @Composable
@@ -57,10 +57,10 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             viewModel = viewModel.imageToggle,
             label = { content ->
-                VMDImage(
+                LocalImage(
                     modifier = Modifier
                         .padding(4.dp),
-                    imageDescriptor = content.image,
+                    imageResource = content.image,
                     colorFilter = ColorFilter.tint(Color.Black)
                 )
             }
@@ -77,10 +77,10 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                         .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    VMDImage(
+                    LocalImage(
                         modifier = Modifier
                             .padding(4.dp),
-                        imageDescriptor = content.image,
+                        imageResource = content.image,
                         colorFilter = ColorFilter.tint(Color.Black)
                     )
                     Text(
@@ -136,10 +136,10 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             viewModel = viewModel.imageToggle,
             label = { content ->
-                VMDImage(
+                LocalImage(
                     modifier = Modifier
                         .padding(4.dp),
-                    imageDescriptor = content.image,
+                    imageResource = content.image,
                     colorFilter = ColorFilter.tint(Color.Black)
                 )
             }
@@ -156,10 +156,10 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                         .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    VMDImage(
+                    LocalImage(
                         modifier = Modifier
                             .padding(4.dp),
-                        imageDescriptor = content.image,
+                        imageResource = content.image,
                         colorFilter = ColorFilter.tint(Color.Black)
                     )
                     Text(
