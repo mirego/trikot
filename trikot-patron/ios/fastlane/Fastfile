@@ -1,0 +1,60 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+import_from_git(url: "git@github.com:mirego/fastlane-boilerplate.git", branch: "fix/ProvisioningTargetFilter")
+
+default_platform(:ios)
+
+platform :ios do
+
+  #-------------------------
+  # Configuration
+  #-------------------------
+
+  mainProject = Model::Project.new(
+    workspacePath: "iosApp.xcworkspace",
+    projectPath: "iosApp.xcodeproj",
+    infoPlistPath: "./iosApp/Info.plist",
+    scheme: "iosApp",
+    target: "iosApp",
+    bundleIdentifier: "com.trikot.sample"
+  )
+
+  #provisioning_profile_qa = Model::ProvisioningProfile.new(path: "./fastlane/profiles/...")
+
+  certificate = Model::Certificate.new(
+    path: "#{strip_quotes(ENV["PROVISIONING_DIR"])}/#{strip_quotes(ENV["PROVISIONING_CERTIFICATE_FILE"])}",
+    name: strip_quotes(ENV["PROVISIONING_NAME"]),
+    password: strip_quotes(ENV["PROVISIONING_CERTIFICATE_PASSWORD"])
+  )
+
+  # QA Configuration
+  enterpriseQAConfig = Model::Configuration.new(certificate: certificate, provisioningProfile: provisioning_profile_qa, buildConfiguration: 'Release', exportMethod: 'enterprise', bundleIdentifierOverride: 'com.trikot.sample.qa')
+
+  #-------------------------
+  # Public lanes
+  #-------------------------
+
+  lane :qa do
+    set_info_plist_value(path: mainProject.infoPlistPath, key: "Environment", value: "qa")
+    cocoapods(clean: true, use_bundle_exec: true, try_repo_update_on_error: true)
+    build(project: mainProject, configuration: enterpriseQAConfig)
+    changelog_from_git_commits(commits_count: 10, pretty: "- (%h) %s%n")
+    # hockey(
+    #  api_token: strip_quotes(ENV["HOCKEYAPP_API_TOKEN"]),
+    #  public_identifier: "SAMPLE",
+    #  bypass_cdn: true,
+    #  notify: "0"
+    #)
+    # upload_symbols_to_crashlytics(gsp_path: "./iosApp/GoogleService-Info.plist")
+  end
+
+end

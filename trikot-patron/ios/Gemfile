@@ -1,0 +1,16 @@
+# Gemfile
+source 'https://rubygems.org'
+
+# Use the latest cocoapods gem
+gem 'cocoapods'
+
+gem 'activesupport', '~>4.2.11'
+
+gem "fastlane", '~>2.116.1'
+
+plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+eval(File.read(plugins_path), binding) if File.exist?(plugins_path)
+
+group :test do
+  gem 'rspec-expectations', '2.11.2'
+end

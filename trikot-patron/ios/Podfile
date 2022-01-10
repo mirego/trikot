@@ -1,0 +1,29 @@
+require_relative 'podspec_versions.rb'
+
+platformVersion = '11.3'
+platform :ios, platformVersion
+
+install! 'cocoapods', :disable_input_output_paths => true
+
+ENV['TRIKOT_FRAMEWORK_NAME']='TrikotFrameworkName'
+
+target 'iosApp' do
+  use_frameworks!
+
+  properties = load_properties('../gradle.properties')
+
+  pod 'SwiftLint'
+  pod 'TrikotFrameworkName', :path => '../common'
+  pod 'Trikot.http', :git => 'git@github.com:mirego/trikot.http.git', :tag => properties['trikot_http_version'], :inhibit_warnings => true
+  pod 'Trikot.viewmodels', :git => 'git@github.com:mirego/trikot.viewmodels.git', :tag => properties['trikot_viewmodels_version'], :inhibit_warnings => true
+  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :tag => properties['trikot_streams_version'], :inhibit_warnings => true
+  pod 'Trikot.kword', :git => 'git@github.com:mirego/trikot.kword.git', :tag => properties['trikot_kword_version'], :inhibit_warnings => true
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = platformVersion
+      end
+    end
+  end
+end
