@@ -1,0 +1,111 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-multiplatform'
+    id 'kotlinx-serialization'
+    id 'org.jlleitschuh.gradle.ktlint'
+}
+
+repositories {
+    google()
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url 'https://jitpack.io' }
+    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+}
+
+group 'com.trikot.viewmodels.sample'
+version '0.0.1'
+
+apply plugin: 'maven-publish'
+
+def iosArchLibrarySuffix = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? "iosarm64" : "iosx64"
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 21
+    }
+}
+
+kotlin {
+    targets {
+        fromPreset(presets.android, 'android')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
+
+        fromPreset(iOSTarget, 'ios') {
+            binaries {
+                framework {
+                    embedBitcode("disable")
+                    baseName = "$trikot_framework_name"
+                    export "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
+                    export "com.mirego.trikot:trikotFoundation-$iosArchLibrarySuffix:$trikot_foundation_version"
+                    export "com.mirego.trikot:streams:$trikot_streams_version"
+                    export "com.mirego.trikot:streams-$iosArchLibrarySuffix:$trikot_streams_version"
+                    export "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
+                    export "com.mirego.trikot:viewmodels-$iosArchLibrarySuffix:$trikot_viewmodels_version"
+                }
+            }
+        }
+    }
+
+    android {
+        publishLibraryVariants('release', 'debug')
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                api "com.mirego.trikot:trikotFoundation:$trikot_foundation_version"
+                api "com.mirego.trikot:streams:$trikot_streams_version"
+                api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test-common'
+                implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+            }
+        }
+        androidMain {
+            dependsOn commonMain
+            dependencies {
+                implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+                implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+                implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+                implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+            }
+        }
+
+        iosMain {
+            dependsOn commonMain
+        }
+    }
+}
+
+task copyFramework() {
+    def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
+
+    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
+
+    doLast {
+        def frameworkFilename = "${trikot_framework_name}.framework"
+        def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
+        def targetDir = file("build/bin/ios").toString()
+        def frameworkDir = "${targetDir}/${frameworkFilename}"
+        def translationDir = "${projectDir}/../common/src/commonMain/resources/translations"
+        copy {
+            from srcFile.parent
+            into targetDir
+            include "${frameworkFilename}/**"
+            include "${frameworkFilename}.dSYM/**"
+        }
+        copy {
+            from translationDir
+            into frameworkDir
+            include "**"
+        }
+    }
+}

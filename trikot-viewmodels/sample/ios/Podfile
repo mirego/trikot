@@ -1,0 +1,27 @@
+platformVersion = '11.3'
+platform :ios, platformVersion
+
+install! 'cocoapods', :disable_input_output_paths => true
+
+ENV['TRIKOT_FRAMEWORK_NAME']='ViewModelsSample' 
+
+target 'iosApp' do
+  use_frameworks!
+  pod 'SwiftLint'
+  pod 'ViewModelsSample', :path => '../common'
+  pod 'Trikot.viewmodels', :path => '../../'
+  pod 'Trikot.streams', :git => 'git@github.com:mirego/trikot.streams.git', :inhibit_warnings => true
+    
+  target 'iosAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = platformVersion
+      end
+  end
+end
