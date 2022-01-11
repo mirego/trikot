@@ -1,73 +1,71 @@
 plugins {
     id("com.android.library")
-    kotlin("multiplatform")
+    id("kotlin-multiplatform")
+    id("kotlinx-serialization")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.kword").version("2.0.1")
+    id("maven-publish")
 }
 
 repositories {
     google()
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
+    maven("https://plugins.gradle.org/m2/")
     maven("https://jitpack.io")
     maven("https://s3.amazonaws.com/mirego-maven/public")
 }
 
-group = "com.mirego.sample"
+group = "com.trikot.viewmodels.sample"
+version = "0.0.1"
 
-val frameworkName = "TrikotViewmodelsDeclarativeSample"
-
-configurations {
-    create("testApi") {}
-    create("testDebugApi") {}
-    create("testReleaseApi") {}
+android {
+    defaultConfig {
+        compileSdk = 30
+        minSdk = 21
+    }
 }
 
-kword {
-    translationFile = file("src/commonMain/resources/translations/translation.en.json")
-    enumClassName = "com.mirego.sample.KWordTranslation"
-    generatedDir = file("src/commonMain/generated")
-}
+val frameworkName = "TrikotViewmodelsSample"
 
 kotlin {
-    android()
+    android {
+        publishLibraryVariants("release", "debug")
+    }
+
     ios {
         binaries {
             framework {
                 baseName = frameworkName
                 transitiveExport = true
-                export(project(Dependencies.trikotViewModelsDeclarative))
-                export(project(Dependencies.trikotStreams))
                 export(project(Dependencies.trikotFoundation))
-                export(project(Dependencies.trikotHttp))
-                export(project(Dependencies.trikotKword))
+                export(project(Dependencies.trikotStreams))
+                export(project(Dependencies.trikotViewModels))
             }
         }
     }
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlin.Experimental")
-                useExperimentalAnnotation("kotlin.time.ExperimentalTime")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
-                api(project(":viewmodels-declarative"))
-                api(Dependencies.trikotFoundation)
-                api(Dependencies.trikotStreams)
-                api(Dependencies.trikotHttp)
-                api(Dependencies.trikotKword)
+                api(project(Dependencies.trikotFoundation))
+                api(project(Dependencies.trikotStreams))
+                api(project(Dependencies.trikotViewModels))
             }
-            kotlin.srcDir(kword.generatedDir)
         }
-
+        val commonTest by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-test-common")
+                implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
+            }
+        }
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-runtime-ktx::${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-extensions::${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-viewmodel::${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx::${Versions.androidXLifecycle}")
             }
         }
 
@@ -75,22 +73,6 @@ kotlin {
             dependsOn(commonMain)
         }
     }
-}
-
-android {
-    defaultConfig {
-        compileSdk = 30
-        minSdk = 23
-        targetSdk = 30
-    }
-}
-
-project.afterEvaluate {
-    tasks
-        .filter { task -> task.name.startsWith("compile") && task.name.contains("Kotlin") }
-        .forEach { task ->
-            task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
-        }
 }
 
 val copyFramework by tasks.creating {

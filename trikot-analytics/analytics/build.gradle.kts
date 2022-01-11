@@ -35,8 +35,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
+                api(project(Dependencies.trikotFoundation))
+                api(project(Dependencies.trikotStreams))
             }
         }
 

@@ -35,10 +35,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("com.mirego.trikot:analytics:${project.extra["trikot_analytics_version"]}")
-                api("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                api("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-                api("com.mirego.trikot:viewmodels:${project.extra["trikot_viewmodels_version"]}")
+                api(project(Dependencies.trikotAnalytics))
+                api(project(Dependencies.trikotFoundation))
+                api(project(Dependencies.trikotStreams))
+                api(project(Dependencies.trikotViewModels))
             }
         }
 

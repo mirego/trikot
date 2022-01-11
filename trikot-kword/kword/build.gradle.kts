@@ -36,7 +36,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
+                api(project(Dependencies.trikotFoundation))
             }
         }
 
@@ -62,7 +62,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:${project.extra["kotlin_wrappers_extensions_version"]}-kotlin-${project.extra["kotlin_version"]}")
+                implementation(Dependencies.kotlinWrapperExtensions)
             }
         }
 
@@ -76,7 +76,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.extra["kotlinx_serialization_version"]}")
+                implementation(Dependencies.kotlinxSerializationJson)
             }
         }
 

@@ -20,9 +20,9 @@ group = "com.mirego.trikot.analytics"
 configurations.forEach { it.exclude("org.reactivestreams") }
 
 dependencies {
-    api("com.mirego.trikot:analytics:${project.extra["trikot_analytics_version"]}")
-    api("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-    api("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
+    api(project(Dependencies.trikotAnalytics))
+    api(project(Dependencies.trikotFoundation))
+    api(project(Dependencies.trikotStreams))
     implementation("com.mixpanel.android:mixpanel-android:5.8.2")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
 }

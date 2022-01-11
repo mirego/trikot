@@ -37,8 +37,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
+                api(project(Dependencies.trikotFoundation))
+                api(project(Dependencies.trikotStreams))
             }
         }
 
@@ -74,8 +74,8 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-process:${project.extra["androidx_lifecycle_version"]}")
-                implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+                implementation("androidx.lifecycle:lifecycle-process:android:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}")
                 implementation("androidx.recyclerview:recyclerview:1.1.0")
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("com.squareup.picasso:picasso:2.71828")

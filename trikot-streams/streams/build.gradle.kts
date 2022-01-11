@@ -39,7 +39,7 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
+                project(Dependencies.trikotFoundation)
             }
         }
 

@@ -41,10 +41,10 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.extra["serialization_version"]}")
-                implementation("io.ktor:ktor-http:${project.extra["ktor_version"]}")
+                implementation(project(Dependencies.trikotFoundation))
+                implementation(project(Dependencies.trikotStreams))
+                implementation(Dependencies.kotlinxSerializationJson)
+                implementation(Dependencies.ktorHttp)
             }
         }
 
@@ -82,8 +82,8 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                api("io.ktor:ktor-client-logging-jvm:${project.extra["ktor_version"]}")
-                implementation("io.ktor:ktor-client-android:${project.extra["ktor_version"]}")
+                api(Dependencies.ktorLoggingJvm)
+                implementation(Dependencies.ktorClientAndroid)
                 implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
                 implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
                     exclude(group = "org.reactivestreams")
