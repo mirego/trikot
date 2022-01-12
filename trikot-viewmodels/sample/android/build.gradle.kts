@@ -9,13 +9,13 @@ plugins {
 
 android {
     defaultConfig {
-        applicationId = "com.trikot.viewmodels.sample"
-        versionCode = 1
-        versionName = "1.0"
-
         compileSdk = 31
         minSdk = 23
         targetSdk = 31
+
+        applicationId = "com.trikot.viewmodels.sample"
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

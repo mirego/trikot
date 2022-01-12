@@ -62,10 +62,10 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-runtime-ktx::${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-extensions::${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-viewmodel::${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx::${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-viewmodel:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidXLifecycle}")
             }
         }
 

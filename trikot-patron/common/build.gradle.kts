@@ -22,7 +22,6 @@ plugins {
 
 repositories {
     google()
-    jcenter()
     mavenCentral()
     mavenLocal()
     maven(url = "https://kotlin.bintray.com/kotlinx")
