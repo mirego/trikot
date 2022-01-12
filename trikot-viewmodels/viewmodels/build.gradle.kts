@@ -74,7 +74,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-process:android:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-process:${Versions.androidXLifecycle}")
                 implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}")
                 implementation("androidx.recyclerview:recyclerview:1.1.0")
                 implementation("androidx.appcompat:appcompat:1.2.0")
