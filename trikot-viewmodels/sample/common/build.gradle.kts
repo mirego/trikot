@@ -37,9 +37,9 @@ kotlin {
             framework {
                 baseName = frameworkName
                 transitiveExport = true
-                export(project(Dependencies.TRIKOT_FOUNDATION))
-                export(project(Dependencies.TRIKOT_STREAMS))
-                export(project(Dependencies.TRIKOT_VIEWMODELS))
+                export(project(Project.TRIKOT_FOUNDATION))
+                export(project(Project.TRIKOT_STREAMS))
+                export(project(Project.TRIKOT_VIEWMODELS))
             }
         }
     }
@@ -47,9 +47,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Dependencies.TRIKOT_FOUNDATION))
-                api(project(Dependencies.TRIKOT_STREAMS))
-                api(project(Dependencies.TRIKOT_VIEWMODELS))
+                api(project(Project.TRIKOT_FOUNDATION))
+                api(project(Project.TRIKOT_STREAMS))
+                api(project(Project.TRIKOT_VIEWMODELS))
             }
         }
         val commonTest by getting {

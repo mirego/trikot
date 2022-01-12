@@ -45,9 +45,9 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(Dependencies.TRIKOT_VIEWMODELS_DECLARATIVE))
-    implementation(project(Dependencies.TRIKOT_FOUNDATION))
-    implementation(project(Dependencies.TRIKOT_STREAMS))
+    implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+    implementation(project(Project.TRIKOT_FOUNDATION))
+    implementation(project(Project.TRIKOT_STREAMS))
 
     api("androidx.compose.foundation:foundation:${Versions.JETPACK_COMPOSE}")
     api("androidx.compose.material:material:${Versions.JETPACK_COMPOSE}")

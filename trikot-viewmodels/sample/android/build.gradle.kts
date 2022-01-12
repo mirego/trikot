@@ -64,7 +64,7 @@ android {
 configurations.forEach { it.exclude("org.reactivestreams") }
 
 dependencies {
-    api(project(Dependencies.TRIKOT_VIEWMODELS_SAMPLE_COMMON))
+    api(project(Project.TRIKOT_VIEWMODELS_SAMPLE_COMMON))
 
     implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
