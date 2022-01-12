@@ -75,7 +75,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-process:${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycleExtensions}")
                 implementation("androidx.recyclerview:recyclerview:1.1.0")
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("com.squareup.picasso:picasso:2.71828")

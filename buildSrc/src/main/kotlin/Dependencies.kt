@@ -8,6 +8,7 @@ object Versions {
     const val kotlinxSerialization = "1.3.1"
     const val ktor = "1.6.4"
     const val kotlinWrappersExtensions = "1.0.1-pre.262"
+    const val androidXLifecycleExtensions = "2.2.0"
     const val androidXLifecycle = "2.3.0"
 }
 

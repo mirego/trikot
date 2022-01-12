@@ -41,6 +41,11 @@ android {
         exclude("META-INF/*.kotlin_module")
     }
 
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
     lintOptions {
         isCheckReleaseBuilds = true
         isAbortOnError = true
@@ -49,11 +54,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    repositories {
-        mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-        maven("https://s3.amazonaws.com/mirego-maven/public")
     }
 
     kotlinOptions {
@@ -68,8 +68,8 @@ dependencies {
 
     implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycleExtensions}")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
     implementation("com.google.android.material:material:1.2.1")
     implementation("com.squareup.picasso:picasso:2.71828")
 }
