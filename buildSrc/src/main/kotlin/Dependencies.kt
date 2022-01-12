@@ -21,6 +21,8 @@ object Dependencies {
     const val trikotViewModels = ":trikot-viewmodels:viewmodels"
     const val trikotViewModelsSampleCommon = ":trikot-viewmodels:sample:common"
     const val trikotViewModelsDeclarative = ":trikot-viewmodels-declarative:viewmodels-declarative"
+    const val trikotViewModelsDeclarativeCompose = ":trikot-viewmodels-declarative:compose"
+    const val trikotViewModelsDeclarativeSampleCommon = ":trikot-viewmodels-declarative:sample:common"
 
     const val ktorHttp = "io.ktor:ktor-http:${Versions.ktor}"
     const val ktorLoggingJvm = "io.ktor:ktor-client-logging-jvm:${Versions.ktor}"

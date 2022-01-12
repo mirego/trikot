@@ -56,8 +56,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":sample:common"))
-    implementation(project(":compose"))
+    implementation(project(Dependencies.trikotViewModelsDeclarativeSampleCommon))
+    implementation(project(Dependencies.trikotViewModelsDeclarativeCompose))
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.4.0")

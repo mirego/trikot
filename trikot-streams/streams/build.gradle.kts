@@ -39,7 +39,7 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                project(Dependencies.trikotFoundation)
+                api(project(Dependencies.trikotFoundation))
             }
         }
 

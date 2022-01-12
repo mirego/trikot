@@ -55,11 +55,11 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                api(project(":viewmodels-declarative"))
-                api(Dependencies.trikotFoundation)
-                api(Dependencies.trikotStreams)
-                api(Dependencies.trikotHttp)
-                api(Dependencies.trikotKword)
+                api(project(Dependencies.trikotViewModelsDeclarative))
+                api(project(Dependencies.trikotFoundation))
+                api(project(Dependencies.trikotStreams))
+                api(project(Dependencies.trikotHttp))
+                api(project(Dependencies.trikotKword))
             }
             kotlin.srcDir(kword.generatedDir)
         }
