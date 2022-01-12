@@ -35,8 +35,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Dependencies.trikotFoundation))
-                api(project(Dependencies.trikotStreams))
+                api(project(Dependencies.TRIKOT_FOUNDATION))
+                api(project(Dependencies.TRIKOT_STREAMS))
             }
         }
 

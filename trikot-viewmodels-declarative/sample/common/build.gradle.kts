@@ -36,11 +36,11 @@ kotlin {
             framework {
                 baseName = frameworkName
                 transitiveExport = true
-                export(project(Dependencies.trikotViewModelsDeclarative))
-                export(project(Dependencies.trikotStreams))
-                export(project(Dependencies.trikotFoundation))
-                export(project(Dependencies.trikotHttp))
-                export(project(Dependencies.trikotKword))
+                export(project(Dependencies.TRIKOT_VIEWMODELS_DECLARATIVE))
+                export(project(Dependencies.TRIKOT_STREAMS))
+                export(project(Dependencies.TRIKOT_FOUNDATION))
+                export(project(Dependencies.TRIKOT_HTTP))
+                export(project(Dependencies.TRIKOT_KWORD))
             }
         }
     }
@@ -55,11 +55,11 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                api(project(Dependencies.trikotViewModelsDeclarative))
-                api(project(Dependencies.trikotFoundation))
-                api(project(Dependencies.trikotStreams))
-                api(project(Dependencies.trikotHttp))
-                api(project(Dependencies.trikotKword))
+                api(project(Dependencies.TRIKOT_VIEWMODELS_DECLARATIVE))
+                api(project(Dependencies.TRIKOT_FOUNDATION))
+                api(project(Dependencies.TRIKOT_STREAMS))
+                api(project(Dependencies.TRIKOT_HTTP))
+                api(project(Dependencies.TRIKOT_KWORD))
             }
             kotlin.srcDir(kword.generatedDir)
         }

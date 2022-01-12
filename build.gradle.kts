@@ -7,10 +7,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:${Versions.androidGradlePlugin}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}")
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint}")
+        classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE_PLUGIN}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.KOTLIN}")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:${Versions.KTLINT}")
     }
 }
 

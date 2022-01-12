@@ -36,7 +36,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Dependencies.trikotFoundation))
+                api(project(Dependencies.TRIKOT_FOUNDATION))
             }
         }
 
@@ -62,7 +62,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                implementation(Dependencies.kotlinWrapperExtensions)
+                implementation(Dependencies.KOTLINX_SERIALIZATION_EXTENSIONS)
             }
         }
 
@@ -76,7 +76,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation(Dependencies.kotlinxSerializationJson)
+                implementation(Dependencies.KOTLINX_SERIALIZATION)
             }
         }
 

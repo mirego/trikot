@@ -37,9 +37,9 @@ kotlin {
             framework {
                 baseName = frameworkName
                 transitiveExport = true
-                export(project(Dependencies.trikotFoundation))
-                export(project(Dependencies.trikotStreams))
-                export(project(Dependencies.trikotViewModels))
+                export(project(Dependencies.TRIKOT_FOUNDATION))
+                export(project(Dependencies.TRIKOT_STREAMS))
+                export(project(Dependencies.TRIKOT_VIEWMODELS))
             }
         }
     }
@@ -47,9 +47,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Dependencies.trikotFoundation))
-                api(project(Dependencies.trikotStreams))
-                api(project(Dependencies.trikotViewModels))
+                api(project(Dependencies.TRIKOT_FOUNDATION))
+                api(project(Dependencies.TRIKOT_STREAMS))
+                api(project(Dependencies.TRIKOT_VIEWMODELS))
             }
         }
         val commonTest by getting {
@@ -61,11 +61,11 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycleExtensions}")
-                implementation("androidx.lifecycle:lifecycle-viewmodel:${Versions.androidXLifecycle}")
-                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidXLifecycle}")
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+                implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
+                implementation("androidx.lifecycle:lifecycle-viewmodel:${Versions.ANDROIDX_LIFECYCLE}")
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
             }
         }
 

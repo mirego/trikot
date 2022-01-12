@@ -64,12 +64,12 @@ android {
 configurations.forEach { it.exclude("org.reactivestreams") }
 
 dependencies {
-    api(project(Dependencies.trikotViewModelsSampleCommon))
+    api(project(Dependencies.TRIKOT_VIEWMODELS_SAMPLE_COMMON))
 
     implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
-    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycleExtensions}")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
+    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("com.google.android.material:material:1.2.1")
     implementation("com.squareup.picasso:picasso:2.71828")
 }

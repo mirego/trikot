@@ -40,8 +40,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Dependencies.trikotFoundation))
-                implementation(project(Dependencies.trikotStreams))
+                implementation(project(Dependencies.TRIKOT_FOUNDATION))
+                implementation(project(Dependencies.TRIKOT_STREAMS))
             }
         }
 

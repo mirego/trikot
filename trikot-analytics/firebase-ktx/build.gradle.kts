@@ -20,9 +20,9 @@ group = "com.mirego.trikot.analytics"
 configurations.forEach { it.exclude("org.reactivestreams") }
 
 dependencies {
-    api(project(Dependencies.trikotAnalytics))
-    api(project(Dependencies.trikotFoundation))
-    api(project(Dependencies.trikotStreams))
+    api(project(Dependencies.TRIKOT_ANALYTICS))
+    api(project(Dependencies.TRIKOT_FOUNDATION))
+    api(project(Dependencies.TRIKOT_STREAMS))
     implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
 }

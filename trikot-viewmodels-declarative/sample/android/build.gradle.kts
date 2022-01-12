@@ -41,7 +41,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.jetpackCompose
+        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE
     }
 
     kotlinOptions {
@@ -56,15 +56,15 @@ android {
 }
 
 dependencies {
-    implementation(project(Dependencies.trikotViewModelsDeclarativeSampleCommon))
-    implementation(project(Dependencies.trikotViewModelsDeclarativeCompose))
+    implementation(project(Dependencies.TRIKOT_VIEWMODELS_DECLARATIVE_SAMPLE_COMMON))
+    implementation(project(Dependencies.TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE))
     implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycleExtensions}")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidXLifecycle}")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.androidXLifecycle}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidXLifecycle}")
-    implementation("androidx.lifecycle:lifecycle-common-java8:${Versions.androidXLifecycle}")
+    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-common-java8:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("com.squareup.picasso:picasso:2.71828")
