@@ -8,13 +8,10 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import com.mirego.trikot.http.connectivity.ConnectivityState
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @SuppressLint("MissingPermission")
 class AndroidConnectivityPublisher @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE) constructor(
     application: ContextWrapper
