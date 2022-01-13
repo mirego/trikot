@@ -14,10 +14,25 @@ buildscript {
     }
 }
 
+plugins {
+    id("mirego.release").version("2.0")
+    id("mirego.publish").version("1.0")
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
         maven("https://s3.amazonaws.com/mirego-maven/public")
     }
+}
+
+release {
+    checkTasks = listOf(
+        "check"
+    )
+    buildTasks = listOf(
+        "publishToMavenLocal"
+    )
+    updateVersionPart = 2
 }
