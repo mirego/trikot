@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
 
-        navigationController.viewControllers = [ListViewController(listViewModel: HomeViewModelImpl(delegate: self))]
+        let homeViewModel = HomeViewModelImpl()
+        homeViewModel.navigationDelegate = self
+        navigationController.viewControllers = [ListViewController(listViewModel: homeViewModel)]
         window.rootViewController = navigationController
 
         window.makeKeyAndVisible()
