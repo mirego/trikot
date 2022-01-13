@@ -21,11 +21,11 @@ interface ExpiringDataSourceRequest : DataSourceRequest {
     val expiredInMilliseconds: Long
 }
 
+@ExperimentalTime
 abstract class BaseExpiringDataSource<R : ExpiringDataSourceRequest, D, T>(
     cacheDataSource: DataSource<R, T>? = null
 ) : BaseHotDataSource<R, T>(cacheDataSource) where T : ExpiringValue<D> {
 
-    @ExperimentalTime
     override fun internalShouldRead(request: R, data: DataState<T, Throwable>): Boolean {
         return when (data) {
             is DataState.Pending -> false

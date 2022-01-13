@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 class LabelListItem: UIView {
     private let title = UILabel(frame: .zero)

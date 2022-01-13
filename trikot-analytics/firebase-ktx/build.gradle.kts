@@ -20,18 +20,18 @@ group = "com.mirego.trikot.analytics"
 configurations.forEach { it.exclude("org.reactivestreams") }
 
 dependencies {
-    api("com.mirego.trikot:analytics:${project.extra["trikot_analytics_version"]}")
-    api("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-    api("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
+    api(project(Project.TRIKOT_ANALYTICS))
+    api(project(Project.TRIKOT_FOUNDATION))
+    api(project(Project.TRIKOT_STREAMS))
     implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
 }
 
 android {
     defaultConfig {
-        compileSdkVersion(30)
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 

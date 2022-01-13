@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot_viewmodels_declarative
-import TrikotViewmodelsDeclarativeSample
+import TRIKOT_FRAMEWORK_NAME
 
 struct HomeView: RootViewModelView {
     typealias VM = HomeViewModel

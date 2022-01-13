@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 class NavigableListItem: UIView {
     private let title = UILabel(frame: .zero)

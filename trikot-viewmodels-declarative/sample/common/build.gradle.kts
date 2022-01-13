@@ -15,7 +15,7 @@ repositories {
 
 group = "com.mirego.sample"
 
-val frameworkName = "TrikotViewmodelsDeclarativeSample"
+val frameworkName = "TRIKOT_FRAMEWORK_NAME"
 
 configurations {
     create("testApi") {}
@@ -36,11 +36,11 @@ kotlin {
             framework {
                 baseName = frameworkName
                 transitiveExport = true
-                export(project(":viewmodels-declarative"))
-                export(Dependencies.trikotStreams)
-                export(Dependencies.trikotFoundation)
-                export(Dependencies.trikotHttp)
-                export(Dependencies.trikotKword)
+                export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+                export(project(Project.TRIKOT_STREAMS))
+                export(project(Project.TRIKOT_FOUNDATION))
+                export(project(Project.TRIKOT_HTTP))
+                export(project(Project.TRIKOT_KWORD))
             }
         }
     }
@@ -55,11 +55,11 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                api(project(":viewmodels-declarative"))
-                api(Dependencies.trikotFoundation)
-                api(Dependencies.trikotStreams)
-                api(Dependencies.trikotHttp)
-                api(Dependencies.trikotKword)
+                api(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+                api(project(Project.TRIKOT_FOUNDATION))
+                api(project(Project.TRIKOT_STREAMS))
+                api(project(Project.TRIKOT_HTTP))
+                api(project(Project.TRIKOT_KWORD))
             }
             kotlin.srcDir(kword.generatedDir)
         }
@@ -79,9 +79,9 @@ kotlin {
 
 android {
     defaultConfig {
-        compileSdk = 30
-        minSdk = 23
-        targetSdk = 30
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 

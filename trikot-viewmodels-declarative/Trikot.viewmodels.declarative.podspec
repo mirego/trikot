@@ -1,6 +1,4 @@
 Pod::Spec.new do |spec|
-  properties = load_properties('gradle.properties')
-
   spec.name          = "Trikot.viewmodels.declarative"
   spec.version       = "1.0.0"
   spec.summary       = "Plugin for trikot.viewmodels.declarative"

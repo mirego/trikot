@@ -1,5 +1,5 @@
 import UIKit
-import TrikotViewmodelsDeclarativeSample
+import TRIKOT_FRAMEWORK_NAME
 
 class SampleImageProvider: VMDImageProvider {
     func imageNameForResource(imageResource: VMDImageResource) -> String? {

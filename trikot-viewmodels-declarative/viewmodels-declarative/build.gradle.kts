@@ -40,8 +40,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Dependencies.trikotFoundation)
-                implementation(Dependencies.trikotStreams)
+                implementation(project(Project.TRIKOT_FOUNDATION))
+                implementation(project(Project.TRIKOT_STREAMS))
             }
         }
 
@@ -120,9 +120,9 @@ kotlin {
 
 android {
     defaultConfig {
-        compileSdk = 30
-        minSdk = 21
-        targetSdk = 30
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 
     buildFeatures {

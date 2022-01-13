@@ -1,5 +1,7 @@
 package com.mirego.trikot.http.android
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.ContextWrapper
 import android.net.ConnectivityManager
@@ -8,12 +10,12 @@ import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.net.NetworkRequest
 import android.os.Build
-import androidx.annotation.RequiresApi
+import androidx.annotation.RequiresPermission
 import com.mirego.trikot.http.connectivity.ConnectivityState
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class AndroidConnectivityPublisher(application: ContextWrapper) :
+@SuppressLint("MissingPermission")
+class AndroidConnectivityPublisher @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE) constructor(application: ContextWrapper) :
     BehaviorSubjectImpl<ConnectivityState>() {
 
     private val connectivityManager: ConnectivityManager =
@@ -74,7 +76,6 @@ class AndroidConnectivityPublisher(application: ContextWrapper) :
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 private fun NetworkCapabilities.asConnectivityState() = when {
     hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
         hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) ||

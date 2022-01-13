@@ -8,9 +8,9 @@ plugins {
 
 android {
     defaultConfig {
-        compileSdk = 31
-        minSdk = 23
-        targetSdk = 31
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
 
         applicationId = "com.mirego.sample"
         versionCode = 1
@@ -41,7 +41,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.jetpackCompose
+        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE
     }
 
     kotlinOptions {
@@ -56,15 +56,15 @@ android {
 }
 
 dependencies {
-    implementation(project(":sample:common"))
-    implementation(project(":compose"))
+    implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_SAMPLE_COMMON))
+    implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE))
     implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.lifecycle:lifecycle-common-java8:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("com.squareup.picasso:picasso:2.71828")

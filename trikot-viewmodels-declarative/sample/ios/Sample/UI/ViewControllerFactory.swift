@@ -1,5 +1,5 @@
 import UIKit
-import TrikotViewmodelsDeclarativeSample
+import TRIKOT_FRAMEWORK_NAME
 import Trikot_viewmodels_declarative
 
 public class ViewControllerFactory {

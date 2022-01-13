@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot_viewmodels_declarative
-import TrikotViewmodelsDeclarativeSample
+import TRIKOT_FRAMEWORK_NAME
 
 struct TextShowcaseView: RootViewModelView {
     typealias VM = TextShowcaseViewModel
@@ -77,7 +77,7 @@ struct TextShowcaseView: RootViewModelView {
             .navigationTitle(viewModel.title.text)
             .toolbar {
                 VMDButton(viewModel.closeButton) { (content: VMDImageContent) in
-                    VMDImage(content.image)
+                    content.image.image
                 }
             }
         }

@@ -41,10 +41,10 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.extra["serialization_version"]}")
-                implementation("io.ktor:ktor-http:${project.extra["ktor_version"]}")
+                implementation(project(Project.TRIKOT_FOUNDATION))
+                implementation(project(Project.TRIKOT_STREAMS))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
+                implementation("io.ktor:ktor-http:${Versions.KTOR}")
             }
         }
 
@@ -82,9 +82,9 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                api("io.ktor:ktor-client-logging-jvm:${project.extra["ktor_version"]}")
-                implementation("io.ktor:ktor-client-android:${project.extra["ktor_version"]}")
-                implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+                api("io.ktor:ktor-client-logging-jvm:${Versions.KTOR}")
+                implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
+                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
                 implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
                     exclude(group = "org.reactivestreams")
                 }
@@ -139,9 +139,9 @@ kotlin {
 
 android {
     defaultConfig {
-        compileSdkVersion(30)
-        minSdkVersion(14)
-        targetSdkVersion(30)
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 

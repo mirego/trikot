@@ -1,5 +1,5 @@
 import Foundation
-import TrikotViewmodelsDeclarativeSample
+import TRIKOT_FRAMEWORK_NAME
 import Trikot_http
 import Trikot_kword
 

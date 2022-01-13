@@ -1,5 +1,5 @@
 import Trikot_viewmodels
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvider {
     func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes? {

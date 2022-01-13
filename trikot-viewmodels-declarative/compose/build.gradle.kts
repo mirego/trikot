@@ -17,9 +17,9 @@ group = "com.mirego.trikot"
 
 android {
     defaultConfig {
-        compileSdk = 30
-        minSdk = 21
-        targetSdk = 30
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 
     buildFeatures {
@@ -31,7 +31,7 @@ android {
         targetCompatibility(JavaVersion.VERSION_11)
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.jetpackCompose
+        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -45,17 +45,17 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":viewmodels-declarative"))
-    implementation(Dependencies.trikotFoundation)
-    implementation(Dependencies.trikotStreams)
+    implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+    implementation(project(Project.TRIKOT_FOUNDATION))
+    implementation(project(Project.TRIKOT_STREAMS))
 
-    api("androidx.compose.foundation:foundation:${Versions.jetpackCompose}")
-    api("androidx.compose.material:material:${Versions.jetpackCompose}")
-    api("androidx.compose.runtime:runtime:${Versions.jetpackCompose}")
-    api("androidx.compose.ui:ui-tooling:${Versions.jetpackCompose}")
-    api("io.coil-kt:coil-compose:${Versions.coil}")
+    api("androidx.compose.foundation:foundation:${Versions.JETPACK_COMPOSE}")
+    api("androidx.compose.material:material:${Versions.JETPACK_COMPOSE}")
+    api("androidx.compose.runtime:runtime:${Versions.JETPACK_COMPOSE}")
+    api("androidx.compose.ui:ui-tooling:${Versions.JETPACK_COMPOSE}")
+    api("io.coil-kt:coil-compose:${Versions.COIL}")
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")
 }
 
 tasks {
