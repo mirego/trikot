@@ -109,7 +109,11 @@ fun <T, R> Publisher<T>.safeCombine(publisher: Publisher<R>): Publisher<Pair<T, 
 @Suppress("UNCHECKED_CAST")
 fun <T, R1, R2> Publisher<T>.safeCombine(publisher1: Publisher<R1>, publisher2: Publisher<R2>): Publisher<Triple<T, R1, R2>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? T != null && list[2] as? T != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? T != null &&
+                list[2] as? T != null
+        }
         .map { list ->
             Triple(list[0] as T, list[1] as R1, list[2] as R2)
         }
@@ -122,7 +126,12 @@ fun <T, R1, R2, R3> Publisher<T>.safeCombine(
     publisher3: Publisher<R3>
 ): Publisher<NTuple4<T, R1, R2, R3>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null
+        }
         .map { list ->
             NTuple4(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3)
         }
@@ -136,7 +145,13 @@ fun <T, R1, R2, R3, R4> Publisher<T>.safeCombine(
     publisher4: Publisher<R4>
 ): Publisher<NTuple5<T, R1, R2, R3, R4>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3, publisher4) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null && list[4] as? R4 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null &&
+                list[4] as? R4 != null
+        }
         .map { list ->
             NTuple5(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3, list[4] as R4)
         }
@@ -151,7 +166,14 @@ fun <T, R1, R2, R3, R4, R5> Publisher<T>.safeCombine(
     publisher5: Publisher<R5>
 ): Publisher<NTuple6<T, R1, R2, R3, R4, R5>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3, publisher4, publisher5) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null && list[4] as? R4 != null && list[5] as? R5 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null &&
+                list[4] as? R4 != null &&
+                list[5] as? R5 != null
+        }
         .map { list ->
             NTuple6(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3, list[4] as R4, list[5] as R5)
         }
@@ -167,7 +189,15 @@ fun <T, R1, R2, R3, R4, R5, R6> Publisher<T>.safeCombine(
     publisher6: Publisher<R6>
 ): Publisher<NTuple7<T, R1, R2, R3, R4, R5, R6>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3, publisher4, publisher5, publisher6) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null && list[4] as? R4 != null && list[5] as? R5 != null && list[6] as? R6 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null &&
+                list[4] as? R4 != null &&
+                list[5] as? R5 != null &&
+                list[6] as? R6 != null
+        }
         .map { list ->
             NTuple7(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3, list[4] as R4, list[5] as R5, list[6] as R6)
         }
@@ -184,7 +214,16 @@ fun <T, R1, R2, R3, R4, R5, R6, R7> Publisher<T>.safeCombine(
     publisher7: Publisher<R7>
 ): Publisher<NTuple8<T, R1, R2, R3, R4, R5, R6, R7>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3, publisher4, publisher5, publisher6, publisher7) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null && list[4] as? R4 != null && list[5] as? R5 != null && list[6] as? R6 != null && list[7] as? R7 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null &&
+                list[4] as? R4 != null &&
+                list[5] as? R5 != null &&
+                list[6] as? R6 != null &&
+                list[7] as? R7 != null
+        }
         .map { list ->
             NTuple8(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3, list[4] as R4, list[5] as R5, list[6] as R6, list[7] as R7)
         }
@@ -202,7 +241,17 @@ fun <T, R1, R2, R3, R4, R5, R6, R7, R8> Publisher<T>.safeCombine(
     publisher8: Publisher<R8>
 ): Publisher<NTuple9<T, R1, R2, R3, R4, R5, R6, R7, R8>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3, publisher4, publisher5, publisher6, publisher7, publisher8) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null && list[4] as? R4 != null && list[5] as? R5 != null && list[6] as? R6 != null && list[7] as? R7 != null && list[8] as? R8 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null &&
+                list[4] as? R4 != null &&
+                list[5] as? R5 != null &&
+                list[6] as? R6 != null &&
+                list[7] as? R7 != null &&
+                list[8] as? R8 != null
+        }
         .map { list ->
             NTuple9(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3, list[4] as R4, list[5] as R5, list[6] as R6, list[7] as R7, list[8] as R8)
         }
@@ -221,7 +270,18 @@ fun <T, R1, R2, R3, R4, R5, R6, R7, R8, R9> Publisher<T>.safeCombine(
     publisher9: Publisher<R9>
 ): Publisher<NTuple10<T, R1, R2, R3, R4, R5, R6, R7, R8, R9>> {
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2, publisher3, publisher4, publisher5, publisher6, publisher7, publisher8, publisher9) as List<Publisher<Any>>)
-        .filter { list -> list[0] as? T != null && list[1] as? R1 != null && list[2] as? R2 != null && list[3] as? R3 != null && list[4] as? R4 != null && list[5] as? R5 != null && list[6] as? R6 != null && list[7] as? R7 != null && list[8] as? R8 != null && list[9] as? R9 != null }
+        .filter { list ->
+            list[0] as? T != null &&
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null &&
+                list[3] as? R3 != null &&
+                list[4] as? R4 != null &&
+                list[5] as? R5 != null &&
+                list[6] as? R6 != null &&
+                list[7] as? R7 != null &&
+                list[8] as? R8 != null &&
+                list[9] as? R9 != null
+        }
         .map { list ->
             NTuple10(list[0] as T, list[1] as R1, list[2] as R2, list[3] as R3, list[4] as R4, list[5] as R5, list[6] as R6, list[7] as R7, list[8] as R8, list[9] as R9)
         }

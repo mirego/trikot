@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.mirego.trikot.viewmodels.LifecycleOwnerWrapper
 import com.trikot.viewmodels.sample.databinding.ActivityMainBinding
 import com.trikot.viewmodels.sample.databinding.ListItemViewModelAdapter
 import com.trikot.viewmodels.sample.navigation.Destination

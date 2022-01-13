@@ -49,7 +49,11 @@ actual class AtomicReference<T> actual constructor(value: T) {
     actual fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?) {
         if (!compareAndSet(expected, new)) {
             val debugInformationString = debugInfo?.let { "\n${it()}" }
-            throw ConcurrentModificationException("($this) Unable to set $new to AtomicReference. Possible Race Condition. Expected value $expected was $value (Unfrozen: $expectedUnfrozenValue). (Internal: ${nativeAtomicReference.value}) Is class frozen: $isFrozen. ${debugInformationString ?: ""}")
+            throw ConcurrentModificationException(
+                "($this) Unable to set $new to AtomicReference. Possible Race Condition. " +
+                    "Expected value $expected was $value (Unfrozen: $expectedUnfrozenValue). " +
+                    "(Internal: ${nativeAtomicReference.value}) Is class frozen: $isFrozen. ${debugInformationString ?: ""}"
+            )
         }
     }
 
