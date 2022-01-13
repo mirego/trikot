@@ -15,7 +15,7 @@ repositories {
 
 group = "com.mirego.sample"
 
-val frameworkName = "TrikotViewmodelsDeclarativeSample"
+val frameworkName = "TRIKOT_FRAMEWORK_NAME"
 
 configurations {
     create("testApi") {}

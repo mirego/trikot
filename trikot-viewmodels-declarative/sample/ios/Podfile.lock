@@ -5,48 +5,48 @@ PODS:
   - SwiftLint (0.43.1)
   - Trikot.http (1.0.1):
     - ReachabilitySwift (~> 5.0)
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.kword (0.0.1):
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.streams (0.0.1):
     - Trikot.streams/streams (= 0.0.1)
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.streams/streams (0.0.1):
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.viewmodels.declarative (1.0.0):
     - Trikot.streams
     - Trikot.viewmodels.declarative/Core (= 1.0.0)
     - Trikot.viewmodels.declarative/SwiftUI (= 1.0.0)
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.viewmodels.declarative/Combine (1.0.0):
     - Trikot.streams
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.viewmodels.declarative/Core (1.0.0):
     - Trikot.streams
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.viewmodels.declarative/SwiftUI (1.0.0):
     - Introspect (~> 0.1)
     - Kingfisher (~> 7.1)
     - Trikot.streams
     - Trikot.viewmodels.declarative/Combine
     - Trikot.viewmodels.declarative/Core
-    - TrikotViewmodelsDeclarativeSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.viewmodels.declarative/UIKit (1.0.0):
     - Kingfisher (>= 5.0)
     - Trikot.streams
     - Trikot.viewmodels.declarative/Core
-    - TrikotViewmodelsDeclarativeSample
-  - TrikotViewmodelsDeclarativeSample (1.0.0)
+    - TRIKOT_FRAMEWORK_NAME
+  - TRIKOT_FRAMEWORK_NAME (1.0.0)
 
 DEPENDENCIES:
   - SwiftLint
-  - "Trikot.http (from `git@github.com:mirego/trikot.http.git`, tag `2.3.2`)"
-  - "Trikot.kword (from `git@github.com:mirego/trikot.kword.git`, tag `2.3.1`)"
-  - "Trikot.streams (from `git@github.com:mirego/trikot.streams.git`, tag `2.2.6`)"
+  - Trikot.http (from `../../../trikot-http`)
+  - Trikot.kword (from `../../../trikot-kword`)
+  - Trikot.streams (from `../../../trikot-streams`)
   - Trikot.viewmodels.declarative (from `../..`)
   - Trikot.viewmodels.declarative/SwiftUI (from `../..`)
   - Trikot.viewmodels.declarative/UIKit (from `../..`)
-  - TrikotViewmodelsDeclarativeSample (from `../common`)
+  - TRIKOT_FRAMEWORK_NAME (from `../common`)
 
 SPEC REPOS:
   trunk:
@@ -57,41 +57,27 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Trikot.http:
-    :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 2.3.2
+    :path: "../../../trikot-http"
   Trikot.kword:
-    :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 2.3.1
+    :path: "../../../trikot-kword"
   Trikot.streams:
-    :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 2.2.6
+    :path: "../../../trikot-streams"
   Trikot.viewmodels.declarative:
     :path: "../.."
-  TrikotViewmodelsDeclarativeSample:
+  TRIKOT_FRAMEWORK_NAME:
     :path: "../common"
-
-CHECKOUT OPTIONS:
-  Trikot.http:
-    :git: "git@github.com:mirego/trikot.http.git"
-    :tag: 2.3.2
-  Trikot.kword:
-    :git: "git@github.com:mirego/trikot.kword.git"
-    :tag: 2.3.1
-  Trikot.streams:
-    :git: "git@github.com:mirego/trikot.streams.git"
-    :tag: 2.2.6
 
 SPEC CHECKSUMS:
   Introspect: 2be020f30f084ada52bb4387fff83fa52c5c400e
   Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
-  Trikot.http: cf5e71ad4ce126ddcb275af5fce080f1f550c005
-  Trikot.kword: 58dc4fbc7024e5d072b1fd62a26a651e54af374e
-  Trikot.streams: 40458deb1c5daa78144c44e8caf64b28be573f32
-  Trikot.viewmodels.declarative: 80f2e75f6799f3c1f6122fde2923a027c0bf6963
-  TrikotViewmodelsDeclarativeSample: 4a996ca59e8e83614a51de43e3ac93f5dc24c2a8
+  Trikot.http: 0f6c042b54b7395d446fb2e8c4f27c6085fd4c8b
+  Trikot.kword: 7a3b2fd8553e7742d56e7de6f9efbaa9951e057a
+  Trikot.streams: 6921e5e72e0dcfd230653e3c1089eb77b96f8c1d
+  Trikot.viewmodels.declarative: 64fe27149d15688bb36ba854f0c46198f6aae674
+  TRIKOT_FRAMEWORK_NAME: c732bae6204b568ee346dc397c263926dcd13bb4
 
-PODFILE CHECKSUM: 7aa5b3e9d31bd118c0b156b4d7ea0f86ab27e0dc
+PODFILE CHECKSUM: 7baee4b637059e07a8523827560ef5ba5a5a6c74
 
 COCOAPODS: 1.11.2

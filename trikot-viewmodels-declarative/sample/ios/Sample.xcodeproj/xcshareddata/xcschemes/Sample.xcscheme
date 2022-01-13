@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "exec &gt; ${PROJECT_DIR}/prebuild.log 2&gt;&amp;1&#10;echo $PROJECT_DIR&#10;&#10;find ${PROJECT_DIR}/../../swift -regex &quot;.*\.swift&quot; -type f -print0 | while read -d $&apos;\0&apos; file&#10;do&#10;  if grep -q &apos;TRIKOT_FRAMEWORK_NAME&apos; &quot;$file&quot;; then&#10;    sed -i &apos;&apos; &quot;s/TRIKOT_FRAMEWORK_NAME/TrikotViewmodelsDeclarativeSample/g&quot; $file&#10;  fi&#10;done&#10;">
+               scriptText = "exec &gt; ${PROJECT_DIR}/prebuild.log 2&gt;&amp;1&#10;echo $PROJECT_DIR&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

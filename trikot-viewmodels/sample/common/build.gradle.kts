@@ -25,7 +25,7 @@ android {
     }
 }
 
-val frameworkName = "TrikotViewmodelsSample"
+val frameworkName = "TRIKOT_FRAMEWORK_NAME"
 
 kotlin {
     android {
@@ -79,7 +79,6 @@ val copyFramework by tasks.creating {
     val buildType = project.findProperty("kotlin.build.type")?.toString() ?: "RELEASE"
     val target = project.findProperty("kotlin.target")?.toString() ?: "iosArm64"
     val targetDir = project.findProperty("configuration.build.dir")?.toString() ?: "build/bin/ios"
-    val translationDir = "$projectDir/../common/src/commonMain/resources/translations"
     val framework =
         kotlin.targets.getByName<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>(target).binaries.getFramework(
             buildType
@@ -99,7 +98,6 @@ val copyFramework by tasks.creating {
         }
 
         copy {
-            from(translationDir)
             into(frameworkDir)
             include("**")
         }

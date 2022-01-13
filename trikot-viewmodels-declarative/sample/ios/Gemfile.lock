@@ -92,6 +92,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  arm64-darwin-21
 
 DEPENDENCIES
   activesupport
@@ -99,4 +100,4 @@ DEPENDENCIES
   rspec-expectations (= 2.11.2)
 
 BUNDLED WITH
-   2.2.29
+   2.3.5

@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Awesome library'
 
     spec.static_framework         = true
-    spec.vendored_frameworks      = "build/bin/ios/ViewModelsSample.framework"
+    spec.vendored_frameworks      = "build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework"
     spec.libraries                = "c++", "System"
     spec.module_name              = "#{spec.name}_umbrella"
 
@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
     }
 
     spec.prepare_command = <<-CMD
-        ../gradlew :common:copyFramework -Pkotlin.build.type=RELEASE
+         mkdir -p build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework
       CMD
 
     spec.script_phases = [
@@ -27,13 +27,9 @@ Pod::Spec.new do |spec|
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
-                cd "$SRCROOT/../.." 
+                cd "$SRCROOT/../../../.."
                 pwd
-                FILE=.env.sh
-                if [ -f $FILE ]; then
-                source .env.sh
-                fi
-                ./gradlew :common:copyFramework \
+                ./gradlew :trikot-viewmodels:sample:common:copyFramework\
                 -Pconfiguration.build.dir=${CONFIGURATION_BUILD_DIR} \
                 -Pkotlin.build.type=${KOTLIN_BUILD_TYPE} \
                 -Pkotlin.target=${KOTLIN_TARGET}

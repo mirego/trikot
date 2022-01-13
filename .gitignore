@@ -79,6 +79,9 @@ native/
 build/
 captures/
 
+# Log files
+*.log
+
 # Crashlytics
 crashlytics-build.properties
 com_crashlytics_export_strings.xml

@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'TrikotViewmodelsDeclarativeSample'
+    spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
     spec.version                  = '1.0.0'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Awesome library'
 
     spec.static_framework         = true
-    spec.vendored_frameworks      = "build/bin/ios/TrikotViewmodelsDeclarativeSample.framework"
+    spec.vendored_frameworks      = "build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework"
     spec.libraries                = "c++", "System"
     spec.module_name              = "#{spec.name}_umbrella"
 
@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
     }
 
     spec.prepare_command = <<-CMD
-        mkdir -p build/bin/ios/TrikotViewmodelsDeclarativeSample.framework
+        mkdir -p build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework
     CMD
 
     spec.script_phases = [
@@ -35,9 +35,9 @@ if [ "$ENABLE_PREVIEWS" = "NO" ]
 then
   echo "Building common framework"
 
-  cd "$SRCROOT/../.."
+  cd "$SRCROOT/../../../.."
 
-  ./gradlew :sample:common:copyFramework \
+  ./gradlew :trikot-viewmodels-declarative:sample:common:copyFramework \
     -Pconfiguration.build.dir="build/bin/ios" \
     -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" \
     -Pkotlin.target="$KOTLIN_TARGET"

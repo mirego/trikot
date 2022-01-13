@@ -20,14 +20,7 @@ fileprivate extension UIBarButtonItem {
         unbindActionBlock()
         if let buttonViewModel = viewModel {
             vmd.observe(buttonViewModel.publisher(for: \VMDButtonViewModel<VMDImageContent>.content)) { [weak self] content in
-                self?.vmd.imageDescriptorLoader.loadImage(imageDescriptor: content.image, completionHandler: { result in
-                    switch result {
-                    case .success(let image):
-                        self?.image = image
-                    case .failure(_):
-                        break
-                    }
-                })
+                self?.image = content.image.uiImage
             }
             bindActionBlock(buttonViewModel.actionBlock)
         }
