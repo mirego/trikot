@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 import Trikot_viewmodels
 
 @UIApplicationMain

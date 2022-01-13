@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'ViewModelsSample'
+    spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
     spec.version                  = '0.0.1'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }

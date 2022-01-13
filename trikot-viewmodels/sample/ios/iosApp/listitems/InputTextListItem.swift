@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 class InputTextListItem: UIView {
     private let textField = UITextField(frame: .zero)

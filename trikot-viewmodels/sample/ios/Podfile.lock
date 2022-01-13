@@ -2,19 +2,19 @@ PODS:
   - SwiftLint (0.43.0)
   - Trikot.streams (0.0.1):
     - Trikot.streams/streams (= 0.0.1)
-    - ViewModelsSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.streams/streams (0.0.1):
-    - ViewModelsSample
+    - TRIKOT_FRAMEWORK_NAME
   - Trikot.viewmodels (0.0.1):
     - Trikot.streams
-    - ViewModelsSample
-  - ViewModelsSample (0.0.1)
+    - TRIKOT_FRAMEWORK_NAME
+  - TRIKOT_FRAMEWORK_NAME (0.0.1)
 
 DEPENDENCIES:
   - SwiftLint
   - Trikot.streams (from `../../../trikot-streams`)
   - Trikot.viewmodels (from `../../`)
-  - ViewModelsSample (from `../common`)
+  - TRIKOT_FRAMEWORK_NAME (from `../common`)
 
 SPEC REPOS:
   trunk:
@@ -25,15 +25,15 @@ EXTERNAL SOURCES:
     :path: "../../../trikot-streams"
   Trikot.viewmodels:
     :path: "../../"
-  ViewModelsSample:
+  TRIKOT_FRAMEWORK_NAME:
     :path: "../common"
 
 SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
-  Trikot.streams: 495aae8afde3c2c3c5d08124d0e1c0c038108c4d
-  Trikot.viewmodels: 4a1fbc4ba79056a03c1d3ac0180b2f944d893ce5
-  ViewModelsSample: e388931e5cbba73ee320dcf375addf3bccbd7878
+  Trikot.streams: 6921e5e72e0dcfd230653e3c1089eb77b96f8c1d
+  Trikot.viewmodels: fb2018613765207f83868109ecd34fd10cd8c090
+  TRIKOT_FRAMEWORK_NAME: 527521ea248fd6138a8ff97820cb23d769091254
 
-PODFILE CHECKSUM: d4ccb90de260ad50f3cfc75e4c9fecbaefd5cbb8
+PODFILE CHECKSUM: 89d13d06b6af88a69b1557240a80ad5f66ecffe1
 
 COCOAPODS: 1.9.3

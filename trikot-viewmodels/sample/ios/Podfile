@@ -3,7 +3,7 @@ platform :ios, platformVersion
 
 install! 'cocoapods', :disable_input_output_paths => true
 
-ENV['TRIKOT_FRAMEWORK_NAME']='ViewModelsSample' 
+ENV['TRIKOT_FRAMEWORK_NAME']='TRIKOT_FRAMEWORK_NAME'
 
 target 'iosApp' do
   use_frameworks!

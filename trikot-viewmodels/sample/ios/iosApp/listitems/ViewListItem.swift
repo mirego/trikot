@@ -1,5 +1,5 @@
 import UIKit
-import ViewModelsSample
+import TRIKOT_FRAMEWORK_NAME
 
 class ViewListItem: UIView {
     private let view = UIView(frame: .zero)
