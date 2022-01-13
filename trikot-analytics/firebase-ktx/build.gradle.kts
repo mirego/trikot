@@ -3,8 +3,7 @@ plugins {
     id("kotlin-platform-android")
     id("org.jlleitschuh.gradle.ktlint")
     id("maven-publish")
-    id("mirego.release").version("2.0")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -33,13 +32,6 @@ android {
         minSdk = Versions.Android.MIN_SDK
         targetSdk = Versions.Android.TARGET_SDK
     }
-}
-
-release {
-    checkTasks = listOf("check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
-    tagPrefix = "firebase-ktx-"
 }
 
 tasks {

@@ -2,8 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.release").version("2.0")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -141,8 +140,3 @@ android {
     }
 }
 
-release {
-    checkTasks = listOf("check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
-}
