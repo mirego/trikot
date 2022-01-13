@@ -20,8 +20,9 @@ version = "0.0.1"
 
 android {
     defaultConfig {
-        compileSdk = 30
-        minSdk = 21
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 

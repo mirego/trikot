@@ -100,9 +100,9 @@ kotlin {
 
 android {
     defaultConfig {
-        compileSdkVersion(30)
-        minSdkVersion(14)
-        targetSdkVersion(30)
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 

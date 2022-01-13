@@ -8,9 +8,9 @@ plugins {
 
 android {
     defaultConfig {
-        compileSdk = 31
-        minSdk = 23
-        targetSdk = 31
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
 
         applicationId = "com.mirego.sample"
         versionCode = 1

@@ -9,4 +9,10 @@ object Versions {
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.262"
     const val ANDROIDX_LIFECYCLE_EXTENSIONS = "2.2.0"
     const val ANDROIDX_LIFECYCLE = "2.3.0"
+
+    object Android {
+        const val TARGET_SDK = 30
+        const val COMPILE_SDK = 31
+        const val MIN_SDK = 23
+    }
 }
