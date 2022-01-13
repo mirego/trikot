@@ -13,8 +13,10 @@ Pod::Spec.new do |spec|
     spec.module_name              = "#{spec.name}_umbrella"
 
     spec.pod_target_xcconfig = {
-        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'ios_x64',
-        'KOTLIN_TARGET[sdk=iphoneos*]' => 'ios_arm',
+        'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
+        'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
+        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosX64',
+        'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64'
     }
 
     spec.prepare_command = <<-CMD
@@ -27,13 +29,20 @@ Pod::Spec.new do |spec|
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
-                cd "$SRCROOT/../../../.."
-                pwd
-                ./gradlew :trikot-viewmodels:sample:common:copyFramework\
-                -Pconfiguration.build.dir=${CONFIGURATION_BUILD_DIR} \
-                -Pkotlin.build.type=${KOTLIN_BUILD_TYPE} \
-                -Pkotlin.target=${KOTLIN_TARGET}
-            SCRIPT
+            if [ "$ENABLE_PREVIEWS" = "NO" ]
+            then
+              echo "Building common framework"
+
+              cd "$SRCROOT/../../../.."
+
+              ./gradlew :trikot-viewmodels:sample:common:copyFramework \
+                -Pconfiguration.build.dir="build/bin/ios" \
+                -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" \
+                -Pkotlin.target="$KOTLIN_TARGET"
+            else
+              echo "Skipping build of common framework in preview mode"
+            fi
+               SCRIPT
         }
     ]
 end
