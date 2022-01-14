@@ -32,13 +32,8 @@ job(context.jobFullName) {
         shell('''
           source "${SDKMAN_DIR}/bin/sdkman-init.sh"
           sdk install java 11.0.10.hs-adpt
-          sdk use java 11.0.10.hs-adpt''')
-        gradle {
-            useWrapper()
-            makeExecutable()
-            tasks('release')
-            switches('-i -s')
-        }
+          sdk use java 11.0.10.hs-adpt
+          ./gradlew release -i -s''')
     }
     publishers {
         slackNotifier {
