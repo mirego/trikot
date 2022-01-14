@@ -32,21 +32,21 @@ release {
         "check"
     )
     buildTasks = listOf(
-        ":trikot-foundation:trikotFoundation:publishToMavenLocal",
-        ":trikot-streams:streams:publishToMavenLocal",
-        ":trikot-http:http:publishToMavenLocal",
-        ":trikot-datasources:datasources:publishToMavenLocal",
-        ":trikot-kword:kword:publishToMavenLocal",
-        ":trikot-kword:kword-plugin:publishToMavenLocal",
-        ":trikot-http:http:publishToMavenLocal",
-        ":trikot-viewmodels:viewmodels:publishToMavenLocal",
-        ":trikot-viewmodels-declarative:viewmodels-declarative:publishToMavenLocal",
-        ":trikot-viewmodels-declarative:compose:publishToMavenLocal",
-        ":trikot-viewmodels-declarative:compose:publishToMavenLocal",
-        ":trikot-analytics:analytics:publishToMavenLocal",
-        ":trikot-analytics:analytics-viewmodel:publishToMavenLocal",
-        ":trikot-analytics:firebase-ktx:publishToMavenLocal",
-        ":trikot-analytics:mixpanel-ktx:publishToMavenLocal"
+        ":trikot-foundation:trikotFoundation:publish",
+        ":trikot-streams:streams:publish",
+        ":trikot-http:http:publish",
+        ":trikot-datasources:datasources:publish",
+        ":trikot-kword:kword:publish",
+        ":trikot-kword:kword-plugin:publish",
+        ":trikot-http:http:publish",
+        ":trikot-viewmodels:viewmodels:publish",
+        ":trikot-viewmodels-declarative:viewmodels-declarative:publish",
+        ":trikot-viewmodels-declarative:compose:publish",
+        ":trikot-viewmodels-declarative:compose:publish",
+        ":trikot-analytics:analytics:publish",
+        ":trikot-analytics:analytics-viewmodel:publish",
+        ":trikot-analytics:firebase-ktx:publish",
+        ":trikot-analytics:mixpanel-ktx:publish"
     )
     updateVersionPart = 2
 }
