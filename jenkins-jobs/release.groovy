@@ -29,10 +29,10 @@ job(context.jobFullName) {
         }
     }
     steps {
-        envInjectBuilder {
-            propertiesContent('JAVA_HOME=$OPENJDK_HOME')
-            propertiesFilePath('')
-        }
+        shell('''
+          source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+          sdk install java 11.0.10.hs-adpt
+          sdk use java 11.0.10.hs-adpt''')
         gradle {
             useWrapper()
             makeExecutable()
