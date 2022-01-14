@@ -1,5 +1,6 @@
 package com.mirego.trikot.bluetooth.android
 
+import android.annotation.SuppressLint
 import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.util.SparseArray
@@ -23,6 +24,7 @@ fun ScanResult.toBluetoothScanResult(context: Context): AndroidBluetoothScanResu
 }
 
 @ExperimentalTime
+@SuppressLint("MissingPermission")
 class AndroidBluetoothScanResult(
     private val scanResult: ScanResult,
     private val context: Context

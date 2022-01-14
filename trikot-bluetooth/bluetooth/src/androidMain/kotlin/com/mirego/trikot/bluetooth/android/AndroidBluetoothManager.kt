@@ -1,6 +1,7 @@
 package com.mirego.trikot.bluetooth.android
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothAdapter.STATE_ON
 import android.bluetooth.le.BluetoothLeScanner
@@ -29,6 +30,7 @@ import kotlin.concurrent.schedule
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
+@SuppressLint("MissingPermission")
 class AndroidBluetoothManager(val context: Context) : BluetoothManager {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
