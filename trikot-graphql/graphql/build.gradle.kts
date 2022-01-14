@@ -2,8 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.release").version("2.0")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -34,11 +33,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.mirego.trikot:trikotFoundation:${project.extra["trikot_foundation_version"]}")
-                implementation("com.mirego.trikot:streams:${project.extra["trikot_streams_version"]}")
-                implementation("com.mirego.trikot:http:${project.extra["trikot_http_version"]}")
-                implementation("com.mirego.trikot:datasources:${project.extra["trikot_datasources_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.extra["serialization_version"]}")
+                implementation(project(Project.TRIKOT_FOUNDATION))
+                implementation(project(Project.TRIKOT_STREAMS))
+                implementation(project(Project.TRIKOT_HTTP))
+                implementation(project(Project.TRIKOT_DATASOURCES))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
             }
         }
 
@@ -74,8 +73,8 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
+                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
             }
         }
 
@@ -130,14 +129,8 @@ kotlin {
 
 android {
     defaultConfig {
-        compileSdkVersion(30)
-        minSdkVersion(14)
-        targetSdkVersion(30)
+        compileSdk = Versions.Android.COMPILE_SDK
+        minSdk = Versions.Android.MIN_SDK
+        targetSdk = Versions.Android.TARGET_SDK
     }
-}
-
-release {
-    checkTasks = listOf("check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
 }
