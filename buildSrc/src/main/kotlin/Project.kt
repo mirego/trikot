@@ -9,4 +9,5 @@ object Project {
     const val TRIKOT_VIEWMODELS_DECLARATIVE = ":trikot-viewmodels-declarative:viewmodels-declarative"
     const val TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE = ":trikot-viewmodels-declarative:compose"
     const val TRIKOT_VIEWMODELS_DECLARATIVE_SAMPLE_COMMON = ":trikot-viewmodels-declarative:sample:common"
+    const val TRIKOT_DATASOURCES = ":trikot-datasources:datasources"
 }

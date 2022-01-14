@@ -45,7 +45,9 @@ release {
         ":trikot-analytics:analytics:publish",
         ":trikot-analytics:analytics-viewmodel:publish",
         ":trikot-analytics:firebase-ktx:publish",
-        ":trikot-analytics:mixpanel-ktx:publish"
+        ":trikot-analytics:mixpanel-ktx:publish",
+        ":trikot-bluetooth:bluetooth:publish",
+        ":trikot-graphql:graphql:publish"
     )
     updateVersionPart = 2
 }

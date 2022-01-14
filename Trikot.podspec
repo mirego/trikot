@@ -83,6 +83,13 @@ Pod::Spec.new do |spec|
     subspec.source_files  = "trikot-kword/swift-extensions/*.swift"
   end
 
+  # Bluetooth
+  spec.subspec 'bluetooth' do |subspec|
+    subspec.source_files  = "trikot-bluetooth/swift-extensions/*.swift"
+    subspec.ios.deployment_target  = '10.0'
+    subspec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
+  end
+
   spec.prepare_command = <<-CMD
     find . -type f -name "*.swift" -exec sed -i '' -e "s/TRIKOT_FRAMEWORK_NAME/${TRIKOT_FRAMEWORK_NAME}/g" {} +
   CMD

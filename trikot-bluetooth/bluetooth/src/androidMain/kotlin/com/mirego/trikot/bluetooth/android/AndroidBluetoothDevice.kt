@@ -1,5 +1,6 @@
 package com.mirego.trikot.bluetooth.android
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCallback
 import android.bluetooth.BluetoothGattCharacteristic
@@ -21,6 +22,7 @@ import java.util.Locale
 import java.util.Timer
 import kotlin.concurrent.schedule
 
+@SuppressLint("MissingPermission")
 class AndroidBluetoothDevice(
     private val device: android.bluetooth.BluetoothDevice,
     private val context: Context,
