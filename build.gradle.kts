@@ -42,7 +42,6 @@ release {
         ":trikot-viewmodels:viewmodels:publish",
         ":trikot-viewmodels-declarative:viewmodels-declarative:publish",
         ":trikot-viewmodels-declarative:compose:publish",
-        ":trikot-viewmodels-declarative:compose:publish",
         ":trikot-analytics:analytics:publish",
         ":trikot-analytics:analytics-viewmodel:publish",
         ":trikot-analytics:firebase-ktx:publish",

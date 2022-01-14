@@ -139,4 +139,3 @@ android {
         targetSdk = Versions.Android.TARGET_SDK
     }
 }
-
