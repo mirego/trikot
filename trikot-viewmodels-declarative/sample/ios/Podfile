@@ -8,12 +8,12 @@ target 'Sample' do
   use_frameworks!
 
   pod 'TRIKOT_FRAMEWORK_NAME', :path => '../common'
-  pod 'Trikot.viewmodels.declarative', :path => '../..'
-  pod 'Trikot.viewmodels.declarative/UIKit', :path => '../..'
-  pod 'Trikot.viewmodels.declarative/SwiftUI', :path => '../..'
-  pod 'Trikot.streams', :path => '../../../trikot-streams', :inhibit_warnings => true
-  pod 'Trikot.http', :path => '../../../trikot-http', :inhibit_warnings => true
-  pod 'Trikot.kword', :path => '../../../trikot-kword', :inhibit_warnings => true
+  pod 'Trikot/viewmodels.declarative', :path => '../../..'
+  pod 'Trikot/viewmodels.declarative.UIKit', :path => '../../..'
+  pod 'Trikot/viewmodels.declarative.SwiftUI', :path => '../../..'
+  pod 'Trikot/streams', :path => '../../..', :inhibit_warnings => true
+  pod 'Trikot/http', :path => '../../..', :inhibit_warnings => true
+  pod 'Trikot/kword', :path => '../../..', :inhibit_warnings => true
   pod 'SwiftLint'
 
   post_install do |installer|

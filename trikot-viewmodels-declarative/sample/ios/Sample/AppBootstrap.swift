@@ -1,7 +1,6 @@
 import Foundation
 import TRIKOT_FRAMEWORK_NAME
-import Trikot_http
-import Trikot_kword
+import Trikot
 
 class AppBootstrap {
     static func initialize() {

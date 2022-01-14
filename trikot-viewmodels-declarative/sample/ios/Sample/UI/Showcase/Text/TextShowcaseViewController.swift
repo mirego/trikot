@@ -1,5 +1,5 @@
 import UIKit
-import Trikot_viewmodels_declarative
+import Trikot
 import TRIKOT_FRAMEWORK_NAME
 
 class TextShowcaseViewController: BaseViewModelViewController<TextShowcaseViewModelController, TextShowcaseViewModel, TextShowcaseView, TextShowcaseNavigationDelegate> {

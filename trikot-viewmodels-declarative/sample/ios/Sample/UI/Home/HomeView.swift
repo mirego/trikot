@@ -1,5 +1,5 @@
 import SwiftUI
-import Trikot_viewmodels_declarative
+import Trikot
 import TRIKOT_FRAMEWORK_NAME
 
 struct HomeView: RootViewModelView {

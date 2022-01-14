@@ -1,6 +1,6 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
-import Trikot_streams
+import Trikot
 
 extension UIView {
     public var viewModel: ViewModel? {

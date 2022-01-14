@@ -1,4 +1,4 @@
-import Trikot_viewmodels
+import Trikot
 import TRIKOT_FRAMEWORK_NAME
 
 class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvider {

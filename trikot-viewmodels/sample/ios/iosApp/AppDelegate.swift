@@ -1,6 +1,6 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
-import Trikot_viewmodels
+import Trikot
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NavigationDelegate {

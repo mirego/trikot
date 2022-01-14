@@ -1,6 +1,6 @@
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
-import Trikot_viewmodels_declarative
+import Trikot
 
 public class ViewControllerFactory {
     private let viewModelControllerFactory: SampleViewModelControllerFactory

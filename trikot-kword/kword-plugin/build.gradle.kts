@@ -1,7 +1,6 @@
 plugins {
     id("groovy")
-    id("mirego.release").version("2.0")
-    id("mirego.publish").version("1.0")
+    id("mirego.publish")
 }
 
 repositories {
@@ -35,11 +34,4 @@ publishing {
             artifact(tasks["sourcesJar"])
         }
     }
-}
-
-release {
-    tagPrefix = "plugin-"
-    checkTasks = listOf("check")
-    buildTasks = listOf("publish")
-    updateVersionPart = 2
 }
