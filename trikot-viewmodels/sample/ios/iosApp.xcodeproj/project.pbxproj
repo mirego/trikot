@@ -245,7 +245,6 @@
 				F861D7DB207FA40F0085E80D /* Resources */,
 				40171A17226663B300C0D218 /* Embed Frameworks */,
 				1FBAC30C22A834EF008281E9 /* Run SwiftLint */,
-				030BD2FBAB836C381E9F596B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -363,21 +362,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		030BD2FBAB836C381E9F596B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1FBAC30C22A834EF008281E9 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

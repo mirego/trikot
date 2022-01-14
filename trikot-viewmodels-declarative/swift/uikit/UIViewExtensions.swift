@@ -1,5 +1,5 @@
 import TRIKOT_FRAMEWORK_NAME
-import Trikot_streams
+import Trikot
 import UIKit
 
 extension UIView: ViewModelDeclarativeCompatible { }

@@ -1,5 +1,5 @@
 import SwiftUI
-import Trikot_viewmodels_declarative
+import Trikot
 
 enum TextStyle {
     case caption2
