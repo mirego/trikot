@@ -48,5 +48,5 @@ release {
         ":trikot-analytics:firebase-ktx:publish",
         ":trikot-analytics:mixpanel-ktx:publish"
     )
-    updateVersionPart = 2
+    updateVersionPart = 3
 }
