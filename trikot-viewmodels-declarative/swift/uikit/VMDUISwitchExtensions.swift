@@ -13,17 +13,17 @@ extension ViewModelDeclarativeWrapper where Base : UISwitch {
 
 fileprivate extension UISwitch {
     func bindViewModel(_ viewModel: VMDToggleViewModel<VMDNoContent>?) {
-        removeTarget(self, action: #selector(UISwitch.onValueChanged), for: .valueChanged)
+        removeTarget(self, action: #selector(UISwitch.onSwitchValueChanged), for: .valueChanged)
         if let toggleViewModel = viewModel {
             observe(toggleViewModel.publisher(for: \VMDToggleViewModel<VMDNoContent>.isOn)) { [weak self] isOn in
                 self?.isOn = isOn
             }
-            self.addTarget(self, action: #selector(UISwitch.onValueChanged), for: .valueChanged)
+            self.addTarget(self, action: #selector(UISwitch.onSwitchValueChanged), for: .valueChanged)
         }
     }
 
     @objc
-    private func onValueChanged(sender: UISwitch) {
+    private func onSwitchValueChanged(sender: UISwitch) {
         vmd.toggleViewModel?.onValueChange(isOn: isOn)
     }
 }
