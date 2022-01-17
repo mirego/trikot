@@ -8,9 +8,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class DelayProcessor<T>(
     parentPublisher: Publisher<T>,
     private val duration: Duration,

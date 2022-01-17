@@ -29,10 +29,6 @@ kotlin {
     macosX64()
 
     sourceSets {
-        all {
-            languageSettings.useExperimentalAnnotation("kotlin.time.ExperimentalTime")
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(project(Project.TRIKOT_FOUNDATION))
@@ -47,8 +43,8 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
                 implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
+                implementation("androidx.appcompat:appcompat:1.4.1")
             }
         }
 

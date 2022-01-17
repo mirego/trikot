@@ -59,7 +59,6 @@ dependencies {
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_SAMPLE_COMMON))
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE))
     implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")

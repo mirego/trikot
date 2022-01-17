@@ -9,9 +9,7 @@ import platform.Foundation.NSISO8601DateFormatter
 import platform.Foundation.dateByAddingTimeInterval
 import platform.Foundation.timeIntervalSince1970
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 actual class Date(val nsDate: NSDate) {
     actual val epoch: Long = (nsDate.timeIntervalSince1970 * 1000).toLong()
 

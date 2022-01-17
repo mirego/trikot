@@ -2,17 +2,17 @@ package com.mirego.trikot.streams.reactive.backoff
 
 import com.mirego.trikot.foundation.concurrent.atomic
 import kotlin.time.Duration
-import kotlin.time.milliseconds
-import kotlin.time.minutes
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.minutes
 
 private fun min(a: Duration, b: Duration): Duration {
     return if (a <= b) a else b
 }
 
 class ExponentialBackoffPolicy(
-    private val initialInterval: Duration = Duration.milliseconds(500),
+    private val initialInterval: Duration = 500.milliseconds,
     private val maxRetries: Int? = null,
-    private val maxInterval: Duration = Duration.minutes(1),
+    private val maxInterval: Duration = 1.minutes,
     private val multiplier: Double = 1.5
 ) : BackoffPolicy {
     private var currentInterval: Duration by atomic(initialInterval)

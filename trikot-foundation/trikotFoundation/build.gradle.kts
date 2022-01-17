@@ -31,10 +31,6 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            languageSettings.useExperimentalAnnotation("kotlin.time.ExperimentalTime")
-        }
-
         val commonMain by getting
 
         val commonTest by getting {

@@ -49,7 +49,6 @@ kotlin {
         all {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlin.Experimental")
-                useExperimentalAnnotation("kotlin.time.ExperimentalTime")
             }
         }
 

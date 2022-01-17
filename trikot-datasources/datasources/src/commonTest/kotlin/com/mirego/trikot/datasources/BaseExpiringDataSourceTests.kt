@@ -6,9 +6,7 @@ import com.mirego.trikot.streams.reactive.BehaviorSubject
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.promise.Promise
 import kotlin.test.Test
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class BaseExpiringDataSourceTests {
 
     private val requestUseCache1 = BasicRequest("1", DataSourceRequest.Type.USE_CACHE, 1000)

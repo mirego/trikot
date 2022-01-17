@@ -7,8 +7,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import kotlin.time.Duration
-import kotlin.time.seconds
+import kotlin.time.Duration.Companion.seconds
 
 class TimerPublisherTests {
 
@@ -17,7 +16,7 @@ class TimerPublisherTests {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, _ -> MockTimer().also { timers.add(it) } }
 
-        Publishers.timer(Duration.seconds(10), timerFactory)
+        Publishers.timer(10.seconds, timerFactory)
         assertEquals(0, timerFactory.singleCall)
     }
 
@@ -25,10 +24,10 @@ class TimerPublisherTests {
     fun testTimerPublisher_emitsAfterSubscriptionDelay() {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, duration ->
-            assertEquals(Duration.seconds(10), duration)
+            assertEquals(10.seconds, duration)
             MockTimer().also { timers.add(it) }
         }
-        val timerPublisher = Publishers.timer(Duration.seconds(10), timerFactory)
+        val timerPublisher = Publishers.timer(10.seconds, timerFactory)
 
         val receivedResults = mutableListOf<Long>()
         var completed = false
@@ -51,10 +50,10 @@ class TimerPublisherTests {
     fun testTimerPublisher_doesNotEmitIfCancelledBeforeDelay() {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, duration ->
-            assertEquals(Duration.seconds(10), duration)
+            assertEquals(10.seconds, duration)
             MockTimer().also { timers.add(it) }
         }
-        val timerPublisher = Publishers.timer(Duration.seconds(10), timerFactory)
+        val timerPublisher = Publishers.timer(10.seconds, timerFactory)
 
         val receivedResults = mutableListOf<Long>()
         var completed = false

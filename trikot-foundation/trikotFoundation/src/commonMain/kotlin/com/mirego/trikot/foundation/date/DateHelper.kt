@@ -1,8 +1,5 @@
 package com.mirego.trikot.foundation.date
 
-import kotlin.time.ExperimentalTime
-
-@ExperimentalTime
 object DateHelper {
     fun compare(initial: Date, other: Date): Int {
         val difference = initial.epoch - other.epoch

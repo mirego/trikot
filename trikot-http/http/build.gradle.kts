@@ -83,7 +83,6 @@ kotlin {
             dependencies {
                 api("io.ktor:ktor-client-logging-jvm:${Versions.KTOR}")
                 implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
                 implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
                     exclude(group = "org.reactivestreams")
                 }

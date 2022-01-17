@@ -3,9 +3,7 @@ package com.mirego.trikot.streams.utils
 import com.mirego.trikot.foundation.timers.Timer
 import com.mirego.trikot.foundation.timers.TimerFactory
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class MockTimerFactory(private val creationBlock: (Boolean, Duration) -> MockTimer) : TimerFactory {
     var repeatableCall = 0
     var singleCall = 0

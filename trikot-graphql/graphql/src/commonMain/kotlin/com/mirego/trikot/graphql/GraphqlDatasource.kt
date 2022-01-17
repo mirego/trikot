@@ -7,12 +7,9 @@ import com.mirego.trikot.http.HttpConfiguration
 import com.mirego.trikot.http.HttpHeaderProvider
 import com.mirego.trikot.streams.reactive.executable.ExecutablePublisher
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 typealias GraphqlDataSourceType<T> = DataSource<GraphqlQueryDataSourceRequest<T>, T>
 
-@ExperimentalTime
 data class GraphqlQueryDataSourceRequest<T>(
     val query: GraphqlQuery<T>,
     override val cacheableId: String,
@@ -20,7 +17,6 @@ data class GraphqlQueryDataSourceRequest<T>(
     val requestTimeout: Duration? = null
 ) : DataSourceRequest
 
-@ExperimentalTime
 class GraphqlDataSource<T>(
     private val graphqlPublisherFactory: GraphqlPublisherFactory,
     cacheDataSource: DataSource<GraphqlQueryDataSourceRequest<T>, T>? = null,

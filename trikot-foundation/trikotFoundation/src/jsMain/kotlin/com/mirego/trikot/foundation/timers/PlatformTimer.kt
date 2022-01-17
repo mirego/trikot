@@ -2,9 +2,7 @@ package com.mirego.trikot.foundation.timers
 
 import kotlinx.browser.window
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 actual class PlatformTimer actual constructor(delay: Duration, private val repeat: Boolean, block: () -> Unit) :
     Timer {
     private val timeoutId = if (repeat) {

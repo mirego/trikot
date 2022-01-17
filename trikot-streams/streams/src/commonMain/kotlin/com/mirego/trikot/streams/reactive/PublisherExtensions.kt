@@ -46,7 +46,6 @@ import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProce
 import com.mirego.trikot.streams.reactive.processors.WithPreviousValueProcessor
 import org.reactivestreams.Publisher
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 typealias SubscriptionBlock<T> = (T) -> Unit
 typealias SubscriptionErrorBlock = (Throwable) -> Unit
@@ -165,7 +164,6 @@ fun <T> Publisher<T>.timeout(
  *
  * @see @see <a href="http://reactivex.io/documentation/operators/delay.html">http://reactivex.io/documentation/operators/delay.html</a>
  */
-@ExperimentalTime
 fun <T> Publisher<T>.delay(
     duration: Duration,
     timerFactory: TimerFactory = FoundationConfiguration.timerFactory
@@ -173,7 +171,6 @@ fun <T> Publisher<T>.delay(
     return DelayProcessor(this, duration, timerFactory)
 }
 
-@ExperimentalTime
 fun <T> Publisher<T>.debounce(
     timeout: Duration,
     timerFactory: TimerFactory = FoundationConfiguration.timerFactory
