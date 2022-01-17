@@ -15,12 +15,12 @@ extension ViewModelDeclarativeWrapper where Base : UIImageView {
         }
     }
 
-    public static var imageViewModelHandler: ImageViewModelHandler {
+    public static var imageViewModelHandler: VMDImageViewModelHandler {
         get {
-            if let customHandler = objc_getAssociatedObject(self, IMAGE_VIEW_MODEL_HANDLER_KEY) as? ImageViewModelHandler {
+            if let customHandler = objc_getAssociatedObject(self, IMAGE_VIEW_MODEL_HANDLER_KEY) as? VMDImageViewModelHandler {
                 return customHandler
             } else {
-                return DefaultImageViewModelHandler.shared
+                return VMDDefaultImageViewModelHandler.shared
             }
         }
         set(value) {
@@ -58,13 +58,13 @@ extension ViewModelDeclarativeWrapper where Base : UIImageView {
     }
 }
 
-public protocol ImageViewModelHandler {
+public protocol VMDImageViewModelHandler {
     func handleImage(imageViewModel: VMDImageViewModel?, on imageView: UIImageView)
     func handleImageDescriptor(imageDescriptor: VMDImageDescriptor?, on imageView: UIImageView)
 }
 
-private class DefaultImageViewModelHandler: ImageViewModelHandler {
-    static let shared = DefaultImageViewModelHandler()
+private class VMDDefaultImageViewModelHandler: VMDImageViewModelHandler {
+    static let shared = VMDDefaultImageViewModelHandler()
 
     private init() { }
 
