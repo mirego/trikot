@@ -1,9 +1,7 @@
 package com.mirego.trikot.foundation.date
 
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 actual class Date(val date: kotlin.js.Date) {
     actual val epoch: Long = date.getTime().toLong()
 

@@ -111,7 +111,8 @@ fun RemoteImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
 ) {
-    val coilPainter = rememberImagePainter(imageUrl,
+    val coilPainter = rememberImagePainter(
+        imageUrl,
         builder = {
             size(OriginalSize)
         }

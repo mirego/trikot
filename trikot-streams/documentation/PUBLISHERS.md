@@ -98,7 +98,7 @@ publisher.refresh()
 Repeatable publisher are specialized publisher that are reexecuted after the specified duration, until cancelled.
 
 ```kotlin
-Publishers.repeat(Duration.minutes(1)) {
+Publishers.repeat(1.minutes {
     Publishers.behaviorSubject("I will repeat this message in 1 minute")
 }
 ```

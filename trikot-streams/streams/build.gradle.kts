@@ -32,10 +32,6 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            languageSettings.useExperimentalAnnotation("kotlin.time.ExperimentalTime")
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
@@ -74,8 +70,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}") {
                     exclude(group = "org.reactivestreams")
                 }
             }

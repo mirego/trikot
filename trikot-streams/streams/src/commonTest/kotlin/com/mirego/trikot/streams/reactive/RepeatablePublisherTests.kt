@@ -6,14 +6,14 @@ import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
 
 class RepeatablePublisherTests {
     @Test
     fun blockIsExecutedOnSubscription() {
         var executed = false
 
-        val repeatable = Publishers.repeat(Duration.minutes(1)) {
+        val repeatable = Publishers.repeat(1.minutes) {
             executed = true
             Publishers.behaviorSubject<String>()
         }
@@ -24,7 +24,7 @@ class RepeatablePublisherTests {
     @Test
     fun blockIsReexecutedIfResubscribed() {
         var executionCount by atomic(0)
-        val repeatable = Publishers.repeat(Duration.minutes(1)) {
+        val repeatable = Publishers.repeat(1.minutes) {
             executionCount++
             Publishers.behaviorSubject<String>()
         }
@@ -42,10 +42,10 @@ class RepeatablePublisherTests {
         var executions by atomic(0)
         var timer: MockTimer? = null
         val timerFactory = MockTimerFactory { _, duration ->
-            assertEquals(Duration.minutes(1), duration)
+            assertEquals(1.minutes, duration)
             MockTimer().also { timer = it }
         }
-        val repeatable = Publishers.repeat(Duration.minutes(1), timerFactory) {
+        val repeatable = Publishers.repeat(1.minutes, timerFactory) {
             executions++
             Publishers.behaviorSubject<String>()
         }

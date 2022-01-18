@@ -13,17 +13,13 @@ import com.mirego.trikot.streams.reactive.map
 import org.reactivestreams.Publisher
 import java.util.Timer
 import kotlin.concurrent.schedule
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.DurationUnit
-import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
 
-@ExperimentalTime
 fun ScanResult.toBluetoothScanResult(context: Context): AndroidBluetoothScanResult {
     return AndroidBluetoothScanResult(this, context)
 }
 
-@ExperimentalTime
 @SuppressLint("MissingPermission")
 class AndroidBluetoothScanResult(
     private val scanResult: ScanResult,
@@ -64,7 +60,7 @@ class AndroidBluetoothScanResult(
         updateManufacturerData()
         rssiPublisher.value = scanResult.rssi
         timer = Timer().also {
-            it.schedule(Duration.minutes(1).toLong(DurationUnit.MILLISECONDS)) {
+            it.schedule(1.minutes.toLong(DurationUnit.MILLISECONDS)) {
                 lostHeartbeatCallback?.let {
                     it()
                 }

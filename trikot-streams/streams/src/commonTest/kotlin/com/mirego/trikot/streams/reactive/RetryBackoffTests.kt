@@ -7,17 +7,16 @@ import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.time.Duration
-import kotlin.time.hours
-import kotlin.time.minutes
-import kotlin.time.seconds
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 class RetryBackoffTests {
     @Test
     fun retryBackoff_successAfterFirstRetry() {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, duration ->
-            assertEquals(Duration.minutes(1), duration)
+            assertEquals(1.minutes, duration)
             MockTimer().also { timers.add(it) }
         }
         var attempt: Int by atomic(0)
@@ -31,9 +30,9 @@ class RetryBackoffTests {
         }
         val retryPublisher = upStreamPublisher.retryBackoff(
             ExponentialBackoffPolicy(
-                initialInterval = Duration.minutes(1),
+                initialInterval = 1.minutes,
                 maxRetries = 8,
-                maxInterval = Duration.hours(1),
+                maxInterval = 1.hours,
                 multiplier = 2.0
             ),
             timerFactory
@@ -59,8 +58,8 @@ class RetryBackoffTests {
         var attempt: Int by atomic(0)
         val timerFactory = MockTimerFactory { _, duration ->
             when (timers.size) {
-                0 -> assertEquals(Duration.minutes(1), duration)
-                1 -> assertEquals(Duration.minutes(2), duration)
+                0 -> assertEquals(1.minutes, duration)
+                1 -> assertEquals(2.minutes, duration)
             }
             MockTimer().also { timers.add(it) }
         }
@@ -77,9 +76,9 @@ class RetryBackoffTests {
         }
         val retryPublisher = upStreamPublisher.retryBackoff(
             ExponentialBackoffPolicy(
-                initialInterval = Duration.minutes(1),
+                initialInterval = 1.minutes,
                 maxRetries = 8,
-                maxInterval = Duration.hours(1),
+                maxInterval = 1.hours,
                 multiplier = 2.0
             ),
             timerFactory
@@ -118,26 +117,26 @@ class RetryBackoffTests {
         val timers = mutableListOf<MockTimer>()
         val timerFactory = MockTimerFactory { _, duration ->
             when (timers.size) {
-                0 -> assertEquals(Duration.seconds(1), duration)
-                1 -> assertEquals(Duration.minutes(1), duration)
-                2 -> assertEquals(Duration.seconds(1), duration)
-                3 -> assertEquals(Duration.minutes(2), duration)
-                4 -> assertEquals(Duration.seconds(1), duration)
-                5 -> assertEquals(Duration.minutes(4), duration)
-                6 -> assertEquals(Duration.seconds(1), duration)
-                7 -> assertEquals(Duration.minutes(8), duration)
+                0 -> assertEquals(1.seconds, duration)
+                1 -> assertEquals(1.minutes, duration)
+                2 -> assertEquals(1.seconds, duration)
+                3 -> assertEquals(2.minutes, duration)
+                4 -> assertEquals(1.seconds, duration)
+                5 -> assertEquals(4.minutes, duration)
+                6 -> assertEquals(1.seconds, duration)
+                7 -> assertEquals(8.minutes, duration)
             }
             MockTimer().also { timers.add(it) }
         }
         val upStreamPublisher = ColdPublisher {
-            Publishers.error<Int>(Throwable()).delay(Duration.seconds(1), timerFactory)
+            Publishers.error<Int>(Throwable()).delay(1.seconds, timerFactory)
         }
 
         val retryPublisher = upStreamPublisher.retryBackoff(
             ExponentialBackoffPolicy(
-                initialInterval = Duration.minutes(1),
+                initialInterval = 1.minutes,
                 maxRetries = 4,
-                maxInterval = Duration.hours(1),
+                maxInterval = 1.hours,
                 multiplier = 2.0
             ),
             timerFactory

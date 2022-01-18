@@ -6,13 +6,11 @@ import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 private val dateFormat =
     DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         .withZone(ZoneOffset.UTC)
 
-@ExperimentalTime
 actual class Date(val instant: Instant) {
     actual val epoch: Long
         get() {

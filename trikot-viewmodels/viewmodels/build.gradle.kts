@@ -74,7 +74,6 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-process:${Versions.ANDROIDX_LIFECYCLE}")
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
                 implementation("androidx.recyclerview:recyclerview:1.1.0")
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("com.squareup.picasso:picasso:2.71828")
@@ -88,10 +87,10 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
-                implementation("androidx.test:core:1.3.0")
-                implementation("androidx.test.ext:junit:1.1.2")
+                implementation("androidx.test:core:1.4.1-alpha03")
+                implementation("androidx.test.ext:junit:1.1.3")
                 implementation("org.robolectric:robolectric:4.5.1")
-                implementation("androidx.fragment:fragment-testing:1.3.2")
+                implementation("androidx.fragment:fragment-testing:1.4.0")
             }
         }
 

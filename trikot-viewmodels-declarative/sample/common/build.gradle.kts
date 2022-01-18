@@ -49,7 +49,6 @@ kotlin {
         all {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlin.Experimental")
-                useExperimentalAnnotation("kotlin.time.ExperimentalTime")
             }
         }
 
@@ -67,7 +66,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
             }
         }
 

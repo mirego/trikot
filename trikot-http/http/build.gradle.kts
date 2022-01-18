@@ -23,7 +23,7 @@ kotlin {
     jvm()
     ios()
     iosArm32("iosArm32")
-//    iosSimulatorArm64()
+    iosSimulatorArm64()
     tvos()
     watchos()
     macosX64()
@@ -55,7 +55,7 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
                 implementation("org.jetbrains.kotlin:kotlin-reflect")
                 implementation("junit:junit:4.13.2")
-                implementation("io.mockk:mockk-common:1.12.1")
+                implementation("io.mockk:mockk-common:1.12.2")
             }
         }
 
@@ -83,8 +83,7 @@ kotlin {
             dependencies {
                 api("io.ktor:ktor-client-logging-jvm:${Versions.KTOR}")
                 implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
-                implementation("androidx.lifecycle:lifecycle-extensions:${Versions.ANDROIDX_LIFECYCLE_EXTENSIONS}")
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}") {
                     exclude(group = "org.reactivestreams")
                 }
             }
@@ -102,9 +101,9 @@ kotlin {
             dependsOn(nativeMain)
         }
 
-//        val iosSimulatorArm64Main by getting {
-//            dependsOn(iosArm64Main)
-//        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosArm64Main)
+        }
 
         val iosX64Main by getting {
             dependsOn(nativeMain)

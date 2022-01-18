@@ -10,9 +10,7 @@ import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.http.requestPublisher.DeserializableHttpRequestPublisher
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class GraphqlQueryPublisher<T>(
     query: GraphqlQuery<T>,
     baseUrl: String = HttpConfiguration.baseUrl,

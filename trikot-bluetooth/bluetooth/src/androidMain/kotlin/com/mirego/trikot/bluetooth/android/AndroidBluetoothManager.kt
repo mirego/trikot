@@ -27,9 +27,7 @@ import java.util.Timer
 import java.util.UUID
 import kotlin.collections.set
 import kotlin.concurrent.schedule
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 @SuppressLint("MissingPermission")
 class AndroidBluetoothManager(val context: Context) : BluetoothManager {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()

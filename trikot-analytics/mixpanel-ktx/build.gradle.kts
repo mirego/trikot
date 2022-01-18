@@ -22,8 +22,8 @@ dependencies {
     api(project(Project.TRIKOT_ANALYTICS))
     api(project(Project.TRIKOT_FOUNDATION))
     api(project(Project.TRIKOT_STREAMS))
-    implementation("com.mixpanel.android:mixpanel-android:5.8.2")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
+    implementation("com.mixpanel.android:mixpanel-android:5.9.6")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
 }
 
 android {

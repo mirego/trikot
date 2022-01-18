@@ -8,13 +8,13 @@ import kotlin.test.assertTrue
 class FrozenPublisherTests {
 
     @Test
-    fun `Publishers.frozenBehaviourSubjects really returns a frozen publisher`() {
+    fun frozenBehaviourSubjectsReallyReturnsAFrozenPublisher() {
         val publisher = Publishers.frozenBehaviorSubject("test")
         assertTrue(publisher.isFrozen)
     }
 
     @Test
-    fun `Publishers.frozenPublishSubjects really returns a frozen publisher`() {
+    fun frozenPublishSubjectsReallyReturnsAFrozenPublisher() {
         val publisher = Publishers.frozenPublishSubject<String>()
         assertTrue(publisher.isFrozen)
     }

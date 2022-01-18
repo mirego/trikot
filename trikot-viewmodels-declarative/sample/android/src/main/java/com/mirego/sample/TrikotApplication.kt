@@ -11,11 +11,9 @@ import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControllerFactory
 import com.mirego.trikot.viewmodels.declarative.controller.factory.ViewModelControllerFactoryProvidingApplication
-import kotlin.time.ExperimentalTime
 
 class TrikotApplication : Application(), ViewModelControllerFactoryProvidingApplication {
 
-    @ExperimentalTime
     override fun onCreate() {
         super.onCreate()
 

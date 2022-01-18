@@ -31,20 +31,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.reactivestreams.Publisher
-import kotlin.ByteArray
-import kotlin.Int
-import kotlin.String
-import kotlin.Throwable
 import kotlin.coroutines.CoroutineContext
-import kotlin.let
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
+import kotlin.time.Duration.Companion.seconds
 import io.ktor.client.features.HttpRequestTimeoutException as KtorRequestTimeoutException
 
-@ExperimentalTime
-private val DEFAULT_TIMEOUT_DURATION = Duration.seconds(10)
+private val DEFAULT_TIMEOUT_DURATION = 10.seconds
 
-@ExperimentalTime
 class KtorHttpRequestFactory(
     httpLogLevel: LogLevel = LogLevel.NONE,
     httpLogger: Logger = Logger.DEFAULT,
@@ -107,7 +100,7 @@ class KtorHttpRequestFactory(
 
                         requestBuilder.timeout?.takeIf { it > 0 }?.let { timeout ->
                             timeout {
-                                requestTimeoutMillis = Duration.seconds(timeout).inWholeMilliseconds
+                                requestTimeoutMillis = timeout.seconds.inWholeMilliseconds
                             }
                         }
 

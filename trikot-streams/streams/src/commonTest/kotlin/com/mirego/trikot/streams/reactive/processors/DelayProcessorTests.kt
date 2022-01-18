@@ -10,11 +10,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
+import kotlin.time.Duration.Companion.seconds
 
-@ExperimentalTime
 class DelayProcessorTests {
 
     @Test
@@ -26,7 +23,7 @@ class DelayProcessorTests {
 
         val receivedResults = mutableListOf<String>()
         publisher
-            .delay(Duration.seconds(5), timerFactory)
+            .delay(5.seconds, timerFactory)
             .subscribe(CancellableManager()) {
                 receivedResults.add(it)
             }
@@ -52,7 +49,7 @@ class DelayProcessorTests {
         val receivedValues = mutableListOf<String>()
         val receivedErrors = mutableListOf<Throwable>()
         publisher
-            .delay(Duration.seconds(5), timerFactory)
+            .delay(5.seconds, timerFactory)
             .subscribe(
                 CancellableManager(),
                 onNext = { receivedValues.add(it) },
@@ -80,7 +77,7 @@ class DelayProcessorTests {
         val receivedResults = mutableListOf<String>()
         var completed = false
         publisher
-            .delay(Duration.seconds(5), timerFactory)
+            .delay(5.seconds, timerFactory)
             .subscribe(
                 CancellableManager(),
                 onNext = { receivedResults.add(it) },
@@ -110,7 +107,7 @@ class DelayProcessorTests {
         val cancellableManager = CancellableManager()
         val receivedResults = mutableListOf<String>()
         publisher
-            .delay(Duration.seconds(5), timerFactory)
+            .delay(5.seconds, timerFactory)
             .subscribe(cancellableManager) {
                 receivedResults.add(it)
             }
