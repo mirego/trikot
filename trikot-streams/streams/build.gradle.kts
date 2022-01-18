@@ -70,7 +70,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0") {
+                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}") {
                     exclude(group = "org.reactivestreams")
                 }
             }

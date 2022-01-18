@@ -23,7 +23,7 @@ dependencies {
     api(project(Project.TRIKOT_FOUNDATION))
     api(project(Project.TRIKOT_STREAMS))
     implementation("com.google.firebase:firebase-analytics:19.0.2")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
 }
 
 android {

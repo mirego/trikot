@@ -52,7 +52,6 @@ sealed class DataState<V, E : Throwable> {
             is Pending -> hasDataIfPending && result.value != null
             is Data -> true
             is Error -> hasDataIfError && result.value != null
-            else -> false
         }
     }
 }

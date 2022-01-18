@@ -23,7 +23,7 @@ class ExponentialBackoffPolicyTests {
             assertBackoffDuration(1.minutes, backoffs[0])
             assertBackoffDuration(2.minutes, backoffs[1])
             assertBackoffDuration(4.minutes, backoffs[2])
-            assertBackoffDuration(5.minutes, backoffs[3])
+            assertBackoffDuration(8.minutes, backoffs[3])
             assertBackoffDuration(16.minutes, backoffs[4])
             assertBackoffDuration(32.minutes, backoffs[5])
             assertBackoffDuration(1.hours, backoffs[6])
@@ -39,7 +39,7 @@ class ExponentialBackoffPolicyTests {
     fun exponentialBackoff_multiplierIsOneWithoutMaxRetry() {
         val backoffPolicy = ExponentialBackoffPolicy(
             initialInterval = 1.seconds,
-            maxInterval = Duration.INFINITE,
+            maxInterval = Duration.Companion.INFINITE,
             multiplier = 1.0
         )
         val backoffs = (1..1000).map { backoffPolicy.nextBackoff() }

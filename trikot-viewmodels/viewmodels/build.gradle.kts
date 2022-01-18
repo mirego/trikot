@@ -87,10 +87,10 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
-                implementation("androidx.test:core:1.3.0")
-                implementation("androidx.test.ext:junit:1.1.2")
+                implementation("androidx.test:core:1.4.1-alpha03")
+                implementation("androidx.test.ext:junit:1.1.3")
                 implementation("org.robolectric:robolectric:4.5.1")
-                implementation("androidx.fragment:fragment-testing:1.3.2")
+                implementation("androidx.fragment:fragment-testing:1.4.0")
             }
         }
 
