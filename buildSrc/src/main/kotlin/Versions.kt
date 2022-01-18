@@ -1,6 +1,6 @@
 object Versions {
     const val KOTLIN = "1.6.10"
-    const val ANDROID_GRADLE_PLUGIN = "7.1.0-rc01"
+    const val ANDROID_GRADLE_PLUGIN = "7.0.4"
     const val JETPACK_COMPOSE = "1.2.0-alpha01"
     const val COIL = "1.4.0"
     const val KTLINT = "10.2.0"
