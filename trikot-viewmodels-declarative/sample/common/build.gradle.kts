@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.kword").version("2.0.1")
+    id("mirego.kword").version("3.1.3")
 }
 
 repositories {
