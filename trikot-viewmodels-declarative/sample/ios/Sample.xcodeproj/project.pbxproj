@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26B0E8612799B523009D1F21 /* translation.en.json in Resources */ = {isa = PBXBuildFile; fileRef = 26B0E8602799B523009D1F21 /* translation.en.json */; };
 		C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C883569D2750339300DA0786 /* SampleImageProvider.swift */; };
 		C88356BE27580F0200DA0786 /* TextShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */; };
 		C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BD27580F0200DA0786 /* TextShowcaseView.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		041921FF518BA5BA4B3375EC /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
+		26B0E8602799B523009D1F21 /* translation.en.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = translation.en.json; path = ../../common/src/commonMain/resources/translations/translation.en.json; sourceTree = "<group>"; };
 		3240D0E8403B18772B9C9D06 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C883569D2750339300DA0786 /* SampleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageProvider.swift; sourceTree = "<group>"; };
 		C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				C8D868E1268AA9670054CF44 /* Assets.xcassets */,
 				C8D868E6268AA9670054CF44 /* LaunchScreen.storyboard */,
 				C8D868E9268AA9670054CF44 /* Info.plist */,
+				26B0E8602799B523009D1F21 /* translation.en.json */,
 				C8D868E3268AA9670054CF44 /* Preview Content */,
 			);
 			path = Sample;
@@ -242,6 +245,7 @@
 				C8D868E8268AA9670054CF44 /* LaunchScreen.storyboard in Resources */,
 				C8D868E5268AA9670054CF44 /* Preview Assets.xcassets in Resources */,
 				C8D868E2268AA9670054CF44 /* Assets.xcassets in Resources */,
+				26B0E8612799B523009D1F21 /* translation.en.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

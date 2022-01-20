@@ -1,8 +1,9 @@
 plugins {
-    id("com.android.library")
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
+    id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.kword").version("2.0.1")
+    id("mirego.kword").version("3.0.0")
 }
 
 repositories {
@@ -14,8 +15,7 @@ repositories {
 }
 
 group = "com.mirego.sample"
-
-val frameworkName = "TRIKOT_FRAMEWORK_NAME"
+version = "1.0.0"
 
 configurations {
     create("testApi") {}
@@ -31,10 +31,31 @@ kword {
 
 kotlin {
     android()
-    ios {
-        binaries {
+
+    cocoapods {
+        framework {
+            summary = "Trikot-viewmodels-declarative sample"
+            homepage = "www.mirego.com"
+            baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
+            transitiveExport = true
+            embedBitcode("bitcode")
+
+            export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+            export(project(Project.TRIKOT_STREAMS))
+            export(project(Project.TRIKOT_FOUNDATION))
+            export(project(Project.TRIKOT_HTTP))
+            export(project(Project.TRIKOT_KWORD))
+        }
+    }
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries {
             framework {
-                baseName = frameworkName
+                baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
                 transitiveExport = true
                 export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
                 export(project(Project.TRIKOT_STREAMS))
@@ -70,8 +91,14 @@ kotlin {
             }
         }
 
-        val iosMain by getting {
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
             dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
         }
     }
 }
@@ -90,35 +117,4 @@ project.afterEvaluate {
         .forEach { task ->
             task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
         }
-}
-
-val copyFramework by tasks.creating {
-    val buildType = project.findProperty("kotlin.build.type")?.toString() ?: "RELEASE"
-    val target = project.findProperty("kotlin.target")?.toString() ?: "iosArm64"
-    val targetDir = project.findProperty("configuration.build.dir")?.toString() ?: "build/bin/ios"
-    val translationDir = "$projectDir/../common/src/commonMain/resources/translations"
-    val framework =
-        kotlin.targets.getByName<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>(target).binaries.getFramework(
-            buildType
-        )
-
-    dependsOn(framework.linkTask)
-
-    doLast {
-        val frameworkDir = "$targetDir/$frameworkName.framework"
-        val srcFile = framework.outputFile
-
-        copy {
-            from(srcFile.parent)
-            into(targetDir)
-            include("$frameworkName.framework/**")
-            include("$frameworkName.framework.dSYM/**")
-        }
-
-        copy {
-            from(translationDir)
-            into(frameworkDir)
-            include("**")
-        }
-    }
 }

@@ -4,26 +4,21 @@ Pod::Spec.new do |spec|
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
-    spec.license                  = 'No license'
-    spec.summary                  = 'Awesome library'
+    spec.license                  = ''
+    spec.summary                  = 'Trikot-viewmodels-declarative sample'
 
-    spec.static_framework         = true
-    spec.vendored_frameworks      = "build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework"
-    spec.libraries                = "c++", "System"
+    spec.vendored_frameworks      = "build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework"
+    spec.libraries                = "c++"
     spec.module_name              = "#{spec.name}_umbrella"
 
-    spec.ios.deployment_target  = '13.0'
+                
+
+                
 
     spec.pod_target_xcconfig = {
-        'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
-        'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
-        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosX64',
-        'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64'
+        'KOTLIN_PROJECT_PATH' => ':trikot-viewmodels-declarative:sample:common',
+        'PRODUCT_MODULE_NAME' => 'TRIKOT_FRAMEWORK_NAME',
     }
-
-    spec.prepare_command = <<-CMD
-        mkdir -p build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework
-    CMD
 
     spec.script_phases = [
         {
@@ -31,19 +26,16 @@ Pod::Spec.new do |spec|
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
-if [ "$ENABLE_PREVIEWS" = "NO" ]
-then
-  echo "Building common framework"
-
-  cd "$SRCROOT/../../../.."
-
-  ./gradlew :trikot-viewmodels-declarative:sample:common:copyFramework \
-    -Pconfiguration.build.dir="build/bin/ios" \
-    -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" \
-    -Pkotlin.target="$KOTLIN_TARGET"
-else
-  echo "Skipping build of common framework in preview mode"
-fi
+                if [ "YES" = "$COCOAPODS_SKIP_KOTLIN_BUILD" ]; then
+                  echo "Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\""
+                  exit 0
+                fi
+                set -ev
+                REPO_ROOT="$PODS_TARGET_SRCROOT"
+                "$REPO_ROOT/../../../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                    -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
+                    -Pkotlin.native.cocoapods.archs="$ARCHS" \
+                    -Pkotlin.native.cocoapods.configuration=$CONFIGURATION
             SCRIPT
         }
     ]

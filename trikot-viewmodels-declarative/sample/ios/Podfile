@@ -4,6 +4,8 @@ platform :ios, platformVersion
 
 ENV['TRIKOT_FRAMEWORK_NAME']='TRIKOT_FRAMEWORK_NAME'
 
+system("../../../gradlew -p ../../../trikot-viewmodels-declarative/sample/common :trikot-viewmodels-declarative:sample:common:syncFramework -Pkotlin.native.cocoapods.platform=iphonesimulator -Pkotlin.native.cocoapods.archs=arm64 -Pkotlin.native.cocoapods.configuration=Debug")
+
 target 'Sample' do
   use_frameworks!
 

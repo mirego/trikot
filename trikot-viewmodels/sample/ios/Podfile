@@ -5,6 +5,9 @@ install! 'cocoapods', :disable_input_output_paths => true
 
 ENV['TRIKOT_FRAMEWORK_NAME']='TRIKOT_FRAMEWORK_NAME'
 
+system("../../../gradlew -p ../../../trikot-viewmodels/sample/common :trikot-viewmodels:sample:common:syncFramework -Pkotlin.native.cocoapods.platform=iphonesimulator -Pkotlin.native.cocoapods.archs=arm64 -Pkotlin.native.cocoapods.configuration=Debug")
+
+
 target 'iosApp' do
   use_frameworks!
   pod 'SwiftLint'

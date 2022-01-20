@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
+    spec.name                     = 'common'
     spec.version                  = '1.0.0'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Trikot-viewmodels sample'
+    spec.summary                  = 'Trikot-viewmodels-declarative sample'
 
     spec.vendored_frameworks      = "build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework"
     spec.libraries                = "c++"
@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
                 
 
     spec.pod_target_xcconfig = {
-        'KOTLIN_PROJECT_PATH' => ':trikot-viewmodels:sample:common',
-        'PRODUCT_MODULE_NAME' => 'TRIKOT_FRAMEWORK_NAME',
+        'KOTLIN_PROJECT_PATH' => ':trikot-viewmodels-declarative:sample:common',
+        'PRODUCT_MODULE_NAME' => 'common',
     }
 
     spec.script_phases = [
