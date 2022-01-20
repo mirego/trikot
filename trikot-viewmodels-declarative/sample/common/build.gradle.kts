@@ -3,7 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
-    id("mirego.kword").version("3.0.0")
+    id("mirego.kword").version("3.1.3")
 }
 
 repositories {
