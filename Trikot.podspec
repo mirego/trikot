@@ -34,7 +34,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'viewmodels' do |subspec|
     subspec.source_files  = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.source_files = "trikot-viewmodels/swift-extensions/*.swift"
-    subspec.tvos.exclude_files = "trikot-viewmodels/swift-extensions/UISliderExtensions.swift", "swift-extensions/UISwitchExtensions.swift", "swift-extensions/UIPickerExtensions.swift"
+    subspec.tvos.exclude_files = ["trikot-viewmodels/swift-extensions/UISliderExtensions.swift", "swift-extensions/UISwitchExtensions.swift", "swift-extensions/UIPickerExtensions.swift"]
     subspec.ios.deployment_target = '9.0'
     subspec.tvos.deployment_target = '9.0'
     subspec.dependency 'Trikot/streams'
