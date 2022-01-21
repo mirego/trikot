@@ -19,16 +19,16 @@ Trikot is a framework that helps building kotlin multiplatform apps. iOS, androi
 ## Modules
 | Module | Description |
 | - | - |
-| [trikot-foundation](./trikot.foundation) | Foundation classes and building blocks |
-| [trikot-streams](./trikot.streams) | Reactive streams |
-| [trikot-datasources](./trikot.datasources) | Cascading data access layers abstraction. |
-| [trikot-http](./trikot.http) | Multiplatform http client with native platform implementations. |
-| [trikot-graphql](./trikot.graphql) | GraphQL query client built over trikot.http and trikot.datasources. |
-| [trikot-analytics](./trikot.analytics) | AAndroid and iOS analytics providers. |
-| [trikot-bluetooth](./trikot.bluetooth) | Android and iOS bluetooth. |
-| [trikot-kword](./trikot.kword) | i18N with code generation for string keys. |
-| [trikot-viewmodels](./trikot.viewmodels) | ViewModels for imperative frameworks (Android views and UIKit). |
-| [trikot-viewmodels-declarative](./trikot.viewmodels.declarative) | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
+| [trikot.foundation](./trikot-foundation) | Foundation classes and building blocks |
+| [trikot.streams](./trikot-streams) | Reactive streams |
+| [trikot.datasources](./trikot-datasources) | Cascading data access layers abstraction. |
+| [trikot.http](./trikot-http) | Multiplatform http client with native platform implementations. |
+| [trikot.graphql](./trikot-graphql) | GraphQL query client built over trikot.http and trikot.datasources. |
+| [trikot.analytics](./trikot-analytics) | AAndroid and iOS analytics providers. |
+| [trikot.bluetooth](./trikot-bluetooth) | Android and iOS bluetooth. |
+| [trikot.kword](./trikot-kword) | i18N with code generation for string keys. |
+| [trikot.viewmodels](./trikot-viewmodels) | ViewModels for imperative frameworks (Android views and UIKit). |
+| [trikot.viewmodels.declarative](./trikot-viewmodels-declarative) | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
 
 ## Samples
 - [trikot.patron](https://github.com/mirego/trikot.patron) is our boilerplate project. It uses a couple of trikot modules.
