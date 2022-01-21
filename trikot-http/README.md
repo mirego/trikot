@@ -1,7 +1,5 @@
 # Trikot.http
 
-**Incubating**
-
 Kotlin Multiplaform http networking abstraction.
 - Default Http request implementation for each platform
 - Http header management and Error management
@@ -72,23 +70,26 @@ Values are `WIFI`, `CELLULAR`, `NONE`
 ## Installation
 ##### Import dependencies
 ```groovy
-    api "com.mirego.trikot:http:$trikot_http_version"
-    jvm "com.mirego.trikot:http-jvm:$trikot_http_version"
-    js "com.mirego.trikot:http-js:$trikot_http_version"
-    iosx64 "com.mirego.trikot:http-iosx64:$trikot_http_version"
-    iosarm64 "com.mirego.trikot:http-iosarm64:$trikot_http_version"
+   dependencies {
+       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+   }
+
+    ios() {
+        binaries {
+            framework {
+                export "com.mirego.trikot:http:$trikot_version"
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                 implementation "com.mirego.trikot:http:$trikot_version"
+            }
+        }
+    }
 ```
 
 ##### Setup platforms
 - [Swift extensions](./swift-extensions/README.md)
-- [Android extensions](./android-ktx/README.md) 
-
-## License
-
-Trikot.http is © 2018-2019 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot.http/blob/master/LICENSE.md) file.
-
-## About Mirego
-
-[Mirego](https://www.mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We’re a team of [talented people](https://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://www.mirego.org).
-
-We also [love open-source software](https://open.mirego.com) and we try to give back to the community as much as we can.
+- [Android extensions](./android-ktx/README.md)

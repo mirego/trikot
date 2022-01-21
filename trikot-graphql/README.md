@@ -1,5 +1,4 @@
 # Trikot.graphql
-**Incubating**
 
 Multiplaform graphql query implementation.
 - Use Kotlinx.serialization to deserialize objects
@@ -59,9 +58,22 @@ val dataSourceState = myDataSource.read(GraphqlQueryDataSourceRequest(FooQuery("
 ## Installation
 ##### Import dependencies
 ```groovy
-    api "com.mirego.trikot:graphql:$trikot_graphql_version"
-    jvm "com.mirego.trikot:graphql-jvm:$trikot_graphql_version"
-    js "com.mirego.trikot:graphql-js:$trikot_graphql_version"
-    iosx64 "com.mirego.trikot:graphql-iosx64:$trikot_graphql_version"
-    iosarm64 "com.mirego.trikot:graphql-iosarm64:$trikot_graphql_version"
+   dependencies {
+       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+   }
+
+    ios() {
+        binaries {
+            framework {
+                export "com.mirego.trikot:graphql:$trikot_version"
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                 implementation "com.mirego.trikot:graphql:$trikot_version"
+            }
+        }
+    }
 ```

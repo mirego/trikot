@@ -35,8 +35,12 @@ button.onTap = TrackableMetaAction(AnalyticsEvents.myClickEvent) {
 iOS - [swift extensions](./swift-extensions/firebase/README.md)
 Android - [firebase-ktx](./firebase-ktx/README.md)
 
+#### Mixpanel
+iOS - [swift extensions](./swift-extensions/mixpanel/README.md)
+Android - [firebase-ktx](./mixpanel-ktx/README.md)
+
 #### Add more service
-Implement [AnalyticsService](https://github.com/mirego/trikot.analytics/blob/master/analytics/src/commonMain/kotlin/com/mirego/trikot/analytics/AnalyticsService.kt)
+Implement [AnalyticsService](https://github.com/mirego/trikot/blob/master/trikot-analytics/analytics/src/commonMain/kotlin/com/mirego/trikot/analytics/AnalyticsService.kt)
 
 
 ## Common
@@ -44,22 +48,27 @@ Implement [AnalyticsService](https://github.com/mirego/trikot.analytics/blob/mas
 
 Use the code bellow to import the core module of trikot analytics.
 ```groovy
-    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+   dependencies {
+       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+   }
 
-    api "com.mirego.trikot:analytics:$trikot_analytics_version"
+    ios() {
+        binaries {
+            framework {
+                export "com.mirego.trikot:analytics:$trikot_version"
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "com.mirego.trikot:analytics:$trikot_version"
+            }
+        }
+    }
 ```
 
 If you wish to use the `trikot.viewmodel` integration, you have to import it from a separate module.
 ```groovy
-    api "com.mirego.trikot:analytics-viewmodel:$trikot_analytics_version"
+    implementation "com.mirego.trikot:analytics-viewmodel:$trikot_version"
 ```
-
-## License
-
-Trikot.analytics is © 2018-2019 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot.analytics/blob/master/LICENSE.md) file.
-
-## About Mirego
-
-[Mirego](https://www.mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We’re a team of [talented people](https://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://www.mirego.org).
-
-We also [love open-source software](https://open.mirego.com) and we try to give back to the community as much as we can.

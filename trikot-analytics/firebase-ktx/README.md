@@ -4,7 +4,7 @@
 Add dependency
 ```groovy
 dependencies {
-    implementation "com.mirego.trikot.analytics:firebase-ktx:$trikot_analytics_firebase_ktx_version"
+    implementation "com.mirego.trikot.analytics:firebase-ktx:$trikot_version"
 }
 ```
 

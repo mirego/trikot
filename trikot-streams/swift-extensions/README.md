@@ -4,12 +4,12 @@
 - Adds sugar coating to Publisher Subscriptions and DataBinding
 
 ## Installation
-To use `Trikot.streams` swift extensions, you must export `streams` and `streams-iosarm64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle) for a sample use case.
+To use `Trikot.streams` swift extensions, you must export `streams` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle.kts) for a sample use case.
 
 ##### Setup Pod dependency
 ```groovy
   ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-  pod 'Trikot.streams', :git => 'https://github.com/mirego/trikot.streams.git'
+  pod 'Trikot/streams', :git => 'https://github.com/mirego/trikot.git'
 ```
 Then, run `pod install`.
 

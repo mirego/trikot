@@ -52,13 +52,24 @@ Subscription and unsubscription are managed trough `Cancellable` and `Cancellabl
 ## Installation
 ##### Import dependencies
 ```groovy
-    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+   dependencies {
+       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
+   }
 
-    api "com.mirego.trikot:streams:$trikot_streams_version"
-    jvm "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-    js "com.mirego.trikot:streams-js:$trikot_streams_version"
-    iosx64 "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
-    iosarm64 "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
+    ios() {
+        binaries {
+            framework {
+                export "com.mirego.trikot:streams:$trikot_version"
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                 implementation "com.mirego.trikot:streams:$trikot_version"
+            }
+        }
+    }
 ```
 
 ## License

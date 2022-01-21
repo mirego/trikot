@@ -4,7 +4,7 @@
 Add dependency
 ```groovy
 dependencies {
-    implementation "com.mirego.trikot.analytics:mixpanel-ktx:$trikot_analytics_mixpanel_ktx_version"
+    implementation "com.mirego.trikot.analytics:mixpanel-ktx:$trikot_version"
 }
 ```
 
