@@ -9,7 +9,7 @@ Trikot.KWord provides the necessary tools to make localisation happen in Kotlin 
 ## Plugin usage
 ```groovy
 plugins {
-    id 'mirego.kword' version '0.1'
+    id 'mirego.kword' version trikot_version
 }
 
 kword {
@@ -56,6 +56,7 @@ Assuming the following translation key
   "plural_1": "One key",
   "plural_17": "Seventeen keys"
 }
+```
 
 ```kotlin
 // "No keys"
@@ -99,6 +100,3 @@ KWord.t(KWordTranslation.PLURAL, 17)
 
 ### iOS
 See [swift extensions](./swift-extensions/README.md)
-
-### Android
-See [android extensions](./android-ktx/README.md)

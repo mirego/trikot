@@ -1,4 +1,4 @@
-![trikot](img/trikot.svg)
+![trikot](trikot.svg)
 
 [![Latest version](https://img.shields.io/github/tag/mirego/trikot.svg?label=Latest%20version)](https://github.com/mirego/trikot/tags)
 [![Kotlin](https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin)](http://kotlinlang.org)

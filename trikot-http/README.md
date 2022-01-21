@@ -92,4 +92,3 @@ Values are `WIFI`, `CELLULAR`, `NONE`
 
 ##### Setup platforms
 - [Swift extensions](./swift-extensions/README.md)
-- [Android extensions](./android-ktx/README.md)

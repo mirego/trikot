@@ -66,9 +66,22 @@ button.buttonViewModel = searchViewModel.buttonViewModel
 ## Installation
 ##### Import dependencies
 ```groovy
-    api "com.mirego.trikot:viewmodels:$trikot_viewmodels_version"
-    jvm "com.mirego.trikot:viewmodels-jvm:$trikot_viewmodels_version"
-    js "com.mirego.trikot:viewmodels-js:$trikot_viewmodels_version"
-    iosx64 "com.mirego.trikot:viewmodels-iosx64:$trikot_viewmodels_version"
-    iosarm64 "com.mirego.trikot:viewmodels-iosarm64:$trikot_viewmodels_version"
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
+
+    ios() {
+        binaries {
+            framework {
+                export "com.mirego.trikot:viewmodels:$trikot_version"
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "com.mirego.trikot:analytics:$trikot_version"
+            }
+        }
+    }
 ```
