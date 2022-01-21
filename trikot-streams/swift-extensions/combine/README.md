@@ -3,12 +3,12 @@
 - Easily manage Trikot.streams publisher with swiftUI. 
 
 ## Installation
-To use `Trikot.streams` swift combine extensions, you must export `streams` and `streams-iosarm64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle) for a sample use case.
+To use `Trikot.streams` swift combine extensions, you must export `streams` and `streams-iosarm64` module in your exported framework. See [Trikot.patron build.gradle file](https://github.com/mirego/trikot.patron/blob/master/common/build.gradle.kts) for a sample use case.
 
 ##### Setup Pod dependency
 ```groovy
   ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-  pod 'Trikot.streams/Combine', :git => 'https://github.com/mirego/trikot.streams.git'
+  pod 'Trikot/streams.Combine', :git => 'https://github.com/mirego/trikot.git', :tag => properties['trikot_version']
 ```
 Then, run `pod install`.
 

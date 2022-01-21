@@ -4,7 +4,7 @@ To use `Trikot.kword` swift extensions, you must export `kword` module in your e
 ##### Setup Pod dependency
 ```groovy
   ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-  pod 'Trikot/kword', :git => 'git@github.com:mirego/trikot.git'
+  pod 'Trikot/kword', :git => 'git@github.com:mirego/trikot.git', :tag => properties['trikot_version']
 ```
 Then, run `pod install`.
 

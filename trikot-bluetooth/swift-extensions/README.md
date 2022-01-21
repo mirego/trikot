@@ -6,7 +6,7 @@ To use `Trikot.bluetooth` with iOS, you must export `bluetooth` module in your e
 ##### Setup Pod dependency
 ```groovy
   ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-  pod 'Trikot/bluetooth', :git => 'https://github.com/mirego/trikot.git'
+  pod 'Trikot/bluetooth', :git => 'https://github.com/mirego/trikot.git', :tag => properties['trikot_version']
 ```
 Then, run `pod install`.
 

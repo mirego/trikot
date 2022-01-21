@@ -4,7 +4,7 @@ To use `Trikot.http` swift extensions, you must export `http` module in your exp
 ##### Setup Pod dependency
 ```groovy
     ENV['TRIKOT_FRAMEWORK_NAME']='ReplaceMeByTheFrameworkNameImportedByCocoaPods'
-  pod 'Trikot/http', :git => 'git@github.com:mirego/trikot.git'
+  pod 'Trikot/http', :git => 'git@github.com:mirego/trikot.git', :tag => properties['trikot_version']
 ```
 Then, run `pod install`.
 
