@@ -62,9 +62,9 @@ See: [Dispatch Queues](./documentation/DISPATCH_QUEUES.md)
 ##### Import dependencies
 build.gradle
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {

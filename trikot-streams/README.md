@@ -52,9 +52,9 @@ Subscription and unsubscription are managed trough `Cancellable` and `Cancellabl
 ## Installation
 ##### Import dependencies
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {

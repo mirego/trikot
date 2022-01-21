@@ -71,9 +71,9 @@ See [swift extensions](./swift-extensions/README.md) for more information.
 ## Common
 ##### Import dependencies
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {

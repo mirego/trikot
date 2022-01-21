@@ -48,9 +48,9 @@ Implement [AnalyticsService](https://github.com/mirego/trikot/blob/master/trikot
 
 Use the code bellow to import the core module of trikot analytics.
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {

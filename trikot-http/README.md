@@ -70,9 +70,9 @@ Values are `WIFI`, `CELLULAR`, `NONE`
 ## Installation
 ##### Import dependencies
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {

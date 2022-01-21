@@ -58,9 +58,9 @@ val dataSourceState = myDataSource.read(GraphqlQueryDataSourceRequest(FooQuery("
 ## Installation
 ##### Import dependencies
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {

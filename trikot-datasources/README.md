@@ -70,9 +70,9 @@ invalidatingPublisher.value = true // Will invalidate the whole myDataSource cac
 ## Installation
 ##### Import dependencies
 ```groovy
-   dependencies {
-       maven { url('https://s3.amazonaws.com/mirego-maven/public') }
-   }
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
 
     ios() {
         binaries {
