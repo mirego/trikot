@@ -32,8 +32,8 @@ Trikot is a framework that helps building kotlin multiplatform apps. iOS, androi
 
 ## Samples
 - [trikot.patron](https://github.com/mirego/trikot.patron) is our boilerplate project. It uses a couple of trikot modules.
-- [trikot.viewmodel samples](./trikot-viewmodels/samples) are our samples specific to this module.
-- [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/samples) are our samples specific to this module.
+- [trikot.viewmodel samples](./trikot-viewmodels/sample) are our samples specific to this module.
+- [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/sample) are our samples specific to this module.
 
 ## License
 
