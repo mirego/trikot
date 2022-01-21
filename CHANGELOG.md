@@ -4,11 +4,13 @@ All notable changes to the library will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## 3.1.3
+> 2022-01-18
 - Updated to kotlin 1.6.10
 - Downgrade AGP to 7.0.4 to make releases compatible with Arctic Fox
 - Update to kotlinx.serialization 1.3.2, ktor 1.6.7, android lifecycle 1.4.0, jetpack compose 1.2.0-alpha01
 
 ## 3.0.0
+> 2022-01-17
 - Migrated to mono repository
 - Updated to AGP 7.1.0-rc01 (Android studio bumblebee)
 - Updated to gradle 7.3.3
