@@ -1,4 +1,4 @@
-Copyright (c) 2018-2019, Mirego
+Copyright (c) 2018-2022, Mirego
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

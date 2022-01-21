@@ -8,7 +8,9 @@ Elegant implementation of ReactiveStreams for Kotlin Multiplatform.
 - Help you focus on what you need to do by hiding Multiplatform complexity
 
 ## Sample
+
 #### Common code
+
 ```kotlin
 class SearchController() {
     private val searchKeywordPublisher = Publishers.behaviorSubject<String>("keyword")
@@ -21,44 +23,63 @@ class SearchController() {
     val resultUppercaseTitles = searchResultsPublisher.map { it.title.toUpperCase() }
     val searchResultCountLabel = searchResultsPublisher.map { "${it.results.count()} results" }
     fun searchFor(keyword: String) {
-       searchKeywordPublisher.value = keyword 
+       searchKeywordPublisher.value = keyword
     }
 }
 ```
 
 #### Swift
+
 See [swift extensions](./swift-extensions/README.md) for more information.
 
 Helps connect a publisher to a variable in a reactive environment.
+
 ```kotlin
 let label = UILabel()
 label.bind(searchController.searchResultCountLabel, \UILabel.text)
 ```
 
 #### Android
+
 See [android-ktx](./android-ktx/README.md) for more information.
 
-Binding helpers relies on AndroidViewModel and uses lifecycleOwner to manage subscription and unsubscription. 
+Binding helpers relies on AndroidViewModel and uses lifecycleOwner to manage subscription and unsubscription.
+
 ```kotlin
 val searchResultLiveData = searchController.searchResultCountLabel.asLiveData()
 ```
 
 ## [Publishers and Processors](./documentation/PUBLISHERS.md)
+
 Foundation of trikot.streams is based on a immutable and concurrent implementation of [Reactive-Streams](https://www.reactive-streams.org/).
 
 ## [Cancellables](./documentation/CANCELLABLE.md)
+
 Subscription and unsubscription are managed trough `Cancellable` and `CancellableManager`.
 
 ## Installation
-##### Import dependencies
-```groovy
-    maven { url('https://s3.amazonaws.com/mirego-maven/public') }
 
-    api "com.mirego.trikot:streams:$trikot_streams_version"
-    jvm "com.mirego.trikot:streams-jvm:$trikot_streams_version"
-    js "com.mirego.trikot:streams-js:$trikot_streams_version"
-    iosx64 "com.mirego.trikot:streams-iosx64:$trikot_streams_version"
-    iosarm64 "com.mirego.trikot:streams-iosarm64:$trikot_streams_version"
+##### Import dependencies
+
+```groovy
+    dependencies {
+        maven { url("https://s3.amazonaws.com/mirego-maven/public") }
+    }
+
+    ios() {
+        binaries {
+            framework {
+                export "com.mirego.trikot:streams:$trikot_version"
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                 implementation "com.mirego.trikot:streams:$trikot_version"
+            }
+        }
+    }
 ```
 
 ## License

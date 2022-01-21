@@ -1,0 +1,8 @@
+# ignore all files
+*
+
+# include all folders
+!**/
+
+# include files to format
+!*.md
