@@ -1,8 +1,10 @@
 ![trikot](img/trikot.svg)
- [![Latest version](https://img.shields.io/github/tag/mirego/trikot.svg?label=Latest%20version)](https://github.com/mirego/trikot/tags)
- [![Kotlin](https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
- [![CI](https://github.com/mirego/trikot/actions/workflows/ci.yml/badge.svg)](https://github.com/mirego/trikot/actions/workflows/ci.yml)
- [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
+[![Latest version](https://img.shields.io/github/tag/mirego/trikot.svg?label=Latest%20version)](https://github.com/mirego/trikot/tags)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![CI](https://github.com/mirego/trikot/actions/workflows/ci.yml/badge.svg)](https://github.com/mirego/trikot/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 # Trikot / kotlin multiplatform libraries
 
 ## Table of contents
@@ -15,21 +17,23 @@
 Trikot is a framework that helps building kotlin multiplatform apps. iOS, android and web are the primary targets.
 
 ## Modules
-[trikot-foundation](./trikot.foundation) Foundation classes and building blocks
-[trikot-streams](./trikot.streams) Reactive streams
-[trikot-datasources](./trikot.datasources) Cascading data access layers abstraction.
-[trikot-http](./trikot.http) Multiplatform http client with native platform implementations.
-[trikot-graphql](./trikot.graphql) GraphQL query client built over trikot.http and trikot.datasources.
-[trikot-analytics](./trikot.analytics) Analytics providers.
-[trikot-bluetooth](./trikot.bluetooth) Android and iOS bluetooth.
-[trikot-kword](./trikot.kword) i18N with code generation for string keys.
-[trikot-viewmodels](./trikot.viewmodels) ViewModels for imperative frameworks (Android views and UIKit).
-[trikot-viewmodels-declarative](./trikot.viewmodels.declarative) ViewModels for declarative framework (jetpack compose and SwiftUI).
+| Module | Description |
+| - | - |
+| [trikot-foundation](./trikot.foundation) | Foundation classes and building blocks |
+| [trikot-streams](./trikot.streams) | Reactive streams |
+| [trikot-datasources](./trikot.datasources) | Cascading data access layers abstraction. |
+| [trikot-http](./trikot.http) | Multiplatform http client with native platform implementations. |
+| [trikot-graphql](./trikot.graphql) | GraphQL query client built over trikot.http and trikot.datasources. |
+| [trikot-analytics](./trikot.analytics) | AAndroid and iOS analytics providers. |
+| [trikot-bluetooth](./trikot.bluetooth) | Android and iOS bluetooth. |
+| [trikot-kword](./trikot.kword) | i18N with code generation for string keys. |
+| [trikot-viewmodels](./trikot.viewmodels) | ViewModels for imperative frameworks (Android views and UIKit). |
+| [trikot-viewmodels-declarative](./trikot.viewmodels.declarative) | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
 
 ## Samples
-[trikot.patron](https://github.com/mirego/trikot.patron) is our boilerplate project. It uses a couple of trikot modules.
-[trikot.viewmodel samples](./trikot-viewmodels/samples) are our samples specific to this module.
-[trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/samples) are our samples specific to this module.
+- [trikot.patron](https://github.com/mirego/trikot.patron) is our boilerplate project. It uses a couple of trikot modules.
+- [trikot.viewmodel samples](./trikot-viewmodels/samples) are our samples specific to this module.
+- [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/samples) are our samples specific to this module.
 
 ## License
 
