@@ -1,11 +1,13 @@
 # Trikot.datasources
 
 Multiplaform cache layers abstraction.
+
 - Interfaces unifying accessing cachable data
 - Abstract implementation for implementers
 - Simple memory cache without invalidation
 
 # Concepts
+
 - 1 datasource by data type to allow cache tuning
 - Cascading approach `MasterDataSource` -> `FirstCacheLayer` -> `SecondCacheLayer` (Ex: `Http` -> `Memory` -> `Disk`)
 - Request sent to datasource can specify if cache can be used, if not, cache will only be use if cache refresh fails
@@ -14,6 +16,7 @@ Multiplaform cache layers abstraction.
 # How to Create a new DatasourceType
 
 ##### 1 - Create a new DatasourceRequestType extending `DataSourceRequest`
+
 ```kotlin
 data class MyDataSourceRequest<T>(
     val query: MySpecialQueryType,
@@ -23,15 +26,16 @@ data class MyDataSourceRequest<T>(
 ```
 
 ##### 2 - Create a new DatasourceType extending `BaseDataSource` and override internalRead
+
 ```kotlin
-class MyDataSource<T>(    
+class MyDataSource<T>(
     cacheDataSource: DataSource<MyDataSourceRequest<T>, T>? = null
 ) : BaseDataSource<MyDataSourceRequest<T>, T>(cacheDataSource) {
     override fun internalRead(request: MyDataSourceRequest<T>): ExecutablePublisher<T> {
         val myExecutablePublisher = new MyExecutablePublisher(request.query)
         return myExecutablePublisher
     }
-    
+
     override fun save(request: MyDataSourceRequest<T>, data: T?) {
         // Save content to cache if needed
     }
@@ -39,13 +43,17 @@ class MyDataSource<T>(
 ```
 
 ##### 3 - Create an instance
+
 In this example we will use memory cache
+
 ```
 val myDataSource = MyDataSource<String>(MemoryCacheDataSource())
 ```
 
 ##### 4 - Send a request to the datasource
+
 In this example we will use memory cache
+
 ```kotlin
 val request = myDataSource.myMyDataSource.read(MyDataSourceRequest(query, "queryCacheId"))
 request.subscribe(cancelableManager) {
@@ -54,13 +62,17 @@ request.subscribe(cancelableManager) {
 ```
 
 # Invalidation
+
 To invalidate data, simply send a get request using REFRESH_CACHE. No subscription is needed for the invalidation to happens
+
 ```kotlin
 myDataSource.myMyDataSource.read(MyDataSourceRequest(query, "queryCacheId", DataSourceRequest.Type.REFRESH_CACHE))
 ```
 
 # Complete Datasource invalidation
+
 `InvalidatableDataSource` is a special wrapper around a `MasterDataSource` that invalidate all cached elements when the associated publishers publish `true`.
+
 ```kotlin
 val invalidatingPublisher = Publishers.behaviorSubject()
 val invalidatableDatasource = InvalidatableDataSource(myDataSource, invalidatingPublisher)
@@ -68,7 +80,9 @@ invalidatingPublisher.value = true // Will invalidate the whole myDataSource cac
 ```
 
 ## Installation
+
 ##### Import dependencies
+
 ```groovy
     dependencies {
         maven { url("https://s3.amazonaws.com/mirego-maven/public") }

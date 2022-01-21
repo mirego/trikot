@@ -1,7 +1,9 @@
 # Trikot.analytics Android Mixpanel extension
 
 ### Installation
+
 Add dependency
+
 ```groovy
 dependencies {
     implementation "com.mirego.trikot.analytics:mixpanel-ktx:$trikot_version"
@@ -9,6 +11,7 @@ dependencies {
 ```
 
 ### Configure
+
 ```kotlin
     val context = this // application context
     AnalyticsConfiguration.analyticsManager =   MixpanelAnalyticsService(this)

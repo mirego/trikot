@@ -1,13 +1,14 @@
 # Trikot.graphql
 
 Multiplaform graphql query implementation.
+
 - Use Kotlinx.serialization to deserialize objects
 - No codegen for now
-
 
 # Sending a graphql request
 
 ##### 1 - Create the models for your response
+
 ```kotlin
 import kotlinx.serialization.Serializable
 
@@ -22,6 +23,7 @@ data class Foo(val __typename: String, val id: String)
 ```
 
 ##### 2 - Create a graphql query
+
 ```kotlin
 class FooQuery(fooId: String) :
     AbstractGraphqlQuery<DataResponse<FooResponse>>(DataResponse.serializer(FooResponse.serializer())) {
@@ -41,6 +43,7 @@ class FooQuery(fooId: String) :
 ```
 
 ##### 3 - Execute your query
+
 ```kotlin
 val query = GraphqlQueryPublisher(FooQuery("3"))
 query.execute()
@@ -50,13 +53,16 @@ query.subscribe(cancellableManager) {
 ```
 
 # Using with Trikot.datasources
+
 ```kotlin
 val myDataSource = GraphqlDataSource<DataResponse<FooResponse>>(GraphqlPublisherFactoryImpl())
 val dataSourceState = myDataSource.read(GraphqlQueryDataSourceRequest(FooQuery("3"), "cachableId-3"))
 ```
 
 ## Installation
+
 ##### Import dependencies
+
 ```groovy
     dependencies {
         maven { url("https://s3.amazonaws.com/mirego-maven/public") }

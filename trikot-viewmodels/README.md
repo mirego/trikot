@@ -1,7 +1,9 @@
 # Trikot.viewmodels
+
 ViewModels expose properties that can be binded to Android or iOS UI components. It allows 2 way interactions between Kotlin Multiplatform Common Code and platform UI.
 
 ## The basics
+
 Both iOS and Android comes with a binding library that supports basics UI components (View, Label, Button, Input, Image) designed to be bound to their ViewModel equivalent (`ViewModel`, `LabelViewModel`, `ButtonViewModel`, `ImageViewModel`, ect...). Since `ViewModels` are interfaces that are not meant to be modified, Mutable implementations are included to create each type of ViewModel (`MutableViewModel`, `MutableLabelViewModel`, `MutableButtonViewModel`, `MutableImageViewModel`, ect...). We suggest that custom ViewModel definition and implementation follow the same pattern.
 
 All properties are reactive and observed by the platforms. They are ReactiveStreams `Publisher<T>`. See [Trikot.streams](https://github.com/mirego/trikot.streams) for more inforamtion about Publishers.
@@ -10,20 +12,22 @@ Additionally, you can easily replace a property with another `org.reactivestream
 
 See (Sample application)[https://github.com/mirego/trikot.viewmodels/tree/master/sample] for all possibilities.
 
-iOS UILabel             |  Android TextView
-:-------------------------:|:-------------------------:
-![](./documentation/ios-label.png)  |  ![](./documentation/android-textview.png)
+|            iOS UILabel             |             Android TextView              |
+| :--------------------------------: | :---------------------------------------: |
+| ![](./documentation/ios-label.png) | ![](./documentation/android-textview.png) |
 
 ### Interfaces provides documentation
+
 - [ViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/ViewModel.kt)
 - [ButtonViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/ButtonViewModel.kt)
 - [LabelViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/LabelViewModel.kt)
 - [ImageViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/ImageViewModel.kt)
 - [InputTextViewModel](https://github.com/mirego/trikot.viewmodels/blob/master/viewmodels/src/commonMain/kotlin/com/mirego/trikot/viewmodels/InputTextViewModel.kt)
 
-
 ## Multiplatform Sample
+
 #### Common code
+
 ```kotlin
 class SearchViewModel() {
     private val numberOfClickPublisher = Publishers.behaviorSubject(0)
@@ -39,9 +43,11 @@ class SearchViewModel() {
 ```
 
 #### iOS
+
 See [swift extensions](./swift-extensions/README.md) for more information.
 
 Helps connect a publisher to a variable in a reactive environment.
+
 ```kotlin
 let label = UILabel()
 let button = UIButton()
@@ -50,6 +56,7 @@ button.buttonViewModel = searchViewModel.buttonViewModel
 ```
 
 #### Android
+
 ```kotlin
  <TextView
             ...
@@ -64,7 +71,9 @@ button.buttonViewModel = searchViewModel.buttonViewModel
 ```
 
 ## Installation
+
 ##### Import dependencies
+
 ```groovy
     dependencies {
         maven { url("https://s3.amazonaws.com/mirego-maven/public") }

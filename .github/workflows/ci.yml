@@ -8,17 +8,23 @@ on:
   # Trigger the workflow on any pull requests
   pull_request:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.17.x
+
+      - name: Run prettier
+        run: npx prettier --check .
 
       - name: Gradle cache
         uses: actions/cache@v1

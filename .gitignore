@@ -95,3 +95,6 @@ Core.podspec
 
 # Kotlin JS compilation files
 web/src/library/**/*.kjsm
+
+# Node
+node_modules/

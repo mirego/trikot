@@ -1,7 +1,9 @@
 # Trikot.analytics Android Firebase extensions
 
 ### Installation
+
 Add dependency
+
 ```groovy
 dependencies {
     implementation "com.mirego.trikot.analytics:firebase-ktx:$trikot_version"
@@ -9,6 +11,7 @@ dependencies {
 ```
 
 ### Configure
+
 ```kotlin
     val context = this // application context
     AnalyticsConfiguration.analyticsManager =   FirebaseAnalyticsService(this)

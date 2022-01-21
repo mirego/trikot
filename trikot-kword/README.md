@@ -7,6 +7,7 @@ Trikot.KWord provides the necessary tools to make localisation happen in Kotlin 
 - Swift and Android extensions to change current locale to use.
 
 ## Plugin usage
+
 ```groovy
 plugins {
     id 'mirego.kword' version trikot_version
@@ -41,14 +42,17 @@ This will generate an enum Named KWordTranslation containing all the keys contai
 ### Common Code
 
 for simple usage:
+
 ```kotlin
 val myString = KWord[KWordTranslation.HELLO_WORLD]
 ```
 
 ##### For zero/singular/plural usage
-To support language with multiple plurals, we adopt the interpolation pattern 
+
+To support language with multiple plurals, we adopt the interpolation pattern
 
 Assuming the following translation key
+
 ```json
 {
   "plural": "{{count}} keys",
@@ -76,7 +80,9 @@ KWord.t(KWordTranslation.PLURAL, 17)
 ```
 
 ## Installation
+
 ##### Import dependencies
+
 ```groovy
     dependencies {
         maven { url("https://s3.amazonaws.com/mirego-maven/public") }
@@ -99,4 +105,5 @@ KWord.t(KWordTranslation.PLURAL, 17)
 ```
 
 ### iOS
+
 See [swift extensions](./swift-extensions/README.md)
