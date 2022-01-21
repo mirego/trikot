@@ -14,6 +14,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.ParcelUuid
 import androidx.core.content.ContextCompat
 import com.mirego.trikot.bluetooth.BluetoothManager
@@ -30,26 +31,31 @@ import kotlin.concurrent.schedule
 
 @SuppressLint("MissingPermission")
 class AndroidBluetoothManager(val context: Context) : BluetoothManager {
-    private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    private val bluetoothAdapter = (context.getSystemService(Context.BLUETOOTH_SERVICE) as android.bluetooth.BluetoothManager).adapter
 
     override val statePublisher = Publishers.behaviorSubject<BluetoothManager.State>()
-    override val missingPermissionsPublisher =
-        Publishers.behaviorSubject<List<BluetoothManager.Permission>>()
+    override val missingPermissionsPublisher = Publishers.behaviorSubject<List<BluetoothManager.Permission>>()
 
-    fun refreshLocationPermission() {
-        missingPermissionsPublisher.value =
-            if (
-                ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED
-            ) {
-                emptyList()
-            } else {
-                listOf(BluetoothManager.Permission.LOCATION)
-            }
+    fun refreshPermissions() {
+        val missingPermissions = mutableListOf<BluetoothManager.Permission>()
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            missingPermissions.add(BluetoothManager.Permission.LOCATION)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            (
+                ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
+                )
+        ) {
+            missingPermissions.add(BluetoothManager.Permission.BLUETOOTH)
+        }
+        missingPermissionsPublisher.value = missingPermissions
     }
 
     init {
-        refreshLocationPermission()
+        refreshPermissions()
         if (bluetoothAdapter != null) {
             statePublisher.value =
                 if (bluetoothAdapter.isEnabled) {
