@@ -3,7 +3,7 @@ package com.mirego.trikot.viewmodels.properties
 import com.mirego.trikot.foundation.concurrent.freeze
 import kotlin.math.roundToInt
 
-class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f) {
+data class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f) {
     private val alphaHex: String
         get() {
             return toHex((alpha * 255).roundToInt())
@@ -28,5 +28,7 @@ class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f
 
     companion object {
         val None = freeze(Color(-1, -1, -1, -1f))
+        val Black = freeze(Color(0, 0, 0))
+        val White = freeze(Color(255, 255, 255))
     }
 }
