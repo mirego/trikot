@@ -13,9 +13,9 @@ extension ViewModelDeclarativeWrapper where Base : UITextField {
 
 fileprivate extension UITextField {
     func bindViewModel(_ textFieldViewModel: VMDTextFieldViewModel?) {
-        removeTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
+        removeTarget(self, action: #selector(vmd_editingChanged), for: .editingChanged)
         if let textFieldViewModel = textFieldViewModel {
-            addTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
+            addTarget(self, action: #selector(vmd_editingChanged), for: .editingChanged)
             vmd.observe(textFieldViewModel.publisher(for: \VMDTextFieldViewModel.text)) { [weak self] text in
                 guard let self = self else { return }
                 if self.text != text {
@@ -54,7 +54,7 @@ fileprivate extension UITextField {
     }
 
     @objc
-    private func onEditingChanged() {
+    private func vmd_editingChanged() {
         guard let textFieldViewModel = vmd.textFieldViewModel else { return }
         textFieldViewModel.onValueChange(text: textFieldViewModel.formatText(text ?? ""))
     }
