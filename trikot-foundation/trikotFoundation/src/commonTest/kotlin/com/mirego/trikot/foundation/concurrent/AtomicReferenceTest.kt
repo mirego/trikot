@@ -12,7 +12,6 @@ class AtomicReferenceTest {
     fun canSetNewNullValueAndReadAfterFreezing() {
         atomicReference.compareAndSet(null, expectedValue)
         assertEquals(expectedValue, atomicReference.value)
-        MrFreeze.freeze(atomicReference)
         atomicReference.compareAndSet(expectedValue, null)
         assertNull(atomicReference.value)
     }
@@ -21,7 +20,6 @@ class AtomicReferenceTest {
     fun canSwapValue() {
         assertEquals(expectedValue, atomicReference.compareAndSwap(null, expectedValue))
         assertEquals(null, atomicReference.compareAndSwap(expectedValue, null))
-        freeze(atomicReference)
         assertEquals(expectedValue, atomicReference.compareAndSwap(null, expectedValue))
         assertEquals(expectedValue, atomicReference.compareAndSwap(null, "other"))
         assertEquals("other", atomicReference.compareAndSwap(expectedValue, "other"))

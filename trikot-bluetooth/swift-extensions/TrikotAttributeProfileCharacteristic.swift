@@ -49,4 +49,3 @@ class TrikotAttributeProfileCharacteristic: NSObject, AttributeProfileCharacteri
         super.init()        
     }
 }
-

@@ -10,17 +10,16 @@ import com.mirego.trikot.http.exception.HttpRequestTimeoutException
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
-import io.ktor.client.features.HttpTimeout
-import io.ktor.client.features.ResponseException
-import io.ktor.client.features.logging.DEFAULT
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.timeout
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.logging.DEFAULT
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.url
-import io.ktor.client.statement.HttpStatement
 import io.ktor.client.statement.readBytes
 import io.ktor.content.ByteArrayContent
 import io.ktor.content.TextContent
@@ -34,7 +33,7 @@ import org.reactivestreams.Publisher
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
-import io.ktor.client.features.HttpRequestTimeoutException as KtorRequestTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException as KtorRequestTimeoutException
 
 private val DEFAULT_TIMEOUT_DURATION = 10.seconds
 
@@ -76,10 +75,13 @@ class KtorHttpRequestFactory(
 
             launch {
                 try {
-                    httpClient.request<HttpStatement> {
+                    val response = httpClient.request {
                         url(requestBuilder.buildUrl())
 
-                        requestBuilder.headers.filter { it.key != com.mirego.trikot.http.ContentType }
+                        method = requestBuilder.method.ktorMethod
+
+                        requestBuilder.headers
+                            .filter { it.key != com.mirego.trikot.http.ContentType }
                             .forEach { entry ->
                                 header(entry.key, entry.value)
                             }
@@ -103,12 +105,10 @@ class KtorHttpRequestFactory(
                                 requestTimeoutMillis = timeout.seconds.inWholeMilliseconds
                             }
                         }
-
-                        method = requestBuilder.method.ktorMethod
-                    }.execute { response ->
-                        publisher.value =
-                            KTorHttpResponse(response, response.call.response.readBytes())
                     }
+
+                    publisher.value =
+                        KTorHttpResponse(response, response.call.response.readBytes())
                 } catch (ex: Throwable) {
                     val response = (ex as? ResponseException)?.response
                     if (response != null) {

@@ -3,7 +3,6 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotQueueDispatcher
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
-import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
@@ -13,7 +12,6 @@ class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispat
     TrikotQueueDispatcher {
 
     override fun subscribe(s: Subscriber<in T>) {
-        freeze(s)
         dispatch {
             super.subscribe(s)
         }
@@ -31,7 +29,6 @@ class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispat
         }
 
         override fun onCancel(s: Subscription) {
-            freeze(s)
             dispatch {
                 super.onCancel(s)
             }

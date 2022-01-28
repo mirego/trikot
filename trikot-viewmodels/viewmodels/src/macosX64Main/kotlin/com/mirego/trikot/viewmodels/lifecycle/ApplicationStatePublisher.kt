@@ -13,7 +13,6 @@ import platform.darwin.NSObject
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import platform.darwin.sel_registerName
-import kotlin.native.concurrent.freeze
 
 @Suppress("unused")
 actual class ApplicationStatePublisher :
@@ -26,12 +25,9 @@ actual class ApplicationStatePublisher :
         if (NSThread.isMainThread) {
             setInitialValue()
         } else {
-            dispatch_async(
-                dispatch_get_main_queue(),
-                {
-                    setInitialValue()
-                }.freeze()
-            )
+            dispatch_async(dispatch_get_main_queue()) {
+                setInitialValue()
+            }
         }
     }
 
@@ -58,7 +54,7 @@ actual class ApplicationStatePublisher :
         private var callback: ((ApplicationState) -> Unit)? by atomicNullable(null)
 
         fun start(closure: (ApplicationState) -> Unit) {
-            callback = closure.freeze()
+            callback = closure
             NSNotificationCenter.defaultCenter.addObserver(
                 this,
                 sel_registerName("didBecomeActive"),
