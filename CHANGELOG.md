@@ -4,6 +4,15 @@ All notable changes to the library will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 3.2.0-M1
+
+> 2022-01-31
+
+- Enabled experimental kotlin native memory model
+- Removed MrFreeze and all "freezing" related extensions
+- Updated to [Ktor 2.0.0-beta-1](https://github.com/ktorio/ktor/releases/tag/2.0.0-beta-1)
+- Reimplemented AtomicReference using [kotlinx.atomicfu](https://github.com/Kotlin/kotlinx.atomicfu)
+
 ## 3.1.2
 
 > 2022-01-18
