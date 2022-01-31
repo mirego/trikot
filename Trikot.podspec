@@ -1,6 +1,8 @@
+properties = load_properties('gradle.properties')
+
 Pod::Spec.new do |spec|
   spec.name          = "Trikot"
-  spec.version       = "3.2.0-M1"
+  spec.version       = "#{properties['version']}"
   spec.summary       = "Plugins for Trikot"
   spec.description   = "Plugins for Trikot"
   spec.homepage      = "https://github.com/mirego/trikot"
