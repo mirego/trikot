@@ -45,34 +45,39 @@ public struct VMDTextField<Label>: View where Label: View {
 
     public var body: some View {
         if #available(iOS 15.0, *) {
-            if let labelBuilder = labelBuilder {
-                TextField(text: text, prompt: prompt, label: labelBuilder)
-                    .onSubmit {
-                        viewModel.onReturnKeyTap()
+            // Workaround to avoid a crash on iOS 14 in Release. Ref: https://github.com/gongzhang/swiftui-availability-check-crash
+            Group {
+                if #available(iOS 15.0, *) {
+                    if let labelBuilder = labelBuilder {
+                        TextField(text: text, prompt: prompt, label: labelBuilder)
+                            .onSubmit {
+                                viewModel.onReturnKeyTap()
+                            }
+                            .focusMe($isFocused)
+                            .onChange(of: isFocused) { isFocused in
+                                self.onFocusChange?(isFocused)
+                            }
+                            .keyboardType(viewModel.keyboardType.uiKeyboardType)
+                            .submitLabel(viewModel.keyboardReturnKeyType.submitLabel)
+                            .textContentType(viewModel.contentType?.uiTextContentType)
+                            .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
+                            .disableAutocorrection(!viewModel.autoCorrect)
+                    } else {
+                        TextField(viewModel.placeholder, text: text, prompt: prompt)
+                            .onSubmit {
+                                viewModel.onReturnKeyTap()
+                            }
+                            .focusMe($isFocused)
+                            .onChange(of: isFocused) { isFocused in
+                                self.onFocusChange?(isFocused)
+                            }
+                            .keyboardType(viewModel.keyboardType.uiKeyboardType)
+                            .submitLabel(viewModel.keyboardReturnKeyType.submitLabel)
+                            .textContentType(viewModel.contentType?.uiTextContentType)
+                            .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
+                            .disableAutocorrection(!viewModel.autoCorrect)
                     }
-                    .focusMe($isFocused)
-                    .onChange(of: isFocused) { isFocused in
-                        self.onFocusChange?(isFocused)
-                    }
-                    .keyboardType(viewModel.keyboardType.uiKeyboardType)
-                    .submitLabel(viewModel.keyboardReturnKeyType.submitLabel)
-                    .textContentType(viewModel.contentType?.uiTextContentType)
-                    .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
-                    .disableAutocorrection(!viewModel.autoCorrect)
-            } else {
-                TextField(viewModel.placeholder, text: text, prompt: prompt)
-                    .onSubmit {
-                        viewModel.onReturnKeyTap()
-                    }
-                    .focusMe($isFocused)
-                    .onChange(of: isFocused) { isFocused in
-                        self.onFocusChange?(isFocused)
-                    }
-                    .keyboardType(viewModel.keyboardType.uiKeyboardType)
-                    .submitLabel(viewModel.keyboardReturnKeyType.submitLabel)
-                    .textContentType(viewModel.contentType?.uiTextContentType)
-                    .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
-                    .disableAutocorrection(!viewModel.autoCorrect)
+                }
             }
         } else {
             TextField(viewModel.placeholder, text: text, onEditingChanged: { isEditing in
