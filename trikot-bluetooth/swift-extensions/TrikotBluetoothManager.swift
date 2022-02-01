@@ -7,14 +7,14 @@ public class TrikotBluetoothManager: NSObject, BluetoothManager, CBCentralManage
     private let dispatchQueue = DispatchQueue(label: TrikotBluetoothManager.QueueLabel, qos: .background)
     private lazy var centralManager = CBCentralManager(delegate: self, queue: dispatchQueue)
 
-    private let scanResultpublisher = Publishers.behaviorSubject(value: nil)
+    private let scanResultpublisher = Publishers().behaviorSubject(value: nil)
     private let numberOfScanRequest = Atomic<Int>(0)
 
     private var scanResults = [CBPeripheral: TrikotBluetoothScanResult]()
     private var connectedDevices = [CBPeripheral: TrikotBluetoothDevice]()
     private var delegates = [CBCentralManagerDelegate]()
 
-    private let bluetoothStatePublisher: Publisher = Publishers.behaviorSubject(value: nil)
+    private let bluetoothStatePublisher: Publisher = Publishers().behaviorSubject(value: nil)
 
     public lazy var statePublisher = PublisherExtensionsKt.map(bluetoothStatePublisher) { (value: Any) in
         guard let centralManagerState = value as? CBManagerState else { return nil }

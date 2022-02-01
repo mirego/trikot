@@ -7,7 +7,7 @@ class TrikotAttributeProfileService: NSObject, AttributeProfileService {
 
     var trikotCharacteristics = [CBCharacteristic: TrikotAttributeProfileCharacteristic]()
 
-    let characteristics: Publisher = Publishers.behaviorSubject(value: nil)
+    let characteristics: Publisher = Publishers().behaviorSubject(value: nil)
 
     init(service: CBService, peripheral: CBPeripheral) {
         self.service = service
