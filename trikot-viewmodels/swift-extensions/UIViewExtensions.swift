@@ -17,6 +17,12 @@ extension UIView {
 
             bind(viewModel.hidden, \UIView.isHidden)
 
+            bind(viewModel.isAccessibilityElement, \UIView.isAccessibilityElement)
+
+            bind(viewModel.accessibilityLabel, \UIView.accessibilityLabel)
+
+            bind(viewModel.accessibilityHint, \UIView.accessibilityHint)
+
             if !(self is UIControl) {
                 observe(viewModel.action) {[weak self] (value: ViewModelAction) in
                     guard let self = self else { return }

@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
@@ -33,6 +34,18 @@ fun View.bindViewModel(
 
         it.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
             setAlpha(alpha)
+        }
+
+        it.isAccessibilityElement.observe(lifecycleOwnerWrapper.lifecycleOwner) { isAccessibilityElement ->
+            importantForAccessibility = if (isAccessibilityElement) View.IMPORTANT_FOR_ACCESSIBILITY_YES else View.IMPORTANT_FOR_ACCESSIBILITY_NO
+        }
+
+        it.accessibilityLabel.observe(lifecycleOwnerWrapper.lifecycleOwner) { accessibilityLabel ->
+            contentDescription = accessibilityLabel
+        }
+
+        it.accessibilityHint.observe(lifecycleOwnerWrapper.lifecycleOwner) { accessibilityHint ->
+            ViewCompat.replaceAccessibilityAction(this, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK, accessibilityHint, null)
         }
 
         bindAction(it, lifecycleOwnerWrapper)

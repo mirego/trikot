@@ -14,4 +14,10 @@ open class MutableViewModel : ViewModel {
     override var hidden = PropertyFactory.never<Boolean>()
 
     override var action = PropertyFactory.create(ViewModelAction.None)
+
+    override var isAccessibilityElement = PropertyFactory.never<Boolean>()
+
+    override var accessibilityLabel = PropertyFactory.never<String>()
+
+    override var accessibilityHint = PropertyFactory.never<String>()
 }

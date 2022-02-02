@@ -20,8 +20,8 @@ class HeaderListItem: UIView {
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             title.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            title.leadingAnchor.constraint(equalTo: leadingAnchor),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor)
+            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
     }
 

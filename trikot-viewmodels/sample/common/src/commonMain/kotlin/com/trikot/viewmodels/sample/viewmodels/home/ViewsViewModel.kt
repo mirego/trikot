@@ -18,20 +18,42 @@ class ViewsViewModel : MutableListViewModel<ListItemViewModel>() {
 
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor"),
-        MutableViewListItemViewModel().also {
-            it.view.backgroundColor = StateSelector(Color(255, 0, 0)).just()
+        MutableViewListItemViewModel().apply {
+            view.backgroundColor = StateSelector(Color(255, 0, 0)).just()
         },
         MutableHeaderListItemViewModel(".alpha"),
-        MutableViewListItemViewModel().also {
-            it.view.alpha = 0.5f.just()
+        MutableViewListItemViewModel().apply {
+            view.alpha = 0.5f.just()
         },
         MutableHeaderListItemViewModel(".hidden"),
-        MutableViewListItemViewModel().also {
-            it.view.hidden = true.just()
+        MutableViewListItemViewModel().apply {
+            view.hidden = true.just()
         },
         MutableHeaderListItemViewModel(".onTap"),
-        MutableViewListItemViewModel().also {
-            it.view.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
+        MutableViewListItemViewModel().apply {
+            view.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
+        },
+        MutableHeaderListItemViewModel(".isAccessibilityElement (true)"),
+        MutableViewListItemViewModel().apply {
+            view.accessibilityLabel = "This should be accessible".just()
+            view.isAccessibilityElement = true.just()
+        },
+        MutableHeaderListItemViewModel(".isAccessibilityElement (false)"),
+        MutableViewListItemViewModel().apply {
+            view.accessibilityLabel = "This should not be accessible".just()
+            view.isAccessibilityElement = false.just()
+        },
+        MutableHeaderListItemViewModel(".accessibilityLabel (\"Sample view\")"),
+        MutableViewListItemViewModel().apply {
+            view.accessibilityLabel = "This is a sample view".just()
+            view.isAccessibilityElement = true.just()
+        },
+        MutableHeaderListItemViewModel(".accessibilityHint (\"Purchase the item.\")"),
+        MutableViewListItemViewModel().apply {
+            view.accessibilityLabel = "Purchase".just()
+            view.accessibilityHint = "Purchase the item".just()
+            view.isAccessibilityElement = true.just()
+            view.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
         }
     ).just()
 }

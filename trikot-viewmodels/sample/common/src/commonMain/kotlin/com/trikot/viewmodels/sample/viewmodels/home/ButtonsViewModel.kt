@@ -125,6 +125,17 @@ class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
             it.button.action = ViewModelAction {
                 iconVisible.value = iconVisible.value?.not()
             }.just()
-        }
+        },
+        MutableHeaderListItemViewModel(".accessibilityLabel (\"This is a sample\")"),
+        MutableButtonListItemViewModel().apply {
+            button.accessibilityLabel = "This is a sample".just()
+            button.isAccessibilityElement = true.just()
+        },
+        MutableHeaderListItemViewModel(".accessibilityHint (\"Purchase the item\")"),
+        MutableButtonListItemViewModel().apply {
+            button.accessibilityLabel = "Purchase".just()
+            button.accessibilityHint = "Purchase the item".just()
+            button.isAccessibilityElement = true.just()
+        },
     ).just()
 }
