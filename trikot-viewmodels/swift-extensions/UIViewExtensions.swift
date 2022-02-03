@@ -17,6 +17,35 @@ extension UIView {
 
             bind(viewModel.hidden, \UIView.isHidden)
 
+            bind(viewModel.isAccessibilityElement, \UIView.isAccessibilityElement)
+
+            bind(viewModel.accessibilityLabel, \UIView.accessibilityLabel)
+
+            observe(viewModel.accessibilityHint) {[weak self] (value: ViewModelAccessibilityHint) in
+                guard let self = self else { return }
+
+                self.accessibilityHint = value.hint
+
+                if value.announceHintChanges && self.accessibilityElementIsFocused() {
+                    let hintToAnnounce = value.customHintsChangeAnnouncement ?? value.hint
+
+                    /**
+                     To prevent default VoiceOver from discarding the announcement,
+                     we wait a short period of time before queuing our custom announcement.
+                     We don't have to wait for the engine to finish talking, but we have
+                     to make sure we don't queue our announcement before VoiceOver starts its own.
+                     */
+                    if UIAccessibility.isVoiceOverRunning {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            let delayedHintToAnnounce = NSAttributedString(string: hintToAnnounce, attributes: [.accessibilitySpeechQueueAnnouncement: true])
+                            UIAccessibility.post(notification: .announcement, argument: delayedHintToAnnounce)
+                        }
+                    } else {
+                        UIAccessibility.post(notification: .announcement, argument: hintToAnnounce)
+                    }
+                }
+            }
+
             if !(self is UIControl) {
                 observe(viewModel.action) {[weak self] (value: ViewModelAction) in
                     guard let self = self else { return }

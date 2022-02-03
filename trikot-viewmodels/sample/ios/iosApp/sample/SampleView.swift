@@ -13,9 +13,8 @@ class ListView: UIView {
     var vm: ListViewModel? {
         didSet {
             guard let vm = vm else { return }
-            observe(vm.elements) {[weak self] (elements: [ListItemViewModel]) in
-                self?.items = elements
-            }
+
+            bind(vm.elements, \ListView.items)
         }
     }
 
@@ -43,11 +42,12 @@ class ListView: UIView {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -56,55 +56,71 @@ class ListView: UIView {
 extension ListView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items?.count ?? 0
+        items?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let metaListItem = items?[indexPath.row]
 
-        if let metaListItem = metaListItem as? NavigableListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<NavigableListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+        switch items?[indexPath.row] {
+        case let viewModel as NavigableListItemViewModel:
+            let cell = prepareCell(type: NavigableListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? LabelListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<LabelListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as LabelListItemViewModel:
+            let cell = prepareCell(type: LabelListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? HeaderListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<HeaderListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as HeaderListItemViewModel:
+            let cell = prepareCell(type: HeaderListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? ViewListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ViewListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as ViewListItemViewModel:
+            let cell = prepareCell(type: ViewListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? ButtonListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ButtonListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as ButtonListItemViewModel:
+            let cell = prepareCell(type: ButtonListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? ImageListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ImageListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as ImageListItemViewModel:
+            let cell = prepareCell(type: ImageListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? InputTextListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<InputTextListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as InputTextListItemViewModel:
+            let cell = prepareCell(type: InputTextListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? SliderListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<SliderListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as SliderListItemViewModel:
+            let cell = prepareCell(type: SliderListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? ToggleSwitchListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<ToggleSwitchListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as ToggleSwitchListItemViewModel:
+            let cell = prepareCell(type: ToggleSwitchListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
-        } else if let metaListItem = metaListItem as? PickerListItemViewModel {
-            let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<PickerListItem>.self, for: indexPath)
-            cell.view.item = metaListItem
+
+        case let viewModel as PickerListItemViewModel:
+            let cell = prepareCell(type: PickerListItem.self, tableView: tableView, indexPath: indexPath)
+            cell.view.item = viewModel
             return cell
+
+        default:
+            fatalError("Unexpected list item viewModel")
         }
+    }
 
-        return UITableViewCell(frame: .zero)
+    private func prepareCell<T: UIView>(type: T.Type, tableView: UITableView, indexPath: IndexPath) -> AutosizingCell<T> {
+        let cell = tableView.dequeueReusableCell(withCellType: AutosizingCell<T>.self, for: indexPath)
+        cell.resetCellContent()
+        return cell
     }
 }
 

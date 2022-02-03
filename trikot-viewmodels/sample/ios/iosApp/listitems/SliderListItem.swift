@@ -24,12 +24,12 @@ class SliderListItem: UIView {
         NSLayoutConstraint.activate([
             slider.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             slider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            slider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20),
+            slider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
 
             label.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 20),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 20),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20)
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
 
