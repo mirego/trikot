@@ -4,7 +4,9 @@ import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.shared
 import com.mirego.trikot.viewmodels.ListItemViewModel
+import com.mirego.trikot.viewmodels.ViewModelAccessibilityHint
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
 import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.Color
@@ -25,6 +27,7 @@ class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
     var navigationDelegate: NavigationDelegate? by weakAtomicReference()
 
     private var iconVisible = Publishers.behaviorSubject(true)
+    private val hasPurchasedExample = Publishers.behaviorSubject(false)
 
     override var elements: Publisher<List<ListItemViewModel>> = listOf<ListItemViewModel>(
         MutableHeaderListItemViewModel(".backgroundColor (normal + highlighted)"),
@@ -133,9 +136,27 @@ class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
         },
         MutableHeaderListItemViewModel(".accessibilityHint (\"Purchase the item\")"),
         MutableButtonListItemViewModel().apply {
-            button.accessibilityLabel = "Purchase".just()
-            button.accessibilityHint = "Purchase the item".just()
+            val sharedTextResource = hasPurchasedExample
+                .map { hasPurchased ->
+                    if (hasPurchased) "Cancel" else "Purchase"
+                }
+                .shared()
+
             button.isAccessibilityElement = true.just()
+            button.text = sharedTextResource
+            button.accessibilityLabel = sharedTextResource
+            button.accessibilityHint = hasPurchasedExample.map { hasPurchased ->
+                when {
+                    hasPurchased -> ViewModelAccessibilityHint(
+                        hint = "Cancel your purchase",
+                        customHintsChangeAnnouncement = "Interact again to cancel your purchase"
+                    )
+                    else -> ViewModelAccessibilityHint(hint = "Purchase the item")
+                }
+            }
+            button.action = ViewModelAction {
+                hasPurchasedExample.value = hasPurchasedExample.value?.let { !it } ?: false
+            }.just()
         },
     ).just()
 }

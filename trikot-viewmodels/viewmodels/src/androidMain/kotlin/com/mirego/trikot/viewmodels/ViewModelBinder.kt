@@ -45,7 +45,11 @@ fun View.bindViewModel(
         }
 
         it.accessibilityHint.observe(lifecycleOwnerWrapper.lifecycleOwner) { accessibilityHint ->
-            ViewCompat.replaceAccessibilityAction(this, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK, accessibilityHint, null)
+            ViewCompat.replaceAccessibilityAction(this, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK, accessibilityHint.hint, null)
+
+            if (accessibilityHint.announceHintChanges && isAccessibilityFocused) {
+                announceForAccessibility(accessibilityHint.customHintsChangeAnnouncement ?: accessibilityHint.hint)
+            }
         }
 
         bindAction(it, lifecycleOwnerWrapper)

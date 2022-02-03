@@ -16,5 +16,20 @@ interface AccessibleViewModel {
      * Describes the result of performing an action on the element, when the result is non-obvious.
      * For example: "Purchases the item." or "Downloads the attachment."
      */
-    val accessibilityHint: Publisher<String>
+    val accessibilityHint: Publisher<ViewModelAccessibilityHint>
 }
+
+/**
+ * Accessibility hint
+ *
+ * @property hint                           Describes the result of performing an action on the element.
+ * @property announceHintChanges            Indicates whether to announce the new hint when it changes. Default is true.
+ * @property customHintsChangeAnnouncement  A custom hint that is announced only when the action changes and the view is already focussed.
+ *                                          `hint` will be used if no value is specified for `customHintsChangeAnnouncement`.
+ *                                          This is particularly useful for toggles. Ex : "Interact again to cancel your purchase"
+ */
+data class ViewModelAccessibilityHint(
+    val hint: String,
+    val announceHintChanges: Boolean = true,
+    val customHintsChangeAnnouncement: String? = null
+)

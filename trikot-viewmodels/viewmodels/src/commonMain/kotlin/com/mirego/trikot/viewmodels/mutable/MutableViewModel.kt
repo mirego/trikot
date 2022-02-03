@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.mutable
 
 import com.mirego.trikot.viewmodels.ViewModel
+import com.mirego.trikot.viewmodels.ViewModelAccessibilityHint
 import com.mirego.trikot.viewmodels.factory.PropertyFactory
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
@@ -19,5 +20,5 @@ open class MutableViewModel : ViewModel {
 
     override var accessibilityLabel = PropertyFactory.never<String>()
 
-    override var accessibilityHint = PropertyFactory.never<String>()
+    override var accessibilityHint = PropertyFactory.never<ViewModelAccessibilityHint>()
 }
