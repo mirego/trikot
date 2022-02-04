@@ -27,9 +27,18 @@ fun View.bindViewModel(
     viewModel: ViewModel?,
     lifecycleOwnerWrapper: LifecycleOwnerWrapper
 ) {
+    bindViewModel(viewModel, HiddenVisibility.GONE, lifecycleOwnerWrapper)
+}
+
+@BindingAdapter("view_model", "hiddenVisibility", "lifecycleOwnerWrapper")
+fun View.bindViewModel(
+    viewModel: ViewModel?,
+    hiddenVisibility: HiddenVisibility,
+    lifecycleOwnerWrapper: LifecycleOwnerWrapper
+) {
     (viewModel ?: NoViewModel).let {
         it.hidden.observe(lifecycleOwnerWrapper.lifecycleOwner) { isHidden ->
-            visibility = if (isHidden) View.GONE else View.VISIBLE
+            visibility = if (isHidden) hiddenVisibility.value else View.VISIBLE
         }
 
         it.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
@@ -52,20 +61,17 @@ fun View.bindViewModel(
             }
         }
 
-        bindAction(it, lifecycleOwnerWrapper)
+        it.backgroundColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+            if (selector.isEmpty) return@observe
 
-        it.backgroundColor
-            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
-                if (selector.isEmpty) {
-                    return@observe
-                }
-
-                background ?: run {
-                    ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
-                }
-
-                ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
+            background ?: run {
+                ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
             }
+
+            ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
+        }
+
+        bindAction(it, lifecycleOwnerWrapper)
     }
 }
 

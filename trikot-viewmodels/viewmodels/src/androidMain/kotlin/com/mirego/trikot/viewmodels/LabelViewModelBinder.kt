@@ -1,10 +1,7 @@
 package com.mirego.trikot.viewmodels
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.TextView
-import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
@@ -84,28 +81,7 @@ object LabelViewModelBinder {
         hiddenVisibility: HiddenVisibility,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper
     ) {
-        labelViewModel.hidden.observe(lifecycleOwnerWrapper.lifecycleOwner) { hidden ->
-            with(textView) { visibility = if (hidden) hiddenVisibility.value else View.VISIBLE }
-        }
-
-        labelViewModel.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
-            textView.alpha = alpha
-        }
-
-        labelViewModel.backgroundColor
-            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
-                if (selector.isEmpty) {
-                    return@observe
-                }
-
-                textView.background ?: run {
-                    ViewCompat.setBackground(textView, ColorDrawable(Color.WHITE))
-                }
-
-                ViewCompat.setBackgroundTintList(textView, selector.toColorStateList())
-            }
-
-        textView.bindAction(labelViewModel, lifecycleOwnerWrapper)
+        textView.bindViewModel(labelViewModel, hiddenVisibility, lifecycleOwnerWrapper)
     }
 }
 
