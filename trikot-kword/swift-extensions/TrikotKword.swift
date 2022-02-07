@@ -31,4 +31,3 @@ public class TrikotKword: NSObject {
         i18N.changeLocaleStrings(strings: allStrings)
     }
 }
-

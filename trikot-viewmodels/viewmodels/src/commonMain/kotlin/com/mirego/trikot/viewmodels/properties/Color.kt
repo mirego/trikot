@@ -1,6 +1,5 @@
 package com.mirego.trikot.viewmodels.properties
 
-import com.mirego.trikot.foundation.concurrent.freeze
 import kotlin.math.roundToInt
 
 data class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f) {
@@ -27,8 +26,8 @@ data class Color(val red: Int, val green: Int, val blue: Int, val alpha: Float =
     }
 
     companion object {
-        val None = freeze(Color(-1, -1, -1, -1f))
-        val Black = freeze(Color(0, 0, 0))
-        val White = freeze(Color(255, 255, 255))
+        val None = Color(-1, -1, -1, -1f)
+        val Black = Color(0, 0, 0)
+        val White = Color(255, 255, 255)
     }
 }

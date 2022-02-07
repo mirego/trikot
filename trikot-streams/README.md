@@ -2,7 +2,6 @@
 
 Elegant implementation of ReactiveStreams for Kotlin Multiplatform.
 
-- Manage object immutability in native implementation (Object are frozen when switching threads)
 - Multithread support with ObserveOn and SubscribeOn processors
 - Simplify the management of publishers subscriptions and unsubscriptions
 - Help you focus on what you need to do by hiding Multiplatform complexity

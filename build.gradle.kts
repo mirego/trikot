@@ -10,6 +10,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE_PLUGIN}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}")
         classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.KOTLIN}")
+        classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:${Versions.ATOMIC_FU}")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:${Versions.KTLINT}")
     }
 }

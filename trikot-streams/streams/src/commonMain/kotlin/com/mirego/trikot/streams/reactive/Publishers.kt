@@ -1,7 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.foundation.FoundationConfiguration
-import com.mirego.trikot.foundation.concurrent.MrFreeze
 import com.mirego.trikot.foundation.timers.TimerFactory
 import org.reactivestreams.Publisher
 import kotlin.time.Duration
@@ -11,16 +10,8 @@ object Publishers {
         return BehaviorSubjectImpl(value)
     }
 
-    fun <T> frozenBehaviorSubject(value: T? = null): BehaviorSubject<T> {
-        return MrFreeze.freeze(BehaviorSubjectImpl(value))
-    }
-
     fun <T> publishSubject(): PublishSubject<T> {
         return PublishSubjectImpl()
-    }
-
-    fun <T> frozenPublishSubject(): PublishSubject<T> {
-        return MrFreeze.freeze(PublishSubjectImpl())
     }
 
     /**
