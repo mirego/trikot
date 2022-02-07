@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.databinding.BindingAdapter
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
@@ -26,29 +27,51 @@ fun View.bindViewModel(
     viewModel: ViewModel?,
     lifecycleOwnerWrapper: LifecycleOwnerWrapper
 ) {
+    bindViewModel(viewModel, HiddenVisibility.GONE, lifecycleOwnerWrapper)
+}
+
+@BindingAdapter("view_model", "hiddenVisibility", "lifecycleOwnerWrapper")
+fun View.bindViewModel(
+    viewModel: ViewModel?,
+    hiddenVisibility: HiddenVisibility,
+    lifecycleOwnerWrapper: LifecycleOwnerWrapper
+) {
     (viewModel ?: NoViewModel).let {
         it.hidden.observe(lifecycleOwnerWrapper.lifecycleOwner) { isHidden ->
-            visibility = if (isHidden) View.GONE else View.VISIBLE
+            visibility = if (isHidden) hiddenVisibility.value else View.VISIBLE
         }
 
         it.alpha.observe(lifecycleOwnerWrapper.lifecycleOwner) { alpha ->
             setAlpha(alpha)
         }
 
-        bindAction(it, lifecycleOwnerWrapper)
+        it.isAccessibilityElement.observe(lifecycleOwnerWrapper.lifecycleOwner) { isAccessibilityElement ->
+            importantForAccessibility = if (isAccessibilityElement) View.IMPORTANT_FOR_ACCESSIBILITY_YES else View.IMPORTANT_FOR_ACCESSIBILITY_NO
+        }
 
-        it.backgroundColor
-            .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
-                if (selector.isEmpty) {
-                    return@observe
-                }
+        it.accessibilityLabel.observe(lifecycleOwnerWrapper.lifecycleOwner) { accessibilityLabel ->
+            contentDescription = accessibilityLabel
+        }
 
-                background ?: run {
-                    ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
-                }
+        it.accessibilityHint.observe(lifecycleOwnerWrapper.lifecycleOwner) { accessibilityHint ->
+            ViewCompat.replaceAccessibilityAction(this, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK, accessibilityHint.hint, null)
 
-                ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
+            if (accessibilityHint.announceHintChanges && isAccessibilityFocused) {
+                announceForAccessibility(accessibilityHint.customHintsChangeAnnouncement ?: accessibilityHint.hint)
             }
+        }
+
+        it.backgroundColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
+            if (selector.isEmpty) return@observe
+
+            background ?: run {
+                ViewCompat.setBackground(this, ColorDrawable(Color.WHITE))
+            }
+
+            ViewCompat.setBackgroundTintList(this, selector.toColorStateList())
+        }
+
+        bindAction(it, lifecycleOwnerWrapper)
     }
 }
 

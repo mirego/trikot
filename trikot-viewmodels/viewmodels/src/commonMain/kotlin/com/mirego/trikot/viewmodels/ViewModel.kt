@@ -5,7 +5,7 @@ import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import org.reactivestreams.Publisher
 
-interface ViewModel {
+interface ViewModel : AccessibleViewModel {
     /**
      * Alpha value of the view. 0.0 to 1.0
      */
