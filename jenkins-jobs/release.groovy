@@ -9,9 +9,17 @@ context.standardFolders()
 job(context.jobFullName) {
     description("Make a release of all trikot libraries")
     logRotator(5)
+    parameters {
+        stringParam {
+            name('branch')
+            defaultValue("${GIT_BRANCH}")
+            description('The git branch to be built')
+            trim(true)
+        }
+    }
     scm {
         git {
-            branch("${GIT_BRANCH}")
+            branch('${branch}')
             remote {
                 name('origin')
                 url("${GIT_URL}")
