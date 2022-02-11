@@ -16,7 +16,7 @@ import kotlin.reflect.KProperty
 
 @Composable
 fun <T : VMDViewModel> T.observeAsState(): State<T> {
-    return propertyDidChange.map { this }.subscribeAsState(initial = this)
+    return propertyDidChange.map { this }.subscribeAsState(initial = this, key = this)
 }
 
 @Composable
@@ -25,12 +25,12 @@ fun <T, VM : VMDViewModel> VM.observeAsState(
     initialValue: T? = null
 ): State<T> {
     val initial: T = initialValue ?: property.getter.call()
-    return publisherForProperty(property).subscribeAsState(initial = initial)
+    return publisherForProperty(property).subscribeAsState(initial = initial, key = this)
 }
 
 @Composable
-fun <R, T : R> Publisher<T>.subscribeAsState(initial: R): State<R> =
-    asState(initial) { callback ->
+fun <R, T : R> Publisher<T>.subscribeAsState(initial: R, key: Any? = initial): State<R> =
+    asState(initial, key) { callback ->
         val cancellableManager = CancellableManager()
         subscribe(cancellableManager) {
             callback(it)
@@ -41,9 +41,10 @@ fun <R, T : R> Publisher<T>.subscribeAsState(initial: R): State<R> =
 @Composable
 inline fun <T, S> S.asState(
     initial: T,
+    key: Any? = initial,
     crossinline subscribe: S.((T) -> Unit) -> Cancellable
 ): State<T> {
-    val state = remember { mutableStateOf(initial, neverEqualPolicy()) }
+    val state = remember(key) { mutableStateOf(initial, neverEqualPolicy()) }
     DisposableEffect(this) {
         val cancellable = subscribe {
             state.value = it
