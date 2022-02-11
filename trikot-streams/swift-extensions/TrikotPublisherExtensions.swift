@@ -104,6 +104,13 @@ extension NSObject {
             }
         })
     }
+
+    public func bind<T, V, I>(_ concretePublisher: ConcretePublisher<I>, _ keyPath: ReferenceWritableKeyPath<T, V>, transform: @escaping ((I) -> V)) {
+        observe(concretePublisher, toClosure: { [weak self] (newValue: I) in
+            guard let strongSelf = self as? T else { return }
+            strongSelf[keyPath: keyPath] = transform(newValue)
+        })
+    }
 }
 
 extension Publisher {
