@@ -41,7 +41,7 @@ fun <R, T : R> Publisher<T>.subscribeAsState(initial: R, key: Any? = initial): S
 @Composable
 inline fun <T, S> S.asState(
     initial: T,
-    key: Any? = initial,
+    key: Any? = null,
     crossinline subscribe: S.((T) -> Unit) -> Cancellable
 ): State<T> {
     val state = remember(key) { mutableStateOf(initial, neverEqualPolicy()) }
