@@ -4,8 +4,8 @@ Pod::Spec.new do |spec|
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
-    spec.license                  = 'No license'
-    spec.summary                  = 'Awesome library'
+    spec.license                  = { :type => 'BSD' }
+    spec.summary                  = 'trikot.viewModels Sample'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework"
