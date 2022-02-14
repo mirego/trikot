@@ -15,13 +15,14 @@ Pod::Spec.new do |spec|
     spec.pod_target_xcconfig = {
         'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
         'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
-        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosX64',
+        'KOTLIN_TARGET[sdk=iphonesimulator*][arch=x86_64]' => 'iosX64',
+        'KOTLIN_TARGET[sdk=iphonesimulator*][arch=arm64]' => 'iosSimulatorArm64',
         'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64'
     }
 
     spec.prepare_command = <<-CMD
-         mkdir -p build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework
-      CMD
+        mkdir -p build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework
+    CMD
 
     spec.script_phases = [
         {
