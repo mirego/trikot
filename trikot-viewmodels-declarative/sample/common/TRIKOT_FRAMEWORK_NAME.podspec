@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
-    spec.license                  = { :type => 'BSD' }
+    spec.license                  = { :type => 'BSD-3' }
     spec.summary                  = 'trikot.viewmodels-declarative Sample'
 
     spec.static_framework         = true
