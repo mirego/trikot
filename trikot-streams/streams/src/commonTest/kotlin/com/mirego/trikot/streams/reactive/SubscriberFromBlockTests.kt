@@ -8,7 +8,6 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class SubscriberFromBlockTests {
     var behaviorSubject = Publishers.behaviorSubject<String>()
@@ -40,7 +39,7 @@ class SubscriberFromBlockTests {
 
         val publisher = object : Publisher<Int> {
             override fun subscribe(s: Subscriber<in Int>) {
-                s.onSubscribe(object: Subscription {
+                s.onSubscribe(object : Subscription {
                     override fun request(n: Long) {
                         requestCount = n
                     }
@@ -51,7 +50,6 @@ class SubscriberFromBlockTests {
             }
         }
         publisher.subscribe(cancellableManager) {
-
         }
 
         assertEquals(Long.MAX_VALUE, requestCount)
