@@ -29,6 +29,7 @@ class SubscriberFromBlock<T>(
                 }
             }
         )
+        s.request(Long.MAX_VALUE)
     }
 
     override fun onNext(t: T) {
