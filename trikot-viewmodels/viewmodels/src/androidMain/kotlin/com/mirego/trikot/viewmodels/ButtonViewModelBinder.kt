@@ -22,6 +22,38 @@ object ButtonViewModelBinder {
     val NoButtonViewModel = MutableButtonViewModel().apply { hidden = true.just() } as ButtonViewModel
     val NoViewModelAction = Publishers.behaviorSubject(ViewModelAction {})
 
+    fun bindImage(
+        it: ViewWithIconViewModel,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper,
+        textView: TextView
+    ) {
+        it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
+            .observe(lifecycleOwnerWrapper.lifecycleOwner) { observeResult ->
+                val alignment = observeResult.first?.first
+                val selector = observeResult.first?.second
+                val tintColor = observeResult.second
+
+                if (alignment == null || (selector == null || selector.isEmpty)) return@observe
+
+                val drawable = selector.asDrawable(textView.context, tintColor)
+                with(textView) {
+                    when (alignment) {
+                        Alignment.LEFT -> drawableStart = drawable
+                        Alignment.TOP -> drawableTop = drawable
+                        Alignment.RIGHT -> drawableEnd = drawable
+                        Alignment.BOTTOM -> drawableBottom = drawable
+                        Alignment.CENTER -> drawableStart = drawable
+                        else -> {
+                            drawableStart = null
+                            drawableTop = null
+                            drawableEnd = null
+                            drawableBottom = null
+                        }
+                    }
+                }
+            }
+    }
+
     @JvmStatic
     @BindingAdapter("view_model")
     fun bind(
@@ -77,31 +109,7 @@ object ButtonViewModelBinder {
                     textView.text = it
                 }
 
-            it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) { observeResult ->
-                    val alignment = observeResult.first?.first
-                    val selector = observeResult.first?.second
-                    val tintColor = observeResult.second
-
-                    if (alignment == null || selector == null) return@observe
-
-                    val drawable = selector.asDrawable(textView.context, tintColor)
-                    with(textView) {
-                        when (alignment) {
-                            Alignment.LEFT -> drawableStart = drawable
-                            Alignment.TOP -> drawableTop = drawable
-                            Alignment.RIGHT -> drawableEnd = drawable
-                            Alignment.BOTTOM -> drawableBottom = drawable
-                            Alignment.CENTER -> drawableStart = drawable
-                            else -> {
-                                drawableStart = null
-                                drawableTop = null
-                                drawableEnd = null
-                                drawableBottom = null
-                            }
-                        }
-                    }
-                }
+            bindImage(it, lifecycleOwnerWrapper, textView)
 
             it.textColor
                 .observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
@@ -165,40 +173,7 @@ object ButtonViewModelBinder {
                     button.text = it
                 }
 
-            it.imageAlignment.combine(it.imageResource).combine(it.tintColor)
-                .observe(lifecycleOwnerWrapper.lifecycleOwner) { observeResult ->
-                    val alignment = observeResult.first?.first
-                    val selector = observeResult.first?.second
-                    val tintColor = observeResult.second
-
-                    if (alignment == null || (selector == null || selector.isEmpty)) return@observe
-
-                    val drawable = selector.asDrawable(button.context, tintColor)
-
-                    with(button) {
-                        when (alignment) {
-                            Alignment.LEFT ->
-                                drawableStart =
-                                    drawable
-                            Alignment.TOP ->
-                                drawableTop =
-                                    drawable
-                            Alignment.RIGHT ->
-                                drawableEnd =
-                                    drawable
-                            Alignment.BOTTOM ->
-                                drawableBottom =
-                                    drawable
-                            Alignment.CENTER -> drawableStart = drawable
-                            else -> {
-                                drawableStart = null
-                                drawableTop = null
-                                drawableEnd = null
-                                drawableBottom = null
-                            }
-                        }
-                    }
-                }
+            bindImage(it, lifecycleOwnerWrapper, button)
 
             it.backgroundColor.observe(lifecycleOwnerWrapper.lifecycleOwner) { selector ->
                 if (!selector.isEmpty) {

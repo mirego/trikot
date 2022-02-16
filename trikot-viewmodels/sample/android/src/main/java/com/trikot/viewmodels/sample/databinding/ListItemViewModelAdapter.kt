@@ -10,6 +10,7 @@ import com.trikot.viewmodels.sample.viewmodels.ButtonListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.HeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.ImageListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.InputTextListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.InputTextWithIconListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.LabelListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.NavigableListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.PickerListItemViewModel
@@ -30,6 +31,7 @@ class ListItemViewModelAdapter(lifecycleOwner: LifecycleOwner) :
                 is ViewListItemViewModel -> R.layout.item_view
                 is ButtonListItemViewModel -> R.layout.item_button
                 is ImageListItemViewModel -> R.layout.item_image
+                is InputTextWithIconListItemViewModel -> R.layout.item_input_text_with_icon
                 is InputTextListItemViewModel -> R.layout.item_input_text
                 is SliderListItemViewModel -> R.layout.item_slider
                 is ToggleSwitchListItemViewModel -> R.layout.item_switch

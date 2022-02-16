@@ -4,14 +4,18 @@ import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.viewmodels.ListItemViewModel
 import com.mirego.trikot.viewmodels.mutable.MutableListViewModel
+import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextEditorAction
 import com.mirego.trikot.viewmodels.properties.InputTextType
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
+import com.mirego.trikot.viewmodels.resource.ImageResource
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
+import com.trikot.viewmodels.sample.resource.ImageResources
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableInputTextListItemViewModel
+import com.trikot.viewmodels.sample.viewmodels.MutableInputTextWithIconListItemViewModel
 import org.reactivestreams.Publisher
 
 class InputTextViewModel : MutableListViewModel<ListItemViewModel>() {
@@ -60,6 +64,21 @@ class InputTextViewModel : MutableListViewModel<ListItemViewModel>() {
         MutableHeaderListItemViewModel(".inputType = number decimal"),
         MutableInputTextListItemViewModel().also {
             it.inputText.inputType = InputTextType.NUMBER_DECIMAL.just()
-        }
+        },
+        MutableHeaderListItemViewModel(".imageResource"),
+        MutableInputTextWithIconListItemViewModel(".imageResource").also {
+            it.inputTextWithIcon.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+        },
+        MutableHeaderListItemViewModel(".imageResource, .imageAlignement = LEFT"),
+        MutableInputTextWithIconListItemViewModel(".imageResource, .imageAlignement = LEFT").also {
+            it.inputTextWithIcon.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+            it.inputTextWithIcon.imageAlignment = Alignment.LEFT.just()
+        },
+        MutableHeaderListItemViewModel(".imageResource, .imageAlignement = LEFT, .tintColor"),
+        MutableInputTextWithIconListItemViewModel(".imageResource, .imageAlignement = LEFT, .tintColor").also {
+            it.inputTextWithIcon.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+            it.inputTextWithIcon.tintColor = StateSelector(Color(255, 0, 0)).just()
+            it.inputTextWithIcon.imageAlignment = Alignment.LEFT.just()
+        },
     ).just()
 }
