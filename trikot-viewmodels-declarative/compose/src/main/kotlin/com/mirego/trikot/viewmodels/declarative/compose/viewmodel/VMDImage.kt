@@ -27,6 +27,7 @@ fun VMDImage(
     viewModel: VMDImageViewModel,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
@@ -40,6 +41,7 @@ fun VMDImage(
         contentScale = contentScale,
         colorFilter = colorFilter,
         contentDescription = contentDescription,
+        placeholderContentScale = placeholderContentScale,
         imageDescriptor = imageViewModel.image
     )
 }
@@ -50,6 +52,7 @@ fun VMDImage(
     imageDescriptor: VMDImageDescriptor,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
@@ -73,6 +76,7 @@ fun VMDImage(
                 placeholderImage = imageDescriptor.placeholderImageResource,
                 alignment = alignment,
                 contentScale = contentScale,
+                placeholderContentScale = placeholderContentScale,
                 colorFilter = colorFilter,
                 contentDescription = contentDescription
             )
@@ -108,6 +112,7 @@ fun RemoteImage(
     placeholderImage: VMDImageResource = VMDImageResource.None,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
 ) {
@@ -117,9 +122,22 @@ fun RemoteImage(
             size(OriginalSize)
         }
     )
-
-    Box {
-        Image(
+    when (coilPainter.state) {
+        is ImagePainter.State.Loading -> LocalImage(
+            imageResource = placeholderImage,
+            modifier = modifier,
+            colorFilter = colorFilter,
+            contentScale = placeholderContentScale,
+            contentDescription = contentDescription
+        )
+        is ImagePainter.State.Error -> LocalImage(
+            imageResource = placeholderImage,
+            modifier = modifier,
+            colorFilter = colorFilter,
+            contentScale = placeholderContentScale,
+            contentDescription = contentDescription
+        )
+        is ImagePainter.State.Success -> Image(
             painter = coilPainter,
             modifier = modifier,
             alignment = alignment,
@@ -127,23 +145,6 @@ fun RemoteImage(
             contentScale = contentScale,
             contentDescription = contentDescription
         )
-        when (coilPainter.state) {
-            is ImagePainter.State.Loading -> LocalImage(
-                imageResource = placeholderImage,
-                modifier = modifier,
-                colorFilter = colorFilter,
-                contentScale = contentScale,
-                contentDescription = contentDescription
-            )
-            is ImagePainter.State.Error -> LocalImage(
-                imageResource = placeholderImage,
-                modifier = modifier,
-                colorFilter = colorFilter,
-                contentScale = contentScale,
-                contentDescription = contentDescription
-            )
-            else -> {
-            }
-        }
+        ImagePainter.State.Empty -> {}
     }
 }
