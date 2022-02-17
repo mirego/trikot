@@ -27,7 +27,7 @@ fun VMDImage(
     viewModel: VMDImageViewModel,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
-    placeholderContentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
@@ -52,7 +52,7 @@ fun VMDImage(
     imageDescriptor: VMDImageDescriptor,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
-    placeholderContentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
@@ -112,7 +112,7 @@ fun RemoteImage(
     placeholderImage: VMDImageResource = VMDImageResource.None,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
-    placeholderContentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = contentScale,
     colorFilter: ColorFilter? = null,
     contentDescription: String = ""
 ) {
