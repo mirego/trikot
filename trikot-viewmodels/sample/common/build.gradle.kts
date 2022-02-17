@@ -28,21 +28,27 @@ android {
 
 val frameworkName = "TRIKOT_FRAMEWORK_NAME"
 
+fun org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer.configureFramework() {
+    framework {
+        baseName = frameworkName
+        transitiveExport = true
+        export(project(Project.TRIKOT_FOUNDATION))
+        export(project(Project.TRIKOT_STREAMS))
+        export(project(Project.TRIKOT_VIEWMODELS))
+    }
+}
+
 kotlin {
     android {
         publishLibraryVariants("release", "debug")
     }
 
     ios {
-        binaries {
-            framework {
-                baseName = frameworkName
-                transitiveExport = true
-                export(project(Project.TRIKOT_FOUNDATION))
-                export(project(Project.TRIKOT_STREAMS))
-                export(project(Project.TRIKOT_VIEWMODELS))
-            }
-        }
+        binaries.configureFramework()
+    }
+
+    iosSimulatorArm64 {
+        binaries.configureFramework()
     }
 
     sourceSets {
@@ -80,9 +86,11 @@ val copyFramework by tasks.creating {
     val target = project.findProperty("kotlin.target")?.toString() ?: "iosArm64"
     val targetDir = project.findProperty("configuration.build.dir")?.toString() ?: "build/bin/ios"
     val framework =
-        kotlin.targets.getByName<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>(target).binaries.getFramework(
+        kotlin.targets.findByName(target)?.let {
+            it as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+        }?.binaries?.getFramework(
             buildType
-        )
+        ) ?: return@creating
 
     dependsOn(framework.linkTask)
 

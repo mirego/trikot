@@ -4,8 +4,8 @@ Pod::Spec.new do |spec|
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
-    spec.license                  = 'No license'
-    spec.summary                  = 'Awesome library'
+    spec.license                  = { :type => 'BSD-3' }
+    spec.summary                  = 'trikot.viewmodels-declarative Sample'
 
     spec.static_framework         = true
     spec.vendored_frameworks      = "build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework"
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
     spec.pod_target_xcconfig = {
         'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
         'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
-        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosX64',
+        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosSimulator',
         'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64'
     }
 
@@ -33,16 +33,23 @@ Pod::Spec.new do |spec|
             :script => <<-SCRIPT
 if [ "$ENABLE_PREVIEWS" = "NO" ]
 then
-  echo "Building common framework"
+    cd "$SRCROOT/../../../.."
 
-  cd "$SRCROOT/../../../.."
+    if [ "$KOTLIN_TARGET" = "iosSimulator" ]
+    then
+        if [ "$NATIVE_ARCH_ACTUAL" = "x86_64" ]
+        then
+            KOTLIN_TARGET="iosX64"
+        else
+            KOTLIN_TARGET="iosSimulatorArm64"
+        fi
+    fi
 
-  ./gradlew :trikot-viewmodels-declarative:sample:common:copyFramework \
-    -Pconfiguration.build.dir="build/bin/ios" \
-    -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" \
-    -Pkotlin.target="$KOTLIN_TARGET"
+    echo "Building common framework on architecture ${KOTLIN_TARGET}"
+    
+    ./gradlew :trikot-viewmodels-declarative:sample:common:copyFramework -Pconfiguration.build.dir="build/bin/ios" -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" -Pkotlin.target="$KOTLIN_TARGET"
 else
-  echo "Skipping build of common framework in preview mode"
+    echo "Skipping build of common framework in preview mode"
 fi
             SCRIPT
         }
