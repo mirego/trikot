@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## 3.1.12
 
 > 2022-02-21
- 
+
 - Update sample projects to build on iOS arm simulators
 - Update Android Gradle Plugin to `7.1.1`
 - Update Jetpack Compose to `1.2.0-alpha03`
