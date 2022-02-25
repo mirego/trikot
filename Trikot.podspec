@@ -40,6 +40,16 @@ Pod::Spec.new do |spec|
     subspec.dependency 'Trikot/streams'
   end
 
+  spec.subspec 'viewmodels.Kingfisher' do |subspec|
+    subspec.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
+    subspec.tvos.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
+    subspec.ios.deployment_target = '10.0'
+    subspec.tvos.deployment_target = '10.0'
+    subspec.dependency 'Trikot/streams'
+    subspec.dependency 'Trikot/viewmodels'
+    subspec.dependency 'Kingfisher', '>= 5.0'
+  end
+
   # View Model Declarative
   spec.subspec 'viewmodels.declarative' do |subspec|
     subspec.source_files = 'trikot-viewmodels-declarative/swift/core/**/*.swift'
