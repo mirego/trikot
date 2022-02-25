@@ -29,26 +29,33 @@ kword {
     generatedDir = file("src/commonMain/generated")
 }
 
+fun org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer.configureFramework() {
+    framework {
+        baseName = frameworkName
+        transitiveExport = true
+        export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+        export(project(Project.TRIKOT_STREAMS))
+        export(project(Project.TRIKOT_FOUNDATION))
+        export(project(Project.TRIKOT_HTTP))
+        export(project(Project.TRIKOT_KWORD))
+    }
+}
+
 kotlin {
     android()
+
     ios {
-        binaries {
-            framework {
-                baseName = frameworkName
-                transitiveExport = true
-                export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
-                export(project(Project.TRIKOT_STREAMS))
-                export(project(Project.TRIKOT_FOUNDATION))
-                export(project(Project.TRIKOT_HTTP))
-                export(project(Project.TRIKOT_KWORD))
-            }
-        }
+        binaries.configureFramework()
+    }
+
+    iosSimulatorArm64 {
+        binaries.configureFramework()
     }
 
     sourceSets {
         all {
             languageSettings.apply {
-                useExperimentalAnnotation("kotlin.Experimental")
+                optIn("kotlin.Experimental")
             }
         }
 
@@ -72,6 +79,10 @@ kotlin {
 
         val iosMain by getting {
             dependsOn(commonMain)
+        }
+
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
     }
 }
@@ -98,9 +109,11 @@ val copyFramework by tasks.creating {
     val targetDir = project.findProperty("configuration.build.dir")?.toString() ?: "build/bin/ios"
     val translationDir = "$projectDir/../common/src/commonMain/resources/translations"
     val framework =
-        kotlin.targets.getByName<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>(target).binaries.getFramework(
+        kotlin.targets.findByName(target)?.let {
+            it as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+        }?.binaries?.getFramework(
             buildType
-        )
+        ) ?: return@creating
 
     dependsOn(framework.linkTask)
 

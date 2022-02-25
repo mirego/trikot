@@ -4,6 +4,8 @@ All notable changes to the library will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Upcoming release
+
 ## 3.2.0-M1
 
 > 2022-01-31
@@ -12,6 +14,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Removed MrFreeze and all "freezing" related extensions
 - Updated to [Ktor 2.0.0-beta-1](https://github.com/ktorio/ktor/releases/tag/2.0.0-beta-1)
 - Reimplemented AtomicReference using [kotlinx.atomicfu](https://github.com/Kotlin/kotlinx.atomicfu)
+
+## 3.1.13
+
+> 2022-02-25
+
+- [viewmodels] Add KingFisher implementation for image handling
+
+## 3.1.12
+
+> 2022-02-21
+
+- Update sample projects to build on iOS arm simulators
+- Update Android Gradle Plugin to `7.1.1`
+- Update Jetpack Compose to `1.2.0-alpha03`
+
+## 3.1.10
+
+> 2022-02-21
+
+- [VMD] Update VMDImageProvider's signature on iOS
 
 ## 3.1.2
 

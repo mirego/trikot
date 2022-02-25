@@ -58,13 +58,6 @@ extension NSObject {
         }
     }
 
-    public func bind<T, V>(_ publisher: Publisher, _ keyPath: ReferenceWritableKeyPath<T, V>) {
-        observe(publisher) {[weak self] (newValue: V) in
-            guard let strongSelf = self as? T else { return }
-            strongSelf[keyPath: keyPath] = newValue
-        }
-    }
-
     public func observe<V>(_ concretePublisher: ConcretePublisher<V>, toClosure closure: @escaping ((V) -> Void)) {
         observe(cancellableManager: trikotInternalPublisherCancellableManager, concretePublisher: concretePublisher, toClosure: closure)
     }
@@ -81,11 +74,40 @@ extension NSObject {
         }
     }
 
+    public func bind<T, V>(_ publisher: Publisher, _ keyPath: ReferenceWritableKeyPath<T, V>) {
+        observe(publisher) {[weak self] (newValue: V) in
+            guard let strongSelf = self as? T else { return }
+            strongSelf[keyPath: keyPath] = newValue
+        }
+    }
+
     public func bind<T, V>(_ concretePublisher: ConcretePublisher<V>, _ keyPath: ReferenceWritableKeyPath<T, V>) {
         observe(concretePublisher) {[weak self] (newValue: V) in
             guard let strongSelf = self as? T else { return }
             strongSelf[keyPath: keyPath] = newValue
         }
+    }
+
+    public func bind<T, V, I>(_ publisher: Publisher, _ keyPath: ReferenceWritableKeyPath<T, V>, transform: @escaping ((I) -> V)) {
+        observe(publisher, toClosure: { [weak self] (newValue: Any?) in
+            guard let strongSelf = self as? T else { return }
+
+            if let newValue = newValue as? I {
+                strongSelf[keyPath: keyPath] = transform(newValue)
+            } else if let E = I.self as? ExpressibleByNilLiteral.Type, newValue is NSNull || newValue == nil {
+                // swiftlint:disable:next explicit_init
+                strongSelf[keyPath: keyPath] = transform(E.init(nilLiteral: ()) as! I)
+            } else {
+                assertionFailure("Incorrect binding value type" + (newValue is NSNull || newValue == nil ? " received null, property should be marked as optional" : ""))
+            }
+        })
+    }
+
+    public func bind<T, V, I>(_ concretePublisher: ConcretePublisher<I>, _ keyPath: ReferenceWritableKeyPath<T, V>, transform: @escaping ((I) -> V)) {
+        observe(concretePublisher, toClosure: { [weak self] (newValue: I) in
+            guard let strongSelf = self as? T else { return }
+            strongSelf[keyPath: keyPath] = transform(newValue)
+        })
     }
 }
 

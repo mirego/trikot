@@ -34,21 +34,19 @@ android {
             applicationIdSuffix = ".debug"
         }
     }
-
     packagingOptions {
-        pickFirst("META-INF/androidx.customview_customview.version")
-        pickFirst("META-INF/androidx.legacy_legacy-support-core-ui.version")
-        exclude("META-INF/*.kotlin_module")
+        resources {
+            excludes += setOf("META-INF/*.kotlin_module")
+            pickFirsts += setOf(
+                "META-INF/androidx.customview_customview.version",
+                "META-INF/androidx.legacy_legacy-support-core-ui.version"
+            )
+        }
     }
 
     buildFeatures {
         viewBinding = true
         dataBinding = true
-    }
-
-    lintOptions {
-        isCheckReleaseBuilds = true
-        isAbortOnError = true
     }
 
     compileOptions {
@@ -58,6 +56,11 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    lint {
+        abortOnError = true
+        checkReleaseBuilds = true
     }
 }
 

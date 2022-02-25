@@ -1,3 +1,5 @@
+require_relative 'podspec_versions.rb'
+
 properties = load_properties('gradle.properties')
 
 Pod::Spec.new do |spec|
@@ -40,6 +42,16 @@ Pod::Spec.new do |spec|
     subspec.ios.deployment_target = '9.0'
     subspec.tvos.deployment_target = '9.0'
     subspec.dependency 'Trikot/streams'
+  end
+
+  spec.subspec 'viewmodels.Kingfisher' do |subspec|
+    subspec.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
+    subspec.tvos.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
+    subspec.ios.deployment_target = '10.0'
+    subspec.tvos.deployment_target = '10.0'
+    subspec.dependency 'Trikot/streams'
+    subspec.dependency 'Trikot/viewmodels'
+    subspec.dependency 'Kingfisher', '>= 5.0'
   end
 
   # View Model Declarative

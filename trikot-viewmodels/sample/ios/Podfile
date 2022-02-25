@@ -10,6 +10,7 @@ target 'iosApp' do
   pod 'SwiftLint'
   pod 'TRIKOT_FRAMEWORK_NAME', :path => '../common'
   pod 'Trikot/viewmodels', :path => '../../..'
+  pod 'Trikot/viewmodels.Kingfisher', :path => '../../..'
   pod 'Trikot/streams', :path => '../../..', :inhibit_warnings => true
     
   target 'iosAppTests' do
