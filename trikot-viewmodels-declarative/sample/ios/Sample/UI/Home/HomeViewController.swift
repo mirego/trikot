@@ -14,7 +14,7 @@ extension HomeViewController: HomeNavigationDelegate {
     }
 
     func navigateToButtonShowcase() {
-        //TODO:
+        present(viewControllerFactory.buttonShowcase(), animated: true, completion: nil)
     }
 
     func navigateToImageShowcase() {

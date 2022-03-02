@@ -16,6 +16,10 @@ public class ViewControllerFactory {
     func textShowcase() -> TextShowcaseViewController {
         TextShowcaseViewController(viewModelController: viewModelControllerFactory.textShowcase()).assignFactory(self)
     }
+
+    func buttonShowcase() -> ButtonShowcaseViewController {
+        ButtonShowcaseViewController(viewModelController: viewModelControllerFactory.buttonShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {
