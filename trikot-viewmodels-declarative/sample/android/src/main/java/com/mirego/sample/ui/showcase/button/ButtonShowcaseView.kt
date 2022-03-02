@@ -19,12 +19,10 @@ import androidx.compose.ui.unit.dp
 import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
-import com.mirego.sample.ui.showcase.text.TextShowcaseView
 import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.medium
 import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModelPreview
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
