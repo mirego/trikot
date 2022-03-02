@@ -1,11 +1,9 @@
 package com.mirego.trikot.viewmodels.declarative.components.impl
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.PublishSubjectImpl
 import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
-import com.mirego.trikot.streams.reactive.switchMap
 import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 import com.mirego.trikot.viewmodels.declarative.utilities.VMDDispatchQueues
