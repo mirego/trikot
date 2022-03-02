@@ -18,7 +18,7 @@ extension HomeViewController: HomeNavigationDelegate {
     }
 
     func navigateToImageShowcase() {
-        //TODO:
+        present(viewControllerFactory.imageShowcase(), animated: true, completion: nil)
     }
 
     func navigateToProgressShowcase() {
