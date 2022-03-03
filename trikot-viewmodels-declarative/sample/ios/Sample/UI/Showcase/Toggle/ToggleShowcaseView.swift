@@ -116,16 +116,6 @@ struct ToggleShowcaseView: RootViewModelView {
             }
         }
     }
-
-    @ViewBuilder
-    private func testPlaceholder(placeholderImage: Image?) -> some View {
-        if let placeholderImage = placeholderImage {
-            placeholderImage
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50)
-        }
-    }
 }
 
 struct ToggleShowcaseViewPreviews: PreviewProvider {
