@@ -7,6 +7,10 @@ class SampleImageProvider: VMDImageProvider {
         switch resource {
         case .iconClose:
             return UIImage(named: "icn_close")
+        case .imageBridge:
+            return UIImage(named: "bridge")
+        case .imagePlaceholder:
+            return UIImage(named: "placeholder")
         default:
             return nil
         }

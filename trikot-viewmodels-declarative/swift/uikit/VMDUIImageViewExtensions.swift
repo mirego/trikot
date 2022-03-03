@@ -91,9 +91,9 @@ private class VMDDefaultImageViewModelHandler: VMDImageViewModelHandler {
                     imageView.contentMode = placeholderContentMode
                 }
                 let placeholderImage = remote.placeholderImageResource.uiImage
-                if let url = URL(string: remote.url) {
+                if let imageURL = remote.imageURL {
                     imageView.image = nil
-                    let imageResource = Kingfisher.ImageResource(downloadURL: url)
+                    let imageResource = Kingfisher.ImageResource(downloadURL: imageURL)
                     imageView.kf.setImage(with: imageResource, placeholder: placeholderImage, completionHandler: { [weak imageView] result in
                         switch result {
                         case .success:

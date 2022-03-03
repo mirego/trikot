@@ -108,7 +108,7 @@ fun LocalImage(
 @Composable
 fun RemoteImage(
     modifier: Modifier = Modifier,
-    imageUrl: String,
+    imageUrl: String?,
     placeholderImage: VMDImageResource = VMDImageResource.None,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,

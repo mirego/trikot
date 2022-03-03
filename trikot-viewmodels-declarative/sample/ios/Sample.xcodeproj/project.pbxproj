@@ -29,6 +29,8 @@
 		E6B3102227CFAD75008D2F36 /* ButtonShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102127CFAD75008D2F36 /* ButtonShowcaseView.swift */; };
 		E6B3102627CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102527CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift */; };
 		E6B3102827CFBD10008D2F36 /* RoundedShadowButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102727CFBD10008D2F36 /* RoundedShadowButtonStyle.swift */; };
+		E6B3102B27CFF9C9008D2F36 /* ImageShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102A27CFF9C9008D2F36 /* ImageShowcaseViewController.swift */; };
+		E6B3102D27CFF9FE008D2F36 /* ImageShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102C27CFF9FE008D2F36 /* ImageShowcaseView.swift */; };
 		E6B3103027D01F0F008D2F36 /* ToggleShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102F27D01F0F008D2F36 /* ToggleShowcaseView.swift */; };
 		E6B3103227D01F1A008D2F36 /* ToggleShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3103127D01F1A008D2F36 /* ToggleShowcaseViewController.swift */; };
 		F25286619BB74750972639E1 /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3240D0E8403B18772B9C9D06 /* Pods_Sample.framework */; };
@@ -62,6 +64,8 @@
 		E6B3102127CFAD75008D2F36 /* ButtonShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShowcaseView.swift; sourceTree = "<group>"; };
 		E6B3102527CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentShowcaseSectionView.swift; sourceTree = "<group>"; };
 		E6B3102727CFBD10008D2F36 /* RoundedShadowButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButtonStyle.swift; sourceTree = "<group>"; };
+		E6B3102A27CFF9C9008D2F36 /* ImageShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShowcaseViewController.swift; sourceTree = "<group>"; };
+		E6B3102C27CFF9FE008D2F36 /* ImageShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShowcaseView.swift; sourceTree = "<group>"; };
 		E6B3102F27D01F0F008D2F36 /* ToggleShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleShowcaseView.swift; sourceTree = "<group>"; };
 		E6B3103127D01F1A008D2F36 /* ToggleShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleShowcaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +87,7 @@
 			children = (
 				C88356BB27580EC300DA0786 /* Text */,
 				E6B3101E27CFAD15008D2F36 /* Button */,
+				E6B3102927CFF9AF008D2F36 /* Image */,
 				E6B3102E27D01EE8008D2F36 /* Toggle */,
 				E6B3102427CFBCC7008D2F36 /* Utilities */,
 			);
@@ -216,6 +221,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		E6B3102927CFF9AF008D2F36 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				E6B3102A27CFF9C9008D2F36 /* ImageShowcaseViewController.swift */,
+				E6B3102C27CFF9FE008D2F36 /* ImageShowcaseView.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		E6B3102E27D01EE8008D2F36 /* Toggle */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,7 +357,9 @@
 				C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */,
 				E6B3102827CFBD10008D2F36 /* RoundedShadowButtonStyle.swift in Sources */,
 				C8959A70268AB1690080732A /* HomeViewController.swift in Sources */,
+				E6B3102B27CFF9C9008D2F36 /* ImageShowcaseViewController.swift in Sources */,
 				C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */,
+				E6B3102D27CFF9FE008D2F36 /* ImageShowcaseView.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
 				C88356C1275814AC00DA0786 /* BaseViewModelViewController.swift in Sources */,
 				C8959A73268AB9D50080732A /* ViewControllerFactory.swift in Sources */,
