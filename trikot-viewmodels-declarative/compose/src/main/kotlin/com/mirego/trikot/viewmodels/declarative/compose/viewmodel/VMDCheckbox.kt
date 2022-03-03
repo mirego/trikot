@@ -15,20 +15,20 @@ import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
-import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
+import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
 
 @Composable
 fun VMDCheckbox(
     modifier: Modifier = Modifier,
     componentModifier: Modifier = Modifier,
-    viewModel: VMDToggleViewModel<VMDTextContent>,
+    viewModel: VMDToggleViewModel<VMDNoContent>,
     colors: CheckboxColors = CheckboxDefaults.colors()
 ) {
     VMDCheckbox(
         modifier = modifier,
         componentModifier = componentModifier,
         viewModel = viewModel,
-        label = { Text(text = it.text) },
+        label = {},
         colors = colors
     )
 }
@@ -64,7 +64,7 @@ fun <C : VMDContent> VMDCheckbox(
 fun EnabledToggleCheckboxPreview() {
     val toggleViewModel =
         VMDComponents.Toggle.withState(true, CancellableManager())
-    VMDCheckbox(viewModel = toggleViewModel, label = {})
+    VMDCheckbox(viewModel = toggleViewModel)
 }
 
 @Preview
@@ -72,7 +72,7 @@ fun EnabledToggleCheckboxPreview() {
 fun DisabledToggleCheckboxPreview() {
     val toggleViewModel =
         VMDComponents.Toggle.withState(false, CancellableManager())
-    VMDCheckbox(viewModel = toggleViewModel, label = {})
+    VMDCheckbox(viewModel = toggleViewModel)
 }
 
 @Preview
@@ -80,5 +80,5 @@ fun DisabledToggleCheckboxPreview() {
 fun SimpleTextToggleCheckboxPreview() {
     val toggleViewModel =
         VMDComponents.Toggle.withText("Label", true, CancellableManager())
-    VMDCheckbox(viewModel = toggleViewModel)
+    VMDCheckbox(viewModel = toggleViewModel, label = { Text(it.text) })
 }
