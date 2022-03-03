@@ -3,8 +3,6 @@ package com.mirego.sample.viewmodels.showcase.text
 import com.mirego.sample.resources.SampleImageResource
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
-import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
-import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 
 class TextShowcaseViewModelPreview : VMDViewModelImpl(CancellableManager()), TextShowcaseViewModel {
