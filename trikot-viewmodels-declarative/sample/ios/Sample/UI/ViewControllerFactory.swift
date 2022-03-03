@@ -20,6 +20,10 @@ public class ViewControllerFactory {
     func buttonShowcase() -> ButtonShowcaseViewController {
         ButtonShowcaseViewController(viewModelController: viewModelControllerFactory.buttonShowcase()).assignFactory(self)
     }
+
+    func imageShowcase() -> ImageShowcaseViewController {
+        ImageShowcaseViewController(viewModelController: viewModelControllerFactory.imageShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {

@@ -10,7 +10,7 @@ sealed class VMDImageDescriptor {
     ) : VMDImageDescriptor()
 
     data class Remote(
-        val url: String,
+        val url: String?,
         val placeholderImageResource: VMDImageResource = VMDImageResource.None
     ) : VMDImageDescriptor()
 }

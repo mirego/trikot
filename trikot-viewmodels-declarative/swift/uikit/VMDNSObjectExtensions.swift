@@ -94,8 +94,8 @@ private class DefaultImageDescriptorLoader: ImageDescriptorLoader {
             let placeholderImage = remote.placeholderImageResource.uiImage
             completionHandler(Result.success(placeholderImage))
 
-            if let url = URL(string: remote.url) {
-                let imageResource = Kingfisher.ImageResource(downloadURL: url)
+            if let imageURL = remote.imageURL {
+                let imageResource = Kingfisher.ImageResource(downloadURL: imageURL)
                 KingfisherManager.shared.retrieveImage(with: imageResource) { result in
                     switch result {
                     case .success(let imageResult):

@@ -60,7 +60,7 @@ object VMDComponents {
                     .apply(closure)
 
             fun remote(
-                imageURL: String,
+                imageURL: String?,
                 placeholderImageResource: VMDImageResource = VMDImageResource.None,
                 cancellableManager: CancellableManager,
                 closure: VMDImageViewModelImpl.() -> Unit = {}

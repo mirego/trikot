@@ -7,11 +7,17 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
 interface ImageShowcaseViewModel : ShowcaseViewModel {
     val localImageTitle: VMDTextViewModel
-    val remoteImageTitle: VMDTextViewModel
-    val localImageDescriptorTitle: VMDTextViewModel
-    val remoteImageDescriptorTitle: VMDTextViewModel
     val localImage: VMDImageViewModel
-    val remoteImage: VMDImageViewModel
+
+    val localImageDescriptorTitle: VMDTextViewModel
     val localImageDescriptor: VMDImageDescriptor
+
+    val remoteImageDescriptorTitle: VMDTextViewModel
     val remoteImageDescriptor: VMDImageDescriptor
+
+    val remoteImageTitle: VMDTextViewModel
+    val remoteImage: VMDImageViewModel
+
+    val placeholderImageTitle: VMDTextViewModel
+    val placeholderImage: VMDImageViewModel
 }
