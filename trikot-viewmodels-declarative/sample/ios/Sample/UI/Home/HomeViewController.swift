@@ -21,15 +21,15 @@ extension HomeViewController: HomeNavigationDelegate {
         //TODO:
     }
 
-    func navigateToProgressShowcase() {
-        //TODO:
+    func navigateToToggleShowcase() {
+        present(viewControllerFactory.toggleShowcase(), animated: true, completion: nil)
     }
 
     func navigateToTextFieldShowcase() {
         //TODO:
     }
 
-    func navigateToToggleShowcase() {
+    func navigateToProgressShowcase() {
         //TODO:
     }
 }
