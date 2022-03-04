@@ -30,7 +30,8 @@ fun VMDImage(
     placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = ""
+    contentDescription: String = "",
+    allowHardware: Boolean = true
 ) {
     val imageViewModel by viewModel.observeAsState()
 
@@ -42,7 +43,8 @@ fun VMDImage(
         colorFilter = colorFilter,
         contentDescription = contentDescription,
         placeholderContentScale = placeholderContentScale,
-        imageDescriptor = imageViewModel.image
+        imageDescriptor = imageViewModel.image,
+        allowHardware = allowHardware
     )
 }
 
@@ -55,7 +57,8 @@ fun VMDImage(
     placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = ""
+    contentDescription: String = "",
+    allowHardware: Boolean = true
 ) {
     when (imageDescriptor) {
         is Local -> {
@@ -78,7 +81,8 @@ fun VMDImage(
                 contentScale = contentScale,
                 placeholderContentScale = placeholderContentScale,
                 colorFilter = colorFilter,
-                contentDescription = contentDescription
+                contentDescription = contentDescription,
+                allowHardware = allowHardware
             )
         }
     }
@@ -114,11 +118,13 @@ fun RemoteImage(
     contentScale: ContentScale = ContentScale.Fit,
     placeholderContentScale: ContentScale = contentScale,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = ""
+    contentDescription: String = "",
+    allowHardware: Boolean = true
 ) {
     val coilPainter = rememberImagePainter(
         imageUrl,
         builder = {
+            allowHardware(allowHardware)
             size(OriginalSize)
         }
     )
