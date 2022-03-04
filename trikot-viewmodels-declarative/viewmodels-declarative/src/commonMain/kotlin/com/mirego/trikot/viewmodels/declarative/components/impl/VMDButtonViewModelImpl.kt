@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.components.impl
 
+import com.mirego.trikot.foundation.concurrent.atomic
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.observeOn
@@ -17,7 +18,7 @@ open class VMDButtonViewModelImpl<C : VMDContent>(
     defaultContent: C
 ) : VMDButtonViewModel<C>(cancellableManager) {
 
-    override var actionBlock: () -> Unit = {}
+    override var actionBlock: () -> Unit by atomic {}
 
     private val contentDelegate = published(defaultContent, this)
     override var content: C by contentDelegate
