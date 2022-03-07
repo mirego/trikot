@@ -1,0 +1,32 @@
+package com.mirego.sample.ui.showcase.textfield
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.compose.setContent
+import com.mirego.sample.viewmodels.showcase.textfield.TextFieldShowcaseNavigationDelegate
+import com.mirego.sample.viewmodels.showcase.textfield.TextFieldShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.textfield.TextFieldShowcaseViewModelController
+import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
+
+class TextFieldShowcaseActivity : ViewModelActivity<TextFieldShowcaseViewModelController, TextFieldShowcaseViewModel, TextFieldShowcaseNavigationDelegate>(), TextFieldShowcaseNavigationDelegate {
+
+    override val viewModelController: TextFieldShowcaseViewModelController by lazy {
+        getViewModelController(TextFieldShowcaseViewModelController::class)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            TextFieldShowcaseView(textFieldShowcaseViewModel = viewModel)
+        }
+    }
+
+    override fun close() {
+        finish()
+    }
+
+    companion object {
+        fun intent(context: Context) = Intent(context, TextFieldShowcaseActivity::class.java)
+    }
+}
