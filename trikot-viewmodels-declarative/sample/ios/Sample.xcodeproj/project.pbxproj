@@ -25,6 +25,8 @@
 		C8D868E5268AA9670054CF44 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E4268AA9670054CF44 /* Preview Assets.xcassets */; };
 		C8D868E8268AA9670054CF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E6268AA9670054CF44 /* LaunchScreen.storyboard */; };
 		E639E66427D0603900FEEA03 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E639E66327D0603900FEEA03 /* CheckboxStyle.swift */; };
+		E644903627D66D42003D7684 /* TextFieldShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644903427D66D42003D7684 /* TextFieldShowcaseViewController.swift */; };
+		E644903727D66D42003D7684 /* TextFieldShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644903527D66D42003D7684 /* TextFieldShowcaseView.swift */; };
 		E6B3102027CFAD52008D2F36 /* ButtonShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3101F27CFAD52008D2F36 /* ButtonShowcaseViewController.swift */; };
 		E6B3102227CFAD75008D2F36 /* ButtonShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102127CFAD75008D2F36 /* ButtonShowcaseView.swift */; };
 		E6B3102627CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3102527CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift */; };
@@ -60,6 +62,8 @@
 		C8D868E9268AA9670054CF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCF87A6E6976B4011B629160 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
 		E639E66327D0603900FEEA03 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
+		E644903427D66D42003D7684 /* TextFieldShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldShowcaseViewController.swift; sourceTree = "<group>"; };
+		E644903527D66D42003D7684 /* TextFieldShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldShowcaseView.swift; sourceTree = "<group>"; };
 		E6B3101F27CFAD52008D2F36 /* ButtonShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShowcaseViewController.swift; sourceTree = "<group>"; };
 		E6B3102127CFAD75008D2F36 /* ButtonShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShowcaseView.swift; sourceTree = "<group>"; };
 		E6B3102527CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentShowcaseSectionView.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		C8152AB4275930E000A0F681 /* Showcase */ = {
 			isa = PBXGroup;
 			children = (
+				E644903327D66D2D003D7684 /* TextField */,
 				C88356BB27580EC300DA0786 /* Text */,
 				E6B3101E27CFAD15008D2F36 /* Button */,
 				E6B3102927CFF9AF008D2F36 /* Image */,
@@ -200,6 +205,15 @@
 				041921FF518BA5BA4B3375EC /* Pods-Sample.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E644903327D66D2D003D7684 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				E644903427D66D42003D7684 /* TextFieldShowcaseViewController.swift */,
+				E644903527D66D42003D7684 /* TextFieldShowcaseView.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		E6B3101E27CFAD15008D2F36 /* Button */ = {
@@ -358,6 +372,7 @@
 				E6B3102827CFBD10008D2F36 /* RoundedShadowButtonStyle.swift in Sources */,
 				C8959A70268AB1690080732A /* HomeViewController.swift in Sources */,
 				E6B3102B27CFF9C9008D2F36 /* ImageShowcaseViewController.swift in Sources */,
+				E644903727D66D42003D7684 /* TextFieldShowcaseView.swift in Sources */,
 				C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */,
 				E6B3102D27CFF9FE008D2F36 /* ImageShowcaseView.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
@@ -374,6 +389,7 @@
 				C8959A71268AB1690080732A /* HomeView.swift in Sources */,
 				C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */,
 				E6B3103227D01F1A008D2F36 /* ToggleShowcaseViewController.swift in Sources */,
+				E644903627D66D42003D7684 /* TextFieldShowcaseViewController.swift in Sources */,
 				E6B3102627CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift in Sources */,
 				C8D868E0268AA9660054CF44 /* ContentView.swift in Sources */,
 			);

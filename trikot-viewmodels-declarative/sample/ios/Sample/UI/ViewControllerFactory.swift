@@ -28,6 +28,10 @@ public class ViewControllerFactory {
     func toggleShowcase() -> ToggleShowcaseViewController {
         ToggleShowcaseViewController(viewModelController: viewModelControllerFactory.toggleShowcase()).assignFactory(self)
     }
+
+    func textFieldShowcase() -> TextFieldShowcaseViewController {
+        TextFieldShowcaseViewController(viewModelController: viewModelControllerFactory.textFieldShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {
