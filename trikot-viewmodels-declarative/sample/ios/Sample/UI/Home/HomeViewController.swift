@@ -26,7 +26,7 @@ extension HomeViewController: HomeNavigationDelegate {
     }
 
     func navigateToTextFieldShowcase() {
-        //TODO:
+        present(viewControllerFactory.textFieldShowcase(), animated: true, completion: nil)
     }
 
     func navigateToProgressShowcase() {

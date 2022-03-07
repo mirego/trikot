@@ -29,6 +29,10 @@ public class ViewControllerFactory {
         ToggleShowcaseViewController(viewModelController: viewModelControllerFactory.toggleShowcase()).assignFactory(self)
     }
 
+    func textFieldShowcase() -> TextFieldShowcaseViewController {
+        TextFieldShowcaseViewController(viewModelController: viewModelControllerFactory.textFieldShowcase()).assignFactory(self)
+    }
+
     func progressShowcase() -> ProgressShowcaseViewController {
         ProgressShowcaseViewController(viewModelController: viewModelControllerFactory.progressShowcase()).assignFactory(self)
     }
