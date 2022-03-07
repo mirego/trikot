@@ -2,7 +2,7 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
 public extension VMDImage {
-    public func resizable() -> VMDImage {
+    func resizable() -> VMDImage {
         configure {
             $0.resizable()
         } remote: { kfImage, _ in
@@ -10,7 +10,7 @@ public extension VMDImage {
         }
     }
 
-    public func renderingMode(_ renderingMode: Image.TemplateRenderingMode) -> VMDImage {
+    func renderingMode(_ renderingMode: Image.TemplateRenderingMode) -> VMDImage {
         configure {
             $0.renderingMode(renderingMode)
         } remote: { kfImage, _ in
@@ -18,7 +18,7 @@ public extension VMDImage {
         }
     }
 
-    public func placeholder<Content: View>(@ViewBuilder _ content: @escaping (_ placeholderImage: Image?) -> Content) -> VMDImage {
+    func placeholder<Content: View>(@ViewBuilder _ content: @escaping (_ placeholderImage: Image?) -> Content) -> VMDImage {
         configure {
             $0
         } remote: { kfImage, placehoder in
@@ -28,7 +28,7 @@ public extension VMDImage {
         }
     }
 
-    public func placeholder<Content: View>(@ViewBuilder _ content: @escaping (_ progress: Progress, _ placeholderImage: Image?) -> Content) -> VMDImage {
+    func placeholder<Content: View>(@ViewBuilder _ content: @escaping (_ progress: Progress, _ placeholderImage: Image?) -> Content) -> VMDImage {
         configure {
             $0
         } remote: { kfImage, placehoder in

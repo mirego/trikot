@@ -28,6 +28,10 @@ public class ViewControllerFactory {
     func toggleShowcase() -> ToggleShowcaseViewController {
         ToggleShowcaseViewController(viewModelController: viewModelControllerFactory.toggleShowcase()).assignFactory(self)
     }
+
+    func progressShowcase() -> ProgressShowcaseViewController {
+        ProgressShowcaseViewController(viewModelController: viewModelControllerFactory.progressShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {
