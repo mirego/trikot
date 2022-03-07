@@ -12,8 +12,8 @@ struct HiddenModifier: ViewModifier {
     }
 }
 
-extension View {
-    public func hidden(_ hidden: Bool) -> some View {
+public extension View {
+    func hidden(_ hidden: Bool) -> some View {
         modifier(HiddenModifier(hidden: hidden))
     }
 }
