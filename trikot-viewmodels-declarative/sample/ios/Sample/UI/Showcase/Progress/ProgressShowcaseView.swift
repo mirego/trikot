@@ -31,7 +31,7 @@ struct ProgressShowcaseView: RootViewModelView {
 
                     ComponentShowcaseSectionView(viewModel.circularDeterminateProgressTitle) {
                         VMDProgressView(viewModel.determinateProgress)
-                            .progressViewStyle(.circular)
+                            .progressViewStyle(.circularDeterminate)
                     }
 
                     ComponentShowcaseSectionView(viewModel.circularIndeterminateProgressTitle) {

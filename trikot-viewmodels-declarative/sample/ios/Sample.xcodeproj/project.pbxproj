@@ -25,6 +25,7 @@
 		C8D868E5268AA9670054CF44 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E4268AA9670054CF44 /* Preview Assets.xcassets */; };
 		C8D868E8268AA9670054CF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E6268AA9670054CF44 /* LaunchScreen.storyboard */; };
 		E639E66427D0603900FEEA03 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E639E66327D0603900FEEA03 /* CheckboxStyle.swift */; };
+		E66B0BC227D643E10033FE90 /* CircularDeterminateProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66B0BC127D643E10033FE90 /* CircularDeterminateProgressViewStyle.swift */; };
 		E69A6D9127D11B8300E5CEAC /* ProgressShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A6D8F27D11B8300E5CEAC /* ProgressShowcaseViewController.swift */; };
 		E69A6D9227D11B8300E5CEAC /* ProgressShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A6D9027D11B8300E5CEAC /* ProgressShowcaseView.swift */; };
 		E69A6D9427D15C8B00E5CEAC /* LinearIndeterminateProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A6D9327D15C8B00E5CEAC /* LinearIndeterminateProgressViewStyle.swift */; };
@@ -63,6 +64,7 @@
 		C8D868E9268AA9670054CF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCF87A6E6976B4011B629160 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
 		E639E66327D0603900FEEA03 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
+		E66B0BC127D643E10033FE90 /* CircularDeterminateProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularDeterminateProgressViewStyle.swift; sourceTree = "<group>"; };
 		E69A6D8F27D11B8300E5CEAC /* ProgressShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShowcaseViewController.swift; sourceTree = "<group>"; };
 		E69A6D9027D11B8300E5CEAC /* ProgressShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShowcaseView.swift; sourceTree = "<group>"; };
 		E69A6D9327D15C8B00E5CEAC /* LinearIndeterminateProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearIndeterminateProgressViewStyle.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				E6B3102527CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift */,
 				E6B3102727CFBD10008D2F36 /* RoundedShadowButtonStyle.swift */,
 				E69A6D9327D15C8B00E5CEAC /* LinearIndeterminateProgressViewStyle.swift */,
+				E66B0BC127D643E10033FE90 /* CircularDeterminateProgressViewStyle.swift */,
 				E639E66327D0603900FEEA03 /* CheckboxStyle.swift */,
 			);
 			path = Utilities;
@@ -395,6 +398,7 @@
 				C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */,
 				E6B3103227D01F1A008D2F36 /* ToggleShowcaseViewController.swift in Sources */,
 				E6B3102627CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift in Sources */,
+				E66B0BC227D643E10033FE90 /* CircularDeterminateProgressViewStyle.swift in Sources */,
 				C8D868E0268AA9660054CF44 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
