@@ -25,12 +25,7 @@ class TextFieldShowcaseViewModelImpl(i18N: I18N, cancellableManager: Cancellable
     override val characterCountText = VMDComponents.Text.empty(cancellableManager) {
         bindText(
             textField.publisherForProperty(VMDTextFieldViewModel::text).map {
-                val characterCount = it.length
-                if (characterCount > 1) {
-                    i18N.t(KWordTranslation.TEXT_FIELD_SHOWCASE_CHARACTER_COUNT_PLURAL, Pair("count", "$characterCount"))
-                } else {
-                    i18N.t(KWordTranslation.TEXT_FIELD_SHOWCASE_CHARACTER_COUNT_SINGULAR, Pair("count", "$characterCount"))
-                }
+                i18N.t(KWordTranslation.TEXT_FIELD_SHOWCASE_CHARACTER_COUNT, it.length, "count" to "${it.length}")
             }
         )
     }
