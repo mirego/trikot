@@ -32,6 +32,10 @@ public class ViewControllerFactory {
     func textFieldShowcase() -> TextFieldShowcaseViewController {
         TextFieldShowcaseViewController(viewModelController: viewModelControllerFactory.textFieldShowcase()).assignFactory(self)
     }
+
+    func progressShowcase() -> ProgressShowcaseViewController {
+        ProgressShowcaseViewController(viewModelController: viewModelControllerFactory.progressShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {

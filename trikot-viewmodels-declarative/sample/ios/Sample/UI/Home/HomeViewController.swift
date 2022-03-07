@@ -30,6 +30,6 @@ extension HomeViewController: HomeNavigationDelegate {
     }
 
     func navigateToProgressShowcase() {
-        //TODO:
+        present(viewControllerFactory.progressShowcase(), animated: true, completion: nil)
     }
 }

@@ -12,7 +12,7 @@ struct HiddenModifier: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func hidden(_ hidden: Bool) -> some View {
         modifier(HiddenModifier(hidden: hidden))
     }
