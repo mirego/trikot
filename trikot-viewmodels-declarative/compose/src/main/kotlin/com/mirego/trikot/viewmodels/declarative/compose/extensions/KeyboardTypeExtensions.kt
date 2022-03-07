@@ -1,6 +1,8 @@
 package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardAutoCapitalization
 import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardReturnKeyType
 import androidx.compose.ui.text.input.KeyboardType as ComposeKeyboardType
 import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardType as TrikotKeyboardType
@@ -25,4 +27,12 @@ val VMDKeyboardReturnKeyType.composeValue: ImeAction
         VMDKeyboardReturnKeyType.Next -> ImeAction.Next
         VMDKeyboardReturnKeyType.Search -> ImeAction.Search
         VMDKeyboardReturnKeyType.Send -> ImeAction.Send
+    }
+
+val VMDKeyboardAutoCapitalization.composeValue: KeyboardCapitalization
+    get() = when (this) {
+        VMDKeyboardAutoCapitalization.None -> KeyboardCapitalization.None
+        VMDKeyboardAutoCapitalization.Sentences -> KeyboardCapitalization.Sentences
+        VMDKeyboardAutoCapitalization.Words -> KeyboardCapitalization.Words
+        VMDKeyboardAutoCapitalization.Characters -> KeyboardCapitalization.Characters
     }
