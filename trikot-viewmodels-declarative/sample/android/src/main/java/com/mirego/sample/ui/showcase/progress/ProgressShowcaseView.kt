@@ -8,10 +8,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCircularProgressIndicator
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLinearProgressIndicator
@@ -61,4 +63,10 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             progressViewModel = viewModel.indeterminateProgress
         )
     }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun ProgressShowcaseViewPreview() {
+    ProgressShowcaseView(progressShowcaseViewModel = ProgressShowcaseViewModelPreview())
 }
