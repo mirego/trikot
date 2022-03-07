@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.resource.SampleImageProvider
@@ -66,7 +65,7 @@ fun TextFieldShowcaseView(textFieldShowcaseViewModel: TextFieldShowcaseViewModel
                     )
                 }
             }
-            
+
             VMDText(viewModel = viewModel.characterCountText, style = SampleTextStyle.caption1)
         }
     }
