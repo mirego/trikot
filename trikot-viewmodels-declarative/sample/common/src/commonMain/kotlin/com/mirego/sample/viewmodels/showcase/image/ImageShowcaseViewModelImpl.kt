@@ -5,6 +5,8 @@ import com.mirego.sample.resources.SampleImageResource
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
+import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
@@ -29,4 +31,7 @@ class ImageShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMana
 
     override val placeholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE], cancellableManager)
     override val placeholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager)
+
+    override val complexPlaceholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE], cancellableManager)
+    override val complexPlaceholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager)
 }
