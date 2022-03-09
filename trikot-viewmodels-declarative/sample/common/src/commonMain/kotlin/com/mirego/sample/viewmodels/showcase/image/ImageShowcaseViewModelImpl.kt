@@ -5,8 +5,6 @@ import com.mirego.sample.resources.SampleImageResource
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
-import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 
