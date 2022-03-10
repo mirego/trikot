@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 
@@ -32,7 +33,7 @@ fun <C : VMDIdentifiableContent> VMDList(
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     itemContent: @Composable LazyItemScope.(item: C) -> Unit
 ) {
-    val listViewModel: VMDListViewModel<C> by viewModel.observeAsState()
+    val listViewModel: VMDListViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     LazyColumn(
         modifier = modifier

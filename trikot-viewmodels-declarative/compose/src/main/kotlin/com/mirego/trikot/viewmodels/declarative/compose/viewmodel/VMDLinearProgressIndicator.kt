@@ -14,22 +14,25 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.VMDProgressViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 
 @Composable
 fun VMDLinearProgressIndicator(
     modifier: Modifier = Modifier,
-    progressViewModel: VMDProgressViewModel,
+    viewModel: VMDProgressViewModel,
     color: Color = MaterialTheme.colors.primary,
     backgroundColor: Color = color.copy(alpha = ProgressIndicatorDefaults.IndicatorBackgroundOpacity)
 ) {
-    val viewModel: VMDProgressViewModel by progressViewModel.observeAsState()
+    val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = viewModel.determination?.progressRatio ?: 0f)
     if (viewModel.determination == null) {
-        LinearProgressIndicator(modifier = modifier.hidden(viewModel.isHidden))
+        LinearProgressIndicator(
+            modifier = modifier.hidden(progressViewModel.isHidden)
+        )
     } else {
         LinearProgressIndicator(
-            modifier = modifier.hidden(viewModel.isHidden),
+            modifier = modifier.hidden(progressViewModel.isHidden),
             progress = animatedProgress,
             color = color,
             backgroundColor = backgroundColor
@@ -43,6 +46,6 @@ fun DeterminateLinearProgressIndicatorPreview() {
     val progressViewModel = VMDComponents.Progress.determinate(0.25f, CancellableManager())
     VMDLinearProgressIndicator(
         modifier = Modifier.fillMaxWidth(),
-        progressViewModel = progressViewModel
+        viewModel = progressViewModel
     )
 }

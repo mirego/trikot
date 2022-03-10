@@ -14,6 +14,7 @@ import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
 import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.painterResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
@@ -33,7 +34,7 @@ fun VMDImage(
     contentDescription: String = "",
     allowHardware: Boolean = true
 ) {
-    val imageViewModel by viewModel.observeAsState()
+    val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDImage(
         modifier = modifier.hidden(imageViewModel.isHidden),

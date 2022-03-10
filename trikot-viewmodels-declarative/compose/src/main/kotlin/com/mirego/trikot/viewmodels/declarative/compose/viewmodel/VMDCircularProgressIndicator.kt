@@ -14,22 +14,24 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.VMDProgressViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 
 @Composable
 fun VMDCircularProgressIndicator(
     modifier: Modifier = Modifier,
-    progressViewModel: VMDProgressViewModel,
+    viewModel: VMDProgressViewModel,
     color: Color = MaterialTheme.colors.primary,
     strokeWidth: Dp = ProgressIndicatorDefaults.StrokeWidth
 ) {
-    val viewModel: VMDProgressViewModel by progressViewModel.observeAsState()
-    val animatedProgress by animateFloatAsState(targetValue = viewModel.determination?.progressRatio ?: 0f)
+    val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
+    val animatedProgress by animateFloatAsState(targetValue = progressViewModel.determination?.progressRatio ?: 0f)
+
     if (viewModel.determination == null) {
-        CircularProgressIndicator(modifier = modifier.hidden(viewModel.isHidden))
+        CircularProgressIndicator(modifier = modifier.hidden(progressViewModel.isHidden))
     } else {
         CircularProgressIndicator(
-            modifier = modifier.hidden(viewModel.isHidden),
+            modifier = modifier.hidden(progressViewModel.isHidden),
             progress = animatedProgress,
             color = color,
             strokeWidth = strokeWidth
@@ -42,6 +44,6 @@ fun VMDCircularProgressIndicator(
 fun DeterminateCircularProgressIndicatorPreview() {
     val progressViewModel = VMDComponents.Progress.determinate(0.25f, CancellableManager())
     VMDCircularProgressIndicator(
-        progressViewModel = progressViewModel
+        viewModel = progressViewModel
     )
 }
