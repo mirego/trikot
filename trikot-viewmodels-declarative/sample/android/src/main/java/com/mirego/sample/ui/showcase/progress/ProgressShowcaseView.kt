@@ -36,7 +36,7 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.determinateProgress
+            viewModel = viewModel.determinateProgress
         )
 
         ComponentShowcaseTitle(viewModel.linearIndeterminateProgressTitle)
@@ -45,7 +45,7 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.indeterminateProgress
+            viewModel = viewModel.indeterminateProgress
         )
 
         ComponentShowcaseTitle(viewModel.circularDeterminateProgressTitle)
@@ -53,14 +53,14 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
         VMDCircularProgressIndicator(
             modifier = Modifier
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.determinateProgress
+            viewModel = viewModel.determinateProgress
         )
 
         ComponentShowcaseTitle(viewModel.circularIndeterminateProgressTitle)
 
         VMDCircularProgressIndicator(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            progressViewModel = viewModel.indeterminateProgress
+            viewModel = viewModel.indeterminateProgress
         )
     }
 }
