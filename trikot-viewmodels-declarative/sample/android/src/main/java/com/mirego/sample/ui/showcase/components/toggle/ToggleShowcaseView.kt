@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.toggle
+package com.mirego.sample.ui.showcase.components.toggle
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

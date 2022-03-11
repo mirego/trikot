@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.button
+package com.mirego.sample.ui.showcase.components.button
 
 import android.content.Context
 import android.content.Intent

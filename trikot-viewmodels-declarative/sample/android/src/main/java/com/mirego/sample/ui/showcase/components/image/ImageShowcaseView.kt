@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.image
+package com.mirego.sample.ui.showcase.components.image
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio

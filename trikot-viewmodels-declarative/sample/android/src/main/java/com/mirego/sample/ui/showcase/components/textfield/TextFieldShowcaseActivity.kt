@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.textfield
+package com.mirego.sample.ui.showcase.components.textfield
 
 import android.content.Context
 import android.content.Intent

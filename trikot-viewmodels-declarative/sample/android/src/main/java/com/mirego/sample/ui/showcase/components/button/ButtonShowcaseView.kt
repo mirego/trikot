@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.button
+package com.mirego.sample.ui.showcase.components.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

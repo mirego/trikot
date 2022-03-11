@@ -27,27 +27,27 @@
         </activity>
 
         <activity
-            android:name=".ui.showcase.text.TextShowcaseActivity"
+            android:name="com.mirego.sample.ui.showcase.components.text.TextShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity
-            android:name=".ui.showcase.progress.ProgressShowcaseActivity"
+            android:name="com.mirego.sample.ui.showcase.components.progress.ProgressShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity
-            android:name=".ui.showcase.image.ImageShowcaseActivity"
+            android:name="com.mirego.sample.ui.showcase.components.image.ImageShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity
-            android:name=".ui.showcase.button.ButtonShowcaseActivity"
+            android:name="com.mirego.sample.ui.showcase.components.button.ButtonShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity
-            android:name=".ui.showcase.toggle.ToggleShowcaseActivity"
+            android:name="com.mirego.sample.ui.showcase.components.toggle.ToggleShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <activity
-            android:name=".ui.showcase.textfield.TextFieldShowcaseActivity"
+            android:name="com.mirego.sample.ui.showcase.components.textfield.TextFieldShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
     </application>

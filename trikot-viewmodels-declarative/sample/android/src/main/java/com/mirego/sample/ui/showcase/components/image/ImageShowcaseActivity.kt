@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.image
+package com.mirego.sample.ui.showcase.components.image
 
 import android.content.Context
 import android.content.Intent

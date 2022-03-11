@@ -2,12 +2,12 @@ package com.mirego.sample.ui.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.mirego.sample.ui.showcase.button.ButtonShowcaseActivity
-import com.mirego.sample.ui.showcase.image.ImageShowcaseActivity
-import com.mirego.sample.ui.showcase.progress.ProgressShowcaseActivity
-import com.mirego.sample.ui.showcase.text.TextShowcaseActivity
-import com.mirego.sample.ui.showcase.textfield.TextFieldShowcaseActivity
-import com.mirego.sample.ui.showcase.toggle.ToggleShowcaseActivity
+import com.mirego.sample.ui.showcase.components.button.ButtonShowcaseActivity
+import com.mirego.sample.ui.showcase.components.image.ImageShowcaseActivity
+import com.mirego.sample.ui.showcase.components.progress.ProgressShowcaseActivity
+import com.mirego.sample.ui.showcase.components.text.TextShowcaseActivity
+import com.mirego.sample.ui.showcase.components.textfield.TextFieldShowcaseActivity
+import com.mirego.sample.ui.showcase.components.toggle.ToggleShowcaseActivity
 import com.mirego.sample.viewmodels.home.HomeNavigationDelegate
 import com.mirego.sample.viewmodels.home.HomeViewModel
 import com.mirego.sample.viewmodels.home.HomeViewModelController

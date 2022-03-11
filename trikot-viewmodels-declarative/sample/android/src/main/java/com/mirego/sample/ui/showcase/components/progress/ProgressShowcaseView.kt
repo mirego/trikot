@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.progress
+package com.mirego.sample.ui.showcase.components.progress
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

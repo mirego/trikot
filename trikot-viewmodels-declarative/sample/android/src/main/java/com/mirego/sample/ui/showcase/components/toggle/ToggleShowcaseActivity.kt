@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.toggle
+package com.mirego.sample.ui.showcase.components.toggle
 
 import android.content.Context
 import android.content.Intent

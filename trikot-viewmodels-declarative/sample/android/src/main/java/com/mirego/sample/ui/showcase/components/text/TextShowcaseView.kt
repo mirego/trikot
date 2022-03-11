@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.text
+package com.mirego.sample.ui.showcase.components.text
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

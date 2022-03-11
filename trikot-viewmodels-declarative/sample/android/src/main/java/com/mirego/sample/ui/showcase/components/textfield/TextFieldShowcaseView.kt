@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.textfield
+package com.mirego.sample.ui.showcase.components.textfield
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

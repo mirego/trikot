@@ -1,4 +1,4 @@
-package com.mirego.sample.ui.showcase.progress
+package com.mirego.sample.ui.showcase.components.progress
 
 import android.content.Context
 import android.content.Intent
