@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
-import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModelPreview
+import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative

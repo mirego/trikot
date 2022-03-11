@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseNavigationDelegate
-import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseNavigationDelegate
+import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelController
 import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
 class ProgressShowcaseActivity : ViewModelActivity<ProgressShowcaseViewModelController, ProgressShowcaseViewModel, ProgressShowcaseNavigationDelegate>(), ProgressShowcaseNavigationDelegate {

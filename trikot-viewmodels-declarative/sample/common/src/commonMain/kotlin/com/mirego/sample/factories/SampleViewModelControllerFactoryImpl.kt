@@ -1,12 +1,12 @@
 package com.mirego.sample.factories
 
 import com.mirego.sample.viewmodels.home.HomeViewModelController
-import com.mirego.sample.viewmodels.showcase.button.ButtonShowcaseViewModelController
-import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModelController
-import com.mirego.sample.viewmodels.showcase.progress.ProgressShowcaseViewModelController
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelController
-import com.mirego.sample.viewmodels.showcase.textfield.TextFieldShowcaseViewModelController
-import com.mirego.sample.viewmodels.showcase.toggle.ToggleShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelController
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KWord
 

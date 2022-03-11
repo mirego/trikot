@@ -16,8 +16,8 @@ import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.bold
 import com.mirego.sample.ui.theming.medium
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelPreview
+import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative

@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseNavigationDelegate
-import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.image.ImageShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseNavigationDelegate
+import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelController
 import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
 class ImageShowcaseActivity : ViewModelActivity<ImageShowcaseViewModelController, ImageShowcaseViewModel, ImageShowcaseNavigationDelegate>(), ImageShowcaseNavigationDelegate {

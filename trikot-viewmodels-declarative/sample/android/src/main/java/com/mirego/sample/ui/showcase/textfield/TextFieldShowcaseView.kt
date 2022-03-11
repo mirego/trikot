@@ -21,8 +21,8 @@ import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.medium
-import com.mirego.sample.viewmodels.showcase.textfield.TextFieldShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.textfield.TextFieldShowcaseViewModelPreview
+import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText

@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseNavigationDelegate
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.text.TextShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseNavigationDelegate
+import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelController
 import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
 class TextShowcaseActivity : ViewModelActivity<TextShowcaseViewModelController, TextShowcaseViewModel, TextShowcaseNavigationDelegate>(), TextShowcaseNavigationDelegate {

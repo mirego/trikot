@@ -19,8 +19,8 @@ import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.SampleTextStyle
-import com.mirego.sample.viewmodels.showcase.toggle.ToggleShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.toggle.ToggleShowcaseViewModelPreview
+import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModel
+import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCheckbox
