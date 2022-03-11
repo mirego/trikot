@@ -18,7 +18,7 @@ public extension VMDAnimation {
                     return .default.delay(tweenAnimation.delayInSeconds)
                 }
             } else if let customEasing = tweenAnimation.easing as? VMDAnimationEasingCubicBezier {
-                return .timingCurve(Double(customEasing.a), Double(customEasing.b), Double(customEasing.c), Double(customEasing.d))
+                return .timingCurve(Double(customEasing.a), Double(customEasing.b), Double(customEasing.c), Double(customEasing.d), duration: tweenAnimation.durationInSeconds)
             }
         } else if let springAnimation = self as? VMDAnimationSpring {
             return .interpolatingSpring(stiffness: Double(springAnimation.stiffness), damping: Double(springAnimation.dampingRatio))

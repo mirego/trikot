@@ -1,6 +1,7 @@
 package com.mirego.sample.factories
 
 import com.mirego.sample.viewmodels.home.HomeViewModelController
+import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelController
@@ -23,4 +24,6 @@ interface SampleViewModelControllerFactory : VMDViewModelControllerFactory {
     fun toggleShowcase(): ToggleShowcaseViewModelController
 
     fun textFieldShowcase(): TextFieldShowcaseViewModelController
+
+    fun animationTypesShowcase(): AnimationTypesShowcaseViewModelController
 }

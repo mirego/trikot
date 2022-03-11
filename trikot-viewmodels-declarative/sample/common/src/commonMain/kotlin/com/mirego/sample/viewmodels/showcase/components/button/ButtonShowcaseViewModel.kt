@@ -10,11 +10,14 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDTextPairContent
 
 interface ButtonShowcaseViewModel : ShowcaseViewModel {
     val textButtonTitle: VMDTextViewModel
-    val imageButtonTitle: VMDTextViewModel
-    val textImageButtonTitle: VMDTextViewModel
-    val textPairButtonTitle: VMDTextViewModel
     val textButton: VMDButtonViewModel<VMDTextContent>
+
+    val imageButtonTitle: VMDTextViewModel
     val imageButton: VMDButtonViewModel<VMDImageContent>
+
+    val textImageButtonTitle: VMDTextViewModel
     val textImageButton: VMDButtonViewModel<VMDTextImagePairContent>
+
+    val textPairButtonTitle: VMDTextViewModel
     val textPairButton: VMDButtonViewModel<VMDTextPairContent>
 }

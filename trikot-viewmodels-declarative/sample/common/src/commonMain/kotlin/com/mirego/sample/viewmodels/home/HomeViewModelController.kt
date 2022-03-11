@@ -65,7 +65,7 @@ class HomeViewModelController(i18N: I18N) :
                                 text = i18N[KWordTranslation.HOME_ANIMATION_EASING],
                                 cancellableManager = cancellableManager
                             ) {
-                                setAction { navigationDelegate?.navigateToTextShowcase() }
+                                setAction { navigationDelegate?.navigateToAnimationTypesShowcase() }
                             }
                         ),
                         cancellableManager = cancellableManager

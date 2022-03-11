@@ -44,11 +44,9 @@
   "text_showcase_text_title3": "Title 3",
   "toggle_showcase_title": "Toggle showcase",
   "text_showcase_text_headline": "Headline",
-  "text_showcase_text_body": "Body",
-  "text_showcase_text_body_medium": "Body medium",
   "text_showcase_text_button": "Button",
   "text_showcase_text_callout": "Callout",
-  "text_showcase_text_subheadline": "Subhealine",
+  "text_showcase_text_subheadline": "Subheadline",
   "text_showcase_text_footnote": "Footnote",
   "text_showcase_text_caption1": "Caption 1",
   "text_showcase_text_caption2": "Caption 2",
@@ -61,5 +59,13 @@
   "toggle_showcase_text_switch_title": "Text switch",
   "toggle_showcase_image_switch_title": "Image switch",
   "toggle_showcase_text_image_switch_title": "Text image switch",
-  "toggle_showcase_text_pair_switch_title": "Text pair switch"
+  "toggle_showcase_text_pair_switch_title": "Text pair switch",
+  "animation_types_showcase_title": "Animation types",
+  "animation_types_animate_button_text": "Animate",
+  "animation_types_linear_tile": "Linear",
+  "animation_types_ease_in_tile": "Ease In",
+  "animation_types_ease_out_tile": "Ease Out",
+  "animation_types_ease_in_ease_out_tile": "Ease In/Out",
+  "animation_types_cubic_bezier_tile": "Cubic Bezier (0, 1, 0, 1)",
+  "animation_types_spring_tile": "Spring"
 }

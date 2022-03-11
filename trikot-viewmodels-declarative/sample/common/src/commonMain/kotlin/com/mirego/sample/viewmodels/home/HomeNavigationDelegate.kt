@@ -14,4 +14,6 @@ interface HomeNavigationDelegate : VMDNavigationDelegate {
     fun navigateToToggleShowcase()
 
     fun navigateToProgressShowcase()
+
+    fun navigateToAnimationTypesShowcase()
 }

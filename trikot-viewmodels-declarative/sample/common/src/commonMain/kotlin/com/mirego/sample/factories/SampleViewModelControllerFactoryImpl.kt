@@ -1,6 +1,7 @@
 package com.mirego.sample.factories
 
 import com.mirego.sample.viewmodels.home.HomeViewModelController
+import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelController
@@ -40,5 +41,9 @@ class SampleViewModelControllerFactoryImpl : SampleViewModelControllerFactory {
 
     override fun textFieldShowcase(): TextFieldShowcaseViewModelController {
         return TextFieldShowcaseViewModelController(i18N)
+    }
+
+    override fun animationTypesShowcase(): AnimationTypesShowcaseViewModelController {
+        return AnimationTypesShowcaseViewModelController(i18N)
     }
 }
