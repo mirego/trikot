@@ -7,8 +7,8 @@ import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
-import com.mirego.trikot.viewmodels.declarative.components.animation.VMDAnimation
-import com.mirego.trikot.viewmodels.declarative.components.animation.withAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.withAnimation
 import com.mirego.trikot.viewmodels.declarative.utilities.VMDDispatchQueues
 import com.mirego.trikot.viewmodels.declarative.utilities.valueOrThrow
 import org.reactivestreams.Publisher

@@ -10,8 +10,8 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import com.mirego.trikot.viewmodels.declarative.components.animation.VMDAnimation
-import com.mirego.trikot.viewmodels.declarative.components.animation.VMDAnimationEasing
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimationEasing
 import kotlin.time.DurationUnit
 
 fun <T, V> VMDAnimatedPropertyChange<T, V>.animationSpec() : AnimationSpec<T> {

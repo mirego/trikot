@@ -5,8 +5,8 @@ import com.mirego.trikot.streams.reactive.ConcretePublisher
 import com.mirego.trikot.streams.reactive.PublishSubjectImpl
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.asConcretePublisher
-import com.mirego.trikot.viewmodels.declarative.components.animation.VMDAnimation
-import com.mirego.trikot.viewmodels.declarative.components.animation.VMDAnimationContext
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimationContext
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPublishedProperty
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.published

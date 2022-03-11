@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels.declarative.components.animation
+package com.mirego.trikot.viewmodels.declarative.animation
 
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds

@@ -1,4 +1,4 @@
-package com.mirego.trikot.viewmodels.declarative.components.animation
+package com.mirego.trikot.viewmodels.declarative.animation
 
 sealed interface VMDAnimationEasing {
     enum class Standard: VMDAnimationEasing {
