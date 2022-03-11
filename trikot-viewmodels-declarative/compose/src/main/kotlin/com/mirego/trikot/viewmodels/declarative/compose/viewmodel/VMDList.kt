@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -33,6 +34,32 @@ fun <C : VMDIdentifiableContent> VMDList(
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     itemContent: @Composable LazyItemScope.(item: C) -> Unit
 ) {
+    VMDSectionedList(
+        modifier = modifier,
+        viewModel = viewModel,
+        state = state,
+        contentPadding = contentPadding,
+        reverseLayout = reverseLayout,
+        verticalArrangement = verticalArrangement,
+        horizontalAlignment = horizontalAlignment,
+        flingBehavior = flingBehavior) {
+        items(viewModel.elements, key = { item -> item.identifier }, itemContent = itemContent)
+    }
+}
+
+@Composable
+fun <C : VMDIdentifiableContent> VMDSectionedList(
+    modifier: Modifier = Modifier,
+    viewModel: VMDListViewModel<C>,
+    state: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    reverseLayout: Boolean = false,
+    verticalArrangement: Arrangement.Vertical =
+        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
+    content: LazyListScope.(elements: List<C>) -> Unit
+) {
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     LazyColumn(
@@ -45,6 +72,6 @@ fun <C : VMDIdentifiableContent> VMDList(
         horizontalAlignment = horizontalAlignment,
         flingBehavior = flingBehavior
     ) {
-        items(listViewModel.elements, key = { item -> item.identifier }, itemContent = itemContent)
+        content(listViewModel.elements)
     }
 }

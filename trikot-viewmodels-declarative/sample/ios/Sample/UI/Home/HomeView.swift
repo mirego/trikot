@@ -17,14 +17,18 @@ struct HomeView: RootViewModelView {
 
     var body: some View {
         NavigationView {
-            VMDList(viewModel.items) { item in
-                VMDButton(item) { textContent in
-                    Text(textContent.text)
+            VMDList(viewModel.sections) { section in
+                Section(header: VMDText(section.title)) {
+                    ForEach(section.elements) { element in
+                        VMDButton(element.button) { textContent in
+                            Text(textContent.text)
+                        }
+                        .foregroundColor(.black)
+                    }
                 }
-                .foregroundColor(.black)
             }
             .listStyle(GroupedListStyle())
-            .navigationTitle(viewModel.title.text)
+            .navigationTitle(viewModel.title)
         }
     }
 }
