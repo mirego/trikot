@@ -1,5 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.animation
 
+import kotlin.math.PI
+import kotlin.math.sqrt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
@@ -30,6 +32,11 @@ sealed interface VMDAnimation {
             const val StiffnessLow = 200f
             const val StiffnessVeryLow = 50f
         }
+
+        // Used in SwiftUI.
+        // The amount of time to complete a single oscillation (period).
+        // T = 2π√m/k
+        val response = 2 * PI / sqrt(stiffness)
     }
 }
 

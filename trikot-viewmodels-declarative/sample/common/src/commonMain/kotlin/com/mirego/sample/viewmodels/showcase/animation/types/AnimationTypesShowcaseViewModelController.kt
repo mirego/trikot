@@ -15,34 +15,34 @@ class AnimationTypesShowcaseViewModelController(i18N: I18N) : VMDViewModelContro
 
         viewModel.closeButton.setAction { navigationDelegate?.close() }
 
-        viewModel.linearAnimateButton.setAction {
+        viewModel.linear.animateButton.setAction {
             withAnimation(VMDAnimation.Tween(duration = 1.seconds, easing = VMDAnimationEasing.Standard.Linear)) {
-                viewModel.linearIsTrailing = !viewModel.linearIsTrailing
+                viewModel.linear.isTrailing = !viewModel.linear.isTrailing
             }
         }
-        viewModel.easeInAnimateButton.setAction {
+        viewModel.easeIn.animateButton.setAction {
             withAnimation(VMDAnimation.Tween(duration = 1.seconds, easing = VMDAnimationEasing.Standard.EaseIn)) {
-                viewModel.easeInIsTrailing = !viewModel.easeInIsTrailing
+                viewModel.easeIn.isTrailing = !viewModel.easeIn.isTrailing
             }
         }
-        viewModel.easeOutAnimateButton.setAction {
+        viewModel.easeOut.animateButton.setAction {
             withAnimation(VMDAnimation.Tween(duration = 1.seconds, easing = VMDAnimationEasing.Standard.EaseOut)) {
-                viewModel.easeOutIsTrailing = !viewModel.easeOutIsTrailing
+                viewModel.easeOut.isTrailing = !viewModel.easeOut.isTrailing
             }
         }
-        viewModel.easeInEaseOutAnimateButton.setAction {
+        viewModel.easeInEaseOut.animateButton.setAction {
             withAnimation(VMDAnimation.Tween(duration = 1.seconds, easing = VMDAnimationEasing.Standard.EaseInEaseOut)) {
-                viewModel.easeInEaseOutIsTrailing = !viewModel.easeInEaseOutIsTrailing
+                viewModel.easeInEaseOut.isTrailing = !viewModel.easeInEaseOut.isTrailing
             }
         }
-        viewModel.cubicBezierAnimateButton.setAction {
+        viewModel.cubicBezier.animateButton.setAction {
             withAnimation(VMDAnimation.Tween(duration = 1.seconds, easing = VMDAnimationEasing.CubicBezier(0f, 1f, 0f, 1f))) {
-                viewModel.cubicBezierIsTrailing = !viewModel.cubicBezierIsTrailing
+                viewModel.cubicBezier.isTrailing = !viewModel.cubicBezier.isTrailing
             }
         }
-        viewModel.springAnimateButton.setAction {
-            withAnimation(VMDAnimation.Spring(dampingRatio = VMDAnimation.Spring.DampingRatioNoBouncy, stiffness = VMDAnimation.Spring.StiffnessVeryLow)) {
-                viewModel.springIsTrailing = !viewModel.springIsTrailing
+        viewModel.spring.animateButton.setAction {
+            withAnimation(VMDAnimation.Spring(dampingRatio = VMDAnimation.Spring.DampingRatioMediumBouncy, stiffness = VMDAnimation.Spring.StiffnessVeryLow)) {
+                viewModel.spring.isTrailing = !viewModel.spring.isTrailing
             }
         }
     }

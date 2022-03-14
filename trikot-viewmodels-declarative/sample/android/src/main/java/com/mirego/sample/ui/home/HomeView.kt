@@ -41,6 +41,7 @@ fun HomeView(homeViewModel: HomeViewModel) {
                         viewModel = section.title,
                         fontSize = 22.sp
                     )
+                    Divider(color = Color.LightGray)
                 }
 
                 items(section.elements, key = { item -> item.identifier }) { element ->

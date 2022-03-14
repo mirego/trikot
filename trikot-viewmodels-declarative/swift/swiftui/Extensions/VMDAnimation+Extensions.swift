@@ -21,7 +21,7 @@ public extension VMDAnimation {
                 return .timingCurve(Double(customEasing.a), Double(customEasing.b), Double(customEasing.c), Double(customEasing.d), duration: tweenAnimation.durationInSeconds)
             }
         } else if let springAnimation = self as? VMDAnimationSpring {
-            return .interpolatingSpring(stiffness: Double(springAnimation.stiffness), damping: Double(springAnimation.dampingRatio))
+            return .spring(response: springAnimation.response, dampingFraction: Double(springAnimation.dampingRatio))
         }
 
         return nil

@@ -24,6 +24,7 @@
 		C8D868E2268AA9670054CF44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E1268AA9670054CF44 /* Assets.xcassets */; };
 		C8D868E5268AA9670054CF44 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E4268AA9670054CF44 /* Preview Assets.xcassets */; };
 		C8D868E8268AA9670054CF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8D868E6268AA9670054CF44 /* LaunchScreen.storyboard */; };
+		E60C4B5127DBEE130015CBC3 /* AnimationTypeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60C4B5027DBEE130015CBC3 /* AnimationTypeSectionView.swift */; };
 		E639E66427D0603900FEEA03 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E639E66327D0603900FEEA03 /* CheckboxStyle.swift */; };
 		E644903627D66D42003D7684 /* TextFieldShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644903427D66D42003D7684 /* TextFieldShowcaseViewController.swift */; };
 		E644903727D66D42003D7684 /* TextFieldShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644903527D66D42003D7684 /* TextFieldShowcaseView.swift */; };
@@ -67,6 +68,7 @@
 		C8D868E7268AA9670054CF44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8D868E9268AA9670054CF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCF87A6E6976B4011B629160 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		E60C4B5027DBEE130015CBC3 /* AnimationTypeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTypeSectionView.swift; sourceTree = "<group>"; };
 		E639E66327D0603900FEEA03 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
 		E644903427D66D42003D7684 /* TextFieldShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldShowcaseViewController.swift; sourceTree = "<group>"; };
 		E644903527D66D42003D7684 /* TextFieldShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldShowcaseView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E60C4B4F27DBEE060015CBC3 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				E6C3D23D27DBA48B00EF48F0 /* AnimationTypesShowcaseViewController.swift */,
+				E6C3D23E27DBA48B00EF48F0 /* AnimationTypesShowcaseView.swift */,
+				E60C4B5027DBEE130015CBC3 /* AnimationTypeSectionView.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
 		E644903327D66D2D003D7684 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,8 +301,7 @@
 		E6C3D23C27DBA47100EF48F0 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				E6C3D23D27DBA48B00EF48F0 /* AnimationTypesShowcaseViewController.swift */,
-				E6C3D23E27DBA48B00EF48F0 /* AnimationTypesShowcaseView.swift */,
+				E60C4B4F27DBEE060015CBC3 /* Types */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -420,6 +431,7 @@
 				E6B3102D27CFF9FE008D2F36 /* ImageShowcaseView.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
 				C88356C1275814AC00DA0786 /* BaseViewModelViewController.swift in Sources */,
+				E60C4B5127DBEE130015CBC3 /* AnimationTypeSectionView.swift in Sources */,
 				C8959A73268AB9D50080732A /* ViewControllerFactory.swift in Sources */,
 				E6B3103027D01F0F008D2F36 /* ToggleShowcaseView.swift in Sources */,
 				C8959A6B268AAADF0080732A /* AppBootstrap.swift in Sources */,
