@@ -33,9 +33,15 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.UnsafeNumber")
+        }
+
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
+                implementation(project(Project.TRIKOT_STREAMS))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
             }
         }
 
@@ -73,10 +79,7 @@ kotlin {
         }
 
         val androidMain by getting {
-            dependsOn(commonMain)
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
-            }
+            dependsOn(jvmMain)
         }
 
         val androidTest by getting {
@@ -90,44 +93,52 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val iosArm32Main by getting {
+        val iosMain by getting {
             dependsOn(nativeMain)
+        }
+
+        val iosArm32Main by getting {
+            dependsOn(iosMain)
         }
 
         val iosArm64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val iosSimulatorArm64Main by getting {
-            dependsOn(iosArm64Main)
+            dependsOn(iosMain)
         }
 
         val iosX64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val tvosArm64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val tvosX64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val watchos32Main by creating {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
+        }
+
+        val watchosArm32Main by getting {
+            dependsOn(iosMain)
         }
 
         val watchosArm64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val watchosX64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
 
         val macosX64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(iosMain)
         }
     }
 }
