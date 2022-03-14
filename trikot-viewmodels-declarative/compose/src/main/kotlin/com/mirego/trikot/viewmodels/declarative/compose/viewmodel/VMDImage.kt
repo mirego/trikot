@@ -1,7 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,7 +30,16 @@ fun VMDImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
-    allowHardware: Boolean = true
+    allowHardware: Boolean = true,
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: ImagePainter.State) -> Unit) = { imageResource, state ->
+        RemoteImageDefaultPlaceholder(
+            imageResource = imageResource,
+            modifier = modifier,
+            contentScale = placeholderContentScale,
+            colorFilter = colorFilter,
+            contentDescription = contentDescription
+        )
+    }
 ) {
     val imageViewModel by viewModel.observeAsState()
 
@@ -44,7 +52,8 @@ fun VMDImage(
         contentDescription = contentDescription,
         placeholderContentScale = placeholderContentScale,
         imageDescriptor = imageViewModel.image,
-        allowHardware = allowHardware
+        allowHardware = allowHardware,
+        placeholder = placeholder
     )
 }
 
@@ -58,7 +67,16 @@ fun VMDImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
-    allowHardware: Boolean = true
+    allowHardware: Boolean = true,
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: ImagePainter.State) -> Unit) = { imageResource, state ->
+        RemoteImageDefaultPlaceholder(
+            imageResource = imageResource,
+            modifier = modifier,
+            contentScale = placeholderContentScale,
+            colorFilter = colorFilter,
+            contentDescription = contentDescription
+        )
+    }
 ) {
     when (imageDescriptor) {
         is Local -> {
@@ -79,10 +97,10 @@ fun VMDImage(
                 placeholderImage = imageDescriptor.placeholderImageResource,
                 alignment = alignment,
                 contentScale = contentScale,
-                placeholderContentScale = placeholderContentScale,
                 colorFilter = colorFilter,
                 contentDescription = contentDescription,
-                allowHardware = allowHardware
+                allowHardware = allowHardware,
+                placeholder = placeholder
             )
         }
     }
@@ -114,9 +132,9 @@ fun RemoteImage(
     modifier: Modifier = Modifier,
     imageUrl: String?,
     placeholderImage: VMDImageResource = VMDImageResource.None,
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: ImagePainter.State) -> Unit),
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
-    placeholderContentScale: ContentScale = contentScale,
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
     allowHardware: Boolean = true
@@ -125,24 +143,13 @@ fun RemoteImage(
         imageUrl,
         builder = {
             allowHardware(allowHardware)
-            size(OriginalSize)
+            if (imageUrl != null) {
+                size(OriginalSize)
+            }
         }
     )
+
     when (coilPainter.state) {
-        is ImagePainter.State.Loading -> LocalImage(
-            imageResource = placeholderImage,
-            modifier = modifier,
-            colorFilter = colorFilter,
-            contentScale = placeholderContentScale,
-            contentDescription = contentDescription
-        )
-        is ImagePainter.State.Error -> LocalImage(
-            imageResource = placeholderImage,
-            modifier = modifier,
-            colorFilter = colorFilter,
-            contentScale = placeholderContentScale,
-            contentDescription = contentDescription
-        )
         is ImagePainter.State.Success -> Image(
             painter = coilPainter,
             modifier = modifier,
@@ -151,6 +158,23 @@ fun RemoteImage(
             contentScale = contentScale,
             contentDescription = contentDescription
         )
-        ImagePainter.State.Empty -> {}
+        else -> placeholder(placeholderImage, coilPainter.state)
     }
+}
+
+@Composable
+private fun RemoteImageDefaultPlaceholder(
+    imageResource: VMDImageResource,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale,
+    colorFilter: ColorFilter?,
+    contentDescription: String
+) {
+    LocalImage(
+        imageResource = imageResource,
+        modifier = modifier,
+        colorFilter = colorFilter,
+        contentScale = contentScale,
+        contentDescription = contentDescription
+    )
 }

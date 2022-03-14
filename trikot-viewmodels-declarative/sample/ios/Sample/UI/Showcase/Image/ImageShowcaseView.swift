@@ -25,24 +25,28 @@ struct ImageShowcaseView: RootViewModelView {
                         VMDImage(viewModel.localImage)
                             .resizable()
                             .aspectRatio(imageAspectRatio, contentMode: .fill)
+                            .clipped()
                     }
 
                     ComponentShowcaseSectionView(viewModel.remoteImageTitle) {
                         VMDImage(viewModel.remoteImage)
                             .resizable()
                             .aspectRatio(imageAspectRatio, contentMode: .fill)
+                            .clipped()
                     }
 
                     ComponentShowcaseSectionView(viewModel.localImageDescriptorTitle) {
                         VMDImage(viewModel.localImageDescriptor)
                             .resizable()
                             .aspectRatio(imageAspectRatio, contentMode: .fill)
+                            .clipped()
                     }
 
                     ComponentShowcaseSectionView(viewModel.remoteImageDescriptorTitle) {
                         VMDImage(viewModel.remoteImageDescriptor)
                             .resizable()
                             .aspectRatio(imageAspectRatio, contentMode: .fill)
+                            .clipped()
                     }
 
                     ComponentShowcaseSectionView(viewModel.placeholderImageTitle) {
@@ -53,9 +57,43 @@ struct ImageShowcaseView: RootViewModelView {
                                     placeholderImage
                                         .resizable()
                                         .aspectRatio(imageAspectRatio, contentMode: .fill)
+                                        .clipped()
                                 }
                             })
-                            .aspectRatio(contentMode: .fit)
+                    }
+
+                    ComponentShowcaseSectionView(viewModel.complexPlaceholderImageTitle) {
+                        VMDImage(viewModel.complexPlaceholderImage)
+                            .resizable()
+                            .placeholder({ status, progress, placeholderImage in
+                                Color.gray.opacity(0.25)
+                                    .frame(maxWidth: .infinity)
+                                    .aspectRatio(imageAspectRatio, contentMode: .fill)
+                                    .overlay(
+                                            VStack(spacing: 10) {
+                                            if let placeholderImage = placeholderImage {
+                                                placeholderImage
+                                                    .resizable()
+                                                    .aspectRatio(imageAspectRatio, contentMode: .fill)
+                                                    .frame(width: 50 * imageAspectRatio, height: 50)
+                                            }
+
+                                            switch status {
+                                            case .empty:
+                                                Text("There is no image to display")
+                                                    .style(.subheadline)
+                                            case .loading:
+                                                Text("Loading \(progress.fractionCompleted)")
+                                                    .style(.subheadline)
+                                            case .error:
+                                                Text("Unable to load the remote image")
+                                                    .style(.subheadline)
+                                            default:
+                                                EmptyView()
+                                            }
+                                        }
+                                    )
+                            })
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
