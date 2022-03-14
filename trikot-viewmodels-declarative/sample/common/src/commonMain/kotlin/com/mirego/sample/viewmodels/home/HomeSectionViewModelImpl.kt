@@ -8,7 +8,7 @@ class HomeSectionViewModelImpl(
     text: String,
     override val elements: List<HomeSectionElementViewModel>,
     cancellableManager: CancellableManager
-) : VMDViewModelImpl(cancellableManager), HomeSectionViewModel{
+) : VMDViewModelImpl(cancellableManager), HomeSectionViewModel {
     override val identifier = text
     override val title = VMDComponents.Text.withContent(text, cancellableManager)
 }

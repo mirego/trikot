@@ -9,7 +9,8 @@ import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowc
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModelController
 import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
-class AnimationTypesShowcaseActivity : ViewModelActivity<AnimationTypesShowcaseViewModelController, AnimationTypesShowcaseViewModel, AnimationTypesShowcaseNavigationDelegate>(), AnimationTypesShowcaseNavigationDelegate {
+class AnimationTypesShowcaseActivity :
+    ViewModelActivity<AnimationTypesShowcaseViewModelController, AnimationTypesShowcaseViewModel, AnimationTypesShowcaseNavigationDelegate>(), AnimationTypesShowcaseNavigationDelegate {
 
     override val viewModelController: AnimationTypesShowcaseViewModelController by lazy {
         getViewModelController(AnimationTypesShowcaseViewModelController::class)

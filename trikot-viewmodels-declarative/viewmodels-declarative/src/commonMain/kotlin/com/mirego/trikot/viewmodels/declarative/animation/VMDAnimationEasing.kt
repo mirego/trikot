@@ -1,7 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.animation
 
 sealed interface VMDAnimationEasing {
-    enum class Standard: VMDAnimationEasing {
+    enum class Standard : VMDAnimationEasing {
         Linear, EaseIn, EaseOut, EaseInEaseOut
     }
 
@@ -10,5 +10,5 @@ sealed interface VMDAnimationEasing {
         val b: Float,
         val c: Float,
         val d: Float
-    ): VMDAnimationEasing
+    ) : VMDAnimationEasing
 }

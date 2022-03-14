@@ -1,6 +1,5 @@
 package com.mirego.sample.viewmodels.showcase.animation.types
 
-import com.mirego.sample.KWordTranslation
 import com.mirego.sample.resources.SampleImageResource
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents

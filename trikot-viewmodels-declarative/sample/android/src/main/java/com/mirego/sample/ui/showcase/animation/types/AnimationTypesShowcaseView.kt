@@ -31,14 +31,11 @@ import com.mirego.sample.ui.theming.medium
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypeShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModelPreview
-import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
-import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.animationSpec
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAnimatedPropertyAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
-import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 
 @Composable
 private fun animateHorizontalAlignmentAsState(
