@@ -2,6 +2,13 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 import Kingfisher
 
+public enum VMDImageLoadingStatus {
+    case empty
+    case loading
+    case success
+    case error
+}
+
 public struct VMDImage: View {
     public typealias LocalImageConfiguration = (Image) -> Image
     public typealias RemoteImageConfiguration = (KFImage, VMDImageResource) -> KFImage
@@ -14,6 +21,7 @@ public struct VMDImage: View {
     }
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDImageViewModel>
+    @State var loadingStatus: VMDImageLoadingStatus = .empty
 
     public init(_ viewModel: VMDImageViewModel) {
         self.observableViewModel = viewModel.asObservable()

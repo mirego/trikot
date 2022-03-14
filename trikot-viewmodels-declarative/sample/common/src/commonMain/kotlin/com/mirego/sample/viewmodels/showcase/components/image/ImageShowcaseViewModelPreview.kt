@@ -27,9 +27,8 @@ class ImageShowcaseViewModelPreview : VMDViewModelImpl(CancellableManager()), Im
     override val remoteImageDescriptor = VMDImageDescriptor.Remote("https://picsum.photos/2000/1600", placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER)
 
     override val placeholderImageTitle = VMDComponents.Text.withContent("Placeholder image", cancellableManager)
-    override val placeholderImage = VMDComponents.Image.remote(
-        null,
-        SampleImageResource.IMAGE_PLACEHOLDER,
-        cancellableManager
-    )
+    override val placeholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager)
+
+    override val complexPlaceholderImageTitle = VMDComponents.Text.withContent("Complex placeholder image", cancellableManager)
+    override val complexPlaceholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager)
 }
