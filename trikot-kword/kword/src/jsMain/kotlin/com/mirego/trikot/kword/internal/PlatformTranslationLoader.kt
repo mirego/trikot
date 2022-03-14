@@ -5,7 +5,7 @@ import kotlinext.js.require
 internal actual object PlatformTranslationLoader {
     actual fun loadTranslations(path: String): Map<String, String>? =
         try {
-            mapOf(require(path))
+            mapOf(require("./translations/$path"))
         } catch (error: dynamic) {
             println("Unable to parse JSON: $error")
             null

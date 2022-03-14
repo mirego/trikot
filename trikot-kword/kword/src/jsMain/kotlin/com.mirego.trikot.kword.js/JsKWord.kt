@@ -5,7 +5,7 @@ import com.mirego.trikot.kword.KwordLoader
 
 object JsKWord {
     private val DEFAULT_PATHS = listOf(
-        "./translations/translation"
+        "translation"
     )
 
     fun setCurrentLanguageCode(code: String) {
