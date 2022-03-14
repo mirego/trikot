@@ -23,14 +23,18 @@ class MultiLanguageI18NTests {
 
     @BeforeTest
     fun setup() {
-        frenchI18N.changeLocaleStrings(mapOf(
-            SomeKey.translationKey to FR_VALUE,
-            ArgKey.translationKey to FR_ARG_VALUE
-        ))
-        englishI18N.changeLocaleStrings(mapOf(
-            SomeKey.translationKey to EN_VALUE,
-            ArgKey.translationKey to EN_ARG_VALUE
-        ))
+        frenchI18N.changeLocaleStrings(
+            mapOf(
+                SomeKey.translationKey to FR_VALUE,
+                ArgKey.translationKey to FR_ARG_VALUE
+            )
+        )
+        englishI18N.changeLocaleStrings(
+            mapOf(
+                SomeKey.translationKey to EN_VALUE,
+                ArgKey.translationKey to EN_ARG_VALUE
+            )
+        )
     }
 
     @Test
