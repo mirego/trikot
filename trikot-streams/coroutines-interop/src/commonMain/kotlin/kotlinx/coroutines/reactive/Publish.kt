@@ -97,7 +97,7 @@ class PublisherCoroutine<in T>(
             }
         }
 
-    public override suspend fun send(element: T) {
+    override suspend fun send(element: T) {
         mutex.lock()
         doLockedNext(element)?.let { throw it }
     }

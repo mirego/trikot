@@ -18,7 +18,7 @@ import org.reactivestreams.*
  * If [action] throws an exception at some point, the subscription is cancelled, and the exception is rethrown from
  * [collect]. Also, if the publisher signals an error, that error is rethrown from [collect].
  */
-public suspend inline fun <T> Publisher<T>.collect(action: (T) -> Unit): Unit =
+suspend inline fun <T> Publisher<T>.collect(action: (T) -> Unit): Unit =
     toChannel().consumeEach(action)
 
 @PublishedApi

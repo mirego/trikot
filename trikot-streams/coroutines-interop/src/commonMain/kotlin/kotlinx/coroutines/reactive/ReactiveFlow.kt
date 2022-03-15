@@ -29,7 +29,7 @@ import kotlin.jvm.*
  * This function is integrated with `ReactorContext` from `kotlinx-coroutines-reactor` module,
  * see its documentation for additional details.
  */
-public fun <T : Any> Publisher<T>.asFlow(): Flow<T> =
+fun <T : Any> Publisher<T>.asFlow(): Flow<T> =
     PublisherAsFlow(this)
 
 /**
@@ -44,7 +44,7 @@ public fun <T : Any> Publisher<T>.asFlow(): Flow<T> =
  * is used, so calls are performed from an arbitrary thread.
  */
 @JvmOverloads // binary compatibility
-public fun <T : Any> Flow<T>.asPublisher(context: CoroutineContext = EmptyCoroutineContext): Publisher<T> =
+fun <T : Any> Flow<T>.asPublisher(context: CoroutineContext = EmptyCoroutineContext): Publisher<T> =
     FlowAsPublisher(this, Dispatchers.Unconfined + context)
 
 private class PublisherAsFlow<T : Any>(
@@ -176,9 +176,9 @@ private class FlowAsPublisher<T : Any>(
 
 /** @suppress */
 @InternalCoroutinesApi
-public class FlowSubscription<T>(
-    @JvmField public val flow: Flow<T>,
-    @JvmField public val subscriber: Subscriber<in T>,
+class FlowSubscription<T>(
+    @JvmField val flow: Flow<T>,
+    @JvmField val subscriber: Subscriber<in T>,
     context: CoroutineContext
 ) : Subscription, AbstractCoroutine<Unit>(context, initParentJob = false, true) {
     /*
