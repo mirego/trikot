@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://user-images.githubusercontent.com/11348/158435852-861b0ea1-b895-452b-abd4-029ccd6f5b86.svg" width="200" />
-  <p>Trikot is a framework that helps building Kotlin Multiplatform applications.<br />iOS, android and web are the primary targets.</p>
+  <p>Trikot is a framework that helps building Kotlin Multiplatform applications.<br />iOS, Android and Web are the primary targets.</p>
   <a href="https://github.com/mirego/trikot/tags"><img src="https://img.shields.io/github/tag/mirego/trikot.svg?label=Latest%20version"></a>
   <a href="http://kotlinlang.org"><img src="https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin" /></a>
   <a href="https://github.com/mirego/trikot/actions/workflows/ci.yml"><img src="https://github.com/mirego/trikot/actions/workflows/ci.yml/badge.svg" /></a>
