@@ -22,7 +22,7 @@ import kotlin.coroutines.*
  *
  * @throws NoSuchElementException if the publisher does not emit any value
  */
-public suspend fun <T> Publisher<T>.awaitFirst(): T = awaitOne(Mode.FIRST)
+suspend fun <T> Publisher<T>.awaitFirst(): T = awaitOne(Mode.FIRST)
 
 /**
  * Awaits the first value from the given publisher, or returns the [default] value if none is emitted, without blocking
@@ -33,7 +33,7 @@ public suspend fun <T> Publisher<T>.awaitFirst(): T = awaitOne(Mode.FIRST)
  * If the [Job] of the current coroutine is cancelled or completed while the suspending function is waiting, this
  * function immediately cancels its [Subscription] and resumes with [CancellationException].
  */
-public suspend fun <T> Publisher<T>.awaitFirstOrDefault(default: T): T = awaitOne(Mode.FIRST_OR_DEFAULT, default)
+suspend fun <T> Publisher<T>.awaitFirstOrDefault(default: T): T = awaitOne(Mode.FIRST_OR_DEFAULT, default)
 
 /**
  * Awaits the first value from the given publisher, or returns `null` if none is emitted, without blocking the thread,
@@ -43,7 +43,7 @@ public suspend fun <T> Publisher<T>.awaitFirstOrDefault(default: T): T = awaitOn
  * If the [Job] of the current coroutine is cancelled or completed while the suspending function is waiting, this
  * function immediately cancels its [Subscription] and resumes with [CancellationException].
  */
-public suspend fun <T> Publisher<T>.awaitFirstOrNull(): T? = awaitOne(Mode.FIRST_OR_DEFAULT)
+suspend fun <T> Publisher<T>.awaitFirstOrNull(): T? = awaitOne(Mode.FIRST_OR_DEFAULT)
 
 /**
  * Awaits the first value from the given publisher, or calls [defaultValue] to get a value if none is emitted, without
@@ -54,7 +54,7 @@ public suspend fun <T> Publisher<T>.awaitFirstOrNull(): T? = awaitOne(Mode.FIRST
  * If the [Job] of the current coroutine is cancelled or completed while the suspending function is waiting, this
  * function immediately cancels its [Subscription] and resumes with [CancellationException].
  */
-public suspend fun <T> Publisher<T>.awaitFirstOrElse(defaultValue: () -> T): T = awaitOne(Mode.FIRST_OR_DEFAULT) ?: defaultValue()
+suspend fun <T> Publisher<T>.awaitFirstOrElse(defaultValue: () -> T): T = awaitOne(Mode.FIRST_OR_DEFAULT) ?: defaultValue()
 
 /**
  * Awaits the last value from the given publisher without blocking the thread and
@@ -66,7 +66,7 @@ public suspend fun <T> Publisher<T>.awaitFirstOrElse(defaultValue: () -> T): T =
  *
  * @throws NoSuchElementException if the publisher does not emit any value
  */
-public suspend fun <T> Publisher<T>.awaitLast(): T = awaitOne(Mode.LAST)
+suspend fun <T> Publisher<T>.awaitLast(): T = awaitOne(Mode.LAST)
 
 /**
  * Awaits the single value from the given publisher without blocking the thread and returns the resulting value, or,
@@ -79,96 +79,7 @@ public suspend fun <T> Publisher<T>.awaitLast(): T = awaitOne(Mode.LAST)
  * @throws NoSuchElementException if the publisher does not emit any value
  * @throws IllegalArgumentException if the publisher emits more than one value
  */
-public suspend fun <T> Publisher<T>.awaitSingle(): T = awaitOne(Mode.SINGLE)
-
-/**
- * Awaits the single value from the given publisher, or returns the [default] value if none is emitted, without
- * blocking the thread, and returns the resulting value, or, if this publisher has produced an error, throws the
- * corresponding exception.
- *
- * This suspending function is cancellable.
- * If the [Job] of the current coroutine is cancelled or completed while the suspending function is waiting, this
- * function immediately cancels its [Subscription] and resumes with [CancellationException].
- *
- * ### Deprecation
- *
- * This method is deprecated because the conventions established in Kotlin mandate that an operation with the name
- * `awaitSingleOrDefault` returns the default value instead of throwing in case there is an error; however, this would
- * also mean that this method would return the default value if there are *too many* values. This could be confusing to
- * those who expect this function to validate that there is a single element or none at all emitted, and cases where
- * there are no elements are indistinguishable from those where there are too many, though these cases have different
- * meaning.
- *
- * @throws NoSuchElementException if the publisher does not emit any value
- * @throws IllegalArgumentException if the publisher emits more than one value
- *
- * @suppress
- */
-@Deprecated(
-    message = "Deprecated without a replacement due to its name incorrectly conveying the behavior. " +
-        "Please consider using awaitFirstOrDefault().",
-    level = DeprecationLevel.ERROR
-) // Warning since 1.5, error in 1.6, hidden in 1.7
-public suspend fun <T> Publisher<T>.awaitSingleOrDefault(default: T): T = awaitOne(Mode.SINGLE_OR_DEFAULT, default)
-
-/**
- * Awaits the single value from the given publisher without blocking the thread and returns the resulting value, or, if
- * this publisher has produced an error, throws the corresponding exception. If more than one value or none were
- * produced by the publisher, `null` is returned.
- *
- * This suspending function is cancellable.
- * If the [Job] of the current coroutine is cancelled or completed while the suspending function is waiting, this
- * function immediately cancels its [Subscription] and resumes with [CancellationException].
- *
- * ### Deprecation
- *
- * This method is deprecated because the conventions established in Kotlin mandate that an operation with the name
- * `awaitSingleOrNull` returns `null` instead of throwing in case there is an error; however, this would
- * also mean that this method would return `null` if there are *too many* values. This could be confusing to
- * those who expect this function to validate that there is a single element or none at all emitted, and cases where
- * there are no elements are indistinguishable from those where there are too many, though these cases have different
- * meaning.
- *
- * @throws IllegalArgumentException if the publisher emits more than one value
- * @suppress
- */
-@Deprecated(
-    message = "Deprecated without a replacement due to its name incorrectly conveying the behavior. " +
-        "There is a specialized version for Reactor's Mono, please use that where applicable. " +
-        "Alternatively, please consider using awaitFirstOrNull().",
-    level = DeprecationLevel.ERROR,
-    replaceWith = ReplaceWith("this.awaitSingleOrNull()", "kotlinx.coroutines.reactor")
-) // Warning since 1.5, error in 1.6, hidden in 1.7
-public suspend fun <T> Publisher<T>.awaitSingleOrNull(): T? = awaitOne(Mode.SINGLE_OR_DEFAULT)
-
-/**
- * Awaits the single value from the given publisher, or calls [defaultValue] to get a value if none is emitted, without
- * blocking the thread, and returns the resulting value, or, if this publisher has produced an error, throws the
- * corresponding exception.
- *
- * This suspending function is cancellable.
- * If the [Job] of the current coroutine is cancelled or completed while the suspending function is waiting, this
- * function immediately cancels its [Subscription] and resumes with [CancellationException].
- *
- * ### Deprecation
- *
- * This method is deprecated because the conventions established in Kotlin mandate that an operation with the name
- * `awaitSingleOrElse` returns the calculated value instead of throwing in case there is an error; however, this would
- * also mean that this method would return the calculated value if there are *too many* values. This could be confusing
- * to those who expect this function to validate that there is a single element or none at all emitted, and cases where
- * there are no elements are indistinguishable from those where there are too many, though these cases have different
- * meaning.
- *
- * @throws IllegalArgumentException if the publisher emits more than one value
- * @suppress
- */
-@Deprecated(
-    message = "Deprecated without a replacement due to its name incorrectly conveying the behavior. " +
-        "Please consider using awaitFirstOrElse().",
-    level = DeprecationLevel.ERROR
-) // Warning since 1.5, error in 1.6, hidden in 1.7
-public suspend fun <T> Publisher<T>.awaitSingleOrElse(defaultValue: () -> T): T =
-    awaitOne(Mode.SINGLE_OR_DEFAULT) ?: defaultValue()
+suspend fun <T> Publisher<T>.awaitSingle(): T = awaitOne(Mode.SINGLE)
 
 // ------------------------ private ------------------------
 
@@ -188,23 +99,23 @@ private suspend fun <T> Publisher<T>.awaitOne(
     /* This implementation must obey
     https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#2-subscriber-code
     The numbers of rules are taken from there. */
-    injectCoroutineContext(cont.context).subscribe(object : Subscriber<T> {
+    subscribe(object : Subscriber<T> {
         // It is unclear whether 2.13 implies (T: Any), but if so, it seems that we don't break anything by not adhering
         private var subscription: Subscription? = null
         private var value: T? = null
         private var seenValue = false
         private var inTerminalState = false
 
-        override fun onSubscribe(sub: Subscription) {
+        override fun onSubscribe(s: Subscription) {
             /** cancelling the new subscription due to rule 2.5, though the publisher would either have to
              * subscribe more than once, which would break 2.12, or leak this [Subscriber]. */
             if (subscription != null) {
-                sub.cancel()
+                s.cancel()
                 return
             }
-            subscription = sub
-            cont.invokeOnCancellation { sub.cancel() }
-            sub.request(if (mode == Mode.FIRST || mode == Mode.FIRST_OR_DEFAULT) 1 else Long.MAX_VALUE)
+            subscription = s
+            cont.invokeOnCancellation { s.cancel() }
+            s.request(if (mode == Mode.FIRST || mode == Mode.FIRST_OR_DEFAULT) 1 else Long.MAX_VALUE)
         }
 
         override fun onNext(t: T) {
@@ -275,9 +186,9 @@ private suspend fun <T> Publisher<T>.awaitOne(
             }
         }
 
-        override fun onError(e: Throwable) {
+        override fun onError(t: Throwable) {
             if (tryEnterTerminalState("onError")) {
-                cont.resumeWithException(e)
+                cont.resumeWithException(t)
             }
         }
 

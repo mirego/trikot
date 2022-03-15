@@ -78,7 +78,7 @@ private class PublisherAsFlow<T : Any>(
         val newDispatcher = context[ContinuationInterceptor]
         if (newDispatcher == null || newDispatcher == collectContext[ContinuationInterceptor]) {
             // fast path -- subscribe directly in this dispatcher
-            return collectImpl(collectContext + context, collector)
+            return collectImpl(collector)
         }
         // slow path -- produce in a separate dispatcher
         collectSlowPath(collector)
@@ -90,10 +90,10 @@ private class PublisherAsFlow<T : Any>(
         }
     }
 
-    private suspend fun collectImpl(injectContext: CoroutineContext, collector: FlowCollector<T>) {
+    private suspend fun collectImpl(collector: FlowCollector<T>) {
         val subscriber = ReactiveSubscriber<T>(capacity, onBufferOverflow, requestSize)
         // inject subscribe context into publisher
-        publisher.injectCoroutineContext(injectContext).subscribe(subscriber)
+        publisher.subscribe(subscriber)
         try {
             var consumed = 0L
             while (true) {
@@ -112,7 +112,7 @@ private class PublisherAsFlow<T : Any>(
 
     // The second channel here is used for produceIn/broadcastIn and slow-path (dispatcher change)
     override suspend fun collectTo(scope: ProducerScope<T>) =
-        collectImpl(scope.coroutineContext, SendingCollector(scope.channel))
+        collectImpl(SendingCollector(scope.channel))
 }
 
 @Suppress("ReactiveStreamsSubscriberImplementation")
@@ -133,9 +133,9 @@ private class ReactiveSubscriber<T : Any>(
         return result.getOrElse { null } // Closed channel
     }
 
-    override fun onNext(value: T) {
+    override fun onNext(t: T) {
         // Controlled by requestSize
-        require(channel.trySend(value).isSuccess) { "Element $value was not added to channel because it was full, $channel" }
+        require(channel.trySend(t).isSuccess) { "Element $t was not added to channel because it was full, $channel" }
     }
 
     override fun onComplete() {
@@ -160,17 +160,6 @@ private class ReactiveSubscriber<T : Any>(
     }
 }
 
-// ContextInjector service is implemented in `kotlinx-coroutines-reactor` module only.
-// If `kotlinx-coroutines-reactor` module is not included, the list is empty.
-private val contextInjectors: Array<ContextInjector> =
-    emptyArray()
-//    ServiceLoader.load(ContextInjector::class.java, ContextInjector::class.java.classLoader)
-//        .iterator().asSequence()
-//        .toList().toTypedArray() // R8 opto
-
-internal fun <T> Publisher<T>.injectCoroutineContext(coroutineContext: CoroutineContext) =
-    contextInjectors.fold(this) { pub, contextInjector -> contextInjector.injectCoroutineContext(pub, coroutineContext) }
-
 /**
  * Adapter that transforms [Flow] into TCK-complaint [Publisher].
  * [cancel] invocation cancels the original flow.
@@ -180,9 +169,8 @@ private class FlowAsPublisher<T : Any>(
     private val flow: Flow<T>,
     private val context: CoroutineContext
 ) : Publisher<T> {
-    override fun subscribe(subscriber: Subscriber<in T>) {
-        if (subscriber == null) throw NullPointerException()
-        subscriber.onSubscribe(FlowSubscription(flow, subscriber, context))
+    override fun subscribe(s: Subscriber<in T>) {
+        s.onSubscribe(FlowSubscription(flow, s, context))
     }
 }
 

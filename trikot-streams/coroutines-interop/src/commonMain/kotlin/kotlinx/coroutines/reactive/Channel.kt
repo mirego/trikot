@@ -97,18 +97,7 @@ private class SubscriptionChannel<T>(
         close(cause = null)
     }
 
-    override fun onError(e: Throwable) {
-        close(cause = e)
+    override fun onError(t: Throwable) {
+        close(cause = t)
     }
-}
-
-/** @suppress */
-@Deprecated(
-    message = "Transforming publisher to channel is deprecated, use asFlow() instead",
-    level = DeprecationLevel.HIDDEN
-) // ERROR in 1.4, HIDDEN in 1.6.0
-public fun <T> Publisher<T>.openSubscription(request: Int = 1): ReceiveChannel<T> {
-    val channel = SubscriptionChannel<T>(request)
-    subscribe(channel)
-    return channel
 }

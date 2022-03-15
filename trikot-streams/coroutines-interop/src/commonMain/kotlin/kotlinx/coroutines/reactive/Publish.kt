@@ -36,7 +36,7 @@ import kotlin.jvm.*
  *
  * @throws IllegalArgumentException if the provided [context] contains a [Job] instance.
  */
-public fun <T> publish(
+fun <T> publish(
     context: CoroutineContext = EmptyCoroutineContext,
     @BuilderInference block: suspend ProducerScope<T>.() -> Unit
 ): Publisher<T> {
@@ -49,14 +49,12 @@ public fun <T> publish(
 
 /** @suppress For internal use from other reactive integration modules only */
 @InternalCoroutinesApi
-public fun <T> publishInternal(
+fun <T> publishInternal(
     scope: CoroutineScope, // support for legacy publish in scope
     context: CoroutineContext,
     exceptionOnCancelHandler: (Throwable, CoroutineContext) -> Unit,
     block: suspend ProducerScope<T>.() -> Unit
 ): Publisher<T> = Publisher { subscriber ->
-    // specification requires NPE on null subscriber
-    if (subscriber == null) throw NullPointerException("Subscriber cannot be null")
     val newContext = scope.newCoroutineContext(context)
     val coroutine = PublisherCoroutine(newContext, subscriber, exceptionOnCancelHandler)
     subscriber.onSubscribe(coroutine) // do it first (before starting coroutine), to avoid unnecessary suspensions
@@ -70,7 +68,7 @@ private val DEFAULT_HANDLER: (Throwable, CoroutineContext) -> Unit = { t, ctx ->
 /** @suppress */
 @Suppress("CONFLICTING_JVM_DECLARATIONS", "RETURN_TYPE_MISMATCH_ON_INHERITANCE")
 @InternalCoroutinesApi
-public class PublisherCoroutine<in T>(
+class PublisherCoroutine<in T>(
     parentContext: CoroutineContext,
     private val subscriber: Subscriber<T>,
     private val exceptionOnCancelHandler: (Throwable, CoroutineContext) -> Unit
@@ -321,13 +319,3 @@ public class PublisherCoroutine<in T>(
         super.cancel(null)
     }
 }
-
-@Deprecated(
-    message = "CoroutineScope.publish is deprecated in favour of top-level publish",
-    level = DeprecationLevel.HIDDEN,
-    replaceWith = ReplaceWith("publish(context, block)")
-) // Since 1.3.0, will be error in 1.3.1 and hidden in 1.4.0. Binary compatibility with Spring
-public fun <T> CoroutineScope.publish(
-    context: CoroutineContext = EmptyCoroutineContext,
-    @BuilderInference block: suspend ProducerScope<T>.() -> Unit
-): Publisher<T> = publishInternal(this, context, DEFAULT_HANDLER, block)

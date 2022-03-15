@@ -27,6 +27,8 @@ kotlin {
             languageSettings {
                 optIn("kotlinx.coroutines.InternalCoroutinesApi")
                 optIn("kotlin.experimental.ExperimentalTypeInference")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                optIn("kotlinx.coroutines.DelicateCoroutinesApi")
             }
         }
 
