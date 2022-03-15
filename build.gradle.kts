@@ -34,6 +34,7 @@ release {
     buildTasks = listOf(
         ":trikot-foundation:trikotFoundation:publish",
         ":trikot-streams:streams:publish",
+        ":trikot-streams:test-utils:publish",
         ":trikot-http:http:publish",
         ":trikot-datasources:datasources:publish",
         ":trikot-kword:kword:publish",

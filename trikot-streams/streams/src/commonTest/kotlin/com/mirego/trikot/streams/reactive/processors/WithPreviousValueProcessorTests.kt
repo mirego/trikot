@@ -3,7 +3,7 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.streams.reactive.PublisherResultAccumulator
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.asPublisher
-import com.mirego.trikot.streams.reactive.assertEquals
+import com.mirego.trikot.streams.tests.assertEquals
 import com.mirego.trikot.streams.reactive.withPreviousValue
 import kotlin.test.Test
 import kotlin.test.assertEquals

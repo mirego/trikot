@@ -2,7 +2,7 @@ package com.mirego.trikot.streams.reactive.promise
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
-import com.mirego.trikot.streams.reactive.verify
+import com.mirego.trikot.streams.tests.verify
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

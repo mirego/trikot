@@ -1,42 +1,22 @@
 package com.mirego.trikot.kword.android
 
-import android.util.Log
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.kword.KWord
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
-import java.io.IOException
+import com.mirego.trikot.kword.KwordLoader
 
 object AndroidKWord {
-    private val json = Json {
-        ignoreUnknownKeys = true
-        isLenient = true
-        allowSpecialFloatingPointValues = true
-    }
+    private val DEFAULT_PATHS = listOf(
+        "/translations/translation"
+    )
 
     fun setCurrentLanguageCode(code: String) {
-        setCurrentLanguageCodes(KWord, code)
+        KwordLoader.setCurrentLanguageCode(code, DEFAULT_PATHS)
     }
 
     fun setCurrentLanguageCode(i18N: I18N, code: String) {
-        setCurrentLanguageCodes(i18N, code)
+        KwordLoader.setCurrentLanguageCode(i18N, DEFAULT_PATHS, code)
     }
 
     fun setCurrentLanguageCodes(i18N: I18N, vararg codes: String) {
-        val map = mutableMapOf<String, String>()
-        val variant = mutableListOf<String>()
-        codes.forEach {
-            variant.add(it)
-            val variantPath = variant.joinToString(".")
-            try {
-                val fileContent =
-                    KWord::class.java.getResource("/translations/translation.$variantPath.json")!!
-                        .readText()
-                map.putAll(json.decodeFromString<Map<String, String>>(fileContent))
-            } catch (ioException: IOException) {
-                Log.v("Kword", "Unable to load translation $variantPath", ioException)
-            }
-        }
-        i18N.changeLocaleStrings(map)
+        KwordLoader.setCurrentLanguageCodes(i18N, DEFAULT_PATHS, *codes)
     }
 }

@@ -1,12 +1,12 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.RefreshablePublisher
 import com.mirego.trikot.streams.reactive.StreamsProcessorException
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.streams.reactive.switchMap
+import com.mirego.trikot.streams.tests.MockPublisher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
