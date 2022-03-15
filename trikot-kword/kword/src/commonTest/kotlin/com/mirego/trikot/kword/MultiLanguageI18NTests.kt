@@ -1,5 +1,6 @@
 package com.mirego.trikot.kword
 
+import com.mirego.trikot.streams.tests.assertEquals
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

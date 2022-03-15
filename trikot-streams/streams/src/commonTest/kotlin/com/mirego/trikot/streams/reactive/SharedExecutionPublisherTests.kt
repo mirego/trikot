@@ -1,5 +1,8 @@
 package com.mirego.trikot.streams.reactive
 
+import com.mirego.trikot.streams.tests.assertError
+import com.mirego.trikot.streams.tests.get
+import com.mirego.trikot.streams.tests.subscribe
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

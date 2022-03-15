@@ -1,9 +1,9 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.reactive.MockPublisher
 import com.mirego.trikot.streams.reactive.StreamsTimeoutException
 import com.mirego.trikot.streams.reactive.subscribe
+import com.mirego.trikot.streams.tests.MockPublisher
 import com.mirego.trikot.streams.utils.MockTimer
 import com.mirego.trikot.streams.utils.MockTimerFactory
 import kotlin.test.Test
