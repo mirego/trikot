@@ -187,14 +187,6 @@ actual open class TestBase(private var disableOutCheck: Boolean) {
         if (actionIndex.get() != 0 && !finished.get()) {
             makeError("Expecting that 'finish(${actionIndex.get() + 1})' was invoked, but it was not")
         }
-//        // Shutdown all thread pools
-//        shutdownPoolsAfterTest()
-//        // Check that are now leftover threads
-//        runCatching {
-//            checkTestThreads(threadsBefore)
-//        }.onFailure {
-//            setError(it)
-//        }
         // Restore original uncaught exception handler
         Thread.setDefaultUncaughtExceptionHandler(originalUncaughtExceptionHandler)
         if (!disableOutCheck) {

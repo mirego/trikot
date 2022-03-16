@@ -324,39 +324,5 @@ class PublishTest : TestBase() {
         assertEquals("OK", publisher.awaitFirstOrNull())
     }
 
-    /*
-    @Test
-    fun testOnSendCancelled() = runTest {
-        val latch = CountDownLatch(1)
-        val published = publish(Dispatchers.Default) {
-            expect(2)
-            // Collector is ready
-            send(1)
-            try {
-                send(2)
-                expectUnreached()
-            } catch (e: CancellationException) {
-                // publisher cancellation is async
-                latch.countDown()
-                throw e
-            }
-        }
-
-        expect(1)
-        val collectorLatch = Mutex(true)
-        val job = launch {
-            published.asFlow().buffer(0).collect {
-                collectorLatch.unlock()
-                hang { expect(4) }
-            }
-        }
-        collectorLatch.lock()
-        expect(3)
-        job.cancelAndJoin()
-        latch.await()
-        finish(5)
-    }
-     */
-
     class TestException : Exception()
 }
