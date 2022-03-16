@@ -29,6 +29,8 @@ kotlin {
                 optIn("kotlin.experimental.ExperimentalTypeInference")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 optIn("kotlinx.coroutines.DelicateCoroutinesApi")
+                optIn("kotlinx.coroutines.FlowPreview")
+                optIn("kotlin.contracts.ExperimentalContracts")
             }
         }
 
@@ -46,6 +48,29 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES}")
             }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-test")
+                implementation("org.jetbrains.kotlin:kotlin-test-junit")
+            }
+        }
+
+        val androidTest by getting {
+            dependsOn(jvmTest)
+        }
+
+        val nativeTest by creating {
+            dependsOn(commonTest)
+        }
+
+        val iosX64Test by getting {
+            dependsOn(nativeTest)
+        }
+
+        val iosSimulatorArm64Test by getting {
+            dependsOn(nativeTest)
         }
     }
 }

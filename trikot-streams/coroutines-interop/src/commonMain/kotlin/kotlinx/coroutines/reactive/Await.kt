@@ -4,13 +4,16 @@
 
 package kotlinx.coroutines.reactive
 
-/* ktlint-disable no-wildcard-imports */
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.handleCoroutineException
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
-import kotlin.coroutines.*
-/* ktlint-enable no-wildcard-imports */
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /**
  * Awaits the first value from the given publisher without blocking the thread and returns the resulting value, or, if
@@ -89,6 +92,7 @@ private enum class Mode(val s: String) {
     LAST("awaitLast"),
     SINGLE("awaitSingle"),
     SINGLE_OR_DEFAULT("awaitSingleOrDefault");
+
     override fun toString(): String = s
 }
 

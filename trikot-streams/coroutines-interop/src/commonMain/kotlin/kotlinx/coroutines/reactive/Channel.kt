@@ -4,13 +4,16 @@
 
 package kotlinx.coroutines.reactive
 
-/* ktlint-disable no-wildcard-imports */
-import kotlinx.atomicfu.*
+import kotlinx.atomicfu.atomic
+import kotlinx.atomicfu.loop
 import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.internal.*
-import org.reactivestreams.*
-/* ktlint-enable no-wildcard-imports */
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.internal.LockFreeLinkedListNode
+import org.reactivestreams.Publisher
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 
 /**
  * Subscribes to this [Publisher] and performs the specified action for each received element.

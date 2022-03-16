@@ -4,18 +4,16 @@
 
 package kotlinx.coroutines.reactive
 
-/* ktlint-disable no-wildcard-imports */
 import kotlinx.atomicfu.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.flow.internal.*
+import kotlinx.coroutines.internal.*
 import kotlinx.coroutines.intrinsics.*
 import org.reactivestreams.*
 import kotlin.coroutines.*
-import kotlinx.coroutines.internal.*
 import kotlin.jvm.*
-/* ktlint-enable no-wildcard-imports */
 
 /**
  * Transforms the given reactive [Publisher] into [Flow].
@@ -187,6 +185,7 @@ class FlowSubscription<T>(
      */
     private val requested = atomic(0L)
     private val producer = atomic<Continuation<Unit>?>(createInitialContinuation())
+
     @Volatile
     private var cancellationRequested = false
 

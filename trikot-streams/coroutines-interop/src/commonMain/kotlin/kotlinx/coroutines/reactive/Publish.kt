@@ -3,7 +3,6 @@
  */
 package kotlinx.coroutines.reactive
 
-/* ktlint-disable no-wildcard-imports */
 import kotlinx.atomicfu.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -13,7 +12,6 @@ import kotlinx.coroutines.sync.*
 import org.reactivestreams.*
 import kotlin.coroutines.*
 import kotlin.jvm.*
-/* ktlint-enable no-wildcard-imports */
 
 /**
  * Creates a cold reactive [Publisher] that runs a given [block] in a coroutine.
@@ -210,12 +208,12 @@ class PublisherCoroutine<in T>(
     }
 
     private fun unlockAndCheckCompleted() {
-       /*
-        * There is no sense to check completion before doing `unlock`, because completion might
-        * happen after this check and before `unlock` (see `signalCompleted` that does not do anything
-        * if it fails to acquire the lock that we are still holding).
-        * We have to recheck `isCompleted` after `unlock` anyway.
-        */
+        /*
+         * There is no sense to check completion before doing `unlock`, because completion might
+         * happen after this check and before `unlock` (see `signalCompleted` that does not do anything
+         * if it fails to acquire the lock that we are still holding).
+         * We have to recheck `isCompleted` after `unlock` anyway.
+         */
         mutex.unlock()
         // check isCompleted and and try to regain lock to signal completion
         if (isCompleted && mutex.tryLock()) {
