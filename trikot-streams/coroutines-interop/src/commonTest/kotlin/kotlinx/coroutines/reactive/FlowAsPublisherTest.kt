@@ -4,11 +4,14 @@
 
 package kotlinx.coroutines.reactive
 
-import kotlinx.coroutines.*
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.flow.*
-import org.reactivestreams.*
-import kotlin.test.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withTimeout
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
+import kotlin.test.Test
+import kotlin.test.assertTrue
 
 class FlowAsPublisherTest : TestBase() {
     @Test

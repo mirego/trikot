@@ -8,31 +8,37 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
-import org.junit.*
-import java.io.*
-import java.util.*
-import java.util.concurrent.atomic.*
-import kotlin.coroutines.*
-import kotlin.test.*
+import org.junit.After
+import org.junit.Before
+import java.io.OutputStream
+import java.io.PrintStream
+import java.util.Collections
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicReference
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.coroutineContext
+import kotlin.test.assertTrue
+import kotlin.test.expect
 
 /**
  * Is `true` when running in a nightly stress test mode.
  */
-public actual val isStressTest = System.getProperty("stressTest")?.toBoolean() ?: false
+actual val isStressTest = System.getProperty("stressTest")?.toBoolean() ?: false
 
-public actual val stressTestMultiplierSqrt = if (isStressTest) 5 else 1
+actual val stressTestMultiplierSqrt = if (isStressTest) 5 else 1
 
 private const val SHUTDOWN_TIMEOUT = 1_000L // 1s at most to wait per thread
 
-public actual val isNative = false
+actual val isNative = false
 
 /**
  * Multiply various constants in stress tests by this factor, so that they run longer during nightly stress test.
  */
-public actual val stressTestMultiplier = stressTestMultiplierSqrt * stressTestMultiplierSqrt
+actual val stressTestMultiplier = stressTestMultiplierSqrt * stressTestMultiplierSqrt
 
 @Suppress("ACTUAL_WITHOUT_EXPECT")
-public actual typealias TestResult = Unit
+actual typealias TestResult = Unit
 
 /**
  * Base class for tests, so that tests for predictable scheduling of actions in multiple coroutines sharing a single
@@ -53,11 +59,11 @@ public actual typealias TestResult = Unit
  * }
  * ```
  */
-public actual open class TestBase(private var disableOutCheck: Boolean) {
+actual open class TestBase(private var disableOutCheck: Boolean) {
 
     actual constructor() : this(false)
 
-    public actual val isBoundByJsTestTimeout = false
+    actual val isBoundByJsTestTimeout = false
     private var actionIndex = AtomicInteger()
     private var finished = AtomicBoolean()
     private var error = AtomicReference<Throwable>()
@@ -66,6 +72,7 @@ public actual open class TestBase(private var disableOutCheck: Boolean) {
     private lateinit var threadsBefore: Set<Thread>
     private val uncaughtExceptions = Collections.synchronizedList(ArrayList<Throwable>())
     private var originalUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
+
     /*
      * System.out that we redefine in order to catch any debugging/diagnostics
      * 'println' from main source set.
@@ -79,11 +86,11 @@ public actual open class TestBase(private var disableOutCheck: Boolean) {
      * complete successfully even if this exception is consumed somewhere in the test.
      */
     @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
-    public actual fun error(message: Any, cause: Throwable? = null): Nothing {
+    actual fun error(message: Any, cause: Throwable? = null): Nothing {
         throw makeError(message, cause)
     }
 
-    public fun hasError() = error.get() != null
+    fun hasError() = error.get() != null
 
     private fun makeError(message: Any, cause: Throwable? = null): IllegalStateException =
         IllegalStateException(message.toString(), cause).also {
@@ -106,14 +113,14 @@ public actual open class TestBase(private var disableOutCheck: Boolean) {
      * Throws [IllegalStateException] when `value` is false like `check` in stdlib, but also ensures that the
      * test will not complete successfully even if this exception is consumed somewhere in the test.
      */
-    public inline fun check(value: Boolean, lazyMessage: () -> Any) {
+    inline fun check(value: Boolean, lazyMessage: () -> Any) {
         if (!value) error(lazyMessage())
     }
 
     /**
      * Asserts that this invocation is `index`-th in the execution sequence (counting from one).
      */
-    public actual fun expect(index: Int) {
+    actual fun expect(index: Int) {
         val wasIndex = actionIndex.incrementAndGet()
         check(index == wasIndex) { "Expecting action index $index but it is actually $wasIndex" }
     }
@@ -121,14 +128,14 @@ public actual open class TestBase(private var disableOutCheck: Boolean) {
     /**
      * Asserts that this line is never executed.
      */
-    public actual fun expectUnreached() {
+    actual fun expectUnreached() {
         error("Should not be reached, current action index is ${actionIndex.get()}")
     }
 
     /**
      * Asserts that this is the last action in the test. It must be invoked by any test that used [expect].
      */
-    public actual fun finish(index: Int) {
+    actual fun finish(index: Int) {
         expect(index)
         check(!finished.getAndSet(true)) { "Should call 'finish(...)' at most once" }
     }
@@ -136,11 +143,11 @@ public actual open class TestBase(private var disableOutCheck: Boolean) {
     /**
      * Asserts that [finish] was invoked
      */
-    public actual fun ensureFinished() {
+    actual fun ensureFinished() {
         require(finished.get()) { "finish(...) should be caller prior to this check" }
     }
 
-    public actual fun reset() {
+    actual fun reset() {
         check(actionIndex.get() == 0 || finished.get()) { "Expecting that 'finish(...)' was invoked, but it was not" }
         actionIndex.set(0)
         finished.set(false)
@@ -201,7 +208,7 @@ public actual open class TestBase(private var disableOutCheck: Boolean) {
     }
 
     @Suppress("ACTUAL_WITHOUT_EXPECT", "ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
-    public actual fun runTest(
+    actual fun runTest(
         expected: ((Throwable) -> Boolean)? = null,
         unhandled: List<(Throwable) -> Boolean> = emptyList(),
         block: suspend CoroutineScope.() -> Unit

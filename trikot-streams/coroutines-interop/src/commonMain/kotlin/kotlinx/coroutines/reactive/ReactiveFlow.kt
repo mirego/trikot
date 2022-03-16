@@ -4,6 +4,7 @@
 
 package kotlinx.coroutines.reactive
 
+/* ktlint-disable no-wildcard-imports */
 import kotlinx.atomicfu.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -14,6 +15,7 @@ import kotlinx.coroutines.intrinsics.*
 import org.reactivestreams.*
 import kotlin.coroutines.*
 import kotlin.jvm.*
+/* ktlint-enable no-wildcard-imports */
 
 /**
  * Transforms the given reactive [Publisher] into [Flow].

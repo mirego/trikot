@@ -4,8 +4,10 @@
 
 package kotlinx.coroutines.reactive
 
-import kotlinx.coroutines.*
-import org.reactivestreams.*
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.yield
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 import kotlin.test.Test
 
 class PublisherBackpressureTest : TestBase() {

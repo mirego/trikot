@@ -4,8 +4,10 @@
 
 package kotlinx.coroutines.reactive
 
-import org.reactivestreams.*
-import kotlin.test.*
+import org.reactivestreams.Publisher
+import org.reactivestreams.Subscription
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class PublisherCollectTest : TestBase() {
 

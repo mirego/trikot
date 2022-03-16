@@ -3,6 +3,7 @@
  */
 package kotlinx.coroutines.reactive
 
+/* ktlint-disable no-wildcard-imports */
 import kotlinx.atomicfu.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -12,6 +13,7 @@ import kotlinx.coroutines.sync.*
 import org.reactivestreams.*
 import kotlin.coroutines.*
 import kotlin.jvm.*
+/* ktlint-enable no-wildcard-imports */
 
 /**
  * Creates a cold reactive [Publisher] that runs a given [block] in a coroutine.
