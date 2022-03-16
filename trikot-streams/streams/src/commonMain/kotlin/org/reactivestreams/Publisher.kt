@@ -10,7 +10,7 @@ package org.reactivestreams
  *
  * @param <T> the type of element signaled.
 </T> */
-interface Publisher<T> {
+fun interface Publisher<T> {
 
     /**
      * Request [Publisher] to start streaming data.

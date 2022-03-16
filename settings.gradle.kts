@@ -21,6 +21,7 @@ rootProject.name = "trikot"
 
 include(":trikot-foundation:trikotFoundation")
 include(":trikot-streams:streams")
+include(":trikot-streams:coroutines-interop")
 include(":trikot-datasources:datasources")
 include(":trikot-http:http")
 include(":trikot-analytics:analytics")
