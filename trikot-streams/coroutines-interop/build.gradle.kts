@@ -14,6 +14,8 @@ repositories {
     maven("https://s3.amazonaws.com/mirego-maven/public")
 }
 
+group = "com.mirego.trikot.streams"
+
 kotlin {
     android {
         publishAllLibraryVariants()
