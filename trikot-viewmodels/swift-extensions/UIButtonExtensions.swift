@@ -156,7 +156,8 @@ extension UIButton {
         return completedAttributedString
     }
 
-    public func positionSubviews(_ alignment: Alignment?) {
+    @objc
+    open func positionSubviews(_ alignment: Alignment?) {
         guard let buttonViewModel = buttonViewModel else { return }
         guard let alignment = alignment, [Alignment.right, Alignment.left].contains(alignment) else { resetAlignment() ; return }
 
