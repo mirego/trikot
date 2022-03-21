@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming release
 
+## 3.2.1
+
+> 2022-03-22
+
+- [streams] Rename `collect()` operator to `scanWith()`
+
 ## 3.2.0
 
 > 2022-03-21

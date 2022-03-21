@@ -1,6 +1,8 @@
 package com.mirego.trikot.streams.reactive
 
-import CollectProcessor
+import ScanWithAccumulatorBlock
+import ScanWithSeedProcessor
+import ScanWithSeedSupplierBlock
 import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
@@ -224,8 +226,58 @@ fun <T> Publisher<T>.scan(block: ScanProcessorBlock<T>): Publisher<T> {
     return ScanProcessor(this, null, block)
 }
 
-fun <T> Publisher<T>.scan(initialValue: T, block: ScanProcessorBlock<T>): Publisher<T> {
-    return ScanProcessor(this, initialValue, block)
+/**
+ * Returns a {@code Publisher} that emits the provided initial {@code seed} value,
+ * then emits a new value by applying the specified accumulator to the previous
+ * emitted value and the current value emitted by the upstream publisher.
+ *
+ * This sort of function is sometimes called an accumulator.
+ *
+ * Note that the {@code Publisher} that results from this method will emit
+ * {@code seed} as its first emitted item.
+ *
+ * Note that the value returned the {@code seed} is shared among all subscribers
+ * to the resulting {@code Publisher} and may cause problems if it is mutable.
+ *
+ * Note that this is a shortHand for {@code scanWith({ seed }, accumulator)}
+ *
+ * Marbles diagram :
+ * ------------(1)--------(2)----------(3)-------|->
+ * scan([]) { acc, x => acc + x }
+ * ---([])----([1])----([1, 2])----([1, 2, 3])---|->
+ *
+ * @see <a href="http://reactivex.io/documentation/operators/scan.html">ReactiveX operators documentation: Scan</a>
+ * @see <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-">http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-</a>
+ */
+fun <T, R> Publisher<T>.scan(seed: R, accumulator: ScanWithAccumulatorBlock<T, R>) = scanWith({ seed }, accumulator)
+
+/**
+ * Returns a {@code Publisher} that emits the provided initial value returned
+ * by the {@code seedSupplier}, then emits a new value by applying the specified
+ * accumulator to the previous emitted value and the current value emitted by the
+ * upstream publisher.
+ *
+ * This sort of function is sometimes called an accumulator.
+ *
+ * Note that the {@code Publisher} that results from this method will emit the value
+ * returned by the {@code seedSupplier} as its first emitted item.
+ *
+ * Note that the value returned the {@code seedSupplier} is shared among all subscribers
+ * to the resulting {@code Observable} and may cause problems if it is mutable.
+ *
+ * Marbles diagram :
+ * ------------(1)--------(2)--------(3)---------|->
+ * scan([]) { acc, x => acc + x }
+ * ---([])----([1])----([1, 2])----([1, 2, 3])---|->
+ *
+ * @see <a href="http://reactivex.io/documentation/operators/scan.html">ReactiveX operators documentation: Scan</a>
+ * @see <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-">http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-</a>
+ */
+fun <T, R> Publisher<T>.scanWith(
+    seedSupplier: ScanWithSeedSupplierBlock<R>,
+    accumulator: ScanWithAccumulatorBlock<T, R>
+): Publisher<R> {
+    return ScanWithSeedProcessor(this, seedSupplier, accumulator)
 }
 
 /** Suppress the first n items emitted by a Publisher **/
@@ -284,20 +336,4 @@ fun <T> Publisher<T>.takeWhile(predicate: TakeWhileProcessorPredicate<T>): Publi
  */
 fun <T> Publisher<T>.takeUntil(predicate: TakeUntilProcessorPredicate<T>): Publisher<T> {
     return TakeUntilProcessor(this, predicate)
-}
-
-/**
- * Collects items emitted by the source Publisher into a single mutable data structure
- * and returns an Publisher that emits this structure.
- *
- * Marbles diagram :
- * -------(1)--------(2)----------(3)-------|->
- * reduce([]) { acc, x => acc + x }
- * ------([1])----([1, 2])----([1, 2, 3])---|->
- *
- * @see <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-">http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-</a>
- */
-
-fun <T, R> Publisher<T>.collect(seed: R, collector: (R, T) -> R): Publisher<R> {
-    return CollectProcessor(this, seed, collector)
 }
