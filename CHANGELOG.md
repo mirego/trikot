@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming release
 
+## 3.2.0
+> 2022-03-21
+
+- Now compatible with both memory models
+
+## 3.2.0-M2
+> 2022-03-17
+
+- [streams] Added coroutine interop extensions
+
+## 3.2.0-M1
+
+> 2022-01-31
+
+- Enabled experimental kotlin native memory model
+- Updated to [Ktor 2.0.0-beta-1](https://github.com/ktorio/ktor/releases/tag/2.0.0-beta-1)
+- Reimplemented AtomicReference using [kotlinx.atomicfu](https://github.com/Kotlin/kotlinx.atomicfu)
+
 ## 3.1.19
 
 > 2022-03-21

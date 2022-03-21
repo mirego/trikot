@@ -35,6 +35,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
+                implementation("org.jetbrains.kotlin:kotlin-stdlib")
             }
         }
 

@@ -1,6 +1,10 @@
+require_relative 'podspec_versions.rb'
+
+properties = load_properties('gradle.properties')
+
 Pod::Spec.new do |spec|
   spec.name          = "Trikot"
-  spec.version       = "1.0.0"
+  spec.version       = "#{properties['version']}"
   spec.summary       = "Plugins for Trikot"
   spec.description   = "Plugins for Trikot"
   spec.homepage      = "https://github.com/mirego/trikot"

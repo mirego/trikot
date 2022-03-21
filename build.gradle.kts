@@ -10,6 +10,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE_PLUGIN}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}")
         classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.KOTLIN}")
+        classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:${Versions.ATOMIC_FU}")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:${Versions.KTLINT}")
     }
 }
@@ -35,6 +36,7 @@ release {
         ":trikot-foundation:trikotFoundation:publish",
         ":trikot-streams:streams:publish",
         ":trikot-streams:test-utils:publish",
+        ":trikot-streams:coroutines-interop:publish",
         ":trikot-http:http:publish",
         ":trikot-datasources:datasources:publish",
         ":trikot-kword:kword:publish",

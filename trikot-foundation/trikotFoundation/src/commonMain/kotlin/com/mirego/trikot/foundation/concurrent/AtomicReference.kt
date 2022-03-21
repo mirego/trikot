@@ -1,17 +1,28 @@
 package com.mirego.trikot.foundation.concurrent
 
-expect class AtomicReference<T>(value: T) {
-    val value: T
+class AtomicReference<T>(value: T) {
 
-    fun compareAndSet(expected: T, new: T): Boolean
+    private val atomicValue = kotlinx.atomicfu.atomic(value)
 
-    fun setOrThrow(expected: T, new: T)
+    val value: T get() = atomicValue.value
 
-    fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?)
+    fun compareAndSet(expected: T, new: T): Boolean = atomicValue.compareAndSet(expected, new)
 
-    fun compareAndSwap(expected: T, new: T): T
+    fun setOrThrow(expected: T, new: T) = setOrThrow(expected, new, null)
+
+    fun setOrThrow(expected: T, new: T, debugInfo: (() -> String)?) {
+        if (!compareAndSet(expected, new)) {
+            throw ConcurrentModificationException(
+                "($this) Unable to set $new to AtomicReference. " +
+                    "Possible Race Condition. Expected value $expected was $value. " +
+                    debugInfo?.let { "\n${it()}" }.orEmpty()
+            )
+        }
+    }
+
+    fun compareAndSwap(expected: T, new: T): T {
+        return if (compareAndSet(expected, new)) new else value
+    }
 }
 
-fun <T> AtomicReference<T>.setOrThrow(new: T) {
-    setOrThrow(value, new)
-}
+fun <T> AtomicReference<T>.setOrThrow(new: T) = setOrThrow(value, new)

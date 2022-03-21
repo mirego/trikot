@@ -35,7 +35,10 @@ kotlin {
 
     sourceSets {
         all {
-            languageSettings.optIn("kotlin.ExperimentalStdlibApi")
+            languageSettings {
+                optIn("kotlin.ExperimentalStdlibApi")
+                optIn("io.ktor.util.InternalAPI")
+            }
         }
 
         val commonMain by getting {

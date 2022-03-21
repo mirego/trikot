@@ -1,7 +1,7 @@
 package com.mirego.trikot.http.android
 
 import android.util.Log
-import io.ktor.client.features.logging.Logger
+import io.ktor.client.plugins.logging.Logger
 
 /**
  * Use this Logger when instantiating the KtorHttpRequestFactory.
