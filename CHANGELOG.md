@@ -7,11 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Upcoming release
 
 ## 3.2.0
+
 > 2022-03-21
 
 - Now compatible with both memory models
 
 ## 3.2.0-M2
+
 > 2022-03-17
 
 - [streams] Added coroutine interop extensions
