@@ -29,7 +29,6 @@ fun VMDTextField(
     placeHolderStyle: TextStyle = LocalTextStyle.current,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    keyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.None,
     keyboardActions: KeyboardActions = KeyboardActions(),
     singleLine: Boolean = true,
     isError: Boolean = false,
@@ -59,7 +58,7 @@ fun VMDTextField(
         keyboardActions = keyboardActionsDelegate,
         keyboardOptions = KeyboardOptions(
             keyboardType = textFieldViewModel.keyboardType.composeValue,
-            capitalization = keyboardCapitalization,
+            capitalization = textFieldViewModel.autoCapitalization.composeValue,
             imeAction = textFieldViewModel.keyboardReturnKeyType.composeValue
         ),
         singleLine = singleLine,

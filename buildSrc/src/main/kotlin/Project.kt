@@ -1,6 +1,7 @@
 object Project {
     const val TRIKOT_FOUNDATION = ":trikot-foundation:trikotFoundation"
     const val TRIKOT_STREAMS = ":trikot-streams:streams"
+    const val TRIKOT_STREAMS_TEST_UTILS = ":trikot-streams:test-utils"
     const val TRIKOT_HTTP = ":trikot-http:http"
     const val TRIKOT_KWORD = ":trikot-kword:kword"
     const val TRIKOT_ANALYTICS = ":trikot-analytics:analytics"

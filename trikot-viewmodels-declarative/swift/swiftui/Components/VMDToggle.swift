@@ -1,7 +1,7 @@
 import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
-public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
+public struct VMDToggle<Label, Content>: View where Label: View, Content: VMDContent {
     private let labelBuilder: ((Content) -> Label)?
     private let title: String?
 
@@ -19,18 +19,6 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
         }
     }
 
-    public init(_ viewModel: VMDToggleViewModel<VMDNoContent>) {
-        self.observableViewModel = viewModel.asObservable()
-        self.labelBuilder = nil
-        self.title = ""
-    }
-
-    public init(_ viewModel: VMDToggleViewModel<VMDTextContent>) {
-        self.observableViewModel = viewModel.asObservable()
-        self.labelBuilder = nil
-        self.title = viewModel.label.text
-    }
-
     public init(_ viewModel: VMDToggleViewModel<Content>, @ViewBuilder label: @escaping (Content) -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
@@ -39,9 +27,16 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
 
     public var body: some View {
         if let title = title {
-            Toggle(title, isOn: isOn)
-                .disabled(!viewModel.isEnabled)
-                .hidden(viewModel.isHidden)
+            if title.isEmpty {
+                Toggle(title, isOn: isOn)
+                    .labelsHidden()
+                    .disabled(!viewModel.isEnabled)
+                    .hidden(viewModel.isHidden)
+            } else {
+                Toggle(title, isOn: isOn)
+                    .disabled(!viewModel.isEnabled)
+                    .hidden(viewModel.isHidden)
+            }
         } else {
             Toggle(isOn: isOn) {
                 labelBuilder?(viewModel.label)
@@ -49,5 +44,21 @@ public struct VMDSwitch<Label, Content: VMDContent>: View where Label: View {
             .disabled(!viewModel.isEnabled)
             .hidden(viewModel.isHidden)
         }
+    }
+}
+
+extension VMDToggle where Content == VMDNoContent, Label == EmptyView {
+    public init(_ viewModel: VMDToggleViewModel<VMDNoContent>) {
+        self.observableViewModel = viewModel.asObservable()
+        self.labelBuilder = nil
+        self.title = ""
+    }
+}
+
+extension VMDToggle where Content == VMDTextContent, Label == Text {
+    public init(_ viewModel: VMDToggleViewModel<VMDTextContent>) {
+        self.observableViewModel = viewModel.asObservable()
+        self.labelBuilder = nil
+        self.title = viewModel.label.text
     }
 }

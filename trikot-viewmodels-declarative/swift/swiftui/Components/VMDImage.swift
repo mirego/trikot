@@ -2,9 +2,16 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 import Kingfisher
 
+public enum VMDImageLoadingStatus {
+    case empty
+    case loading
+    case success
+    case error
+}
+
 public struct VMDImage: View {
     public typealias LocalImageConfiguration = (Image) -> Image
-    public typealias RemoteImageConfiguration = (KFImage) -> KFImage
+    public typealias RemoteImageConfiguration = (KFImage, VMDImageResource) -> KFImage
 
     private var localImageConfigurations = [LocalImageConfiguration]()
     private var remoteImageConfigurations = [RemoteImageConfiguration]()
@@ -14,6 +21,7 @@ public struct VMDImage: View {
     }
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDImageViewModel>
+    @State var loadingStatus: VMDImageLoadingStatus = .empty
 
     public init(_ viewModel: VMDImageViewModel) {
         self.observableViewModel = viewModel.asObservable()
@@ -28,16 +36,16 @@ public struct VMDImage: View {
             localImageConfigurations.reduce(image, { current, config in
                 config(current)
             })
-        } else if let remoteImage = viewModel.image as? VMDImageDescriptor.Remote, let url = URL(string: remoteImage.url) {
-            remoteImageConfigurations.reduce(KFImage(url), { current, config in
-                config(current)
+        } else if let remoteImage = viewModel.image as? VMDImageDescriptor.Remote {
+            remoteImageConfigurations.reduce(KFImage(remoteImage.imageURL), { current, config in
+                config(current, remoteImage.placeholderImageResource)
             })
         } else {
             EmptyView()
         }
     }
 
-    public func configure(local configureLocalBlock: @escaping LocalImageConfiguration, remote configureRemoteBlock: @escaping (KFImage) -> KFImage) -> VMDImage {
+    public func configure(local configureLocalBlock: @escaping LocalImageConfiguration, remote configureRemoteBlock: @escaping (KFImage, VMDImageResource) -> KFImage) -> VMDImage {
         if viewModel.image is VMDImageDescriptor.Local {
             return configureLocalImage(configureLocalBlock)
         } else if viewModel.image is VMDImageDescriptor.Remote {

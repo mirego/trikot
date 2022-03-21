@@ -16,6 +16,26 @@ public class ViewControllerFactory {
     func textShowcase() -> TextShowcaseViewController {
         TextShowcaseViewController(viewModelController: viewModelControllerFactory.textShowcase()).assignFactory(self)
     }
+
+    func buttonShowcase() -> ButtonShowcaseViewController {
+        ButtonShowcaseViewController(viewModelController: viewModelControllerFactory.buttonShowcase()).assignFactory(self)
+    }
+
+    func imageShowcase() -> ImageShowcaseViewController {
+        ImageShowcaseViewController(viewModelController: viewModelControllerFactory.imageShowcase()).assignFactory(self)
+    }
+
+    func toggleShowcase() -> ToggleShowcaseViewController {
+        ToggleShowcaseViewController(viewModelController: viewModelControllerFactory.toggleShowcase()).assignFactory(self)
+    }
+
+    func textFieldShowcase() -> TextFieldShowcaseViewController {
+        TextFieldShowcaseViewController(viewModelController: viewModelControllerFactory.textFieldShowcase()).assignFactory(self)
+    }
+
+    func progressShowcase() -> ProgressShowcaseViewController {
+        ProgressShowcaseViewController(viewModelController: viewModelControllerFactory.progressShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {

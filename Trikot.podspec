@@ -39,16 +39,16 @@ Pod::Spec.new do |spec|
     subspec.source_files  = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.source_files = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.exclude_files = "trikot-viewmodels/swift-extensions/UISliderExtensions.swift", "trikot-viewmodels/swift-extensions/UISwitchExtensions.swift", "trikot-viewmodels/swift-extensions/UIPickerExtensions.swift"
-    subspec.ios.deployment_target = '9.0'
-    subspec.tvos.deployment_target = '9.0'
+    subspec.ios.deployment_target = '11.0'
+    subspec.tvos.deployment_target = '11.0'
     subspec.dependency 'Trikot/streams'
   end
 
   spec.subspec 'viewmodels.Kingfisher' do |subspec|
     subspec.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
     subspec.tvos.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
-    subspec.ios.deployment_target = '10.0'
-    subspec.tvos.deployment_target = '10.0'
+    subspec.ios.deployment_target = '11.0'
+    subspec.tvos.deployment_target = '11.0'
     subspec.dependency 'Trikot/streams'
     subspec.dependency 'Trikot/viewmodels'
     subspec.dependency 'Kingfisher', '>= 5.0'

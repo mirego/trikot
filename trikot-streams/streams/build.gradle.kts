@@ -41,6 +41,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                implementation(project(Project.TRIKOT_STREAMS_TEST_UTILS))
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
             }

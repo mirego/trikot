@@ -14,22 +14,22 @@ extension HomeViewController: HomeNavigationDelegate {
     }
 
     func navigateToButtonShowcase() {
-        //TODO:
+        present(viewControllerFactory.buttonShowcase(), animated: true, completion: nil)
     }
 
     func navigateToImageShowcase() {
-        //TODO:
-    }
-
-    func navigateToProgressShowcase() {
-        //TODO:
-    }
-
-    func navigateToTextFieldShowcase() {
-        //TODO:
+        present(viewControllerFactory.imageShowcase(), animated: true, completion: nil)
     }
 
     func navigateToToggleShowcase() {
-        //TODO:
+        present(viewControllerFactory.toggleShowcase(), animated: true, completion: nil)
+    }
+
+    func navigateToTextFieldShowcase() {
+        present(viewControllerFactory.textFieldShowcase(), animated: true, completion: nil)
+    }
+
+    func navigateToProgressShowcase() {
+        present(viewControllerFactory.progressShowcase(), animated: true, completion: nil)
     }
 }

@@ -15,6 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated to [Ktor 2.0.0-beta-1](https://github.com/ktorio/ktor/releases/tag/2.0.0-beta-1)
 - Reimplemented AtomicReference using [kotlinx.atomicfu](https://github.com/Kotlin/kotlinx.atomicfu)
 
+## 3.1.17
+
+- [kword] Introduce a new `DynamicI18N` concept which expose strings via Publishers. It is implemented via a `MultiLanguageI18N` to react on language changes. When the language switches all publishers will emit the localized string in the new language.
+- [kword] Allow loading json strings from multiple sources (paths) via the basePaths parameter.
+
 ## 3.1.13
 
 > 2022-02-25
