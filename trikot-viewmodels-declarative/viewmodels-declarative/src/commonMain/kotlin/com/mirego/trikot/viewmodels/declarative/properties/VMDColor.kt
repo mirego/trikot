@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.properties
 
+import com.mirego.trikot.foundation.concurrent.freeze
 import kotlin.math.roundToInt
 
 class VMDColor(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1.0f) {
@@ -26,6 +27,6 @@ class VMDColor(val red: Int, val green: Int, val blue: Int, val alpha: Float = 1
     }
 
     companion object {
-        val None = VMDColor(-1, -1, -1, -1f)
+        val None = freeze(VMDColor(-1, -1, -1, -1f))
     }
 }

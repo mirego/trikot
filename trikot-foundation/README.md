@@ -47,6 +47,20 @@ val otherDate = Date.fromISO8601(isoDate)
 otherDate == date               // true
 ```
 
+## Multiplatform freezing
+
+Allow freezing in common code. Does nothing in js and JVM.
+
+```kotlin
+freeze(objectToFreeze)
+```
+
+In swift, use access freeze via MrFreezeKt class helper to freeze object.
+
+```swift
+MrFreezeKt.freeze(objectToFreeze: objectToFreeze)
+```
+
 ## Dispatch Queues
 
 While waiting for [Sharing of coroutines across threads in Kotlin/Native](https://github.com/Kotlin/kotlinx.coroutines/pull/1648) to work correctly. Trikot.foundation provide a standard Thread model based on queues. When this issue will be resolved, DispatchQueues will be converted to Coroutines.

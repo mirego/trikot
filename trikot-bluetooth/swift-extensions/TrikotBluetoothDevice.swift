@@ -10,8 +10,8 @@ class TrikotBluetoothDevice: NSObject, BluetoothDevice, CBPeripheralDelegate {
 
     var physicalAddress: String
 
-    var attributeProfileServices: Publisher = Publishers().behaviorSubject(value: nil)
-    var isConnected: Publisher = Publishers().behaviorSubject(value: nil)
+    var attributeProfileServices: Publisher = frozenBehaviorSubject()
+    var isConnected: Publisher = frozenBehaviorSubject()
 
     var managerIsConnected = false {
         didSet {

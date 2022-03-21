@@ -3,6 +3,7 @@ package com.mirego.trikot.streams.reactive
 import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
+import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.backoff.Backoff
 import com.mirego.trikot.streams.reactive.backoff.BackoffPolicy
@@ -38,6 +39,7 @@ import com.mirego.trikot.streams.reactive.processors.TakeUntilProcessor
 import com.mirego.trikot.streams.reactive.processors.TakeUntilProcessorPredicate
 import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessor
 import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessorPredicate
+import com.mirego.trikot.streams.reactive.processors.ThreadLocalProcessor
 import com.mirego.trikot.streams.reactive.processors.TimeoutProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessorResultType
@@ -131,6 +133,13 @@ fun <T> Publisher<T>.startWith(value: T): Publisher<T> {
 
 fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
     return this.filter { block(it) != null }.map { block(it)!! }
+}
+
+fun <T> Publisher<T>.threadLocal(
+    observeOnQueue: TrikotDispatchQueue,
+    subscribeOnQueue: TrikotDispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue
+): Publisher<T> {
+    return ThreadLocalProcessor(this, observeOnQueue, subscribeOnQueue)
 }
 
 fun <T> Publisher<T>.timeout(

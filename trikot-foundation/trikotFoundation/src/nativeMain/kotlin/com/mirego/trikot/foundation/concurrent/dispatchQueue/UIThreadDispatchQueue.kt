@@ -1,5 +1,6 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
+import com.mirego.trikot.foundation.concurrent.freeze
 import platform.Foundation.NSThread
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
@@ -15,9 +16,13 @@ actual class UIThreadDispatchQueue actual constructor() : TrikotDispatchQueue {
         if (currentCount == 1 && NSThread.isMainThread) {
             runQueueTask(block)
         } else {
-            dispatch_async(dispatch_get_main_queue()) {
-                runQueueTask(block)
-            }
+            freeze(block)
+            dispatch_async(
+                dispatch_get_main_queue(),
+                freeze {
+                    runQueueTask(block)
+                }
+            )
         }
     }
 

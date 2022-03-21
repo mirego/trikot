@@ -1,5 +1,6 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
+import com.mirego.trikot.foundation.concurrent.freeze
 import platform.darwin.DISPATCH_QUEUE_SERIAL
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_queue_create
@@ -14,9 +15,14 @@ open class IOSSerialDispatchQueue(identifier: String) : TrikotDispatchQueue {
     override fun isSerial() = true
 
     override fun dispatch(block: DispatchBlock) {
-        dispatch_async(serialQueue) {
-            runQueueTask(block)
-        }
+        freeze(block)
+
+        dispatch_async(
+            serialQueue,
+            freeze {
+                runQueueTask(block)
+            }
+        )
     }
 
     private fun runQueueTask(block: DispatchBlock) {
