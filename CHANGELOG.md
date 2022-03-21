@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming release
 
+## 3.1.19
+
+> 2022-03-21
+
+- [streams] Introduce `collect()` operator for Publishers
+
 ## 3.1.17
+
+> 2022-03-15
 
 - [kword] Introduce a new `DynamicI18N` concept which expose strings via Publishers. It is implemented via a `MultiLanguageI18N` to react on language changes. When the language switches all publishers will emit the localized string in the new language.
 - [kword] Allow loading json strings from multiple sources (paths) via the basePaths parameter.
