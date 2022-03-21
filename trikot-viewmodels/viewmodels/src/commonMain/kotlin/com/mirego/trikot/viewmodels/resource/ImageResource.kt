@@ -1,8 +1,10 @@
 package com.mirego.trikot.viewmodels.resource
 
+import com.mirego.trikot.foundation.concurrent.freeze
+
 interface ImageResource {
     companion object {
-        val None = NoImageResource() as ImageResource
+        val None = freeze(NoImageResource() as ImageResource)
     }
 }
 

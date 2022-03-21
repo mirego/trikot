@@ -6,6 +6,7 @@ import com.mirego.trikot.datasources.testutils.assertPending
 import com.mirego.trikot.datasources.testutils.assertValue
 import com.mirego.trikot.datasources.testutils.get
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.MrFreeze
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousDispatchQueue
 import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
@@ -226,6 +227,7 @@ class BaseDataSourceTests {
     @Test
     fun givenNetworkDataWhenRefreshingThenPendingWithCurrentData() {
         val networkDataSourceReadPublisher = ReadFromCachePublisher().also {
+            MrFreeze.freeze(it)
             it.dispatchResult(networkResult)
         }
         val dataSource = BasicDataSource(mutableMapOf(simpleCacheableId to networkDataSourceReadPublisher))
