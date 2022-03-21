@@ -1,5 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
+import CollectProcessor
 import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
@@ -283,4 +284,20 @@ fun <T> Publisher<T>.takeWhile(predicate: TakeWhileProcessorPredicate<T>): Publi
  */
 fun <T> Publisher<T>.takeUntil(predicate: TakeUntilProcessorPredicate<T>): Publisher<T> {
     return TakeUntilProcessor(this, predicate)
+}
+
+/**
+ * Collects items emitted by the source Publisher into a single mutable data structure
+ * and returns an Publisher that emits this structure.
+ *
+ * Marbles diagram :
+ * -------(1)--------(2)----------(3)-------|->
+ * reduce([]) { acc, x => acc + x }
+ * ------([1])----([1, 2])----([1, 2, 3])---|->
+ *
+ * @see <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-">http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect-rx.functions.Func0-rx.functions.Action2-</a>
+ */
+
+fun <T, R> Publisher<T>.collect(seed: R, collector: (R, T) -> R): Publisher<R> {
+    return CollectProcessor(this, seed, collector)
 }
