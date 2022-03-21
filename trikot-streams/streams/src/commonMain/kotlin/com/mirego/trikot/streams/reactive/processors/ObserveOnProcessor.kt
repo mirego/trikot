@@ -4,6 +4,7 @@ import com.mirego.trikot.foundation.concurrent.dispatchQueue.SequentialDispatchQ
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotQueueDispatcher
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
+import com.mirego.trikot.foundation.concurrent.freeze
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
@@ -27,10 +28,12 @@ open class ObserveOnProcessor<T>(
     ) : ProcessorSubscription<T, T>(s), TrikotQueueDispatcher {
 
         override fun onNext(t: T, subscriber: Subscriber<in T>) {
+            freeze(t)
             dispatch { subscriber.onNext(t) }
         }
 
         override fun onError(t: Throwable) {
+            freeze(t)
             dispatch { super.onError(t) }
         }
 

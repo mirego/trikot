@@ -4,7 +4,7 @@ import CoreBluetooth
 class TrikotAttributeProfileCharacteristic: NSObject, AttributeProfileCharacteristic {
     private let characteristic: CBCharacteristic
     private let peripheral: CBPeripheral
-    let event: Publisher = Publishers().publishSubject()
+    let event = frozenSubject()
 
     var newValue: Data? {
         didSet {

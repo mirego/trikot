@@ -1,5 +1,7 @@
 package com.mirego.trikot.viewmodels.properties
 
+import com.mirego.trikot.foundation.concurrent.freeze
+
 typealias InputTextEditorActionBlock = (actionContext: Any?) -> Boolean
 
 open class InputTextEditorAction(private var action: InputTextEditorActionBlock) {
@@ -8,6 +10,6 @@ open class InputTextEditorAction(private var action: InputTextEditorActionBlock)
     open fun execute(actionContext: Any? = null): Boolean = action(actionContext)
 
     companion object {
-        val None = InputTextEditorAction { false }
+        val None = freeze(InputTextEditorAction { false })
     }
 }

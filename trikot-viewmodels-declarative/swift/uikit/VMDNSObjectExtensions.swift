@@ -55,6 +55,7 @@ extension ViewModelDeclarativeWrapper where Base : NSObject {
             if Thread.current.isMainThread {
                 closure(value as! V)
             } else {
+                MrFreezeKt.freeze(objectToFreeze: value)
                 DispatchQueue.main.async {
                     closure(value as! V)
                 }
