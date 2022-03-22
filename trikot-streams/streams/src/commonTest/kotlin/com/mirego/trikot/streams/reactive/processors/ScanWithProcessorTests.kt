@@ -173,7 +173,6 @@ class ScanWithProcessorTests {
     fun testThrowingSupplier() {
         val publisher = Publishers.behaviorSubject("a")
 
-        @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
         var receivedException: StreamsProcessorException? = null
 
         val scanPublisher = publisher.scanWith({ throw IllegalStateException() }) { acc, _ -> acc }
@@ -186,13 +185,14 @@ class ScanWithProcessorTests {
             )
             publisher.value = "b"
         }
+
+        assertEquals(null, receivedException)
     }
 
     @Test
     fun testMappingAnyException() {
         val publisher = Publishers.behaviorSubject("a")
 
-        @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
         var receivedException: StreamsProcessorException? = null
 
         assertFailsWith(IllegalStateException::class) {
@@ -203,8 +203,9 @@ class ScanWithProcessorTests {
                     onNext = { },
                     onError = { receivedException = it as StreamsProcessorException }
                 )
-            publisher.value = "b"
         }
+
+        assertEquals(null, receivedException)
     }
 
     @Test
