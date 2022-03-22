@@ -67,7 +67,31 @@ class ScanProcessorTests {
         publisher.value = 4
         publisher.complete()
 
-        assertEquals(listOf(10, 11, 13, 16, 20), receivedResults)
+        assertEquals(listOf(10, 10, 11, 13, 16, 20), receivedResults)
+        assertTrue(completed)
+    }
+
+    @Test
+    fun testScanWithEmptyUpstream() {
+        val publisher = Publishers.empty<Int>()
+        val receivedResults = mutableListOf<Int>()
+        var completed = false
+
+        publisher
+            .scan(10) { acc, current -> acc + current }
+            .subscribe(
+                CancellableManager(),
+                onNext = {
+                    receivedResults.add(it)
+                },
+                onError = {
+                },
+                onCompleted = {
+                    completed = true
+                }
+            )
+
+        assertEquals(listOf(10), receivedResults)
         assertTrue(completed)
     }
 

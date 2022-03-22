@@ -3,14 +3,14 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.StreamsProcessorException
-import com.mirego.trikot.streams.reactive.collect
+import com.mirego.trikot.streams.reactive.scanWith
 import com.mirego.trikot.streams.reactive.subscribe
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-class CollectProcessorTests {
+class ScanWithProcessorTests {
     @Test
     fun testCollectToList() {
         val publisher = Publishers.behaviorSubject(0)
@@ -18,7 +18,7 @@ class CollectProcessorTests {
         var completed = false
 
         publisher
-            .collect(emptyList<Int>()) { acc, current -> acc + current }
+            .scanWith({ emptyList<Int>() }) { acc, current -> acc + current }
             .subscribe(
                 CancellableManager(),
                 onNext = { receivedResults += it },
@@ -33,6 +33,7 @@ class CollectProcessorTests {
         publisher.complete()
 
         val expectedResults = listOf(
+            listOf(),
             listOf(0),
             listOf(0, 1),
             listOf(0, 1, 2),
@@ -50,7 +51,7 @@ class CollectProcessorTests {
         var completed = false
 
         publisher
-            .collect("") { acc, current -> acc + current }
+            .scanWith({ "" }) { acc, current -> acc + current }
             .subscribe(
                 CancellableManager(),
                 onNext = { receivedResults += it },
@@ -65,6 +66,7 @@ class CollectProcessorTests {
         publisher.complete()
 
         val expectedResults = listOf(
+            "",
             "0",
             "01",
             "012",
@@ -76,11 +78,30 @@ class CollectProcessorTests {
     }
 
     @Test
+    fun testCollectWithEmptyUpstream() {
+        val publisher = Publishers.empty<Int>()
+        val receivedResults = mutableListOf<Int>()
+        var completed = false
+
+        publisher
+            .scanWith({ 0 }) { acc, current -> acc + current }
+            .subscribe(
+                CancellableManager(),
+                onNext = { receivedResults += it },
+                onError = { },
+                onCompleted = { completed = true }
+            )
+
+        assertEquals(listOf(0), receivedResults)
+        assertTrue(completed)
+    }
+
+    @Test
     fun testReconnection() {
         val publisher = Publishers.publishSubject<String>()
         val receivedResults = mutableListOf<String>()
 
-        val collectPublisher = publisher.collect("") { acc, current -> acc + current }
+        val collectPublisher = publisher.scanWith({ "" }) { acc, current -> acc + current }
 
         val cancellableManager1 = CancellableManager()
         val cancellableManager2 = CancellableManager()
@@ -100,7 +121,33 @@ class CollectProcessorTests {
 
         cancellableManager2.cancel()
 
-        assertEquals(listOf("a", "ab", "abc", "a", "ab", "abc"), receivedResults)
+        assertEquals(listOf("", "a", "ab", "abc", "", "a", "ab", "abc"), receivedResults)
+    }
+
+    @Test
+    fun testMultipleSubscribers() {
+        val publisher = Publishers.publishSubject<String>()
+
+        val collectPublisher = publisher.scanWith({ "" }) { acc, current -> acc + current }
+
+        val receivedResults1 = mutableListOf<String>()
+        val cancellableManager1 = CancellableManager()
+        collectPublisher.subscribe(cancellableManager1) { receivedResults1 += it }
+
+        publisher.value = "a"
+        publisher.value = "b"
+        publisher.value = "c"
+
+        val receivedResults2 = mutableListOf<String>()
+        val cancellableManager2 = CancellableManager()
+        collectPublisher.subscribe(cancellableManager2) { receivedResults2 += it }
+
+        publisher.value = "d"
+        publisher.value = "e"
+        publisher.value = "f"
+
+        assertEquals(listOf("", "a", "ab", "abc", "abcd", "abcde", "abcdef"), receivedResults1)
+        assertEquals(listOf("", "d", "de", "def"), receivedResults2)
     }
 
     @Test
@@ -110,7 +157,7 @@ class CollectProcessorTests {
         var receivedException: StreamsProcessorException? = null
 
         publisher
-            .collect(emptySet<Int>()) { _, _ -> throw expectedException }
+            .scanWith({ 0 }) { _, _ -> throw expectedException }
             .subscribe(
                 CancellableManager(),
                 onNext = { },
@@ -123,22 +170,42 @@ class CollectProcessorTests {
     }
 
     @Test
+    fun testThrowingSupplier() {
+        val publisher = Publishers.behaviorSubject("a")
+
+        var receivedException: StreamsProcessorException? = null
+
+        val scanPublisher = publisher.scanWith({ throw IllegalStateException() }) { acc, _ -> acc }
+
+        assertFailsWith(IllegalStateException::class) {
+            scanPublisher.subscribe(
+                CancellableManager(),
+                onNext = { },
+                onError = { receivedException = it as StreamsProcessorException }
+            )
+            publisher.value = "b"
+        }
+
+        assertEquals(null, receivedException)
+    }
+
+    @Test
     fun testMappingAnyException() {
         val publisher = Publishers.behaviorSubject("a")
 
-        @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
         var receivedException: StreamsProcessorException? = null
 
         assertFailsWith(IllegalStateException::class) {
             publisher
-                .collect(0) { _, _ -> throw IllegalStateException() }
+                .scanWith({ 0 }) { _, _ -> throw IllegalStateException() }
                 .subscribe(
                     CancellableManager(),
                     onNext = { },
                     onError = { receivedException = it as StreamsProcessorException }
                 )
-            publisher.value = "b"
         }
+
+        assertEquals(null, receivedException)
     }
 
     @Test
@@ -149,7 +216,7 @@ class CollectProcessorTests {
         var receivedException: Throwable? = null
 
         publisher
-            .collect(0) { acc, value -> acc + value.toInt() }
+            .scanWith({ 0 }) { acc, value -> acc + value.toInt() }
             .subscribe(
                 CancellableManager(),
                 onNext = { },
