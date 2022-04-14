@@ -81,6 +81,10 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
     public var isImageDependantOnViewSize = false
     public var minimumSizeChange: CGFloat = 50
     public var sizeMultiplier: CGFloat = UIScreen.main.scale
+    public var downloadImageAdapter: ((_ data: Data?) -> UIImage?) = { optinalData in
+        guard let data = optinalData else { return nil }
+        return UIImage(data: data)
+    }
 
     public var maxNumberOfImagesInCache: Int {
         get {
@@ -187,7 +191,7 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
             MrFreeze().freeze(objectToFreeze: imageFlow)
 
             let dataTask = URLSession.shared.dataTask(with: url) { [weak imageView, weak self] data, response, error in
-                    let image = data != nil ? UIImage(data: data!) : nil
+                let image = self?.downloadImageAdapter(data)
                 DispatchQueue.main.async {
                     guard let imageView = imageView else { return }
                     if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,

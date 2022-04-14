@@ -12,6 +12,7 @@ public class KFImageViewModelHandler: ImageViewModelHandler {
 
     public var isImageDependantOnViewSize = false
     public var sizeMultiplier: CGFloat = UIScreen.main.scale
+    public var imageProcessor: ImageProcessor? = nil
 
     public init() {}
 
@@ -105,7 +106,7 @@ public class KFImageViewModelHandler: ImageViewModelHandler {
     ) {
         guard let urlString = imageFlow.url, let url = URL(string: urlString) else { return }
 
-        var options: KingfisherOptionsInfo = []
+        var options: KingfisherOptionsInfo = imageProcessor != nil ? [.processor(imageProcessor!)] : []
         if let modifier = delegate?.requestModifier(for: url) {
             options.append(.requestModifier(modifier))
         }
