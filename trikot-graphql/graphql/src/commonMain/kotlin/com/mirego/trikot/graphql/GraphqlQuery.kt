@@ -42,7 +42,7 @@ abstract class AbstractGraphqlQuery<T>(override val deserializer: Deserializatio
     private fun anyToJson(any: Any): String {
         return when (any) {
             is List<*> -> listJson(any)
-            is Int,
+            is Number,
             is Boolean -> "$any"
             is GraphqlJsonObject -> any.body
             else -> "\"${any.toString().escapeForGraphql()}\""

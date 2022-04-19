@@ -16,6 +16,26 @@ class GraphqlQueryTests {
         )
     }
 
+    @Test
+    fun givenQueryWithNumbersTheyArentEscaped() {
+        val query = NumberQuery()
+
+        assertEquals(
+            "{\"query\": \"PutSomeNumbers\",\"variables\": {\"float\":5.5,\"int\":-5,\"double\":-123.45}}",
+            query.requestBody
+        )
+    }
+
+    class NumberQuery : AbstractGraphqlQuery<String>(String.serializer()) {
+        override val variables = mapOf(
+            "float" to 5.5f,
+            "int" to -5,
+            "double" to -123.45
+        )
+
+        override val query = "PutSomeNumbers"
+    }
+
     class QueryTest : AbstractGraphqlQuery<String>(String.serializer()) {
         override val variables = mapOf("var" to stringToEscape())
 
