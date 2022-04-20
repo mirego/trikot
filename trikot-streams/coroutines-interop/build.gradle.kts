@@ -17,12 +17,7 @@ repositories {
 group = "com.mirego.trikot.streams"
 
 kotlin {
-    android {
-        publishAllLibraryVariants()
-    }
-    jvm()
-    ios()
-    iosSimulatorArm64()
+    configureKmmTargets(js = false)
 
     sourceSets {
         all {
