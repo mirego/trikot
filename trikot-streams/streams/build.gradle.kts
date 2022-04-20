@@ -17,19 +17,7 @@ repositories {
 group = "com.mirego.trikot"
 
 kotlin {
-    android {
-        publishAllLibraryVariants()
-    }
-    jvm()
-    ios()
-    iosArm32("iosArm32")
-    iosSimulatorArm64()
-    tvos()
-    watchos()
-    macosX64()
-    js(IR) {
-        browser()
-    }
+    configureKmmTargets()
 
     sourceSets {
         val commonMain by getting {
