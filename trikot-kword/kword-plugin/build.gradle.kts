@@ -3,12 +3,6 @@ plugins {
     id("mirego.publish")
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-    maven("https://s3.amazonaws.com/mirego-maven/public")
-}
-
 dependencies {
     implementation(gradleApi())
     implementation(localGroovy())

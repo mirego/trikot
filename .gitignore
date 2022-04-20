@@ -97,4 +97,5 @@ Core.podspec
 web/src/library/**/*.kjsm
 
 # Node
+yarn.lock
 node_modules/

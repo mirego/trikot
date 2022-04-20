@@ -7,14 +7,6 @@ plugins {
 
 apply(plugin = "kotlinx-atomicfu")
 
-repositories {
-    google()
-    mavenLocal()
-    mavenCentral()
-    maven("https://jitpack.io")
-    maven("https://plugins.gradle.org/m2/")
-}
-
 group = "com.mirego.trikot"
 
 kotlin {
