@@ -5,14 +5,6 @@ plugins {
     id("mirego.kword").version("2.0.1")
 }
 
-repositories {
-    google()
-    mavenCentral()
-    mavenLocal()
-    maven("https://jitpack.io")
-    maven("https://s3.amazonaws.com/mirego-maven/public")
-}
-
 group = "com.mirego.sample"
 
 val frameworkName = "TRIKOT_FRAMEWORK_NAME"

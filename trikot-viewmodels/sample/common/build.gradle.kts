@@ -6,15 +6,6 @@ plugins {
     id("maven-publish")
 }
 
-repositories {
-    google()
-    mavenLocal()
-    mavenCentral()
-    maven("https://plugins.gradle.org/m2/")
-    maven("https://jitpack.io")
-    maven("https://s3.amazonaws.com/mirego-maven/public")
-}
-
 group = "com.trikot.viewmodels.sample"
 version = "0.0.1"
 

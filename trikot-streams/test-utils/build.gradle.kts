@@ -4,15 +4,6 @@ plugins {
     id("mirego.publish")
 }
 
-repositories {
-    google()
-    mavenLocal()
-    mavenCentral()
-    maven("https://jitpack.io")
-    maven("https://plugins.gradle.org/m2/")
-    maven("https://s3.amazonaws.com/mirego-maven/public")
-}
-
 group = "com.mirego.trikot"
 
 kotlin {
