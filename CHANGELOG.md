@@ -11,11 +11,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 > 2022-04-20
 
 Updated:
-AtomicFu from 0.17.0 to 0.17.1
-Jetpack Compose from 1.2.0-alpha03 to 1.2.0-alpha07
-Kotlinx.Coroutines from 1.6.0 to 1.6.1
-Ktor from 2.0.0-beta-1 to 2.0.0
-Kotlin to 1.6.20
+- AtomicFu from 0.17.0 to 0.17.1
+- Jetpack Compose from 1.2.0-alpha03 to 1.2.0-alpha07
+- Kotlinx.Coroutines from 1.6.0 to 1.6.1
+- Ktor from 2.0.0-beta-1 to 2.0.0
+- Kotlin to 1.6.20
 
 ## 3.2.1
 
