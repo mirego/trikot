@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -12,7 +14,6 @@ android {
         minSdk = Versions.Android.MIN_SDK
         targetSdk = Versions.Android.TARGET_SDK
     }
-
     buildFeatures {
         compose = true
         buildConfig = false
@@ -26,6 +27,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    sourceSets {
+        println("SSS $this")
     }
 }
 
@@ -50,22 +54,23 @@ dependencies {
 }
 
 tasks {
-    val sourcesJar by creating(Jar::class) {
+    val sourcesJar by registering(Jar::class) {
+        val sourceSet = android.sourceSets.getByName("main").kotlin as DefaultAndroidSourceDirectorySet
+        from(sourceSet.srcDirs)
         archiveClassifier.set("sources")
-        from(android.sourceSets.getByName("main").java.srcDirs().toString())
+    }
+
+    artifacts {
+        archives(sourcesJar)
     }
 }
+
 
 afterEvaluate {
     publishing {
         publications {
-            create<MavenPublication>("release") {
+            create<MavenPublication>("composeAar") {
                 from(components["release"])
-                artifactId = "viewmodels-declarative-compose"
-                artifact(tasks["sourcesJar"])
-            }
-            create<MavenPublication>("debug") {
-                from(components["debug"])
                 artifactId = "viewmodels-declarative-compose"
                 artifact(tasks["sourcesJar"])
             }
