@@ -62,7 +62,6 @@ tasks {
     }
 }
 
-
 afterEvaluate {
     publishing {
         publications {
