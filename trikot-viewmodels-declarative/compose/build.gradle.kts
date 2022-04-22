@@ -28,9 +28,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    sourceSets {
-        println("SSS $this")
-    }
 }
 
 kotlin {
