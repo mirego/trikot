@@ -32,4 +32,8 @@ extension HomeViewController: HomeNavigationDelegate {
     func navigateToProgressShowcase() {
         present(viewControllerFactory.progressShowcase(), animated: true, completion: nil)
     }
+
+    func navigateToAnimationTypesShowcase() {
+        present(viewControllerFactory.animationTypesShowcase(), animated: true, completion: nil)
+    }
 }

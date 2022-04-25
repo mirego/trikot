@@ -13,6 +13,7 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
@@ -42,7 +43,7 @@ fun <C : VMDContent> VMDSwitch(
     label: @Composable (RowScope.(field: C) -> Unit),
     colors: SwitchColors = SwitchDefaults.colors()
 ) {
-    val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState()
+    val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDLabeledComponent(
         modifier = modifier

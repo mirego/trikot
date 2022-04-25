@@ -7,6 +7,8 @@ import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.observeOn
 import com.mirego.trikot.streams.reactive.subscribe
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.withAnimation
 import com.mirego.trikot.viewmodels.declarative.utilities.VMDDispatchQueues
 import com.mirego.trikot.viewmodels.declarative.utilities.valueOrThrow
 import org.reactivestreams.Publisher
@@ -62,8 +64,37 @@ abstract class VMDPublishedProperty<V>(initialValue: V, listener: VMDPropertyCha
             .observeOn(VMDDispatchQueues.uiQueue)
             .subscribe(
                 propertyCancellableManager,
+                onNext = { value ->
+                    setValue(this, property, value)
+                },
+                onError = {
+                    println("Error setting published property \"${property.name}\" on ${this.listener}\n$it")
+                }
+            )
+    }
+
+    fun updatePublisherWithAnimation(
+        property: KProperty<V>,
+        publisher: Publisher<Pair<V, VMDAnimation?>>,
+        cancellableManager: CancellableManager
+    ) {
+        val propertyCancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
+        cancellableManager.add(propertyCancellableManager)
+
+        publisher
+            .observeOn(VMDDispatchQueues.uiQueue)
+            .subscribe(
+                propertyCancellableManager,
                 onNext = {
-                    setValue(this, property, it)
+                    val value = it.first
+                    val animation = it.second
+                    if (animation != null) {
+                        withAnimation(animation) {
+                            setValue(this, property, value)
+                        }
+                    } else {
+                        setValue(this, property, value)
+                    }
                 },
                 onError = {
                     println("Error setting published property \"${property.name}\" on ${this.listener}\n$it")

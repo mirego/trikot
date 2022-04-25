@@ -5,6 +5,8 @@ import com.mirego.trikot.streams.reactive.ConcretePublisher
 import com.mirego.trikot.streams.reactive.PublishSubjectImpl
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.asConcretePublisher
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimationContext
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPublishedProperty
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.published
@@ -13,21 +15,21 @@ import kotlin.reflect.KProperty
 
 open class VMDViewModelImpl(protected val cancellableManager: CancellableManager) : VMDViewModel {
 
-    private val propertyWillChangeSubject = PublishSubjectImpl<Unit>()
+    private val propertyWillChangeSubject = PublishSubjectImpl<VMDPropertyChange<*>>()
     private val propertyDidChangeSubject = PublishSubjectImpl<VMDPropertyChange<*>>()
 
-    override val propertyWillChange: ConcretePublisher<Unit>
+    override val propertyWillChange: ConcretePublisher<VMDPropertyChange<*>>
         get() = propertyWillChangeSubject.asConcretePublisher()
 
     override val propertyDidChange: ConcretePublisher<VMDPropertyChange<*>>
         get() = propertyDidChangeSubject.asConcretePublisher()
 
     override fun <V> willChange(property: KProperty<V>, oldValue: V, newValue: V) {
-        propertyWillChangeSubject.value = Unit
+        propertyWillChangeSubject.value = VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek())
     }
 
     override fun <V> didChange(property: KProperty<V>, oldValue: V, newValue: V) {
-        propertyDidChangeSubject.value = VMDPropertyChange(property, oldValue, newValue)
+        propertyDidChangeSubject.value = VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek())
     }
 
     override fun <V> publisherForProperty(property: KProperty<V>): Publisher<V> {
@@ -49,6 +51,10 @@ open class VMDViewModelImpl(protected val cancellableManager: CancellableManager
         updatePropertyPublisher(this::isHidden, cancellableManager, publisher)
     }
 
+    fun bindHiddenAnimated(publisher: Publisher<Pair<Boolean, VMDAnimation?>>) {
+        updateAnimatedPropertyPublisher(this::isHidden, cancellableManager, publisher)
+    }
+
     protected open val propertyMapping: Map<String, VMDPublishedProperty<*>> by lazy {
         mapOf(
             this::isHidden.name to hiddenDelegate
@@ -62,6 +68,19 @@ open class VMDViewModelImpl(protected val cancellableManager: CancellableManager
         publisher: Publisher<V>
     ) {
         (propertyMapping[property.name] as? VMDPublishedProperty<V>)?.updatePublisher(
+            property,
+            publisher,
+            cancellableManager
+        )
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    protected fun <V> updateAnimatedPropertyPublisher(
+        property: KProperty<V>,
+        cancellableManager: CancellableManager,
+        publisher: Publisher<Pair<V, VMDAnimation?>>
+    ) {
+        (propertyMapping[property.name] as? VMDPublishedProperty<V>)?.updatePublisherWithAnimation(
             property,
             publisher,
             cancellableManager

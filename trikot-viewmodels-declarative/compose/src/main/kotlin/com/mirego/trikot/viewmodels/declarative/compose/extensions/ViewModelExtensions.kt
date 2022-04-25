@@ -8,15 +8,24 @@ import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import com.mirego.trikot.streams.cancellable.Cancellable
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.filter
+import com.mirego.trikot.streams.reactive.first
 import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.merge
 import com.mirego.trikot.streams.reactive.subscribe
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
+import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import org.reactivestreams.Publisher
 import kotlin.reflect.KProperty
 
+data class VMDAnimatedPropertyChange<T, V>(val value: T, val propertyChange: VMDPropertyChange<V>)
+
 @Composable
-fun <T : VMDViewModel> T.observeAsState(): State<T> {
-    return propertyDidChange.map { this }.subscribeAsState(initial = this, key = this)
+fun <T : VMDViewModel> T.observeAsState(excludedProperties: List<KProperty<*>> = emptyList()): State<T> {
+    return propertyDidChange
+        .filter { propertyChange -> !excludedProperties.map { it.name }.contains(propertyChange.property.name) }
+        .map { this }
+        .subscribeAsState(initial = this, key = this)
 }
 
 @Composable
@@ -28,8 +37,51 @@ fun <T, VM : VMDViewModel> VM.observeAsState(
     return publisherForProperty(property).subscribeAsState(initial = initial, key = this)
 }
 
+@Suppress("UNCHECKED_CAST")
 @Composable
-fun <R, T : R> Publisher<T>.subscribeAsState(initial: R, key: Any? = initial): State<R> =
+fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
+    property: KProperty<T>,
+    initialValue: T? = null
+): State<VMDAnimatedPropertyChange<T, T>> {
+    val initial: T = (initialValue ?: property.getter.call()) as T
+    val initialPropertyChange = VMDAnimatedPropertyChange(initial, VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
+
+    val propertyPublisher = publisherForProperty(property)
+        .first()
+        .map { VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
+
+    val propertyChangePublisher =  propertyDidChange
+        .filter { it.property.name == property.name }
+        .map { VMDAnimatedPropertyChange(value = it.newValue as T, propertyChange = it as VMDPropertyChange<T>) }
+
+    return propertyPublisher.merge(propertyChangePublisher)
+        .subscribeAsState(initial = initialPropertyChange, key = this)
+}
+
+@Suppress("UNCHECKED_CAST")
+@Composable
+fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
+    property: KProperty<T>,
+    initialValue: T? = null,
+    transform: (T) -> V
+): State<VMDAnimatedPropertyChange<V, T>> {
+    val initial: T = (initialValue ?: property.getter.call())
+    val initialPropertyChange = VMDAnimatedPropertyChange(transform(initial), VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
+
+    val propertyPublisher = publisherForProperty(property)
+        .first()
+        .map { VMDAnimatedPropertyChange(value = transform(it), VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
+
+    val propertyChangePublisher =  propertyDidChange
+        .filter { it.property.name == property.name }
+        .map { VMDAnimatedPropertyChange(value = transform(it.newValue as T), propertyChange = it as VMDPropertyChange<T>) }
+
+    return propertyPublisher.merge(propertyChangePublisher)
+        .subscribeAsState(initial = initialPropertyChange, key = this)
+}
+
+@Composable
+fun <T> Publisher<T>.subscribeAsState(initial: T, key: Any? = initial): State<T> =
     asState(initial, key) { callback ->
         val cancellableManager = CancellableManager()
         subscribe(cancellableManager) {

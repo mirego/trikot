@@ -62,6 +62,7 @@ public struct VMDTextField<Label>: View where Label: View {
                             .textContentType(viewModel.contentType?.uiTextContentType)
                             .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
                             .disableAutocorrection(!viewModel.autoCorrect)
+                            .hidden(viewModel.isHidden)
                     } else {
                         TextField(viewModel.placeholder, text: text, prompt: prompt)
                             .onSubmit {
@@ -76,6 +77,7 @@ public struct VMDTextField<Label>: View where Label: View {
                             .textContentType(viewModel.contentType?.uiTextContentType)
                             .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
                             .disableAutocorrection(!viewModel.autoCorrect)
+                            .hidden(viewModel.isHidden)
                     }
                 }
             }

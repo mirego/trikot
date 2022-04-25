@@ -8,7 +8,7 @@ import org.reactivestreams.Publisher
 import kotlin.reflect.KProperty
 
 interface VMDViewModel : VMDPropertyChangeListener, VMDContent {
-    val propertyWillChange: ConcretePublisher<Unit>
+    val propertyWillChange: ConcretePublisher<VMDPropertyChange<*>>
     val propertyDidChange: ConcretePublisher<VMDPropertyChange<*>>
 
     var isHidden: Boolean

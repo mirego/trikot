@@ -36,6 +36,10 @@ public class ViewControllerFactory {
     func progressShowcase() -> ProgressShowcaseViewController {
         ProgressShowcaseViewController(viewModelController: viewModelControllerFactory.progressShowcase()).assignFactory(self)
     }
+
+    func animationTypesShowcase() -> AnimationTypesShowcaseViewController {
+        AnimationTypesShowcaseViewController(viewModelController: viewModelControllerFactory.animationTypesShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {
