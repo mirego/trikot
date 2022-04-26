@@ -28,7 +28,7 @@ kotlin {
                 implementation(project(Project.TRIKOT_FOUNDATION))
                 implementation(project(Project.TRIKOT_STREAMS))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
-                implementation("io.ktor:ktor-http:${Versions.KTOR}")
+                implementation("io.ktor:ktor-client-core:${Versions.KTOR}")
             }
         }
 
