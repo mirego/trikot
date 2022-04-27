@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import com.mirego.sample.ui.showcase.animation.types.AnimationTypesShowcaseActivity
 import com.mirego.sample.ui.showcase.components.button.ButtonShowcaseActivity
 import com.mirego.sample.ui.showcase.components.image.ImageShowcaseActivity
+import com.mirego.sample.ui.showcase.components.list.ListShowcaseActivity
 import com.mirego.sample.ui.showcase.components.progress.ProgressShowcaseActivity
 import com.mirego.sample.ui.showcase.components.text.TextShowcaseActivity
 import com.mirego.sample.ui.showcase.components.textfield.TextFieldShowcaseActivity
@@ -53,5 +54,9 @@ class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, H
 
     override fun navigateToAnimationTypesShowcase() {
         startActivity(AnimationTypesShowcaseActivity.intent(this))
+    }
+
+    override fun navigateToListShowcase() {
+        startActivity(ListShowcaseActivity.intent(this))
     }
 }
