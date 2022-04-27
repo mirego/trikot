@@ -49,6 +49,6 @@ class SampleViewModelControllerFactoryImpl : SampleViewModelControllerFactory {
     }
 
     override fun listShowcase(): ListShowcaseViewModelController {
-       return ListShowcaseViewModelController(i18N)
+        return ListShowcaseViewModelController(i18N)
     }
 }
