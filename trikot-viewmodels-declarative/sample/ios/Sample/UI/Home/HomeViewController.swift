@@ -36,4 +36,8 @@ extension HomeViewController: HomeNavigationDelegate {
     func navigateToAnimationTypesShowcase() {
         present(viewControllerFactory.animationTypesShowcase(), animated: true, completion: nil)
     }
+
+    func navigateToListShowcase() {
+        //TODO: present list showcase
+    }
 }
