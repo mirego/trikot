@@ -14,6 +14,7 @@
   "home_component_textfield": "TextField",
   "home_component_toggle": "Toggle",
   "home_component_progress": "Progress",
+  "home_component_list": "List",
   "image_showcase_complex_placeholder_image_title": "Complex placeholder",
   "home_animations_title": "Animations",
   "home_animation_easing": "Animation Easing",
@@ -68,5 +69,6 @@
   "animation_types_ease_out_tile": "Ease Out",
   "animation_types_ease_in_ease_out_tile": "Ease In/Out",
   "animation_types_cubic_bezier_tile": "Cubic Bezier (0, 1, 0, 1)",
-  "animation_types_spring_tile": "Spring"
+  "animation_types_spring_tile": "Spring",
+  "list_showcase_title": "List showcase"
 }

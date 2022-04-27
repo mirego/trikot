@@ -54,6 +54,12 @@ class HomeViewModelController(i18N: I18N) :
                                 cancellableManager = cancellableManager
                             ) {
                                 setAction { navigationDelegate?.navigateToProgressShowcase() }
+                            },
+                            HomeSectionElementViewModelImpl(
+                                text = i18N[KWordTranslation.HOME_COMPONENT_LIST],
+                                cancellableManager = cancellableManager
+                            ) {
+                                setAction { navigationDelegate?.navigateToListShowcase() }
                             }
                         ),
                         cancellableManager = cancellableManager

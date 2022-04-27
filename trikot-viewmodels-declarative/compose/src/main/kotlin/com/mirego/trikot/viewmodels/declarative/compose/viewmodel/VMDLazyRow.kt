@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,62 +17,61 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 
-@Deprecated("Use either VMDLazyColumn instead")
 @Composable
-fun <C : VMDIdentifiableContent> VMDList(
+fun <C : VMDIdentifiableContent> VMDLazyRow(
     modifier: Modifier = Modifier,
     viewModel: VMDListViewModel<C>,
     state: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,
-    verticalArrangement: Arrangement.Vertical =
-        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    horizontalArrangement: Arrangement.Horizontal =
+        if (!reverseLayout) Arrangement.Start else Arrangement.End,
+    verticalAlignment: Alignment.Vertical = Alignment.Top,
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     itemContent: @Composable LazyItemScope.(item: C) -> Unit
 ) {
-    VMDSectionedList(
+    VMDLazyRowIndexed(
         modifier = modifier,
         viewModel = viewModel,
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,
-        verticalArrangement = verticalArrangement,
-        horizontalAlignment = horizontalAlignment,
-        flingBehavior = flingBehavior) {
-        items(viewModel.elements, key = { item -> item.identifier }, itemContent = itemContent)
+        horizontalArrangement = horizontalArrangement,
+        verticalAlignment = verticalAlignment,
+        flingBehavior = flingBehavior
+    ) { _, item ->
+        itemContent(item)
     }
 }
 
 @Composable
-fun <C : VMDIdentifiableContent> VMDSectionedList(
+fun <C : VMDIdentifiableContent> VMDLazyRowIndexed(
     modifier: Modifier = Modifier,
     viewModel: VMDListViewModel<C>,
     state: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,
-    verticalArrangement: Arrangement.Vertical =
-        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    horizontalArrangement: Arrangement.Horizontal =
+        if (!reverseLayout) Arrangement.Start else Arrangement.End,
+    verticalAlignment: Alignment.Vertical = Alignment.Top,
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
-    content: LazyListScope.(elements: List<C>) -> Unit
+    itemContent: @Composable LazyItemScope.(index: Int, item: C) -> Unit
 ) {
-    val listViewModel: VMDListViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
+    val listViewModel: VMDListViewModel<C> by viewModel.observeAsState()
 
-    LazyColumn(
+    LazyRow(
         modifier = modifier
             .hidden(listViewModel.isHidden),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,
-        verticalArrangement = verticalArrangement,
-        horizontalAlignment = horizontalAlignment,
+        horizontalArrangement = horizontalArrangement,
+        verticalAlignment = verticalAlignment,
         flingBehavior = flingBehavior
     ) {
-        content(listViewModel.elements)
+        itemsIndexed(listViewModel.elements, key = { _, item -> item.identifier }, itemContent = itemContent)
     }
 }
