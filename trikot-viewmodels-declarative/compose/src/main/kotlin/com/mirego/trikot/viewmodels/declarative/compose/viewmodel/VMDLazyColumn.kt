@@ -74,5 +74,3 @@ fun <C : VMDIdentifiableContent> VMDLazyColumnIndexed(
         itemsIndexed(listViewModel.elements, key = { _, item -> item.identifier }, itemContent = itemContent)
     }
 }
-
-

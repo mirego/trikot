@@ -21,7 +21,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingA
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 
-@Deprecated("Use either VMDLazyColumn or VMDLazyRow instead")
+@Deprecated("Use either VMDLazyColumn instead")
 @Composable
 fun <C : VMDIdentifiableContent> VMDList(
     modifier: Modifier = Modifier,

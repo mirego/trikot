@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +19,6 @@ import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseViewMod
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLazyColumnIndexed
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLazyRow
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLazyRowIndexed
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 
 @Composable
