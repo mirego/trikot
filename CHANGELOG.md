@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming release
 
+## 3.3.2
+
+> 2022-05-02
+
+- [VMD] VMDLazyColumn & VMDLazyRow to replace VMDList with Compose
+- [VMD] Updated Coil from 1.4.0 to 2.0.0-rc03
+
+## 3.3.1
+
+> 2022-04-25
+
+- [VMD] Animation engine
+- [VMD] Publish sources for compose module
+
 ## 3.3.0
 
 > 2022-04-20
