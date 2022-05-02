@@ -3,7 +3,7 @@ object Versions {
     const val ATOMIC_FU = "0.17.1"
     const val ANDROID_GRADLE_PLUGIN = "7.1.2"
     const val JETPACK_COMPOSE = "1.2.0-alpha08"
-    const val COIL = "1.4.0"
+    const val COIL = "2.0.0-rc03"
     const val KTLINT = "10.2.0"
     const val KOTLINX_SERIALIZATION = "1.3.2"
     const val KOTLINX_COROUTINES = "1.6.1"

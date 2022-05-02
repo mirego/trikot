@@ -8,9 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
-import coil.compose.ImagePainter
-import coil.compose.rememberImagePainter
-import coil.size.OriginalSize
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
 import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
@@ -32,7 +34,7 @@ fun VMDImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
     allowHardware: Boolean = true,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: ImagePainter.State) -> Unit) = { imageResource, state ->
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
             modifier = modifier,
@@ -69,7 +71,7 @@ fun VMDImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
     allowHardware: Boolean = true,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: ImagePainter.State) -> Unit) = { imageResource, state ->
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
             modifier = modifier,
@@ -133,25 +135,23 @@ fun RemoteImage(
     modifier: Modifier = Modifier,
     imageUrl: String?,
     placeholderImage: VMDImageResource = VMDImageResource.None,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: ImagePainter.State) -> Unit),
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit),
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
     allowHardware: Boolean = true
 ) {
-    val coilPainter = rememberImagePainter(
-        imageUrl,
-        builder = {
-            allowHardware(allowHardware)
-            if (imageUrl != null) {
-                size(OriginalSize)
-            }
-        }
+    val coilPainter = rememberAsyncImagePainter(
+        ImageRequest.Builder(LocalContext.current)
+            .data(imageUrl)
+            .allowHardware(allowHardware)
+            .apply { if (imageUrl != null) size(Size.ORIGINAL) }
+            .build()
     )
 
     when (coilPainter.state) {
-        is ImagePainter.State.Success -> Image(
+        is AsyncImagePainter.State.Success -> Image(
             painter = coilPainter,
             modifier = modifier,
             alignment = alignment,

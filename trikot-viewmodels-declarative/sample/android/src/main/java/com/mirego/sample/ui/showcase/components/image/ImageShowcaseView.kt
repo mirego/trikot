@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.ImagePainter
+import coil.compose.AsyncImagePainter
 import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
@@ -124,9 +124,9 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                     )
 
                     when (state) {
-                        is ImagePainter.State.Empty -> Text("There is no image to display", style = SampleTextStyle.subheadline)
-                        is ImagePainter.State.Loading -> Text("Loading", style = SampleTextStyle.subheadline)
-                        is ImagePainter.State.Error -> Text("Unable to load the remote image", style = SampleTextStyle.subheadline)
+                        is AsyncImagePainter.State.Empty -> Text("There is no image to display", style = SampleTextStyle.subheadline)
+                        is AsyncImagePainter.State.Loading -> Text("Loading", style = SampleTextStyle.subheadline)
+                        is AsyncImagePainter.State.Error -> Text("Unable to load the remote image", style = SampleTextStyle.subheadline)
                         else -> {}
                     }
                 }
