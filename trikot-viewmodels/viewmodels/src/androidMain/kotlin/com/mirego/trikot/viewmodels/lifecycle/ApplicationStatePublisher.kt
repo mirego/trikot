@@ -1,8 +1,8 @@
 package com.mirego.trikot.viewmodels.lifecycle
 
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import org.reactivestreams.Publisher
@@ -10,7 +10,7 @@ import org.reactivestreams.Publisher
 actual class ApplicationStatePublisher :
     BehaviorSubjectImpl<ApplicationState>(),
     Publisher<ApplicationState>,
-    LifecycleObserver {
+    DefaultLifecycleObserver {
 
     private val lifecycle = ProcessLifecycleOwner.get().lifecycle
 
@@ -29,15 +29,13 @@ actual class ApplicationStatePublisher :
         super.onNoSubscription()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    @Suppress("unused")
-    fun onMoveToForeground() {
+    override fun onStart(owner: LifecycleOwner) {
+        super.onStart(owner)
         value = ApplicationState.FOREGROUND
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    @Suppress("unused")
-    fun onMoveToBackground() {
+    override fun onStop(owner: LifecycleOwner) {
+        super.onStop(owner)
         value = ApplicationState.BACKGROUND
     }
 }

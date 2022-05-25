@@ -2,11 +2,10 @@ package com.mirego.trikot.viewmodels.adapter
 
 import android.view.View
 import androidx.annotation.CallSuper
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,11 +20,11 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
 
     init {
         lifecycleOwner.lifecycle.addObserver(
-            object : LifecycleObserver {
-                @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-                fun detachAll() {
+            object : DefaultLifecycleObserver {
+                override fun onDestroy(owner: LifecycleOwner) {
+                    super.onDestroy(owner)
                     viewHolders.forEach {
-                        it.detach()
+                        it.destroy()
                     }
                     viewHolders.clear()
                     lifecycleOwner.lifecycle.removeObserver(this)
@@ -55,6 +54,7 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
     @CallSuper
     override fun onViewRecycled(holder: VH) {
         super.onViewRecycled(holder)
+        holder.destroy()
         viewHolders.remove(holder)
     }
 
@@ -74,18 +74,26 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
         open fun onDetach() {}
 
         fun attach() {
-            if (lifecycleRegistry.currentState != Lifecycle.State.STARTED) {
+            if (lifecycleRegistry.currentState != Lifecycle.State.RESUMED) {
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
+                lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
                 onAttach()
             }
         }
 
         fun detach() {
-            if (lifecycleRegistry.currentState != Lifecycle.State.DESTROYED) {
+            if (lifecycleRegistry.currentState == Lifecycle.State.RESUMED) {
+                lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
-                lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 onDetach()
+            }
+        }
+
+        fun destroy() {
+            detach()
+            if (lifecycleRegistry.currentState != Lifecycle.State.DESTROYED) {
+                lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 lifecycleRegistry = LifecycleRegistry(this)
             }
         }
