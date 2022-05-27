@@ -4,6 +4,7 @@ object Project {
     const val TRIKOT_STREAMS_TEST_UTILS = ":trikot-streams:test-utils"
     const val TRIKOT_HTTP = ":trikot-http:http"
     const val TRIKOT_KWORD = ":trikot-kword:kword"
+    const val TRIKOT_KWORD_SAMPLE_COMMON = ":trikot-kword:sample:common"
     const val TRIKOT_ANALYTICS = ":trikot-analytics:analytics"
     const val TRIKOT_VIEWMODELS = ":trikot-viewmodels:viewmodels"
     const val TRIKOT_VIEWMODELS_SAMPLE_COMMON = ":trikot-viewmodels:sample:common"

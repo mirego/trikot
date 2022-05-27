@@ -20,6 +20,7 @@ kotlin {
                 api(project(Project.TRIKOT_FOUNDATION))
                 implementation(project(Project.TRIKOT_STREAMS))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
             }
         }
 
