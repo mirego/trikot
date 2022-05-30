@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("org.jlleitschuh.gradle.ktlint")
     id("mirego.kword").version("2.0.1")
 }
@@ -21,27 +22,43 @@ kword {
     generatedDir = file("src/commonMain/generated")
 }
 
-fun org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer.configureFramework() {
-    framework {
-        baseName = frameworkName
-        transitiveExport = true
-        export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
-        export(project(Project.TRIKOT_STREAMS))
-        export(project(Project.TRIKOT_FOUNDATION))
-        export(project(Project.TRIKOT_HTTP))
-        export(project(Project.TRIKOT_KWORD))
-    }
+fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
+    baseName = frameworkName
+    transitiveExport = true
+    export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
+    export(project(Project.TRIKOT_STREAMS))
+    export(project(Project.TRIKOT_FOUNDATION))
+    export(project(Project.TRIKOT_HTTP))
+    export(project(Project.TRIKOT_KWORD))
 }
 
 kotlin {
     android()
 
+    cocoapods {
+        name = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
+        summary = "Trikot-viewmodels-declarative sample"
+        homepage = "www.mirego.com"
+        license = "BSD-3"
+        extraSpecAttributes = mutableMapOf(
+            "resources" to "\"src/commonMain/resources/translations/*\""
+        )
+
+        framework {
+            configureFramework()
+        }
+    }
+
     ios {
-        binaries.configureFramework()
+        binaries.framework {
+            configureFramework()
+        }
     }
 
     iosSimulatorArm64 {
-        binaries.configureFramework()
+        binaries.framework {
+            configureFramework()
+        }
     }
 
     sourceSets {
@@ -93,37 +110,4 @@ project.afterEvaluate {
         .forEach { task ->
             task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
         }
-}
-
-val copyFramework by tasks.creating {
-    val buildType = project.findProperty("kotlin.build.type")?.toString() ?: "RELEASE"
-    val target = project.findProperty("kotlin.target")?.toString() ?: "iosArm64"
-    val targetDir = project.findProperty("configuration.build.dir")?.toString() ?: "build/bin/ios"
-    val translationDir = "$projectDir/../common/src/commonMain/resources/translations"
-    val framework =
-        kotlin.targets.findByName(target)?.let {
-            it as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-        }?.binaries?.getFramework(
-            buildType
-        ) ?: return@creating
-
-    dependsOn(framework.linkTask)
-
-    doLast {
-        val frameworkDir = "$targetDir/$frameworkName.framework"
-        val srcFile = framework.outputFile
-
-        copy {
-            from(srcFile.parent)
-            into(targetDir)
-            include("$frameworkName.framework/**")
-            include("$frameworkName.framework.dSYM/**")
-        }
-
-        copy {
-            from(translationDir)
-            into(frameworkDir)
-            include("**")
-        }
-    }
 }

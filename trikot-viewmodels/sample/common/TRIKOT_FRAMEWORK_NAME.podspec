@@ -2,54 +2,38 @@ Pod::Spec.new do |spec|
     spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
     spec.version                  = '0.0.1'
     spec.homepage                 = 'www.mirego.com'
-    spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
+    spec.source                   = { :http=> ''}
     spec.authors                  = ''
-    spec.license                  = { :type => 'BSD-3' }
-    spec.summary                  = 'trikot.viewModels Sample'
-
-    spec.static_framework         = true
-    spec.vendored_frameworks      = "build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework"
-    spec.libraries                = "c++", "System"
-    spec.module_name              = "#{spec.name}_umbrella"
-
+    spec.license                  = 'BSD-3'
+    spec.summary                  = 'Trikot-viewmodels sample'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework'
+    spec.libraries                = 'c++'
+                
+                
+                
     spec.pod_target_xcconfig = {
-        'KOTLIN_BUILD_TYPE[config=Debug]' => 'DEBUG',
-        'KOTLIN_BUILD_TYPE[config=Release]' => 'RELEASE',
-        'KOTLIN_TARGET[sdk=iphonesimulator*]' => 'iosSimulator',
-        'KOTLIN_TARGET[sdk=iphoneos*]' => 'iosArm64'
+        'KOTLIN_PROJECT_PATH' => ':trikot-viewmodels:sample:common',
+        'PRODUCT_MODULE_NAME' => 'TRIKOT_FRAMEWORK_NAME',
     }
-
-    spec.prepare_command = <<-CMD
-        mkdir -p build/bin/ios/TRIKOT_FRAMEWORK_NAME.framework
-    CMD
-
+                
     spec.script_phases = [
         {
-            :name => 'Build common',
+            :name => 'Build TRIKOT_FRAMEWORK_NAME',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
-if [ "$ENABLE_PREVIEWS" = "NO" ]
-then
-    cd "$SRCROOT/../../../.."
-
-    if [ "$KOTLIN_TARGET" = "iosSimulator" ]
-    then
-        if [ "$NATIVE_ARCH_ACTUAL" = "x86_64" ]
-        then
-            KOTLIN_TARGET="iosX64"
-        else
-            KOTLIN_TARGET="iosSimulatorArm64"
-        fi
-    fi
-
-    echo "Building common framework on architecture ${KOTLIN_TARGET}"
-    
-    ./gradlew :trikot-viewmodels:sample:common:copyFramework -Pconfiguration.build.dir="build/bin/ios" -Pkotlin.build.type="$KOTLIN_BUILD_TYPE" -Pkotlin.target="$KOTLIN_TARGET"
-else
-    echo "Skipping build of common framework in preview mode"
-fi
-               SCRIPT
+                if [ "YES" = "$COCOAPODS_SKIP_KOTLIN_BUILD" ]; then
+                  echo "Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\""
+                  exit 0
+                fi
+                set -ev
+                REPO_ROOT="$PODS_TARGET_SRCROOT"
+                "$REPO_ROOT/../../../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                    -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
+                    -Pkotlin.native.cocoapods.archs="$ARCHS" \
+                    -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"
+            SCRIPT
         }
     ]
+                
 end
