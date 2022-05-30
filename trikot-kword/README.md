@@ -109,7 +109,10 @@ KWord.t(KWordTranslation.PLURAL, 17)
 See [swift extensions](./swift-extensions/README.md)
 
 # Tooling
+
 ## Android
-When using the Jetpack Compose previewer in Android Studio, there is a specific implementation of `I18N` that can be used to properly load the translations files. 
+
+When using the Jetpack Compose previewer in Android Studio, there is a specific implementation
+of `I18N` that can be used to properly load the translations files.
 
 [PreviewI18N](./kword/src/androidMain/kotlin/com/mirego/trikot/kword/android/PreviewI18N.kt)
