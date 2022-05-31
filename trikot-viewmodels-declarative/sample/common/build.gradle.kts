@@ -8,8 +8,6 @@ plugins {
 
 group = "com.mirego.sample"
 
-val frameworkName = "TRIKOT_FRAMEWORK_NAME"
-
 configurations {
     create("testApi") {}
     create("testDebugApi") {}
@@ -23,7 +21,7 @@ kword {
 }
 
 fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
-    baseName = frameworkName
+    baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
     transitiveExport = true
     export(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
     export(project(Project.TRIKOT_STREAMS))
