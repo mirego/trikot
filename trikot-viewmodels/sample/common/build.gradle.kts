@@ -26,8 +26,6 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
     export(project(Project.TRIKOT_VIEWMODELS))
 }
 
-
-
 kotlin {
     android {
         publishLibraryVariants("release", "debug")
