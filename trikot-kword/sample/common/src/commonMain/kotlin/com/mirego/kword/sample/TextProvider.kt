@@ -1,7 +1,7 @@
 package com.mirego.kword.sample
 
 import com.mirego.sample.KWordTranslation
-import com.mirego.trikot.kword.FlowI18N
+import com.mirego.trikot.kword.flow.FlowI18N
 
 class TextProvider(private val i18N: FlowI18N) {
     val text = i18N[KWordTranslation.TEXT].wrap()

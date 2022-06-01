@@ -1,5 +1,7 @@
-package com.mirego.trikot.kword
+package com.mirego.trikot.kword.flow
 
+import com.mirego.trikot.kword.I18N
+import com.mirego.trikot.kword.KWordKey
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 

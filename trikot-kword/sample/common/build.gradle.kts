@@ -50,6 +50,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_KWORD))
+                api(project(Project.TRIKOT_KWORD_FLOW))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
             }
             kotlin.srcDir(kword.generatedDir)

@@ -2,8 +2,8 @@ package com.mirego.kword.sample
 
 import android.app.Application
 import com.mirego.trikot.kword.DefaultI18N
-import com.mirego.trikot.kword.FlowMultiLanguageI18N
 import com.mirego.trikot.kword.android.AndroidKWord
+import com.mirego.trikot.kword.flow.FlowMultiLanguageI18N
 
 class TrikotApplication : Application() {
 

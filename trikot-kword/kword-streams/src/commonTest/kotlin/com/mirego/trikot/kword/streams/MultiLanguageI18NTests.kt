@@ -1,5 +1,7 @@
-package com.mirego.trikot.kword
+package com.mirego.trikot.kword.streams
 
+import com.mirego.trikot.kword.DefaultI18N
+import com.mirego.trikot.kword.KWordKey
 import com.mirego.trikot.streams.tests.assertEquals
 import kotlin.test.BeforeTest
 import kotlin.test.Test
