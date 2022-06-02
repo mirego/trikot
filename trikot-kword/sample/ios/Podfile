@@ -9,7 +9,6 @@ target 'Sample' do
 
   pod 'TRIKOT_FRAMEWORK_NAME', :path => '../common'
   pod 'Trikot/kword', :path => '../../..'
-  pod 'Trikot/kword.Flow', :path => '../../..'
   pod 'SwiftLint'
 
   post_install do |installer|

@@ -13,13 +13,14 @@ struct SampleApp: App {
     }
     
     private func createI18NMap() -> FlowMultiLanguageI18N {
-        let i18NEn = DefaultI18N()
-        KwordLoader.shared.setCurrentLanguageCode(i18N: i18NEn, basePaths: basePaths, code: "en")
-        let i18NFr = DefaultI18N()
-        KwordLoader.shared.setCurrentLanguageCode(i18N: i18NFr, basePaths: basePaths, code: "fr")
-        
-        let i18NList = [i18NEn, i18NFr]
         let languageCodes = ["en", "fr"]
+        var i18NList: [I18N] = []
+        
+        languageCodes.forEach { languageCode in
+            let i18N = DefaultI18N()
+            KwordLoader.shared.setCurrentLanguageCode(i18N: i18N, basePaths: basePaths, code: languageCode)
+            i18NList.append(i18N)
+        }
         
         let map = [String: I18N](uniqueKeysWithValues: zip(languageCodes, i18NList))
         return FlowMultiLanguageI18N(initialLanguage: "en", languages: map)
