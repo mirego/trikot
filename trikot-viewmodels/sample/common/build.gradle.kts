@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.library")
     id("kotlin-multiplatform")
+    id("com.android.library")
+    kotlin("native.cocoapods")
     id("kotlinx-serialization")
     id("org.jlleitschuh.gradle.ktlint")
     id("maven-publish")
@@ -17,16 +18,12 @@ android {
     }
 }
 
-val frameworkName = "TRIKOT_FRAMEWORK_NAME"
-
-fun org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer.configureFramework() {
-    framework {
-        baseName = frameworkName
-        transitiveExport = true
-        export(project(Project.TRIKOT_FOUNDATION))
-        export(project(Project.TRIKOT_STREAMS))
-        export(project(Project.TRIKOT_VIEWMODELS))
-    }
+fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
+    baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
+    transitiveExport = true
+    export(project(Project.TRIKOT_FOUNDATION))
+    export(project(Project.TRIKOT_STREAMS))
+    export(project(Project.TRIKOT_VIEWMODELS))
 }
 
 kotlin {
@@ -34,12 +31,27 @@ kotlin {
         publishLibraryVariants("release", "debug")
     }
 
+    cocoapods {
+        name = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
+        summary = "Trikot-viewmodels sample"
+        homepage = "www.mirego.com"
+        license = "BSD-3"
+
+        framework {
+            configureFramework()
+        }
+    }
+
     ios {
-        binaries.configureFramework()
+        binaries.framework {
+            configureFramework()
+        }
     }
 
     iosSimulatorArm64 {
-        binaries.configureFramework()
+        binaries.framework {
+            configureFramework()
+        }
     }
 
     sourceSets {
@@ -68,37 +80,6 @@ kotlin {
 
         val iosMain by getting {
             dependsOn(commonMain)
-        }
-    }
-}
-
-val copyFramework by tasks.creating {
-    val buildType = project.findProperty("kotlin.build.type")?.toString() ?: "RELEASE"
-    val target = project.findProperty("kotlin.target")?.toString() ?: "iosArm64"
-    val targetDir = project.findProperty("configuration.build.dir")?.toString() ?: "build/bin/ios"
-    val framework =
-        kotlin.targets.findByName(target)?.let {
-            it as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-        }?.binaries?.getFramework(
-            buildType
-        ) ?: return@creating
-
-    dependsOn(framework.linkTask)
-
-    doLast {
-        val frameworkDir = "$targetDir/$frameworkName.framework"
-        val srcFile = framework.outputFile
-
-        copy {
-            from(srcFile.parent)
-            into(targetDir)
-            include("$frameworkName.framework/**")
-            include("$frameworkName.framework.dSYM/**")
-        }
-
-        copy {
-            into(frameworkDir)
-            include("**")
         }
     }
 }
