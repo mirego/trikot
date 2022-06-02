@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 
 class FlowMultiLanguageI18N(private val initialLanguage: String, private val languages: Map<String, I18N>) : FlowI18N {
-    override val language = MutableStateFlow(initialLanguage)
+    private val language = MutableStateFlow(initialLanguage)
     override val i18N = language.map { languages.getValue(it) }
     override val currentI18N get() = language.value.let { languages.getValue(it) }
 
@@ -17,6 +17,8 @@ class FlowMultiLanguageI18N(private val initialLanguage: String, private val lan
     override fun changeLanguage(code: String) {
         language.value = code
     }
+
+    override fun getLanguageCode() = language.value
 
     override operator fun get(key: KWordKey) =
         i18N.map { it[key] }

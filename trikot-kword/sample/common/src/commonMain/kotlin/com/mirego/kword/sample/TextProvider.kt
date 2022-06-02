@@ -8,7 +8,7 @@ class TextProvider(private val i18N: FlowI18N) {
     val buttonText = i18N[KWordTranslation.BUTTON_CHANGE_LANGUAGE].wrap()
 
     fun toggleLanguage() {
-        if (i18N.language.value == "en") {
+        if (i18N.getLanguageCode() == "en") {
             i18N.changeLanguage("fr")
         } else {
             i18N.changeLanguage("en")

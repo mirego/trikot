@@ -1,12 +1,16 @@
 PODS:
   - SwiftLint (0.43.1)
-  - Trikot/kword (3.3.3):
+  - Trikot/kword (3.3.4):
+    - TRIKOT_FRAMEWORK_NAME
+  - Trikot/kword.Flow (3.3.4):
+    - Trikot/kword
     - TRIKOT_FRAMEWORK_NAME
   - TRIKOT_FRAMEWORK_NAME (1.0.0)
 
 DEPENDENCIES:
   - SwiftLint
   - Trikot/kword (from `../../..`)
+  - Trikot/kword.Flow (from `../../..`)
   - TRIKOT_FRAMEWORK_NAME (from `../common`)
 
 SPEC REPOS:
@@ -21,9 +25,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
-  Trikot: 3a4624cc43080ab4f5832b1f79711360cbfa31f8
+  Trikot: 11e3ee902aa38e16c32105ba73dbb8359e4861ea
   TRIKOT_FRAMEWORK_NAME: b364056552af4ebc4a04b8b800a24317d1ea5717
 
-PODFILE CHECKSUM: 0a8f28ca73dd15b9fd2240072080f0080cedd117
+PODFILE CHECKSUM: 617c6e707ff1ed8a3c69cbb9c28c25d5e2150643
 
 COCOAPODS: 1.11.2

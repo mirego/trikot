@@ -47,7 +47,7 @@ class FlowMultiLanguageI18NTests {
     @Test
     fun givenFrenchInitialLanguageThenItStartsInFrench() = runTest(UnconfinedTestDispatcher()) {
         val multiLanguageI18N = FlowMultiLanguageI18N(FR, languages)
-        assertEquals(FR, multiLanguageI18N.language.value)
+        assertEquals(FR, multiLanguageI18N.getLanguageCode())
         assertEquals(frenchI18N, multiLanguageI18N.currentI18N)
         assertEquals(frenchI18N, multiLanguageI18N.i18N.first())
     }
@@ -65,7 +65,7 @@ class FlowMultiLanguageI18NTests {
     @Test
     fun givenLanguageSwitchedToEnglishThenItForwardsCallToEnglishI18N() = runTest(UnconfinedTestDispatcher()) {
         val multiLanguageI18N = FlowMultiLanguageI18N(FR, languages)
-        multiLanguageI18N.language.value = EN
+        multiLanguageI18N.changeLanguage(EN)
 
         assertEquals(EN_VALUE, multiLanguageI18N[SomeKey].first())
         assertEquals(EN_VALUE, multiLanguageI18N.t(SomeKey).first())
@@ -75,11 +75,11 @@ class FlowMultiLanguageI18NTests {
     }
 
     @Test
-    fun givenFrenchInitialLanguageWhenSwitchingToEnglishAndResettingThenItGoesBackToFrench() {
+    fun givenFrenchInitialLanguageWhenSwitchingToEnglishAndResettingThenItGoesBackToFrench() = runTest(UnconfinedTestDispatcher()) {
         val multiLanguageI18N = FlowMultiLanguageI18N(FR, languages)
-        multiLanguageI18N.language.value = EN
+        multiLanguageI18N.changeLanguage(EN)
         multiLanguageI18N.reset()
-        assertEquals(FR, multiLanguageI18N.language.value)
+        assertEquals(FR, multiLanguageI18N.getLanguageCode())
     }
 
     private object SomeKey : KWordKey {

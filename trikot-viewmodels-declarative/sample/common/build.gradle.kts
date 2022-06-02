@@ -30,7 +30,6 @@ fun org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer.configur
         export(project(Project.TRIKOT_FOUNDATION))
         export(project(Project.TRIKOT_HTTP))
         export(project(Project.TRIKOT_KWORD))
-        export(project(Project.TRIKOT_KWORD_FLOW))
     }
 }
 

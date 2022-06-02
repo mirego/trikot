@@ -26,6 +26,7 @@ fun org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer.configur
         baseName = frameworkName
         transitiveExport = true
         export(project(Project.TRIKOT_KWORD))
+        export(project(Project.TRIKOT_KWORD_FLOW))
     }
 }
 
