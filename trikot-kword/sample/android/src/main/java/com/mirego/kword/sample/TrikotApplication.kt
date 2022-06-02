@@ -11,7 +11,7 @@ class TrikotApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        application = this
+        instance = this
     }
 
     private fun createI18NMap(): FlowMultiLanguageI18N {
@@ -25,10 +25,7 @@ class TrikotApplication : Application() {
     }
 
     companion object {
-        private lateinit var application: TrikotApplication
-
-        @JvmStatic
-        val instance: TrikotApplication
-            get() = application
+        lateinit var instance: TrikotApplication
+        private set
     }
 }
