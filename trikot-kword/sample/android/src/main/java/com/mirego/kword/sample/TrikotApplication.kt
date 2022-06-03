@@ -26,6 +26,6 @@ class TrikotApplication : Application() {
 
     companion object {
         lateinit var instance: TrikotApplication
-        private set
+            private set
     }
 }

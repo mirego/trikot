@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun Screen(textProvider: TextProvider) {
         val text: String by textProvider.text.collectAsState("")
-        val buttonText: String by textProvider.buttonText.collectAsState( "")
+        val buttonText: String by textProvider.buttonText.collectAsState("")
         Scaffold(
             topBar = { TopAppBar { Text(text = "Kword Sample with flows", color = Color.White) } },
-            content = { paddingValues ->  Content(paddingValues, text, buttonText) }
+            content = { paddingValues -> Content(paddingValues, text, buttonText) }
         )
     }
 
@@ -50,9 +50,10 @@ class MainActivity : AppCompatActivity() {
             .fillMaxWidth()
             .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center) {
+        verticalArrangement = Arrangement.Center
+    ) {
         Text(
-            text= text,
+            text = text,
             textAlign = TextAlign.Center,
             modifier = Modifier.wrapContentWidth()
         )
