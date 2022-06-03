@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming release
 
+## 3.3.4
+
+> 2022-06-02
+
+- [kword] Trikot Kword now supports the use of Flows
+- [kword] BREAKING: To continue using Publishers in your project, please add the following dependency in addition to the usual dependency: `com.mirego.trikot:kword-streams`
+
 ## 3.3.2
 
 > 2022-05-02

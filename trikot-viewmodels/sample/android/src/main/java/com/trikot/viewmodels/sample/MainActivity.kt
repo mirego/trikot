@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.trikot.viewmodels.sample.databinding.ActivityMainBinding
 import com.trikot.viewmodels.sample.databinding.ListItemViewModelAdapter
 import com.trikot.viewmodels.sample.navigation.Destination
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), NavigationDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appViewModel = ViewModelProviders.of(this).get(AndroidAppViewModel::class.java)
+        appViewModel = ViewModelProvider(this)[AndroidAppViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.datasets.adapter = ListItemViewModelAdapter(this)
         binding.viewModel = appViewModel.getVm(this)

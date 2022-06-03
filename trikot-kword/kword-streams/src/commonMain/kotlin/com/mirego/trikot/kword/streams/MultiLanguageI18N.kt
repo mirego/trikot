@@ -1,5 +1,7 @@
-package com.mirego.trikot.kword
+package com.mirego.trikot.kword.streams
 
+import com.mirego.trikot.kword.I18N
+import com.mirego.trikot.kword.KWordKey
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.shared

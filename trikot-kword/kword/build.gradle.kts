@@ -18,7 +18,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
-                implementation(project(Project.TRIKOT_STREAMS))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
             }
         }

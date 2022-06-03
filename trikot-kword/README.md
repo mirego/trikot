@@ -92,6 +92,8 @@ KWord.t(KWordTranslation.PLURAL, 17)
         binaries {
             framework {
                 export "com.mirego.trikot:kword:$trikot_version"
+                export "com.mirego.trikot:kword-streams:$trikot_version" // If needed for multilingual support
+                export "com.mirego.trikot:kword-flow:$trikot_version" // If needed for multilingual support
             }
         }
     }
@@ -99,6 +101,8 @@ KWord.t(KWordTranslation.PLURAL, 17)
         commonMain {
             dependencies {
                  implementation "com.mirego.trikot:kword:$trikot_version"
+                 implementation "com.mirego.trikot:kword-streams:$trikot_version" // If needed for multilingual support
+                 implementation "com.mirego.trikot:kword-flow:$trikot_version" // If needed for multilingual support
             }
         }
     }
