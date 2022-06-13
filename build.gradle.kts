@@ -44,6 +44,8 @@ release {
         ":trikot-http:http:publish",
         ":trikot-datasources:datasources:publish",
         ":trikot-kword:kword:publish",
+        ":trikot-kword:kword-streams:publish",
+        ":trikot-kword:kword-flow:publish",
         ":trikot-kword:kword-plugin:publish",
         ":trikot-http:http:publish",
         ":trikot-viewmodels:viewmodels:publish",
