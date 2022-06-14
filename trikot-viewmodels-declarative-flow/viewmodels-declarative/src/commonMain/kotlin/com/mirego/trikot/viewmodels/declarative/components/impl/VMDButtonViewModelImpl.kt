@@ -30,7 +30,7 @@ open class VMDButtonViewModelImpl<C : VMDContent>(
     fun <T> setAction(flow: Flow<T>, action: (T) -> Unit) {
         actionBlock = {
             coroutineScope.launch {
-                flow.collectLatest { action(it) }
+                flow.collect { action(it) }
             }
         }
     }

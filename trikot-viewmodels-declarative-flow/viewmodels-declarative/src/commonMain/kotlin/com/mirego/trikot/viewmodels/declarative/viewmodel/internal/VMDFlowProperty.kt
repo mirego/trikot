@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -61,7 +60,7 @@ abstract class VMDFlowProperty<V>(
         coroutineScope.launch {
             flow
                 .catch { println("Error setting flow property \"${property.name}\" on ${this@VMDFlowProperty.listener}\n$it") }
-                .collectLatest { setValue(this, property, it) }
+                .collect { setValue(this, property, it) }
         }
     }
 
@@ -73,7 +72,7 @@ abstract class VMDFlowProperty<V>(
             withContext(Dispatchers.Main.immediate) {
                 flow
                     .catch { println("Error setting published property \"${property.name}\" on ${this@VMDFlowProperty.listener}\n$it") }
-                    .collectLatest {
+                    .collect {
                         val value = it.first
                         val animation = it.second
                         if (animation != null) {

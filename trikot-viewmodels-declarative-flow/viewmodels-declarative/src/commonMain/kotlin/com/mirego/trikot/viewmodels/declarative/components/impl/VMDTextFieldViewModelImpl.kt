@@ -53,15 +53,15 @@ open class VMDTextFieldViewModelImpl(coroutineScope: CoroutineScope) :
     fun addReturnKeyTapAction(action: () -> Unit) {
         coroutineScope.launch {
             onReturnKeyTapStateFlow
-                .collectLatest { action() }
+                .collect { action() }
         }
     }
 
     fun <T> addReturnKeyTapAction(flow: Flow<T>, action: (T) -> Unit) {
         coroutineScope.launch {
             onReturnKeyTapStateFlow
-                .collectLatest {
-                    flow.collectLatest { action(it) }
+                .collect {
+                    flow.collect { action(it) }
                 }
         }
     }
