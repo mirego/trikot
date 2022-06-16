@@ -47,6 +47,7 @@ open class VMDTextFieldViewModelImpl(cancellableManager: CancellableManager) :
     }
 
     override var formatText: (text: String) -> String = { text -> text }
+    override var unformatText: (text: String) -> String = { text -> text }
 
     override fun onValueChange(text: String) {
         this.text = text
