@@ -28,7 +28,7 @@ public struct VMDImage: View {
     }
 
     public init(_ imageDescriptor: VMDImageDescriptor) {
-        self.observableViewModel = VMDComponents.Image.companion.withDescriptor(imageDescriptor: imageDescriptor, cancellableManager: CancellableManager(), closure: {_ in }).asObservable()
+        self.observableViewModel = VMDComponents.Image.companion.withDescriptor(imageDescriptor: imageDescriptor, coroutineScope: CoroutineScopeProvider().provideMainWithSuperviserJob(), closure: {_ in }).asObservable()
     }
 
     public var body: some View {

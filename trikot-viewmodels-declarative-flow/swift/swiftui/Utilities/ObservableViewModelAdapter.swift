@@ -4,27 +4,24 @@ import TRIKOT_FRAMEWORK_NAME
 
 public class ObservableViewModelAdapter<VM: VMDViewModel>: ObservableObject {
     public let viewModel: VM
-    private let propertyWillChangePublisher: AnyPublisher<VMDPropertyChange<AnyObject>, Never>
-    private var cancellable: AnyCancellable?
+    private var closeable: Closeable?
 
     public init(viewModel: VM) {
         self.viewModel = viewModel
-        self.propertyWillChangePublisher = viewModel.propertyWillChange.eraseToAnyPublisher()
-        self.cancellable = propertyWillChangePublisher
-            .receive(on: Foundation.DispatchQueue.main)
-            .sink { [weak self] propertyChange in
-                if let propertyChangeAnimation = propertyChange.animation {
-                    withAnimation(propertyChangeAnimation.animation) {
-                        self?.objectWillChange.send()
-                    }
-                } else {
+        viewModel.propertyWillChange.watch { [weak self] propertyChange, closeable in
+            self?.closeable = closeable
+            if let propertyChangeAnimation = propertyChange.animation {
+                withAnimation(propertyChangeAnimation.animation) {
                     self?.objectWillChange.send()
                 }
+            } else {
+                self?.objectWillChange.send()
             }
+        }
     }
 
     deinit {
-        cancellable?.cancel()
+        closeable?.close()
     }
 }
 

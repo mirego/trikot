@@ -1,6 +1,8 @@
 package com.mirego.trikot.viewmodels.declarative.viewmodel
 
 import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.extension.VMDFlow
+import com.mirego.trikot.viewmodels.declarative.extension.wrap
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProperty
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.emit
@@ -16,11 +18,11 @@ open class VMDViewModelImpl(protected val coroutineScope: CoroutineScope) : VMDV
     private val propertyWillChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>()
     private val propertyDidChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>()
 
-    override val propertyWillChange: Flow<VMDPropertyChange<*>>
-        get() = propertyWillChangeSubject
+    override val propertyWillChange: VMDFlow<VMDPropertyChange<*>>
+        get() = propertyWillChangeSubject.wrap()
 
-    override val propertyDidChange: Flow<VMDPropertyChange<*>>
-        get() = propertyDidChangeSubject
+    override val propertyDidChange: VMDFlow<VMDPropertyChange<*>>
+        get() = propertyDidChangeSubject.wrap()
 
     override fun <V> willChange(property: KProperty<V>, oldValue: V, newValue: V) {
         coroutineScope.launch {

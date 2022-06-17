@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.flowWithLifecycle
-import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDComponent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import kotlinx.coroutines.CoroutineScope
@@ -27,8 +26,6 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.reflect.KProperty
-import kotlin.reflect.full.instanceParameter
-import kotlin.reflect.full.memberFunctions
 
 data class VMDAnimatedPropertyChange<T, V>(val value: T, val propertyChange: VMDPropertyChange<V>)
 
@@ -37,9 +34,9 @@ fun <T : VMDViewModel> T.observeAsState(excludedProperties: List<KProperty<*>> =
     return propertyDidChange
             .filter { propertyChange -> !excludedProperties.map { it.name }.contains(propertyChange.property.name) }
             .map {
-                (this as VMDComponent).copy() as T
+                this
             }
-            .collectAsStateLifecycleAware(initial = this)
+            .subscribeAsState(initial = this)
 }
 
 @Composable
@@ -113,7 +110,7 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
         .map { VMDAnimatedPropertyChange(value = transform(it.newValue as T), propertyChange = it as VMDPropertyChange<T>) }
 
     return merge(propertyFlow, propertyChangeFlow)
-        .collectAsStateLifecycleAware(initial = initialPropertyChange)
+        .subscribeAsState(initial = initialPropertyChange)
 }
 
 @Composable

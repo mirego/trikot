@@ -4,7 +4,6 @@ import Trikot
 
 class AppBootstrap {
     static func initialize() {
-        initializeTrikotHttp()
         initializeTrikotViewModels()
         initializeTrikotKword()
     }
@@ -13,11 +12,6 @@ class AppBootstrap {
         TrikotViewModelDeclarative.shared.initialize(
             imageProvider: SampleImageProvider()
         )
-    }
-
-    private static func initializeTrikotHttp() {
-        HttpConfiguration().httpRequestFactory = TrikotHttpRequestFactory()
-        HttpConfiguration().connectivityPublisher = TrikotConnectivityService.shared.publisher
     }
 
     private static func initializeTrikotKword() {
