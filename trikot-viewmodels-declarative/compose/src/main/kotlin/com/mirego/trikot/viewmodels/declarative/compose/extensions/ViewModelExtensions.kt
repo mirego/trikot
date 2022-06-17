@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -48,11 +49,20 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
 
     val propertyPublisher = publisherForProperty(property)
         .first()
-        .map { VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
+        .map {
+            Log.d("VMDExtensions", "propertyFlow map with it: $it")
+            VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it))
+        }
 
     val propertyChangePublisher =  propertyDidChange
-        .filter { it.property.name == property.name }
-        .map { VMDAnimatedPropertyChange(value = it.newValue as T, propertyChange = it as VMDPropertyChange<T>) }
+        .filter {
+            Log.d("VMDExtensions", "propertyChangeFlow filter with it: $it")
+            it.property.name == property.name
+        }
+        .map {
+            Log.d("VMDExtensions", "propertyChangeFlow map with it: $it")
+            VMDAnimatedPropertyChange(value = it.newValue as T, propertyChange = it as VMDPropertyChange<T>)
+        }
 
     return propertyPublisher.merge(propertyChangePublisher)
         .subscribeAsState(initial = initialPropertyChange, key = this)

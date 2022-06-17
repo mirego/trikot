@@ -44,6 +44,8 @@ dependencies {
     api("androidx.compose.material:material:${Versions.JETPACK_COMPOSE}")
     api("androidx.compose.runtime:runtime:${Versions.JETPACK_COMPOSE}")
     api("androidx.compose.ui:ui-tooling:${Versions.JETPACK_COMPOSE}")
+    api("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+    api("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     api("io.coil-kt:coil-compose:${Versions.COIL}")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")

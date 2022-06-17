@@ -3,7 +3,9 @@ package com.mirego.trikot.viewmodels.declarative.controller
 import com.mirego.trikot.foundation.concurrent.atomic
 import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
 abstract class VMDViewModelController<VM : VMDViewModel, N : VMDNavigationDelegate> :
@@ -11,7 +13,7 @@ abstract class VMDViewModelController<VM : VMDViewModel, N : VMDNavigationDelega
 
     var navigationDelegate: N? by weakAtomicReference()
 
-    protected val viewModelControllerScope = MainScope()
+    protected val viewModelControllerScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
 
     abstract val viewModel: VM
 

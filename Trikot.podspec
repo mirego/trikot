@@ -84,20 +84,14 @@ Pod::Spec.new do |spec|
       subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/core/**/*.swift'
     end
 
-    spec.subspec 'viewmodels.declarative.Combine.flow' do |subspec|
-      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/combine/**/*.swift'
-    end
-
-    spec.subspec 'viewmodels.declarative.UIKit.flow' do |subspec|
-      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/uikit/**/*.swift'
-      subspec.dependency 'Trikot/viewmodels.declarative.flow'
-      subspec.dependency 'Kingfisher', '>= 5.0'
-    end
+    #spec.subspec 'viewmodels.declarative.Combine.flow' do |subspec|
+    #  subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/combine/**/*.swift'
+    #end
 
     spec.subspec 'viewmodels.declarative.SwiftUI.flow' do |subspec|
       subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/swiftui/**/*.swift'
       subspec.dependency 'Trikot/viewmodels.declarative.flow'
-      subspec.dependency 'Trikot/viewmodels.declarative.Combine.flow'
+      #subspec.dependency 'Trikot/viewmodels.declarative.Combine.flow'
       subspec.dependency 'Kingfisher', '~> 7.1'
       subspec.dependency 'Introspect', '~> 0.1'
     end
