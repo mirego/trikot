@@ -68,7 +68,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("composeAar") {
                 from(components["release"])
-                artifactId = "viewmodels-declarative-compose"
+                artifactId = "viewmodels-declarative-compose-flow"
                 artifact(tasks["sourcesJar"])
             }
         }
