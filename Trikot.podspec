@@ -84,10 +84,6 @@ Pod::Spec.new do |spec|
       subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/core/**/*.swift'
     end
 
-    #spec.subspec 'viewmodels.declarative.Combine.flow' do |subspec|
-    #  subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/combine/**/*.swift'
-    #end
-
     spec.subspec 'viewmodels.declarative.SwiftUI.flow' do |subspec|
       subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/swiftui/**/*.swift'
       subspec.dependency 'Trikot/viewmodels.declarative.flow'
