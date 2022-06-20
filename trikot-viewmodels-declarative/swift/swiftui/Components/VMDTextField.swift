@@ -43,7 +43,7 @@ public struct VMDTextField<Label>: View where Label: View {
             Group {
                 if #available(iOS 15.0, *) {
                     if let labelBuilder = labelBuilder {
-                        TextField(text: text, prompt: prompt, label: labelBuilder)
+                        TextField(text: $text, prompt: prompt, label: labelBuilder)
                             .onSubmit {
                                 viewModel.onReturnKeyTap()
                             }
@@ -58,7 +58,7 @@ public struct VMDTextField<Label>: View where Label: View {
                             .disableAutocorrection(!viewModel.autoCorrect)
                             .hidden(viewModel.isHidden)
                     } else {
-                        TextField(viewModel.placeholder, text: text, prompt: prompt)
+                        TextField(viewModel.placeholder, text: $text, prompt: prompt)
                             .onSubmit {
                                 viewModel.onReturnKeyTap()
                             }
@@ -82,7 +82,7 @@ public struct VMDTextField<Label>: View where Label: View {
                 handleTextTransformations(newValue)
             }
         } else {
-            TextField(viewModel.placeholder, text: text, onEditingChanged: { isEditing in
+            TextField(viewModel.placeholder, text: $text, onEditingChanged: { isEditing in
                 self.onFocusChange?(isEditing)
             }, onCommit: {
                 viewModel.onReturnKeyTap()
