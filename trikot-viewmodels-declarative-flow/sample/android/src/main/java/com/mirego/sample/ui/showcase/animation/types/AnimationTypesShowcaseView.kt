@@ -83,14 +83,14 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
         property = viewModel::isTrailing,
         transform = { isTrailing -> if (isTrailing) 1f else -1f }
     )
-    /*val horizontalAlignment by animateHorizontalAlignmentAsState(
+    val horizontalAlignment by animateHorizontalAlignmentAsState(
         targetValue = linearAnimatedProperty.value,
         animationSpec = linearAnimatedProperty.animationSpec()
-    )*/
+    )
 
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(start = 16.dp, end = 16.dp, top = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        .padding(start = 16.dp, end = 16.dp, top = 16.dp), horizontalAlignment = horizontalAlignment) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             VMDText(
                 viewModel = viewModel.title,
