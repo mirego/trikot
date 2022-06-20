@@ -1,9 +1,10 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("mirego.publish")
 }
 
-version = "1.0"
+group = "com.mirego.trikot"
 
 kotlin {
     configureKmmTargets()

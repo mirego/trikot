@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -21,6 +22,8 @@ fun <C : VMDContent> VMDButton(
     modifier: Modifier = Modifier,
     viewModel: VMDButtonViewModel<C>,
     contentAlignment: Alignment = Alignment.Center,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    indication: Indication? = rememberRipple(),
     content: @Composable (BoxScope.(field: C) -> Unit)
 ) {
     val buttonViewModel: VMDButtonViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
@@ -31,8 +34,8 @@ fun <C : VMDContent> VMDButton(
             .clickable(
                 enabled = buttonViewModel.isEnabled,
                 onClick = viewModel.actionBlock,
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple()
+                interactionSource = interactionSource,
+                indication = indication
             ),
         contentAlignment = contentAlignment,
         content = { content(buttonViewModel.content) }

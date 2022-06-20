@@ -74,8 +74,10 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
         open fun onDetach() {}
 
         fun attach() {
-            if (lifecycleRegistry.currentState != Lifecycle.State.RESUMED) {
+            if (lifecycleRegistry.currentState == Lifecycle.State.INITIALIZED) {
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            }
+            if (lifecycleRegistry.currentState == Lifecycle.State.CREATED) {
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
                 onAttach()
@@ -92,7 +94,7 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
 
         fun destroy() {
             detach()
-            if (lifecycleRegistry.currentState != Lifecycle.State.DESTROYED) {
+            if (lifecycleRegistry.currentState == Lifecycle.State.CREATED) {
                 lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 lifecycleRegistry = LifecycleRegistry(this)
             }
