@@ -39,7 +39,7 @@ kotlin {
         extraSpecAttributes = mutableMapOf(
             "prepare_command" to """
                 <<-CMD
-                    ../../../gradlew :common:generateDummyFramework
+                    ../../../gradlew :trikot-viewmodels:sample:common:generateDummyFramework
                 CMD
             """.trimIndent()
         )

@@ -41,7 +41,7 @@ kotlin {
             "resources" to "\"src/commonMain/resources/translations/*\"",
             "prepare_command" to """
                 <<-CMD
-                    ../../../gradlew :common:generateDummyFramework
+                    ../../../gradlew :trikot-kword:sample:common:generateDummyFramework
                 CMD
             """.trimIndent()
         )
