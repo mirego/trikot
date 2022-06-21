@@ -45,7 +45,10 @@ GEM
       public_suffix (~> 4.0)
       typhoeus (~> 1.0)
     cocoapods-deintegrate (1.0.5)
+    cocoapods-disable-podfile-validations (0.1.1)
     cocoapods-downloader (1.5.1)
+    cocoapods-generate (2.2.2)
+      cocoapods-disable-podfile-validations (~> 0.1.1)
     cocoapods-plugins (1.0.0)
       nap
     cocoapods-search (1.0.1)
@@ -93,10 +96,12 @@ GEM
 PLATFORMS
   arm64-darwin-20
   arm64-darwin-21
+  ruby
 
 DEPENDENCIES
   activesupport
   cocoapods (= 1.11.2)
+  cocoapods-generate
   rspec-expectations (= 2.11.2)
 
 BUNDLED WITH

@@ -38,7 +38,12 @@ kotlin {
         homepage = "www.mirego.com"
         license = "BSD-3"
         extraSpecAttributes = mutableMapOf(
-            "resources" to "\"src/commonMain/resources/translations/*\""
+            "resources" to "\"src/commonMain/resources/translations/*\"",
+            "prepare_command" to """
+                <<-CMD
+                    ../../../gradlew :trikot-kword:sample:common:generateDummyFramework
+                CMD
+            """.trimIndent()
         )
 
         framework {

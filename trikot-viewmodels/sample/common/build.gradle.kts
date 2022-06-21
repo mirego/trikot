@@ -36,6 +36,13 @@ kotlin {
         summary = "Trikot-viewmodels sample"
         homepage = "www.mirego.com"
         license = "BSD-3"
+        extraSpecAttributes = mutableMapOf(
+            "prepare_command" to """
+                <<-CMD
+                    ../../../gradlew :trikot-viewmodels:sample:common:generateDummyFramework
+                CMD
+            """.trimIndent()
+        )
 
         framework {
             configureFramework()
