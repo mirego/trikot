@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Use the latest cocoapods gem
 gem 'cocoapods'
+gem 'cocoapods-generate'
 
 gem 'activesupport', '~>4.0.2'
 
