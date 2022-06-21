@@ -42,7 +42,7 @@ kotlin {
             "resources" to "\"src/commonMain/resources/translations/*\"",
             "prepare_command" to """
                 <<-CMD
-                    ../gradlew :common:generateDummyFramework
+                    ../../../gradlew :common:generateDummyFramework
                 CMD
             """.trimIndent()
         )
