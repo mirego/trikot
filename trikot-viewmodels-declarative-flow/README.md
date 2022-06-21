@@ -1,3 +1,3 @@
-# Trikot.viewmodels.declarative
+# Trikot.viewmodels.declarative-flow
 
-MVVM toolset for declarative UI frameworks such as SwiftUI and Jetpack Compose
+[EXPERIMENTAL] MVVM toolset for declarative UI frameworks such as SwiftUI and Jetpack Compose that works well with coroutines
