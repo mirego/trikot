@@ -1,6 +1,6 @@
 import TRIKOT_FRAMEWORK_NAME
 
-class Collector<T>: Kotlinx_coroutines_coreFlowCollector {
+class Collector<T>: FlowCollector {
     
     let callback:(T) -> Void
 

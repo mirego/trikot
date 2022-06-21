@@ -1,6 +1,5 @@
 package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -19,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -36,7 +36,7 @@ fun <T : VMDViewModel> T.observeAsState(excludedProperties: List<KProperty<*>> =
             .map {
                 this
             }
-            .subscribeAsState(initial = this)
+            .subscribeAsState(initial = this, key = this)
 }
 
 @Composable
@@ -74,10 +74,8 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
     val initial: T = (initialValue ?: property.getter.call())
     val initialPropertyChange = VMDAnimatedPropertyChange(initial, VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
 
-    val propertyFlow = remember {
-        flowForProperty(property)
+    val propertyFlow = flowForProperty(property)
             .map { VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
-    }
 
     val propertyChangeFlow =  remember {
         propertyDidChange
@@ -101,7 +99,6 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
 
     val propertyFlow = flowForProperty(property)
         .map {
-            Log.d("VMDEXTENSIONS", "inside observeAnimatedPropertyAsState")
             VMDAnimatedPropertyChange(value = transform(it), VMDPropertyChange(property = property, oldValue = it, newValue = it))
         }
 
@@ -110,7 +107,7 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
         .map { VMDAnimatedPropertyChange(value = transform(it.newValue as T), propertyChange = it as VMDPropertyChange<T>) }
 
     return merge(propertyFlow, propertyChangeFlow)
-        .subscribeAsState(initial = initialPropertyChange)
+        .subscribeAsState(initial = initialPropertyChange, key = this)
 }
 
 @Composable

@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.viewmodel
 
 import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimationContext
 import com.mirego.trikot.viewmodels.declarative.extension.VMDFlow
 import com.mirego.trikot.viewmodels.declarative.extension.wrap
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProperty
@@ -26,13 +27,13 @@ open class VMDViewModelImpl(protected val coroutineScope: CoroutineScope) : VMDV
 
     override fun <V> willChange(property: KProperty<V>, oldValue: V, newValue: V) {
         coroutineScope.launch {
-            propertyWillChangeSubject.emit(VMDPropertyChange(property, oldValue, newValue))
+            propertyWillChangeSubject.emit(VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek()))
         }
     }
 
     override fun <V> didChange(property: KProperty<V>, oldValue: V, newValue: V) {
         coroutineScope.launch {
-            propertyDidChangeSubject.emit(VMDPropertyChange(property, oldValue, newValue))
+            propertyDidChangeSubject.emit(VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek()))
         }
     }
 
