@@ -79,6 +79,18 @@ Pod::Spec.new do |spec|
     subspec.dependency 'Introspect', '~> 0.1'
   end
 
+    # View Model Declarative Flow
+    spec.subspec 'viewmodels.declarative.flow' do |subspec|
+      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/core/**/*.swift'
+    end
+
+    spec.subspec 'viewmodels.declarative.SwiftUI.flow' do |subspec|
+      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/swiftui/**/*.swift'
+      subspec.dependency 'Trikot/viewmodels.declarative.flow'
+      subspec.dependency 'Kingfisher', '~> 7.1'
+      subspec.dependency 'Introspect', '~> 0.1'
+    end
+
   # Analytics
   spec.subspec 'analytics.Firebase' do |subspec|
     subspec.source_files = 'trikot-analytics/swift-extensions/firebase/*.swift'

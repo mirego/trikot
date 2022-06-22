@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming release
 
+## 3.3.8
+
+> 2022-06-21
+
+- [VMD-flow] New Experimental module that uses Flows and coroutines instead of Publishers
+
 ## 3.3.4
 
 > 2022-06-02

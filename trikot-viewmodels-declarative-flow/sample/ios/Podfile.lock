@@ -1,0 +1,44 @@
+PODS:
+  - Introspect (0.1.4)
+  - Kingfisher (7.2.4)
+  - SwiftLint (0.43.1)
+  - Trikot/kword (3.3.4):
+    - TRIKOT_FRAMEWORK_NAME
+  - Trikot/viewmodels.declarative.flow (3.3.4):
+    - TRIKOT_FRAMEWORK_NAME
+  - Trikot/viewmodels.declarative.SwiftUI.flow (3.3.4):
+    - Introspect (~> 0.1)
+    - Kingfisher (~> 7.1)
+    - Trikot/viewmodels.declarative.flow
+    - TRIKOT_FRAMEWORK_NAME
+  - TRIKOT_FRAMEWORK_NAME (3.3.4)
+
+DEPENDENCIES:
+  - SwiftLint
+  - Trikot/kword (from `../../..`)
+  - Trikot/viewmodels.declarative.flow (from `../../..`)
+  - Trikot/viewmodels.declarative.SwiftUI.flow (from `../../..`)
+  - TRIKOT_FRAMEWORK_NAME (from `../common`)
+
+SPEC REPOS:
+  trunk:
+    - Introspect
+    - Kingfisher
+    - SwiftLint
+
+EXTERNAL SOURCES:
+  Trikot:
+    :path: "../../.."
+  TRIKOT_FRAMEWORK_NAME:
+    :path: "../common"
+
+SPEC CHECKSUMS:
+  Introspect: b62c4dd2063072327c21d618ef2bedc3c87bc366
+  Kingfisher: 2457be2121734e69e54a2312ecc0150eb9ae70b3
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  Trikot: f7a353d70799cc941d602d9b90638fd04a7ba368
+  TRIKOT_FRAMEWORK_NAME: 3ce2f458c247b03d97fe44168aa424eb0c504e2e
+
+PODFILE CHECKSUM: 3ea922a40d3e15204de5e4af30076387b6e5f2c9
+
+COCOAPODS: 1.11.2

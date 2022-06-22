@@ -48,11 +48,17 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
 
     val propertyPublisher = publisherForProperty(property)
         .first()
-        .map { VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
+        .map {
+            VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it))
+        }
 
     val propertyChangePublisher =  propertyDidChange
-        .filter { it.property.name == property.name }
-        .map { VMDAnimatedPropertyChange(value = it.newValue as T, propertyChange = it as VMDPropertyChange<T>) }
+        .filter {
+            it.property.name == property.name
+        }
+        .map {
+            VMDAnimatedPropertyChange(value = it.newValue as T, propertyChange = it as VMDPropertyChange<T>)
+        }
 
     return propertyPublisher.merge(propertyChangePublisher)
         .subscribeAsState(initial = initialPropertyChange, key = this)
