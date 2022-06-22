@@ -1,9 +1,8 @@
 package com.mirego.trikot.viewmodels.declarative.viewmodel
 
+import com.mirego.trikot.viewmodels.declarative.util.CoroutineScopeProvider
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
 abstract class VMDLifecycleViewModelImpl(coroutineScope: CoroutineScope) : VMDLifecycleViewModel, VMDViewModelImpl(coroutineScope) {
@@ -14,11 +13,9 @@ abstract class VMDLifecycleViewModelImpl(coroutineScope: CoroutineScope) : VMDLi
 
     final override fun onAppear() {
         viewLifecycleCoroutineScope?.cancel()
-        viewLifecycleCoroutineScope = CoroutineScope(
-            Dispatchers.Main.immediate + SupervisorJob() + CoroutineExceptionHandler { _, exception ->
+        viewLifecycleCoroutineScope = CoroutineScopeProvider.provideMainWithSuperviserJob(CoroutineExceptionHandler { _, exception ->
                 println("CoroutineExceptionHandler got $exception")
-            }
-        ).also {
+            }).also {
             onAppear(it)
             if (firstOnAppear) {
                 firstOnAppear = false
