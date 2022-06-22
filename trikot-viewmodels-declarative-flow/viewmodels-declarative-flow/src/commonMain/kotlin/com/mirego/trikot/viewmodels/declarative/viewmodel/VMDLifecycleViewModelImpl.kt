@@ -13,9 +13,11 @@ abstract class VMDLifecycleViewModelImpl(coroutineScope: CoroutineScope) : VMDLi
 
     final override fun onAppear() {
         viewLifecycleCoroutineScope?.cancel()
-        viewLifecycleCoroutineScope = CoroutineScopeProvider.provideMainWithSuperviserJob(CoroutineExceptionHandler { _, exception ->
+        viewLifecycleCoroutineScope = CoroutineScopeProvider.provideMainWithSuperviserJob(
+            CoroutineExceptionHandler { _, exception ->
                 println("CoroutineExceptionHandler got $exception")
-            }).also {
+            }
+        ).also {
             onAppear(it)
             if (firstOnAppear) {
                 firstOnAppear = false

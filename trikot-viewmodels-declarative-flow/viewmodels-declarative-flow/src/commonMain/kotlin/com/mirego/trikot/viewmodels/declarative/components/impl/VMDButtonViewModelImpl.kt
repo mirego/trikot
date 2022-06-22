@@ -7,7 +7,6 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProper
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.emit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Suppress("LeakingThis")
