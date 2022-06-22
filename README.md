@@ -39,7 +39,6 @@
 - [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/sample) are our samples specific to this module.
 - [trikot.viewmodel.declarative-flow samples](./trikot-viewmodels-declarative-flow/sample) are our samples specific to this module.
 
-
 ## License
 
 Trikot is © 2018-2022 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](LICENSE.md) file.
