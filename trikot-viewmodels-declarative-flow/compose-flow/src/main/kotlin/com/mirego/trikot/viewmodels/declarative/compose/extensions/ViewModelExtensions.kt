@@ -18,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -31,12 +30,13 @@ data class VMDAnimatedPropertyChange<T, V>(val value: T, val propertyChange: VMD
 
 @Composable
 fun <T : VMDViewModel> T.observeAsState(excludedProperties: List<KProperty<*>> = emptyList()): State<T> {
-    return propertyDidChange
+    return remember(this, excludedProperties) {
+        propertyDidChange
             .filter { propertyChange -> !excludedProperties.map { it.name }.contains(propertyChange.property.name) }
             .map {
                 this
             }
-            .subscribeAsState(initial = this, key = this)
+    }.subscribeAsState(initial = this, key = this)
 }
 
 @Composable
@@ -74,17 +74,16 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
     val initial: T = (initialValue ?: property.getter.call())
     val initialPropertyChange = VMDAnimatedPropertyChange(initial, VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
 
-    val propertyFlow = flowForProperty(property)
+    return remember(this, property) {
+        val propertyFlow = flowForProperty(property)
             .map { VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
 
-    val propertyChangeFlow =  remember {
-        propertyDidChange
+        val propertyChangeFlow = propertyDidChange
             .filter { it.property.name == property.name }
             .map { VMDAnimatedPropertyChange(value = it.newValue as T, propertyChange = it as VMDPropertyChange<T>) }
-    }
 
-    return merge(propertyFlow, propertyChangeFlow)
-        .subscribeAsState(initial = initialPropertyChange, key = this)
+        merge(propertyFlow, propertyChangeFlow)
+    }.subscribeAsState(initial = initialPropertyChange, key = this)
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -96,18 +95,19 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
 ): State<VMDAnimatedPropertyChange<V, T>> {
     val initial: T = (initialValue ?: property.getter.call())
     val initialPropertyChange = VMDAnimatedPropertyChange(transform(initial), VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
+    return remember(this, property) {
+        val propertyFlow = flowForProperty(property)
+            .map {
+                VMDAnimatedPropertyChange(value = transform(it), VMDPropertyChange(property = property, oldValue = it, newValue = it))
+            }
 
-    val propertyFlow = flowForProperty(property)
-        .map {
-            VMDAnimatedPropertyChange(value = transform(it), VMDPropertyChange(property = property, oldValue = it, newValue = it))
-        }
+        val propertyChangeFlow = propertyDidChange
+            .filter { it.property.name == property.name }
+            .map { VMDAnimatedPropertyChange(value = transform(it.newValue as T), propertyChange = it as VMDPropertyChange<T>) }
 
-    val propertyChangeFlow = propertyDidChange
-        .filter { it.property.name == property.name }
-        .map { VMDAnimatedPropertyChange(value = transform(it.newValue as T), propertyChange = it as VMDPropertyChange<T>) }
+        merge(propertyFlow, propertyChangeFlow)
+    }.subscribeAsState(initial = initialPropertyChange, key = this)
 
-    return merge(propertyFlow, propertyChangeFlow)
-        .subscribeAsState(initial = initialPropertyChange, key = this)
 }
 
 @Composable

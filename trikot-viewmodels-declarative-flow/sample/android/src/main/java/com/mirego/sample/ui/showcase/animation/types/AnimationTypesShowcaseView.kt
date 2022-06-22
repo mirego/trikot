@@ -19,8 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -88,9 +86,12 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
         animationSpec = linearAnimatedProperty.animationSpec()
     )
 
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(start = 16.dp, end = 16.dp, top = 16.dp), horizontalAlignment = horizontalAlignment) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+        horizontalAlignment = horizontalAlignment
+    ) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             VMDText(
                 viewModel = viewModel.title,
@@ -111,11 +112,14 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
             }
         }
 
-        Canvas(modifier = Modifier
-            .size(30.dp)
-            .padding(top = 10.dp), onDraw = {
-            drawCircle(Color.Red)
-        })
+        Canvas(
+            modifier = Modifier
+                .size(30.dp)
+                .padding(top = 10.dp),
+            onDraw = {
+                drawCircle(Color.Red)
+            }
+        )
     }
 }
 

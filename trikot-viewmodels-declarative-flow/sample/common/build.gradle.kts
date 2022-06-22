@@ -70,7 +70,6 @@ kotlin {
                 api(project(Project.TRIKOT_FOUNDATION))
                 api(project(Project.TRIKOT_KWORD))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
-
             }
             kotlin.srcDir(kword.generatedDir)
         }
