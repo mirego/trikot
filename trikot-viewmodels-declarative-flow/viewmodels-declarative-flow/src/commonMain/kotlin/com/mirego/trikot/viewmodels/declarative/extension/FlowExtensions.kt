@@ -14,7 +14,7 @@ fun interface Closeable {
 
 class VMDFlow<T : Any> internal constructor(
     private val origin: Flow<T>,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 ) : Flow<T> by origin {
     fun watch(block: (T, Closeable) -> Unit) {
         val job = Job()
