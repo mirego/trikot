@@ -7,12 +7,12 @@ extension UISwitch {
         static var impactFeedbackStyle = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
     
-    public var toggleSwitchViewModel: ToggleSwitchViewModel? {
-        get { return trikotViewModel() }
+    public var trikotToggleSwitchViewModel: ToggleSwitchViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
             if impactFeedbackStyle() == nil { impactFeedbackStyle(value: .light) }
             
-            viewModel = value
+            trikotViewModel = value
             guard let toggleSwitchViewModel = value else { return }
 
             observe(PublisherExtensionsKt.distinctUntilChanged(toggleSwitchViewModel.checked)) { [weak self] (value: Bool) in
@@ -40,7 +40,7 @@ extension UISwitch {
         if #available(iOS 10.0, *), let style = impactFeedbackStyle() {
             UIImpactFeedbackGenerator(style: getFeedbackStyle(style: style)).impactOccurred()
         }
-        guard let toggleSwitchViewModel = toggleSwitchViewModel else { return }
+        guard let toggleSwitchViewModel = trikotToggleSwitchViewModel else { return }
         observe(toggleSwitchViewModel.toggleSwitchAction.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
         PromiseCompanion().from(single: toggleSwitchViewModel.checked, cancellableManager: nil).onSuccess(accept: { value in
             let isOn = (value as! Bool)

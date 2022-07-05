@@ -3,8 +3,8 @@ import TRIKOT_FRAMEWORK_NAME
 import Trikot
 
 extension UIView {
-    public var viewModel: ViewModel? {
-        get { return trikotViewModel() }
+    public var trikotViewModel: ViewModel? {
+        get { return getTrikotViewModel() }
         set(viewModel) {
             unsubscribeFromAllPublisher()
             setTrikotViewModel(viewModel: viewModel)
@@ -63,7 +63,7 @@ extension UIView {
         static var viewModelKey = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
 
-    public func trikotViewModel<T>() -> T? {
+    public func getTrikotViewModel<T>() -> T? {
         return objc_getAssociatedObject(self, AssociatedKeys.viewModelKey) as? T
     }
 
@@ -73,7 +73,7 @@ extension UIView {
 
     @objc
     private func trikotOnViewTouchUp() {
-        let localViewModel: ViewModel? = trikotViewModel()
+        let localViewModel: ViewModel? = getTrikotViewModel()
         guard let viewModelModel = localViewModel else { return }
         observe(viewModelModel.action.first()) {[weak self] (value: ViewModelAction) in value.execute(actionContext: self) }
     }

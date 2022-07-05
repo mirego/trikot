@@ -15,11 +15,11 @@ extension UIButton {
         }
     }
 
-    public var buttonViewModel: ButtonViewModel? {
-        get { return trikotViewModel() }
+    public var trikotButtonViewModel: ButtonViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
             removeTarget(self, action: #selector(onPrimaryActionTriggered), for: .primaryActionTriggered)
-            viewModel = value
+            trikotViewModel = value
             if let buttonViewModel = value {
                 trikotInternalPublisherCancellableManager.add(cancellable: KeyValueObservationHolder(self.observe(\UIButton.isHighlighted) { (button, _) in
                     button.updateBackgroundColor()
@@ -158,7 +158,7 @@ extension UIButton {
 
     @objc
     open func positionSubviews(_ alignment: Alignment?) {
-        guard let buttonViewModel = buttonViewModel else { return }
+        guard let buttonViewModel = trikotButtonViewModel else { return }
         guard let alignment = alignment, [Alignment.right, Alignment.left].contains(alignment) else { resetAlignment() ; return }
 
         observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector<ImageResource>) in
@@ -206,7 +206,7 @@ extension UIButton {
     }
 
     func updateBackgroundColor() {
-        guard let buttonViewModel = buttonViewModel else { return }
+        guard let buttonViewModel = trikotButtonViewModel else { return }
         observe(buttonViewModel.backgroundColor.first()) {[weak self] (selector: StateSelector) in
             self?.updateBackgroundColor(selector)
         }
