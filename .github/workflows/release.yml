@@ -1,39 +1,10 @@
 name: On-Demand
 
-on:
-  workflow_dispatch:
-    inputs:
-      platform:
-        description: 'Platform'
-        type: choice
-        options:
-          - ios
-          - android
-        required: true
-      environment:
-        description: 'Build Type'
-        type: choice
-        options:
-          - qa
-          - staging
-          - production
-          - store
-        required: true
-
+on: workflow_dispatch
 
 jobs:
-  pre-build:
-    name: Build setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-
   build-cd:
-    name: Build app for CD
-    needs: pre-build
+    name: Release library
     runs-on: macos-12
     continue-on-error: false
     steps:
@@ -77,4 +48,4 @@ jobs:
           MAVEN_AWS_KEY: ${{ secrets.MIREGO_MAVEN_AWS_ACCESS_KEY_ID }}
           MAVEN_AWS_SECRET: ${{ secrets.MIREGO_MAVEN_AWS_SECRET_ACCESS_KEY }}
         run: |
-          ./gradlew release -i -s
+          ./gradlew check release -i -s
