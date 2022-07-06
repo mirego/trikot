@@ -2,11 +2,11 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 extension UITextField {
-    public var inputTextViewModel: InputTextViewModel? {
-        get { return trikotViewModel() }
+    public var trikotInputTextViewModel: InputTextViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
             removeTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
-            viewModel = value
+            trikotViewModel = value
             if let inputTextViewModel = value {
                 addTarget(self, action: #selector(onEditingChanged), for: .editingChanged)
 
@@ -65,6 +65,6 @@ extension UITextField {
 
     @objc
     private func onEditingChanged() {
-        inputTextViewModel?.setUserInput(value: text ?? "")
+        trikotInputTextViewModel?.setUserInput(value: text ?? "")
     }
 }

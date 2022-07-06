@@ -11,11 +11,12 @@ on:
       - "**"
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -26,13 +27,15 @@ jobs:
       - name: Run prettier
         run: npx prettier --check .
 
-      - name: Gradle cache
-        uses: actions/cache@v1
+      - name: Gradle Cache
+        uses: actions/cache@v3
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          key: gradle-${{ hashFiles('**/gradle.properties') }}
+          restore-keys: gradle-
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+
       - name: Setup Java
         uses: actions/setup-java@v1
         with:

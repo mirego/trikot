@@ -1,0 +1,45 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  cd:
+    name: Build library CD
+    runs-on: macos-latest
+    continue-on-error: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Gradle Cache
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{ hashFiles('**/gradle.properties') }}
+          restore-keys: gradle-
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+
+      - name: Kotlin Native Cache
+        uses: actions/cache@v3
+        with:
+          key: kotlin-native-${{ hashFiles('gradle.properties') }}
+          path: ~/.konan
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Release dev with gradle
+        env:
+          MAVEN_AWS_KEY: ${{ secrets.MIREGO_MAVEN_AWS_ACCESS_KEY_ID }}
+          MAVEN_AWS_SECRET: ${{ secrets.MIREGO_MAVEN_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          ./gradlew writeDevVersion -i -s
+          ./gradlew check publish -i -s

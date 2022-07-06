@@ -2,10 +2,10 @@ import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
 extension UILabel {
-    public var labelViewModel: LabelViewModel? {
-        get { return trikotViewModel() }
+    public var trikotLabelViewModel: LabelViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
-            viewModel = value
+            trikotViewModel = value
             if let labelViewModel = value {
                 if let richText = labelViewModel.richText {
                     observe(richText) {[weak self] (richText: RichText) in
