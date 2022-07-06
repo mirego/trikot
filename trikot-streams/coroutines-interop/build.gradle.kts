@@ -60,6 +60,30 @@ kotlin {
         val iosSimulatorArm64Test by getting {
             dependsOn(nativeTest)
         }
+
+        val macosX64Test by getting {
+            dependsOn(nativeTest)
+        }
+
+        val tvosArm64Test by getting {
+            dependsOn(nativeTest)
+        }
+
+        val tvosX64Test by getting {
+            dependsOn(nativeTest)
+        }
+
+        val watchos32Test by creating {
+            dependsOn(nativeTest)
+        }
+
+        val watchosArm64Test by getting {
+            dependsOn(nativeTest)
+        }
+
+        val watchosX64Test by getting {
+            dependsOn(nativeTest)
+        }
     }
 }
 
