@@ -52,10 +52,10 @@ extension UIImageView {
         }
     }
 
-    public var imageViewModel: ImageViewModel? {
-        get { return trikotViewModel() }
+    public var trikotImageViewModel: ImageViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
-            viewModel = value
+            trikotViewModel = value
             UIImageView.imageViewModelHandler.handleImage(imageViewModel: value, on: self)
         }
     }

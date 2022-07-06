@@ -7,13 +7,13 @@ extension UISlider {
         static var impactFeedbackStyle = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     }
 
-    public var sliderViewModel: SliderViewModel? {
-        get { return trikotViewModel() }
+    public var trikotSliderViewModel: SliderViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
             if oldValue() == nil { oldValue(value: 0) }
             if impactFeedbackStyle() == nil { impactFeedbackStyle(value: .light) }
 
-            viewModel = value
+            trikotViewModel = value
             guard let sliderViewModel = value else { return }
             self.minimumValue = Float(sliderViewModel.minValue)
             self.maximumValue = Float(sliderViewModel.maxValue)
@@ -34,7 +34,7 @@ extension UISlider {
                 UIImpactFeedbackGenerator(style: getFeedbackStyle(style: style)).impactOccurred()
             }
             oldValue(value: integerValue)
-            sliderViewModel?.setSelectedValue(value: integerValue)
+            trikotSliderViewModel?.setSelectedValue(value: integerValue)
         }
     }
 

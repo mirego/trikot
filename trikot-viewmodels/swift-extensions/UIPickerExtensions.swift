@@ -15,10 +15,10 @@ extension UIPickerView {
         }
     }
     
-    public var pickerViewModel: PickerViewModel? {
-        get { return trikotViewModel() }
+    public var trikotPickerViewModel: PickerViewModel? {
+        get { return getTrikotViewModel() }
         set(value) {
-            viewModel = value
+            trikotViewModel = value
             
             guard let pickerViewModel = value else { return }
 
@@ -45,7 +45,7 @@ extension UIPickerView {
 
 extension UIPickerView : UIPickerViewDelegate {
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.pickerViewModel?.setSelectedElementIndex(index: Int32(row))
+        self.trikotPickerViewModel?.setSelectedElementIndex(index: Int32(row))
     }
 }
 
