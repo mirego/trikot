@@ -11,6 +11,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 > 2022-07-05
 
 - [viewmodels] BREAKING: UIView extensions properties are now prefixed with "trikot" on iOS and tvOS
+  - `UIButton.buttonViewModel` is now `trikotButtonViewModel`
+  - `UIImage.imageViewModel` is now `trikotImageViewModel`
+  - `UILabel.labelViewModel` is now `trikotLabelViewModel`
+  - `UIPicker.pickerViewModel` is now `trikotPickerViewModel`
+  - `UISlider.sliderViewModel` is now `trikotSliderViewModel`
+  - `UISwitch.toggleSwitchViewModel` is now `trikotToggleSwitchViewModel`
+  - `UITextField.inputTextViewModel` is now `trikotInputTextViewModel`
+  - `UITextView.labelViewModel` is now `trikotLabelViewModel`
+  - `UIView.viewModel` is now `trikotViewModel`
+  - `UIView.trikotViewModel()` is now `getTrikotViewModel()`
 
 ## 3.3.8
 
