@@ -26,6 +26,7 @@ import com.mirego.trikot.streams.reactive.subscribe
 import org.reactivestreams.Publisher
 import java.util.Timer
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.collections.set
 import kotlin.concurrent.schedule
 
@@ -95,7 +96,7 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
         val devicesPublisher = Publishers.behaviorSubject<List<BluetoothScanResult>>(emptyList())
 
         val callback = object : ScanCallback() {
-            val foundDevice = HashMap<String, BluetoothScanResult>()
+            val foundDevice = ConcurrentHashMap<String, BluetoothScanResult>()
 
             override fun onBatchScanResults(results: MutableList<ScanResult>?) {
                 super.onBatchScanResults(results)
