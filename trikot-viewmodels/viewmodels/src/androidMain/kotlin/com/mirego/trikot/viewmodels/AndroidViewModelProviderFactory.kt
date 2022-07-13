@@ -157,7 +157,7 @@ class AndroidViewModelProviderFactory {
         private val viewModelControllerFactoryClass = viewModelControllerFactory::class.java
 
         @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val getters = viewModelControllerFactoryClass.declaredMethods
                 .filter {
                     it.returnType == modelClass && it.parameterTypes.map { javaClass ->

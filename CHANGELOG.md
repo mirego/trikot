@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## 4.0.0
 
+> 2022-07-12
+Updated:
+
+- Kotlin to 1.7.0
+- AtomicFu from 0.17.0 to 0.17.1
+- Jetpack Compose from 1.2.0-alpha03 to 1.2.0-alpha08
+- Ktor from 2.0.0 to 2.0.3
+
 > 2022-07-05
 
 - [viewmodels] BREAKING: UIView extensions properties are now prefixed with "trikot" on iOS and tvOS

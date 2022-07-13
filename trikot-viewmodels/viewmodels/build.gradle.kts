@@ -164,3 +164,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
+
+// Fixes https://youtrack.jetbrains.com/issue/KT-52761/Kotlin-170-breaks-kapt-processing-for-protobuf-generated-java-sources
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs>().configureEach {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjava-source-roots=$projectDir/src/commonMain/kotlin")
+    }
+}

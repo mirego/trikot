@@ -23,7 +23,7 @@ android {
         targetCompatibility(JavaVersion.VERSION_11)
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE
+        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE_COMPILER
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -41,10 +41,10 @@ dependencies {
     implementation(project(Project.TRIKOT_FOUNDATION))
     implementation(project(Project.TRIKOT_STREAMS))
 
-    api("androidx.compose.foundation:foundation:${Versions.JETPACK_COMPOSE}")
-    api("androidx.compose.material:material:${Versions.JETPACK_COMPOSE}")
-    api("androidx.compose.runtime:runtime:${Versions.JETPACK_COMPOSE}")
-    api("androidx.compose.ui:ui-tooling:${Versions.JETPACK_COMPOSE}")
+    api("androidx.compose.foundation:foundation:${Versions.JETPACK_COMPOSE_RUNTIME}")
+    api("androidx.compose.material:material:${Versions.JETPACK_COMPOSE_RUNTIME}")
+    api("androidx.compose.runtime:runtime:${Versions.JETPACK_COMPOSE_RUNTIME}")
+    api("androidx.compose.ui:ui-tooling:${Versions.JETPACK_COMPOSE_RUNTIME}")
     api("io.coil-kt:coil-compose:${Versions.COIL}")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")
