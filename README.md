@@ -1,7 +1,8 @@
 <div align="center">
   <img src="https://user-images.githubusercontent.com/11348/158435852-861b0ea1-b895-452b-abd4-029ccd6f5b86.svg" width="200" />
   <p>Trikot is a framework that helps building Kotlin Multiplatform applications.<br />iOS, Android and Web are the primary targets.</p>
-  <a href="https://github.com/mirego/trikot/tags"><img src="https://img.shields.io/github/tag/mirego/trikot.svg?label=Latest%20version"></a>
+  <a href="https://github.com/mirego/trikot/tags"><img src="https://img.shields.io/github/tag/mirego/trikot.svg?label=Latest%20release"></a>
+  <img src="https://img.shields.io/maven-metadata/v?label=latest%20dev&metadataUrl=https%3A%2F%2Fmirego-maven.s3.amazonaws.com%2Fpublic%2Fcom%2Fmirego%2Ftrikot%2FtrikotFoundation%2Fmaven-metadata.xml" />
   <a href="http://kotlinlang.org"><img src="https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin" /></a>
   <a href="https://github.com/mirego/trikot/actions/workflows/ci.yml"><img src="https://github.com/mirego/trikot/actions/workflows/ci.yml/badge.svg" /></a>
   <a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg" /></a>
