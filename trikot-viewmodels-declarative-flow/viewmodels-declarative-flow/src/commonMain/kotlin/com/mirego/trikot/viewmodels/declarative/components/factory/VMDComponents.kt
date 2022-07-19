@@ -13,12 +13,19 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDImageDescriptorContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
+import com.mirego.trikot.viewmodels.declarative.content.VMDTextFlowImagePairContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextImagePairContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextPairContent
+import com.mirego.trikot.viewmodels.declarative.content.VMDTextPairFlowContent
+import com.mirego.trikot.viewmodels.declarative.extension.asVMDTextContent
+import com.mirego.trikot.viewmodels.declarative.extension.asVMDTextImagePairContent
+import com.mirego.trikot.viewmodels.declarative.extension.asVMDTextPairContent
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDProgressDetermination
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 object VMDComponents {
     class Text {
@@ -37,6 +44,15 @@ object VMDComponents {
             ) =
                 VMDTextViewModelImpl(coroutineScope)
                     .apply { text = content }
+                    .apply(closure)
+
+            fun withContent(
+                contentFlow: Flow<String>,
+                coroutineScope: CoroutineScope,
+                closure: VMDTextViewModelImpl.() -> Unit = {}
+            ) =
+                VMDTextViewModelImpl(coroutineScope)
+                    .apply { bindText(contentFlow) }
                     .apply(closure)
         }
     }
@@ -100,6 +116,15 @@ object VMDComponents {
                 VMDButtonViewModelImpl(coroutineScope, VMDTextContent(text))
                     .apply(closure)
 
+            fun withText(
+                textFlow: Flow<String>,
+                coroutineScope: CoroutineScope,
+                closure: VMDButtonViewModelImpl<VMDTextContent>.() -> Unit = {}
+            ) =
+                VMDButtonViewModelImpl(coroutineScope, VMDTextContent(""))
+                    .apply { bindContent(textFlow.asVMDTextContent()) }
+                    .apply(closure)
+
             fun withImage(
                 image: VMDImageResource,
                 coroutineScope: CoroutineScope,
@@ -136,12 +161,30 @@ object VMDComponents {
                 VMDButtonViewModelImpl(coroutineScope, textPair)
                     .apply(closure)
 
+            fun withTextPair(
+                textPairFlow: VMDTextPairFlowContent,
+                coroutineScope: CoroutineScope,
+                closure: VMDButtonViewModelImpl<VMDTextPairContent>.() -> Unit = {}
+            ) =
+                VMDButtonViewModelImpl(coroutineScope, VMDTextPairContent("", ""))
+                    .apply { bindContent(flowOf(textPairFlow).asVMDTextPairContent()) }
+                    .apply(closure)
+
             fun withTextImage(
                 textImage: VMDTextImagePairContent,
                 coroutineScope: CoroutineScope,
                 closure: VMDButtonViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
             ) =
                 VMDButtonViewModelImpl(coroutineScope, textImage)
+                    .apply(closure)
+
+            fun withTextImage(
+                textFlowImage: VMDTextFlowImagePairContent,
+                coroutineScope: CoroutineScope,
+                closure: VMDButtonViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
+            ) =
+                VMDButtonViewModelImpl(coroutineScope, VMDTextImagePairContent("", textFlowImage.image))
+                    .apply { bindContent(flowOf(textFlowImage).asVMDTextImagePairContent()) }
                     .apply(closure)
         }
     }
@@ -162,6 +205,15 @@ object VMDComponents {
             ) =
                 VMDTextFieldViewModelImpl(coroutineScope)
                     .apply { placeholder = placeholderText }
+                    .apply(closure)
+
+            fun withPlaceholder(
+                placeholderTextFlow: Flow<String>,
+                coroutineScope: CoroutineScope,
+                closure: VMDTextFieldViewModelImpl.() -> Unit = {}
+            ) =
+                VMDTextFieldViewModelImpl(coroutineScope)
+                    .apply { bindPlaceholder(placeholderTextFlow) }
                     .apply(closure)
         }
     }
@@ -194,6 +246,17 @@ object VMDComponents {
                     .apply { isOn = state }
                     .apply(closure)
 
+            fun withText(
+                textFlow: Flow<String>,
+                state: Boolean,
+                coroutineScope: CoroutineScope,
+                closure: VMDToggleViewModelImpl<VMDTextContent>.() -> Unit = {}
+            ) =
+                VMDToggleViewModelImpl(coroutineScope, VMDTextContent(""))
+                    .apply { bindContent(textFlow.asVMDTextContent()) }
+                    .apply { isOn = state }
+                    .apply(closure)
+
             fun withImage(
                 image: VMDImageResource,
                 state: Boolean,
@@ -217,6 +280,17 @@ object VMDComponents {
                     .apply { isOn = state }
                     .apply(closure)
 
+            fun withTextPair(
+                textPairFlow: VMDTextPairFlowContent,
+                state: Boolean,
+                coroutineScope: CoroutineScope,
+                closure: VMDToggleViewModelImpl<VMDTextPairContent>.() -> Unit = {}
+            ) =
+                VMDToggleViewModelImpl(coroutineScope, VMDTextPairContent("", ""))
+                    .apply { bindContent(flowOf(textPairFlow).asVMDTextPairContent()) }
+                    .apply { isOn = state }
+                    .apply(closure)
+
             fun withTextImage(
                 textImage: VMDTextImagePairContent,
                 state: Boolean,
@@ -224,6 +298,17 @@ object VMDComponents {
                 closure: VMDToggleViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
             ) =
                 VMDToggleViewModelImpl(coroutineScope, textImage)
+                    .apply { isOn = state }
+                    .apply(closure)
+
+            fun withTextImage(
+                textFlowImage: VMDTextFlowImagePairContent,
+                state: Boolean,
+                coroutineScope: CoroutineScope,
+                closure: VMDToggleViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
+            ) =
+                VMDToggleViewModelImpl(coroutineScope, VMDTextImagePairContent("", textFlowImage.image))
+                    .apply { bindContent(flowOf(textFlowImage).asVMDTextImagePairContent()) }
                     .apply { isOn = state }
                     .apply(closure)
         }
