@@ -9,6 +9,11 @@ open class TrackableViewModelAction(private val event: AnalyticsEvent, private v
     ViewModelAction(actionBlock) {
     constructor(event: AnalyticsEvent, properties: AnalyticsPropertiesType, actionBlock: ViewModelActionBlock) : this(event, properties.just(), actionBlock)
 
+    override fun execute() {
+        super.execute()
+        AnalyticsConfiguration.analyticsManager.trackEvent(event, properties)
+    }
+
     override fun execute(actionContext: Any?) {
         super.execute(actionContext)
         AnalyticsConfiguration.analyticsManager.trackEvent(event, properties)
