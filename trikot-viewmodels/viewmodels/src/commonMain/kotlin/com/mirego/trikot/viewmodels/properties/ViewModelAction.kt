@@ -6,7 +6,7 @@ import kotlin.js.JsName
 typealias ViewModelActionBlock = (actionContext: Any?) -> Unit
 
 open class ViewModelAction(private var action: ViewModelActionBlock) {
-    fun execute() {
+    open fun execute() {
         action(null)
     }
 
