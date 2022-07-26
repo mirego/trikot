@@ -15,7 +15,7 @@ fun VMDLabeledComponent(
     content: @Composable RowScope.() -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().then(modifier),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
