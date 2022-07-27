@@ -50,7 +50,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.textCheckboxTitle)
 
         VMDCheckbox(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.textToggle,
             label = { Text(it.text, style = SampleTextStyle.body) }
         )
@@ -58,7 +60,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.imageCheckboxTitle)
 
         VMDCheckbox(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.imageToggle,
             label = { content ->
                 LocalImage(
@@ -71,7 +75,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.textImageCheckboxTitle)
 
         VMDCheckbox(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.textImageToggle,
             label = { content ->
                 Row(
@@ -92,7 +98,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.textPairCheckboxTitle)
 
         VMDCheckbox(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.textPairToggle,
             label = { content ->
                 Column(
@@ -120,7 +128,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.textSwitchTitle)
 
         VMDSwitch(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.textToggle,
             label = { Text(it.text, style = SampleTextStyle.body) }
         )
@@ -128,7 +138,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.imageSwitchTitle)
 
         VMDSwitch(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.imageToggle,
             label = { content ->
                 LocalImage(
@@ -141,7 +153,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.textImageSwitchTitle)
 
         VMDSwitch(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.textImageToggle,
             label = { content ->
                 Row(
@@ -163,7 +177,9 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
         ComponentShowcaseTitle(viewModel.textPairSwitchTitle)
 
         VMDSwitch(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
+                .fillMaxWidth(),
             viewModel = viewModel.textPairToggle,
             label = { content ->
                 Column(
