@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## 4.0.0
 
+> 2022-07-27
+
+- [VMD] BREAKING: Removed Modifier.fillMaxWidth in VMDLabeledComponent
+  - UI using `VMDCheckbox` and `VMDSwitch` should add fillMaxWidth to the modifier
+- [VMD-flow] BREAKING: Removed Modifier.fillMaxWidth in VMDLabeledComponent
+  - UI using `VMDCheckbox` and `VMDSwitch` should add fillMaxWidth to the modifier
+
 > 2022-07-05
 
 - [viewmodels] BREAKING: UIView extensions properties are now prefixed with "trikot" on iOS and tvOS
