@@ -38,6 +38,7 @@ release {
     )
     buildTasks = listOf(
         ":trikot-foundation:trikotFoundation:publish",
+        ":trikot-foundation:test-utils:publish",
         ":trikot-streams:streams:publish",
         ":trikot-streams:test-utils:publish",
         ":trikot-streams:coroutines-interop:publish",
