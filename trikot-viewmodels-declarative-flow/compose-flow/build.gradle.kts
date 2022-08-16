@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -52,21 +50,16 @@ dependencies {
 }
 
 tasks {
-    val sourcesJar by registering(Jar::class) {
-        val sourceSet = android.sourceSets.getByName("main").kotlin as DefaultAndroidSourceDirectorySet
-        from(sourceSet.srcDirs)
+    val sourcesJar by creating(Jar::class) {
         archiveClassifier.set("sources")
-    }
-
-    artifacts {
-        archives(sourcesJar)
+        from(kotlin.sourceSets["main"].kotlin.srcDirs)
     }
 }
 
 afterEvaluate {
     publishing {
         publications {
-            create<MavenPublication>("composeAar") {
+            create<MavenPublication>("release") {
                 from(components["release"])
                 artifactId = "viewmodels-declarative-compose-flow"
                 artifact(tasks["sourcesJar"])
