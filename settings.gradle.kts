@@ -20,6 +20,7 @@ pluginManagement {
 rootProject.name = "trikot"
 
 include(":trikot-foundation:trikotFoundation")
+include(":trikot-foundation:test-utils")
 include(":trikot-streams:streams")
 include(":trikot-streams:test-utils")
 include(":trikot-streams:coroutines-interop")
