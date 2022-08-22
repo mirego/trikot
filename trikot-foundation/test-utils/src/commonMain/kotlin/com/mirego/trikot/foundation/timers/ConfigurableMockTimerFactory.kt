@@ -2,20 +2,24 @@ import com.mirego.trikot.foundation.timers.Timer
 import com.mirego.trikot.foundation.timers.TimerFactory
 import kotlin.test.assertTrue
 import kotlin.time.Duration
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
+import kotlin.time.Duration.Companion.milliseconds
 
-data class TimerData(val timer: MockTimer, val fireOffTime: Duration, val repeatTime: Duration = fireOffTime, val repeatable: Boolean = false) {
+data class TimerData(
+    val timer: MockTimer,
+    val fireOffTime: Duration,
+    val repeatTime: Duration = fireOffTime,
+    val repeatable: Boolean = false
+) {
     var fired = false
 }
 
-class ConfigurableMockTimerFactory(initialTime: Duration = 0.toDuration(DurationUnit.MILLISECONDS)) : TimerFactory {
+class ConfigurableMockTimerFactory(initialTime: Duration = 0.milliseconds) : TimerFactory {
     var singleCall = 0
     var repeatableCall = 0
     val timers = mutableListOf<TimerData>()
     private var currentTime = initialTime
 
-    fun addToTime(timeToAdd: Duration) = setTime(currentTime + timeToAdd)
+    fun add(timeToAdd: Duration) = setTime(currentTime + timeToAdd)
 
     fun setTime(toTime: Duration) {
         if (toTime == currentTime) return

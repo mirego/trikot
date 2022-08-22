@@ -19,13 +19,13 @@ class ConfigurableMockTimerFactoryTest {
     }
 
     @Test
-    fun singleAddTime() {
+    fun singleAdd() {
         val mockTimer = ConfigurableMockTimerFactory()
         var fired = false
         mockTimer.single(500.milliseconds) {
             fired = true
         }
-        mockTimer.addToTime(500.milliseconds)
+        mockTimer.add(500.milliseconds)
         assertTrue(fired)
     }
 
@@ -44,16 +44,16 @@ class ConfigurableMockTimerFactoryTest {
     }
 
     @Test
-    fun repeatableWithAddToTime() {
+    fun repeatableWithAdd() {
         val mockTimer = ConfigurableMockTimerFactory()
         var counter = 0
         mockTimer.repeatable(500.milliseconds) {
             counter++
         }
-        mockTimer.addToTime(500.milliseconds)
+        mockTimer.add(500.milliseconds)
         assertEquals(1, counter)
 
-        mockTimer.addToTime(500.milliseconds)
+        mockTimer.add(500.milliseconds)
         assertEquals(2, counter)
     }
 }
