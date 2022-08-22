@@ -29,6 +29,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `UIView.viewModel` is now `trikotViewModel`
   - `UIView.trikotViewModel()` is now `getTrikotViewModel()`
 
+## 3.3.9
+
+> 2022-07-06
+
+- [VMD-flow] Add support for use of FlowI18N in VMDComponents factory
+
 ## 3.3.8
 
 > 2022-06-21
