@@ -22,7 +22,6 @@ public struct VMDTextField<Label>: View where Label: View {
         }
     }
 
-    @available(iOS 15, *)
     @State var isFocused = false
 
     public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil) {
