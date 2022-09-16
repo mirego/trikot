@@ -26,9 +26,12 @@ fun VMDLinearProgressIndicator(
 ) {
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = viewModel.determination?.progressRatio ?: 0f)
+
     if (viewModel.determination == null) {
         LinearProgressIndicator(
-            modifier = modifier.hidden(progressViewModel.isHidden)
+            modifier = modifier.hidden(progressViewModel.isHidden),
+            color = color,
+            backgroundColor = backgroundColor
         )
     } else {
         LinearProgressIndicator(
