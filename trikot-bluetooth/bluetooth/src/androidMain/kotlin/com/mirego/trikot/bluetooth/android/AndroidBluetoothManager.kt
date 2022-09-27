@@ -39,21 +39,25 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
 
     fun refreshPermissions() {
         val missingPermissions = mutableListOf<BluetoothManager.Permission>()
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S &&
+            isPermissionDisabled(Manifest.permission.ACCESS_FINE_LOCATION) &&
+            isPermissionDisabled(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
             missingPermissions.add(BluetoothManager.Permission.LOCATION)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
             (
-                ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
+                isPermissionDisabled(Manifest.permission.BLUETOOTH_CONNECT) ||
+                    isPermissionDisabled(Manifest.permission.BLUETOOTH_SCAN)
                 )
         ) {
             missingPermissions.add(BluetoothManager.Permission.BLUETOOTH)
         }
         missingPermissionsPublisher.value = missingPermissions
     }
+
+    private fun isPermissionDisabled(permissionManifest: String): Boolean =
+        ContextCompat.checkSelfPermission(context, permissionManifest) != PackageManager.PERMISSION_GRANTED
 
     init {
         refreshPermissions()
