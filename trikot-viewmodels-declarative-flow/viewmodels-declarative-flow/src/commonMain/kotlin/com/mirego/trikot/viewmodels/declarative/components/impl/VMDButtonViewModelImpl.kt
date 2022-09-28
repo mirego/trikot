@@ -7,6 +7,7 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProper
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.emit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 @Suppress("LeakingThis")
@@ -29,7 +30,7 @@ open class VMDButtonViewModelImpl<C : VMDContent>(
     fun <T> setAction(flow: Flow<T>, action: (T) -> Unit) {
         actionBlock = {
             coroutineScope.launch {
-                flow.collect { action(it) }
+                flow.firstOrNull()?.let { action(it) }
             }
         }
     }
