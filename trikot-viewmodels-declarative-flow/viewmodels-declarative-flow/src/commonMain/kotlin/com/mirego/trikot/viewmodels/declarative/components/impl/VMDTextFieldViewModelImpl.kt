@@ -44,9 +44,11 @@ open class VMDTextFieldViewModelImpl(coroutineScope: CoroutineScope) :
     }
 
     override var formatText: (text: String) -> String = { text -> text }
+    override var unformatText: (text: String) -> String = { text -> text }
+    override var transformText: (text: String) -> String = { text -> text }
 
     override fun onValueChange(text: String) {
-        this.text = text
+        this.text = transformText(text)
     }
 
     fun addReturnKeyTapAction(action: () -> Unit) {
