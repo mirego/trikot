@@ -31,8 +31,7 @@ open class VMDButtonViewModelImpl<C : VMDContent>(
     fun <T> setAction(flow: Flow<T>, action: (T) -> Unit) {
         actionBlock = {
             coroutineScope.launch {
-                val value = flow.firstOrNull()
-                value?.let { action(it) }
+                flow.firstOrNull()?.let { action(it) }
             }
         }
     }
