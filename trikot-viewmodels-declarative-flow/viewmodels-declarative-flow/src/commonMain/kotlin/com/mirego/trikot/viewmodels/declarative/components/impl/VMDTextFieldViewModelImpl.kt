@@ -39,10 +39,10 @@ open class VMDTextFieldViewModelImpl(coroutineScope: CoroutineScope) :
         emit(VMDKeyboardAutoCapitalization.Sentences, this, coroutineScope)
     override var autoCapitalization: VMDKeyboardAutoCapitalization by autoCapitalizationDelegate
 
-    val onReturnKeyTapStateFlow = MutableSharedFlow<Unit>(0, 0)
+    val onReturnKeyTapSharedFlow = MutableSharedFlow<Unit>()
     override val onReturnKeyTap: () -> Unit = {
         coroutineScope.launch {
-            onReturnKeyTapStateFlow.emit(Unit)
+            onReturnKeyTapSharedFlow.emit(Unit)
         }
     }
 
@@ -56,14 +56,14 @@ open class VMDTextFieldViewModelImpl(coroutineScope: CoroutineScope) :
 
     fun addReturnKeyTapAction(action: () -> Unit) {
         coroutineScope.launch {
-            onReturnKeyTapStateFlow
+            onReturnKeyTapSharedFlow
                 .collect { action() }
         }
     }
 
     fun <T> addReturnKeyTapAction(flow: Flow<T>, action: (T) -> Unit) {
         coroutineScope.launch {
-            onReturnKeyTapStateFlow
+            onReturnKeyTapSharedFlow
                 .collect {
                     flow.firstOrNull()?.let(action)
                 }
