@@ -12,13 +12,7 @@ public struct VMDTextField<Label>: View where Label: View {
         observableViewModel.viewModel
     }
 
-    private var text: Binding<String> {
-        Binding {
-            self.viewModel.text
-        } set: { text in
-            self.viewModel.onValueChange(text: self.viewModel.formatText(text))
-        }
-    }
+    @State private var text: String = ""
 
     private var prompt: Text? {
         if !viewModel.placeholder.isEmpty {
@@ -48,7 +42,7 @@ public struct VMDTextField<Label>: View where Label: View {
             Group {
                 if #available(iOS 15.0, *) {
                     if let labelBuilder = labelBuilder {
-                        TextField(text: text, prompt: prompt, label: labelBuilder)
+                        TextField(text: $text, prompt: prompt, label: labelBuilder)
                             .onSubmit {
                                 viewModel.onReturnKeyTap()
                             }
@@ -63,7 +57,7 @@ public struct VMDTextField<Label>: View where Label: View {
                             .disableAutocorrection(!viewModel.autoCorrect)
                             .hidden(viewModel.isHidden)
                     } else {
-                        TextField(viewModel.placeholder, text: text, prompt: prompt)
+                        TextField(viewModel.placeholder, text: $text, prompt: prompt)
                             .onSubmit {
                                 viewModel.onReturnKeyTap()
                             }
@@ -80,8 +74,14 @@ public struct VMDTextField<Label>: View where Label: View {
                     }
                 }
             }
+            .onChange(of: viewModel.text) { newValue in
+                text = viewModel.formatText(newValue)
+            }
+            .onChange(of: text) { newValue in
+                handleTextTransformations(newValue)
+            }
         } else {
-            TextField(viewModel.placeholder, text: text, onEditingChanged: { isEditing in
+            TextField(viewModel.placeholder, text: $text, onEditingChanged: { isEditing in
                 self.onFocusChange?(isEditing)
             }, onCommit: {
                 viewModel.onReturnKeyTap()
@@ -93,6 +93,18 @@ public struct VMDTextField<Label>: View where Label: View {
                 .textContentType(viewModel.contentType?.uiTextContentType)
                 .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
                 .disableAutocorrection(!viewModel.autoCorrect)
+                .onChange(of: viewModel.text) { newValue in
+                    text = viewModel.formatText(newValue)
+                }
+                .onChange(of: text) { newValue in
+                    handleTextTransformations(newValue)
+                }
         }
+    }
+
+    private func handleTextTransformations(_ value: String) {
+        let unformattedText = viewModel.unformatText(value)
+        text = viewModel.formatText(viewModel.transformText(unformattedText))
+        viewModel.onValueChange(text: unformattedText)
     }
 }

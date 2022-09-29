@@ -16,6 +16,8 @@ interface VMDTextFieldViewModel : VMDControlViewModel {
     val onReturnKeyTap: () -> Unit
 
     val formatText: (text: String) -> String
+    val unformatText: (text: String) -> String
+    val transformText: (text: String) -> String
 
     fun onValueChange(text: String)
 }

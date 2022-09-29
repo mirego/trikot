@@ -9,7 +9,8 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProper
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.emit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 @Suppress("LeakingThis")
@@ -38,29 +39,33 @@ open class VMDTextFieldViewModelImpl(coroutineScope: CoroutineScope) :
         emit(VMDKeyboardAutoCapitalization.Sentences, this, coroutineScope)
     override var autoCapitalization: VMDKeyboardAutoCapitalization by autoCapitalizationDelegate
 
-    val onReturnKeyTapStateFlow = MutableStateFlow(Unit)
-    override val onReturnKeyTap = {
-        onReturnKeyTapStateFlow.value = Unit
+    val onReturnKeyTapSharedFlow = MutableSharedFlow<Unit>()
+    override val onReturnKeyTap: () -> Unit = {
+        coroutineScope.launch {
+            onReturnKeyTapSharedFlow.emit(Unit)
+        }
     }
 
     override var formatText: (text: String) -> String = { text -> text }
+    override var unformatText: (text: String) -> String = { text -> text }
+    override var transformText: (text: String) -> String = { text -> text }
 
     override fun onValueChange(text: String) {
-        this.text = text
+        this.text = transformText(text)
     }
 
     fun addReturnKeyTapAction(action: () -> Unit) {
         coroutineScope.launch {
-            onReturnKeyTapStateFlow
+            onReturnKeyTapSharedFlow
                 .collect { action() }
         }
     }
 
     fun <T> addReturnKeyTapAction(flow: Flow<T>, action: (T) -> Unit) {
         coroutineScope.launch {
-            onReturnKeyTapStateFlow
+            onReturnKeyTapSharedFlow
                 .collect {
-                    flow.collect { action(it) }
+                    flow.firstOrNull()?.let(action)
                 }
         }
     }
