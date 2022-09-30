@@ -3,6 +3,7 @@ package com.mirego.trikot.analytics
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.mirego.trikot.streams.reactive.promise.Promise
 
 class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = true) :
     AnalyticsService {
@@ -21,6 +22,17 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
     override val name: String = "FirebaseAnalytics"
 
     private var superProperties = emptyMap<String, Any>()
+
+    override val distinctId = Promise.create<String?> { resolve, reject ->
+        firebaseAnalytics.appInstanceId
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    resolve(task.result)
+                } else {
+                    reject(Throwable(task.exception))
+                }
+            }
+    }
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         firebaseAnalytics.setUserId(userId)

@@ -14,6 +14,8 @@ class AnalyticsServiceLogger(private val analyticsService: AnalyticsService) : A
 
     private val superProperties = AtomicReference<AnalyticsPropertiesType>(mapOf())
 
+    override val distinctId = analyticsService.distinctId
+
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         println(
             """
