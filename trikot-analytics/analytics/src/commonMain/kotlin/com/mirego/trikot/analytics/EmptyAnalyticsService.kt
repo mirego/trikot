@@ -7,7 +7,7 @@ class EmptyAnalyticsService : AnalyticsService {
 
     override var isEnabled = false
 
-    override val distinctId: Promise<String?> = Promise.reject(Throwable())
+    override val distinctId: Promise<String?> = Promise.resolve("ANALYTICS_SERVICE_NOT_CONFIGURED_DISTINCT_ID")
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
     }

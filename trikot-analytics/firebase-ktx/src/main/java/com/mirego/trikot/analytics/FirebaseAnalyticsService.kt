@@ -32,6 +32,9 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
                     reject(Throwable(task.exception))
                 }
             }
+            .addOnCanceledListener {
+                reject(Throwable("cancelled"))
+            }
     }
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
