@@ -16,6 +16,10 @@ public class FirebaseAnalyticsService: AnalyticsService {
         }
     }
 
+    public func distinctAppId() -> Promise<NSString>  {
+        PromiseCompanion().resolve(value: Analytics.appInstanceID) as! Promise<NSString>
+    }
+
     public func identifyUser(userId: String, properties: [String: Any]) {
         Analytics.setUserID(userId)
         properties.forEach { Analytics.setUserProperty(anyToString($0.value), forName: $0.key) }

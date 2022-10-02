@@ -25,7 +25,7 @@ class MixpanelAnalyticsService(
 
     override val name: String = "MixpanelAnalytics"
 
-    override val distinctId = Promise.resolve(mixpanelAnalytics.distinctId)
+    override fun distinctAppId() = Promise.resolve(mixpanelAnalytics.distinctId)
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         mixpanelAnalytics.identify(userId)

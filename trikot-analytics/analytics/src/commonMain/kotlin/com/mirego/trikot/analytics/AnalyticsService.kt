@@ -18,9 +18,9 @@ interface AnalyticsService {
     var isEnabled: Boolean
 
     /*
-    The distinctId associated with the current device
+    The distinctAppId associated with the current device
      */
-    val distinctId: Promise<String?>
+    fun distinctAppId(): Promise<String?>
 
     /*
     userId: Id of the logged in user
@@ -76,7 +76,7 @@ interface AnalyticsService {
                 currentAnalyticsService().isEnabled = value
             }
 
-        override val distinctId = currentAnalyticsService().distinctId
+        override fun distinctAppId() = currentAnalyticsService().distinctAppId()
 
         override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
             currentAnalyticsService().identifyUser(userId, properties)
