@@ -18,6 +18,10 @@ public class MixpanelAnalyticsService: AnalyticsService {
         }
     }
 
+    public func distinctAppId() -> Promise<NSString>  {
+        PromiseCompanion().resolve(value: Mixpanel.mainInstance().distinctId) as! Promise<NSString>
+    }
+
     public func identifyUser(userId: String, properties: [String: Any]) {
         Mixpanel.mainInstance().identify(distinctId: userId)
         Mixpanel.mainInstance().people.set(properties: properties.asMixpanelProperties)

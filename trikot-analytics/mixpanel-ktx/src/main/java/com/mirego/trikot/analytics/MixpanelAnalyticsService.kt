@@ -1,6 +1,7 @@
 package com.mirego.trikot.analytics
 
 import android.content.Context
+import com.mirego.trikot.streams.reactive.promise.Promise
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import org.json.JSONObject
 
@@ -23,6 +24,8 @@ class MixpanelAnalyticsService(
         }
 
     override val name: String = "MixpanelAnalytics"
+
+    override fun distinctAppId() = Promise.resolve(mixpanelAnalytics.distinctId)
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         mixpanelAnalytics.identify(userId)

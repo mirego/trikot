@@ -1,9 +1,13 @@
 package com.mirego.trikot.analytics
 
+import com.mirego.trikot.streams.reactive.promise.Promise
+
 class EmptyAnalyticsService : AnalyticsService {
     override val name: String = "ANALYTICS SERVICE NOT CONFIGURED"
 
     override var isEnabled = false
+
+    override fun distinctAppId() = Promise.resolve("ANALYTICS_SERVICE_NOT_CONFIGURED_DISTINCT_ID")
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
     }
