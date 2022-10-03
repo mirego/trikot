@@ -23,13 +23,16 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
 
     private var superProperties = emptyMap<String, Any>()
 
-    override fun distinctAppId() = Promise.create<String?> { resolve, reject ->
+    override fun distinctAppId() = Promise.create<String> { resolve, reject ->
         firebaseAnalytics.appInstanceId
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    resolve(task.result)
-                } else {
+                val result = task.result
+                if (task.isSuccessful && result != null) {
+                    resolve(result)
+                } else if(!task.isSuccessful) {
                     reject(Throwable(task.exception))
+                } else {
+                    reject(Throwable("Empty result"))
                 }
             }
             .addOnCanceledListener {

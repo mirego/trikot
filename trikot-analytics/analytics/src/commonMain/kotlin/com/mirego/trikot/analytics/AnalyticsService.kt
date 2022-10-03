@@ -20,7 +20,7 @@ interface AnalyticsService {
     /*
     The distinctAppId associated with the current device
      */
-    fun distinctAppId(): Promise<String?>
+    fun distinctAppId(): Promise<String>
 
     /*
     userId: Id of the logged in user
