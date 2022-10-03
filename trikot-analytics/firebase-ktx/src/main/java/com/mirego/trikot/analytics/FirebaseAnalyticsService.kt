@@ -29,7 +29,7 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
                 val result = task.result
                 if (task.isSuccessful && result != null) {
                     resolve(result)
-                } else if(!task.isSuccessful) {
+                } else if (!task.isSuccessful) {
                     reject(Throwable(task.exception))
                 } else {
                     reject(Throwable("Empty result"))
