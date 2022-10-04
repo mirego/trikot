@@ -145,8 +145,7 @@ fun RemoteImage(
     contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
-    allowHardware: Boolean = true,
-    displayPlaceholderOnError: Boolean = true
+    allowHardware: Boolean = true
 ) {
     val coilPainter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current)
@@ -170,10 +169,7 @@ fun RemoteImage(
                 )
             } else {
                 Log.e(TAG, "Unable to load bitmap: size too large (${drawable.bitmap.allocationByteCount})")
-
-                if (displayPlaceholderOnError) {
-                    placeholder(placeholderImage, state)
-                }
+                placeholder(placeholderImage, state)
             }
         }
         else -> placeholder(placeholderImage, state)
