@@ -1,5 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
+import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +24,9 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Local
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Remote
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
+
+private const val TAG = "VMDImage"
+private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024 // 100 MB, taken from android.graphics.RecordingCanvas
 
 @Composable
 fun VMDImage(
@@ -150,16 +155,24 @@ fun RemoteImage(
             .build()
     )
 
-    when (coilPainter.state) {
-        is AsyncImagePainter.State.Success -> Image(
-            painter = coilPainter,
-            modifier = modifier,
-            alignment = alignment,
-            colorFilter = colorFilter,
-            contentScale = contentScale,
-            contentDescription = contentDescription
-        )
-        else -> placeholder(placeholderImage, coilPainter.state)
+    when (val state = coilPainter.state) {
+        is AsyncImagePainter.State.Success -> {
+            val drawable = state.result.drawable
+            if (drawable !is BitmapDrawable || drawable.bitmap.allocationByteCount <= MAX_BITMAP_SIZE) {
+                Image(
+                    painter = coilPainter,
+                    modifier = modifier,
+                    alignment = alignment,
+                    colorFilter = colorFilter,
+                    contentScale = contentScale,
+                    contentDescription = contentDescription
+                )
+            } else {
+                Log.e(TAG, "Unable to load bitmap: size too large (${drawable.bitmap.allocationByteCount})")
+                placeholder(placeholderImage, state)
+            }
+        }
+        else -> placeholder(placeholderImage, state)
     }
 }
 
