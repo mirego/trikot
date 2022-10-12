@@ -16,6 +16,8 @@ object Project {
     const val TRIKOT_VIEWMODELS_DECLARATIVE_FLOW = ":trikot-viewmodels-declarative-flow:viewmodels-declarative-flow"
     const val TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE_FLOW = ":trikot-viewmodels-declarative-flow:compose-flow"
     const val TRIKOT_VIEWMODELS_DECLARATIVE_SAMPLE_COMMON_FLOW = ":trikot-viewmodels-declarative-flow:sample:common"
-    const val TRIKOT_DATASOURCES = ":trikot-datasources:datasources"
+    const val TRIKOT_DATASOURCES_CORE = ":trikot-datasources:datasources-core"
+    const val TRIKOT_DATASOURCES_STREAMS = ":trikot-datasources:datasources-streams"
+    const val TRIKOT_DATASOURCES_FLOW = ":trikot-datasources:datasources-flow"
     const val TRIKOT_SAMPLES_FRAMEWORK_NAME = "TRIKOT_FRAMEWORK_NAME"
 }

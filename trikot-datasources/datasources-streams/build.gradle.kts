@@ -15,9 +15,7 @@ kotlin {
             dependencies {
                 implementation(project(Project.TRIKOT_FOUNDATION))
                 implementation(project(Project.TRIKOT_STREAMS))
-                implementation(project(Project.TRIKOT_HTTP))
-                implementation(project(Project.TRIKOT_DATASOURCES_STREAMS))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
+                api(project(Project.TRIKOT_DATASOURCES_CORE))
             }
         }
 
@@ -52,9 +50,6 @@ kotlin {
 
         val androidMain by getting {
             dependsOn(commonMain)
-            dependencies {
-                implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
-            }
         }
 
         val androidTest by getting {
