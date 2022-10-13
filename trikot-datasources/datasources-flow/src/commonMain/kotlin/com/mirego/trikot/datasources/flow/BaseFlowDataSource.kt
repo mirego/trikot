@@ -102,12 +102,16 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
 
     override suspend fun delete(cacheableId: String) {
         upstreamDataSource?.delete(cacheableId)
-        cache.remove(cacheableId)
+        cacheMutex.withLock {
+            cache.remove(cacheableId)
+        }
     }
 
     override suspend fun clear() {
         upstreamDataSource?.clear()
-        cache.clear()
+        cacheMutex.withLock {
+            cache.clear()
+        }
     }
 
     internal fun cacheableIds(): List<Any> {
@@ -117,7 +121,6 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
 
 private class CachedDataFlow<R: FlowDataSourceRequest, T>(
     scope: CoroutineScope,
-    sharingStarted: SharingStarted = SharingStarted.Lazily,
     initialRequest: R,
     initialValue: DataState<T, Throwable> = DataState.pending(),
     private val flowBlock: (request: R) -> Flow<DataState<T, Throwable>>
@@ -127,7 +130,7 @@ private class CachedDataFlow<R: FlowDataSourceRequest, T>(
     private val data: StateFlow<DataState<T, Throwable>> =
         retryCount.flatMapLatest { flowBlock(it.request) }
             .withPreviousDataStateValue()
-            .stateIn(scope, sharingStarted, initialValue)
+            .stateIn(scope, SharingStarted.Lazily, initialValue)
 
     fun retry(request: R) {
         retryCount.value = RetryData(request, retryCount.value.count + 1)

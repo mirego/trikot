@@ -10,7 +10,6 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -160,13 +159,13 @@ class BaseFlowDataSourceTests {
         }, coroutineContext = testDispatcher)
 
         val values = mutableListOf<DataState<DataSourceTestData, Throwable>>()
-        val collectJob = launch(testDispatcher) {
+        val job = launch(testDispatcher) {
             mainDataSource.read(requestRefreshCache).toList(values)
         }
         assertEquals(DataState.Pending(), values[0])
         mutex.unlock()
         assertEquals(DataState.data(data), values[1])
-        collectJob.cancel()
+        job.cancel()
     }
 
     @Test
@@ -220,20 +219,20 @@ class BaseFlowDataSourceTests {
     }
 }
 
-data class DataSourceTestData(
+private data class DataSourceTestData(
     val value: String
 )
 
-data class TestDataSourceRequest(
+private data class TestDataSourceRequest(
     override val cacheableId: String,
     override val requestType: FlowDataSourceRequest.Type,
     val value: DataSourceTestData
 ) : FlowDataSourceRequest
 
-class MainDataSource(
+private class MainDataSource(
     var readFunction: suspend (request: TestDataSourceRequest) -> DataSourceTestData,
     cacheDataSource: FlowDataSource<TestDataSourceRequest, DataSourceTestData>? = null,
-    coroutineContext: CoroutineContext = EmptyCoroutineContext,
+    coroutineContext: CoroutineContext,
     private val userRequestValue: Boolean = false
 ) :
     BaseFlowDataSource<TestDataSourceRequest, DataSourceTestData>(cacheDataSource, coroutineContext) {
@@ -252,7 +251,7 @@ class MainDataSource(
 
 private class CacheDataSource(
     var readFunction: suspend (request: TestDataSourceRequest) -> DataSourceTestData,
-    coroutineContext: CoroutineContext = EmptyCoroutineContext
+    coroutineContext: CoroutineContext
 ) : BaseFlowDataSource<TestDataSourceRequest, DataSourceTestData>(coroutineContext = coroutineContext) {
     var internalSaveCount = 0
     var internalDeleteCount = 0
