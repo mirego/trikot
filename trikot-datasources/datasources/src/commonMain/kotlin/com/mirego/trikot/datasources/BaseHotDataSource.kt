@@ -112,7 +112,6 @@ abstract class BaseHotDataSource<R : DataSourceRequest, T>(private val cacheData
                             cachedValue
                         }
                     }
-
                 }
             } ?: dataPublisher
             )
