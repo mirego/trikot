@@ -102,20 +102,27 @@ abstract class BaseHotDataSource<R : DataSourceRequest, T>(private val cacheData
                 if (data.value != null) {
                     data
                 } else {
-                    val newValue = NullableValue(cacheData)
-                    if (!cacheData.isPending()) {
-                        readIfNeeded(request, newValue, dataPublisher)
+                    val cachedValue = NullableValue(cacheData)
+                    if (cacheData.isPending()) {
+                        cachedValue
+                    } else {
+                        if (readIfNeeded(request, cachedValue, dataPublisher)) {
+                            NullableValue(null)
+                        } else {
+                            cachedValue
+                        }
                     }
-                    newValue
                 }
             } ?: dataPublisher
             )
     }
 
-    private fun readIfNeeded(request: R, currentData: NullableDataState<T>, dataPublisher: DataPublisher<T>) {
-        if (shouldRead(request, currentData)) {
+    private fun readIfNeeded(request: R, currentData: NullableDataState<T>, dataPublisher: DataPublisher<T>): Boolean {
+        val shouldRead = shouldRead(request, currentData)
+        if (shouldRead) {
             doInternalRead(request, currentData, dataPublisher)
         }
+        return shouldRead
     }
 
     private fun shouldRead(request: R, currentReadData: NullableDataState<T>): Boolean =

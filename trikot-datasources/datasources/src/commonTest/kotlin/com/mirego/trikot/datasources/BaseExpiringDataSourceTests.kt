@@ -39,10 +39,16 @@ class BaseExpiringDataSourceTests {
         val initialData = ExpiringValue(TestData("value"), 0)
         val cacheDataSource = CacheTestDataSource(initialData)
         val error = Throwable()
-        val readPromise = Promise.reject<ExpiringValue<TestData>>(error)
+
+        val readPublisher: BehaviorSubject<ExpiringValue<TestData>> = Publishers.behaviorSubject()
+        val readPromise = Promise.from(readPublisher)
+
         val mainDataSource = TestDataSource(readPromise, cacheDataSource)
 
-        mainDataSource.read(requestUseCache1).assertEquals(DataState.error(error, initialData))
+        val publisher = mainDataSource.read(requestUseCache1)
+        readPublisher.error = error
+
+        publisher.assertEquals(DataState.error(error, initialData))
     }
 
     @Test
