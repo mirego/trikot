@@ -64,6 +64,19 @@ class BaseFlowDataSourceTests {
     }
 
     @Test
+    fun givenErrorCacheDataThenPendingIsReturned() = runTest {
+        val cacheDataSource = CacheDataSource({ throw Throwable() }, testDispatcher)
+        val mainDataSource = MainDataSource({ awaitCancellation() }, cacheDataSource, testDispatcher)
+
+        val values = mutableListOf<DataState<DataSourceTestData, Throwable>>()
+        val collectJob = launch(testDispatcher) {
+            mainDataSource.read(requestUseCache).toList(values)
+        }
+        assertEquals(listOf(DataState.pending()), values)
+        collectJob.cancel()
+    }
+
+    @Test
     fun givenPendingCacheDataWhenReadWithRefreshAndCacheDataCompletedAndDataIsAvailableThenReturningTheNewDataAndSaveCalled() = runTest {
         val mutex = Mutex(locked = true)
         val cacheData = DataSourceTestData("value")
@@ -79,10 +92,8 @@ class BaseFlowDataSourceTests {
         val job = launch(testDispatcher) {
             mainDataSource.read(requestRefreshCache).toList(values)
         }
-        assertEquals()
-        publisher.assertEquals(DataState.pending())
-        cacheReadPublisher.value = cacheData
-        publisher.assertEquals(DataState.data(newData))
+        mutex.unlock()
+        assertEquals(listOf(DataState.pending(), DataState.data(newData)), values)
         assertEquals(1, mainDataSource.internalReadCount)
         assertEquals(1, cacheDataSource.internalSaveCount)
         job.cancel()
