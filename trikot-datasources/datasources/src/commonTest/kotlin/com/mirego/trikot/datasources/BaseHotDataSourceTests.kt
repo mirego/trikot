@@ -49,6 +49,15 @@ class BaseHotDataSourceTests {
     }
 
     @Test
+    fun givenErrorCacheDataThenPendingIsReturned() {
+        val cacheDataSource = CacheDataSource(Promise.reject(Throwable()))
+        val mainDataSource = MainDataSource(Promise.from(Publishers.behaviorSubject()), cacheDataSource)
+
+        val publisher = mainDataSource.read(requestUseCache)
+        publisher.assertEquals(DataState.pending())
+    }
+
+    @Test
     fun givenPendingCacheDataWhenReadWithRefreshAndCacheDataCompletedAndDataIsAvailableThenReturningTheNewDataAndSaveCalled() {
         val cacheReadPublisher: BehaviorSubject<DataSourceTestData> = Publishers.behaviorSubject()
         val cacheDataSource = CacheDataSource(Promise.from(cacheReadPublisher))
