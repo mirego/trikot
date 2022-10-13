@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 
 class RetryableDataFlow<T>(
     scope: CoroutineScope,
-    sharingStarted: SharingStarted = SharingStarted.WhileSubscribed(),
+    sharingStarted: SharingStarted = SharingStarted.Lazily,
     initialValue: DataState<T, Throwable> = DataState.pending(),
     private val flowBlock: () -> Flow<DataState<T, Throwable>>
 ) : StateFlow<DataState<T, Throwable>> {
