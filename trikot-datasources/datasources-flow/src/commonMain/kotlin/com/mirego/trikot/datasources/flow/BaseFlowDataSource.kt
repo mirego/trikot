@@ -86,9 +86,9 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
         }
     }
 
-    abstract suspend fun internalRead(request: R): T
+    protected abstract suspend fun internalRead(request: R): T
 
-    open fun shouldRead(request: R, data: DataState<T, Throwable>): Boolean {
+    protected open fun shouldRead(request: R, data: DataState<T, Throwable>): Boolean {
         return when (data) {
             is DataState.Pending -> false
             is DataState.Data -> request.requestType == FlowDataSourceRequest.Type.REFRESH_CACHE

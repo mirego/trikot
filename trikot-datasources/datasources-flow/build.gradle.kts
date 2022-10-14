@@ -3,6 +3,7 @@ plugins {
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint")
     id("mirego.publish")
+    id("kotlinx-serialization")
 }
 
 group = "com.mirego.trikot"
