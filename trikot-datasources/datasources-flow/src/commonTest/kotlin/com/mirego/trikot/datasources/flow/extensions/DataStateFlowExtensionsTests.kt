@@ -3,10 +3,12 @@ package com.mirego.trikot.datasources.flow.extensions
 import com.mirego.trikot.datasources.DataState
 import com.mirego.trikot.datasources.extensions.mapData
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class DataStateFlowExtensionsTests {
     private val combineTransform: suspend (a: String, b: String) -> String = { a, b -> a + b }
@@ -59,7 +61,7 @@ class DataStateFlowExtensionsTests {
     }
 
     @Test
-    fun mapValueMapsTheDataStateValueInAllStates() = runTest {
+    fun mapValue() = runTest {
         val transform: suspend (a: String) -> String = { a -> "$a$a" }
         val error = Throwable()
         assertEquals(DataState.pending(), flowOf(DataState.pending<String, Throwable>()).mapValue(transform).first())
@@ -67,5 +69,14 @@ class DataStateFlowExtensionsTests {
         assertEquals(DataState.error(error), flowOf(DataState.error<String, Throwable>(error)).mapValue(transform).first())
         assertEquals(DataState.error(error, "aa"), flowOf(DataState.error(error, "a")).mapValue(transform).first())
         assertEquals(DataState.data("aa"), flowOf(DataState.data<String, Throwable>("a")).mapValue(transform).first())
+    }
+
+    @Test
+    fun filterValue() = runTest {
+        assertNull(flowOf(DataState.pending<String, Throwable>()).filterValue().firstOrNull())
+        assertEquals("a", flowOf(DataState.pending<String, Throwable>("a")).filterValue().firstOrNull())
+        assertNull(flowOf(DataState.error<String, Throwable>(Throwable())).filterValue().firstOrNull())
+        assertEquals("a", flowOf(DataState.error(Throwable(), "a")).filterValue().firstOrNull())
+        assertEquals("a", flowOf(DataState.data<String, Throwable>("a")).filterValue().firstOrNull())
     }
 }
