@@ -119,7 +119,7 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     }
 }
 
-private class CachedDataFlow<R: FlowDataSourceRequest, T>(
+private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     scope: CoroutineScope,
     initialRequest: R,
     initialValue: DataState<T, Throwable> = DataState.pending(),
@@ -146,7 +146,7 @@ private class CachedDataFlow<R: FlowDataSourceRequest, T>(
         data.collect(collector)
     }
 
-    private data class RetryData<R: FlowDataSourceRequest>(
+    private data class RetryData<R : FlowDataSourceRequest>(
         val request: R,
         val count: Int
     )

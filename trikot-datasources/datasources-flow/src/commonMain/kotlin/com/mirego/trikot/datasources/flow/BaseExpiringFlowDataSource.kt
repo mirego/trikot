@@ -17,7 +17,7 @@ data class FlowDataSourceExpiringValue<T>(
     fun isExpired(): Boolean = expiredEpoch < Date.now.epoch
 }
 
-abstract class BaseExpiringExecutableFlowDataSource<R: ExpiringFlowDataSourceRequest, T>(
+abstract class BaseExpiringExecutableFlowDataSource<R : ExpiringFlowDataSourceRequest, T>(
     cacheDataSource: FlowDataSource<R, FlowDataSourceExpiringValue<T>>? = null,
     coroutineContext: CoroutineContext = EmptyCoroutineContext
 ) : BaseFlowDataSource<R, FlowDataSourceExpiringValue<T>>(cacheDataSource, coroutineContext) {

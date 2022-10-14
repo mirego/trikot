@@ -1,7 +1,6 @@
 package com.mirego.trikot.datasources.flow.extensions
 
 import com.mirego.trikot.datasources.DataState
-import com.mirego.trikot.datasources.extensions.mapData
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf

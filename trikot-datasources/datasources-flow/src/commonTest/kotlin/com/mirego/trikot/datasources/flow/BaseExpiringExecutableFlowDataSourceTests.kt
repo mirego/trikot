@@ -69,7 +69,7 @@ class BaseExpiringExecutableFlowDataSourceTests {
     }
 
     @Test
-    fun whenCacheIsValidThenReadWith_REFRESH_CACHE_ReturnsPendingWithData() = runTest  {
+    fun whenCacheIsValidThenReadWith_REFRESH_CACHE_ReturnsPendingWithData() = runTest {
         val initialData = TestData("value")
         val cacheDataSource = CacheTestDataSource(FlowDataSourceExpiringValue(initialData, Date.now.epoch + 1000), testDispatcher)
         val mainDataSource = TestDataSource({ awaitCancellation() }, cacheDataSource, testDispatcher)
