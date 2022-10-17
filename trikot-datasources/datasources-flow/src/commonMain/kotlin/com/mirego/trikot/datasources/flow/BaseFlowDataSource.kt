@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -134,6 +135,8 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
 
     init {
         scope.launch {
+            // Start subscribing only when dataStateFlow has subscriptions
+            dataStateFlow.subscriptionCount.first { it > 0 }
             blockData.collect {
                 dataStateFlow.value = it
             }
