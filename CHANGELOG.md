@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## 4.0.0
 
+> 2022-10-17
+
+- [Datasources] BREAKING: Moved Trikot.Datasources to Trikot.Datasources.streams
+  `com.mirego.trikot:datasources:$trikot_version -> com.mirego.trikot:datasources-streams:$trikot_version`
+- [Datasources.flow] New implementation that supports flows and coroutines
+
 > 2022-07-27
 
 - [VMD] BREAKING: Removed Modifier.fillMaxWidth in VMDLabeledComponent
