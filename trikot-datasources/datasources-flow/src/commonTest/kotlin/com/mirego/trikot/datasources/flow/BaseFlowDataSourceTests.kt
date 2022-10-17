@@ -2,6 +2,7 @@ package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
 import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -123,6 +124,44 @@ class BaseFlowDataSourceTests {
         job1.cancel()
         job2.cancel()
         job3.cancel()
+    }
+
+    @Test
+    fun whenSecondReadStartsWithRefreshCacheItEmitsPreviousValueWhilePending() = runTest {
+        val initialData = DataSourceTestData("value")
+        val newData = DataSourceTestData("value2")
+        val mutex = Mutex(locked = true)
+        val mainDataSource = MainDataSource({
+            initialData
+        }, coroutineContext = testDispatcher)
+
+        val values = mutableListOf<DataState<DataSourceTestData, Throwable>>()
+        val job1 = launch(testDispatcher) {
+            mainDataSource.read(requestRefreshCache).toList(values)
+        }
+
+        mainDataSource.readFunction = {
+            mutex.withLock {
+                newData
+            }
+        }
+
+        val job2 = launch(testDispatcher) {
+            mainDataSource.read(requestRefreshCache).collect()
+        }
+        mutex.unlock()
+        assertEquals(
+            listOf(
+                DataState.pending(),
+                DataState.data(initialData),
+                DataState.pending(initialData),
+                DataState.data(newData)
+            ),
+            values
+        )
+        assertEquals(2, mainDataSource.internalReadCount)
+        job1.cancel()
+        job2.cancel()
     }
 
     @Test

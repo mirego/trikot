@@ -1,6 +1,7 @@
 package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
+import com.mirego.trikot.datasources.extensions.value
 import com.mirego.trikot.datasources.flow.extensions.withPreviousDataStateValue
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -59,12 +61,11 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
                         when (it) {
                             is DataState.Pending -> emit(it)
                             is DataState.Data -> if (shouldRead(request, it)) {
-                                emit(DataState.pending(it.value))
-                                emitInternalRead(request)
+                                emitInternalRead(request, it.value)
                             } else {
                                 emit(it)
                             }
-                            is DataState.Error -> emitInternalRead(request)
+                            is DataState.Error -> emitInternalRead(request, it.value)
                         }
                     }
                 } else {
@@ -73,8 +74,9 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
             }
         }
 
-    private suspend fun FlowCollector<DataState<T, Throwable>>.emitInternalRead(request: R) {
+    private suspend fun FlowCollector<DataState<T, Throwable>>.emitInternalRead(request: R, oldValue: T? = null) {
         try {
+            emit(DataState.pending(oldValue))
             val readResult = internalRead(request)
             upstreamDataSource?.save(request, readResult)
             emit(DataState.Data(readResult))
