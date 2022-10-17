@@ -8,13 +8,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -129,33 +126,33 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     private val flowBlock: (request: R) -> Flow<DataState<T, Throwable>>
 ) : StateFlow<DataState<T, Throwable>> {
     private val retryCount = MutableStateFlow(RetryData(initialRequest, 0))
-    private val innerData = MutableStateFlow(initialValue)
+    private val dataStateFlow = MutableStateFlow(initialValue)
 
-    private val data: Flow<DataState<T, Throwable>> =
+    private val blockData: Flow<DataState<T, Throwable>> =
         retryCount.flatMapLatest { flowBlock(it.request) }
             .withPreviousDataStateValue()
 
     init {
         scope.launch {
-            data.collect {
-                innerData.value = it
+            blockData.collect {
+                dataStateFlow.value = it
             }
         }
     }
 
     fun retry(request: R) {
-        innerData.value = DataState.pending(innerData.value.value())
+        dataStateFlow.value = DataState.pending(dataStateFlow.value.value())
         retryCount.value = RetryData(request, retryCount.value.count + 1)
     }
 
     override val replayCache: List<DataState<T, Throwable>>
-        get() = innerData.replayCache
+        get() = dataStateFlow.replayCache
 
     override val value: DataState<T, Throwable>
-        get() = innerData.value
+        get() = dataStateFlow.value
 
     override suspend fun collect(collector: FlowCollector<DataState<T, Throwable>>): Nothing {
-        innerData.collect(collector)
+        dataStateFlow.collect(collector)
     }
 
     private data class RetryData<R : FlowDataSourceRequest>(
