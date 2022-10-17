@@ -6,19 +6,20 @@ The Trikot ViewModels Declarative Compiler is a Gradle plugin that generates the
 
 ### Published Property
 
-When a field in a ViewModel interface needs to be *published*, simply annotate it with the `@Published` annotation.
+When a field in a ViewModel interface needs to be _published_, simply annotate it with the `@Published` annotation.
 
 ```kotlin
 interface ExampleViewModel : VMDViewModel {
-    
+
     @Published
     val publishedField: String
-    
+
     val nonPublishedField: String
 }
 ```
 
 When the plugin detects the annotation on an interface, it will automatically generate an abstract base class that your implementation can extend. This class will contain:
+
 - A constructor that requires the initial values of the published fields
 - The published property delegate
 - The overridden `var` based on the delegate
@@ -28,7 +29,7 @@ When the plugin detects the annotation on an interface, it will automatically ge
 
 ### Published Subclass
 
-By default, the generated base class will extend the standard ViewModel base class, `VMDViewModelImpl`. 
+By default, the generated base class will extend the standard ViewModel base class, `VMDViewModelImpl`.
 However, if your View Model implementation needs it to extend something else, use the @PublishedSubClass annotation on your implementation.
 
 ```kotlin
@@ -43,10 +44,10 @@ class ExampleViewModelImpl(
 
 In this case, `BaseExampleViewModelImpl` will extend `VMDLifecycleViewModelImpl` instead of `VMDViewModelImpl`.
 
-
 ## Plugin installation
 
 The compiler has 2 main components:
+
 - A Kotlin Multiplatform library containing the annotations, needed as a dependency of your kotlin multiplatform code.
 - A KSP plugin that handles annotation processing and code generation, only needed at compile time in your project.
 
@@ -63,6 +64,7 @@ val commonMain by getting {
 ```
 
 And in your native exports:
+
 ```kotlin
 framework {
     export("com.mirego.trikot:viewmodels-annotations:[trikot version]")
@@ -81,7 +83,7 @@ plugins {
 
 The compiler is not a multi platform project, mainly because it's only needed in the common Koltin code (no need for target-specific code).
 
-In order to add the compiler in your build pipeline, add the following dependency (at the root of your gradle script file). 
+In order to add the compiler in your build pipeline, add the following dependency (at the root of your gradle script file).
 
 ```kotlin
 dependencies {
