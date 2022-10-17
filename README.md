@@ -20,7 +20,7 @@
 ## Modules
 
 | Module                                                                             | Description                                                         |
-|------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | [trikot.foundation](./trikot-foundation)                                           | Foundation classes and building blocks                              |
 | [trikot.streams](./trikot-streams)                                                 | Reactive streams                                                    |
 | [trikot.datasources](./trikot-datasources)                                         | Cascading data access layers abstraction.                           |
