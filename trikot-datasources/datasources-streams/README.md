@@ -42,7 +42,7 @@ val myDataSource = MyDataSource<String>(MemoryCacheDataSource())
 In this example we will use memory cache
 
 ```kotlin
-val request = myDataSource.myMyDataSource.read(MyDataSourceRequest(query, "queryCacheId"))
+val request = myDataSource.myDataSource.read(MyDataSourceRequest(query, "queryCacheId"))
 request.subscribe(cancelableManager) {
     print(it)
 }
@@ -53,7 +53,7 @@ request.subscribe(cancelableManager) {
 To invalidate data, simply send a get request using REFRESH_CACHE. No subscription is needed for the invalidation to happens
 
 ```kotlin
-myDataSource.myMyDataSource.read(MyDataSourceRequest(query, "queryCacheId", DataSourceRequest.Type.REFRESH_CACHE))
+myDataSource.myDataSource.read(MyDataSourceRequest(query, "queryCacheId", DataSourceRequest.Type.REFRESH_CACHE))
 ```
 
 # Complete Datasource invalidation
