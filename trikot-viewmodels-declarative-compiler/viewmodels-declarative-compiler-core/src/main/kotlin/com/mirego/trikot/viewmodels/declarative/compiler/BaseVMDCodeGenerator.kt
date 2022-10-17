@@ -3,7 +3,6 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.KSPLogger
-import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.ksp.toClassName
@@ -104,7 +103,6 @@ abstract class BaseVMDCodeGenerator(
         return builder.build()
     }
 
-
     private fun generateConstructorParameters(viewModelMetaData: ViewModelMetaData): CodeBlock =
         viewModelMetaData.superClass?.primaryConstructor?.parameters?.let { parameters ->
             CodeBlock.of(parameters.joinToString(", "))
@@ -147,7 +145,6 @@ abstract class BaseVMDCodeGenerator(
                     .build()
             }
 
-
     private fun generatePropertyMappingOverride(viewModelMetaData: ViewModelMetaData) = PropertySpec.builder(
         name = "propertyMapping",
         type = Map::class.asClassName().parameterizedBy(
@@ -167,7 +164,8 @@ abstract class BaseVMDCodeGenerator(
                             }
                         }
                         .endControlFlow()
-                        .build())
+                        .build()
+                )
                 .endControlFlow()
                 .build()
         )
@@ -191,7 +189,6 @@ abstract class BaseVMDCodeGenerator(
             .build()
     }
 
-
     private fun generateBindAllFunction(viewModelMetaData: ViewModelMetaData): FunSpec {
         val bodyStatements = CodeBlock.builder()
         viewModelMetaData.publishedProperty.forEach { propertyDeclaration ->
@@ -213,7 +210,6 @@ abstract class BaseVMDCodeGenerator(
             .build()
     }
 
-
     private fun generatePublisherForPropertyFunctions(viewModelMetaData: ViewModelMetaData) = viewModelMetaData.publishedProperty.map { propertyDeclaration ->
         FunSpec
             .builder("${publisherName}For${propertyDeclaration.simpleName.getShortName().replaceFirstChar { it.uppercase() }}")
@@ -226,4 +222,3 @@ abstract class BaseVMDCodeGenerator(
             .build()
     }
 }
-

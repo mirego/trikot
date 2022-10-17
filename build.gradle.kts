@@ -58,6 +58,7 @@ release {
         ":trikot-viewmodels-declarative-flow:compose-flow:publish",
         ":trikot-viewmodels-declarative-annotations:publish",
         ":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-streams:publish",
+        ":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-flow:publish",
         ":trikot-analytics:analytics:publish",
         ":trikot-analytics:analytics-viewmodel:publish",
         ":trikot-analytics:firebase-ktx:publish",
