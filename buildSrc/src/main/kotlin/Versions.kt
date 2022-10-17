@@ -10,6 +10,7 @@ object Versions {
     const val KTOR = "2.0.0"
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.331"
     const val ANDROIDX_LIFECYCLE = "2.4.0"
+    const val OKIO = "3.2.0"
 
     object Android {
         const val TARGET_SDK = 31
