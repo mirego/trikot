@@ -11,6 +11,8 @@ object Versions {
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.331"
     const val ANDROIDX_LIFECYCLE = "2.4.0"
     const val OKIO = "3.2.0"
+    const val KSP = "1.7.10-1.0.6"
+    const val KOTLIN_POET = "1.12.0"
 
     object Android {
         const val TARGET_SDK = 31
