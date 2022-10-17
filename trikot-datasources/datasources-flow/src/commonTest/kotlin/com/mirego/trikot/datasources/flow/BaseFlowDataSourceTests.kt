@@ -2,7 +2,6 @@ package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
 import kotlinx.coroutines.awaitCancellation
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -135,9 +134,9 @@ class BaseFlowDataSourceTests {
             initialData
         }, coroutineContext = testDispatcher)
 
-        val values = mutableListOf<DataState<DataSourceTestData, Throwable>>()
+        val values1 = mutableListOf<DataState<DataSourceTestData, Throwable>>()
         val job1 = launch(testDispatcher) {
-            mainDataSource.read(requestRefreshCache).toList(values)
+            mainDataSource.read(requestRefreshCache).toList(values1)
         }
 
         mainDataSource.readFunction = {
@@ -145,22 +144,16 @@ class BaseFlowDataSourceTests {
                 newData
             }
         }
+        job1.cancel()
 
+        val values2 = mutableListOf<DataState<DataSourceTestData, Throwable>>()
         val job2 = launch(testDispatcher) {
-            mainDataSource.read(requestRefreshCache).collect()
+            mainDataSource.read(requestRefreshCache).toList(values2)
         }
         mutex.unlock()
-        assertEquals(
-            listOf(
-                DataState.pending(),
-                DataState.data(initialData),
-                DataState.pending(initialData),
-                DataState.data(newData)
-            ),
-            values
-        )
+        assertEquals(listOf(DataState.pending(), DataState.data(initialData)), values1)
+        assertEquals(listOf(DataState.pending(initialData), DataState.data(newData)), values2)
         assertEquals(2, mainDataSource.internalReadCount)
-        job1.cancel()
         job2.cancel()
     }
 

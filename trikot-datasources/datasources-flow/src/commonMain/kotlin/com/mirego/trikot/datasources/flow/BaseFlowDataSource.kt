@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.CoroutineContext
@@ -128,24 +129,33 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     private val flowBlock: (request: R) -> Flow<DataState<T, Throwable>>
 ) : StateFlow<DataState<T, Throwable>> {
     private val retryCount = MutableStateFlow(RetryData(initialRequest, 0))
+    private val innerData = MutableStateFlow(initialValue)
 
-    private val data: StateFlow<DataState<T, Throwable>> =
+    private val data: Flow<DataState<T, Throwable>> =
         retryCount.flatMapLatest { flowBlock(it.request) }
             .withPreviousDataStateValue()
-            .stateIn(scope, SharingStarted.Lazily, initialValue)
+
+    init {
+        scope.launch {
+            data.collect {
+                innerData.value = it
+            }
+        }
+    }
 
     fun retry(request: R) {
+        innerData.value = DataState.pending(innerData.value.value())
         retryCount.value = RetryData(request, retryCount.value.count + 1)
     }
 
     override val replayCache: List<DataState<T, Throwable>>
-        get() = data.replayCache
+        get() = innerData.replayCache
 
     override val value: DataState<T, Throwable>
-        get() = data.value
+        get() = innerData.value
 
     override suspend fun collect(collector: FlowCollector<DataState<T, Throwable>>): Nothing {
-        data.collect(collector)
+        innerData.collect(collector)
     }
 
     private data class RetryData<R : FlowDataSourceRequest>(
