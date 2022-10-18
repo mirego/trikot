@@ -126,6 +126,38 @@ class BaseFlowDataSourceTests {
     }
 
     @Test
+    fun whenSecondReadStartsWithRefreshCacheItEmitsPreviousValueWhilePending() = runTest {
+        val initialData = DataSourceTestData("value")
+        val newData = DataSourceTestData("value2")
+        val mutex = Mutex(locked = true)
+        val mainDataSource = MainDataSource({
+            initialData
+        }, coroutineContext = testDispatcher)
+
+        val values1 = mutableListOf<DataState<DataSourceTestData, Throwable>>()
+        val job1 = launch(testDispatcher) {
+            mainDataSource.read(requestRefreshCache).toList(values1)
+        }
+
+        mainDataSource.readFunction = {
+            mutex.withLock {
+                newData
+            }
+        }
+        job1.cancel()
+
+        val values2 = mutableListOf<DataState<DataSourceTestData, Throwable>>()
+        val job2 = launch(testDispatcher) {
+            mainDataSource.read(requestRefreshCache).toList(values2)
+        }
+        mutex.unlock()
+        assertEquals(listOf(DataState.pending(), DataState.data(initialData)), values1)
+        assertEquals(listOf(DataState.pending(initialData), DataState.data(newData)), values2)
+        assertEquals(2, mainDataSource.internalReadCount)
+        job2.cancel()
+    }
+
+    @Test
     fun givenCachedDataWhenRefreshingWithoutAnySubscriberThenNextSubscriberReceiveRefreshedData() = runTest {
         val initialData = DataSourceTestData("value")
         val cacheDataSource = CacheDataSource({ initialData }, testDispatcher)

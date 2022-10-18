@@ -1,18 +1,20 @@
 package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
+import com.mirego.trikot.datasources.extensions.value
 import com.mirego.trikot.datasources.flow.extensions.withPreviousDataStateValue
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.CoroutineContext
@@ -59,12 +61,11 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
                         when (it) {
                             is DataState.Pending -> emit(it)
                             is DataState.Data -> if (shouldRead(request, it)) {
-                                emit(DataState.pending(it.value))
-                                emitInternalRead(request)
+                                emitInternalRead(request, it.value)
                             } else {
                                 emit(it)
                             }
-                            is DataState.Error -> emitInternalRead(request)
+                            is DataState.Error -> emitInternalRead(request, it.value)
                         }
                     }
                 } else {
@@ -73,8 +74,9 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
             }
         }
 
-    private suspend fun FlowCollector<DataState<T, Throwable>>.emitInternalRead(request: R) {
+    private suspend fun FlowCollector<DataState<T, Throwable>>.emitInternalRead(request: R, oldValue: T? = null) {
         try {
+            emit(DataState.pending(oldValue))
             val readResult = internalRead(request)
             upstreamDataSource?.save(request, readResult)
             emit(DataState.Data(readResult))
@@ -103,13 +105,16 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     override suspend fun delete(cacheableId: String) {
         upstreamDataSource?.delete(cacheableId)
         cacheMutex.withLock {
-            cache.remove(cacheableId)
+            cache.remove(cacheableId)?.cancel()
         }
     }
 
     override suspend fun clear() {
         upstreamDataSource?.clear()
         cacheMutex.withLock {
+            cache.values.forEach {
+                it.cancel()
+            }
             cache.clear()
         }
     }
@@ -126,24 +131,40 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     private val flowBlock: (request: R) -> Flow<DataState<T, Throwable>>
 ) : StateFlow<DataState<T, Throwable>> {
     private val retryCount = MutableStateFlow(RetryData(initialRequest, 0))
+    private val dataStateFlow = MutableStateFlow(initialValue)
+    private val job: Job
 
-    private val data: StateFlow<DataState<T, Throwable>> =
+    private val blockData: Flow<DataState<T, Throwable>> =
         retryCount.flatMapLatest { flowBlock(it.request) }
             .withPreviousDataStateValue()
-            .stateIn(scope, SharingStarted.Lazily, initialValue)
+
+    init {
+        job = scope.launch {
+            // Start subscribing only when dataStateFlow has subscriptions
+            dataStateFlow.subscriptionCount.first { it > 0 }
+            blockData.collect {
+                dataStateFlow.value = it
+            }
+        }
+    }
 
     fun retry(request: R) {
+        dataStateFlow.value = DataState.pending(dataStateFlow.value.value())
         retryCount.value = RetryData(request, retryCount.value.count + 1)
     }
 
+    fun cancel() {
+        job.cancel()
+    }
+
     override val replayCache: List<DataState<T, Throwable>>
-        get() = data.replayCache
+        get() = dataStateFlow.replayCache
 
     override val value: DataState<T, Throwable>
-        get() = data.value
+        get() = dataStateFlow.value
 
     override suspend fun collect(collector: FlowCollector<DataState<T, Throwable>>): Nothing {
-        data.collect(collector)
+        dataStateFlow.collect(collector)
     }
 
     private data class RetryData<R : FlowDataSourceRequest>(
