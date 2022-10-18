@@ -19,19 +19,20 @@
 
 ## Modules
 
-| Module                                                                     | Description                                                         |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| [trikot.foundation](./trikot-foundation)                                   | Foundation classes and building blocks                              |
-| [trikot.streams](./trikot-streams)                                         | Reactive streams                                                    |
-| [trikot.datasources](./trikot-datasources)                                 | Cascading data access layers abstraction.                           |
-| [trikot.http](./trikot-http)                                               | Multiplatform http client with native platform implementations.     |
-| [trikot.graphql](./trikot-graphql)                                         | GraphQL query client built over trikot.http and trikot.datasources. |
-| [trikot.analytics](./trikot-analytics)                                     | Android and iOS analytics providers.                                |
-| [trikot.bluetooth](./trikot-bluetooth)                                     | Android and iOS bluetooth.                                          |
-| [trikot.kword](./trikot-kword)                                             | i18N with code generation for string keys.                          |
-| [trikot.viewmodels](./trikot-viewmodels)                                   | ViewModels for imperative frameworks (Android views and UIKit).     |
-| [trikot.viewmodels.declarative](./trikot-viewmodels-declarative)           | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
-| [trikot.viewmodels.declarative-flow](./trikot-viewmodels-declarative-flow) | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
+| Module                                                                             | Description                                                         |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [trikot.foundation](./trikot-foundation)                                           | Foundation classes and building blocks                              |
+| [trikot.streams](./trikot-streams)                                                 | Reactive streams                                                    |
+| [trikot.datasources](./trikot-datasources)                                         | Cascading data access layers abstraction.                           |
+| [trikot.http](./trikot-http)                                                       | Multiplatform http client with native platform implementations.     |
+| [trikot.graphql](./trikot-graphql)                                                 | GraphQL query client built over trikot.http and trikot.datasources. |
+| [trikot.analytics](./trikot-analytics)                                             | Android and iOS analytics providers.                                |
+| [trikot.bluetooth](./trikot-bluetooth)                                             | Android and iOS bluetooth.                                          |
+| [trikot.kword](./trikot-kword)                                                     | i18N with code generation for string keys.                          |
+| [trikot.viewmodels](./trikot-viewmodels)                                           | ViewModels for imperative frameworks (Android views and UIKit).     |
+| [trikot.viewmodels.declarative](./trikot-viewmodels-declarative)                   | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
+| [trikot.viewmodels.declarative-flow](./trikot-viewmodels-declarative-flow)         | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
+| [trikot.viewmodels.declarative-compiler](./trikot-viewmodels-declarative-compiler) | Gradle plugin to generate declarative Viewmodels boilerplate code.  |
 
 ## Samples
 
