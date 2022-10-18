@@ -22,7 +22,7 @@ class DiskCacheFlowDataSource<R : FlowDataSourceRequest, T : Any>(
             json.decodeFromString(dataSerializer, fileManager.getFileAsString(getPath(request.cacheableId)))
         } catch (e: SerializationException) {
             if (deleteOnSerializationError) {
-                delete(request.cacheableId)
+                fileManager.deleteFile(getPath(request.cacheableId))
             }
             throw e
         }
