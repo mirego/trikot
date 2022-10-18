@@ -36,6 +36,5 @@ class FlowVMDCodeGenerator(
         addStatement("%M(${propertyName}InitialValue, this, $lifecycleComponentName)", publishedMemberName)
 
     override fun CodeBlock.Builder.addUpdatePropertyInvocationStatement(propertyName: String, value: String): CodeBlock.Builder =
-        addStatement("updateProperty(this::${propertyName}, $value)")
+        addStatement("updateProperty(this::$propertyName, $value)")
 }
-

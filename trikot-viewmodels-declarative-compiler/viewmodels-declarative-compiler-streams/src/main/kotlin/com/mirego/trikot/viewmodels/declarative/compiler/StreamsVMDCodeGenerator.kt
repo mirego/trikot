@@ -36,7 +36,5 @@ class StreamsVMDCodeGenerator(
         addStatement("%M(${propertyName}InitialValue, this)", publishedMemberName)
 
     override fun CodeBlock.Builder.addUpdatePropertyInvocationStatement(propertyName: String, value: String): CodeBlock.Builder =
-        addStatement("updatePropertyPublisher(this::${propertyName}, $lifecycleComponentName, $value)")
-
+        addStatement("updatePropertyPublisher(this::$propertyName, $lifecycleComponentName, $value)")
 }
-
