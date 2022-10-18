@@ -5,6 +5,7 @@ import com.mirego.trikot.datasources.extensions.value
 import com.mirego.trikot.datasources.flow.extensions.withPreviousDataStateValue
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -104,13 +105,16 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     override suspend fun delete(cacheableId: String) {
         upstreamDataSource?.delete(cacheableId)
         cacheMutex.withLock {
-            cache.remove(cacheableId)
+            cache.remove(cacheableId)?.cancel()
         }
     }
 
     override suspend fun clear() {
         upstreamDataSource?.clear()
         cacheMutex.withLock {
+            cache.values.forEach {
+                it.cancel()
+            }
             cache.clear()
         }
     }
@@ -128,13 +132,14 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
 ) : StateFlow<DataState<T, Throwable>> {
     private val retryCount = MutableStateFlow(RetryData(initialRequest, 0))
     private val dataStateFlow = MutableStateFlow(initialValue)
+    private val job: Job
 
     private val blockData: Flow<DataState<T, Throwable>> =
         retryCount.flatMapLatest { flowBlock(it.request) }
             .withPreviousDataStateValue()
 
     init {
-        scope.launch {
+        job = scope.launch {
             // Start subscribing only when dataStateFlow has subscriptions
             dataStateFlow.subscriptionCount.first { it > 0 }
             blockData.collect {
@@ -146,6 +151,10 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     fun retry(request: R) {
         dataStateFlow.value = DataState.pending(dataStateFlow.value.value())
         retryCount.value = RetryData(request, retryCount.value.count + 1)
+    }
+
+    fun cancel() {
+        job.cancel()
     }
 
     override val replayCache: List<DataState<T, Throwable>>
