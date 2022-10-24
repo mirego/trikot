@@ -47,7 +47,8 @@ fun VMDImage(
             colorFilter = colorFilter,
             contentDescription = contentDescription
         )
-    }
+    },
+    asyncStateCallback: ((AsyncImagePainter.State) -> Unit)? = null
 ) {
     val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
@@ -61,7 +62,8 @@ fun VMDImage(
         placeholderContentScale = placeholderContentScale,
         imageDescriptor = imageViewModel.image,
         allowHardware = allowHardware,
-        placeholder = placeholder
+        placeholder = placeholder,
+        asyncStateCallback = asyncStateCallback
     )
 }
 
@@ -84,7 +86,8 @@ fun VMDImage(
             colorFilter = colorFilter,
             contentDescription = contentDescription
         )
-    }
+    },
+    asyncStateCallback: ((AsyncImagePainter.State) -> Unit)? = null
 ) {
     when (imageDescriptor) {
         is Local -> {
@@ -108,7 +111,8 @@ fun VMDImage(
                 colorFilter = colorFilter,
                 contentDescription = contentDescription,
                 allowHardware = allowHardware,
-                placeholder = placeholder
+                placeholder = placeholder,
+                asyncStateCallback = asyncStateCallback
             )
         }
     }
@@ -145,7 +149,8 @@ fun RemoteImage(
     contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
     contentDescription: String = "",
-    allowHardware: Boolean = true
+    allowHardware: Boolean = true,
+    asyncStateCallback: ((AsyncImagePainter.State) -> Unit)? = null
 ) {
     val coilPainter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current)
@@ -155,7 +160,10 @@ fun RemoteImage(
             .build()
     )
 
-    when (val state = coilPainter.state) {
+    val state = coilPainter.state
+    asyncStateCallback?.invoke(state)
+
+    when (state) {
         is AsyncImagePainter.State.Success -> {
             val drawable = state.result.drawable
             if (drawable !is BitmapDrawable || drawable.bitmap.allocationByteCount <= MAX_BITMAP_SIZE) {
