@@ -8,7 +8,9 @@ on:
 jobs:
   cd:
     name: Build library CD
-    runs-on: macos-latest
+    # simulator names changed in macos-12 . Waiting on this to be released
+    # https://github.com/JetBrains/kotlin/commit/10947e2c45255cf89b8cee1598017b6fc61b0079
+    runs-on: macos-11
     continue-on-error: false
     steps:
       - name: Checkout
