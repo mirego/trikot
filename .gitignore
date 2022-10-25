@@ -98,4 +98,5 @@ web/src/library/**/*.kjsm
 
 # Node
 yarn.lock
+**/*/yarn.lock
 node_modules/
