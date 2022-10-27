@@ -6,8 +6,8 @@ class ImageListItem: UIView {
 
     var item: ImageListItemViewModel? {
         didSet {
-            viewModel = item
-            image.imageViewModel = item?.image
+            trikotViewModel = item
+            image.trikotImageViewModel = item?.image
         }
     }
 

@@ -7,9 +7,9 @@ class SliderListItem: UIView {
 
     var item: SliderListItemViewModel? {
         didSet {
-            viewModel = item
-            slider.sliderViewModel = item?.slider
-            label.labelViewModel = item?.valueLabel
+            trikotViewModel = item
+            slider.trikotSliderViewModel = item?.slider
+            label.trikotLabelViewModel = item?.valueLabel
         }
     }
 

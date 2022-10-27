@@ -6,8 +6,8 @@ class ButtonListItem: UIView {
 
     var item: ButtonListItemViewModel? {
         didSet {
-            viewModel = item
-            button.buttonViewModel = item?.button
+            trikotViewModel = item
+            button.trikotButtonViewModel = item?.button
         }
     }
 

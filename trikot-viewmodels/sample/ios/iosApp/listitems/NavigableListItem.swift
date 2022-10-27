@@ -6,8 +6,8 @@ class NavigableListItem: UIView {
 
     var item: NavigableListItemViewModel? {
         didSet {
-            viewModel = item
-            title.labelViewModel = item?.title
+            trikotViewModel = item
+            title.trikotLabelViewModel = item?.title
         }
     }
 

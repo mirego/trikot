@@ -6,8 +6,8 @@ class PickerListItem: UIView {
 
     var item: PickerListItemViewModel? {
         didSet {
-            viewModel = item
-            pickerItem.pickerViewModel = item?.picker
+            trikotViewModel = item
+            pickerItem.trikotPickerViewModel = item?.picker
         }
     }
 

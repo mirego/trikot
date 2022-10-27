@@ -6,8 +6,8 @@ class HeaderListItem: UIView {
 
     var item: HeaderListItemViewModel? {
         didSet {
-            viewModel = item
-            title.labelViewModel = item?.text
+            trikotViewModel = item
+            title.trikotLabelViewModel = item?.text
         }
     }
 

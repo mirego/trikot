@@ -6,8 +6,8 @@ class ToggleSwitchListItem: UIView {
 
     var item: ToggleSwitchListItemViewModel? {
         didSet {
-            viewModel = item
-            switchItem.toggleSwitchViewModel = item?.toggleSwitch
+            trikotViewModel = item
+            switchItem.trikotToggleSwitchViewModel = item?.toggleSwitch
         }
     }
 

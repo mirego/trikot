@@ -6,8 +6,8 @@ class LabelListItem: UIView {
 
     var item: LabelListItemViewModel? {
         didSet {
-            viewModel = item
-            title.labelViewModel = item?.label
+            trikotViewModel = item
+            title.trikotLabelViewModel = item?.label
         }
     }
 
