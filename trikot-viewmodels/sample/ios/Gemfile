@@ -2,12 +2,10 @@
 source 'https://rubygems.org'
 
 # Use the latest cocoapods gem
-gem 'cocoapods'
+gem 'cocoapods', '~>1.11.3'
 gem 'cocoapods-generate'
-
-gem 'activesupport', '~>4.0.2'
-
-gem "fastlane", '~>2.116.1'
+gem 'activesupport'
+gem "fastlane"
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
 eval(File.read(plugins_path), binding) if File.exist?(plugins_path)

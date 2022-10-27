@@ -6,8 +6,8 @@ class InputTextListItem: UIView {
 
     var item: InputTextListItemViewModel? {
         didSet {
-            viewModel = item
-            textField.inputTextViewModel = item?.inputText
+            trikotViewModel = item
+            textField.trikotInputTextViewModel = item?.inputText
         }
     }
 

@@ -6,8 +6,8 @@ class ViewListItem: UIView {
 
     var item: ViewListItemViewModel? {
         didSet {
-            viewModel = item
-            view.viewModel = item?.view
+            trikotViewModel = item
+            view.trikotViewModel = item?.view
         }
     }
 
