@@ -29,19 +29,15 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     private val coroutineScope = CoroutineScope(coroutineContext)
     private val cacheMutex = Mutex()
 
-    final override fun read(request: R): Flow<DataState<T, Throwable>> {
-        val cachedFlow = cache[request.cacheableId]
-        return readIfNeeded(request, cachedFlow)
-    }
-
-    private fun readIfNeeded(request: R, flow: CachedDataFlow<R, T>?) =
+    final override fun read(request: R): Flow<DataState<T, Throwable>> =
         flow {
             val innerFlow = cacheMutex.withLock {
-                if (flow != null) {
-                    if (shouldRead(request, flow.value)) {
-                        flow.retry(request)
+                val cachedFlow = cache[request.cacheableId]
+                if (cachedFlow != null) {
+                    if (shouldRead(request, cachedFlow.value)) {
+                        cachedFlow.retry(request)
                     }
-                    flow
+                    cachedFlow
                 } else {
                     readInFlow(request).also {
                         cache[request.cacheableId] = it
@@ -103,15 +99,15 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     }
 
     override suspend fun delete(cacheableId: String) {
-        upstreamDataSource?.delete(cacheableId)
         cacheMutex.withLock {
+            upstreamDataSource?.delete(cacheableId)
             cache.remove(cacheableId)?.cancel()
         }
     }
 
     override suspend fun clear() {
-        upstreamDataSource?.clear()
         cacheMutex.withLock {
+            upstreamDataSource?.clear()
             cache.values.forEach {
                 it.cancel()
             }
