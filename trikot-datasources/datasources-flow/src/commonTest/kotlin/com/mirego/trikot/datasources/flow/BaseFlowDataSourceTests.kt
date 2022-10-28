@@ -257,14 +257,13 @@ class BaseFlowDataSourceTests {
         val readMutex = Mutex(locked = true)
         val clearMutex = Mutex(locked = true)
         val cacheDataSource = CacheDataSource({ initialData }, testDispatcher, clearFunction = {
-            clearMutex.withLock {  }
+            clearMutex.withLock { }
         })
         val mainDataSource = MainDataSource({
             readMutex.withLock {
                 data
             }
         }, cacheDataSource = cacheDataSource, coroutineContext = testDispatcher)
-
 
         val values = mutableListOf<DataState<DataSourceTestData, Throwable>>()
 
