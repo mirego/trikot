@@ -249,6 +249,41 @@ class BaseFlowDataSourceTests {
         mainDataSource.clear()
         assertEquals(0, mainDataSource.cacheableIds().size)
     }
+
+    @Test
+    fun whenInvalidateWhileReadingEmitsTheDataAtTheEnd() = runTest {
+        val initialData = DataSourceTestData("initial value")
+        val data = DataSourceTestData("value")
+        val readMutex = Mutex(locked = true)
+        val clearMutex = Mutex(locked = true)
+        val cacheDataSource = CacheDataSource({ initialData }, testDispatcher, clearFunction = {
+            clearMutex.withLock {  }
+        })
+        val mainDataSource = MainDataSource({
+            readMutex.withLock {
+                data
+            }
+        }, cacheDataSource = cacheDataSource, coroutineContext = testDispatcher)
+
+
+        val values = mutableListOf<DataState<DataSourceTestData, Throwable>>()
+
+        val job1 = launch(testDispatcher) {
+            mainDataSource.clear()
+        }
+
+        val job2 = launch(testDispatcher) {
+            mainDataSource.read(requestRefreshCache).toList(values)
+        }
+
+        clearMutex.unlock()
+        readMutex.unlock()
+
+        assertEquals(listOf(DataState.pending(), DataState.pending(initialData), DataState.data(data)), values)
+
+        job1.cancel()
+        job2.cancel()
+    }
 }
 
 private data class DataSourceTestData(
@@ -283,7 +318,8 @@ private class MainDataSource(
 
 private class CacheDataSource(
     var readFunction: suspend (request: TestDataSourceRequest) -> DataSourceTestData,
-    coroutineContext: CoroutineContext
+    coroutineContext: CoroutineContext,
+    var clearFunction: suspend () -> Unit = {},
 ) : BaseFlowDataSource<TestDataSourceRequest, DataSourceTestData>(coroutineContext = coroutineContext) {
     var internalSaveCount = 0
     var internalDeleteCount = 0
@@ -305,5 +341,10 @@ private class CacheDataSource(
         internalDeleteCount++
         deletedCacheableIds.add(cacheableId)
         super.delete(cacheableId)
+    }
+
+    override suspend fun clear() {
+        super.clear()
+        clearFunction()
     }
 }
