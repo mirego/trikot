@@ -7,7 +7,7 @@ import kotlin.reflect.KTypeProjection
 import kotlin.reflect.full.createType
 import kotlin.reflect.full.functions
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNotNull
 import kotlin.test.fail
 
 fun KParameter.assertParam(expectedName: String, expectedType: KClass<*>) {
@@ -21,23 +21,31 @@ fun KParameter.assertParam(expectedName: String, expectedType: KClass<*>, expect
 }
 
 fun KClass<*>.assertMember(name: String, type: KClass<*>) {
-    assertTrue(members.filter {
-        it.name == (name) &&
-            it.returnType == type.createType()
-    }.size == 1)
+    assertEquals(
+        1,
+        members.filter {
+            it.name == (name) &&
+                it.returnType == type.createType()
+        }.size
+    )
 }
 
 fun KClass<*>.assertMember(name: String, type: KClass<*>, typeArgument: KClass<*>) {
-    assertTrue(members.filter {
-        it.name == (name) &&
-            it.returnType == type.createType(listOf(KTypeProjection.invariant(typeArgument.createType())))
-    }.size == 1)
+    assertEquals(
+        1,
+        members.filter {
+            it.name == (name) &&
+                it.returnType == type.createType(listOf(KTypeProjection.invariant(typeArgument.createType())))
+        }.size
+    )
 }
 
 fun KClass<*>.getMandatoryFunction(name: String): KFunction<*> =
-    functions.firstOrNull {
-        it.name == name
-    }!!
+    assertNotNull(
+        functions.firstOrNull {
+            it.name == name
+        }
+    )
 
 fun <R> KFunction<R>.assertParam(expectedName: String, expectedType: KClass<*>, expectedTypeParameter: KClass<*>) {
     val parameter = parameters.firstOrNull {

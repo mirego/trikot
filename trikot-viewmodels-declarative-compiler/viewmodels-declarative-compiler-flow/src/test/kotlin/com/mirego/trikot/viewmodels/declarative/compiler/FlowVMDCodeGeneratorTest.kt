@@ -71,8 +71,7 @@ class FlowVMDCodeGeneratorTest {
 
         generatedClass.isSuperclassOf(VMDViewModelImpl::class)
 
-        generatedClass.primaryConstructor!!.run {
-            println("C ${this.parameters[0].name}")
+        assertNotNull(generatedClass.primaryConstructor).run {
             parameters[0].assertParam("fieldInitialValue", String::class)
             parameters[1].assertParam("coroutineScope", CoroutineScope::class)
         }
