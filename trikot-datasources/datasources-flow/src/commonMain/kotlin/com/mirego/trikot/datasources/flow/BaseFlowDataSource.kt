@@ -5,7 +5,6 @@ import com.mirego.trikot.datasources.extensions.value
 import com.mirego.trikot.datasources.flow.extensions.withPreviousDataStateValue
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
