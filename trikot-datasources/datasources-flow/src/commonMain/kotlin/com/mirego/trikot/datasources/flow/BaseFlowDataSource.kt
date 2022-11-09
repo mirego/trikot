@@ -99,17 +99,17 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     }
 
     override suspend fun delete(cacheableId: String) {
-        upstreamDataSource?.delete(cacheableId)
         cacheMutex.withLock {
             cache.remove(cacheableId)
         }
+        upstreamDataSource?.delete(cacheableId)
     }
 
     override suspend fun clear() {
-        upstreamDataSource?.clear()
         cacheMutex.withLock {
             cache.clear()
         }
+        upstreamDataSource?.clear()
     }
 
     internal fun cacheableIds(): List<Any> {
