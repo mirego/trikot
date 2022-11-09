@@ -99,18 +99,15 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     }
 
     override suspend fun delete(cacheableId: String) {
+        upstreamDataSource?.delete(cacheableId)
         cacheMutex.withLock {
-            upstreamDataSource?.delete(cacheableId)
-            cache.remove(cacheableId)?.cancel()
+            cache.remove(cacheableId)
         }
     }
 
     override suspend fun clear() {
+        upstreamDataSource?.clear()
         cacheMutex.withLock {
-            upstreamDataSource?.clear()
-            cache.values.forEach {
-                it.cancel()
-            }
             cache.clear()
         }
     }
@@ -128,14 +125,13 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
 ) : StateFlow<DataState<T, Throwable>> {
     private val retryCount = MutableStateFlow(RetryData(initialRequest, 0))
     private val dataStateFlow = MutableStateFlow(initialValue)
-    private val job: Job
 
     private val blockData: Flow<DataState<T, Throwable>> =
         retryCount.flatMapLatest { flowBlock(it.request) }
             .withPreviousDataStateValue()
 
     init {
-        job = scope.launch {
+        scope.launch {
             // Start subscribing only when dataStateFlow has subscriptions
             dataStateFlow.subscriptionCount.first { it > 0 }
             blockData.collect {
@@ -147,10 +143,6 @@ private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     fun retry(request: R) {
         dataStateFlow.value = DataState.pending(dataStateFlow.value.value())
         retryCount.value = RetryData(request, retryCount.value.count + 1)
-    }
-
-    fun cancel() {
-        job.cancel()
     }
 
     override val replayCache: List<DataState<T, Throwable>>
