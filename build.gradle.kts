@@ -77,6 +77,15 @@ tasks {
         val originalVersion = project.version.toString().replace("-dev\\w+".toRegex(), "")
         property("version", "$originalVersion-dev$gitCommits")
     }
+    val tagDevVersion by registering {
+        try {
+            val version = project.property("version")
+            "git tag $version".runCommand(workingDir = rootDir)
+            "git push origin --tags".runCommand(workingDir = rootDir)
+        } catch (e: Exception) {
+            println("Unable to tag: ${e.message}")
+        }
+    }
 }
 
 // Node.js 16.0.0 is needed on Apple Silicon
