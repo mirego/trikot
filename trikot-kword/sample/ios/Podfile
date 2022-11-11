@@ -5,17 +5,23 @@ platform :ios, platformVersion
 ENV['TRIKOT_FRAMEWORK_NAME']='TRIKOT_FRAMEWORK_NAME'
 
 target 'Sample' do
-  #use_frameworks!
+  use_frameworks!
 
   pod 'TRIKOT_FRAMEWORK_NAME', :path => '../common'
   pod 'Trikot/kword', :path => '../../..'
   pod 'SwiftLint'
+end
 
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = platformVersion
-      end
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = platformVersion
+    end
+
+    if target.name == "TRIKOT_FRAMEWORK_NAME"
+        target.build_configurations.each do |config|
+            config.build_settings['COCOAPODS_SKIP_KOTLIN_BUILD'] = '$ENABLE_PREVIEWS'
+        end
     end
   end
 end

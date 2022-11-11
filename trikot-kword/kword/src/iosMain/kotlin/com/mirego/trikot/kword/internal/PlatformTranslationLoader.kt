@@ -7,10 +7,16 @@ import platform.Foundation.stringWithContentsOfFile
 import platform.objc.object_getClass
 
 internal actual object PlatformTranslationLoader {
+    private val frameworkBundle: NSBundle
+        get() = NSBundle.bundleForClass(object_getClass(0)!!)
+
     actual fun loadTranslations(path: String): Map<String, String>? {
         val cleanedPath = path.replace(".json", "")
-        return NSBundle.bundleForClass(object_getClass(0)!!).pathForResource(cleanedPath, "json")
+        return loadTranslationsFromBundle(cleanedPath, frameworkBundle) ?: loadTranslationsFromBundle(cleanedPath, NSBundle.mainBundle)
+    }
+
+    private fun loadTranslationsFromBundle(path: String, bundle: NSBundle): Map<String, String>? =
+        bundle.pathForResource(path, "json")
             ?.let { NSString.stringWithContentsOfFile(it, NSUTF8StringEncoding, null) }
             ?.let { decodeTranslationFile(it) }
-    }
 }
