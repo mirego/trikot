@@ -45,8 +45,9 @@ fun <C : VMDContent> VMDCheckbox(
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDLabeledComponent(
-        modifier = modifier
-            .hidden(viewModel.isHidden),
+        modifier = Modifier
+            .hidden(viewModel.isHidden)
+            .then(modifier),
         label = { label(toggleViewModel.label) },
         content = {
             Checkbox(

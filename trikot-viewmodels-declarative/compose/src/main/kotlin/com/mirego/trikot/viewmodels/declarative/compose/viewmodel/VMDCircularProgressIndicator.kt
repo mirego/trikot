@@ -27,15 +27,19 @@ fun VMDCircularProgressIndicator(
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = progressViewModel.determination?.progressRatio ?: 0f)
 
+    val newModifier = Modifier
+        .hidden(progressViewModel.isHidden)
+        .then(modifier)
+
     if (viewModel.determination == null) {
         CircularProgressIndicator(
-            modifier = modifier.hidden(progressViewModel.isHidden),
+            modifier = newModifier,
             color = color,
             strokeWidth = strokeWidth
         )
     } else {
         CircularProgressIndicator(
-            modifier = modifier.hidden(progressViewModel.isHidden),
+            modifier = newModifier,
             progress = animatedProgress,
             color = color,
             strokeWidth = strokeWidth

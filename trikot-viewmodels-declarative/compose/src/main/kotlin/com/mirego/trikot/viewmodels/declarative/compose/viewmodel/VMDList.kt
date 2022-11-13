@@ -64,8 +64,9 @@ fun <C : VMDIdentifiableContent> VMDSectionedList(
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     LazyColumn(
-        modifier = modifier
-            .hidden(listViewModel.isHidden),
+        modifier = Modifier
+            .hidden(listViewModel.isHidden)
+            .then(modifier),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,

@@ -53,7 +53,9 @@ fun VMDImage(
     val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDImage(
-        modifier = modifier.hidden(imageViewModel.isHidden),
+        modifier = Modifier
+            .hidden(imageViewModel.isHidden)
+            .then(modifier),
         alpha = alpha,
         alignment = alignment,
         contentScale = contentScale,
