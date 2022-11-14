@@ -132,11 +132,10 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
                     foundDevice[result.device.address] = result.toBluetoothScanResult(context)
                         .also {
                             it.lostHeartbeatCallback = {
-                                foundDevice.remove(result.device.address)
-                                devicesPublisher.value = foundDevice.values.toList()
+                                removeResult(result)
                             }
                         }
-                    devicesPublisher.value = foundDevice.values.toList()
+                    devicesPublisher.value = ConcurrentHashMap(foundDevice).values.toList()
                 } else {
                     (foundDevice[result.device.address] as AndroidBluetoothScanResult).doHeartbeat()
                 }
@@ -144,7 +143,7 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
 
             private fun removeResult(result: ScanResult) {
                 foundDevice.remove(result.device.address)
-                devicesPublisher.value = foundDevice.values.toList()
+                devicesPublisher.value = ConcurrentHashMap(foundDevice).values.toList()
             }
         }
 
