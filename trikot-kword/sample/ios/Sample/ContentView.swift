@@ -18,3 +18,10 @@ struct ContentView: View {
         Button("\(buttonText.value)", action: { textProvider.toggleLanguage() })
     }
 }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let serviceLocator = ServiceLocatorImpl(i18N: FlowMultiLanguageI18N.sample)
+        ContentView(textProvider: serviceLocator.textProvider)
+    }
+}

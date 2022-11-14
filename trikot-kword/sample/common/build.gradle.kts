@@ -25,6 +25,7 @@ kword {
 fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
     baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
     transitiveExport = true
+    isStatic = false
     export(project(Project.TRIKOT_KWORD))
     export(project(Project.TRIKOT_KWORD_FLOW))
 }
@@ -37,6 +38,7 @@ kotlin {
         summary = "Trikot-kword sample"
         homepage = "www.mirego.com"
         license = "BSD-3"
+        podfile = project.file("../ios/Podfile")
         extraSpecAttributes = mutableMapOf(
             "resources" to "\"src/commonMain/resources/translations/*\"",
             "prepare_command" to """
