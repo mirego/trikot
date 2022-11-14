@@ -4,13 +4,17 @@ import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
 
-class CancellableManager : Cancellable {
+open class CancellableManager : Cancellable {
     private val serialQueue = SynchronousSerialQueue()
     private val queueList = AtomicListReference<Cancellable>()
     private val isCancelled = AtomicReference(false)
 
-    fun <T : Cancellable> add(cancellable: T): T {
+    open fun <T : Cancellable> add(cancellable: T): T {
         queueList.add(cancellable)
+        if (queueList.value.size >= 200) {
+            println("JasperCancellable: Warning size: ${queueList.value.size}")
+            throw(RuntimeException("Cancellable Man!"))
+        }
 
         if (isCancelled.value) {
             doCancelAll()
@@ -18,7 +22,7 @@ class CancellableManager : Cancellable {
         return cancellable
     }
 
-    fun add(cancellableBlock: () -> Unit) {
+    open fun add(cancellableBlock: () -> Unit) {
         add(
             object : Cancellable {
                 override fun cancel() {
@@ -37,6 +41,7 @@ class CancellableManager : Cancellable {
     private fun doCancelAll() {
         serialQueue.dispatch {
             val value = queueList.value
+            println("JasperCancellable: CancelAll size:  ${value.size}")
             queueList.removeAll(value)
             for (cancellable in value) {
                 cancellable.cancel()
