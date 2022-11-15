@@ -18,4 +18,6 @@ interface HomeNavigationDelegate : VMDNavigationDelegate {
     fun navigateToAnimationTypesShowcase()
 
     fun navigateToListShowcase()
+
+    fun navigateToPickerShowcase()
 }

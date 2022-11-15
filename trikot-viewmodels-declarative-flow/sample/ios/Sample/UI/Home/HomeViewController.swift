@@ -40,4 +40,8 @@ extension HomeViewController: HomeNavigationDelegate {
     func navigateToListShowcase() {
         //TODO: present list showcase
     }
+    
+    func navigateToPickerShowcase() {
+        present(viewControllerFactory.pickerShowcase(), animated: true, completion: nil)
+    }
 }

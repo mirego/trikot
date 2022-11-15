@@ -40,6 +40,10 @@ public class ViewControllerFactory {
     func animationTypesShowcase() -> AnimationTypesShowcaseViewController {
         AnimationTypesShowcaseViewController(viewModelController: viewModelControllerFactory.animationTypesShowcase()).assignFactory(self)
     }
+    
+    func pickerShowcase() -> PickerShowcaseViewController {
+        PickerShowcaseViewController(viewModelController: viewModelControllerFactory.pickerShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {

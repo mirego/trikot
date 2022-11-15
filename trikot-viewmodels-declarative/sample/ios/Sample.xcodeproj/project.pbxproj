@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7963D28629242D2F00F89C64 /* PickerShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963D28529242D2F00F89C64 /* PickerShowcaseView.swift */; };
+		7963D28829242D5300F89C64 /* PickerShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963D28729242D5300F89C64 /* PickerShowcaseViewController.swift */; };
 		C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C883569D2750339300DA0786 /* SampleImageProvider.swift */; };
 		C88356BE27580F0200DA0786 /* TextShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */; };
 		C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BD27580F0200DA0786 /* TextShowcaseView.swift */; };
@@ -48,6 +50,8 @@
 /* Begin PBXFileReference section */
 		041921FF518BA5BA4B3375EC /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		3240D0E8403B18772B9C9D06 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7963D28529242D2F00F89C64 /* PickerShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerShowcaseView.swift; sourceTree = "<group>"; };
+		7963D28729242D5300F89C64 /* PickerShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerShowcaseViewController.swift; sourceTree = "<group>"; };
 		C883569D2750339300DA0786 /* SampleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageProvider.swift; sourceTree = "<group>"; };
 		C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseViewController.swift; sourceTree = "<group>"; };
 		C88356BD27580F0200DA0786 /* TextShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseView.swift; sourceTree = "<group>"; };
@@ -100,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7963D28429242D0B00F89C64 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				7963D28529242D2F00F89C64 /* PickerShowcaseView.swift */,
+				7963D28729242D5300F89C64 /* PickerShowcaseViewController.swift */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
 		C8152AB4275930E000A0F681 /* Showcase */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +301,7 @@
 		E6C3D23B27DBA46400EF48F0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7963D28429242D0B00F89C64 /* Picker */,
 				C88356BB27580EC300DA0786 /* Text */,
 				E6B3101E27CFAD15008D2F36 /* Button */,
 				E6B3102927CFF9AF008D2F36 /* Image */,
@@ -447,6 +461,7 @@
 				E644903727D66D42003D7684 /* TextFieldShowcaseView.swift in Sources */,
 				C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */,
 				E6B3102D27CFF9FE008D2F36 /* ImageShowcaseView.swift in Sources */,
+				7963D28829242D5300F89C64 /* PickerShowcaseViewController.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
 				C88356C1275814AC00DA0786 /* BaseViewModelViewController.swift in Sources */,
 				E60C4B5127DBEE130015CBC3 /* AnimationTypeSectionView.swift in Sources */,
@@ -465,6 +480,7 @@
 				C8959A71268AB1690080732A /* HomeView.swift in Sources */,
 				C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */,
 				E6B3103227D01F1A008D2F36 /* ToggleShowcaseViewController.swift in Sources */,
+				7963D28629242D2F00F89C64 /* PickerShowcaseView.swift in Sources */,
 				E644903627D66D42003D7684 /* TextFieldShowcaseViewController.swift in Sources */,
 				E6C3D23F27DBA48B00EF48F0 /* AnimationTypesShowcaseViewController.swift in Sources */,
 				E6B3102627CFBCD7008D2F36 /* ComponentShowcaseSectionView.swift in Sources */,

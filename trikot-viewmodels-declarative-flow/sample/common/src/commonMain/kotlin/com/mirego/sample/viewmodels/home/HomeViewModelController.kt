@@ -60,6 +60,12 @@ class HomeViewModelController(i18N: I18N) :
                                 coroutineScope = viewModelControllerScope
                             ) {
                                 setAction { navigationDelegate?.navigateToListShowcase() }
+                            },
+                            HomeSectionElementViewModelImpl(
+                                text = i18N[KWordTranslation.HOME_COMPONENT_PICKER],
+                                coroutineScope = viewModelControllerScope
+                            ) {
+                                setAction { navigationDelegate?.navigateToPickerShowcase() }
                             }
                         ),
                         coroutineScope = viewModelControllerScope
