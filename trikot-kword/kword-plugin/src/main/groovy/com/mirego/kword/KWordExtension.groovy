@@ -1,11 +1,10 @@
 package com.mirego.kword
 
 import org.gradle.api.Project
+import org.gradle.api.file.Directory
 import org.gradle.api.tasks.Input
 
 class KWordExtension {
-    private Project project
-
     @Input
     File translationFile
     @Input
@@ -15,8 +14,10 @@ class KWordExtension {
     @Input
     File generatedDir
 
+    private Directory projectDirectory
+
     KWordExtension(Project project) {
-        this.project = project
+        projectDirectory = project.layout.projectDirectory
     }
 
     File getTranslationFile() {
@@ -24,7 +25,7 @@ class KWordExtension {
     }
 
     void translationFile(Object translationFile) {
-        this.translationFile = project.file(translationFile)
+        this.translationFile = projectDirectory.files(translationFile).singleFile
     }
 
     List<File> getTranslationFiles() {
@@ -32,7 +33,7 @@ class KWordExtension {
     }
 
     void translationFiles(Object... translationFiles) {
-        this.translationFiles = project.files(translationFiles).toList()
+        this.translationFiles = projectDirectory.files(translationFiles)
     }
 
     String getEnumClassName() {
@@ -48,6 +49,6 @@ class KWordExtension {
     }
 
     void generatedDir(Object generatedDir) {
-        this.generatedDir = project.file(generatedDir)
+        this.generatedDir = projectDirectory.files(generatedDir).singleFile
     }
 }
