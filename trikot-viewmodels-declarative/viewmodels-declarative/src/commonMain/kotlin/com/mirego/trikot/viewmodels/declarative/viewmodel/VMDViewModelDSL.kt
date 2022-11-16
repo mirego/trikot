@@ -4,6 +4,7 @@ import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDImageViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
@@ -26,6 +27,9 @@ fun VMDViewModelDSL.buttonWithImage(image: VMDImageResource, action: () -> Unit,
 
 fun VMDViewModelDSL.localImage(image: VMDImageResource) =
     VMDComponents.Image.local(image, cancellableManager)
+
+fun VMDViewModelDSL.remoteImage(imageUrl: String?, placeholderImageResource: VMDImageResource = VMDImageResource.None, closure: VMDImageViewModelImpl.() -> Unit = {}) =
+    VMDComponents.Image.remote(imageUrl, placeholderImageResource, cancellableManager, closure)
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: List<C>) =
     VMDComponents.List.empty<C>(cancellableManager) {
