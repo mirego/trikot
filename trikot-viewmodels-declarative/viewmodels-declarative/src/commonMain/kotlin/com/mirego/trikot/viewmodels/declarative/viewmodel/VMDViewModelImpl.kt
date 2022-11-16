@@ -13,7 +13,7 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.published
 import org.reactivestreams.Publisher
 import kotlin.reflect.KProperty
 
-open class VMDViewModelImpl(protected val cancellableManager: CancellableManager) : VMDViewModel {
+open class VMDViewModelImpl(override val cancellableManager: CancellableManager) : VMDViewModel, VMDViewModelDSL {
 
     private val propertyWillChangeSubject = PublishSubjectImpl<VMDPropertyChange<*>>()
     private val propertyDidChangeSubject = PublishSubjectImpl<VMDPropertyChange<*>>()
