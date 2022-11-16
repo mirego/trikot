@@ -33,7 +33,7 @@ class KWordExtension {
     }
 
     void translationFiles(Object... translationFiles) {
-        this.translationFiles = projectDirectory.files(translationFiles)
+        this.translationFiles = projectDirectory.files(translationFiles).toList()
     }
 
     String getEnumClassName() {
