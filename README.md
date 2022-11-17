@@ -34,13 +34,19 @@
 | [trikot.viewmodels.declarative-flow](./trikot-viewmodels-declarative-flow)         | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
 | [trikot.viewmodels.declarative-compiler](./trikot-viewmodels-declarative-compiler) | Gradle plugin to generate declarative Viewmodels boilerplate code.  |
 
-## Samples
+## Getting started
 
-- [trikot.patron](https://github.com/mirego/trikot.patron) is our boilerplate project. It uses a couple of trikot modules.
-- [trikot.kword](./trikot-kword/sample) are our samples specific to this module.
-- [trikot.viewmodel samples](./trikot-viewmodels/sample) are our samples specific to this module.
-- [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/sample) are our samples specific to this module.
-- [trikot.viewmodel.declarative-flow samples](./trikot-viewmodels-declarative-flow/sample) are our samples specific to this module.
+To start a new kotlin-multiplatform project, we suggest using our _ready-to-run_ [https://github.com/mirego/kmp-boilerplate](kmp-boilerplate) template
+on which you can add all the specific dependencies you need for your project.
+
+### Samples
+
+Here are our samples specific to this module:
+
+- [trikot.kword](./trikot-kword/sample)
+- [trikot.viewmodel samples](./trikot-viewmodels/sample)
+- [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/sample)
+- [trikot.viewmodel.declarative-flow samples](./trikot-viewmodels-declarative-flow/sample)
 
 ## License
 
