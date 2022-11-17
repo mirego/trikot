@@ -41,7 +41,8 @@ on which you can add all the specific dependencies you need for your project.
 
 ### Samples
 
-Here are our samples specific to this module :
+Here are our samples specific to this module:
+
 - [trikot.kword](./trikot-kword/sample)
 - [trikot.viewmodel samples](./trikot-viewmodels/sample)
 - [trikot.viewmodel.declarative samples](./trikot-viewmodels-declarative/sample)
