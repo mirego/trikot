@@ -62,8 +62,9 @@ fun <C : VMDIdentifiableContent> VMDLazyColumnIndexed(
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState()
 
     LazyColumn(
-        modifier = modifier
-            .hidden(listViewModel.isHidden),
+        modifier = Modifier
+            .hidden(listViewModel.isHidden)
+            .then(modifier),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,

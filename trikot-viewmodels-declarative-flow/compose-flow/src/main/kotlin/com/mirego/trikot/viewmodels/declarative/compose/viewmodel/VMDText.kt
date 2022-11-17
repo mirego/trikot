@@ -43,8 +43,9 @@ fun VMDText(
 
     Text(
         text = textViewModel.text,
-        modifier = modifier
-            .hidden(textViewModel.isHidden),
+        modifier = Modifier
+            .hidden(textViewModel.isHidden)
+            .then(modifier),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,

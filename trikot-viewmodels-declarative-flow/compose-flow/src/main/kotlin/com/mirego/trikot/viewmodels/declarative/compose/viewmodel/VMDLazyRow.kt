@@ -63,8 +63,9 @@ fun <C : VMDIdentifiableContent> VMDLazyRowIndexed(
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState()
 
     LazyRow(
-        modifier = modifier
-            .hidden(listViewModel.isHidden),
+        modifier = Modifier
+            .hidden(listViewModel.isHidden)
+            .then(modifier),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,

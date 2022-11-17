@@ -29,8 +29,9 @@ fun <C : VMDContent> VMDButton(
     val buttonViewModel: VMDButtonViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     Box(
-        modifier = modifier
+        modifier = Modifier
             .hidden(buttonViewModel.isHidden)
+            .then(modifier)
             .clickable(
                 enabled = buttonViewModel.isEnabled,
                 onClick = viewModel.actionBlock,
