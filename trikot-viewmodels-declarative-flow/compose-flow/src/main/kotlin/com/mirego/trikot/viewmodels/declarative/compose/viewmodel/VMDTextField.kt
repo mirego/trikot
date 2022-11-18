@@ -20,6 +20,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.composeValue
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.FormattedVisualTransformation
 
 @Composable
 fun VMDTextField(
@@ -95,24 +96,3 @@ fun buildKeyboardActions(viewModel: VMDTextFieldViewModel, keyboardActions: Keyb
             keyboardActions.onSend?.invoke(this)
         },
     )
-
-private class FormattedVisualTransformation(private val formatter: (text: String) -> String) :
-    VisualTransformation {
-
-    override fun filter(text: AnnotatedString): TransformedText {
-        val formattedString = formatter(text.text)
-        val offsetDelta = formattedString.length - text.length
-        return TransformedText(
-            text = AnnotatedString(formattedString),
-            offsetMapping = object : OffsetMapping {
-                override fun originalToTransformed(offset: Int): Int {
-                    return offset + offsetDelta
-                }
-
-                override fun transformedToOriginal(offset: Int): Int {
-                    return offset - offsetDelta
-                }
-            }
-        )
-    }
-}
