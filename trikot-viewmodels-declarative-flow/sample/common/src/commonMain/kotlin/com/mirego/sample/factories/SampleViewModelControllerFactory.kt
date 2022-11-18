@@ -5,6 +5,7 @@ import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowc
 import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.picker.PickerShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModelController
@@ -29,4 +30,6 @@ interface SampleViewModelControllerFactory : VMDViewModelControllerFactory {
     fun animationTypesShowcase(): AnimationTypesShowcaseViewModelController
 
     fun listShowcase(): ListShowcaseViewModelController
+
+    fun pickerShowcase(): PickerShowcaseViewModelController
 }

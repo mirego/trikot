@@ -60,6 +60,12 @@ class HomeViewModelController(i18N: I18N) :
                                 cancellableManager = cancellableManager
                             ) {
                                 setAction { navigationDelegate?.navigateToListShowcase() }
+                            },
+                            HomeSectionElementViewModelImpl(
+                                text = i18N[KWordTranslation.HOME_COMPONENT_PICKER],
+                                cancellableManager = cancellableManager
+                            ) {
+                                setAction { navigationDelegate?.navigateToPickerShowcase() }
                             }
                         ),
                         cancellableManager = cancellableManager

@@ -1,9 +1,12 @@
 package com.mirego.trikot.viewmodels.declarative.components.factory
 
+import com.mirego.trikot.viewmodels.declarative.components.VMDPickerItemViewModel
+import com.mirego.trikot.viewmodels.declarative.components.VMDPickerViewModel
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDImageViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDListViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDLoadingViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDPickerViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDProgressViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextFieldViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModelImpl
@@ -380,6 +383,17 @@ object VMDComponents {
                 VMDListViewModelImpl<C>(coroutineScope)
                     .apply { elements = listElements.asList() }
                     .apply(closure)
+        }
+    }
+
+    class Picker {
+        companion object {
+            fun <E : VMDPickerItemViewModel> withElements(
+                coroutineScope: CoroutineScope,
+                elements: kotlin.collections.List<E>,
+                initialSelectedId: String? = null
+            ): VMDPickerViewModel<E> =
+                VMDPickerViewModelImpl(coroutineScope, elements, initialSelectedId)
         }
     }
 }
