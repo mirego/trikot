@@ -20,4 +20,6 @@ interface HomeNavigationDelegate : VMDNavigationDelegate {
     fun navigateToListShowcase()
 
     fun navigateToPickerShowcase()
+
+    fun navigateToSnackbarShowcase()
 }

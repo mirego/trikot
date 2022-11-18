@@ -44,6 +44,10 @@ public class ViewControllerFactory {
     func pickerShowcase() -> PickerShowcaseViewController {
         PickerShowcaseViewController(viewModelController: viewModelControllerFactory.pickerShowcase()).assignFactory(self)
     }
+    
+    func snackbarShowcase() -> SnackbarShowcaseViewController {
+        SnackbarShowcaseViewController(viewModelController: viewModelControllerFactory.snackbarShowcase()).assignFactory(self)
+    }
 }
 
 private extension BaseViewModelViewController {

@@ -10,6 +10,9 @@
 		7963D2812923FD4E00F89C64 /* PickerShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963D2802923FD4E00F89C64 /* PickerShowcaseViewController.swift */; };
 		7963D2832923FD9C00F89C64 /* PickerShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963D2822923FD9C00F89C64 /* PickerShowcaseView.swift */; };
 		7E5CD529DE8F026642D4C253 /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FDFB201D8B6ABB89A6FDB7 /* Pods_Sample.framework */; };
+		97652A322927C94B00B04656 /* SnackbarShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97652A312927C94B00B04656 /* SnackbarShowcaseViewController.swift */; };
+		97652A342927C98F00B04656 /* SnackbarShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97652A332927C98F00B04656 /* SnackbarShowcaseView.swift */; };
+		97652A362927CB6B00B04656 /* SnackbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97652A352927CB6B00B04656 /* SnackbarView.swift */; };
 		C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C883569D2750339300DA0786 /* SampleImageProvider.swift */; };
 		C88356BE27580F0200DA0786 /* TextShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */; };
 		C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88356BD27580F0200DA0786 /* TextShowcaseView.swift */; };
@@ -53,6 +56,9 @@
 		7963D2822923FD9C00F89C64 /* PickerShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerShowcaseView.swift; sourceTree = "<group>"; };
 		98FDFB201D8B6ABB89A6FDB7 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF4FC2DBC5336F3BBC3D7D5 /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
+		97652A312927C94B00B04656 /* SnackbarShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarShowcaseViewController.swift; sourceTree = "<group>"; };
+		97652A332927C98F00B04656 /* SnackbarShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarShowcaseView.swift; sourceTree = "<group>"; };
+		97652A352927CB6B00B04656 /* SnackbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarView.swift; sourceTree = "<group>"; };
 		C883569D2750339300DA0786 /* SampleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageProvider.swift; sourceTree = "<group>"; };
 		C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseViewController.swift; sourceTree = "<group>"; };
 		C88356BD27580F0200DA0786 /* TextShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseView.swift; sourceTree = "<group>"; };
@@ -119,6 +125,16 @@
 				7963D2822923FD9C00F89C64 /* PickerShowcaseView.swift */,
 			);
 			path = Picker;
+            sourceTree = "<group>";
+        };
+		97652A302926ECFC00B04656 /* Snackbar */ = {
+			isa = PBXGroup;
+			children = (
+				97652A312927C94B00B04656 /* SnackbarShowcaseViewController.swift */,
+				97652A332927C98F00B04656 /* SnackbarShowcaseView.swift */,
+				97652A352927CB6B00B04656 /* SnackbarView.swift */,
+			);
+			path = Snackbar;
 			sourceTree = "<group>";
 		};
 		C8152AB4275930E000A0F681 /* Showcase */ = {
@@ -302,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				7963D27F2923FD2800F89C64 /* Picker */,
+				97652A302926ECFC00B04656 /* Snackbar */,
 				C88356BB27580EC300DA0786 /* Text */,
 				E6B3101E27CFAD15008D2F36 /* Button */,
 				E6B3102927CFF9AF008D2F36 /* Image */,
@@ -452,9 +469,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97652A322927C94B00B04656 /* SnackbarShowcaseViewController.swift in Sources */,
 				E69A6D9227D11B8300E5CEAC /* ProgressShowcaseView.swift in Sources */,
 				E639E66427D0603900FEEA03 /* CheckboxStyle.swift in Sources */,
 				C883569E2750339300DA0786 /* SampleImageProvider.swift in Sources */,
+				97652A342927C98F00B04656 /* SnackbarShowcaseView.swift in Sources */,
 				E6B3102827CFBD10008D2F36 /* RoundedShadowButtonStyle.swift in Sources */,
 				C8959A70268AB1690080732A /* HomeViewController.swift in Sources */,
 				E6B3102B27CFF9C9008D2F36 /* ImageShowcaseViewController.swift in Sources */,
@@ -462,6 +481,7 @@
 				E644903727D66D42003D7684 /* TextFieldShowcaseView.swift in Sources */,
 				C88356BF27580F0200DA0786 /* TextShowcaseView.swift in Sources */,
 				E6B3102D27CFF9FE008D2F36 /* ImageShowcaseView.swift in Sources */,
+				97652A362927CB6B00B04656 /* SnackbarView.swift in Sources */,
 				C8959A76268B5CEB0080732A /* PreviewView.swift in Sources */,
 				C88356C1275814AC00DA0786 /* BaseViewModelViewController.swift in Sources */,
 				E60C4B5127DBEE130015CBC3 /* AnimationTypeSectionView.swift in Sources */,

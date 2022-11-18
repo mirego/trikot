@@ -7,6 +7,7 @@ import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewM
 import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.picker.PickerShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelController
+import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelController
@@ -32,4 +33,6 @@ interface SampleViewModelControllerFactory : VMDViewModelControllerFactory {
     fun listShowcase(): ListShowcaseViewModelController
 
     fun pickerShowcase(): PickerShowcaseViewModelController
+
+    fun snackbarShowcase(): SnackbarShowcaseViewModelController
 }

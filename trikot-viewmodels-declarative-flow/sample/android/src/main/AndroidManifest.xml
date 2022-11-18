@@ -62,5 +62,9 @@
             android:name="com.mirego.sample.ui.showcase.components.picker.PickerShowcaseActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
+        <activity
+            android:name="com.mirego.sample.ui.showcase.components.snackbar.SnackbarShowcaseActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+
     </application>
 </manifest>

@@ -16,6 +16,7 @@
   "home_component_picker": "Picker",
   "home_component_progress": "Progress",
   "home_component_list": "List",
+  "home_component_snackbar": "Snackbar",
   "image_showcase_complex_placeholder_image_title": "Complex placeholder",
   "home_animations_title": "Animations",
   "home_animation_easing": "Animation Easing",
@@ -73,5 +74,9 @@
   "animation_types_ease_in_ease_out_tile": "Ease In/Out",
   "animation_types_cubic_bezier_tile": "Cubic Bezier (0, 1, 0, 1)",
   "animation_types_spring_tile": "Spring",
-  "list_showcase_title": "List showcase"
+  "list_showcase_title": "List showcase",
+  "snackbar_showcase_title": "Snackbar showcase",
+  "snackbar_showcase_short": "Short duration",
+  "snackbar_showcase_long": "Long duration",
+  "snackbar_showcase_indefinite": "Indefinite duration"
 }
