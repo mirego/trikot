@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,19 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.medium
-import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModel
-import com.mirego.sample.viewmodels.showcase.components.progress.ProgressShowcaseViewModelPreview
 import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDCircularProgressIndicator
-import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLinearProgressIndicator
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDSnackbarFlow
 
 @Composable
