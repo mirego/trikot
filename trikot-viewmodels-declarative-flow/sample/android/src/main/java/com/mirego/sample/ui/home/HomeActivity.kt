@@ -8,6 +8,7 @@ import com.mirego.sample.ui.showcase.components.image.ImageShowcaseActivity
 import com.mirego.sample.ui.showcase.components.list.ListShowcaseActivity
 import com.mirego.sample.ui.showcase.components.picker.PickerShowcaseActivity
 import com.mirego.sample.ui.showcase.components.progress.ProgressShowcaseActivity
+import com.mirego.sample.ui.showcase.components.snackbar.SnackbarShowcaseActivity
 import com.mirego.sample.ui.showcase.components.text.TextShowcaseActivity
 import com.mirego.sample.ui.showcase.components.textfield.TextFieldShowcaseActivity
 import com.mirego.sample.ui.showcase.components.toggle.ToggleShowcaseActivity
@@ -63,5 +64,9 @@ class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, H
 
     override fun navigateToPickerShowcase() {
         startActivity(PickerShowcaseActivity.intent(this))
+    }
+
+    override fun navigateToSnackbarShowcase() {
+        startActivity(SnackbarShowcaseActivity.intent(this))
     }
 }

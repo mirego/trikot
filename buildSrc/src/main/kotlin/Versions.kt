@@ -3,6 +3,7 @@ object Versions {
     const val ATOMIC_FU = "0.17.1"
     const val ANDROID_GRADLE_PLUGIN = "7.2.0"
     const val JETPACK_COMPOSE = "1.2.0-alpha08"
+    const val JETPACK_COMPOSE_MATERIAL_3 = "1.1.0-alpha02"
     const val COIL = "2.0.0-rc03"
     const val KTLINT = "10.3.0"
     const val KOTLINX_SERIALIZATION = "1.3.2"
@@ -15,8 +16,8 @@ object Versions {
     const val KOTLIN_POET = "1.12.0"
 
     object Android {
-        const val TARGET_SDK = 31
-        const val COMPILE_SDK = 31
+        const val TARGET_SDK = 33
+        const val COMPILE_SDK = 33
         const val MIN_SDK = 21
     }
 }

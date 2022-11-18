@@ -44,4 +44,8 @@ extension HomeViewController: HomeNavigationDelegate {
     func navigateToPickerShowcase() {
         present(viewControllerFactory.pickerShowcase(), animated: true, completion: nil)
     }
+    
+    func navigateToSnackbarShowcase() {
+        present(viewControllerFactory.snackbarShowcase(), animated: true, completion: nil)
+    }
 }
