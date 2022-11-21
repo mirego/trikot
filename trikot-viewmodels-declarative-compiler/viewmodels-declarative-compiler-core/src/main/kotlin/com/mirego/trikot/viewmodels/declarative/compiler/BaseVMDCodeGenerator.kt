@@ -3,6 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.KSPLogger
+import com.google.devtools.ksp.symbol.KSTypeReference
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
@@ -44,7 +45,11 @@ abstract class BaseVMDCodeGenerator(
     fun generateViewModelParents(viewModelMetaDataList: List<ViewModelMetaData>) {
         logger.logging("Generating abstract parents for viewmodels: $viewModelMetaDataList")
         viewModelMetaDataList.forEach {
-            generateAbstractParent(it)
+            try {
+                generateAbstractParent(it)
+            } catch (e: Exception) {
+                throw Exception("Unable to generate class with metadata = $it", e)
+            }
         }
     }
 
@@ -95,6 +100,7 @@ abstract class BaseVMDCodeGenerator(
             .addParameters(
                 viewModelMetaData.publishedProperty
                     .map { propertyDeclaration ->
+                        validateType(propertyDeclaration.type)
                         ParameterSpec.builder(
                             name = "${propertyDeclaration.simpleName.getShortName()}InitialValue",
                             type = propertyDeclaration.type.resolve().toTypeName()
@@ -104,6 +110,7 @@ abstract class BaseVMDCodeGenerator(
 
         viewModelMetaData.superClass?.primaryConstructor?.parameters?.let { parameters ->
             parameters.forEach { parameter ->
+                validateType(parameter.type)
                 builder.addParameter(parameter.name?.asString() ?: "", parameter.type.toTypeName())
             }
         } ?: run {
@@ -123,6 +130,7 @@ abstract class BaseVMDCodeGenerator(
     private fun generatePropertyOverrides(viewModelMetaData: ViewModelMetaData) =
         viewModelMetaData.publishedProperty
             .map { propertyDeclaration ->
+                validateType(propertyDeclaration.type)
                 PropertySpec.builder(
                     name = propertyDeclaration.simpleName.getShortName(),
                     type = propertyDeclaration.type.resolve().toTypeName()
@@ -140,6 +148,7 @@ abstract class BaseVMDCodeGenerator(
     private fun generatePropertyDelegates(viewModelMetaData: ViewModelMetaData) =
         viewModelMetaData.publishedProperty
             .map { propertyDeclaration ->
+                validateType(propertyDeclaration.type)
                 PropertySpec.builder(
                     name = "${propertyDeclaration.simpleName.getShortName()}Delegate",
                     type = publishedPropertyType.asTypeName().parameterizedBy(propertyDeclaration.type.resolve().toTypeName())
@@ -182,6 +191,7 @@ abstract class BaseVMDCodeGenerator(
         .build()
 
     private fun generateBindFunctions(viewModelMetaData: ViewModelMetaData) = viewModelMetaData.publishedProperty.map { propertyDeclaration ->
+        validateType(propertyDeclaration.type)
         FunSpec
             .builder("bind${propertyDeclaration.simpleName.getShortName().replaceFirstChar { it.uppercase() }}")
             .addParameter(
@@ -210,6 +220,7 @@ abstract class BaseVMDCodeGenerator(
         return FunSpec.builder("bind")
             .addParameters(
                 viewModelMetaData.publishedProperty.map { propertyDeclaration ->
+                    validateType(propertyDeclaration.type)
                     ParameterSpec(
                         name = propertyDeclaration.simpleName.getShortName(),
                         type = publisherType.asTypeName().parameterizedBy(propertyDeclaration.type.resolve().toTypeName())
@@ -221,6 +232,7 @@ abstract class BaseVMDCodeGenerator(
     }
 
     private fun generatePublisherForPropertyFunctions(viewModelMetaData: ViewModelMetaData) = viewModelMetaData.publishedProperty.map { propertyDeclaration ->
+        validateType(propertyDeclaration.type)
         FunSpec
             .builder("${publisherName}For${propertyDeclaration.simpleName.getShortName().replaceFirstChar { it.uppercase() }}")
             .returns(returnType = publisherType.asTypeName().parameterizedBy(propertyDeclaration.type.resolve().toTypeName()))
@@ -230,5 +242,13 @@ abstract class BaseVMDCodeGenerator(
                     .build()
             )
             .build()
+    }
+
+    private fun validateType(type: KSTypeReference) {
+        try {
+            type.resolve().toTypeName()
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Unresolved type: $type", e)
+        }
     }
 }
