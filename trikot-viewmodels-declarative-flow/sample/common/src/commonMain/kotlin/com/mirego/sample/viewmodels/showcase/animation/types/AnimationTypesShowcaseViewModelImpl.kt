@@ -3,11 +3,11 @@ package com.mirego.sample.viewmodels.showcase.animation.types
 import com.mirego.sample.KWordTranslation
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 
 class AnimationTypesShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : ShowcaseViewModelImpl(coroutineScope), AnimationTypesShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent(i18N[KWordTranslation.ANIMATION_TYPES_SHOWCASE_TITLE], coroutineScope)
+    override val title = text(i18N[KWordTranslation.ANIMATION_TYPES_SHOWCASE_TITLE])
 
     override val linear = AnimationTypeShowcaseViewModelImpl(
         title = i18N[KWordTranslation.ANIMATION_TYPES_LINEAR_TILE],

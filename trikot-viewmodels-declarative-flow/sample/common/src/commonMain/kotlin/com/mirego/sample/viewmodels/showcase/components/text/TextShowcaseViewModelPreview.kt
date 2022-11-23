@@ -1,86 +1,43 @@
 package com.mirego.sample.viewmodels.showcase.components.text
 
 import com.mirego.sample.resources.SampleImageResource
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithImage
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.MainScope
 
 class TextShowcaseViewModelPreview : VMDViewModelImpl(MainScope()), TextShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent("Text Showcase", coroutineScope)
+    override val title = text("Text Showcase")
 
-    override val closeButton = VMDComponents.Button.withImage(SampleImageResource.ICON_CLOSE, coroutineScope)
+    override val closeButton = buttonWithImage(SampleImageResource.ICON_CLOSE)
 
-    override val largeTitle = VMDComponents.Text.withContent(
-        "Large Title",
-        coroutineScope
-    )
+    override val largeTitle = text("Large Title")
 
-    override val title1 = VMDComponents.Text.withContent(
-        "Title 1",
-        coroutineScope
-    )
+    override val title1 = text("Title 1")
 
-    override val title1Bold = VMDComponents.Text.withContent(
-        "Title 1 Bold",
-        coroutineScope
-    )
+    override val title1Bold = text("Title 1 Bold")
 
-    override val title2 = VMDComponents.Text.withContent(
-        "Title 2",
-        coroutineScope
-    )
+    override val title2 = text("Title 2")
 
-    override val title2Bold = VMDComponents.Text.withContent(
-        "Title 2 Bold",
-        coroutineScope
-    )
+    override val title2Bold = text("Title 2 Bold")
 
-    override val title3 = VMDComponents.Text.withContent(
-        "Title 3",
-        coroutineScope
-    )
+    override val title3 = text("Title 3")
 
-    override val headline = VMDComponents.Text.withContent(
-        "Headline",
-        coroutineScope
-    )
+    override val headline = text("Headline")
 
-    override val body = VMDComponents.Text.withContent(
-        "Body",
-        coroutineScope
-    )
-    override val bodyMedium = VMDComponents.Text.withContent(
-        "Body Medium",
-        coroutineScope
-    )
+    override val body = text("Body")
 
-    override val button = VMDComponents.Text.withContent(
-        "Button",
-        coroutineScope
-    )
+    override val bodyMedium = text("Body Medium")
 
-    override val callout = VMDComponents.Text.withContent(
-        "Callout",
-        coroutineScope
-    )
+    override val button = text("Button")
 
-    override val subheadline = VMDComponents.Text.withContent(
-        "Subhealine",
-        coroutineScope
-    )
+    override val callout = text("Callout")
 
-    override val footnote = VMDComponents.Text.withContent(
-        "Footnote",
-        coroutineScope
-    )
+    override val subheadline = text("Subhealine")
 
-    override val caption1 = VMDComponents.Text.withContent(
-        "Caption 1",
-        coroutineScope
-    )
+    override val footnote = text("Footnote")
 
-    override val caption2 = VMDComponents.Text.withContent(
-        "Caption 2",
-        coroutineScope
-    )
+    override val caption1 = text("Caption 1")
+
+    override val caption2 = text("Caption 2")
 }

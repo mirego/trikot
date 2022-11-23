@@ -4,32 +4,30 @@ import com.mirego.sample.KWordTranslation
 import com.mirego.sample.resources.SampleImageResource
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
+import com.mirego.trikot.viewmodels.declarative.viewmodel.localImage
+import com.mirego.trikot.viewmodels.declarative.viewmodel.remoteImage
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 
 class ImageShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : ShowcaseViewModelImpl(coroutineScope), ImageShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_TITLE], coroutineScope)
+    override val title = text(i18N[KWordTranslation.IMAGE_SHOWCASE_TITLE])
 
-    override val localImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_TITLE], coroutineScope)
-    override val localImage = VMDComponents.Image.local(SampleImageResource.IMAGE_BRIDGE, coroutineScope)
+    override val localImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_TITLE])
+    override val localImage = localImage(SampleImageResource.IMAGE_BRIDGE)
 
-    override val remoteImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_TITLE], coroutineScope)
-    override val remoteImage = VMDComponents.Image.remote(
-        "https://picsum.photos/2000/1600",
-        SampleImageResource.IMAGE_PLACEHOLDER,
-        coroutineScope
-    )
+    override val remoteImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_TITLE])
+    override val remoteImage = remoteImage("https://picsum.photos/2000/1600", SampleImageResource.IMAGE_PLACEHOLDER)
 
-    override val localImageDescriptorTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_IMAGE_DESCRIPTOR_TITLE], coroutineScope)
+    override val localImageDescriptorTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_IMAGE_DESCRIPTOR_TITLE])
     override val localImageDescriptor = VMDImageDescriptor.Local(SampleImageResource.IMAGE_BRIDGE)
 
-    override val remoteImageDescriptorTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_IMAGE_DESCRIPTOR_TITLE], coroutineScope)
+    override val remoteImageDescriptorTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_IMAGE_DESCRIPTOR_TITLE])
     override val remoteImageDescriptor = VMDImageDescriptor.Remote("https://picsum.photos/2000/1600", placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER)
 
-    override val placeholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE], coroutineScope)
-    override val placeholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, coroutineScope)
+    override val placeholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE])
+    override val placeholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
 
-    override val complexPlaceholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE], coroutineScope)
-    override val complexPlaceholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, coroutineScope)
+    override val complexPlaceholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE])
+    override val complexPlaceholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
 }

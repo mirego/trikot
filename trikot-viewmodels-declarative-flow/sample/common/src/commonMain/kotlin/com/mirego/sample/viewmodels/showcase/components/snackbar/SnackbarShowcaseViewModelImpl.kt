@@ -6,24 +6,22 @@ import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
 import com.mirego.trikot.viewmodels.declarative.components.VMDSnackbarDuration
 import com.mirego.trikot.viewmodels.declarative.components.VMDSnackbarViewData
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 import com.mirego.trikot.viewmodels.declarative.extension.wrap
+import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithText
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class SnackbarShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
     ShowcaseViewModelImpl(coroutineScope), SnackbarShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.SNACKBAR_SHOWCASE_TITLE],
-        coroutineScope
-    )
+    override val title = text(i18N[KWordTranslation.SNACKBAR_SHOWCASE_TITLE])
 
     private val internalSnackBar: MutableSharedFlow<VMDSnackbarViewData> = MutableSharedFlow(0, 0)
     override val snackbar = internalSnackBar.wrap()
 
-    private val short: VMDButtonViewModel<VMDTextContent> = VMDComponents.Button.withText(i18N[KWordTranslation.SNACKBAR_SHOWCASE_SHORT], coroutineScope) {
+    private val short = buttonWithText(i18N[KWordTranslation.SNACKBAR_SHOWCASE_SHORT]) {
         setAction {
             coroutineScope.launch {
                 internalSnackBar.emit(
@@ -36,7 +34,7 @@ class SnackbarShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) 
             }
         }
     }
-    private val long: VMDButtonViewModel<VMDTextContent> = VMDComponents.Button.withText(i18N[KWordTranslation.SNACKBAR_SHOWCASE_LONG], coroutineScope) {
+    private val long = buttonWithText(i18N[KWordTranslation.SNACKBAR_SHOWCASE_LONG]) {
         setAction {
             coroutineScope.launch {
                 internalSnackBar.emit(
@@ -48,7 +46,7 @@ class SnackbarShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) 
             }
         }
     }
-    private val indefinite: VMDButtonViewModel<VMDTextContent> = VMDComponents.Button.withText(i18N[KWordTranslation.SNACKBAR_SHOWCASE_INDEFINITE], coroutineScope) {
+    private val indefinite = buttonWithText(i18N[KWordTranslation.SNACKBAR_SHOWCASE_INDEFINITE]) {
         setAction {
             coroutineScope.launch {
                 internalSnackBar.emit(

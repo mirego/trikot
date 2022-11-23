@@ -1,10 +1,12 @@
 package com.mirego.trikot.viewmodels.declarative.viewmodel
 
+import com.mirego.trikot.viewmodels.declarative.components.VMDPickerItemViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDImageViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDListViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDLoadingViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDPickerViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDProgressViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextFieldViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModelImpl
@@ -106,8 +108,30 @@ fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closu
     this.placeholder = placeholder
 }
 
+fun VMDViewModelDSL.toggle(closure: VMDToggleViewModelImpl<VMDNoContent>.() -> Unit = {}) =
+    VMDComponents.Toggle.empty(coroutineScope, closure)
+
 fun VMDViewModelDSL.toggleWithText(text: String = "", isOn: Boolean = false, closure: VMDToggleViewModelImpl<VMDTextContent>.() -> Unit = {}) =
     VMDComponents.Toggle.withText(text, isOn, coroutineScope, closure)
+
+fun VMDViewModelDSL.toggleWithImage(image: VMDImageResource = VMDImageResource.None, isOn: Boolean = false, closure: VMDToggleViewModelImpl<VMDImageContent>.() -> Unit = {}) =
+    VMDComponents.Toggle.withImage(image, isOn, coroutineScope, closure)
+
+fun VMDViewModelDSL.toggleWithTextImage(
+    text: String = "",
+    image: VMDImageResource = VMDImageResource.None,
+    isOn: Boolean = false,
+    closure: VMDToggleViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
+) =
+    VMDComponents.Toggle.withTextImage(VMDTextImagePairContent(text, image), isOn, coroutineScope, closure)
+
+fun VMDViewModelDSL.toggleWithTextPair(
+    first: String = "",
+    second: String = "",
+    isOn: Boolean = false,
+    closure: VMDToggleViewModelImpl<VMDTextPairContent>.() -> Unit = {}
+) =
+    VMDComponents.Toggle.withTextPair(VMDTextPairContent(first, second), isOn, coroutineScope, closure)
 
 fun VMDViewModelDSL.loading(isLoading: Boolean = false, closure: VMDLoadingViewModelImpl.() -> Unit = {}) = VMDLoadingViewModelImpl(coroutineScope)
     .apply {
@@ -141,3 +165,6 @@ fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: Flow<List<C>>, c
     VMDComponents.List.empty(coroutineScope, closure).apply {
         bindElements(elements)
     }
+
+fun <E : VMDPickerItemViewModel> VMDViewModelDSL.picker(elements: List<E> = emptyList(), initialSelectedId: String? = null, closure: VMDPickerViewModelImpl<E>.() -> Unit = {}) =
+    VMDComponents.Picker.withElements(coroutineScope, elements, initialSelectedId, closure)

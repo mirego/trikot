@@ -2,11 +2,13 @@ package com.mirego.trikot.viewmodels.declarative.viewmodel
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.viewmodels.declarative.components.VMDPickerItemViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDImageViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDListViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDLoadingViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDPickerViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDProgressViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextFieldViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDTextViewModelImpl
@@ -106,8 +108,30 @@ fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closu
     this.placeholder = placeholder
 }
 
+fun VMDViewModelDSL.toggle(closure: VMDToggleViewModelImpl<VMDNoContent>.() -> Unit = {}) =
+    VMDComponents.Toggle.empty(cancellableManager, closure)
+
 fun VMDViewModelDSL.toggleWithText(text: String = "", isOn: Boolean = false, closure: VMDToggleViewModelImpl<VMDTextContent>.() -> Unit = {}) =
     VMDComponents.Toggle.withText(text, isOn, cancellableManager, closure)
+
+fun VMDViewModelDSL.toggleWithImage(image: VMDImageResource = VMDImageResource.None, isOn: Boolean = false, closure: VMDToggleViewModelImpl<VMDImageContent>.() -> Unit = {}) =
+    VMDComponents.Toggle.withImage(image, isOn, cancellableManager, closure)
+
+fun VMDViewModelDSL.toggleWithTextImage(
+    text: String = "",
+    image: VMDImageResource = VMDImageResource.None,
+    isOn: Boolean = false,
+    closure: VMDToggleViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
+) =
+    VMDComponents.Toggle.withTextImage(VMDTextImagePairContent(text, image), isOn, cancellableManager, closure)
+
+fun VMDViewModelDSL.toggleWithTextPair(
+    first: String = "",
+    second: String = "",
+    isOn: Boolean = false,
+    closure: VMDToggleViewModelImpl<VMDTextPairContent>.() -> Unit = {}
+) =
+    VMDComponents.Toggle.withTextPair(VMDTextPairContent(first, second), isOn, cancellableManager, closure)
 
 fun VMDViewModelDSL.loading(isLoading: Boolean = false, closure: VMDLoadingViewModelImpl.() -> Unit = {}) = VMDLoadingViewModelImpl(cancellableManager)
     .apply {
@@ -141,3 +165,6 @@ fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: Publisher<List<C
     VMDComponents.List.empty(cancellableManager, closure).apply {
         bindElements(elements)
     }
+
+fun <E : VMDPickerItemViewModel> VMDViewModelDSL.picker(elements: List<E> = emptyList(), initialSelectedId: String? = null, closure: VMDPickerViewModelImpl<E>.() -> Unit = {}) =
+    VMDComponents.Picker.withElements(cancellableManager, elements, initialSelectedId, closure)

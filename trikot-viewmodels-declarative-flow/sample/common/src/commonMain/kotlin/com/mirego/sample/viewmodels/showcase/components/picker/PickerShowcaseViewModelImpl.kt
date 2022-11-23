@@ -3,21 +3,18 @@ package com.mirego.sample.viewmodels.showcase.components.picker
 import com.mirego.sample.KWordTranslation
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDContentPickerItemViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
+import com.mirego.trikot.viewmodels.declarative.viewmodel.picker
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.map
 
 class PickerShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
     ShowcaseViewModelImpl(coroutineScope), PickerShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.PICKER_SHOWCASE_TITLE],
-        coroutineScope
-    )
+    override val title = text(i18N[KWordTranslation.PICKER_SHOWCASE_TITLE])
 
-    override val textPicker = VMDComponents.Picker.withElements(
-        coroutineScope,
+    override val textPicker = picker(
         listOf(
             VMDContentPickerItemViewModelImpl(coroutineScope, VMDTextContent("Item 1"), "item_1"),
             VMDContentPickerItemViewModelImpl(coroutineScope, VMDTextContent("Item 2"), "item_2"),
@@ -25,10 +22,7 @@ class PickerShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
         )
     )
 
-    override val textPickerTitle = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.PICKER_SHOWCASE_TEXT],
-        coroutineScope
-    ) {
+    override val textPickerTitle = text(i18N[KWordTranslation.PICKER_SHOWCASE_TEXT]) {
         val initialValue = text
         bindText(
             textPicker.flowForProperty(textPicker::selectedIndex).map { index ->

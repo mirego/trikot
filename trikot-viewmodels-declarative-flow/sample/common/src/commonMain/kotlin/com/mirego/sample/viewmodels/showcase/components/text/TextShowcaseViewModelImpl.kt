@@ -3,88 +3,40 @@ package com.mirego.sample.viewmodels.showcase.components.text
 import com.mirego.sample.KWordTranslation
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 
 class TextShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
     ShowcaseViewModelImpl(coroutineScope), TextShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TITLE],
-        coroutineScope
-    )
+    override val title = text(i18N[KWordTranslation.TEXT_SHOWCASE_TITLE])
 
-    override val largeTitle = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE],
-        coroutineScope
-    )
+    override val largeTitle = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE])
 
-    override val title1 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1],
-        coroutineScope
-    )
+    override val title1 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1])
 
-    override val title1Bold = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1_BOLD],
-        coroutineScope
-    )
+    override val title1Bold = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1_BOLD])
 
-    override val title2 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2],
-        coroutineScope
-    )
+    override val title2 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2])
 
-    override val title2Bold = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2_BOLD],
-        coroutineScope
-    )
+    override val title2Bold = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE2_BOLD])
 
-    override val title3 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE3],
-        coroutineScope
-    )
+    override val title3 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE3])
 
-    override val headline = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_HEADLINE],
-        coroutineScope
-    )
+    override val headline = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_HEADLINE])
 
-    override val body = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY],
-        coroutineScope
-    )
+    override val body = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY])
 
-    override val bodyMedium = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY_MEDIUM],
-        coroutineScope
-    )
+    override val bodyMedium = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BODY_MEDIUM])
 
-    override val button = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BUTTON],
-        coroutineScope
-    )
+    override val button = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_BUTTON])
 
-    override val callout = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CALLOUT],
-        coroutineScope
-    )
+    override val callout = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CALLOUT])
 
-    override val subheadline = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_SUBHEADLINE],
-        coroutineScope
-    )
+    override val subheadline = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_SUBHEADLINE])
 
-    override val footnote = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_FOOTNOTE],
-        coroutineScope
-    )
+    override val footnote = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_FOOTNOTE])
 
-    override val caption1 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION1],
-        coroutineScope
-    )
+    override val caption1 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION1])
 
-    override val caption2 = VMDComponents.Text.withContent(
-        i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION2],
-        coroutineScope
-    )
+    override val caption2 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION2])
 }
