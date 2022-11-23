@@ -306,9 +306,10 @@ object VMDComponents {
             fun <E : VMDPickerItemViewModel> withElements(
                 cancellableManager: CancellableManager,
                 elements: kotlin.collections.List<E>,
-                initialSelectedId: String? = null
+                initialSelectedId: String? = null,
+                closure: VMDPickerViewModelImpl<E>.() -> Unit = {}
             ): VMDPickerViewModel<E> =
-                VMDPickerViewModelImpl(cancellableManager, elements, initialSelectedId)
+                VMDPickerViewModelImpl(cancellableManager, elements, initialSelectedId).apply(closure)
         }
     }
 }

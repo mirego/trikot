@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import kotlin.reflect.KProperty
 
-open class VMDViewModelImpl(protected val coroutineScope: CoroutineScope) : VMDViewModel {
+open class VMDViewModelImpl(override val coroutineScope: CoroutineScope) : VMDViewModel, VMDViewModelDSL {
 
     private val propertyWillChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>()
     private val propertyDidChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>()

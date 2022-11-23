@@ -1,9 +1,9 @@
 package com.mirego.sample.viewmodels.home
 
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithText
 import kotlinx.coroutines.CoroutineScope
 
 class HomeSectionElementViewModelImpl(
@@ -12,5 +12,5 @@ class HomeSectionElementViewModelImpl(
     closure: VMDButtonViewModelImpl<VMDTextContent>.() -> Unit = {}
 ) : VMDViewModelImpl(coroutineScope), HomeSectionElementViewModel {
     override val identifier = text
-    override val button = VMDComponents.Button.withText(text, coroutineScope, closure)
+    override val button = buttonWithText(text, closure = closure)
 }

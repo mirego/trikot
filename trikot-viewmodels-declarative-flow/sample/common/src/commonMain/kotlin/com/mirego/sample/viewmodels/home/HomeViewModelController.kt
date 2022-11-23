@@ -3,9 +3,9 @@ package com.mirego.sample.viewmodels.home
 import com.mirego.sample.KWordTranslation
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelController
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.viewmodel.list
 
 class HomeViewModelController(i18N: I18N) :
     VMDViewModelController<HomeViewModel, HomeNavigationDelegate>() {
@@ -15,7 +15,7 @@ class HomeViewModelController(i18N: I18N) :
             override val title = i18N[KWordTranslation.HOME_TITLE]
 
             override val sections: VMDListViewModel<HomeSectionViewModel> =
-                VMDComponents.List.of(
+                list(
                     HomeSectionViewModelImpl(
                         text = i18N[KWordTranslation.HOME_COMPONENTS_TITLE],
                         elements = listOf(
@@ -87,8 +87,7 @@ class HomeViewModelController(i18N: I18N) :
                             }
                         ),
                         coroutineScope = viewModelControllerScope
-                    ),
-                    coroutineScope = viewModelControllerScope
+                    )
                 )
         }
 }

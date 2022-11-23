@@ -1,13 +1,14 @@
 package com.mirego.sample.viewmodels.showcase.animation.types
 
 import com.mirego.sample.resources.SampleImageResource
-import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithImage
+import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.MainScope
 
 class AnimationTypesShowcaseViewModelPreview : VMDViewModelImpl(MainScope()), AnimationTypesShowcaseViewModel {
-    override val title = VMDComponents.Text.withContent("Animation types", coroutineScope)
-    override val closeButton = VMDComponents.Button.withImage(SampleImageResource.ICON_CLOSE, coroutineScope)
+    override val title = text("Animation types")
+    override val closeButton = buttonWithImage(SampleImageResource.ICON_CLOSE)
 
     override val linear = AnimationTypeShowcaseViewModelImpl(
         title = "Linear",

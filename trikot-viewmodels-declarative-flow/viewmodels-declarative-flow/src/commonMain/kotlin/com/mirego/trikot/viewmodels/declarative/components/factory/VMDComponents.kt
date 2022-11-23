@@ -391,9 +391,10 @@ object VMDComponents {
             fun <E : VMDPickerItemViewModel> withElements(
                 coroutineScope: CoroutineScope,
                 elements: kotlin.collections.List<E>,
-                initialSelectedId: String? = null
+                initialSelectedId: String? = null,
+                closure: VMDPickerViewModelImpl<E>.() -> Unit = {}
             ): VMDPickerViewModel<E> =
-                VMDPickerViewModelImpl(coroutineScope, elements, initialSelectedId)
+                VMDPickerViewModelImpl(coroutineScope, elements, initialSelectedId).apply(closure)
         }
     }
 }
