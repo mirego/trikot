@@ -8,16 +8,16 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProper
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.emit
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.launch
 import kotlin.reflect.KProperty
 
 open class VMDViewModelImpl(override val coroutineScope: CoroutineScope) : VMDViewModel, VMDViewModelDSL {
 
-    private val propertyWillChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>()
-    private val propertyDidChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>()
+    private val propertyWillChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val propertyDidChangeSubject = MutableSharedFlow<VMDPropertyChange<*>>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
     override val propertyWillChange: VMDFlow<VMDPropertyChange<*>>
         get() = propertyWillChangeSubject.wrap()
@@ -26,15 +26,11 @@ open class VMDViewModelImpl(override val coroutineScope: CoroutineScope) : VMDVi
         get() = propertyDidChangeSubject.wrap()
 
     override fun <V> willChange(property: KProperty<V>, oldValue: V, newValue: V) {
-        coroutineScope.launch {
-            propertyWillChangeSubject.emit(VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek()))
-        }
+        propertyWillChangeSubject.tryEmit(VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek()))
     }
 
     override fun <V> didChange(property: KProperty<V>, oldValue: V, newValue: V) {
-        coroutineScope.launch {
-            propertyDidChangeSubject.emit(VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek()))
-        }
+        propertyDidChangeSubject.tryEmit(VMDPropertyChange(property, oldValue, newValue, VMDAnimationContext.animationStack.peek()))
     }
 
     override fun <V> flowForProperty(property: KProperty<V>): Flow<V> {

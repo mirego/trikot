@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.components.impl
 
+import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProperty
@@ -16,6 +17,10 @@ open class VMDListViewModelImpl<E : VMDIdentifiableContent>(coroutineScope: Coro
 
     fun bindElements(flow: Flow<List<E>>) {
         updateProperty(this::elements, flow)
+    }
+
+    fun bindElementsAnimated(flow: Flow<Pair<List<E>, VMDAnimation?>>) {
+        updateAnimatedPropertyPublisher(this::elements, flow)
     }
 
     override val propertyMapping: Map<String, VMDFlowProperty<*>> by lazy {
