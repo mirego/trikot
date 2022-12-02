@@ -17,7 +17,6 @@ buildscript {
 
 plugins {
     id("mirego.publish").version("1.0")
-    id("mirego.release").version("2.0")
 }
 
 allprojects {
@@ -32,43 +31,6 @@ allprojects {
     }
 }
 
-release {
-    checkTasks = listOf(
-        "check"
-    )
-    buildTasks = listOf(
-        ":trikot-foundation:trikotFoundation:publish",
-        ":trikot-foundation:test-utils:publish",
-        ":trikot-streams:streams:publish",
-        ":trikot-streams:test-utils:publish",
-        ":trikot-streams:coroutines-interop:publish",
-        ":trikot-http:http:publish",
-        ":trikot-datasources:datasources-core:publish",
-        ":trikot-datasources:datasources-flow:publish",
-        ":trikot-datasources:datasources-streams:publish",
-        ":trikot-kword:kword:publish",
-        ":trikot-kword:kword-streams:publish",
-        ":trikot-kword:kword-flow:publish",
-        ":trikot-kword:kword-plugin:publish",
-        ":trikot-http:http:publish",
-        ":trikot-viewmodels:viewmodels:publish",
-        ":trikot-viewmodels-declarative:viewmodels-declarative:publish",
-        ":trikot-viewmodels-declarative:compose:publish",
-        ":trikot-viewmodels-declarative-flow:viewmodels-declarative-flow:publish",
-        ":trikot-viewmodels-declarative-flow:compose-flow:publish",
-        ":trikot-viewmodels-declarative-annotations:publish",
-        ":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-streams:publish",
-        ":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-flow:publish",
-        ":trikot-analytics:analytics:publish",
-        ":trikot-analytics:analytics-viewmodel:publish",
-        ":trikot-analytics:firebase-ktx:publish",
-        ":trikot-analytics:mixpanel-ktx:publish",
-        ":trikot-bluetooth:bluetooth:publish",
-        ":trikot-graphql:graphql:publish"
-    )
-    updateVersionPart = 2
-}
-
 tasks {
     val writeDevVersion by registering(WriteProperties::class) {
         outputFile = file("${rootDir}/gradle.properties")
@@ -77,7 +39,7 @@ tasks {
         val originalVersion = project.version.toString().replace("-dev\\w+".toRegex(), "")
         property("version", "$originalVersion-dev$gitCommits")
     }
-    val tagDevVersion by registering {
+    val tagVersion by registering {
         try {
             val version = project.property("version")
             "git tag $version".runCommand(workingDir = rootDir)
