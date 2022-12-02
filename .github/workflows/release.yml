@@ -1,4 +1,4 @@
-name: On-Demand
+name: Release
 
 on: workflow_dispatch
 
