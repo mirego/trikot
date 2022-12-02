@@ -4,26 +4,25 @@ All notable changes to the library will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## Upcoming release
+## Upcoming
+
+> TBD
 
 ## 4.0.0
 
-> 2022-10-17
+> 2022-12-02
 
-- [Datasources] BREAKING: Moved Trikot.Datasources to Trikot.Datasources.streams
+### Breaking Changes
+
+- iOS/tvOS minimum deployment target is now `12.0`
+- [datasources] Moved Trikot.Datasources to Trikot.Datasources.streams
   `com.mirego.trikot:datasources:$trikot_version -> com.mirego.trikot:datasources-streams:$trikot_version`
-- [Datasources.flow] New implementation that supports flows and coroutines
-
-> 2022-07-27
-
-- [VMD] BREAKING: Removed Modifier.fillMaxWidth in VMDLabeledComponent
+- [datasources-flow] New implementation that supports flows and coroutines
+- [VMD] Removed Modifier.fillMaxWidth in VMDLabeledComponent
   - UI using `VMDCheckbox` and `VMDSwitch` should add fillMaxWidth to the modifier
-- [VMD-flow] BREAKING: Removed Modifier.fillMaxWidth in VMDLabeledComponent
+- [VMD-flow] Removed Modifier.fillMaxWidth in VMDLabeledComponent
   - UI using `VMDCheckbox` and `VMDSwitch` should add fillMaxWidth to the modifier
-
-> 2022-07-05
-
-- [viewmodels] BREAKING: UIView extensions properties are now prefixed with "trikot" on iOS and tvOS
+- [viewmodels] UIView extensions properties are now prefixed with "trikot" on iOS and tvOS
   - `UIButton.buttonViewModel` is now `trikotButtonViewModel`
   - `UIImage.imageViewModel` is now `trikotImageViewModel`
   - `UILabel.labelViewModel` is now `trikotLabelViewModel`
@@ -35,11 +34,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `UIView.viewModel` is now `trikotViewModel`
   - `UIView.trikotViewModel()` is now `getTrikotViewModel()`
 
-## 3.3.9
+### Updates
 
-> 2022-07-06
-
+- [VMD/VMD-flow] Add a DSL in order to ease view model creation
+- [VMD/VMD-flow] Snackbar component
+- [VMD/VMD-flow] Add Picker component
+- [VMD/VMD-flow] Add callback to RemoteImage in VMDImage to know when the resource is loaded on Android
+- [VMD-flow] Provide a BasicTextField binding for android
 - [VMD-flow] Add support for use of FlowI18N in VMDComponents factory
+- [VMD-flow] Backport and fix some functionalities
+  [VMD-flow] Improved handling of lifecycle on both android and iOS
+- [VMD-compiler] New Gradle plugin to generate declarative Viewmodels boilerplate code
+- [analytics] Add distinctAppId to the AnalyticsService
+- [datasources] Improvement to BaseHotDataSource
+- [datasources] Re-implement with flows and coroutines
+- [datasources-flow] Fix pending state while refreshing
+- [kword] Add support for dynamic framework resource lookup fallback
+
+### Fixes
+
+- [VMD] Fix Jetpack Compose progress views configuration propagation
+- [VMD/VMD-flow] Prevent crashing on too large bitmap in VMDImage on Android
+- [VMD-flow] Fix ButtonViewModel setAction staying subscribed
+- [VMD-flow] willChange and didChange need to be synchronous to work with the VMDAnimationContext.animationStack
+- [viewmodels] Add missing transformation on Android drawable
+- [bluetooth] Update Bluetooth permission requirements for Android depending on OS version
+- [bluetooth] Make toList conversion thread safe by cloning map before converting its values to list
+- [datasources-flow] Change delete/clear cache cancellation behavior
 
 ## 3.3.8
 
