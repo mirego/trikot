@@ -44,13 +44,15 @@ fun VMDViewModelDSL.button(closure: VMDButtonViewModelImpl<VMDNoContent>.() -> U
     VMDComponents.Button.empty(coroutineScope, closure)
 
 fun VMDViewModelDSL.buttonWithText(text: String = "", action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDTextContent>.() -> Unit = {}) =
-    VMDComponents.Button.withText(text, coroutineScope, closure).apply {
+    VMDComponents.Button.withText(text, coroutineScope).apply {
         setAction(action)
+        closure()
     }
 
 fun VMDViewModelDSL.buttonWithImage(image: VMDImageResource = VMDImageResource.None, action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}) =
-    VMDComponents.Button.withImage(image, coroutineScope, closure).apply {
+    VMDComponents.Button.withImage(image, coroutineScope).apply {
         setAction(action)
+        closure()
     }
 
 fun VMDViewModelDSL.buttonWithImage(
@@ -59,9 +61,10 @@ fun VMDViewModelDSL.buttonWithImage(
     action: () -> Unit,
     closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
 ) =
-    VMDComponents.Button.withImage(initialImage, coroutineScope, closure).apply {
+    VMDComponents.Button.withImage(initialImage, coroutineScope).apply {
         bindContent(image.map { VMDImageContent(it) })
         setAction(action)
+        closure()
     }
 
 fun VMDViewModelDSL.buttonWithImageUrl(
@@ -70,8 +73,9 @@ fun VMDViewModelDSL.buttonWithImageUrl(
     action: () -> Unit = {},
     closure: VMDButtonViewModelImpl<VMDImageDescriptorContent>.() -> Unit = {}
 ) =
-    VMDComponents.Button.withImageUrl(imageUrl, placeholderImageResource, coroutineScope, closure).apply {
+    VMDComponents.Button.withImageUrl(imageUrl, placeholderImageResource, coroutineScope).apply {
         setAction(action)
+        closure()
     }
 
 fun VMDViewModelDSL.buttonWithTextPair(first: String = "", second: String = "", action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDTextPairContent>.() -> Unit = {}) =
@@ -80,10 +84,10 @@ fun VMDViewModelDSL.buttonWithTextPair(first: String = "", second: String = "", 
             first,
             second
         ),
-        coroutineScope,
-        closure
+        coroutineScope
     ).apply {
         setAction(action)
+        closure()
     }
 
 fun VMDViewModelDSL.buttonWithTextImage(
@@ -97,15 +101,16 @@ fun VMDViewModelDSL.buttonWithTextImage(
             text,
             image
         ),
-        coroutineScope,
-        closure
+        coroutineScope
     ).apply {
         setAction(action)
+        closure()
     }
 
-fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closure: VMDTextFieldViewModelImpl.() -> Unit = {}) = VMDComponents.TextField.empty(coroutineScope, closure).apply {
+fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closure: VMDTextFieldViewModelImpl.() -> Unit = {}) = VMDComponents.TextField.empty(coroutineScope).apply {
     this.text = text
     this.placeholder = placeholder
+    closure()
 }
 
 fun VMDViewModelDSL.toggle(closure: VMDToggleViewModelImpl<VMDNoContent>.() -> Unit = {}) =
@@ -152,18 +157,21 @@ fun VMDViewModelDSL.determinateProgress(progress: Float = 0f, total: Float = 1f,
     VMDComponents.Progress.determinate(progress, total, coroutineScope, closure)
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: List<C> = emptyList(), closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty(coroutineScope, closure).apply {
+    VMDComponents.List.empty<C>(coroutineScope).apply {
         this.elements = elements
+        closure()
     }
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(vararg elements: C, closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty(coroutineScope, closure).apply {
+    VMDComponents.List.empty<C>(coroutineScope).apply {
         this.elements = elements.toList()
+        closure()
     }
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: Flow<List<C>>, closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty(coroutineScope, closure).apply {
+    VMDComponents.List.empty<C>(coroutineScope).apply {
         bindElements(elements)
+        closure()
     }
 
 fun <E : VMDPickerItemViewModel> VMDViewModelDSL.picker(elements: List<E> = emptyList(), initialSelectedId: String? = null, closure: VMDPickerViewModelImpl<E>.() -> Unit = {}) =
