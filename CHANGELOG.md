@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - iOS/tvOS minimum deployment target is now `12.0`
 - [datasources] Moved Trikot.Datasources to Trikot.Datasources.streams\
-_To migrate:_ 
+  _To migrate:_
   - Update `com.mirego.trikot:datasources:$trikot_version` for `com.mirego.trikot:datasources-streams:$trikot_version`
   - Add `export("com.mirego.trikot:datasources-core:$trikot_version")`
 - [datasources-flow] New implementation that supports flows and coroutines
