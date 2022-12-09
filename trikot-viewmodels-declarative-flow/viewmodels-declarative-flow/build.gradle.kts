@@ -70,6 +70,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("androidx.appcompat:appcompat:1.2.0")
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
             }
         }
 

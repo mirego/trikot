@@ -11,7 +11,7 @@ class HomeViewModelController(i18N: I18N) :
     VMDViewModelController<HomeViewModel, HomeNavigationDelegate>() {
 
     override val viewModel: HomeViewModel =
-        object : VMDViewModelImpl(viewModelControllerScope), HomeViewModel {
+        object : VMDViewModelImpl(viewModelScope), HomeViewModel {
             override val title = i18N[KWordTranslation.HOME_TITLE]
 
             override val sections: VMDListViewModel<HomeSectionViewModel> =
@@ -21,72 +21,72 @@ class HomeViewModelController(i18N: I18N) :
                         elements = listOf(
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_TEXT],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToTextShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_BUTTON],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToButtonShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_IMAGE],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToImageShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_TEXTFIELD],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToTextFieldShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_TOGGLE],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToToggleShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_PROGRESS],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToProgressShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_LIST],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToListShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_PICKER],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToPickerShowcase() }
                             },
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_COMPONENT_SNACKBAR],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToSnackbarShowcase() }
                             }
                         ),
-                        coroutineScope = viewModelControllerScope
+                        coroutineScope = coroutineScope
                     ),
                     HomeSectionViewModelImpl(
                         text = i18N[KWordTranslation.HOME_ANIMATIONS_TITLE],
                         elements = listOf(
                             HomeSectionElementViewModelImpl(
                                 text = i18N[KWordTranslation.HOME_ANIMATION_EASING],
-                                coroutineScope = viewModelControllerScope
+                                coroutineScope = coroutineScope
                             ) {
                                 setAction { navigationDelegate?.navigateToAnimationTypesShowcase() }
                             }
                         ),
-                        coroutineScope = viewModelControllerScope
+                        coroutineScope = coroutineScope
                     )
                 )
         }

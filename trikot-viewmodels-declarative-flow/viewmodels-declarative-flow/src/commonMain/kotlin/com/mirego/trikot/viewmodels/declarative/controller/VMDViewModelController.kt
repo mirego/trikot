@@ -3,24 +3,16 @@ package com.mirego.trikot.viewmodels.declarative.controller
 import com.mirego.trikot.foundation.concurrent.atomic
 import com.mirego.trikot.foundation.ref.weakAtomicReference
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 
 abstract class VMDViewModelController<VM : VMDViewModel, N : VMDNavigationDelegate> :
     VMDPlatformViewModelController() {
 
     var navigationDelegate: N? by weakAtomicReference()
 
-    open val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        println("CoroutineExceptionHandler got $throwable")
-    }
-
-    protected val viewModelControllerScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob() + exceptionHandler)
-
     abstract val viewModel: VM
+
+    val viewModelScope: CoroutineScope = platformViewModelScope
 
     private var hasAppeared by atomic(false)
 
@@ -43,10 +35,5 @@ abstract class VMDViewModelController<VM : VMDViewModel, N : VMDNavigationDelega
     }
 
     open fun onDisappear() {
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelControllerScope.cancel()
     }
 }
