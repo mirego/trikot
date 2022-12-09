@@ -8,7 +8,7 @@ import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControlle
 import kotlin.time.Duration.Companion.seconds
 
 class AnimationTypesShowcaseViewModelController(i18N: I18N) : VMDViewModelController<AnimationTypesShowcaseViewModel, AnimationTypesShowcaseNavigationDelegate>() {
-    override val viewModel: AnimationTypesShowcaseViewModelImpl = AnimationTypesShowcaseViewModelImpl(i18N, viewModelControllerScope)
+    override val viewModel: AnimationTypesShowcaseViewModelImpl = AnimationTypesShowcaseViewModelImpl(i18N, viewModelScope)
 
     override fun onCreate() {
         super.onCreate()
