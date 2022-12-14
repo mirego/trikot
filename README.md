@@ -36,8 +36,7 @@
 
 ## Getting started
 
-To start a new kotlin-multiplatform project, we suggest using our _ready-to-run_ [https://github.com/mirego/kmp-boilerplate](kmp-boilerplate) template
-on which you can add all the specific dependencies you need for your project.
+To start a new Kotlin Multiplatform project, we suggest using our _ready-to-run_ [kmp-boilerplate](https://github.com/mirego/kmp-boilerplate) template on which you can add all the specific dependencies you need for your project.
 
 ### Samples
 
