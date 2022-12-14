@@ -39,6 +39,16 @@ abstract class ViewModelFragment<VMC : VMDViewModelController<VM, N>, VM : VMDVi
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModelController.onAppear()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModelController.onDisappear()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         viewModelController.navigationDelegate = null
