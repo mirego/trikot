@@ -13,7 +13,7 @@ object Versions {
     const val KOTLINX_SERIALIZATION = "1.4.1"
     const val KOTLINX_COROUTINES = "1.6.3"
     const val KTOR = "2.0.3"
-    const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.429"
+    const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.459"
     const val ANDROIDX_LIFECYCLE = "2.4.0"
     const val OKIO = "3.2.0"
     const val KSP = "1.7.10-1.0.6"
