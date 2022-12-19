@@ -26,7 +26,6 @@ allprojects {
         mavenCentral()
         maven("https://jitpack.io")
         maven("https://plugins.gradle.org/m2/")
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
         maven("https://s3.amazonaws.com/mirego-maven/public")
     }
 }
@@ -48,11 +47,4 @@ tasks {
             println("Unable to tag: ${e.message}")
         }
     }
-}
-
-// Node.js 16.0.0 is needed on Apple Silicon
-// This bug will be fixed in Kotlin 1.6.20
-// https://youtrack.jetbrains.com/issue/KT-49109
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "16.0.0"
 }

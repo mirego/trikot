@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 > TBD
 
+### Updates
+
+- Kotlin to `1.7.20`
+- AtomicFu to `0.18.5`
+- Jetpack Compose to 1.3.2/1.3.1
+- Kotlinx.Coroutines from 1.6.0 to 1.6.1
+- Ktor to `2.0.3`
+- Kotlin Serialization to `1.4.1`
+- Kotlin Wrappers extensions to `1.0.1-pre.429`
+
 ## 4.0.0
 
 > 2022-12-02

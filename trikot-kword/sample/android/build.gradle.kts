@@ -40,7 +40,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE
+        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE_COMPILER
     }
 
     kotlinOptions {

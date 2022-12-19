@@ -8,12 +8,7 @@ plugins {
 group = "com.mirego.trikot"
 
 kotlin {
-    configureKmmTargets(js = false)
-    js(IR) {
-        moduleName = "@trikot/http"
-        browser()
-        binaries.executable()
-    }
+    configureKmmTargets()
 
     sourceSets {
         all {
