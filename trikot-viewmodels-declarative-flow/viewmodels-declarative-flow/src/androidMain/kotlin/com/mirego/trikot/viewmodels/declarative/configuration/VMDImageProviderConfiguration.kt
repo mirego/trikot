@@ -7,4 +7,3 @@ object VMDImageProviderConfiguration {
      */
     var painterResourceLegacyDrawableSupport = false
 }
-
