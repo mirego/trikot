@@ -18,6 +18,7 @@ object Versions {
     const val OKIO = "3.2.0"
     const val KSP = "1.7.10-1.0.6"
     const val KOTLIN_POET = "1.12.0"
+    const val ACCOMPANIST = "0.28.0"
 
     object Android {
         const val TARGET_SDK = 33
