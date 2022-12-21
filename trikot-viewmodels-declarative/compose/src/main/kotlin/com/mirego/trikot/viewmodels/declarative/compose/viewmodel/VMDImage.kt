@@ -37,7 +37,7 @@ fun VMDImage(
     placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = "",
+    contentDescription: String? = null,
     allowHardware: Boolean = true,
     placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
@@ -78,7 +78,7 @@ fun VMDImage(
     placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = "",
+    contentDescription: String? = null,
     allowHardware: Boolean = true,
     placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
@@ -128,7 +128,7 @@ fun LocalImage(
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = ""
+    contentDescription: String? = null
 ) {
     Image(
         painter = painterResource(imageResource),
@@ -150,7 +150,7 @@ fun RemoteImage(
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
-    contentDescription: String = "",
+    contentDescription: String? = null,
     allowHardware: Boolean = true,
     asyncStateCallback: ((AsyncImagePainter.State) -> Unit)? = null
 ) {
@@ -192,7 +192,7 @@ private fun RemoteImageDefaultPlaceholder(
     modifier: Modifier = Modifier,
     contentScale: ContentScale,
     colorFilter: ColorFilter?,
-    contentDescription: String
+    contentDescription: String?
 ) {
     LocalImage(
         imageResource = imageResource,
