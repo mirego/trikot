@@ -44,5 +44,5 @@ jobs:
           MAVEN_AWS_SECRET: ${{ secrets.MIREGO_MAVEN_AWS_SECRET_ACCESS_KEY }}
         run: |
           ./gradlew writeDevVersion -i -s
-          ./gradlew check publish -i -s
+          ./gradlew check publish -Pdisable_samples -i -s
           ./gradlew tagVersion -i -s

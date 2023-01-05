@@ -19,6 +19,8 @@ pluginManagement {
 }
 rootProject.name = "trikot"
 
+val samplesEnabled = !extra.has("disable_samples")
+
 include(":trikot-foundation:trikotFoundation")
 include(":trikot-foundation:test-utils")
 include(":trikot-streams:streams")
@@ -36,22 +38,25 @@ include(":trikot-kword:kword")
 include(":trikot-kword:kword-flow")
 include(":trikot-kword:kword-streams")
 include(":trikot-kword:kword-plugin")
-//include(":trikot-kword:sample:common")
-//include(":trikot-kword:sample:android")
 include(":trikot-viewmodels:viewmodels")
-//include(":trikot-viewmodels:sample:common")
-//include(":trikot-viewmodels:sample:android")
 include(":trikot-viewmodels-declarative:viewmodels-declarative")
 include(":trikot-viewmodels-declarative:compose")
-//include(":trikot-viewmodels-declarative:sample:common")
-//include(":trikot-viewmodels-declarative:sample:android")
 include(":trikot-viewmodels-declarative-flow:viewmodels-declarative-flow")
 include(":trikot-viewmodels-declarative-flow:compose-flow")
 include(":trikot-viewmodels-declarative-annotations:viewmodels-annotations")
 include(":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-core")
 include(":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-streams")
 include(":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-flow")
-//include(":trikot-viewmodels-declarative-flow:sample:common")
-//include(":trikot-viewmodels-declarative-flow:sample:android")
 include(":trikot-bluetooth:bluetooth")
 include(":trikot-graphql:graphql")
+
+if (samplesEnabled) {
+    include(":trikot-kword:sample:common")
+    include(":trikot-kword:sample:android")
+    include(":trikot-viewmodels:sample:common")
+    include(":trikot-viewmodels:sample:android")
+    include(":trikot-viewmodels-declarative:sample:common")
+    include(":trikot-viewmodels-declarative:sample:android")
+    include(":trikot-viewmodels-declarative-flow:sample:common")
+    include(":trikot-viewmodels-declarative-flow:sample:android")
+}
