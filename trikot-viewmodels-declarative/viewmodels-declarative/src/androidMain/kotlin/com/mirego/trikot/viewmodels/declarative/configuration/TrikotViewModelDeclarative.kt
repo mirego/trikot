@@ -1,8 +1,5 @@
 package com.mirego.trikot.viewmodels.declarative.configuration
 
-import kotlin.native.concurrent.ThreadLocal
-
-@ThreadLocal
 object TrikotViewModelDeclarative {
     private val uninitializedException: IllegalStateException
         get() {

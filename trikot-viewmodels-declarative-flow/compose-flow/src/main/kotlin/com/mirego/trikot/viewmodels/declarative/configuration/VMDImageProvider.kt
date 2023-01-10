@@ -1,8 +1,8 @@
 package com.mirego.trikot.viewmodels.declarative.configuration
 
+import android.content.Context
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
-import platform.UIKit.UIImage
 
-actual interface VMDImageProvider {
-    fun imageForResource(imageResource: VMDImageResource): UIImage?
+interface VMDImageProvider {
+    fun resourceIdForResource(resource: VMDImageResource, context: Context): Int?
 }

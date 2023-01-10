@@ -9,8 +9,8 @@ extension VMDImageResource {
 
 extension Image {
     public init?(_ imageResource: VMDImageResource) {
-        if let uiImage = TrikotViewModelDeclarative.shared.imageProvider.imageForResource(imageResource: imageResource) {
-            self.init(uiImage: uiImage)
+        if let image = TrikotViewModelDeclarative.shared.imageProvider.imageForResource(imageResource: imageResource) {
+            self = image
         } else {
             return nil
         }
