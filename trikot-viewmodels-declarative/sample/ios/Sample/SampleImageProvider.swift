@@ -1,16 +1,17 @@
-import UIKit
+import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
+import Trikot
 
 class SampleImageProvider: VMDImageProvider {
-    func imageForResource(imageResource: VMDImageResource) -> UIImage? {
+    func imageForResource(imageResource: VMDImageResource) -> Image? {
         guard let resource = imageResource as? SampleImageResource else { return nil }
         switch resource {
         case .iconClose:
-            return UIImage(named: "icn_close")
+            return Image("icn_close")
         case .imageBridge:
-            return UIImage(named: "bridge")
+            return Image("bridge")
         case .imagePlaceholder:
-            return UIImage(named: "placeholder")
+            return Image("placeholder")
         default:
             return nil
         }

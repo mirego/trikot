@@ -3,6 +3,6 @@ import UIKit
 
 extension VMDImageResource {
     public var uiImage: UIImage? {
-        return TrikotViewModelDeclarative.shared.imageProvider.imageForResource(imageResource: self)
+        return TrikotViewModelDeclarativeUIKit.shared.imageProvider.imageForResource(imageResource: self)
     }
 }
