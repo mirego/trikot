@@ -4,6 +4,8 @@ import TRIKOT_FRAMEWORK_NAME
 public struct VMDButton<Label, Content: VMDContent>: View where Label: View {
     private let labelBuilder: (Content) -> Label
 
+    var externalActionHandler: ((_ action: () -> Void) -> Void)?
+
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDButtonViewModel<Content>>
 
     private var viewModel: VMDButtonViewModel<Content> {
@@ -16,12 +18,18 @@ public struct VMDButton<Label, Content: VMDContent>: View where Label: View {
     }
 
     public var body: some View {
-        Button(action: {
-            self.viewModel.actionBlock()
-        }, label: {
+        Button {
+            if let externalActionHandler = externalActionHandler {
+                externalActionHandler {
+                    viewModel.actionBlock()
+                }
+            } else {
+                viewModel.actionBlock()
+            }
+        } label: {
             labelBuilder(viewModel.content)
-        })
-            .disabled(!viewModel.isEnabled)
-            .hidden(viewModel.isHidden)
+        }
+        .disabled(!viewModel.isEnabled)
+        .hidden(viewModel.isHidden)
     }
 }
