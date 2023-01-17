@@ -37,7 +37,6 @@ fun VMDImage(
     placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    contentDescription: String? = null,
     allowHardware: Boolean = true,
     placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
@@ -45,7 +44,7 @@ fun VMDImage(
             modifier = modifier,
             contentScale = placeholderContentScale,
             colorFilter = colorFilter,
-            contentDescription = contentDescription
+            contentDescription = viewModel.contentDescription
         )
     },
     asyncStateCallback: ((AsyncImagePainter.State) -> Unit)? = null
@@ -60,7 +59,7 @@ fun VMDImage(
         alignment = alignment,
         contentScale = contentScale,
         colorFilter = colorFilter,
-        contentDescription = contentDescription,
+        contentDescription = viewModel.contentDescription,
         placeholderContentScale = placeholderContentScale,
         imageDescriptor = imageViewModel.image,
         allowHardware = allowHardware,

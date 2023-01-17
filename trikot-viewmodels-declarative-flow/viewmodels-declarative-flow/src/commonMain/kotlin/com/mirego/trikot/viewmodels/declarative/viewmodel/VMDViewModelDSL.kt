@@ -31,14 +31,14 @@ interface VMDViewModelDSL {
 fun VMDViewModelDSL.text(content: String = "", closure: VMDTextViewModelImpl.() -> Unit = {}) =
     VMDComponents.Text.withContent(content, coroutineScope, closure)
 
-fun VMDViewModelDSL.localImage(image: VMDImageResource = VMDImageResource.None, closure: VMDImageViewModelImpl.() -> Unit = {}) =
-    VMDComponents.Image.local(image, coroutineScope, closure)
+fun VMDViewModelDSL.localImage(image: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
+    VMDComponents.Image.local(image, coroutineScope, contentDescription, closure)
 
-fun VMDViewModelDSL.remoteImage(imageUrl: String? = null, placeholderImageResource: VMDImageResource = VMDImageResource.None, closure: VMDImageViewModelImpl.() -> Unit = {}) =
-    VMDComponents.Image.remote(imageUrl, placeholderImageResource, coroutineScope, closure)
+fun VMDViewModelDSL.remoteImage(imageUrl: String? = null, placeholderImageResource: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
+    VMDComponents.Image.remote(imageUrl, placeholderImageResource, coroutineScope, contentDescription, closure)
 
-fun VMDViewModelDSL.image(imageDescriptor: VMDImageDescriptor = VMDImageDescriptor.Local(VMDImageResource.None), closure: VMDImageViewModelImpl.() -> Unit = {}) =
-    VMDComponents.Image.withDescriptor(imageDescriptor, coroutineScope, closure)
+fun VMDViewModelDSL.image(imageDescriptor: VMDImageDescriptor = VMDImageDescriptor.Local(VMDImageResource.None), contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
+    VMDComponents.Image.withDescriptor(imageDescriptor, coroutineScope, contentDescription, closure)
 
 fun VMDViewModelDSL.button(closure: VMDButtonViewModelImpl<VMDNoContent>.() -> Unit = {}) =
     VMDComponents.Button.empty(coroutineScope, closure)
