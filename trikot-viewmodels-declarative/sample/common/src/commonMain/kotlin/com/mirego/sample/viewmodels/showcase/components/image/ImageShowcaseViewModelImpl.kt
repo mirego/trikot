@@ -32,5 +32,10 @@ class ImageShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMana
     override val placeholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager, contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE])
 
     override val complexPlaceholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE], cancellableManager)
-    override val complexPlaceholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager, contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE])
+    override val complexPlaceholderImage = VMDComponents.Image.remote(
+        imageURL = null,
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        cancellableManager = cancellableManager,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE]
+    )
 }
