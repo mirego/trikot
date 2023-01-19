@@ -28,7 +28,7 @@ public struct VMDImage: View {
     }
 
     public init(_ imageDescriptor: VMDImageDescriptor) {
-        self.observableViewModel = VMDComponents.Image.companion.withDescriptor(imageDescriptor: imageDescriptor, cancellableManager: CancellableManager(), closure: {_ in }).asObservable()
+        self.observableViewModel = VMDComponents.Image.companion.withDescriptor(imageDescriptor: imageDescriptor, cancellableManager: CancellableManager(), contentDescription: nil, closure: {_ in }).asObservable()
     }
 
     public var body: some View {
@@ -36,10 +36,12 @@ public struct VMDImage: View {
             localImageConfigurations.reduce(image, { current, config in
                 config(current)
             })
+            .accessibilityLabel(viewModel.contentDescription ?? "")
         } else if let remoteImage = viewModel.image as? VMDImageDescriptor.Remote {
             remoteImageConfigurations.reduce(KFImage(remoteImage.imageURL), { current, config in
                 config(current, remoteImage.placeholderImageResource)
             })
+            .accessibilityLabel(viewModel.contentDescription ?? "")
         } else {
             EmptyView()
         }
