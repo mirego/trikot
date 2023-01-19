@@ -26,7 +26,11 @@ class ImageShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : S
     override val remoteImageDescriptor = VMDImageDescriptor.Remote("https://picsum.photos/2000/1600", placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER)
 
     override val placeholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE])
-    override val placeholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER, contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE])
+    override val placeholderImage = remoteImage(
+        imageUrl = null,
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE]
+    )
 
     override val complexPlaceholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE])
     override val complexPlaceholderImage = remoteImage(
