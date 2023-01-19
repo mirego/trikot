@@ -34,7 +34,12 @@ fun VMDViewModelDSL.text(content: String = "", closure: VMDTextViewModelImpl.() 
 fun VMDViewModelDSL.localImage(image: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
     VMDComponents.Image.local(image, coroutineScope, contentDescription, closure)
 
-fun VMDViewModelDSL.remoteImage(imageUrl: String? = null, placeholderImageResource: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
+fun VMDViewModelDSL.remoteImage(
+    imageUrl: String? = null,
+    placeholderImageResource: VMDImageResource = VMDImageResource.None,
+    contentDescription: String? = null,
+    closure: VMDImageViewModelImpl.() -> Unit = {}
+) =
     VMDComponents.Image.remote(imageUrl, placeholderImageResource, coroutineScope, contentDescription, closure)
 
 fun VMDViewModelDSL.image(imageDescriptor: VMDImageDescriptor = VMDImageDescriptor.Local(VMDImageResource.None), contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
