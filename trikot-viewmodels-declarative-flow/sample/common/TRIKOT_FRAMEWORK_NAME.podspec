@@ -36,7 +36,4 @@ Pod::Spec.new do |spec|
         }
     ]
     spec.resources = "src/commonMain/resources/translations/*"
-    spec.prepare_command = <<-CMD
-    ../gradlew :common:generateDummyFramework
-CMD
 end
