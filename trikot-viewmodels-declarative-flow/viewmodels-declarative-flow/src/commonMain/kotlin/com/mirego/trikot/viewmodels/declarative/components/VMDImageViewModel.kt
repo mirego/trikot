@@ -5,4 +5,5 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 
 interface VMDImageViewModel : VMDViewModel {
     val image: VMDImageDescriptor
+    val contentDescription: String?
 }

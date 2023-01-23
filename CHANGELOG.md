@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 > TBD
 
+### Breaking Changes
+
+- [VMD] ContentDescription is now a property of VMDImageViewModel.
+  - It does not exist in VMDImage anymore for android
+- [VMD-flow] ContentDescription is now a property of VMDImageViewModel.
+  - It does not exist in VMDImage anymore for android
+
 ## 4.1.0
 
 > 2022-12-19

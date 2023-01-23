@@ -72,31 +72,39 @@ object VMDComponents {
             fun local(
                 imageResource: VMDImageResource,
                 coroutineScope: CoroutineScope,
+                contentDescription: String? = null,
                 closure: VMDImageViewModelImpl.() -> Unit = {}
             ) =
                 VMDImageViewModelImpl(coroutineScope)
-                    .apply { image = VMDImageDescriptor.Local(imageResource) }
+                    .apply {
+                        image = VMDImageDescriptor.Local(imageResource)
+                        this.contentDescription = contentDescription
+                    }
                     .apply(closure)
 
             fun remote(
                 imageURL: String?,
                 placeholderImageResource: VMDImageResource = VMDImageResource.None,
                 coroutineScope: CoroutineScope,
+                contentDescription: String? = null,
                 closure: VMDImageViewModelImpl.() -> Unit = {}
             ) =
                 VMDImageViewModelImpl(coroutineScope)
                     .apply {
                         image = VMDImageDescriptor.Remote(imageURL, placeholderImageResource)
+                        this.contentDescription = contentDescription
                     }
                     .apply(closure)
 
             fun withDescriptor(
                 imageDescriptor: VMDImageDescriptor,
                 coroutineScope: CoroutineScope,
+                contentDescription: String? = null,
                 closure: VMDImageViewModelImpl.() -> Unit = {}
             ) = VMDImageViewModelImpl(coroutineScope)
                 .apply {
                     image = imageDescriptor
+                    this.contentDescription = contentDescription
                 }
                 .apply(closure)
         }

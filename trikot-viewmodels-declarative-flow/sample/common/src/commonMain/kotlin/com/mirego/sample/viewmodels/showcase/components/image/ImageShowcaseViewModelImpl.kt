@@ -14,10 +14,10 @@ class ImageShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : S
     override val title = text(i18N[KWordTranslation.IMAGE_SHOWCASE_TITLE])
 
     override val localImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_TITLE])
-    override val localImage = localImage(SampleImageResource.IMAGE_BRIDGE)
+    override val localImage = localImage(SampleImageResource.IMAGE_BRIDGE, contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_TITLE])
 
     override val remoteImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_TITLE])
-    override val remoteImage = remoteImage("https://picsum.photos/2000/1600", SampleImageResource.IMAGE_PLACEHOLDER)
+    override val remoteImage = remoteImage("https://picsum.photos/2000/1600", SampleImageResource.IMAGE_PLACEHOLDER, contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_TITLE])
 
     override val localImageDescriptorTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_IMAGE_DESCRIPTOR_TITLE])
     override val localImageDescriptor = VMDImageDescriptor.Local(SampleImageResource.IMAGE_BRIDGE)
@@ -26,8 +26,16 @@ class ImageShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : S
     override val remoteImageDescriptor = VMDImageDescriptor.Remote("https://picsum.photos/2000/1600", placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER)
 
     override val placeholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE])
-    override val placeholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
+    override val placeholderImage = remoteImage(
+        imageUrl = null,
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE]
+    )
 
     override val complexPlaceholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE])
-    override val complexPlaceholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
+    override val complexPlaceholderImage = remoteImage(
+        imageUrl = null,
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE]
+    )
 }

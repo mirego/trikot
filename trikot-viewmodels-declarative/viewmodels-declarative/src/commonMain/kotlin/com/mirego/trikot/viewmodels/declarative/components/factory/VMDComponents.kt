@@ -56,31 +56,39 @@ object VMDComponents {
             fun local(
                 imageResource: VMDImageResource,
                 cancellableManager: CancellableManager,
+                contentDescription: String? = null,
                 closure: VMDImageViewModelImpl.() -> Unit = {}
             ) =
                 VMDImageViewModelImpl(cancellableManager)
-                    .apply { image = VMDImageDescriptor.Local(imageResource) }
+                    .apply {
+                        image = VMDImageDescriptor.Local(imageResource)
+                        this.contentDescription = contentDescription
+                    }
                     .apply(closure)
 
             fun remote(
                 imageURL: String?,
                 placeholderImageResource: VMDImageResource = VMDImageResource.None,
                 cancellableManager: CancellableManager,
+                contentDescription: String? = null,
                 closure: VMDImageViewModelImpl.() -> Unit = {}
             ) =
                 VMDImageViewModelImpl(cancellableManager)
                     .apply {
                         image = VMDImageDescriptor.Remote(imageURL, placeholderImageResource)
+                        this.contentDescription = contentDescription
                     }
                     .apply(closure)
 
             fun withDescriptor(
                 imageDescriptor: VMDImageDescriptor,
                 cancellableManager: CancellableManager,
+                contentDescription: String? = null,
                 closure: VMDImageViewModelImpl.() -> Unit = {}
             ) = VMDImageViewModelImpl(cancellableManager)
                 .apply {
                     image = imageDescriptor
+                    this.contentDescription = contentDescription
                 }
                 .apply(closure)
         }

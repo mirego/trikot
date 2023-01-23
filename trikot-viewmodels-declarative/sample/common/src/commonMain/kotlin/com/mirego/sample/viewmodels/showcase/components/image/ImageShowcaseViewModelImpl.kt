@@ -12,13 +12,14 @@ class ImageShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMana
     override val title = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_TITLE], cancellableManager)
 
     override val localImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_TITLE], cancellableManager)
-    override val localImage = VMDComponents.Image.local(SampleImageResource.IMAGE_BRIDGE, cancellableManager)
+    override val localImage = VMDComponents.Image.local(SampleImageResource.IMAGE_BRIDGE, cancellableManager, contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_TITLE])
 
     override val remoteImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_TITLE], cancellableManager)
     override val remoteImage = VMDComponents.Image.remote(
         "https://picsum.photos/2000/1600",
         SampleImageResource.IMAGE_PLACEHOLDER,
-        cancellableManager
+        cancellableManager,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_REMOTE_TITLE]
     )
 
     override val localImageDescriptorTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_LOCAL_IMAGE_DESCRIPTOR_TITLE], cancellableManager)
@@ -28,8 +29,18 @@ class ImageShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMana
     override val remoteImageDescriptor = VMDImageDescriptor.Remote("https://picsum.photos/2000/1600", placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER)
 
     override val placeholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE], cancellableManager)
-    override val placeholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager)
+    override val placeholderImage = VMDComponents.Image.remote(
+        imageURL = null,
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        cancellableManager = cancellableManager,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE]
+    )
 
     override val complexPlaceholderImageTitle = VMDComponents.Text.withContent(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE], cancellableManager)
-    override val complexPlaceholderImage = VMDComponents.Image.remote(null, SampleImageResource.IMAGE_PLACEHOLDER, cancellableManager)
+    override val complexPlaceholderImage = VMDComponents.Image.remote(
+        imageURL = null,
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        cancellableManager = cancellableManager,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE]
+    )
 }
