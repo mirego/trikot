@@ -28,14 +28,14 @@ public struct VMDTextField<Label>: View where Label: View {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = nil
         self.onFocusChange = onFocusChange
-        self.text = viewModel.text
+        _text = State(initialValue: viewModel.text)
     }
 
     public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, @ViewBuilder label: @escaping () -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
         self.onFocusChange = onFocusChange
-        self.text = viewModel.text
+        _text = State(initialValue: viewModel.text)
     }
 
     public var body: some View {
