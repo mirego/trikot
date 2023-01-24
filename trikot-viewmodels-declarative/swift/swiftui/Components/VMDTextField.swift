@@ -12,7 +12,7 @@ public struct VMDTextField<Label>: View where Label: View {
         observableViewModel.viewModel
     }
 
-    @State private var text: String = ""
+    @State private var text: String
 
     private var prompt: Text? {
         if !viewModel.placeholder.isEmpty {
@@ -28,12 +28,14 @@ public struct VMDTextField<Label>: View where Label: View {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = nil
         self.onFocusChange = onFocusChange
+        self.text = viewModel.text
     }
 
     public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, @ViewBuilder label: @escaping () -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
         self.onFocusChange = onFocusChange
+        self.text = viewModel.text
     }
 
     public var body: some View {
@@ -86,19 +88,19 @@ public struct VMDTextField<Label>: View where Label: View {
             }, onCommit: {
                 viewModel.onReturnKeyTap()
             })
-                .keyboardType(viewModel.keyboardType.uiKeyboardType)
-                .introspectTextField { textfield in
-                    textfield.returnKeyType = viewModel.keyboardReturnKeyType.uiReturnKeyType
-                }
-                .textContentType(viewModel.contentType?.uiTextContentType)
-                .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
-                .disableAutocorrection(!viewModel.autoCorrect)
-                .onChange(of: viewModel.text) { newValue in
-                    text = viewModel.formatText(newValue)
-                }
-                .onChange(of: text) { newValue in
-                    handleTextTransformations(newValue)
-                }
+            .keyboardType(viewModel.keyboardType.uiKeyboardType)
+            .introspectTextField { textfield in
+                textfield.returnKeyType = viewModel.keyboardReturnKeyType.uiReturnKeyType
+            }
+            .textContentType(viewModel.contentType?.uiTextContentType)
+            .autocapitalization(viewModel.autoCapitalization.uiTextAutocapitalizationType)
+            .disableAutocorrection(!viewModel.autoCorrect)
+            .onChange(of: viewModel.text) { newValue in
+                text = viewModel.formatText(newValue)
+            }
+            .onChange(of: text) { newValue in
+                handleTextTransformations(newValue)
+            }
         }
     }
 
