@@ -2,7 +2,7 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 
 public extension VMDAnimation {
-    var animation: Animation? {
+    var animation: SwiftUI.Animation? {
         if let tweenAnimation = self as? VMDAnimationTween {
             if let standardEasing = tweenAnimation.easing as? VMDAnimationEasingStandard {
                 switch standardEasing {
