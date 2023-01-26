@@ -4,6 +4,12 @@
 
 package kotlinx.coroutines.reactive
 
+import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.streams.reactive.Publishers
+import com.mirego.trikot.streams.reactive.map
+import com.mirego.trikot.streams.reactive.shared
+import com.mirego.trikot.streams.reactive.subscribe
+import kotlin.math.exp
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
@@ -12,6 +18,13 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.test.Test
 import kotlin.test.assertTrue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectIndexed
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class FlowAsPublisherTest : TestBase() {
     @Test
@@ -76,6 +89,23 @@ class FlowAsPublisherTest : TestBase() {
             }
         })
         finish(3)
+    }
+
+
+    @Test
+    fun testFlowWithSharedResultIsShared() = runTest {
+        val publisher = flowOf(1)
+            .map { n ->
+                expect(1)
+                n
+            }
+            .asPublisher()
+            .shared()
+
+        publisher.subscribe(CancellableManager()) {}
+        publisher.subscribe(CancellableManager()) {}
+
+        finish(2)
     }
 
     @Test
