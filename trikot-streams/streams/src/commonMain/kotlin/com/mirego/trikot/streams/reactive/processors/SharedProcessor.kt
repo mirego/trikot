@@ -28,7 +28,10 @@ class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : BehaviorSu
         }
     }
 
-    override fun onSubscribe(s: Subscription) = with(subscriptionCancellableManager.value) { add { s.cancel() } }
+    override fun onSubscribe(s: Subscription) = with(subscriptionCancellableManager.value) {
+        add { s.cancel() }
+        s.request(Long.MAX_VALUE)
+    }
 
     override fun onNext(t: T) = let { value = t }
 
