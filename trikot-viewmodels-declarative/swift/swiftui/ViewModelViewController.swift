@@ -30,7 +30,7 @@ open class ViewModelViewController<VMC: VMDViewModelController<VM, N>, VM, V: Ro
     }
 
     open override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidDisappear(animated)
         viewModelController.onDisappear()
 
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
