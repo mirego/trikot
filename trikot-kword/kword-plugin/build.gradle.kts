@@ -3,6 +3,12 @@ plugins {
     id("mirego.publish")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
 dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
