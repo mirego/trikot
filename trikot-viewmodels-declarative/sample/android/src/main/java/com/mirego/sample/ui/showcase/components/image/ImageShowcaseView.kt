@@ -40,7 +40,6 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             .fillMaxWidth()
             .verticalScroll(state = rememberScrollState())
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         ComponentShowcaseTitle(viewModel.localImageTitle)

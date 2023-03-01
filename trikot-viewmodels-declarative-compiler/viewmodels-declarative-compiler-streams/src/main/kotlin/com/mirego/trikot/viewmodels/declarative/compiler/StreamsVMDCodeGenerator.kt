@@ -13,7 +13,7 @@ import org.reactivestreams.Publisher
 
 class StreamsVMDCodeGenerator(
     codeGenerator: CodeGenerator,
-    logger: KSPLogger,
+    logger: KSPLogger
 ) : BaseVMDCodeGenerator(
     codeGenerator = codeGenerator,
     logger = logger

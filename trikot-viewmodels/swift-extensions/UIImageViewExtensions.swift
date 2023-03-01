@@ -187,9 +187,6 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
                 observeImageFlow(onSuccess, cancellableManager: cancellableManager, imageViewModel: imageViewModel, imageView: imageView)
             }
         } else {
-            MrFreeze().freeze(objectToFreeze: cancellableManager)
-            MrFreeze().freeze(objectToFreeze: imageFlow)
-
             let dataTask = URLSession.shared.dataTask(with: url) { [weak imageView, weak self] data, response, error in
                 let image = self?.downloadImageAdapter(data)
                 DispatchQueue.main.async {

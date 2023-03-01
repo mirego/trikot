@@ -38,7 +38,7 @@ class ScanWithProcessorTests {
             listOf(0, 1),
             listOf(0, 1, 2),
             listOf(0, 1, 2, 3),
-            listOf(0, 1, 2, 3, 4),
+            listOf(0, 1, 2, 3, 4)
         )
         assertEquals(expectedResults, receivedResults)
         assertTrue(completed)

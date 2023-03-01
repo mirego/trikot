@@ -318,7 +318,7 @@ private class MainDataSource(
 private class CacheDataSource(
     var readFunction: suspend (request: TestDataSourceRequest) -> DataSourceTestData,
     coroutineContext: CoroutineContext,
-    var clearFunction: suspend () -> Unit = {},
+    var clearFunction: suspend () -> Unit = {}
 ) : BaseFlowDataSource<TestDataSourceRequest, DataSourceTestData>(coroutineContext = coroutineContext) {
     var internalSaveCount = 0
     var internalDeleteCount = 0

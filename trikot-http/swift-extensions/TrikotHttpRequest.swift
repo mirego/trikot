@@ -39,13 +39,12 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
                 urlRequest.logResponse(level: logLevel, data: data, urlResponse: urlResponse, error: error, requestStartTime: requestStartTime)
                 if let error = error {
                     if error._code == Constants.HTTP_TIMEOUT_ERROR_CODE {
-                        resultPublisher.error = (MrFreeze().freeze(objectToFreeze: HttpRequestTimeoutException(source: KotlinThrowable(message: error.localizedDescription))) as! HttpRequestTimeoutException)
+                        resultPublisher.error = HttpRequestTimeoutException(source: KotlinThrowable(message: error.localizedDescription))) as! HttpRequestTimeoutException
                     } else {
-                        resultPublisher.error = (MrFreeze().freeze(objectToFreeze: KotlinThrowable(message: error.localizedDescription)) as! KotlinThrowable)
+                        resultPublisher.error = KotlinThrowable(message: error.localizedDescription)) as! KotlinThrowable
                     }
                 } else {
                     let iosResponse = TrikotHttpResponse(data: data, response: urlResponse)
-                    MrFreeze().freeze(objectToFreeze: iosResponse)
                     resultPublisher.value = iosResponse
                 }
             }

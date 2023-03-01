@@ -27,7 +27,6 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
             .fillMaxWidth()
             .verticalScroll(state = rememberScrollState())
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         ComponentShowcaseTitle(viewModel.linearDeterminateProgressTitle)

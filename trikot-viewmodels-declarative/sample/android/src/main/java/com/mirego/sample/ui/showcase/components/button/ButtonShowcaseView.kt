@@ -37,7 +37,6 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
             .fillMaxWidth()
             .verticalScroll(state = rememberScrollState())
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         ComponentShowcaseTitle(viewModel.textButtonTitle)

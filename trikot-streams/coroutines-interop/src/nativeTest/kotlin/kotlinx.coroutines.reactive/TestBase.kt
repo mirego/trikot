@@ -103,14 +103,17 @@ actual open class TestBase actual constructor() {
         } catch (e: Throwable) {
             ex = e
             if (expected != null) {
-                if (!expected(e))
+                if (!expected(e)) {
                     error("Unexpected exception: $e", e)
-            } else
+                }
+            } else {
                 throw e
+            }
         } finally {
             if (ex == null && expected != null) error("Exception was expected but none produced")
         }
-        if (exCount < unhandled.size)
+        if (exCount < unhandled.size) {
             error("Too few unhandled exceptions $exCount, expected ${unhandled.size}")
+        }
     }
 }

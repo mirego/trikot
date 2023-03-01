@@ -43,7 +43,7 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
     property: KProperty<T>,
     initialValue: T? = null
 ): State<VMDAnimatedPropertyChange<T, T>> {
-    val initial: T = (initialValue ?: property.getter.call()) as T
+    val initial: T = (initialValue ?: property.getter.call())
     val initialPropertyChange = VMDAnimatedPropertyChange(initial, VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
 
     val propertyPublisher = publisherForProperty(property)

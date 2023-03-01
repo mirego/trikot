@@ -84,11 +84,15 @@ class ImagesViewModel : MutableListViewModel<ListItemViewModel>() {
         MutableImageListItemViewModel({ _, _ -> Publishers.behaviorSubject(SimpleImageFlow(url = "https://not.existing.url.foo")) }).apply {
             image.backgroundColor = image.imageState.map {
                 StateSelector(
-                    if (it == ImageState.ERROR) Color(
-                        255,
-                        0,
-                        0
-                    ) else Color(0, 255, 0)
+                    if (it == ImageState.ERROR) {
+                        Color(
+                            255,
+                            0,
+                            0
+                        )
+                    } else {
+                        Color(0, 255, 0)
+                    }
                 )
             }
         }

@@ -125,7 +125,7 @@ class LifecycleAdapterTest {
         var onDetachCalls = 0
         override fun onAttach() {
             super.onAttach()
-            onAttachCalls ++
+            onAttachCalls++
         }
 
         override fun onDetach() {

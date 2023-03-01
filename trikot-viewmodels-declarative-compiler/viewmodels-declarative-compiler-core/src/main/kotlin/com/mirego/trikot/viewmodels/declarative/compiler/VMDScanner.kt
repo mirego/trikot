@@ -15,7 +15,7 @@ import com.mirego.trikot.viewmodels.declarative.PublishedSubClass
 
 @OptIn(KspExperimental::class)
 class VMDScanner(
-    val logger: KSPLogger,
+    val logger: KSPLogger
 ) {
     fun getViewModelMetaData(resolver: Resolver): List<ViewModelMetaData> {
         val subClasses = resolver.getSymbolsWithAnnotation(PublishedSubClass::class.qualifiedName!!)

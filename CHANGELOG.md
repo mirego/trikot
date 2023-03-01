@@ -14,6 +14,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - It does not exist in VMDImage anymore for android
 - [VMD-flow] ContentDescription is now a property of VMDImageViewModel.
   - It does not exist in VMDImage anymore for android
+- [All] Old memory model is no longer supported.
+- [Foundation] MrFreeze was removed. It is no longer needed in new MM.
+- [Streams] threadLocal operator was removed. It is no longer needed in new MM.
+
+### Updates
+
+- Kotlin `1.8.10`
+- Jetpack Compose Compiler to `1.4.3`
+- Jetpack Compose Runtime to `1.3.3`
+- Jetpack Compose UI to `1.3.1`
+- Jetpack Compose Material 3 to `1.1.0-alpha07`
+- Ktlint to `11.2.0`
+- Androidx Lifecycle to `2.6.0-rc01`
+- KSP to `1.8.10-1.0.9`
 
 ## 4.1.0
 

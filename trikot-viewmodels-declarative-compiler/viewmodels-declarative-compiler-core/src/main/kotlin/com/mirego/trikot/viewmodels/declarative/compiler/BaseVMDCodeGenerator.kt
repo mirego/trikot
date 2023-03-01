@@ -24,7 +24,7 @@ import kotlin.reflect.KClass
 
 abstract class BaseVMDCodeGenerator(
     private val codeGenerator: CodeGenerator,
-    private val logger: KSPLogger,
+    private val logger: KSPLogger
 ) {
     abstract val defaultSuperClass: TypeName
 
@@ -169,7 +169,7 @@ abstract class BaseVMDCodeGenerator(
         type = Map::class.asClassName().parameterizedBy(
             String::class.asClassName(),
             publishedPropertyType.asClassName().parameterizedBy(STAR)
-        ),
+        )
     ).addModifiers(KModifier.OVERRIDE)
         .delegate(
             CodeBlock.builder()

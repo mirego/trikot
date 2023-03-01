@@ -55,8 +55,9 @@ private class SubscriptionChannel<T>(
             val needRequested = wasRequested - 1
             if (subscription != null && needRequested < 0) { // need to request more from subscription
                 // try to fixup by making request
-                if (wasRequested != request && !_requested.compareAndSet(wasRequested, request))
+                if (wasRequested != request && !_requested.compareAndSet(wasRequested, request)) {
                     return@loop // continue looping if failed
+                }
                 subscription.request((request - needRequested).toLong())
                 return
             }

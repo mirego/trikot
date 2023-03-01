@@ -100,9 +100,13 @@ open class ViewModelAdapter<MLI : ListItemViewModel>(
     }
 
     override fun getItemViewType(position: Int) =
-        if (position == RecyclerView.NO_POSITION) RecyclerView.INVALID_TYPE else layoutMapper(
-            getItem(position)
-        )
+        if (position == RecyclerView.NO_POSITION) {
+            RecyclerView.INVALID_TYPE
+        } else {
+            layoutMapper(
+                getItem(position)
+            )
+        }
 
     protected fun getItem(holder: RecyclerView.ViewHolder): MLI? {
         val position = holder.adapterPosition

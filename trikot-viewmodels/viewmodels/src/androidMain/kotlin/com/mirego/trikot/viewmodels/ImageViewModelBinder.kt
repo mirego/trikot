@@ -35,7 +35,6 @@ object ImageViewModelBinder {
     ) {
         val safeLifecycleOwnerWrapper = lifecycleOwnerWrapper ?: BindingUtils.getLifecycleOwnerWrapperFromView(imageView)
         (imageViewModel ?: NoImageViewModel).let {
-
             imageView.bindViewModel(imageViewModel, safeLifecycleOwnerWrapper)
 
             val originalScaleType = imageView.scaleType

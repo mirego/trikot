@@ -28,7 +28,6 @@ fun HomeView(homeViewModel: HomeViewModel) {
     val viewModel: HomeViewModel by homeViewModel.observeAsState()
 
     Column(modifier = Modifier.fillMaxWidth()) {
-
         TopAppBar(title = { Text(text = viewModel.title) })
 
         VMDSectionedList(viewModel = viewModel.sections) { sections ->

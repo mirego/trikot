@@ -38,7 +38,6 @@ fun TextFieldShowcaseView(textFieldShowcaseViewModel: TextFieldShowcaseViewModel
             .fillMaxWidth()
             .verticalScroll(state = rememberScrollState())
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         Column(
@@ -47,7 +46,6 @@ fun TextFieldShowcaseView(textFieldShowcaseViewModel: TextFieldShowcaseViewModel
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-
             Row(Modifier.padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                 VMDTextField(viewModel = viewModel.textField)
 

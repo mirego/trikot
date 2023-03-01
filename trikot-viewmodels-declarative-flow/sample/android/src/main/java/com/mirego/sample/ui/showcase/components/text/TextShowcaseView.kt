@@ -31,7 +31,6 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
             .fillMaxWidth()
             .verticalScroll(state = rememberScrollState())
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         Column(
@@ -40,7 +39,6 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-
             VMDText(
                 viewModel = viewModel.largeTitle,
                 style = SampleTextStyle.largeTitle
