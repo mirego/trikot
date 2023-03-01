@@ -6,6 +6,7 @@ import ScanWithSeedSupplierBlock
 import com.mirego.trikot.foundation.FoundationConfiguration
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.TrikotDispatchQueue
 import com.mirego.trikot.foundation.timers.TimerFactory
+import com.mirego.trikot.streams.StreamsConfiguration
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.backoff.Backoff
 import com.mirego.trikot.streams.reactive.backoff.BackoffPolicy
@@ -135,6 +136,16 @@ fun <T> Publisher<T>.startWith(value: T): Publisher<T> {
 fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
     return this.filter { block(it) != null }.map { block(it)!! }
 }
+
+@Deprecated(
+    "threadLocal is no longer needed in new MM",
+    ReplaceWith("this")
+)
+@Suppress("UNUSED_PARAMETER")
+fun <T> Publisher<T>.threadLocal(
+    observeOnQueue: TrikotDispatchQueue,
+    subscribeOnQueue: TrikotDispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue
+): Publisher<T> = this
 
 fun <T> Publisher<T>.timeout(
     duration: Duration,

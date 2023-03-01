@@ -25,9 +25,9 @@ public class TrikotHttpResponse: NSObject, HttpResponse {
             statusCode = Int32(response.statusCode)
         }
         if let data = data, data.count > 0 {
-            bodyByteArray = ByteArrayNativeUtils().convert(data: data) as? KotlinByteArray
+            bodyByteArray = ByteArrayNativeUtils().convert(data: data)
         } else {
-            bodyByteArray = KotlinByteArray(size: 0) as? KotlinByteArray
+            bodyByteArray = KotlinByteArray(size: 0)
         }
 
         self.headers = headers

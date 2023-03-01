@@ -15,8 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [VMD-flow] ContentDescription is now a property of VMDImageViewModel.
   - It does not exist in VMDImage anymore for android
 - [All] Old memory model is no longer supported.
-- [Foundation] MrFreeze was removed. It is no longer needed in new MM.
-- [Streams] threadLocal operator was removed. It is no longer needed in new MM.
+
+### Deprecation
+
+- [Foundation] MrFreeze was deprecated. It is no longer needed in new MM.
+- [Streams] `Publisher.threadLocal`, `Publishers.frozenSubject` and `Publishers.frozenBehaviorSubject` operators were removed. They are no longer needed in new MM.
 
 ### Updates
 

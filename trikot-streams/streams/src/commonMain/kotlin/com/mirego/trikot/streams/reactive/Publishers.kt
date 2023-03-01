@@ -10,9 +10,21 @@ object Publishers {
         return BehaviorSubjectImpl(value)
     }
 
+    @Deprecated(
+        "use behaviorSubject instead freezing is no longer needed in new MM",
+        replaceWith = ReplaceWith("Publishers.behaviorSubject<T>(value)")
+    )
+    fun <T> frozenBehaviorSubject(value: T? = null): BehaviorSubject<T> = behaviorSubject(value)
+
     fun <T> publishSubject(): PublishSubject<T> {
         return PublishSubjectImpl()
     }
+
+    @Deprecated(
+        "use behaviorSubject instead freezing is no longer needed in new MM",
+        replaceWith = ReplaceWith("Publishers.publishSubject<T>()")
+    )
+    fun <T> frozenPublishSubject(): PublishSubject<T> = publishSubject()
 
     /**
      * Create a Publisher that emits a particular item
