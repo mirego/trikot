@@ -10,16 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
-- [VMD] ContentDescription is now a property of VMDImageViewModel.
-  - It does not exist in VMDImage anymore for android
-- [VMD-flow] ContentDescription is now a property of VMDImageViewModel.
-  - It does not exist in VMDImage anymore for android
 - [All] Old memory model is no longer supported.
 
 ### Deprecation
 
-- [Foundation] MrFreeze was deprecated. It is no longer needed in new MM.
-- [Streams] `Publisher.threadLocal`, `Publishers.frozenSubject` and `Publishers.frozenBehaviorSubject` operators were removed. They are no longer needed in new MM.
+- [Foundation] `MrFreeze` was deprecated. It is no longer needed in new MM.
+- [Streams] `Publisher.threadLocal`, `Publishers.frozenSubject` and `Publishers.frozenBehaviorSubject` operators were deprecated. They are no longer needed in new MM.
 
 ### Updates
 
@@ -31,6 +27,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Ktlint to `11.2.0`
 - Androidx Lifecycle to `2.6.0-rc01`
 - KSP to `1.8.10-1.0.9`
+
+## 4.2.0
+
+- [VMD & VMD-flow] ContentDescription is now a property of VMDImageViewModel.
+  It does not exist in VMDImage anymore for android
 
 ## 4.1.0
 
