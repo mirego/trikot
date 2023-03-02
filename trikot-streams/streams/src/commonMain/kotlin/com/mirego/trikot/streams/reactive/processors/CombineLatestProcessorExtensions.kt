@@ -80,10 +80,14 @@ fun <T> combine(publishers: List<Publisher<T>>): Publisher<List<T?>> {
         Publishers.behaviorSubject(emptyList())
     } else {
         val publisher = publishers.first()
-        val otherPublishers = if (publishers.count() > 1) publishers.subList(
-            1,
-            publishers.count()
-        ) else emptyList()
+        val otherPublishers = if (publishers.count() > 1) {
+            publishers.subList(
+                1,
+                publishers.count()
+            )
+        } else {
+            emptyList()
+        }
 
         publisher.combine(otherPublishers)
     }

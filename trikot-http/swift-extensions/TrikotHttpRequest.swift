@@ -16,7 +16,7 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
     }
 
     public func execute(cancellableManager: CancellableManager) -> Publisher {
-        let resultPublisher = Publishers().frozenBehaviorSubject(value: nil)
+        let resultPublisher = Publishers().behaviorSubject(value: nil)
 
         if let url = URL(string: requestBuilder.buildUrl()) {
             let urlRequest = NSMutableURLRequest(url: url, cachePolicy: requestBuilder.nsCachePolicy(), timeoutInterval: TimeInterval(requestBuilder.timeout ?? Constants.DEFAULT_TIMEOUT_DURATION_IN_SECONDS))
@@ -39,13 +39,12 @@ public class TrikotHttpRequest: NSObject, HttpRequest {
                 urlRequest.logResponse(level: logLevel, data: data, urlResponse: urlResponse, error: error, requestStartTime: requestStartTime)
                 if let error = error {
                     if error._code == Constants.HTTP_TIMEOUT_ERROR_CODE {
-                        resultPublisher.error = (MrFreeze().freeze(objectToFreeze: HttpRequestTimeoutException(source: KotlinThrowable(message: error.localizedDescription))) as! HttpRequestTimeoutException)
+                        resultPublisher.error = HttpRequestTimeoutException(source: KotlinThrowable(message: error.localizedDescription))
                     } else {
-                        resultPublisher.error = (MrFreeze().freeze(objectToFreeze: KotlinThrowable(message: error.localizedDescription)) as! KotlinThrowable)
+                        resultPublisher.error = KotlinThrowable(message: error.localizedDescription)
                     }
                 } else {
                     let iosResponse = TrikotHttpResponse(data: data, response: urlResponse)
-                    MrFreeze().freeze(objectToFreeze: iosResponse)
                     resultPublisher.value = iosResponse
                 }
             }

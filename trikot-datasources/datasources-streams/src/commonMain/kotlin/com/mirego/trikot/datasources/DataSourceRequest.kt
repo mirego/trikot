@@ -5,6 +5,7 @@ interface DataSourceRequest {
      * Identifier use to save data to cache
      */
     val cacheableId: Any
+
     /**
      * Type of request (See DataSourceRequest.Type)
      */
@@ -15,6 +16,7 @@ interface DataSourceRequest {
          * Use cache if available
          */
         USE_CACHE,
+
         /**
          * Refresh data and save to cache
          */

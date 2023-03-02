@@ -31,8 +31,9 @@ class PublisherCollectTest : TestBase() {
                         lastOutput += 1
                         subscriber.onNext(lastOutput)
                     }
-                    if (lastOutput == x)
+                    if (lastOutput == x) {
                         subscriber.onComplete()
+                    }
                 }
 
                 override fun cancel() {
@@ -71,8 +72,9 @@ class PublisherCollectTest : TestBase() {
                         lastOutput += 1
                         subscriber.onNext(lastOutput)
                     }
-                    if (lastOutput == x)
+                    if (lastOutput == x) {
                         subscriber.onError(IllegalArgumentException(errorString))
+                    }
                 }
 
                 override fun cancel() {

@@ -7,10 +7,12 @@ interface SliderViewModel : ViewModel {
      * Minimum value of the slider
      */
     val minValue: Int
+
     /**
      * Maximum value of the slider
      */
     val maxValue: Int
+
     /**
      * Currently selected value on the slider
      */

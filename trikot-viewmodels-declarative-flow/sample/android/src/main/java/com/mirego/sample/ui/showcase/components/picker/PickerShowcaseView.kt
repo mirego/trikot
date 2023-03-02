@@ -30,7 +30,6 @@ fun PickerShowcaseView(pickerShowcaseViewModel: PickerShowcaseViewModel) {
             .fillMaxWidth()
             .verticalScroll(state = rememberScrollState())
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         Row(

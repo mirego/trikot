@@ -157,6 +157,6 @@ class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
             button.action = ViewModelAction {
                 hasPurchasedExample.value = hasPurchasedExample.value?.let { !it } ?: false
             }.just()
-        },
+        }
     ).just()
 }

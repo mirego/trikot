@@ -66,11 +66,13 @@ private class PublisherAsFlow<T : Any>(
         get() =
             if (onBufferOverflow != BufferOverflow.SUSPEND) {
                 Long.MAX_VALUE // request all, since buffering strategy is to never suspend
-            } else when (capacity) {
-                Channel.RENDEZVOUS -> 1L // need to request at least one anyway
-                Channel.UNLIMITED -> Long.MAX_VALUE // reactive streams way to say "give all", must be Long.MAX_VALUE
-                Channel.BUFFERED -> Channel.CHANNEL_DEFAULT_CAPACITY.toLong()
-                else -> capacity.toLong().also { check(it >= 1) }
+            } else {
+                when (capacity) {
+                    Channel.RENDEZVOUS -> 1L // need to request at least one anyway
+                    Channel.UNLIMITED -> Long.MAX_VALUE // reactive streams way to say "give all", must be Long.MAX_VALUE
+                    Channel.BUFFERED -> Channel.CHANNEL_DEFAULT_CAPACITY.toLong()
+                    else -> capacity.toLong().also { check(it >= 1) }
+                }
             }
 
     override suspend fun collect(collector: FlowCollector<T>) {

@@ -1,7 +1,6 @@
 package com.mirego.trikot.streams.reactive
 
 import com.mirego.trikot.foundation.FoundationConfiguration
-import com.mirego.trikot.foundation.concurrent.MrFreeze
 import com.mirego.trikot.foundation.timers.TimerFactory
 import org.reactivestreams.Publisher
 import kotlin.time.Duration
@@ -11,17 +10,21 @@ object Publishers {
         return BehaviorSubjectImpl(value)
     }
 
-    fun <T> frozenBehaviorSubject(value: T? = null): BehaviorSubject<T> {
-        return MrFreeze.freeze(BehaviorSubjectImpl(value))
-    }
+    @Deprecated(
+        "use behaviorSubject instead freezing is no longer needed in new MM",
+        replaceWith = ReplaceWith("Publishers.behaviorSubject<T>(value)")
+    )
+    fun <T> frozenBehaviorSubject(value: T? = null): BehaviorSubject<T> = behaviorSubject(value)
 
     fun <T> publishSubject(): PublishSubject<T> {
         return PublishSubjectImpl()
     }
 
-    fun <T> frozenPublishSubject(): PublishSubject<T> {
-        return MrFreeze.freeze(PublishSubjectImpl())
-    }
+    @Deprecated(
+        "use behaviorSubject instead freezing is no longer needed in new MM",
+        replaceWith = ReplaceWith("Publishers.publishSubject<T>()")
+    )
+    fun <T> frozenPublishSubject(): PublishSubject<T> = publishSubject()
 
     /**
      * Create a Publisher that emits a particular item

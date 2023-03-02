@@ -11,6 +11,7 @@ interface HttpHeaderProvider {
      * @return Publisher of headers to send with the requestBuilder
      */
     fun headerForURLRequest(cancellableManager: CancellableManager, requestBuilder: RequestBuilder): Publisher<Map<String, String>>
+
     /**
      * This method is called on every error received by HttpRequestPublisher to let the HttpHeaderProvider modify, cleanup or refresh the headers for the next request.
      * @param requestBuilder Request that failed

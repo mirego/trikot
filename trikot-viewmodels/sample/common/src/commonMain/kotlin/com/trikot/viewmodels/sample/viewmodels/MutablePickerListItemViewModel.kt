@@ -13,7 +13,7 @@ class MutablePickerListItemViewModel(override var comparableId: String = "") :
         elements = listOf(
             MutablePickerItemViewModel("Element 1", ""),
             MutablePickerItemViewModel("Element 2", ""),
-            MutablePickerItemViewModel("Element 3", ""),
+            MutablePickerItemViewModel("Element 3", "")
         ).just()
     }
 

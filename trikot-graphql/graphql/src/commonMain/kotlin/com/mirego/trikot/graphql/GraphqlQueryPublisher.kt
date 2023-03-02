@@ -1,6 +1,5 @@
 package com.mirego.trikot.graphql
 
-import com.mirego.trikot.foundation.concurrent.freeze
 import com.mirego.trikot.http.ApplicationJSON
 import com.mirego.trikot.http.ContentType
 import com.mirego.trikot.http.HttpConfiguration
@@ -18,7 +17,7 @@ class GraphqlQueryPublisher<T>(
     httpHeaderProvider: HttpHeaderProvider = HttpConfiguration.defaultHttpHeaderProvider,
     requestTimeout: Duration? = null
 ) : DeserializableHttpRequestPublisher<T>(
-    freeze(query.deserializer),
+    query.deserializer,
     createRequestBuilder(query.requestBody, baseUrl, path, requestTimeout),
     httpHeaderProvider
 ) {

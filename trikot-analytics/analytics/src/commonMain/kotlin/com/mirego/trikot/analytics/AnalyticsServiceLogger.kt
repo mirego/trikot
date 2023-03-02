@@ -22,7 +22,7 @@ class AnalyticsServiceLogger(private val analyticsService: AnalyticsService) : A
 Analytics - Identify user (Service: ${analyticsService.name})
   userId: $userId
 ${properties.toLog()}
-        """.trimMargin()
+            """.trimMargin()
         )
         analyticsService.identifyUser(userId, properties)
     }
@@ -37,7 +37,7 @@ ${properties.toLog()}
             """
 Analytics - Increment user properties (Service: ${analyticsService.name})
 Incremented Properties: ${incrementalProperties.toLog()}
-        """.trimMargin()
+            """.trimMargin()
         )
 
         analyticsService.incrementUserProperties(incrementalProperties)
@@ -54,7 +54,7 @@ Incremented Properties: ${incrementalProperties.toLog()}
             """
 Analytics - Set user properties (Service: ${analyticsService.name})
 UserProperties Properties: ${properties.toLog()}
-        """.trimMargin()
+            """.trimMargin()
         )
     }
 
@@ -80,7 +80,7 @@ Analytics - Track event (Service: ${analyticsService.name})
   event: $event
 ${properties.toLog()}
 ${superProperties.value.toLog()}
-        """.trimMargin()
+            """.trimMargin()
         )
         analyticsService.trackEvent(event, properties)
     }
@@ -95,7 +95,7 @@ ${superProperties.value.toLog()}
             """
 Analytics - SuperProperties updated with $methodName (Service: ${analyticsService.name})
 ${newProps.toLog()}
-        """.trimMargin()
+            """.trimMargin()
         )
     }
 }

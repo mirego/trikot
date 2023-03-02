@@ -66,7 +66,6 @@ class MixpanelAnalyticsService(
     }
 
     private fun AnalyticsPropertiesType.asJSONProperties(): JSONObject {
-
         return JSONObject().also { props ->
             forEach { (type, value) ->
                 props.put(type, value)

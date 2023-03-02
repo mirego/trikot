@@ -42,7 +42,6 @@ import com.mirego.trikot.streams.reactive.processors.TakeUntilProcessor
 import com.mirego.trikot.streams.reactive.processors.TakeUntilProcessorPredicate
 import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessor
 import com.mirego.trikot.streams.reactive.processors.TakeWhileProcessorPredicate
-import com.mirego.trikot.streams.reactive.processors.ThreadLocalProcessor
 import com.mirego.trikot.streams.reactive.processors.TimeoutProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessor
 import com.mirego.trikot.streams.reactive.processors.WithCancellableManagerProcessorResultType
@@ -138,12 +137,15 @@ fun <T, R> Publisher<T>.filterNotNull(block: ((T) -> R?)): Publisher<R> {
     return this.filter { block(it) != null }.map { block(it)!! }
 }
 
+@Deprecated(
+    "threadLocal is no longer needed in new MM",
+    ReplaceWith("this")
+)
+@Suppress("UNUSED_PARAMETER")
 fun <T> Publisher<T>.threadLocal(
     observeOnQueue: TrikotDispatchQueue,
     subscribeOnQueue: TrikotDispatchQueue = StreamsConfiguration.publisherExecutionDispatchQueue
-): Publisher<T> {
-    return ThreadLocalProcessor(this, observeOnQueue, subscribeOnQueue)
-}
+): Publisher<T> = this
 
 fun <T> Publisher<T>.timeout(
     duration: Duration,

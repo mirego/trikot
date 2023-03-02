@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("kotlinx-serialization")
     id("org.jlleitschuh.gradle.ktlint")

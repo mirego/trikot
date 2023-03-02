@@ -10,10 +10,12 @@ interface LabelViewModel : ViewModel {
      * Label text
      */
     val text: Publisher<String>
+
     /**
      * Label rich text. Use this instead of {@link #text text} when not null
      */
     val richText: Publisher<RichText>?
+
     /**
      * Label text color
      */

@@ -67,7 +67,7 @@ kotlin {
                 implementation("junit:junit:4.13.2")
                 implementation("androidx.test:core:1.4.1-alpha03")
                 implementation("androidx.test.ext:junit:1.1.3")
-                implementation("org.robolectric:robolectric:4.5.1")
+                implementation("org.robolectric:robolectric:4.9.2")
                 implementation("androidx.fragment:fragment-testing:1.4.0")
             }
         }

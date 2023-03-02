@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
-    spec.version                  = '4.2.0'
+    spec.version                  = '4.3.0'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
@@ -36,4 +36,7 @@ Pod::Spec.new do |spec|
         }
     ]
     spec.resources = "src/commonMain/resources/translations/*"
+    spec.prepare_command = <<-CMD
+    ../gradlew :common:generateDummyFramework
+CMD
 end

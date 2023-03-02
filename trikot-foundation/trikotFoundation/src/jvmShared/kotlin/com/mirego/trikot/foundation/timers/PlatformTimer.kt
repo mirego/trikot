@@ -7,10 +7,11 @@ import kotlin.time.Duration
 
 actual class PlatformTimer actual constructor(delay: Duration, repeat: Boolean, block: () -> Unit) :
     com.mirego.trikot.foundation.timers.Timer {
-    private val timer = if (repeat)
+    private val timer = if (repeat) {
         Timer(true).scheduleAtFixedRate(delay.inWholeMilliseconds, delay.inWholeMilliseconds) { block() }
-    else
+    } else {
         Timer(true).schedule(delay.inWholeMilliseconds) { block() }
+    }
 
     actual override fun cancel() {
         timer.cancel()

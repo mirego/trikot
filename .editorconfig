@@ -2,4 +2,4 @@
 max_line_length = 200
 
 [*.{kt,kts}]
-disabled_rules=import-ordering
+ktlint_disabled_rules=import-ordering,enum-entry-name-case

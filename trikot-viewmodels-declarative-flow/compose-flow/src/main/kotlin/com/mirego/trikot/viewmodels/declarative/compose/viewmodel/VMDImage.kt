@@ -38,7 +38,7 @@ fun VMDImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     allowHardware: Boolean = true,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, _ ->
         val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
@@ -80,7 +80,7 @@ fun VMDImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String? = null,
     allowHardware: Boolean = true,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, state ->
+    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, _ ->
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
             modifier = modifier,

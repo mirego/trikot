@@ -24,6 +24,9 @@ object BindingUtils {
         "Lifecycle owner not set in $bindingType"
 
     private fun getViewId(view: View): String =
-        if (view.id == View.NO_ID) "NO_ID"
-        else view.resources.getResourceName(view.id)
+        if (view.id == View.NO_ID) {
+            "NO_ID"
+        } else {
+            view.resources.getResourceName(view.id)
+        }
 }

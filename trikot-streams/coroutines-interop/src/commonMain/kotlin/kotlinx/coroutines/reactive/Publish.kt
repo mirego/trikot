@@ -226,8 +226,9 @@ class PublisherCoroutine<in T>(
     // assert: mutex.isLocked() & isCompleted
     private fun doLockedSignalCompleted(cause: Throwable?, handled: Boolean) {
         try {
-            if (_nRequested.value == SIGNALLED)
+            if (_nRequested.value == SIGNALLED) {
                 return
+            }
             _nRequested.value = SIGNALLED // we'll signal onError/onCompleted (the final state, so no CAS needed)
             // Specification requires that after the cancellation is requested we eventually stop calling onXXX
             if (cancelled) {
@@ -267,8 +268,9 @@ class PublisherCoroutine<in T>(
             val cur = _nRequested.value
             if (cur < 0) return // already closed for send, ignore requests, as mandated by the reactive streams spec
             var upd = cur + n
-            if (upd < 0 || n == Long.MAX_VALUE)
+            if (upd < 0 || n == Long.MAX_VALUE) {
                 upd = Long.MAX_VALUE
+            }
             if (cur == upd) return // nothing to do
             if (_nRequested.compareAndSet(cur, upd)) {
                 // unlock the mutex when we don't have back-pressure anymore

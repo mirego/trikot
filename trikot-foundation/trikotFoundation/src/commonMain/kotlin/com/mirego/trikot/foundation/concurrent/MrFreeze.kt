@@ -1,8 +1,23 @@
 package com.mirego.trikot.foundation.concurrent
 
-expect object MrFreeze {
-    fun <T> freeze(objectToFreeze: T): T
-    actual fun ensureNeverFrozen(objectToProtect: Any)
+@Deprecated("No longer needed in new MM")
+object MrFreeze {
+    @Deprecated(
+        "freeze is no longer needed in new MM",
+        replaceWith = ReplaceWith("this")
+    )
+    fun <T> freeze(objectToFreeze: T): T = objectToFreeze
+
+    @Deprecated(
+        "ensureNeverFrozen is no longer needed in new MM",
+        replaceWith = ReplaceWith("this")
+    )
+    @Suppress("UNUSED_PARAMETER")
+    fun ensureNeverFrozen(objectToProtect: Any) {}
 }
 
-expect fun <T> freeze(objectToFreeze: T): T
+@Deprecated(
+    "ensureNeverFrozen is no longer needed in new MM",
+    replaceWith = ReplaceWith("this")
+)
+fun <T> freeze(objectToFreeze: T): T = objectToFreeze

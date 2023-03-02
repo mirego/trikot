@@ -160,8 +160,11 @@ actual open class TestBase(private var disableOutCheck: Boolean) {
     })
 
     fun println(message: Any?) {
-        if (disableOutCheck) kotlin.io.println(message)
-        else previousOut.println(message)
+        if (disableOutCheck) {
+            kotlin.io.println(message)
+        } else {
+            previousOut.println(message)
+        }
     }
 
     @Before
@@ -224,15 +227,18 @@ actual open class TestBase(private var disableOutCheck: Boolean) {
         } catch (e: Throwable) {
             ex = e
             if (expected != null) {
-                if (!expected(e))
+                if (!expected(e)) {
                     error("Unexpected exception: $e", e)
-            } else
+                }
+            } else {
                 throw e
+            }
         } finally {
             if (ex == null && expected != null) error("Exception was expected but none produced")
         }
-        if (exCount < unhandled.size)
+        if (exCount < unhandled.size) {
             error("Too few unhandled exceptions $exCount, expected ${unhandled.size}")
+        }
     }
 
     protected inline fun <reified T : Throwable> assertFailsWith(block: () -> Unit): T {

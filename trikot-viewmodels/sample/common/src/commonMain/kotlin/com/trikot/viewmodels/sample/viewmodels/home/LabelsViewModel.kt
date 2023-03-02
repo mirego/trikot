@@ -113,6 +113,6 @@ class LabelsViewModel :
         MutableLabelListItemViewModel().also {
             it.label.accessibilityLabel = "This is an accessible label".just()
             it.label.text = "I am accessible".just()
-        },
+        }
     ).just()
 }

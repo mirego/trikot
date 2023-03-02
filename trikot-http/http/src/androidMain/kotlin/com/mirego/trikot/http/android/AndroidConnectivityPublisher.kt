@@ -15,7 +15,8 @@ import com.mirego.trikot.http.connectivity.ConnectivityState
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 
 @SuppressLint("MissingPermission")
-class AndroidConnectivityPublisher @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE) constructor(application: ContextWrapper) :
+class AndroidConnectivityPublisher @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+constructor(application: ContextWrapper) :
     BehaviorSubjectImpl<ConnectivityState>() {
 
     private val connectivityManager: ConnectivityManager =
@@ -80,6 +81,7 @@ private fun NetworkCapabilities.asConnectivityState() = when {
     hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
         hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) ||
         hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> ConnectivityState.WIFI
+
     else -> ConnectivityState.CELLULAR
 }
 

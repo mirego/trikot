@@ -7,7 +7,7 @@ class TrikotAttributeProfileService: NSObject, AttributeProfileService {
 
     var trikotCharacteristics = [CBCharacteristic: TrikotAttributeProfileCharacteristic]()
 
-    let characteristics: Publisher = frozenBehaviorSubject()
+    let characteristics: Publisher = behaviorSubject()
 
     init(service: CBService, peripheral: CBPeripheral) {
         self.service = service

@@ -8,7 +8,7 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 
 class BuilderProcessor(
     codeGenerator: CodeGenerator,
-    logger: KSPLogger,
+    logger: KSPLogger
 ) : BaseBuilderProcessor(
     logger = logger,
     vmdCodeGenerator = FlowVMDCodeGenerator(
@@ -19,7 +19,7 @@ class BuilderProcessor(
 
 class BuilderProcessorProvider : SymbolProcessorProvider {
     override fun create(
-        environment: SymbolProcessorEnvironment,
+        environment: SymbolProcessorEnvironment
     ): SymbolProcessor {
         return BuilderProcessor(
             codeGenerator = environment.codeGenerator,

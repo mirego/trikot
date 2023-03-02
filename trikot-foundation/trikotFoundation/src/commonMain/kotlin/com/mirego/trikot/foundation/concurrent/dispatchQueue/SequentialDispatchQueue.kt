@@ -2,7 +2,6 @@ package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
 import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
-import com.mirego.trikot.foundation.concurrent.freeze
 
 /**
  * Ensure dispatch blocks are executed sequentially on a dispatch queue.
@@ -47,7 +46,7 @@ open class SequentialDispatchQueue(override val dispatchQueue: TrikotDispatchQue
     }
 
     companion object {
-        private val NoDispatchBlock = freeze {}
-        private val SyncDispatchBlock = freeze {}
+        private val NoDispatchBlock = {}
+        private val SyncDispatchBlock = {}
     }
 }

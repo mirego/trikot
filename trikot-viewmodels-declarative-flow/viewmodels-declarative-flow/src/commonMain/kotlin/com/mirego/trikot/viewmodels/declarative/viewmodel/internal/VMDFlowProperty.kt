@@ -66,7 +66,7 @@ abstract class VMDFlowProperty<V>(
 
     fun updateFlowWithAnimation(
         property: KProperty<V>,
-        flow: Flow<Pair<V, VMDAnimation?>>,
+        flow: Flow<Pair<V, VMDAnimation?>>
     ) {
         coroutineScope.launch {
             withContext(Dispatchers.Main.immediate) {

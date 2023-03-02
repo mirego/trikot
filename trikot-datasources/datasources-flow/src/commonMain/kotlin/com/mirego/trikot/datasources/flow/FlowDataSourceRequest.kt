@@ -5,6 +5,7 @@ interface FlowDataSourceRequest {
      * Identifier use to save data to cache
      */
     val cacheableId: String
+
     /**
      * Type of request (See DataSourceRequest.Type)
      */
@@ -15,6 +16,7 @@ interface FlowDataSourceRequest {
          * Use cache if available
          */
         USE_CACHE,
+
         /**
          * Refresh data and save to cache
          */

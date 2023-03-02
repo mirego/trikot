@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 
 class FlowVMDCodeGenerator(
     codeGenerator: CodeGenerator,
-    logger: KSPLogger,
+    logger: KSPLogger
 ) : BaseVMDCodeGenerator(
     codeGenerator = codeGenerator,
     logger = logger

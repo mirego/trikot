@@ -112,9 +112,6 @@ public class KFImageViewModelHandler: ImageViewModelHandler {
         }
 
         let task = imageView.kf.setImage(with: url, options: options, completionHandler: { [weak self] result in
-            MrFreeze().freeze(objectToFreeze: cancellableManager)
-            MrFreeze().freeze(objectToFreeze: imageFlow)
-
             switch result {
             case .success:
                 if let onSuccess = imageFlow.onSuccess {

@@ -26,7 +26,6 @@ fun ListShowcaseView(listShowcaseViewModel: ListShowcaseViewModel) {
     Box(
         Modifier.fillMaxSize()
     ) {
-
         ComponentShowcaseTopBar(viewModel)
 
         VMDLazyRow(
