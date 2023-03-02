@@ -21,4 +21,3 @@ object MrFreeze {
     replaceWith = ReplaceWith("this")
 )
 fun <T> freeze(objectToFreeze: T): T = objectToFreeze
-
