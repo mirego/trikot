@@ -28,6 +28,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Androidx Lifecycle to `2.6.0-rc01`
 - KSP to `1.8.10-1.0.9`
 - Android MIN SDK to `24`
+- Kotlin Serialization to `1.5.0`
+- AtomicFu to `0.20.0`
+- Kotlinx Coroutines `1.6.3`
 
 ## 4.2.0
 

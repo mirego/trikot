@@ -67,7 +67,7 @@ abstract class LifecycleAdapter<T, VH : LifecycleAdapter.LifecycleViewHolder>(
             lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
         }
 
-        override val lifecycle: Lifecycle = lifecycleRegistry
+        override val lifecycle: Lifecycle get() = lifecycleRegistry
 
         open fun onAttach() {}
 
