@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.mirego.trikot.streams.cancellable.CancellableManager
@@ -22,7 +23,9 @@ fun VMDCircularProgressIndicator(
     modifier: Modifier = Modifier,
     viewModel: VMDProgressViewModel,
     color: Color = MaterialTheme.colors.primary,
-    strokeWidth: Dp = ProgressIndicatorDefaults.StrokeWidth
+    strokeWidth: Dp = ProgressIndicatorDefaults.StrokeWidth,
+    backgroundColor: Color = Color.Transparent,
+    strokeCap: StrokeCap = StrokeCap.Square,
 ) {
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = progressViewModel.determination?.progressRatio ?: 0f)
@@ -35,14 +38,18 @@ fun VMDCircularProgressIndicator(
         CircularProgressIndicator(
             modifier = newModifier,
             color = color,
-            strokeWidth = strokeWidth
+            strokeWidth = strokeWidth,
+            backgroundColor = backgroundColor,
+            strokeCap = strokeCap
         )
     } else {
         CircularProgressIndicator(
             modifier = newModifier,
             progress = animatedProgress,
             color = color,
-            strokeWidth = strokeWidth
+            strokeWidth = strokeWidth,
+            backgroundColor = backgroundColor,
+            strokeCap = strokeCap
         )
     }
 }

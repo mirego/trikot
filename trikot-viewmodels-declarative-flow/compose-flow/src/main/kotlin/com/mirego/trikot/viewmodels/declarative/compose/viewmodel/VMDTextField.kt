@@ -1,15 +1,20 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.OffsetMapping
@@ -28,11 +33,17 @@ fun VMDTextField(
     viewModel: VMDTextFieldViewModel,
     textStyle: TextStyle = LocalTextStyle.current,
     placeHolderStyle: TextStyle = LocalTextStyle.current,
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardActions: KeyboardActions = KeyboardActions(),
-    singleLine: Boolean = true,
     isError: Boolean = false,
+    singleLine: Boolean = false,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     textFieldColors: TextFieldColors = TextFieldDefaults.textFieldColors()
 ) {
     val textFieldViewModel: VMDTextFieldViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
@@ -47,6 +58,7 @@ fun VMDTextField(
             viewModel.onValueChange(value)
         },
         enabled = textFieldViewModel.isEnabled,
+        label = label,
         placeholder = {
             Text(
                 text = textFieldViewModel.placeholder,
@@ -55,8 +67,9 @@ fun VMDTextField(
         },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
-        colors = textFieldColors,
         textStyle = textStyle,
+        isError = isError,
+        visualTransformation = FormattedVisualTransformation(viewModel.formatText),
         keyboardActions = keyboardActionsDelegate,
         keyboardOptions = KeyboardOptions(
             keyboardType = textFieldViewModel.keyboardType.composeValue,
@@ -64,8 +77,11 @@ fun VMDTextField(
             imeAction = textFieldViewModel.keyboardReturnKeyType.composeValue
         ),
         singleLine = singleLine,
-        isError = isError,
-        visualTransformation = FormattedVisualTransformation(viewModel.formatText)
+        maxLines = maxLines,
+        minLines = minLines,
+        interactionSource = interactionSource,
+        shape = shape,
+        colors = textFieldColors
     )
 }
 

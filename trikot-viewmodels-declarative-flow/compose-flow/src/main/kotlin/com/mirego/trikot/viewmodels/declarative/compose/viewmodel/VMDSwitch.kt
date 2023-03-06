@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchColors
@@ -7,6 +8,7 @@ import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
@@ -23,6 +25,7 @@ fun VMDSwitch(
     modifier: Modifier = Modifier,
     componentModifier: Modifier = Modifier,
     viewModel: VMDToggleViewModel<VMDNoContent>,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: SwitchColors = SwitchDefaults.colors()
 ) {
     VMDSwitch(
@@ -40,6 +43,7 @@ fun <C : VMDContent> VMDSwitch(
     componentModifier: Modifier = Modifier,
     viewModel: VMDToggleViewModel<C>,
     label: @Composable (RowScope.(field: C) -> Unit),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: SwitchColors = SwitchDefaults.colors()
 ) {
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
@@ -55,6 +59,7 @@ fun <C : VMDContent> VMDSwitch(
                 enabled = toggleViewModel.isEnabled,
                 checked = toggleViewModel.isOn,
                 colors = colors,
+                interactionSource = interactionSource,
                 onCheckedChange = { checked -> viewModel.onValueChange(checked) },
             )
         }

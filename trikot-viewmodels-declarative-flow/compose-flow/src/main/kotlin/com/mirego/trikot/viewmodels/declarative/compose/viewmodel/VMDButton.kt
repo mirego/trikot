@@ -22,6 +22,7 @@ fun <C : VMDContent> VMDButton(
     modifier: Modifier = Modifier,
     viewModel: VMDButtonViewModel<C>,
     contentAlignment: Alignment = Alignment.Center,
+    propagateMinConstraints: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     indication: Indication? = rememberRipple(),
     content: @Composable (BoxScope.(field: C) -> Unit)
@@ -39,6 +40,7 @@ fun <C : VMDContent> VMDButton(
                 indication = indication
             ),
         contentAlignment = contentAlignment,
+        propagateMinConstraints = propagateMinConstraints,
         content = { content(buttonViewModel.content) }
     )
 }

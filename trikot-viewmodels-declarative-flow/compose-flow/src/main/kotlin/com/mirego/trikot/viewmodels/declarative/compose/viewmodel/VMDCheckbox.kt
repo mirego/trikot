@@ -1,5 +1,6 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxColors
@@ -7,6 +8,7 @@ import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
@@ -23,6 +25,7 @@ fun VMDCheckbox(
     modifier: Modifier = Modifier,
     componentModifier: Modifier = Modifier,
     viewModel: VMDToggleViewModel<VMDNoContent>,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: CheckboxColors = CheckboxDefaults.colors()
 ) {
     VMDCheckbox(
@@ -30,6 +33,7 @@ fun VMDCheckbox(
         componentModifier = componentModifier,
         viewModel = viewModel,
         label = {},
+        interactionSource = interactionSource,
         colors = colors
     )
 }
@@ -40,6 +44,7 @@ fun <C : VMDContent> VMDCheckbox(
     componentModifier: Modifier = Modifier,
     viewModel: VMDToggleViewModel<C>,
     label: @Composable (RowScope.(field: C) -> Unit),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: CheckboxColors = CheckboxDefaults.colors()
 ) {
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
@@ -51,11 +56,12 @@ fun <C : VMDContent> VMDCheckbox(
         label = { label(toggleViewModel.label) },
         content = {
             Checkbox(
+                onCheckedChange = { checked -> viewModel.onValueChange(checked) },
                 modifier = componentModifier,
                 enabled = toggleViewModel.isEnabled,
                 checked = toggleViewModel.isOn,
-                colors = colors,
-                onCheckedChange = { checked -> viewModel.onValueChange(checked) },
+                interactionSource = interactionSource,
+                colors = colors
             )
         }
     )
