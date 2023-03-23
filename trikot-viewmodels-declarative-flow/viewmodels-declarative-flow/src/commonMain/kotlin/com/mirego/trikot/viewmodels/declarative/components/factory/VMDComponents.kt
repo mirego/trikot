@@ -26,6 +26,7 @@ import com.mirego.trikot.viewmodels.declarative.extension.asVMDTextPairContent
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDProgressDetermination
+import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -42,20 +43,28 @@ object VMDComponents {
 
             fun withContent(
                 content: String,
+                spans: kotlin.collections.List<VMDRichTextSpan>,
                 coroutineScope: CoroutineScope,
                 closure: VMDTextViewModelImpl.() -> Unit = {}
             ) =
                 VMDTextViewModelImpl(coroutineScope)
-                    .apply { text = content }
+                    .apply {
+                        text = content
+                        this.spans = spans
+                    }
                     .apply(closure)
 
             fun withContent(
                 contentFlow: Flow<String>,
+                spansFlow: Flow<kotlin.collections.List<VMDRichTextSpan>>,
                 coroutineScope: CoroutineScope,
                 closure: VMDTextViewModelImpl.() -> Unit = {}
             ) =
                 VMDTextViewModelImpl(coroutineScope)
-                    .apply { bindText(contentFlow) }
+                    .apply {
+                        bindText(contentFlow)
+                        bindSpans(spansFlow)
+                    }
                     .apply(closure)
         }
     }
