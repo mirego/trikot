@@ -113,6 +113,10 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
                 viewModel = viewModel.caption2,
                 style = SampleTextStyle.caption2
             )
+
+            VMDText(
+                viewModel = viewModel.richText
+            )
         }
     }
 }
