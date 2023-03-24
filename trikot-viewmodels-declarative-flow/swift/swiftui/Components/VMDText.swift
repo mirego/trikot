@@ -17,10 +17,22 @@ public struct VMDText: View {
     }
 
     public var body: some View {
-        configurations.reduce(Text(viewModel.text)) { current, config in
+        configurations.reduce(text) { current, config in
             config(current)
         }
         .hidden(viewModel.isHidden)
+    }
+
+    private var text: Text {
+        if viewModel.spans.isEmpty {
+            return Text(viewModel.text)
+        } else {
+            if #available(iOS 15, *) {
+                return Text(AttributedString(text: viewModel.text, spans: viewModel.spans))
+            } else {
+                return Text(viewModel.text)
+            }
+        }
     }
 
     public func configure(_ block: @escaping TextConfiguration) -> VMDText {

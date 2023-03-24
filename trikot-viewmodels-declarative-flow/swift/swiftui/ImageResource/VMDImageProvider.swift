@@ -17,12 +17,26 @@ public class TrikotViewModelDeclarative {
         return internalImageProvider
     }
 
+    var spanStyleProvider: VMDSpanStyleProvider {
+        guard let internalSpanStyleProvider = internalSpanStyleProvider else {
+            fatalError("TrikotViewModelDeclarative must be initialized before use")
+        }
+
+        return internalSpanStyleProvider
+    }
+
     private var internalImageProvider: VMDImageProvider?
+
+    private var internalSpanStyleProvider: VMDSpanStyleProvider?
 
     private init() {
     }
 
-    public func initialize(imageProvider: VMDImageProvider) {
+    public func initialize(
+        imageProvider: VMDImageProvider,
+        spanStyleProvider: VMDSpanStyleProvider
+    ) {
         internalImageProvider = imageProvider
+        internalSpanStyleProvider = spanStyleProvider
     }
 }
