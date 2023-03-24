@@ -19,26 +19,18 @@ public struct VMDText: View {
     public var body: some View {
         Group {
             if viewModel.spans.isEmpty {
-                configurations.reduce(plainText) { current, config in
+                configurations.reduce(Text(viewModel.text)) { current, config in
                     config(current)
                 }
             } else {
-                richText
+                if #available(iOS 15, *) {
+                    Text(AttributedString(text: viewModel.text, spans: viewModel.spans))
+                } else {
+                    UIRichText(observableViewModel: observableViewModel)
+                }
             }
         }
         .hidden(viewModel.isHidden)
-    }
-
-    private var plainText: Text {
-        Text(viewModel.text)
-    }
-
-    private var richText: some View {
-        if #available(iOS 15, *) {
-            return Text(AttributedString(text: viewModel.text, spans: viewModel.spans))
-        } else {
-            return UIRichText(observableViewModel: observableViewModel)
-        }
     }
 
     public func configure(_ block: @escaping TextConfiguration) -> VMDText {
