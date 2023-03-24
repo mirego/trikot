@@ -73,6 +73,7 @@ struct TextShowcaseView: RootViewModelView {
 
                     Group {
                         VMDText(viewModel.richText)
+                            .style(.body)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
