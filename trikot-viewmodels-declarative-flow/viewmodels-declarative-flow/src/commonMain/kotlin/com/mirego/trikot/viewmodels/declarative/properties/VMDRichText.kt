@@ -4,4 +4,4 @@ data class VMDRichTextSpan(val range: IntRange, val transform: VMDRichTextTransf
 
 sealed class VMDRichTextTransform
 
-data class VMDSpanStyleResourceTransform(val spanStyleResource: VMDSpanStyleResource) : VMDRichTextTransform()
+data class VMDSpanStyleResourceTransform(val textStyleResource: VMDTextStyleResource) : VMDRichTextTransform()
