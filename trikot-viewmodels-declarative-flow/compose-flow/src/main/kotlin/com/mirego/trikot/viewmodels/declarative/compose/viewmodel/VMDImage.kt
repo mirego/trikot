@@ -3,18 +3,30 @@ package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.LayoutModifier
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Constraints
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import coil.size.Dimension
+import coil.size.Scale
 import coil.size.Size
+import coil.size.SizeResolver
 import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
@@ -24,6 +36,9 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Local
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Remote
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.mapNotNull
 
 private const val TAG = "VMDImage"
 private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024 // 100 MB, taken from android.graphics.RecordingCanvas
@@ -38,11 +53,11 @@ fun VMDImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     allowHardware: Boolean = true,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, _ ->
+    placeholder: @Composable (BoxScope.(placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, _ ->
         val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
-            modifier = modifier,
+            modifier = Modifier.matchParentSize(),
             contentScale = placeholderContentScale,
             colorFilter = colorFilter,
             contentDescription = imageViewModel.contentDescription
@@ -80,7 +95,7 @@ fun VMDImage(
     colorFilter: ColorFilter? = null,
     contentDescription: String? = null,
     allowHardware: Boolean = true,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, _ ->
+    placeholder: @Composable (BoxScope.(placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit) = { imageResource, _ ->
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
             modifier = modifier,
@@ -103,6 +118,7 @@ fun VMDImage(
                 contentDescription = contentDescription
             )
         }
+
         is Remote -> {
             RemoteImage(
                 modifier = modifier,
@@ -146,7 +162,7 @@ fun RemoteImage(
     modifier: Modifier = Modifier,
     imageUrl: String?,
     placeholderImage: VMDImageResource = VMDImageResource.None,
-    placeholder: @Composable ((placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit),
+    placeholder: @Composable (BoxScope.(placeholderImageResource: VMDImageResource, state: AsyncImagePainter.State) -> Unit),
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     colorFilter: ColorFilter? = null,
@@ -154,35 +170,42 @@ fun RemoteImage(
     allowHardware: Boolean = true,
     asyncStateCallback: ((AsyncImagePainter.State) -> Unit)? = null
 ) {
+    val sizeResolver = remember { ConstraintsSizeResolver() }
     val coilPainter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current)
             .data(imageUrl)
             .allowHardware(allowHardware)
-            .apply { if (imageUrl != null) size(Size.ORIGINAL) }
+            .size(sizeResolver)
+            .scale(contentScale.scale)
             .build()
     )
 
     val state = coilPainter.state
     asyncStateCallback?.invoke(state)
 
-    when (state) {
-        is AsyncImagePainter.State.Success -> {
-            val drawable = state.result.drawable
-            if (drawable !is BitmapDrawable || drawable.bitmap.allocationByteCount <= MAX_BITMAP_SIZE) {
-                Image(
-                    painter = coilPainter,
-                    modifier = modifier,
-                    alignment = alignment,
-                    colorFilter = colorFilter,
-                    contentScale = contentScale,
-                    contentDescription = contentDescription
-                )
-            } else {
-                Log.e(TAG, "Unable to load bitmap: size too large (${drawable.bitmap.allocationByteCount})")
-                placeholder(placeholderImage, state)
+    Box(
+        modifier = modifier.then(sizeResolver)
+    ) {
+        when (state) {
+            is AsyncImagePainter.State.Success -> {
+                val drawable = state.result.drawable
+                if (drawable !is BitmapDrawable || drawable.bitmap.allocationByteCount <= MAX_BITMAP_SIZE) {
+                    Image(
+                        painter = coilPainter,
+                        modifier = Modifier.matchParentSize(),
+                        alignment = alignment,
+                        colorFilter = colorFilter,
+                        contentScale = contentScale,
+                        contentDescription = contentDescription
+                    )
+                } else {
+                    Log.e(TAG, "Unable to load bitmap: size too large (${drawable.bitmap.allocationByteCount})")
+                    placeholder(placeholderImage, state)
+                }
             }
+
+            else -> placeholder(placeholderImage, state)
         }
-        else -> placeholder(placeholderImage, state)
     }
 }
 
@@ -200,5 +223,40 @@ private fun RemoteImageDefaultPlaceholder(
         colorFilter = colorFilter,
         contentScale = contentScale,
         contentDescription = contentDescription
+    )
+}
+
+private class ConstraintsSizeResolver : SizeResolver, LayoutModifier {
+
+    private val cachedConstraints = MutableStateFlow(Constraints.fixed(0, 0))
+
+    override suspend fun size() = cachedConstraints.mapNotNull(Constraints::toSizeOrNull).first()
+
+    override fun MeasureScope.measure(
+        measurable: Measurable,
+        constraints: Constraints
+    ): MeasureResult {
+        cachedConstraints.value = constraints
+
+        val placeable = measurable.measure(constraints)
+        return layout(placeable.width, placeable.height) {
+            placeable.place(0, 0)
+        }
+    }
+}
+
+@Stable
+private val ContentScale.scale: Scale
+    get() = when(this) {
+        ContentScale.Fit, ContentScale.Inside -> Scale.FIT
+        else -> Scale.FILL
+    }
+
+@Stable
+private fun Constraints.toSizeOrNull() = when {
+    isZero -> null
+    else -> Size(
+        width = if (hasBoundedWidth) Dimension(maxWidth) else Dimension.Original,
+        height = if (hasBoundedHeight) Dimension(maxHeight) else Dimension.Original
     )
 }
