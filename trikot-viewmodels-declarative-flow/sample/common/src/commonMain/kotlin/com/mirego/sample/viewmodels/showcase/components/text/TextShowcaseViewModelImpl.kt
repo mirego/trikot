@@ -1,8 +1,13 @@
 package com.mirego.sample.viewmodels.showcase.components.text
 
 import com.mirego.sample.KWordTranslation
+import com.mirego.sample.extensions.rangeOf
+import com.mirego.sample.resources.SampleTextStyleResource
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
+import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
+import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
+import com.mirego.trikot.viewmodels.declarative.properties.VMDSpanStyleResourceTransform
 import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 
@@ -39,4 +44,14 @@ class TextShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
     override val caption1 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION1])
 
     override val caption2 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_CAPTION2])
+
+    override val richText: VMDTextViewModel = text(
+        content = i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_RICH_TEXT],
+        spans = listOf(
+            VMDRichTextSpan(
+                range = i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_RICH_TEXT].rangeOf(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_RICH_TEXT_HIGHLIGHT]),
+                transform = VMDSpanStyleResourceTransform(SampleTextStyleResource.HIGHLIGHTED)
+            )
+        )
+    )
 }

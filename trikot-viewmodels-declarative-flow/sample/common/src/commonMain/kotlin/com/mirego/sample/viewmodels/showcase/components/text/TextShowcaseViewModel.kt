@@ -19,4 +19,5 @@ interface TextShowcaseViewModel : ShowcaseViewModel {
     val footnote: VMDTextViewModel
     val caption1: VMDTextViewModel
     val caption2: VMDTextViewModel
+    val richText: VMDTextViewModel
 }
