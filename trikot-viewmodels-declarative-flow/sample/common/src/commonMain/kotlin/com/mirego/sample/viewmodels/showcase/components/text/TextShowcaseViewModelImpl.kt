@@ -2,7 +2,7 @@ package com.mirego.sample.viewmodels.showcase.components.text
 
 import com.mirego.sample.KWordTranslation
 import com.mirego.sample.extensions.rangeOf
-import com.mirego.sample.resources.SampleSpanStyleResource
+import com.mirego.sample.resources.SampleTextStyleResource
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
@@ -50,7 +50,7 @@ class TextShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
         spans = listOf(
             VMDRichTextSpan(
                 range = i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_RICH_TEXT].rangeOf(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_RICH_TEXT_HIGHLIGHT]),
-                transform = VMDSpanStyleResourceTransform(SampleSpanStyleResource.HIGHLIGHTED)
+                transform = VMDSpanStyleResourceTransform(SampleTextStyleResource.HIGHLIGHTED)
             )
         )
     )

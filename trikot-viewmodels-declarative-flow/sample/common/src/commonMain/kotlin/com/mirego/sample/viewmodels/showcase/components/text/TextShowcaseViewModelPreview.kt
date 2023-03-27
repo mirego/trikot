@@ -2,7 +2,7 @@ package com.mirego.sample.viewmodels.showcase.components.text
 
 import com.mirego.sample.extensions.rangeOf
 import com.mirego.sample.resources.SampleImageResource
-import com.mirego.sample.resources.SampleSpanStyleResource
+import com.mirego.sample.resources.SampleTextStyleResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
 import com.mirego.trikot.viewmodels.declarative.properties.VMDSpanStyleResourceTransform
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
@@ -53,7 +53,7 @@ class TextShowcaseViewModelPreview : VMDViewModelImpl(MainScope()), TextShowcase
         spans = listOf(
             VMDRichTextSpan(
                 range = richTextContent.rangeOf(highlightedTextContent),
-                transform = VMDSpanStyleResourceTransform(SampleSpanStyleResource.HIGHLIGHTED)
+                transform = VMDSpanStyleResourceTransform(SampleTextStyleResource.HIGHLIGHTED)
             )
         )
     )
