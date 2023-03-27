@@ -3,6 +3,7 @@ package com.mirego.sample
 import android.app.Application
 import com.mirego.sample.factories.SampleViewModelControllerFactoryImpl
 import com.mirego.sample.resource.SampleImageProvider
+import com.mirego.sample.resource.SampleTextStyleProvider
 import com.mirego.trikot.kword.android.AndroidKWord
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControllerFactory
@@ -13,7 +14,7 @@ class TrikotApplication : Application(), ViewModelControllerFactoryProvidingAppl
     override fun onCreate() {
         super.onCreate()
 
-        TrikotViewModelDeclarative.initialize(SampleImageProvider())
+        TrikotViewModelDeclarative.initialize(SampleImageProvider(), SampleTextStyleProvider())
         AndroidKWord.setCurrentLanguageCode("en")
     }
 

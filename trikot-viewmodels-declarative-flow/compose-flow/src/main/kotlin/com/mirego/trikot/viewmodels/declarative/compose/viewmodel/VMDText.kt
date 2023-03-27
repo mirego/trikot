@@ -19,6 +19,7 @@ import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.toAnnotatedString
 
 @Composable
 fun VMDText(
@@ -43,7 +44,7 @@ fun VMDText(
     val textViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     Text(
-        text = textViewModel.text,
+        text = textViewModel.toAnnotatedString(),
         modifier = Modifier
             .hidden(textViewModel.isHidden)
             .then(modifier),
