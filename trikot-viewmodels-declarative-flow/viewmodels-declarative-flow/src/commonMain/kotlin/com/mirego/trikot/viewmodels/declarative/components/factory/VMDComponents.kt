@@ -27,6 +27,7 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDProgressDetermination
 import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
+import kotlin.collections.List as KotlinList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -43,7 +44,7 @@ object VMDComponents {
 
             fun withContent(
                 content: String,
-                spans: kotlin.collections.List<VMDRichTextSpan>,
+                spans: KotlinList<VMDRichTextSpan> = emptyList(),
                 coroutineScope: CoroutineScope,
                 closure: VMDTextViewModelImpl.() -> Unit = {}
             ) =
@@ -56,7 +57,7 @@ object VMDComponents {
 
             fun withContent(
                 contentFlow: Flow<String>,
-                spansFlow: Flow<kotlin.collections.List<VMDRichTextSpan>>,
+                spansFlow: Flow<KotlinList<VMDRichTextSpan>>,
                 coroutineScope: CoroutineScope,
                 closure: VMDTextViewModelImpl.() -> Unit = {}
             ) =
@@ -407,7 +408,7 @@ object VMDComponents {
         companion object {
             fun <E : VMDPickerItemViewModel> withElements(
                 coroutineScope: CoroutineScope,
-                elements: kotlin.collections.List<E>,
+                elements: KotlinList<E>,
                 initialSelectedId: String? = null,
                 closure: VMDPickerViewModelImpl<E>.() -> Unit = {}
             ): VMDPickerViewModel<E> =
