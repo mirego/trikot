@@ -11,7 +11,7 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDSpanStyleResourceT
 import com.mirego.trikot.viewmodels.declarative.properties.VMDTextStyleResource
 
 fun VMDTextStyleResource.textStyle(): TextStyle? =
-    TrikotViewModelDeclarative.textStyleProvider?.textStyleForResource(this)
+    TrikotViewModelDeclarative.textStyleProvider.textStyleForResource(this)
 
 fun VMDTextViewModel.toAnnotatedString() = buildAnnotatedString {
     append(text)
@@ -21,7 +21,7 @@ fun VMDTextViewModel.toAnnotatedString() = buildAnnotatedString {
 private fun AnnotatedString.Builder.addSpanStyle(spanStyle: VMDRichTextSpan) {
     spanStyle.toComposeSpanStyle()?.let {
         addStyle(
-            it,
+            style = it,
             start = spanStyle.range.first,
             end = spanStyle.range.last
         )
