@@ -7,6 +7,11 @@ public protocol VMDSpanStyleProvider {
     func spanStyleForResource(textStyleResource: VMDTextStyleResource) -> VMDSpanStyle?
 }
 
+public struct DefaultSpanStyleProvider: VMDSpanStyleProvider {
+    public init() { }
+    public func spanStyleForResource(textStyleResource: VMDTextStyleResource) -> VMDSpanStyle? { nil }
+}
+
 @available(iOS 15, *)
 internal extension AttributedString {
     init(text: String, spans: [VMDRichTextSpan]) {

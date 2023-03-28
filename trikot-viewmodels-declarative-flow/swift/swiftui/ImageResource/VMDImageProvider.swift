@@ -5,6 +5,11 @@ public protocol VMDImageProvider {
     func imageForResource(imageResource: VMDImageResource) -> Image?
 }
 
+public struct DefaultImageProvider: VMDImageProvider {
+    public init() { }
+    public func imageForResource(imageResource: VMDImageResource) -> Image? { nil }
+}
+
 public class TrikotViewModelDeclarative {
 
     public static let shared: TrikotViewModelDeclarative = TrikotViewModelDeclarative()
@@ -33,8 +38,8 @@ public class TrikotViewModelDeclarative {
     }
 
     public func initialize(
-        imageProvider: VMDImageProvider,
-        spanStyleProvider: VMDSpanStyleProvider
+        imageProvider: VMDImageProvider = DefaultImageProvider(),
+        spanStyleProvider: VMDSpanStyleProvider = DefaultSpanStyleProvider()
     ) {
         internalImageProvider = imageProvider
         internalSpanStyleProvider = spanStyleProvider
