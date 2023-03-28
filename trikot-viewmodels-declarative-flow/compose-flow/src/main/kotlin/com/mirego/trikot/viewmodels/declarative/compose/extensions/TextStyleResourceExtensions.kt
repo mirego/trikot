@@ -1,6 +1,5 @@
 package com.mirego.trikot.viewmodels.declarative.compose.extensions
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -11,18 +10,15 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
 import com.mirego.trikot.viewmodels.declarative.properties.VMDSpanStyleResourceTransform
 import com.mirego.trikot.viewmodels.declarative.properties.VMDTextStyleResource
 
-fun VMDTextStyleResource.textStyle(): TextStyle? {
-    return TrikotViewModelDeclarative.textStyleProvider?.textStyleForResource(this)
-}
+fun VMDTextStyleResource.textStyle(): TextStyle? =
+    TrikotViewModelDeclarative.textStyleProvider?.textStyleForResource(this)
 
-@Composable
 fun VMDTextViewModel.toAnnotatedString() = buildAnnotatedString {
     append(text)
-    spans.forEach { SpanStyle(it) }
+    spans.forEach { addSpanStyle(it) }
 }
 
-@Composable
-private fun AnnotatedString.Builder.SpanStyle(spanStyle: VMDRichTextSpan) {
+private fun AnnotatedString.Builder.addSpanStyle(spanStyle: VMDRichTextSpan) {
     spanStyle.toComposeSpanStyle()?.let {
         addStyle(
             it,
@@ -32,6 +28,7 @@ private fun AnnotatedString.Builder.SpanStyle(spanStyle: VMDRichTextSpan) {
     }
 }
 
-@Composable
 private fun VMDRichTextSpan.toComposeSpanStyle(): SpanStyle? =
-    (transform as VMDSpanStyleResourceTransform).textStyleResource.textStyle()?.toSpanStyle()
+    when(val currentTransform = transform) {
+        is VMDSpanStyleResourceTransform -> currentTransform.textStyleResource.textStyle()?.toSpanStyle()
+    }

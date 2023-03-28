@@ -8,18 +8,16 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDNoTextStyleResourc
 import com.mirego.trikot.viewmodels.declarative.properties.VMDTextStyleResource
 
 class SampleTextStyleProvider : VMDTextStyleProvider {
-    override fun textStyleForResource(resource: VMDTextStyleResource): TextStyle? {
-        return when (resource) {
+    override fun textStyleForResource(resource: VMDTextStyleResource): TextStyle? =
+        when (resource) {
             is VMDNoTextStyleResource -> null
             is SampleTextStyleResource -> mapSampleStyleResource(resource)
             else -> null
         }
-    }
 
-    private fun mapSampleStyleResource(resource: VMDTextStyleResource): TextStyle? {
-        return when (resource) {
+    private fun mapSampleStyleResource(resource: VMDTextStyleResource): TextStyle? =
+        when (resource) {
             SampleTextStyleResource.HIGHLIGHTED -> TextStyle(background = Color.Yellow)
             else -> null
         }
-    }
 }
