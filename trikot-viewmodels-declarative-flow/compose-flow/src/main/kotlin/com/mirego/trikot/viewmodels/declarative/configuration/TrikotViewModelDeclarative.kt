@@ -12,11 +12,14 @@ object TrikotViewModelDeclarative {
             return internalImageProvider ?: throw uninitializedException
         }
 
-    var textStyleProvider: VMDTextStyleProvider? = null
-        private set
+    private var internalTextStyleProvider: VMDTextStyleProvider? = null
+    val textStyleProvider: VMDTextStyleProvider
+        get() {
+            return internalTextStyleProvider ?: throw uninitializedException
+        }
 
-    fun initialize(imageProvider: VMDImageProvider, textStyleProvider: VMDTextStyleProvider? = null) {
+    fun initialize(imageProvider: VMDImageProvider = DefaultImageProvider(), textStyleProvider: VMDTextStyleProvider? = DefaultTextStyleProvider()) {
         internalImageProvider = imageProvider
-        this.textStyleProvider = textStyleProvider
+        internalTextStyleProvider = textStyleProvider
     }
 }
