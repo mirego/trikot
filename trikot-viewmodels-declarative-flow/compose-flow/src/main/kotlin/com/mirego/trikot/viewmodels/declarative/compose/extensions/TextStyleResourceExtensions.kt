@@ -31,4 +31,5 @@ private fun AnnotatedString.Builder.addSpanStyle(spanStyle: VMDRichTextSpan) {
 private fun VMDRichTextSpan.toComposeSpanStyle(): SpanStyle? =
     when(val currentTransform = transform) {
         is VMDSpanStyleResourceTransform -> currentTransform.textStyleResource.textStyle()?.toSpanStyle()
+        else -> null
     }
