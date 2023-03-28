@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.resource.SampleImageProvider
+import com.mirego.sample.resource.SampleTextStyleProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.ui.theming.SampleTextStyle
 import com.mirego.sample.ui.theming.bold
@@ -113,6 +114,10 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
                 viewModel = viewModel.caption2,
                 style = SampleTextStyle.caption2
             )
+
+            VMDText(
+                viewModel = viewModel.richText
+            )
         }
     }
 }
@@ -120,6 +125,6 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
 @Preview(showSystemUi = true)
 @Composable
 fun TextShowcaseViewPreview() {
-    TrikotViewModelDeclarative.initialize(SampleImageProvider())
+    TrikotViewModelDeclarative.initialize(SampleImageProvider(), SampleTextStyleProvider())
     TextShowcaseView(textShowcaseViewModel = TextShowcaseViewModelPreview())
 }

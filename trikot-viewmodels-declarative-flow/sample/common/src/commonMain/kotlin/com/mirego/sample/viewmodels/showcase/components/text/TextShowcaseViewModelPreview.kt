@@ -1,6 +1,10 @@
 package com.mirego.sample.viewmodels.showcase.components.text
 
+import com.mirego.sample.extensions.rangeOf
 import com.mirego.sample.resources.SampleImageResource
+import com.mirego.sample.resources.SampleTextStyleResource
+import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
+import com.mirego.trikot.viewmodels.declarative.properties.VMDSpanStyleResourceTransform
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithImage
 import com.mirego.trikot.viewmodels.declarative.viewmodel.text
@@ -40,4 +44,17 @@ class TextShowcaseViewModelPreview : VMDViewModelImpl(MainScope()), TextShowcase
     override val caption1 = text("Caption 1")
 
     override val caption2 = text("Caption 2")
+
+    private val richTextContent = "Rich text demo"
+    private val highlightedTextContent = "text"
+
+    override val richText = text(
+        content = richTextContent,
+        spans = listOf(
+            VMDRichTextSpan(
+                range = richTextContent.rangeOf(highlightedTextContent),
+                transform = VMDSpanStyleResourceTransform(SampleTextStyleResource.HIGHLIGHTED)
+            )
+        )
+    )
 }

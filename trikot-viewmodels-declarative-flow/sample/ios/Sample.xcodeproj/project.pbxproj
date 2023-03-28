@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DDAE0C929D20B6000119366 /* SampleSpanStyleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE0C829D20B6000119366 /* SampleSpanStyleProvider.swift */; };
 		7963D2812923FD4E00F89C64 /* PickerShowcaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963D2802923FD4E00F89C64 /* PickerShowcaseViewController.swift */; };
 		7963D2832923FD9C00F89C64 /* PickerShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963D2822923FD9C00F89C64 /* PickerShowcaseView.swift */; };
 		7E5CD529DE8F026642D4C253 /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FDFB201D8B6ABB89A6FDB7 /* Pods_Sample.framework */; };
@@ -52,13 +53,14 @@
 
 /* Begin PBXFileReference section */
 		34A3E125A74A8794621A570A /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		4DDAE0C829D20B6000119366 /* SampleSpanStyleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleSpanStyleProvider.swift; sourceTree = "<group>"; };
 		7963D2802923FD4E00F89C64 /* PickerShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerShowcaseViewController.swift; sourceTree = "<group>"; };
 		7963D2822923FD9C00F89C64 /* PickerShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerShowcaseView.swift; sourceTree = "<group>"; };
-		98FDFB201D8B6ABB89A6FDB7 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAF4FC2DBC5336F3BBC3D7D5 /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		97652A312927C94B00B04656 /* SnackbarShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarShowcaseViewController.swift; sourceTree = "<group>"; };
 		97652A332927C98F00B04656 /* SnackbarShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarShowcaseView.swift; sourceTree = "<group>"; };
 		97652A352927CB6B00B04656 /* SnackbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarView.swift; sourceTree = "<group>"; };
+		98FDFB201D8B6ABB89A6FDB7 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAF4FC2DBC5336F3BBC3D7D5 /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		C883569D2750339300DA0786 /* SampleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageProvider.swift; sourceTree = "<group>"; };
 		C88356BC27580F0200DA0786 /* TextShowcaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseViewController.swift; sourceTree = "<group>"; };
 		C88356BD27580F0200DA0786 /* TextShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextShowcaseView.swift; sourceTree = "<group>"; };
@@ -125,8 +127,8 @@
 				7963D2822923FD9C00F89C64 /* PickerShowcaseView.swift */,
 			);
 			path = Picker;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		97652A302926ECFC00B04656 /* Snackbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +222,7 @@
 				C8959A6A268AAADF0080732A /* AppBootstrap.swift */,
 				C8D868DD268AA9660054CF44 /* SceneDelegate.swift */,
 				C883569D2750339300DA0786 /* SampleImageProvider.swift */,
+				4DDAE0C829D20B6000119366 /* SampleSpanStyleProvider.swift */,
 				C8959A6C268AB1470080732A /* UI */,
 				C8D868DF268AA9660054CF44 /* ContentView.swift */,
 				C8D868E1268AA9670054CF44 /* Assets.xcassets */,
@@ -498,6 +501,7 @@
 				E69A6D9127D11B8300E5CEAC /* ProgressShowcaseViewController.swift in Sources */,
 				C88356C427581D2D00DA0786 /* TextStyle.swift in Sources */,
 				E6B3102027CFAD52008D2F36 /* ButtonShowcaseViewController.swift in Sources */,
+				4DDAE0C929D20B6000119366 /* SampleSpanStyleProvider.swift in Sources */,
 				C8959A71268AB1690080732A /* HomeView.swift in Sources */,
 				C8D868DE268AA9660054CF44 /* SceneDelegate.swift in Sources */,
 				E6B3103227D01F1A008D2F36 /* ToggleShowcaseViewController.swift in Sources */,

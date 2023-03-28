@@ -20,6 +20,7 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDTextImagePairContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextPairContent
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
+import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -28,8 +29,8 @@ interface VMDViewModelDSL {
     val coroutineScope: CoroutineScope
 }
 
-fun VMDViewModelDSL.text(content: String = "", closure: VMDTextViewModelImpl.() -> Unit = {}) =
-    VMDComponents.Text.withContent(content, coroutineScope, closure)
+fun VMDViewModelDSL.text(content: String = "", spans: List<VMDRichTextSpan> = emptyList(), closure: VMDTextViewModelImpl.() -> Unit = {}) =
+    VMDComponents.Text.withContent(content, spans, coroutineScope, closure)
 
 fun VMDViewModelDSL.localImage(image: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
     VMDComponents.Image.local(image, coroutineScope, contentDescription, closure)

@@ -70,6 +70,11 @@ struct TextShowcaseView: RootViewModelView {
                         VMDText(viewModel.caption2)
                             .style(.caption2)
                     }
+
+                    Group {
+                        VMDText(viewModel.richText)
+                            .style(.body)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
