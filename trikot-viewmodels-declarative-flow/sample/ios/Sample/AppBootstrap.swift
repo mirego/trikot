@@ -10,7 +10,8 @@ class AppBootstrap {
 
     private static func initializeTrikotViewModels() {
         TrikotViewModelDeclarative.shared.initialize(
-            imageProvider: SampleImageProvider()
+            imageProvider: SampleImageProvider(),
+            spanStyleProvider: SampleSpanStyleProvider()
         )
     }
 
