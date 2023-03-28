@@ -112,7 +112,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             placeholderContentScale = ContentScale.Crop,
             placeholder = { placeholderImageResource, state ->
                 Column(
-                    modifier = imageModifier.background(Color.LightGray.copy(alpha = 0.5f)),
+                    modifier = Modifier.matchParentSize().background(Color.LightGray.copy(alpha = 0.5f)),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
