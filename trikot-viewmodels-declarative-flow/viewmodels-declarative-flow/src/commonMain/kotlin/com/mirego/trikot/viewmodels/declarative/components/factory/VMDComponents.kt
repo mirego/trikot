@@ -44,7 +44,18 @@ object VMDComponents {
 
             fun withContent(
                 content: String,
-                spans: KotlinList<VMDRichTextSpan> = emptyList(),
+                coroutineScope: CoroutineScope,
+                closure: VMDTextViewModelImpl.() -> Unit = {}
+            ) =
+                VMDTextViewModelImpl(coroutineScope)
+                    .apply {
+                        text = content
+                    }
+                    .apply(closure)
+
+            fun withSpans(
+                content: String,
+                spans: KotlinList<VMDRichTextSpan>,
                 coroutineScope: CoroutineScope,
                 closure: VMDTextViewModelImpl.() -> Unit = {}
             ) =
@@ -56,6 +67,17 @@ object VMDComponents {
                     .apply(closure)
 
             fun withContent(
+                contentFlow: Flow<String>,
+                coroutineScope: CoroutineScope,
+                closure: VMDTextViewModelImpl.() -> Unit = {}
+            ) =
+                VMDTextViewModelImpl(coroutineScope)
+                    .apply {
+                        bindText(contentFlow)
+                    }
+                    .apply(closure)
+
+            fun withSpans(
                 contentFlow: Flow<String>,
                 spansFlow: Flow<KotlinList<VMDRichTextSpan>>,
                 coroutineScope: CoroutineScope,
