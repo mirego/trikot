@@ -30,7 +30,7 @@ interface VMDViewModelDSL {
 }
 
 fun VMDViewModelDSL.text(content: String = "", spans: List<VMDRichTextSpan> = emptyList(), closure: VMDTextViewModelImpl.() -> Unit = {}) =
-    VMDComponents.Text.withContent(content, spans, coroutineScope, closure)
+    VMDComponents.Text.withSpans(content, spans, coroutineScope, closure)
 
 fun VMDViewModelDSL.localImage(image: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
     VMDComponents.Image.local(image, coroutineScope, contentDescription, closure)
