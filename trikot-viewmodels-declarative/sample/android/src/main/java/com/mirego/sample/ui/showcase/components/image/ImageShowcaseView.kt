@@ -94,8 +94,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                 .aspectRatio(imageAspectRatio)
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
             viewModel = viewModel.placeholderImage,
-            contentScale = ContentScale.Crop,
-            placeholderContentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop
         )
 
         ComponentShowcaseTitle(viewModel.complexPlaceholderImageTitle)
@@ -112,13 +111,17 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             placeholderContentScale = ContentScale.Crop,
             placeholder = { placeholderImageResource, state ->
                 Column(
-                    modifier = Modifier.matchParentSize().background(Color.LightGray.copy(alpha = 0.5f)),
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(Color.LightGray.copy(alpha = 0.5f)),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     LocalImage(
                         imageResource = placeholderImageResource,
-                        modifier = Modifier.size(width = (50 * imageAspectRatio).dp, height = 50.dp).padding(bottom = 10.dp),
+                        modifier = Modifier
+                            .size(width = (50 * imageAspectRatio).dp, height = 50.dp)
+                            .padding(bottom = 10.dp),
                         contentScale = ContentScale.Crop
                     )
 

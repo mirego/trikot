@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LayoutModifier
 import androidx.compose.ui.layout.Measurable
@@ -20,6 +21,7 @@ import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Constraints
+import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -42,6 +44,81 @@ import kotlinx.coroutines.flow.mapNotNull
 
 private const val TAG = "VMDImage"
 private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024 // 100 MB, taken from android.graphics.RecordingCanvas
+
+@Composable
+fun VMDImage(
+    viewModel: VMDImageViewModel,
+    modifier: Modifier = Modifier,
+    alignment: Alignment = Alignment.Center,
+    onState: ((AsyncImagePainter.State) -> Unit)? = null,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    allowHardware: Boolean = true
+) {
+    val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
+
+    VMDImage(
+        imageDescriptor = imageViewModel.image,
+        modifier = Modifier
+            .hidden(imageViewModel.isHidden)
+            .then(modifier),
+        contentDescription = imageViewModel.contentDescription,
+        alignment = alignment,
+        onState = onState,
+        contentScale = contentScale,
+        alpha = alpha,
+        colorFilter = colorFilter,
+        allowHardware = allowHardware
+    )
+}
+
+@Composable
+fun VMDImage(
+    imageDescriptor: VMDImageDescriptor,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+    alignment: Alignment = Alignment.Center,
+    onState: ((AsyncImagePainter.State) -> Unit)? = null,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    allowHardware: Boolean = true
+) {
+    when (imageDescriptor) {
+        is Local -> {
+            LocalImage(
+                modifier = modifier,
+                imageResource = imageDescriptor.imageResource,
+                alignment = alignment,
+                contentScale = contentScale,
+                alpha = alpha,
+                colorFilter = colorFilter,
+                contentDescription = contentDescription
+            )
+        }
+
+        is Remote -> {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(imageDescriptor.url)
+                    .allowHardware(allowHardware)
+                    .build(),
+                contentDescription = contentDescription,
+                modifier = modifier,
+                transform = imageDescriptor.placeholderImageResource
+                    .takeUnless { it == VMDImageResource.None }
+                    ?.let { transformOf(painterResource(it)) }
+                    ?: AsyncImagePainter.DefaultTransform,
+                onState = onState,
+                contentScale = contentScale,
+                alignment = alignment,
+                alpha = alpha,
+                colorFilter = colorFilter
+            )
+        }
+    }
+}
 
 @Composable
 fun VMDImage(
@@ -237,7 +314,7 @@ private class ConstraintsSizeResolver : SizeResolver, LayoutModifier {
         constraints: Constraints
     ): MeasureResult {
         cachedConstraints.value = constraints
-        
+
         val placeable = measurable.measure(constraints)
         return layout(placeable.width, placeable.height) {
             placeable.place(0, 0)
@@ -247,7 +324,7 @@ private class ConstraintsSizeResolver : SizeResolver, LayoutModifier {
 
 @Stable
 private val ContentScale.scale: Scale
-    get() = when(this) {
+    get() = when (this) {
         ContentScale.Fit, ContentScale.Inside -> Scale.FIT
         else -> Scale.FILL
     }
@@ -259,4 +336,15 @@ private fun Constraints.toSizeOrNull() = when {
         width = if (hasBoundedWidth) Dimension(maxWidth) else Dimension.Original,
         height = if (hasBoundedHeight) Dimension(maxHeight) else Dimension.Original
     )
+}
+
+@Stable
+private fun transformOf(
+    placeholder: Painter
+): (AsyncImagePainter.State) -> AsyncImagePainter.State = { state ->
+    when (state) {
+        is AsyncImagePainter.State.Loading -> state.copy(painter = placeholder)
+        is AsyncImagePainter.State.Error -> state.copy(painter = placeholder)
+        else -> state
+    }
 }
