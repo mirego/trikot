@@ -75,7 +75,7 @@ Pod::Spec.new do |spec|
     subspec.source_files = 'trikot-viewmodels-declarative/swift/swiftui/**/*.swift'
     subspec.dependency 'Trikot/viewmodels.declarative'
     subspec.dependency 'Trikot/viewmodels.declarative.Combine'
-    subspec.dependency 'Kingfisher', '~> 7.1'
+    subspec.dependency 'Kingfisher', '~> 7.6.2'
     subspec.dependency 'Introspect', '~> 0.1'
   end
 
@@ -87,7 +87,7 @@ Pod::Spec.new do |spec|
     spec.subspec 'viewmodels.declarative.SwiftUI.flow' do |subspec|
       subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/swiftui/**/*.swift'
       subspec.dependency 'Trikot/viewmodels.declarative.flow'
-      subspec.dependency 'Kingfisher', '~> 7.1'
+      subspec.dependency 'Kingfisher', '~> 7.6.2'
       subspec.dependency 'Introspect', '~> 0.1'
     end
 

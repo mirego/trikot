@@ -1,32 +1,32 @@
 PODS:
   - Introspect (0.1.3)
-  - Kingfisher (7.1.2)
+  - Kingfisher (7.6.2)
   - ReachabilitySwift (5.0.0)
   - SwiftLint (0.43.1)
-  - Trikot/http (4.2.0):
+  - Trikot/http (4.4.0):
     - ReachabilitySwift (~> 5.0)
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/kword (4.2.0):
+  - Trikot/kword (4.4.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/streams (4.2.0):
+  - Trikot/streams (4.4.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative (4.2.0):
+  - Trikot/viewmodels.declarative (4.4.0):
     - Trikot/streams
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.Combine (4.2.0):
+  - Trikot/viewmodels.declarative.Combine (4.4.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.SwiftUI (4.2.0):
+  - Trikot/viewmodels.declarative.SwiftUI (4.4.0):
     - Introspect (~> 0.1)
-    - Kingfisher (~> 7.1)
+    - Kingfisher (~> 7.6.2)
     - Trikot/viewmodels.declarative
     - Trikot/viewmodels.declarative.Combine
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.UIKit (4.2.0):
+  - Trikot/viewmodels.declarative.UIKit (4.4.0):
     - Kingfisher (>= 5.0)
     - Trikot/streams
     - Trikot/viewmodels.declarative
     - TRIKOT_FRAMEWORK_NAME
-  - TRIKOT_FRAMEWORK_NAME (4.2.0)
+  - TRIKOT_FRAMEWORK_NAME (4.4.0)
 
 DEPENDENCIES:
   - SwiftLint
@@ -53,11 +53,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Introspect: 2be020f30f084ada52bb4387fff83fa52c5c400e
-  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
-  Trikot: 3cbee37c11407e001f57349cf47908e45da65636
-  TRIKOT_FRAMEWORK_NAME: a05aa88ba2a695bac7b741b9b54a4f1a61fc696f
+  Trikot: 1004d1cf1f8a54dc1da02e14f6c652545a9abd0c
+  TRIKOT_FRAMEWORK_NAME: 98522350bf03cb427378e654289db636afde3944
 
 PODFILE CHECKSUM: 8057f57ba2a2db77f33517422839afd5282c408e
 
