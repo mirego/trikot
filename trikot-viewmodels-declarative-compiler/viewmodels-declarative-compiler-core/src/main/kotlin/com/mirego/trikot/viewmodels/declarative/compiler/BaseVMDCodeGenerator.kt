@@ -26,6 +26,8 @@ abstract class BaseVMDCodeGenerator(
     private val codeGenerator: CodeGenerator,
     private val logger: KSPLogger
 ) {
+    abstract val viewModelType: KClass<*>
+
     abstract val defaultSuperClass: TypeName
 
     abstract val lifecycleComponentName: String
@@ -56,13 +58,24 @@ abstract class BaseVMDCodeGenerator(
     private fun generateAbstractParent(viewModelMetaData: ViewModelMetaData) {
         logger.logging("$viewModelMetaData")
 
-        val className = "Base${viewModelMetaData.viewModelInterface.simpleName.asString()}Impl"
+        val isConcrete = viewModelMetaData.allFieldsArePublished && !viewModelMetaData.hasAbstractMethods
+
+        val prefix = when {
+            isConcrete -> "Default"
+            else -> "Base"
+        }
+        val classModifier = when {
+            isConcrete -> KModifier.OPEN
+            else -> KModifier.ABSTRACT
+        }
+
+        val className = "$prefix${viewModelMetaData.viewModelInterface.simpleName.asString()}Impl"
         val packageName = viewModelMetaData.viewModelInterface.packageName.asString()
 
         val fileSpec = FileSpec.builder(packageName, className)
             .addType(
                 TypeSpec.classBuilder(className)
-                    .addModifiers(KModifier.ABSTRACT)
+                    .addModifiers(classModifier)
                     .addSuperinterface(viewModelMetaData.viewModelInterface.toClassName())
                     .superclass(generateSuperClass(viewModelMetaData))
                     .primaryConstructor(generateConstructor(viewModelMetaData))
@@ -101,10 +114,15 @@ abstract class BaseVMDCodeGenerator(
                 viewModelMetaData.publishedProperty
                     .map { propertyDeclaration ->
                         validateType(propertyDeclaration.type)
-                        ParameterSpec.builder(
+                        val resolvedType = propertyDeclaration.type.resolve()
+                        val builder = ParameterSpec.builder(
                             name = "${propertyDeclaration.simpleName.getShortName()}InitialValue",
-                            type = propertyDeclaration.type.resolve().toTypeName()
-                        ).build()
+                            type = resolvedType.toTypeName(),
+                        )
+                        if (resolvedType.isMarkedNullable) {
+                            builder.defaultValue("null")
+                        }
+                        builder.build()
                     }
             )
 

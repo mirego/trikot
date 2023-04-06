@@ -3,6 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPublishedProperty
 import com.squareup.kotlinpoet.CodeBlock
@@ -18,6 +19,8 @@ class StreamsVMDCodeGenerator(
     codeGenerator = codeGenerator,
     logger = logger
 ) {
+    override val viewModelType = VMDViewModel::class
+
     override val defaultSuperClass: TypeName = VMDViewModelImpl::class.asTypeName()
 
     override val lifecycleComponentName = "cancellableManager"

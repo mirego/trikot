@@ -14,7 +14,8 @@ abstract class BaseBuilderProcessor(
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         logger.logging("Scanning metadata ...")
-        val viewModelMetaData = vmdScanner.getViewModelMetaData(resolver)
+        val viewModelMetaData = vmdScanner.getViewModelMetaData(resolver, vmdCodeGenerator)
+        logger.logging("Metadata: $viewModelMetaData")
         vmdCodeGenerator.generateViewModelParents(viewModelMetaData)
         return emptyList()
     }

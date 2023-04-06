@@ -2,6 +2,7 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
+import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProperty
 import com.squareup.kotlinpoet.CodeBlock
@@ -10,6 +11,7 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlin.reflect.KClass
 
 class FlowVMDCodeGenerator(
     codeGenerator: CodeGenerator,
@@ -18,6 +20,8 @@ class FlowVMDCodeGenerator(
     codeGenerator = codeGenerator,
     logger = logger
 ) {
+    override val viewModelType = VMDViewModel::class
+
     override val defaultSuperClass: TypeName = VMDViewModelImpl::class.asTypeName()
 
     override val lifecycleComponentName = "coroutineScope"
