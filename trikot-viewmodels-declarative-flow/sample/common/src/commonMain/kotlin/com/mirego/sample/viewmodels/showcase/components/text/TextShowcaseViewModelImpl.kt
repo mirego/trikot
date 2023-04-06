@@ -6,9 +6,13 @@ import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 
-class TextShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
+class TextShowcaseViewModelImpl(
+    i18N: I18N,
+    coroutineScope: CoroutineScope,
+    title: String = i18N[KWordTranslation.TEXT_SHOWCASE_TITLE]
+) :
     ShowcaseViewModelImpl(coroutineScope), TextShowcaseViewModel {
-    override val title = text(i18N[KWordTranslation.TEXT_SHOWCASE_TITLE])
+    override val title = text(title)
 
     override val largeTitle = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE])
 

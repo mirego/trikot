@@ -16,7 +16,7 @@ struct HomeView: RootViewModelView {
     }
 
     var body: some View {
-        NavigationView {
+        ZStack {
             VMDList(viewModel.sections) { section in
                 Section(header: VMDText(section.title)) {
                     ForEach(section.elements) { element in
@@ -28,8 +28,11 @@ struct HomeView: RootViewModelView {
                 }
             }
             .listStyle(GroupedListStyle())
-            .navigationTitle(viewModel.title)
+            SnackbarView(flow: viewModel.snackbar)
+                .padding(.bottom, 24)
         }
+        .navigationTitle(viewModel.title)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

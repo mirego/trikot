@@ -3,7 +3,9 @@ package com.mirego.sample.viewmodels.home
 import com.mirego.sample.KWordTranslation
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
+import com.mirego.trikot.viewmodels.declarative.components.VMDSnackbarViewData
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelController
+import com.mirego.trikot.viewmodels.declarative.extension.VMDFlow
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.list
 
@@ -89,5 +91,7 @@ class HomeViewModelController(i18N: I18N) :
                         coroutineScope = coroutineScope
                     )
                 )
+            override val snackbar: VMDFlow<VMDSnackbarViewData>
+                get() = TODO("Not yet implemented")
         }
 }

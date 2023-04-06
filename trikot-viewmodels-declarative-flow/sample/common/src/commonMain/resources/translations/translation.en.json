@@ -17,6 +17,8 @@
   "home_component_progress": "Progress",
   "home_component_list": "List",
   "home_component_snackbar": "Snackbar",
+  "home_navigation_title" : "Navigation",
+  "home_navigation_dialog" : "Dialog with result",
   "image_showcase_complex_placeholder_image_title": "Complex placeholder",
   "home_animations_title": "Animations",
   "home_animation_easing": "Animation Easing",
@@ -78,5 +80,10 @@
   "snackbar_showcase_title": "Snackbar showcase",
   "snackbar_showcase_short": "Short duration",
   "snackbar_showcase_long": "Long duration",
-  "snackbar_showcase_indefinite": "Indefinite duration"
+  "snackbar_showcase_indefinite": "Indefinite duration",
+  "navigation_dialog_message" : "All I am offering is the truth, nothing more.",
+  "navigation_dialog_choice1" : "Red pill",
+  "navigation_dialog_choice2" : "Blue pill",
+  "navigation_dialog_result1" : "Stay in Wonderland",
+  "navigation_dialog_result2" : "The story ends"
 }

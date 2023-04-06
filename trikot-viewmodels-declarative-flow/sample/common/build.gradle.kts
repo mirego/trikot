@@ -4,6 +4,7 @@ plugins {
     kotlin("native.cocoapods")
     id("org.jlleitschuh.gradle.ktlint")
     id("mirego.kword").version("2.0.1")
+    id("kotlinx-serialization")
 }
 
 group = "com.mirego.sample"
@@ -75,6 +76,7 @@ kotlin {
                 api(project(Project.TRIKOT_FOUNDATION))
                 api(project(Project.TRIKOT_KWORD))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
             }
             kotlin.srcDir(kword.generatedDir)
         }
