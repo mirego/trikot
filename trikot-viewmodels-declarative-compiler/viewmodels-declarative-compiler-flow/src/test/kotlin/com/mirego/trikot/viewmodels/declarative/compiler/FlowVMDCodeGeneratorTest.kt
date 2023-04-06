@@ -13,8 +13,10 @@ import kotlin.reflect.full.isSuperclassOf
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.superclasses
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class FlowVMDCodeGeneratorTest {
 
@@ -50,7 +52,7 @@ class FlowVMDCodeGeneratorTest {
     }
 
     @Test
-    fun `When an interface contains Published annotations base class is generated `() {
+    fun `When an interface contains only Published annotations default class is generated `() {
         val result = compileSources(
             SourceFile.kotlin(
                 name = "ViewModel1.kt",
@@ -67,9 +69,65 @@ class FlowVMDCodeGeneratorTest {
         )
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
+        val generatedClass = result.classLoader.loadClass("DefaultViewModel1Impl").kotlin
+
+        generatedClass.isSuperclassOf(VMDViewModelImpl::class)
+        assertFalse(generatedClass.isAbstract)
+
+        assertNotNull(generatedClass.primaryConstructor).run {
+            parameters[0].assertParam("fieldInitialValue", String::class)
+            parameters[1].assertParam("coroutineScope", CoroutineScope::class)
+        }
+
+        generatedClass.assertMember(
+            name = "fieldDelegate",
+            type = VMDFlowProperty::class,
+            typeArgument = String::class
+        )
+
+        generatedClass.assertMember(
+            name = "field",
+            type = String::class
+        )
+
+        generatedClass.getMandatoryFunction("bindField").run {
+            assertParam("flow", Flow::class, String::class)
+            assertReturnType(Unit::class)
+        }
+
+        generatedClass.getMandatoryFunction("bind").run {
+            assertParam("field", Flow::class, String::class)
+            assertReturnType(Unit::class)
+        }
+
+        generatedClass.getMandatoryFunction("flowForField").run {
+            assertReturnType(type = Flow::class, typeParameter = String::class)
+        }
+    }
+
+    @Test
+    fun `When an interface contains some Published annotations base class is generated `() {
+        val result = compileSources(
+            SourceFile.kotlin(
+                name = "ViewModel1.kt",
+                contents = """
+                        import com.mirego.trikot.viewmodels.declarative.Published
+                        import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
+                
+                        interface ViewModel1 : VMDViewModel {
+                            @Published
+                            val field : String
+                            val field2: String
+                        }
+                        """
+            )
+        )
+        assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
+
         val generatedClass = result.classLoader.loadClass("BaseViewModel1Impl").kotlin
 
         generatedClass.isSuperclassOf(VMDViewModelImpl::class)
+        assertTrue(generatedClass.isAbstract)
 
         assertNotNull(generatedClass.primaryConstructor).run {
             parameters[0].assertParam("fieldInitialValue", String::class)
@@ -112,7 +170,7 @@ class FlowVMDCodeGeneratorTest {
                         import kotlinx.coroutines.CoroutineScope
 
                         @PublishedSubClass(superClass = SuperClass::class)
-                        class BaseClass(coroutineScope: CoroutineScope): ViewModel1, BaseViewModel1Impl("value", coroutineScope)
+                        class BaseClass(coroutineScope: CoroutineScope): ViewModel1, DefaultViewModel1Impl("value", coroutineScope)
                         """
             ),
             SourceFile.kotlin(
@@ -138,7 +196,7 @@ class FlowVMDCodeGeneratorTest {
             )
         )
 
-        val generatedClass = result.classLoader.loadClass("BaseViewModel1Impl").kotlin
+        val generatedClass = result.classLoader.loadClass("DefaultViewModel1Impl").kotlin
         assertNotNull(
             generatedClass.superclasses
                 .firstOrNull {
