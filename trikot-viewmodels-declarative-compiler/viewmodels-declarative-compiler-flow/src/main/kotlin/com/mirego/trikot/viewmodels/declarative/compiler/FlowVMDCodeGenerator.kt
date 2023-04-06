@@ -11,7 +11,6 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlin.reflect.KClass
 
 class FlowVMDCodeGenerator(
     codeGenerator: CodeGenerator,
