@@ -30,6 +30,7 @@ When the plugin detects the annotation on an interface, it will automatically ge
 The generated class will be abstract, only if needed. If it happens that it already implements everything required, it will be concrete (but still `open`). In that can you can instantiate and use the generated class without the need of subclassing it.
 
 The conditions to be concrete are:
+
 - The ViewModel must have all its fields annotated as `@Published` (including fields inherited from any super interface, excluding `VMDViewModel` fields)
 - The ViewModel must not have any abstract methods defined.
 
