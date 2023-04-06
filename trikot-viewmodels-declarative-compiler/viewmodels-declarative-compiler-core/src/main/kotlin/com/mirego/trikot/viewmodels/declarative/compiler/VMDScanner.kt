@@ -104,7 +104,6 @@ class VMDScanner(
             .toList()
     }
 
-
     private fun getViewModelAbstractMethods(
         vmdCodeGenerator: BaseVMDCodeGenerator,
         resolver: Resolver,

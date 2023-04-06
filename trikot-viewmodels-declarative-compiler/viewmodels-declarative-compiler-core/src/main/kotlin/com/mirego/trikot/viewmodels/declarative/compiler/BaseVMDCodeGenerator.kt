@@ -117,7 +117,7 @@ abstract class BaseVMDCodeGenerator(
                         val resolvedType = propertyDeclaration.type.resolve()
                         val builder = ParameterSpec.builder(
                             name = "${propertyDeclaration.simpleName.getShortName()}InitialValue",
-                            type = resolvedType.toTypeName(),
+                            type = resolvedType.toTypeName()
                         )
                         if (resolvedType.isMarkedNullable) {
                             builder.defaultValue("null")
