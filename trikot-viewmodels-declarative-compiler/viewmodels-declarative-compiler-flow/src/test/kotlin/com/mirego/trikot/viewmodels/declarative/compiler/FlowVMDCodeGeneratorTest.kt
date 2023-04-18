@@ -52,7 +52,7 @@ class FlowVMDCodeGeneratorTest {
     }
 
     @Test
-    fun `When an interface contains only Published annotations default class is generated `() {
+    fun `When an interface contains only Published annotations open class is generated `() {
         val result = compileSources(
             SourceFile.kotlin(
                 name = "ViewModel1.kt",
