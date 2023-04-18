@@ -73,6 +73,7 @@ class FlowVMDCodeGeneratorTest {
 
         generatedClass.isSuperclassOf(VMDViewModelImpl::class)
         assertFalse(generatedClass.isAbstract)
+        assertTrue(generatedClass.isOpen)
 
         assertNotNull(generatedClass.primaryConstructor).run {
             parameters[0].assertParam("fieldInitialValue", String::class)
@@ -103,6 +104,29 @@ class FlowVMDCodeGeneratorTest {
         generatedClass.getMandatoryFunction("flowForField").run {
             assertReturnType(type = Flow::class, typeParameter = String::class)
         }
+    }
+
+    @Test
+    fun `When an interface contains only Published annotations or non-abstract fields open class is generated `() {
+        val result = compileSources(
+            SourceFile.kotlin(
+                name = "ViewModel1.kt",
+                contents = """
+                        import com.mirego.trikot.viewmodels.declarative.Published
+                        import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
+                
+                        interface ViewModel1 : VMDViewModel {
+                            @Published
+                            val field : String
+                            val someString: String
+                                get() = "value"
+                        }
+                        """
+            )
+        )
+        val generatedClass = result.classLoader.loadClass("DefaultViewModel1Impl").kotlin
+        assertFalse(generatedClass.isAbstract)
+        assertTrue(generatedClass.isOpen)
     }
 
     @Test

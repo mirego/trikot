@@ -3,6 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAllSuperTypes
 import com.google.devtools.ksp.getKotlinClassByName
+import com.google.devtools.ksp.isAbstract
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSAnnotated
@@ -34,14 +35,14 @@ class VMDScanner(
                     resolver = resolver
                 )
 
-                val viewModelProperties = getViewModelProperties(vmdCodeGenerator, resolver, viewModelInterface)
+                val viewModelAbstractProperties = getViewModelAbstractProperties(vmdCodeGenerator, resolver, viewModelInterface)
                 val viewModelAbstractMethods = getViewModelAbstractMethods(vmdCodeGenerator, resolver, viewModelInterface)
 
                 ViewModelMetaData(
                     viewModelInterface = viewModelInterface,
                     publishedProperty = entry.value.map { it as KSPropertyDeclaration },
                     superClass = superClassDeclaration,
-                    allFieldsArePublished = entry.value.size == viewModelProperties.count(),
+                    allFieldsArePublished = entry.value.size == viewModelAbstractProperties.count(),
                     hasAbstractMethods = viewModelAbstractMethods.isNotEmpty()
                 )
             }
@@ -87,7 +88,7 @@ class VMDScanner(
             }
         }
 
-    private fun getViewModelProperties(
+    private fun getViewModelAbstractProperties(
         vmdCodeGenerator: BaseVMDCodeGenerator,
         resolver: Resolver,
         viewModelInterface: KSClassDeclaration
@@ -96,6 +97,9 @@ class VMDScanner(
             resolver.getKotlinClassByName(it)?.getAllProperties()
         }.orEmpty()
         return viewModelInterface.getAllProperties()
+            .filter { vmProperty ->
+                vmProperty.isAbstract()
+            }
             .filterNot { vmProperty ->
                 baseViewModelProperties.any { baseProperty ->
                     baseProperty.simpleName == vmProperty.simpleName
