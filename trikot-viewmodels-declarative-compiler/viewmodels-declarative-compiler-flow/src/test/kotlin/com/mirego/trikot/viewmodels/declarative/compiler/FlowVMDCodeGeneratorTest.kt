@@ -106,7 +106,7 @@ class FlowVMDCodeGeneratorTest {
     }
 
     @Test
-    fun `When an interface contains some Published annotations base class is generated `() {
+    fun `When an interface contains some Published annotations abstract class is generated `() {
         val result = compileSources(
             SourceFile.kotlin(
                 name = "ViewModel1.kt",
