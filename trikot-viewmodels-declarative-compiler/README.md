@@ -18,14 +18,21 @@ interface ExampleViewModel : VMDViewModel {
 }
 ```
 
-When the plugin detects the annotation on an interface, it will automatically generate an abstract base class that your implementation can extend. This class will contain:
+When the plugin detects the annotation on an interface, it will automatically generate a base class that your implementation can extend. This class will contain:
 
-- A constructor that requires the initial values of the published fields
+- A constructor that requires the initial values of the published fields (nullable fields will have null default values)
 - The published property delegate
 - The overridden `var` based on the delegate
 - The method to update property mapping
 - Convenient methods to bind each field individually, or all of them in a single method
 - Convenient methods to get the `Publisher`/`Flow` of a field
+
+The generated class will be abstract, only if needed. If it happens that it already implements everything required, it will be concrete (but still `open`). In that can you can instantiate and use the generated class without the need of subclassing it.
+
+The conditions to be concrete are:
+
+- The ViewModel must have all its fields annotated as `@Published` (including fields inherited from any super interface, excluding `VMDViewModel` fields)
+- The ViewModel must not have any abstract methods defined.
 
 ### Published Subclass
 

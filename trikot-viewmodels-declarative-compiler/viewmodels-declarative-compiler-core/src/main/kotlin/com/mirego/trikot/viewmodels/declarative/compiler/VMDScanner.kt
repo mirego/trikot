@@ -3,11 +3,13 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAllSuperTypes
 import com.google.devtools.ksp.getKotlinClassByName
+import com.google.devtools.ksp.isAbstract
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import com.mirego.trikot.viewmodels.declarative.Published
@@ -15,9 +17,12 @@ import com.mirego.trikot.viewmodels.declarative.PublishedSubClass
 
 @OptIn(KspExperimental::class)
 class VMDScanner(
-    val logger: KSPLogger
+    private val logger: KSPLogger
 ) {
-    fun getViewModelMetaData(resolver: Resolver): List<ViewModelMetaData> {
+    fun getViewModelMetaData(
+        resolver: Resolver,
+        vmdCodeGenerator: BaseVMDCodeGenerator
+    ): List<ViewModelMetaData> {
         val subClasses = resolver.getSymbolsWithAnnotation(PublishedSubClass::class.qualifiedName!!)
         return resolver.getSymbolsWithAnnotation(Published::class.qualifiedName!!)
             .groupBy { it.parent }
@@ -30,10 +35,15 @@ class VMDScanner(
                     resolver = resolver
                 )
 
+                val viewModelAbstractProperties = getViewModelAbstractProperties(vmdCodeGenerator, resolver, viewModelInterface)
+                val viewModelAbstractMethods = getViewModelAbstractMethods(vmdCodeGenerator, resolver, viewModelInterface)
+
                 ViewModelMetaData(
                     viewModelInterface = viewModelInterface,
                     publishedProperty = entry.value.map { it as KSPropertyDeclaration },
-                    superClass = superClassDeclaration
+                    superClass = superClassDeclaration,
+                    allFieldsArePublished = entry.value.size == viewModelAbstractProperties.count(),
+                    hasAbstractMethods = viewModelAbstractMethods.isNotEmpty()
                 )
             }
     }
@@ -77,4 +87,41 @@ class VMDScanner(
                 resolver.getKotlinClassByName(it)
             }
         }
+
+    private fun getViewModelAbstractProperties(
+        vmdCodeGenerator: BaseVMDCodeGenerator,
+        resolver: Resolver,
+        viewModelInterface: KSClassDeclaration
+    ): List<KSPropertyDeclaration> {
+        val baseViewModelProperties = vmdCodeGenerator.viewModelType.qualifiedName?.let {
+            resolver.getKotlinClassByName(it)?.getAllProperties()
+        }.orEmpty()
+        return viewModelInterface.getAllProperties()
+            .filter { vmProperty ->
+                vmProperty.isAbstract()
+            }
+            .filterNot { vmProperty ->
+                baseViewModelProperties.any { baseProperty ->
+                    baseProperty.simpleName == vmProperty.simpleName
+                }
+            }
+            .toList()
+    }
+
+    private fun getViewModelAbstractMethods(
+        vmdCodeGenerator: BaseVMDCodeGenerator,
+        resolver: Resolver,
+        viewModelInterface: KSClassDeclaration
+    ): List<KSFunctionDeclaration> {
+        val baseViewModelMethods = vmdCodeGenerator.viewModelType.qualifiedName?.let {
+            resolver.getKotlinClassByName(it)?.getAllFunctions()
+        }.orEmpty()
+        return viewModelInterface.getAllFunctions()
+            .filterNot { vmProperty ->
+                baseViewModelMethods.any { baseProperty ->
+                    baseProperty.simpleName == vmProperty.simpleName
+                }
+            }
+            .toList()
+    }
 }

@@ -6,5 +6,7 @@ import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 data class ViewModelMetaData(
     val viewModelInterface: KSClassDeclaration,
     val publishedProperty: List<KSPropertyDeclaration>,
-    val superClass: KSClassDeclaration?
+    val superClass: KSClassDeclaration?,
+    val allFieldsArePublished: Boolean,
+    val hasAbstractMethods: Boolean
 )
