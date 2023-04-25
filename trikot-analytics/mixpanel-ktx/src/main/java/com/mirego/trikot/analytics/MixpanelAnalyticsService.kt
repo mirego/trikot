@@ -60,7 +60,7 @@ class MixpanelAnalyticsService(
     }
 
     override fun unsetSuperProperties(propertyNames: List<String>) {
-        propertyNames.iterator().forEach { name ->
+        propertyNames.forEach { name ->
             mixpanelAnalytics.unregisterSuperProperty(name)
         }
     }
