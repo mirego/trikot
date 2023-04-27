@@ -57,6 +57,12 @@ android {
             resources.srcDir("../common/src/commonMain/resources/")
         }
     }
+
+    lint {
+        abortOnError = true
+        checkReleaseBuilds = true
+        disable.add("NotificationPermission")
+    }
 }
 
 dependencies {

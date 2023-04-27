@@ -60,6 +60,7 @@ android {
     lint {
         abortOnError = true
         checkReleaseBuilds = true
+        disable.add("NotificationPermission")
     }
 }
 
