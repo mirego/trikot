@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    id("org.jlleitschuh.gradle.ktlint")
     id("mirego.publish")
 }
 

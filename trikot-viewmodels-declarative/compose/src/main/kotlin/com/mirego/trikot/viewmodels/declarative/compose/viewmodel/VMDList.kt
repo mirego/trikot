@@ -43,7 +43,8 @@ fun <C : VMDIdentifiableContent> VMDList(
         reverseLayout = reverseLayout,
         verticalArrangement = verticalArrangement,
         horizontalAlignment = horizontalAlignment,
-        flingBehavior = flingBehavior) {
+        flingBehavior = flingBehavior
+    ) {
         items(viewModel.elements, key = { item -> item.identifier }, itemContent = itemContent)
     }
 }

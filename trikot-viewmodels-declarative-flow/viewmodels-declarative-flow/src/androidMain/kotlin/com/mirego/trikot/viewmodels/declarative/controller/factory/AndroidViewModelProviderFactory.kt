@@ -94,9 +94,9 @@ class AndroidViewModelProviderFactory {
             }
 
             return "parameters: ${
-            constructorParams.joinToString(
-                separator = ", "
-            ) { it::class.java.simpleName }
+                constructorParams.joinToString(
+                    separator = ", "
+                ) { it::class.java.simpleName }
             }"
         }
     }

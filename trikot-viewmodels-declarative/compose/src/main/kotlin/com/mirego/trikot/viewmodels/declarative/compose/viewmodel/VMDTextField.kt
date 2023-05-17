@@ -106,5 +106,5 @@ fun buildKeyboardActions(viewModel: VMDTextFieldViewModel, keyboardActions: Keyb
         onSend = {
             viewModel.onReturnKeyTap.invoke()
             keyboardActions.onSend?.invoke(this)
-        },
+        }
     )

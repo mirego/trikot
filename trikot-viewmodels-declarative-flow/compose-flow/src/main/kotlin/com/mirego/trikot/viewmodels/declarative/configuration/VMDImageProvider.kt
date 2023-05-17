@@ -7,6 +7,6 @@ interface VMDImageProvider {
     fun resourceIdForResource(resource: VMDImageResource, context: Context): Int?
 }
 
-class DefaultImageProvider: VMDImageProvider {
+class DefaultImageProvider : VMDImageProvider {
     override fun resourceIdForResource(resource: VMDImageResource, context: Context): Int? = null
 }

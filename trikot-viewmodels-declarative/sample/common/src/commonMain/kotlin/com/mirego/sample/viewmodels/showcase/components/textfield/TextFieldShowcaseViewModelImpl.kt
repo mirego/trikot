@@ -6,8 +6,8 @@ import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextFieldViewModel
-import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardAutoCapitalization
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
+import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardAutoCapitalization
 import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardReturnKeyType
 import com.mirego.trikot.viewmodels.declarative.properties.VMDKeyboardType
 

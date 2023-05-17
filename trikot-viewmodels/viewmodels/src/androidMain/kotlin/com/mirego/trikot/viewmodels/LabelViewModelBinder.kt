@@ -87,5 +87,5 @@ object LabelViewModelBinder {
 
 enum class HiddenVisibility(val value: Int) {
     GONE(View.GONE),
-    INVISIBLE(View.INVISIBLE);
+    INVISIBLE(View.INVISIBLE)
 }

@@ -3,12 +3,12 @@ package com.mirego.trikot.streams.reactive.processors
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.streams.reactive.ColdPublisher
-import com.mirego.trikot.streams.tests.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.map
 import com.mirego.trikot.streams.reactive.retryWhen
 import com.mirego.trikot.streams.reactive.subscribe
+import com.mirego.trikot.streams.tests.MockPublisher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

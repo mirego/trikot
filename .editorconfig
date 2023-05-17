@@ -1,5 +1,9 @@
-[*.{kt,kts}]
-max_line_length = 200
+root = true
 
 [*.{kt,kts}]
-ktlint_disabled_rules=import-ordering,enum-entry-name-case
+max_line_length = 200
+ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
+ktlint_standard_enum-entry-name-case = disabled
+ktlint_standard_trailing-comma-on-call-site = disabled
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+ktlint_standard_no-semi = disabled

@@ -30,6 +30,15 @@ allprojects {
     }
 }
 
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+
+    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+        version.set("0.48.0")
+    }
+}
+
 tasks {
     val writeDevVersion by registering(WriteProperties::class) {
         outputFile = file("${rootDir}/gradle.properties")

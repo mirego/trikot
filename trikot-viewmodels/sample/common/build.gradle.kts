@@ -3,7 +3,6 @@ plugins {
     id("com.android.library")
     kotlin("native.cocoapods")
     id("kotlinx-serialization")
-    id("org.jlleitschuh.gradle.ktlint")
     id("maven-publish")
 }
 

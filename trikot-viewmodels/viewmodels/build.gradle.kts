@@ -2,7 +2,6 @@ plugins {
     kotlin("multiplatform")
     kotlin("kapt")
     id("com.android.library")
-    id("org.jlleitschuh.gradle.ktlint")
     id("mirego.publish")
 }
 

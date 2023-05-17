@@ -1,10 +1,10 @@
 package com.mirego.trikot.datasources.flow.extensions
 
+import com.mirego.trikot.datasources.DataState
 import com.mirego.trikot.datasources.extensions.getFirstError
 import com.mirego.trikot.datasources.extensions.isAnyDataStateError
 import com.mirego.trikot.datasources.extensions.isAnyDataStatePending
 import com.mirego.trikot.datasources.extensions.value
-import com.mirego.trikot.datasources.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest

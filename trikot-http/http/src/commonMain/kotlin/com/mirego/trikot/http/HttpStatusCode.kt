@@ -80,7 +80,8 @@ enum class HttpStatusCode(val statusCode: Int) {
     NOT_EXTENDED(510),
     NETWORK_AUTHENTICATION_REQUIRED(511),
     NETWORK_READ_TIMEOUT(598),
-    NETWORK_CONNECT_TIMEOUT(599);
+    NETWORK_CONNECT_TIMEOUT(599),
+    ;
 
     companion object {
         private val map = values().associateBy(HttpStatusCode::statusCode)

@@ -14,10 +14,10 @@ import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimation
 import com.mirego.trikot.viewmodels.declarative.animation.VMDAnimationEasing
 import kotlin.time.DurationUnit
 
-fun <T, V> VMDAnimatedPropertyChange<T, V>.animationSpec() : AnimationSpec<T>  =
+fun <T, V> VMDAnimatedPropertyChange<T, V>.animationSpec(): AnimationSpec<T> =
     propertyChange.animation?.toComposeAnimationSpec() ?: snap()
 
-fun <T> VMDAnimation.toComposeAnimationSpec() : AnimationSpec<T> =
+fun <T> VMDAnimation.toComposeAnimationSpec(): AnimationSpec<T> =
     when (this) {
         is VMDAnimation.Tween -> {
             tween(
@@ -31,7 +31,7 @@ fun <T> VMDAnimation.toComposeAnimationSpec() : AnimationSpec<T> =
         }
     }
 
-fun VMDAnimationEasing.toComposeEasing() : Easing =
+fun VMDAnimationEasing.toComposeEasing(): Easing =
     when (this) {
         VMDAnimationEasing.Standard.Linear -> LinearEasing
         VMDAnimationEasing.Standard.EaseIn -> LinearOutSlowInEasing

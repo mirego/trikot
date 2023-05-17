@@ -25,6 +25,8 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.reflect.KProperty
+import kotlin.reflect.KProperty0
+import kotlin.reflect.KProperty1
 
 data class VMDAnimatedPropertyChange<T, V>(val value: T, val propertyChange: VMDPropertyChange<V>)
 
@@ -61,7 +63,7 @@ fun <T, VM : VMDViewModel> VM.observeAsState(
     property: KProperty<T>,
     initialValue: T? = null
 ): State<T> {
-    val initial: T = initialValue ?: property.getter.call(this)
+    val initial: T = initialValue ?: property.callGetter(this)
     return flowForProperty(property).subscribeAsState(initial = initial, key = this)
 }
 
@@ -71,7 +73,7 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
     property: KProperty<T>,
     initialValue: T? = null
 ): State<VMDAnimatedPropertyChange<T, T>> {
-    val initial: T = (initialValue ?: property.getter.call(this))
+    val initial: T = (initialValue ?: property.callGetter(this))
     val initialPropertyChange = VMDAnimatedPropertyChange(initial, VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
 
     return remember(this, property) {
@@ -93,7 +95,7 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
     initialValue: T? = null,
     transform: (T) -> V
 ): State<VMDAnimatedPropertyChange<V, T>> {
-    val initial: T = (initialValue ?: property.getter.call(this))
+    val initial: T = (initialValue ?: property.callGetter(this))
     val initialPropertyChange = VMDAnimatedPropertyChange(transform(initial), VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
     return remember(this, property) {
         val propertyFlow = flowForProperty(property)
@@ -107,7 +109,6 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
 
         merge(propertyFlow, propertyChangeFlow)
     }.subscribeAsState(initial = initialPropertyChange, key = this)
-
 }
 
 @Composable
@@ -133,3 +134,11 @@ inline fun <T, S> S.asState(
     }
     return state
 }
+
+@Suppress("UNCHECKED_CAST")
+private fun <T, V> KProperty<V>.callGetter(receiver: T): V =
+    when (this) {
+        is KProperty0<V> -> get()
+        is KProperty1<*, *> -> (this as KProperty1<T, V>).get(receiver)
+        else -> throw IllegalArgumentException("Unsupported property type: $this")
+    }

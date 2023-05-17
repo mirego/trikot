@@ -8,7 +8,7 @@ group = "com.mirego.trikot"
 
 kotlin {
     configureKmmTargets()
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
