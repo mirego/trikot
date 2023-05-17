@@ -27,10 +27,10 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDProgressDetermination
 import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
-import kotlin.collections.List as KotlinList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import kotlin.collections.List as KotlinList
 
 object VMDComponents {
     class Text {

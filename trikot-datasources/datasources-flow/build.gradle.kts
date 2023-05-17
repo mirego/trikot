@@ -1,7 +1,6 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jlleitschuh.gradle.ktlint")
     id("mirego.publish")
     id("kotlinx-serialization")
 }

@@ -1,10 +1,10 @@
 package com.mirego.trikot.streams.reactive.processors
 
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import com.mirego.trikot.streams.tests.MockPublisher
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.onErrorReturn
 import com.mirego.trikot.streams.reactive.subscribe
+import com.mirego.trikot.streams.tests.MockPublisher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

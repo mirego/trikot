@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("kotlin-platform-android")
-    id("org.jlleitschuh.gradle.ktlint")
     id("maven-publish")
     id("mirego.publish")
 }

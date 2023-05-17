@@ -3,7 +3,6 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlinx-serialization")
-    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {

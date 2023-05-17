@@ -9,7 +9,7 @@ object Versions {
     const val JETPACK_COMPOSE_MATERIAL = "1.4.0-beta02"
     const val JETPACK_COMPOSE_MATERIAL_3 = "1.1.0-alpha07"
     const val COIL = "2.0.0-rc03"
-    const val KTLINT = "11.2.0"
+    const val KTLINT = "11.3.2"
     const val KOTLINX_SERIALIZATION = "1.5.0"
     const val KOTLINX_COROUTINES = "1.6.4"
     const val KTOR = "2.0.3"

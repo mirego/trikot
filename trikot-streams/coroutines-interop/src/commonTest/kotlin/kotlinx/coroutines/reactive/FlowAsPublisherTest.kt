@@ -10,13 +10,13 @@ import com.mirego.trikot.streams.reactive.subscribe
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withTimeout
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.test.Test
 import kotlin.test.assertTrue
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 
 class FlowAsPublisherTest : TestBase() {
     @Test

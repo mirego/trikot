@@ -26,6 +26,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    sourceSets.configureEach {
+        java.srcDirs("src/$name/kotlin")
+    }
 }
 
 kotlin {

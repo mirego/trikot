@@ -3,7 +3,6 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlinx-serialization")
-    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -74,8 +73,4 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("com.google.android.material:material:1.2.1")
     implementation("com.squareup.picasso:picasso:2.71828")
-}
-
-ktlint {
-    android.set(true)
 }

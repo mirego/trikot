@@ -25,7 +25,7 @@ fun VMDCircularProgressIndicator(
     color: Color = MaterialTheme.colors.primary,
     strokeWidth: Dp = ProgressIndicatorDefaults.StrokeWidth,
     backgroundColor: Color = Color.Transparent,
-    strokeCap: StrokeCap = StrokeCap.Square,
+    strokeCap: StrokeCap = StrokeCap.Square
 ) {
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = progressViewModel.determination?.progressRatio ?: 0f)

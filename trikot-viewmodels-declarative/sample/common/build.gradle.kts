@@ -2,7 +2,6 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("org.jlleitschuh.gradle.ktlint")
     id("mirego.kword").version("2.0.1")
 }
 

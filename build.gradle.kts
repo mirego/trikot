@@ -30,6 +30,10 @@ allprojects {
     }
 }
 
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+}
+
 tasks {
     val writeDevVersion by registering(WriteProperties::class) {
         outputFile = file("${rootDir}/gradle.properties")

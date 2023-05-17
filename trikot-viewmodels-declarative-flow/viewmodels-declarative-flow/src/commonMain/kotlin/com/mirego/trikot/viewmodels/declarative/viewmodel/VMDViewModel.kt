@@ -4,9 +4,8 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 import com.mirego.trikot.viewmodels.declarative.extension.VMDFlow
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChangeListener
-import kotlin.reflect.KProperty
-
 import kotlinx.coroutines.flow.Flow
+import kotlin.reflect.KProperty
 
 interface VMDViewModel : VMDPropertyChangeListener, VMDContent {
     val propertyWillChange: VMDFlow<VMDPropertyChange<*>>

@@ -60,7 +60,7 @@ fun <C : VMDContent> VMDSwitch(
                 checked = toggleViewModel.isOn,
                 colors = colors,
                 interactionSource = interactionSource,
-                onCheckedChange = { checked -> viewModel.onValueChange(checked) },
+                onCheckedChange = { checked -> viewModel.onValueChange(checked) }
             )
         }
     )

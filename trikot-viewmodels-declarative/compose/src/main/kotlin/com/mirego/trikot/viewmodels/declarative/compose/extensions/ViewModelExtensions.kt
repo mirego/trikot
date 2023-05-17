@@ -54,7 +54,7 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
             VMDAnimatedPropertyChange(it, VMDPropertyChange(property = property, oldValue = it, newValue = it))
         }
 
-    val propertyChangePublisher =  propertyDidChange
+    val propertyChangePublisher = propertyDidChange
         .filter {
             it.property.name == property.name
         }
@@ -80,7 +80,7 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
         .first()
         .map { VMDAnimatedPropertyChange(value = transform(it), VMDPropertyChange(property = property, oldValue = it, newValue = it)) }
 
-    val propertyChangePublisher =  propertyDidChange
+    val propertyChangePublisher = propertyDidChange
         .filter { it.property.name == property.name }
         .map { VMDAnimatedPropertyChange(value = transform(it.newValue as T), propertyChange = it as VMDPropertyChange<T>) }
 
@@ -115,8 +115,8 @@ inline fun <T, S> S.asState(
 }
 
 @Suppress("UNCHECKED_CAST")
-private  fun <T, V> KProperty<V>.callGetter(receiver: T): V =
-    when(this) {
+private fun <T, V> KProperty<V>.callGetter(receiver: T): V =
+    when (this) {
         is KProperty0<V> -> get()
         is KProperty1<*, *> -> (this as KProperty1<T, V>).get(receiver)
         else -> throw IllegalArgumentException("Unsupported property type: $this")

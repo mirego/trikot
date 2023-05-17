@@ -73,4 +73,3 @@ private fun XmlPullParser.seekToStartTagInternal(): XmlPullParser {
     }
     return this
 }
-

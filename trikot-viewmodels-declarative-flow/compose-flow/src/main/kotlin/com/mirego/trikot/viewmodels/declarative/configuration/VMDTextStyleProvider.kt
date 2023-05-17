@@ -7,6 +7,6 @@ interface VMDTextStyleProvider {
     fun textStyleForResource(resource: VMDTextStyleResource): TextStyle?
 }
 
-class DefaultTextStyleProvider: VMDTextStyleProvider {
+class DefaultTextStyleProvider : VMDTextStyleProvider {
     override fun textStyleForResource(resource: VMDTextStyleResource): TextStyle? = null
 }

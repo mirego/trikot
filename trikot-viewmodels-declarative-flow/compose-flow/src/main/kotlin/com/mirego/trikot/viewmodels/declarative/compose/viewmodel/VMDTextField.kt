@@ -15,11 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.OffsetMapping
-import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.text.input.VisualTransformation
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextFieldViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.composeValue
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
@@ -110,5 +106,5 @@ fun buildKeyboardActions(viewModel: VMDTextFieldViewModel, keyboardActions: Keyb
         onSend = {
             viewModel.onReturnKeyTap.invoke()
             keyboardActions.onSend?.invoke(this)
-        },
+        }
     )
