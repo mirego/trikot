@@ -17,6 +17,8 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDPropertyChange
 import org.reactivestreams.Publisher
 import kotlin.reflect.KProperty
+import kotlin.reflect.KProperty0
+import kotlin.reflect.KProperty1
 
 data class VMDAnimatedPropertyChange<T, V>(val value: T, val propertyChange: VMDPropertyChange<V>)
 
@@ -33,7 +35,7 @@ fun <T, VM : VMDViewModel> VM.observeAsState(
     property: KProperty<T>,
     initialValue: T? = null
 ): State<T> {
-    val initial: T = initialValue ?: property.getter.call(this)
+    val initial: T = initialValue ?: property.callGetter(this)
     return publisherForProperty(property).subscribeAsState(initial = initial, key = this)
 }
 
@@ -43,7 +45,7 @@ fun <VM : VMDViewModel, T> VM.observeAnimatedPropertyAsState(
     property: KProperty<T>,
     initialValue: T? = null
 ): State<VMDAnimatedPropertyChange<T, T>> {
-    val initial: T = (initialValue ?: property.getter.call(this))
+    val initial: T = (initialValue ?: property.callGetter(this))
     val initialPropertyChange = VMDAnimatedPropertyChange(initial, VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
 
     val propertyPublisher = publisherForProperty(property)
@@ -71,7 +73,7 @@ fun <VM : VMDViewModel, T, V> VM.observeAnimatedPropertyAsState(
     initialValue: T? = null,
     transform: (T) -> V
 ): State<VMDAnimatedPropertyChange<V, T>> {
-    val initial: T = (initialValue ?: property.getter.call(this))
+    val initial: T = (initialValue ?: property.callGetter(this))
     val initialPropertyChange = VMDAnimatedPropertyChange(transform(initial), VMDPropertyChange(property = property, oldValue = initial, newValue = initial))
 
     val propertyPublisher = publisherForProperty(property)
@@ -111,3 +113,11 @@ inline fun <T, S> S.asState(
     }
     return state
 }
+
+@Suppress("UNCHECKED_CAST")
+private  fun <T, V> KProperty<V>.callGetter(receiver: T): V =
+    when(this) {
+        is KProperty0<V> -> get()
+        is KProperty1<*, *> -> (this as KProperty1<T, V>).getter(receiver)
+        else -> throw IllegalArgumentException("Unsupported property type: $this")
+    }
