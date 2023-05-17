@@ -6,7 +6,4 @@ ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
 ktlint_standard_enum-entry-name-case = disabled
 ktlint_standard_trailing-comma-on-call-site = disabled
 ktlint_standard_trailing-comma-on-declaration-site = disabled
-
-[*/generated/*]
-# noinspection EditorConfigKeyCorrectness
-generated_code = true
+ktlint_standard_no-semi = disabled
