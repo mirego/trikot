@@ -91,7 +91,8 @@ private enum class Mode(val s: String) {
     FIRST_OR_DEFAULT("awaitFirstOrDefault"),
     LAST("awaitLast"),
     SINGLE("awaitSingle"),
-    SINGLE_OR_DEFAULT("awaitSingleOrDefault");
+    SINGLE_OR_DEFAULT("awaitSingleOrDefault"),
+    ;
 
     override fun toString(): String = s
 }

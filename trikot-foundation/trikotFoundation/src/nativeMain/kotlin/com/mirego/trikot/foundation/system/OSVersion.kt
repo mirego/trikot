@@ -1,3 +1,5 @@
+@file:Suppress("ktlint")
+
 package com.mirego.trikot.foundation.system
 
 import kotlinx.cinterop.CValue
