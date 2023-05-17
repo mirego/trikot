@@ -118,6 +118,6 @@ inline fun <T, S> S.asState(
 private  fun <T, V> KProperty<V>.callGetter(receiver: T): V =
     when(this) {
         is KProperty0<V> -> get()
-        is KProperty1<*, *> -> (this as KProperty1<T, V>).getter(receiver)
+        is KProperty1<*, *> -> (this as KProperty1<T, V>).get(receiver)
         else -> throw IllegalArgumentException("Unsupported property type: $this")
     }
