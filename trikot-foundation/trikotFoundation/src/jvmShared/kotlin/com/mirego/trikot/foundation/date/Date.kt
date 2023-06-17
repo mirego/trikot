@@ -11,6 +11,7 @@ private val dateFormat =
     DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         .withZone(ZoneOffset.UTC)
 
+@Deprecated("Use official Kotlin library kotlinx-datetime (https://kotlinlang.org/api/kotlinx-datetime) instead")
 actual class Date(val instant: Instant) {
     actual val epoch: Long
         get() {

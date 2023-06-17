@@ -10,6 +10,7 @@ import platform.Foundation.dateByAddingTimeInterval
 import platform.Foundation.timeIntervalSince1970
 import kotlin.time.Duration
 
+@Deprecated("Use official Kotlin library kotlinx-datetime (https://kotlinlang.org/api/kotlinx-datetime) instead")
 actual class Date(val nsDate: NSDate) {
     actual val epoch: Long = (nsDate.timeIntervalSince1970 * 1000).toLong()
 
