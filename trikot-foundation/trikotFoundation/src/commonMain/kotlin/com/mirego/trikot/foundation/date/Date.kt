@@ -2,6 +2,7 @@ package com.mirego.trikot.foundation.date
 
 import kotlin.time.Duration
 
+@Deprecated("Use official Kotlin library kotlinx-datetime (https://kotlinlang.org/api/kotlinx-datetime) instead")
 expect class Date {
     val epoch: Long
 
