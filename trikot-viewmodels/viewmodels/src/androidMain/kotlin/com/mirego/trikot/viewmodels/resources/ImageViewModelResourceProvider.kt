@@ -1,10 +1,10 @@
 package com.mirego.trikot.viewmodels.resources
 
 import android.content.Context
-import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resource.TrikotImageResource
 
 interface ImageViewModelResourceProvider {
-    fun resourceIdFromResource(resource: ImageResource, context: Context): Int?
+    fun resourceIdFromResource(resource: TrikotImageResource, context: Context): Int?
 }
 
 object ImageViewModelResourceManager {
@@ -13,7 +13,7 @@ object ImageViewModelResourceManager {
 }
 
 class DefaulImageViewModelResourceProvider : ImageViewModelResourceProvider {
-    override fun resourceIdFromResource(resource: ImageResource, context: Context): Int? {
+    override fun resourceIdFromResource(resource: TrikotImageResource, context: Context): Int? {
         return null
     }
 }

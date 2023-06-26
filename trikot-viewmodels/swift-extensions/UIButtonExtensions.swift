@@ -47,7 +47,7 @@ extension UIButton {
 
                 bind(buttonViewModel.selected, \UIButton.isSelected)
 
-                observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector<ImageResource>) in
+                observe(buttonViewModel.backgroundImageResource) {[weak self] (imageResourceSelector: StateSelector<TrikotImageResource>) in
                     guard let self = self else { return }
 
                     self.setBackgroundImageResource(imageResourceSelector.defaultValue(), for: .normal)
@@ -63,7 +63,7 @@ extension UIButton {
                 let imageResourceCombineLatest = CombineLatestProcessorExtensionsKt.combine(buttonViewModel.imageResource, publishers: [buttonViewModel.tintColor])
                 observe(imageResourceCombineLatest) { [weak self] (value: [Any?]) in
                     guard let self = self else { return }
-                    guard let imageSelector = value[0] as? StateSelector<ImageResource>,
+                    guard let imageSelector = value[0] as? StateSelector<TrikotImageResource>,
                         let tintSelector = value[1] as? StateSelector<Color> else { return }
 
                     self.setImageResource(imageSelector.defaultValue(), tintColor: tintSelector.defaultValue()?.safeColor(), for: .normal)
@@ -117,16 +117,16 @@ extension UIButton {
         }
     }
 
-    private func setBackgroundImageResource(_ resource: ImageResource?, for state: UIControl.State) {
-        if resource === ImageResourceCompanion().None {
+    private func setBackgroundImageResource(_ resource: TrikotImageResource?, for state: UIControl.State) {
+        if resource === TrikotImageResourceCompanion().None {
             setBackgroundImage(nil, for: state)
         } else if let image = ImageViewModelResourceManager.shared.image(fromResource: resource) {
             setBackgroundImage(image, for: state)
         }
     }
 
-    private func setImageResource(_ resource: ImageResource?, tintColor: UIColor?, for state: UIControl.State) {
-        if resource === ImageResourceCompanion().None {
+    private func setImageResource(_ resource: TrikotImageResource?, tintColor: UIColor?, for state: UIControl.State) {
+        if resource === TrikotImageResourceCompanion().None {
             setImage(nil, for: state)
         } else if let image = ImageViewModelResourceManager.shared.image(fromResource: resource) {
             setImage(tintColor != nil ? image.imageWithTintColor(tintColor!) : image, for: state)
@@ -161,7 +161,7 @@ extension UIButton {
         guard let buttonViewModel = trikotButtonViewModel else { return }
         guard let alignment = alignment, [Alignment.right, Alignment.left].contains(alignment) else { resetAlignment() ; return }
 
-        observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector<ImageResource>) in
+        observe(buttonViewModel.imageResource.first()) {[weak self] (imageSelector: StateSelector<TrikotImageResource>) in
 
             guard let titleLabel = self?.titleLabel, let image = ImageViewModelResourceManager.shared.image(fromResource: imageSelector.defaultValue()) else { return }
 

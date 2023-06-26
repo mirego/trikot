@@ -2,7 +2,7 @@ package com.mirego.trikot.viewmodels
 
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ImageState
-import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resource.TrikotImageResource
 import org.reactivestreams.Publisher
 
 data class ImageWidth(val value: Int)
@@ -19,12 +19,12 @@ interface ImageFlow {
     /**
      * Image resource to display
      */
-    val imageResource: ImageResource?
+    val imageResource: TrikotImageResource?
 
     /**
      * Image resource to display as placeholder
      */
-    val placeholderImageResource: ImageResource?
+    val placeholderImageResource: TrikotImageResource?
 
     /**
      * Tint color to apply to the imageResource

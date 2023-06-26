@@ -1,12 +1,12 @@
 package com.mirego.trikot.viewmodels.properties
 
 import com.mirego.trikot.viewmodels.ImageFlow
-import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resource.TrikotImageResource
 import org.reactivestreams.Publisher
 
 open class SimpleImageFlow(
-    override val imageResource: ImageResource? = null,
-    override val placeholderImageResource: ImageResource? = null,
+    override val imageResource: TrikotImageResource? = null,
+    override val placeholderImageResource: TrikotImageResource? = null,
     override val tintColor: Color? = null,
     override val accessibilityText: String? = null,
     override val url: String? = null,

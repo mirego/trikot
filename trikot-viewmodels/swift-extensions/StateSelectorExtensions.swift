@@ -18,7 +18,7 @@ extension StateSelector where T == Color {
     }
 }
 
-extension StateSelector where T == ImageResource {
+extension StateSelector where T == TrikotImageResource {
     public func defaultValue() -> T? {
         return stateSelectorDefaultValue(self)
     }

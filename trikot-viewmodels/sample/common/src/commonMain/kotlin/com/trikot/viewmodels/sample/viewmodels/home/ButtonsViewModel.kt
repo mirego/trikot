@@ -12,12 +12,12 @@ import com.mirego.trikot.viewmodels.properties.Alignment
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
-import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resource.TrikotImageResource
 import com.mirego.trikot.viewmodels.text.RichText
 import com.mirego.trikot.viewmodels.text.RichTextRange
 import com.mirego.trikot.viewmodels.text.StyleTransform
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
-import com.trikot.viewmodels.sample.resource.ImageResources
+import com.trikot.viewmodels.sample.resource.TrikotImageResources
 import com.trikot.viewmodels.sample.viewmodels.MutableButtonListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import org.reactivestreams.Publisher
@@ -93,19 +93,19 @@ class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
         },
         MutableHeaderListItemViewModel(".imageResource"),
         MutableButtonListItemViewModel().also {
-            it.button.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+            it.button.imageResource = StateSelector(TrikotImageResources.ICON as TrikotImageResource).just()
         },
         MutableHeaderListItemViewModel(".imageResource .imageAlignment"),
         MutableButtonListItemViewModel().also {
             it.button.text = "Icon to the left".just()
             it.button.imageAlignment = Alignment.LEFT.just()
-            it.button.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+            it.button.imageResource = StateSelector(TrikotImageResources.ICON as TrikotImageResource).just()
         },
         MutableHeaderListItemViewModel(".imageResource .imageAlignment"),
         MutableButtonListItemViewModel().also {
             it.button.text = "Icon to the right".just()
             it.button.imageAlignment = Alignment.RIGHT.just()
-            it.button.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+            it.button.imageResource = StateSelector(TrikotImageResources.ICON as TrikotImageResource).just()
         },
         MutableHeaderListItemViewModel(".textColor (normal + highlighted)"),
         MutableButtonListItemViewModel().also {
@@ -115,14 +115,14 @@ class ButtonsViewModel : MutableListViewModel<ListItemViewModel>() {
         },
         MutableHeaderListItemViewModel(".imageResource .tintColor (normal + highlighted)"),
         MutableButtonListItemViewModel().also {
-            it.button.imageResource = StateSelector(ImageResources.ICON as ImageResource).just()
+            it.button.imageResource = StateSelector(TrikotImageResources.ICON as TrikotImageResource).just()
             it.button.tintColor = StateSelector(Color(255, 0, 0), Color(123, 123, 123)).just()
             it.button.action = ViewModelAction {}.just()
         },
         MutableHeaderListItemViewModel("click to toggle image"),
         MutableButtonListItemViewModel().also {
             it.button.imageResource = iconVisible.map { visible ->
-                StateSelector(if (visible) ImageResources.ICON else null)
+                StateSelector(if (visible) TrikotImageResources.ICON else null)
             }
             it.button.tintColor = StateSelector(Color(255, 0, 0), Color(123, 123, 123)).just()
             it.button.action = ViewModelAction {
