@@ -9,7 +9,7 @@ import com.mirego.trikot.viewmodels.ImageWidth
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.ImageState
 import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
-import com.mirego.trikot.viewmodels.resource.ImageResource
+import com.mirego.trikot.viewmodels.resource.TrikotImageResource
 import org.reactivestreams.Publisher
 
 /**
@@ -29,6 +29,6 @@ open class MutableImageViewModel(var imageFlowProvider: ImageFlowProvider) : Mut
     }
 }
 
-fun simpleImageFlowProvider(url: String? = null, placeholderImageResource: ImageResource? = null, imageResource: ImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
+fun simpleImageFlowProvider(url: String? = null, placeholderImageResource: TrikotImageResource? = null, imageResource: TrikotImageResource? = null, tintColor: Color? = null): ImageFlowProvider {
     return { _, _ -> SimpleImageFlow(url = url, placeholderImageResource = placeholderImageResource, imageResource = imageResource, tintColor = tintColor).just() }
 }

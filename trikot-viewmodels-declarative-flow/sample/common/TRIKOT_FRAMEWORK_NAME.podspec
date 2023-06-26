@@ -37,6 +37,6 @@ Pod::Spec.new do |spec|
     ]
     spec.resources = "src/commonMain/resources/translations/*"
     spec.prepare_command = <<-CMD
-    ../gradlew :common:generateDummyFramework
+    ../../../gradlew :trikot-viewmodels-declarative-flow:sample:common:generateDummyFramework
 CMD
 end

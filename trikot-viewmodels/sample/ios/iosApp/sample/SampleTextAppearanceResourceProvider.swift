@@ -15,8 +15,6 @@ class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvi
                 return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.gray])
             case .textAppearanceHighlighted:
                 return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.black, .backgroundColor: UIColor.yellow])
-            case .textAppearanceBold:
-                return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.black, .backgroundColor: UIColor.yellow])
             case .textAppearanceSuperscript:
                 return TextAppearanceAttributes(attributes: [.font: UIFont.systemFont(ofSize: 7), .foregroundColor: UIColor.black, .baselineOffset: 6])
             default:

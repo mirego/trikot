@@ -39,7 +39,7 @@ kotlin {
             "resources" to "\"src/commonMain/resources/translations/*\"",
             "prepare_command" to """
                 <<-CMD
-                    ../gradlew :common:generateDummyFramework
+                    ../../../gradlew :trikot-viewmodels-declarative-flow:sample:common:generateDummyFramework
                 CMD
             """.trimIndent()
         )

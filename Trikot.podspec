@@ -39,8 +39,8 @@ Pod::Spec.new do |spec|
     subspec.source_files  = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.source_files = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.exclude_files = "trikot-viewmodels/swift-extensions/UISliderExtensions.swift", "trikot-viewmodels/swift-extensions/UISwitchExtensions.swift", "trikot-viewmodels/swift-extensions/UIPickerExtensions.swift"
-    subspec.ios.deployment_target = '11.0'
-    subspec.tvos.deployment_target = '11.0'
+    subspec.ios.deployment_target = '12.0'
+    subspec.tvos.deployment_target = '12.0'
     subspec.dependency 'Trikot/streams'
   end
 
@@ -51,7 +51,7 @@ Pod::Spec.new do |spec|
     subspec.tvos.deployment_target = '12.0'
     subspec.dependency 'Trikot/streams'
     subspec.dependency 'Trikot/viewmodels'
-    subspec.dependency 'Kingfisher', '>= 5.0'
+    subspec.dependency 'Kingfisher', '~> 7.8.1'
   end
 
   # View Model Declarative
@@ -68,14 +68,14 @@ Pod::Spec.new do |spec|
     subspec.source_files = 'trikot-viewmodels-declarative/swift/uikit/**/*.swift'
     subspec.dependency 'Trikot/streams'
     subspec.dependency 'Trikot/viewmodels.declarative'
-    subspec.dependency 'Kingfisher', '>= 5.0'
+    subspec.dependency 'Kingfisher', '~> 7.8.1'
   end
 
   spec.subspec 'viewmodels.declarative.SwiftUI' do |subspec|
     subspec.source_files = 'trikot-viewmodels-declarative/swift/swiftui/**/*.swift'
     subspec.dependency 'Trikot/viewmodels.declarative'
     subspec.dependency 'Trikot/viewmodels.declarative.Combine'
-    subspec.dependency 'Kingfisher', '~> 7.6.2'
+    subspec.dependency 'Kingfisher', '~> 7.8.1'
     subspec.dependency 'Introspect', '~> 0.1'
   end
 
@@ -87,7 +87,7 @@ Pod::Spec.new do |spec|
     spec.subspec 'viewmodels.declarative.SwiftUI.flow' do |subspec|
       subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/swiftui/**/*.swift'
       subspec.dependency 'Trikot/viewmodels.declarative.flow'
-      subspec.dependency 'Kingfisher', '~> 7.6.2'
+      subspec.dependency 'Kingfisher', '~> 7.8.1'
       subspec.dependency 'Introspect', '~> 0.1'
     end
 

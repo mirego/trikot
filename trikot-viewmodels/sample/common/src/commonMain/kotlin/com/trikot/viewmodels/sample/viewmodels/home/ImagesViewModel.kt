@@ -14,7 +14,7 @@ import com.mirego.trikot.viewmodels.properties.SimpleImageFlow
 import com.mirego.trikot.viewmodels.properties.StateSelector
 import com.mirego.trikot.viewmodels.properties.ViewModelAction
 import com.trikot.viewmodels.sample.navigation.NavigationDelegate
-import com.trikot.viewmodels.sample.resource.ImageResources
+import com.trikot.viewmodels.sample.resource.TrikotImageResources
 import com.trikot.viewmodels.sample.viewmodels.MutableHeaderListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableImageListItemViewModel
 import com.trikot.viewmodels.sample.viewmodels.MutableViewListItemViewModel
@@ -45,21 +45,21 @@ class ImagesViewModel : MutableListViewModel<ListItemViewModel>() {
             it.image.action = ViewModelAction { navigationDelegate?.showAlert("Tapped $it") }.just()
         },
         MutableHeaderListItemViewModel(".imageResource"),
-        MutableImageListItemViewModel(simpleImageFlowProvider(imageResource = ImageResources.ICON)),
+        MutableImageListItemViewModel(simpleImageFlowProvider(imageResource = TrikotImageResources.ICON)),
         MutableHeaderListItemViewModel(".imageResource + tintColor"),
         MutableImageListItemViewModel(
             simpleImageFlowProvider(
-                imageResource = ImageResources.ICON,
+                imageResource = TrikotImageResources.ICON,
                 tintColor = Color(255, 0, 0)
             )
         ),
         MutableHeaderListItemViewModel(".placeholder"),
-        MutableImageListItemViewModel(simpleImageFlowProvider(placeholderImageResource = ImageResources.ICON)),
+        MutableImageListItemViewModel(simpleImageFlowProvider(placeholderImageResource = TrikotImageResources.ICON)),
         MutableHeaderListItemViewModel(".placeholder + .url"),
         MutableImageListItemViewModel(
             simpleImageFlowProvider(
                 url = "https://images5.alphacoders.com/346/thumb-1920-346532.jpg",
-                placeholderImageResource = ImageResources.ICON
+                placeholderImageResource = TrikotImageResources.ICON
             )
         ),
         MutableHeaderListItemViewModel("url + .onSuccess"),
