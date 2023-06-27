@@ -48,6 +48,8 @@ dependencies {
     api("androidx.compose.ui:ui-tooling:${Versions.JETPACK_COMPOSE_UI_TOOLING}")
     api("io.coil-kt:coil-compose:${Versions.COIL}")
 
+    testImplementation(kotlin("test"))
+
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")
 }
 
