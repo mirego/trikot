@@ -88,6 +88,8 @@ abstract class HttpRequestPublisher<T>(
             it.method = builder.method
             it.timeout = builder.timeout
             it.parameters = builder.parameters
+            it.cachePolicy = builder.cachePolicy
+            it.followRedirects = builder.followRedirects
         }
     }
 }
