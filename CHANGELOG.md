@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 > TBD
 
+## 4.4.0
+
+> 2023-07-17
+
+### Breaking Changes
+
+- Rename `ImageResource(s)` to `TrikotImageResource(s)` to prevent "ambiguous for type lookup in this context" with xCode 15
+
 ## 4.3.0
 
 > 2023-03-21
