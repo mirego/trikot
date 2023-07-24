@@ -33,10 +33,6 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val iosArm32Main by getting {
-            dependsOn(nativeMain)
-        }
-
         val iosArm64Main by getting {
             dependsOn(nativeMain)
         }

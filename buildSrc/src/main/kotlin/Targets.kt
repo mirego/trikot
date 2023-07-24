@@ -6,7 +6,6 @@ fun KotlinMultiplatformExtension.configureKmmTargets(js: Boolean = true) {
     }
     jvm()
     ios()
-    iosArm32()
     iosSimulatorArm64()
     tvos()
     watchos()

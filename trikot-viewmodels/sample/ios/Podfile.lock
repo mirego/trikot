@@ -1,12 +1,12 @@
 PODS:
   - Kingfisher (7.8.1)
   - SwiftLint (0.52.3)
-  - Trikot/streams (4.4.0):
+  - Trikot/streams (5.0.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels (4.4.0):
+  - Trikot/viewmodels (5.0.0):
     - Trikot/streams
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.Kingfisher (4.4.0):
+  - Trikot/viewmodels.Kingfisher (5.0.0):
     - Kingfisher (~> 7.8.1)
     - Trikot/streams
     - Trikot/viewmodels
@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Kingfisher: 63f677311d36a3473f6b978584f8a3845d023dc5
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
-  Trikot: 549fe7108cdf582bf8dcf2818243c2ed30886f66
+  Trikot: 88e0a9a42e57c4c0610775b2f53554461952ec61
   TRIKOT_FRAMEWORK_NAME: 1e05d806e5dc02cc7f5fcba9ad5993fbc4feb88f
 
 PODFILE CHECKSUM: 56a60de7bc0a9826254d4aa86c5368fff73f8ee5

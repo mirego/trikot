@@ -8,7 +8,7 @@ class EmptyHttpRequestFactory : HttpRequestFactory {
     override fun request(requestBuilder: RequestBuilder): HttpRequest {
         TODO(
             "HTTPConfiguration.httpRequestFactory must be set before sending request." +
-                " See: https://github.com/mirego/trikot.http/blob/master/README.md"
+                " See: https://github.com/mirego/trikot/blob/master/trikot-http/README.md"
         )
     }
 }

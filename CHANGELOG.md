@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 > TBD
 
+## 5.0.0
+
+### Updates
+
+- Kotlin `1.9.0`
+
 ## 4.4.0
 
 > 2023-07-17
@@ -36,7 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Jetpack Compose Runtime to `1.3.3`
 - Jetpack Compose UI to `1.4.0-beta02`
 - Jetpack Compose Material 3 to `1.1.0-alpha07`
-- Ktlint to `11.2.0`
+- Ktlint to `11.5.0`
 - Androidx Lifecycle to `2.6.0-rc01`
 - KSP to `1.8.10-1.0.9`
 - Android MIN SDK to `24`

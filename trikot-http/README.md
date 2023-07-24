@@ -11,7 +11,7 @@ Kotlin Multiplaform http networking abstraction.
 
 ## RequestBuilder
 
-Request builder is a simple class that provides information about the request to send. See [RequestBuilder.kt](https://github.com/mirego/trikot.http/blob/master/http/src/commonMain/kotlin/com/mirego/trikot/http/RequestBuilder.kt) for fields documentation.
+Request builder is a simple class that provides information about the request to send. See [RequestBuilder.kt](./http/src/commonMain/kotlin/com/mirego/trikot/http/RequestBuilder.kt) for fields documentation.
 
 ## HttpRequestPublisher
 
@@ -19,7 +19,7 @@ To send http requests
 
 - Create a child class of HttpRequestPublisher
 - Provide a RequestBuilder by overriding builder var
-- Override processResponse to transform [HttpResponse](https://github.com/mirego/trikot.http/blob/master/http/src/commonMain/kotlin/com/mirego/trikot/http/HttpResponse.kt) into expected result type.
+- Override processResponse to transform [HttpResponse](./http/src/commonMain/kotlin/com/mirego/trikot/http/HttpResponse.kt) into expected result type.
 
 ```kotlin
 val request = object: HttpRequestPublisher<String>() {
@@ -61,7 +61,7 @@ request.execute()
 ## HeaderProvider
 
 `HttpRequestPublisher` and `DeserializableHttpRequestPublisher` both haves an optional `httpHeaderProvider` constructor parameter to provide additionnal request header (Authorization token per example).
-See [HttpHeaderProvider.kt](https://github.com/mirego/trikot.http/blob/master/http/src/commonMain/kotlin/com/mirego/trikot/http/HttpHeaderProvider.kt) for complete documentation.
+See [HttpHeaderProvider.kt](./http/src/commonMain/kotlin/com/mirego/trikot/http/HttpHeaderProvider.kt) for complete documentation.
 
 ### ConnectivityPublisher
 

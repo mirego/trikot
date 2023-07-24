@@ -51,7 +51,7 @@ kotlin {
             dependsOn(jvmShared)
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependsOn(jvmTest)
         }
 
@@ -75,10 +75,6 @@ kotlin {
         }
 
         val iosMain by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosArm32Main by getting {
             dependsOn(nativeMain)
         }
 

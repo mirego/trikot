@@ -44,7 +44,7 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependsOn(jvmTest)
         }
 

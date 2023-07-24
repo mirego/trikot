@@ -84,7 +84,7 @@ Subscription and unsubscription are managed trough `Cancellable` and `Cancellabl
 
 ## License
 
-Trikot.streams is © 2018-2019 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot.streams/blob/master/LICENSE.md) file.
+Trikot.streams is © 2018-2019 [Mirego](https://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the [`LICENSE.md`](https://github.com/mirego/trikot/blob/master/LICENSE.md) file.
 
 ## About Mirego
 

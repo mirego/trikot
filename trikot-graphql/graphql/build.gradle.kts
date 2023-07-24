@@ -56,7 +56,7 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -65,10 +65,6 @@ kotlin {
 
         val nativeMain by creating {
             dependsOn(commonMain)
-        }
-
-        val iosArm32Main by getting {
-            dependsOn(nativeMain)
         }
 
         val iosArm64Main by getting {

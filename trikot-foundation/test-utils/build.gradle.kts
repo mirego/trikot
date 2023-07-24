@@ -8,7 +8,6 @@ group = "com.mirego.trikot.trikotFoundation"
 kotlin {
     jvm()
     ios()
-    iosArm32("iosArm32")
     iosSimulatorArm64()
     tvos()
     watchos()

@@ -59,7 +59,7 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
@@ -73,10 +73,6 @@ kotlin {
 
         val iosMain by getting {
             dependsOn(commonMain)
-        }
-
-        val iosArm32Main by getting {
-            dependsOn(iosMain)
         }
 
         val iosArm64Main by getting {
@@ -132,7 +128,7 @@ android {
     sourceSets {
         getByName("test") {
             manifest {
-                srcFile("src/androidTest/AndroidManifest.xml")
+                srcFile("src/androidUnitTest/AndroidManifest.xml")
             }
         }
     }
@@ -140,20 +136,6 @@ android {
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
-        }
-    }
-}
-
-// Fixes w: library included more than once: ~/.konan/kotlin-native-prebuilt-macos-XXX/klib/common/stdlib
-afterEvaluate {
-    val compilations = listOf("iosMain", "tvosMain").map {
-        kotlin.targets["metadata"].compilations[it]
-    }
-    compilations.forEach { compilation ->
-        compilation.compileKotlinTask.doFirst {
-            compilation.compileDependencyFiles = files(
-                compilation.compileDependencyFiles.filterNot { it.absolutePath.endsWith("klib/common/stdlib") }
-            )
         }
     }
 }

@@ -2,7 +2,10 @@
 
 package com.mirego.trikot.foundation.system
 
+import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.CValue
+import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.cValue
 import platform.Foundation.NSOperatingSystemVersion
 import platform.Foundation.NSProcessInfo
@@ -30,6 +33,7 @@ enum class OSVersion(val platform: OSPlatform, val majorVersion: Int, val minorV
     macOS_10_15(platform = OSPlatform.macOS, majorVersion = 10, minorVersion = 15, patchVersion = 0),
     macOS_11(platform = OSPlatform.macOS, majorVersion = 11, minorVersion = 0, patchVersion = 0);
 
+    @OptIn(ExperimentalForeignApi::class)
     val operatingSystemVersion: CValue<NSOperatingSystemVersion>
         get() = cValue<NSOperatingSystemVersion> {
             majorVersion = majorVersion
@@ -38,6 +42,7 @@ enum class OSVersion(val platform: OSPlatform, val majorVersion: Int, val minorV
         }
 }
 
+@OptIn(ExperimentalForeignApi::class)
 fun osVersionAtLeast(vararg versions: OSVersion): Boolean {
     return versions.filter { it.platform == CurrentPlatform.current }.any {
         NSProcessInfo.processInfo.isOperatingSystemAtLeastVersion(it.operatingSystemVersion)

@@ -54,7 +54,7 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -66,10 +66,6 @@ kotlin {
         }
 
         val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val iosArm32Main by getting {
             dependsOn(iosMain)
         }
 

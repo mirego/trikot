@@ -54,7 +54,7 @@ kotlin {
             dependsOn(commonMain)
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES}")
                 implementation("org.jetbrains.kotlin:kotlin-test")
@@ -67,10 +67,6 @@ kotlin {
         }
 
         val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val iosArm32Main by getting {
             dependsOn(iosMain)
         }
 
