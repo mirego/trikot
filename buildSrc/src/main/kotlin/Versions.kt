@@ -1,6 +1,6 @@
 object Versions {
     const val KOTLIN = "1.9.0"
-    const val ATOMIC_FU = "0.20.0"
+    const val ATOMIC_FU = "0.21.0"
     const val ANDROID_GRADLE_PLUGIN = "7.4.2"
     const val JETPACK_COMPOSE_COMPILER = "1.5.0"
     const val JETPACK_COMPOSE_RUNTIME = "1.4.3"

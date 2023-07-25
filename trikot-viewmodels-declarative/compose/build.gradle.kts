@@ -24,7 +24,7 @@ android {
         kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE_COMPILER
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
     sourceSets.configureEach {
         java.srcDirs("src/$name/kotlin")

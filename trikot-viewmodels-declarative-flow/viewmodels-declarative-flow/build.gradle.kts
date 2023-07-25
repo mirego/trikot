@@ -14,7 +14,7 @@ configurations {
 }
 
 kotlin {
-    android {
+    androidTarget {
         publishAllLibraryVariants()
     }
 

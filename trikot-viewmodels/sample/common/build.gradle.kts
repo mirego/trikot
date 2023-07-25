@@ -26,7 +26,7 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
 }
 
 kotlin {
-    android {
+    androidTarget {
         publishLibraryVariants("release", "debug")
     }
 

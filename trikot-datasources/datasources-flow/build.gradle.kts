@@ -8,7 +8,7 @@ plugins {
 group = "com.mirego.trikot"
 
 kotlin {
-    android {
+    androidTarget {
         publishAllLibraryVariants()
     }
     jvm()

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 fun KotlinMultiplatformExtension.configureKmmTargets(js: Boolean = true) {
-    android {
+    androidTarget {
         publishAllLibraryVariants()
     }
     jvm()
