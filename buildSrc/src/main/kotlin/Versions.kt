@@ -11,7 +11,7 @@ object Versions {
     const val COIL = "2.0.0-rc03"
     const val KTLINT = "11.3.2"
     const val KOTLINX_SERIALIZATION = "1.5.1"
-    const val KOTLINX_COROUTINES = "1.7.2"
+    const val KOTLINX_COROUTINES = "1.6.4"
     const val KTOR = "2.0.3"
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.459"
     const val ANDROIDX_LIFECYCLE = "2.6.1"

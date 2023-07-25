@@ -2,6 +2,7 @@ package com.mirego.trikot.viewmodels.lifecycle
 
 import com.mirego.trikot.foundation.concurrent.atomicNullable
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
 import platform.Foundation.NSNotificationCenter
@@ -56,6 +57,7 @@ actual class ApplicationStatePublisher :
     private class ApplicationStateObserver : NSObject() {
         private var callback: ((ApplicationState) -> Unit)? by atomicNullable(null)
 
+        @OptIn(ExperimentalForeignApi::class)
         fun start(closure: (ApplicationState) -> Unit) {
             callback = closure
             NSNotificationCenter.defaultCenter.addObserver(

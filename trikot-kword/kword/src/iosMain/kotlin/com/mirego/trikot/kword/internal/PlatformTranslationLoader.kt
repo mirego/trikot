@@ -1,5 +1,6 @@
 package com.mirego.trikot.kword.internal
 
+import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSBundle
 import platform.Foundation.NSString
@@ -8,9 +9,9 @@ import platform.Foundation.stringWithContentsOfFile
 import platform.objc.object_getClass
 
 internal actual object PlatformTranslationLoader {
+    @OptIn(BetaInteropApi::class)
     private val frameworkBundle: NSBundle
         get() = NSBundle.bundleForClass(object_getClass(0)!!)
-
 
     actual fun loadTranslations(path: String): Map<String, String>? {
         val cleanedPath = path.replace(".json", "")

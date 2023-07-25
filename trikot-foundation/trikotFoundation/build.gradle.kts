@@ -10,7 +10,7 @@ group = "com.mirego.trikot"
 
 kotlin {
     configureKmmTargets(js = false)
-    js(BOTH) {
+    js(IR) {
         browser()
     }
 
