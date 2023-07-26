@@ -124,6 +124,9 @@ class FlowVMDCodeGeneratorTest {
                         """
             )
         )
+
+        assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
+
         val generatedClass = result.classLoader.loadClass("DefaultViewModel1Impl").kotlin
         assertFalse(generatedClass.isAbstract)
         assertTrue(generatedClass.isOpen)
@@ -219,6 +222,8 @@ class FlowVMDCodeGeneratorTest {
                         """
             )
         )
+
+        assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
         val generatedClass = result.classLoader.loadClass("DefaultViewModel1Impl").kotlin
         assertNotNull(
