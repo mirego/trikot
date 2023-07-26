@@ -9,7 +9,6 @@ import platform.Foundation.currentLocale
 import platform.Foundation.stringByFoldingWithOptions
 
 @OptIn(BetaInteropApi::class)
-actual fun String.normalize(): String {
-    return NSString.create(string = this)
+actual fun String.normalize(): String =
+    NSString.create(string = this)
         .stringByFoldingWithOptions(options = NSDiacriticInsensitiveSearch, locale = NSLocale.currentLocale)
-}

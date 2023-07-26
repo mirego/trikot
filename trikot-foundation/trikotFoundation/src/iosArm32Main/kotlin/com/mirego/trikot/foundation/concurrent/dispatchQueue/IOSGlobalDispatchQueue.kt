@@ -11,7 +11,7 @@ open class IOSGlobalDispatchQueue : TrikotDispatchQueue {
     @OptIn(ExperimentalForeignApi::class)
     override fun dispatch(block: DispatchBlock) {
         dispatch_async(
-            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH.toLong(), 0UL),
+            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0u),
             block
         )
     }

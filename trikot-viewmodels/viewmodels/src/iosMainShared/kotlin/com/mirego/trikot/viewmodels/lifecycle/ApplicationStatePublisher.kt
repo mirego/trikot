@@ -2,6 +2,7 @@ package com.mirego.trikot.viewmodels.lifecycle
 
 import com.mirego.trikot.foundation.concurrent.atomicNullable
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
+import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ObjCAction
 import org.reactivestreams.Publisher
@@ -79,12 +80,14 @@ actual class ApplicationStatePublisher :
             NSNotificationCenter.defaultCenter.removeObserver(this)
         }
 
+        @OptIn(BetaInteropApi::class)
         @ObjCAction
         @Suppress("unused")
         fun willEnterForeground() {
             callback?.let { it(ApplicationState.FOREGROUND) }
         }
 
+        @OptIn(BetaInteropApi::class)
         @ObjCAction
         @Suppress("unused")
         fun didEnterBackground() {
