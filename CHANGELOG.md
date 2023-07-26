@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Breaking Changes
 
 - Removed support for ios arm32 architecture
+- Upgraded Android min SDK from 21 to 24
 
 ## 4.4.0
 
