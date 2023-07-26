@@ -28,7 +28,7 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
 }
 
 kotlin {
-    android()
+    androidTarget()
 
     cocoapods {
         name = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME

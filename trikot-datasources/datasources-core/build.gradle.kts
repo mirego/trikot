@@ -79,10 +79,6 @@ kotlin {
             dependsOn(nativeMain)
         }
 
-        val watchos32Main by creating {
-            dependsOn(nativeMain)
-        }
-
         val watchosArm64Main by getting {
             dependsOn(nativeMain)
         }
