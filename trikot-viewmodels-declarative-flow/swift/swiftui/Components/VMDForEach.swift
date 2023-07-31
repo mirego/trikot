@@ -2,11 +2,15 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 import Trikot
 
-public struct VMDForEach<RowContent, Identifiable, Content, DividerContent>: View where RowContent: View, DividerContent: View, Identifiable: VMDIdentifiableContent, Content: VMDContent {
+public struct VMDForEach<RowContent, Identifiable, Content, DividerContent>: DynamicViewContent where RowContent: View, DividerContent: View, Identifiable: VMDIdentifiableContent, Content: VMDContent {
     private let rowContentBuilder: (Content) -> RowContent
     private let dividedBy: () -> DividerContent
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDListViewModel<Identifiable>>
+
+    public var data: [VMDIdentifiableContent] {
+        viewModel.elements
+    }
 
     private var viewModel: VMDListViewModel<Identifiable> {
         observableViewModel.viewModel
