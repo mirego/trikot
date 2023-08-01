@@ -19,6 +19,7 @@ import com.mirego.trikot.viewmodels.declarative.components.VMDPickerViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
 
 @Composable
 fun <E : VMDPickerItemViewModel> VMDDropDownMenu(
@@ -35,9 +36,7 @@ fun <E : VMDPickerItemViewModel> VMDDropDownMenu(
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
-        modifier = Modifier
-            .hidden(pickerViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifiers(pickerViewModel),
         offset = offset,
         properties = properties
     ) {
@@ -65,9 +64,7 @@ fun <E : VMDPickerItemViewModel> VMDDropDownMenuItem(
             pickerViewModel.selectedIndex = index
             onClick()
         },
-        modifier = Modifier
-            .hidden(pickerItemViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifiers(pickerItemViewModel),
         enabled = pickerItemViewModel.isEnabled,
         contentPadding = contentPadding,
         interactionSource = interactionSource

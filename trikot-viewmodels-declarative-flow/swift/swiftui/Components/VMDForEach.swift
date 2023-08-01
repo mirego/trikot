@@ -44,6 +44,6 @@ public struct VMDForEach<RowContent, Identifiable, Content, DividerContent>: Dyn
                 }
             }
         }
-        .hidden(viewModel.isHidden)
+        .vmdModifier(viewModel)
     }
 }

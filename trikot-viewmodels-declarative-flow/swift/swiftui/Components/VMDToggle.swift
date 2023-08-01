@@ -31,18 +31,18 @@ public struct VMDToggle<Label, Content>: View where Label: View, Content: VMDCon
                 Toggle(title, isOn: isOn)
                     .labelsHidden()
                     .disabled(!viewModel.isEnabled)
-                    .hidden(viewModel.isHidden)
+                    .vmdModifier(viewModel)
             } else {
                 Toggle(title, isOn: isOn)
                     .disabled(!viewModel.isEnabled)
-                    .hidden(viewModel.isHidden)
+                    .vmdModifier(viewModel)
             }
         } else {
             Toggle(isOn: isOn) {
                 labelBuilder?(viewModel.label)
             }
             .disabled(!viewModel.isEnabled)
-            .hidden(viewModel.isHidden)
+            .vmdModifier(viewModel)
         }
     }
 }

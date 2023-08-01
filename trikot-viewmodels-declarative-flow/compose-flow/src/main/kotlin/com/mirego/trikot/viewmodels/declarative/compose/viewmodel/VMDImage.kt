@@ -34,6 +34,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.painterResource
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Local
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor.Remote
@@ -60,9 +61,7 @@ fun VMDImage(
 
     VMDImage(
         imageDescriptor = imageViewModel.image,
-        modifier = Modifier
-            .hidden(imageViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifiers(imageViewModel),
         contentDescription = imageViewModel.contentDescription,
         alignment = alignment,
         onState = onState,

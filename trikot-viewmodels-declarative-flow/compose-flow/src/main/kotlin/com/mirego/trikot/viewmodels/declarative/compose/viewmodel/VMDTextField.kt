@@ -21,6 +21,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.composeValue
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.FormattedVisualTransformation
 
 @Composable
@@ -46,9 +47,7 @@ fun VMDTextField(
     val keyboardActionsDelegate = buildKeyboardActions(viewModel, keyboardActions)
 
     TextField(
-        modifier = Modifier
-            .hidden(textFieldViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifiers(textFieldViewModel),
         value = textFieldViewModel.text,
         onValueChange = { value ->
             viewModel.onValueChange(value)

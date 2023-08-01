@@ -16,6 +16,7 @@ import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
 import kotlinx.coroutines.MainScope
@@ -49,9 +50,7 @@ fun <C : VMDContent> VMDSwitch(
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDLabeledComponent(
-        modifier = Modifier
-            .hidden(toggleViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifiers(toggleViewModel),
         label = { label(toggleViewModel.label) },
         content = {
             Switch(

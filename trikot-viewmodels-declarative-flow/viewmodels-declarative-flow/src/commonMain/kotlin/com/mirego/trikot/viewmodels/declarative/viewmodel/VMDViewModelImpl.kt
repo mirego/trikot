@@ -47,13 +47,21 @@ open class VMDViewModelImpl(override val coroutineScope: CoroutineScope) : VMDVi
     private val hiddenDelegate = emit(false, this, coroutineScope)
     override var isHidden: Boolean by hiddenDelegate
 
+    private val testIdentifierDelegate: VMDFlowProperty<String?> = emit(null, this, coroutineScope)
+    override var testIdentifier: String? by testIdentifierDelegate
+
     fun bindHidden(flow: Flow<Boolean>) {
         updateProperty(this::isHidden, flow)
     }
 
+    fun bindTestIdentifier(flow: Flow<String?>) {
+        updateProperty(this::testIdentifier, flow)
+    }
+
     protected open val propertyMapping: Map<String, VMDFlowProperty<*>> by lazy {
         mapOf(
-            this::isHidden.name to hiddenDelegate
+            this::isHidden.name to hiddenDelegate,
+            this::testIdentifier.name to testIdentifierDelegate
         )
     }
 

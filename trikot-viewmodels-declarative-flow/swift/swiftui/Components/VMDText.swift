@@ -20,7 +20,7 @@ public struct VMDText: View {
         configurations.reduce(text) { current, config in
             config(current)
         }
-        .hidden(viewModel.isHidden)
+        .vmdModifier(viewModel)
     }
 
     private var text: Text {

@@ -20,6 +20,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.toAnnotatedString
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
 
 @Composable
 fun VMDText(
@@ -45,9 +46,7 @@ fun VMDText(
 
     Text(
         text = textViewModel.toAnnotatedString(),
-        modifier = Modifier
-            .hidden(textViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifiers(textViewModel),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,

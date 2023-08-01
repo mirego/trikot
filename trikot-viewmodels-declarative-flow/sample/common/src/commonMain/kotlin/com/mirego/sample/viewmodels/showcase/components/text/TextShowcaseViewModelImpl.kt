@@ -13,7 +13,9 @@ import kotlinx.coroutines.CoroutineScope
 
 class TextShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
     ShowcaseViewModelImpl(coroutineScope), TextShowcaseViewModel {
-    override val title = text(i18N[KWordTranslation.TEXT_SHOWCASE_TITLE])
+    override val title = text(i18N[KWordTranslation.TEXT_SHOWCASE_TITLE]) {
+        testIdentifier = "title"
+    }
 
     override val largeTitle = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE])
 
