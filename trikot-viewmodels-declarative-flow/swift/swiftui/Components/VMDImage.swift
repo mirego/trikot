@@ -37,11 +37,13 @@ public struct VMDImage: View {
                 config(current)
             })
             .accessibilityLabel(viewModel.contentDescription ?? "")
+            .vmdModifier(viewModel)
         } else if let remoteImage = viewModel.image as? VMDImageDescriptor.Remote {
             remoteImageConfigurations.reduce(KFImage(remoteImage.imageURL), { current, config in
                 config(current, remoteImage.placeholderImageResource)
             })
             .accessibilityLabel(viewModel.contentDescription ?? "")
+            .vmdModifier(viewModel)
         } else {
             EmptyView()
         }
