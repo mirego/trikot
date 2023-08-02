@@ -17,22 +17,22 @@ public struct VMDProgressView<Label, CurrentValueLabel>: View where Label : View
             let currentValueLabelBuilder = currentValueLabelBuilder {
 
             ProgressView(value: determination.progress, total: determination.total, label: labelBuilder, currentValueLabel: currentValueLabelBuilder)
-                .hidden(viewModel.isHidden)
+                .vmdModifier(viewModel)
         } else if let labelBuilder = labelBuilder {
             if let determination = viewModel.determination {
                 ProgressView(value: determination.progressRatio, label: labelBuilder)
-                    .hidden(viewModel.isHidden)
+                    .vmdModifier(viewModel)
             } else {
                 ProgressView(label: labelBuilder)
-                    .hidden(viewModel.isHidden)
+                    .vmdModifier(viewModel)
             }
         } else {
             if let determination = viewModel.determination {
                 ProgressView(value: determination.progressRatio)
-                    .hidden(viewModel.isHidden)
+                    .vmdModifier(viewModel)
             } else {
                 ProgressView()
-                    .hidden(viewModel.isHidden)
+                    .vmdModifier(viewModel)
             }
         }
     }

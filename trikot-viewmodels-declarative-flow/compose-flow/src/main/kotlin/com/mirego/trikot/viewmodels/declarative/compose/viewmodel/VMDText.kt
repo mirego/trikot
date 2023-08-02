@@ -16,10 +16,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.toAnnotatedString
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 
 @Composable
 fun VMDText(
@@ -45,9 +45,7 @@ fun VMDText(
 
     Text(
         text = textViewModel.toAnnotatedString(),
-        modifier = Modifier
-            .hidden(textViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifier(textViewModel),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,

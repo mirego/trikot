@@ -12,6 +12,7 @@ interface VMDViewModel : VMDPropertyChangeListener, VMDContent {
     val propertyDidChange: VMDFlow<VMDPropertyChange<*>>
 
     var isHidden: Boolean
+    var testIdentifier: String?
 
     fun <V> flowForProperty(property: KProperty<V>): Flow<V>
     fun <V> flowForPropertyName(propertyName: String): Flow<V>

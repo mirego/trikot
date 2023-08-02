@@ -15,9 +15,13 @@ class TextShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
     ShowcaseViewModelImpl(coroutineScope), TextShowcaseViewModel {
     override val title = text(i18N[KWordTranslation.TEXT_SHOWCASE_TITLE])
 
-    override val largeTitle = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE])
+    override val largeTitle = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_LARGE_TITLE]) {
+        testIdentifier = "largeTitle"
+    }
 
-    override val title1 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1])
+    override val title1 = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1]) {
+        testIdentifier = "title1"
+    }
 
     override val title1Bold = text(i18N[KWordTranslation.TEXT_SHOWCASE_TEXT_TITLE1_BOLD])
 

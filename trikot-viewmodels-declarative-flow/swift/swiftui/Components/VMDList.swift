@@ -28,6 +28,6 @@ public struct VMDList<RowContent, Identifiable, Content>: View where RowContent:
                 rowContentBuilder(content)
             }
         }
-        .hidden(viewModel.isHidden)
+        .vmdModifier(viewModel)
     }
 }

@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 
 @Composable
@@ -62,9 +62,7 @@ fun <C : VMDIdentifiableContent> VMDLazyRowIndexed(
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState()
 
     LazyRow(
-        modifier = Modifier
-            .hidden(listViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifier(listViewModel),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,

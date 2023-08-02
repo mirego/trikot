@@ -12,9 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 
 @Composable
@@ -30,9 +30,7 @@ fun <C : VMDContent> VMDButton(
     val buttonViewModel: VMDButtonViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     Box(
-        modifier = Modifier
-            .hidden(buttonViewModel.isHidden)
-            .then(modifier)
+        modifier = modifier.vmdModifier(buttonViewModel)
             .clickable(
                 enabled = buttonViewModel.isEnabled,
                 onClick = viewModel.actionBlock,

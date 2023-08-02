@@ -16,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mirego.trikot.viewmodels.declarative.components.VMDListViewModel
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 
 @Deprecated("Use either VMDLazyColumn instead")
@@ -65,9 +65,7 @@ fun <C : VMDIdentifiableContent> VMDSectionedList(
     val listViewModel: VMDListViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     LazyColumn(
-        modifier = Modifier
-            .hidden(listViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier.vmdModifier(listViewModel),
         state = state,
         contentPadding = contentPadding,
         reverseLayout = reverseLayout,
