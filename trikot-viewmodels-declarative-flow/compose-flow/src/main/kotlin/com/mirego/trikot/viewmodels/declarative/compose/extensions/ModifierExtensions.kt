@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Density
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModel
 
-fun Modifier.vmdModifiers(viewModel: VMDViewModel): Modifier = Modifier
+fun Modifier.vmdModifier(viewModel: VMDViewModel): Modifier = Modifier
     .hidden(viewModel.isHidden)
     .applyIfNotNull(viewModel.testIdentifier) { testTag(it) }
     .then(this)

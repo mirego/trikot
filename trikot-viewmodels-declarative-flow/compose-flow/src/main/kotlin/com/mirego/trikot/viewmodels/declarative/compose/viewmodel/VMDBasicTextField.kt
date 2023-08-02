@@ -23,7 +23,7 @@ import com.mirego.trikot.viewmodels.declarative.components.VMDTextFieldViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.composeValue
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.FormattedVisualTransformation
 
 @ExperimentalMaterialApi
@@ -62,7 +62,7 @@ fun VMDBasicTextField(
         onValueChange = { value: String ->
             viewModel.onValueChange(value)
         },
-        modifier = modifier.vmdModifiers(viewModel),
+        modifier = modifier.vmdModifier(viewModel),
         enabled = textFieldViewModel.isEnabled,
         readOnly = readOnly,
         textStyle = mergedTextStyle,

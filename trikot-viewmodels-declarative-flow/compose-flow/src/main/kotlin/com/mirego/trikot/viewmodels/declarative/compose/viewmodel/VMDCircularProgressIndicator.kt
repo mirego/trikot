@@ -13,10 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.mirego.trikot.viewmodels.declarative.components.VMDProgressViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import kotlinx.coroutines.MainScope
 
 @Composable
@@ -31,7 +30,7 @@ fun VMDCircularProgressIndicator(
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = progressViewModel.determination?.progressRatio ?: 0f)
 
-    val newModifier = modifier.vmdModifiers(progressViewModel)
+    val newModifier = modifier.vmdModifier(progressViewModel)
 
     if (viewModel.determination == null) {
         CircularProgressIndicator(

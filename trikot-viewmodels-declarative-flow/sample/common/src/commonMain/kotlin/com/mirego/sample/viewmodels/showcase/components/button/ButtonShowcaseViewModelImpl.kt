@@ -12,11 +12,13 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.CoroutineScope
 
 class ButtonShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : ShowcaseViewModelImpl(coroutineScope), ButtonShowcaseViewModel {
-    override val title = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TITLE]) {
-        testIdentifier = "title"
+    override val title = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TITLE])
+    override val textButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_TITLE]) {
+        testIdentifier = "textButtonTitle"
     }
-    override val textButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_TITLE])
-    override val imageButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_IMAGE_TITLE])
+    override val imageButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_IMAGE_TITLE]) {
+        testIdentifier = "imageButtonTitle"
+    }
     override val textImageButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_IMAGE_TITLE])
     override val textPairButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_PAIR_TITLE])
     override val textButton = buttonWithText(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL])

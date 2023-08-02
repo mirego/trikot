@@ -18,10 +18,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextFieldViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.composeValue
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifiers
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.FormattedVisualTransformation
 
 @Composable
@@ -47,7 +46,7 @@ fun VMDTextField(
     val keyboardActionsDelegate = buildKeyboardActions(viewModel, keyboardActions)
 
     TextField(
-        modifier = modifier.vmdModifiers(textFieldViewModel),
+        modifier = modifier.vmdModifier(textFieldViewModel),
         value = textFieldViewModel.text,
         onValueChange = { value ->
             viewModel.onValueChange(value)
