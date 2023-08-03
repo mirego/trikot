@@ -2,6 +2,7 @@ package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxColors
 import androidx.compose.material.CheckboxDefaults
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
@@ -50,16 +52,22 @@ fun <C : VMDContent> VMDCheckbox(
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDLabeledComponent(
-        modifier = modifier.vmdModifier(toggleViewModel),
+        modifier = modifier
+            .toggleable(
+                value = toggleViewModel.isOn,
+                role = Role.Checkbox,
+                onValueChange = { checked -> viewModel.onValueChange(checked) },
+            )
+            .vmdModifier(toggleViewModel),
         label = { label(toggleViewModel.label) },
         content = {
             Checkbox(
-                onCheckedChange = { checked -> viewModel.onValueChange(checked) },
+                onCheckedChange = null,
                 modifier = componentModifier,
                 enabled = toggleViewModel.isEnabled,
                 checked = toggleViewModel.isOn,
                 interactionSource = interactionSource,
-                colors = colors
+                colors = colors,
             )
         }
     )

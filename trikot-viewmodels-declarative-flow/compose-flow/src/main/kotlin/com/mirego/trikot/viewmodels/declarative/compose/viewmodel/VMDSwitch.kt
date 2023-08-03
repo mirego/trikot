@@ -2,6 +2,7 @@ package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchColors
 import androidx.compose.material.SwitchDefaults
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
@@ -33,6 +35,7 @@ fun VMDSwitch(
         componentModifier = componentModifier,
         viewModel = viewModel,
         label = {},
+        interactionSource = interactionSource,
         colors = colors
     )
 }
@@ -49,7 +52,13 @@ fun <C : VMDContent> VMDSwitch(
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDLabeledComponent(
-        modifier = modifier.vmdModifier(toggleViewModel),
+        modifier = modifier
+            .toggleable(
+                value = toggleViewModel.isOn,
+                role = Role.Switch,
+                onValueChange = { checked -> viewModel.onValueChange(checked) },
+            )
+            .vmdModifier(toggleViewModel),
         label = { label(toggleViewModel.label) },
         content = {
             Switch(
@@ -58,7 +67,7 @@ fun <C : VMDContent> VMDSwitch(
                 checked = toggleViewModel.isOn,
                 colors = colors,
                 interactionSource = interactionSource,
-                onCheckedChange = { checked -> viewModel.onValueChange(checked) }
+                onCheckedChange = null
             )
         }
     )
