@@ -34,5 +34,6 @@ public struct VMDPicker<Label, Content: VMDContent>: View where Label: View {
                     .tag(index)
             }
         }
+        .vmdModifier(viewModel)
     }
 }
