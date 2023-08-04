@@ -17,7 +17,7 @@ object Versions {
     const val ANDROIDX_LIFECYCLE = "2.6.0-rc01"
     const val OKIO = "3.2.0"
     const val KSP = "1.8.10-1.0.9"
-    const val KOTLIN_POET = "1.12.0"
+    const val KOTLIN_POET = "1.14.2"
     const val ACCOMPANIST = "0.28.0"
 
     object Android {

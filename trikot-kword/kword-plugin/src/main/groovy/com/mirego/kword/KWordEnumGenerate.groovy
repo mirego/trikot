@@ -26,10 +26,10 @@ class KWordEnumGenerate extends DefaultTask {
         TypeSpec.enumBuilder(generatedClassName)
             .primaryConstructor(
                 FunSpec.constructorBuilder()
-                    .addParameter("translationKey", KOTLIN_STRING, KModifier.OVERRIDE)
+                    .addParameter("translationKey", KOTLIN_STRING)
                     .build())
             .addProperty(
-                PropertySpec.builder("translationKey", KOTLIN_STRING)
+                PropertySpec.builder("translationKey", KOTLIN_STRING, KModifier.OVERRIDE)
                     .initializer("translationKey")
                     .build())
             .addSuperinterface(ClassName.bestGuess('com.mirego.trikot.kword.KWordKey'), CodeBlock.EMPTY)
