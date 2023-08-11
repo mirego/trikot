@@ -14,7 +14,7 @@ configurations {
 }
 
 kotlin {
-    configureKmmTargets(watchos = false, macosx = false)
+    configureKmmTargets()
 
     sourceSets {
         val commonMain by getting {
