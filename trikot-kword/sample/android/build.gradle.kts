@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace = "com.mirego.kword.sample"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

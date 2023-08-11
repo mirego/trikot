@@ -40,7 +40,6 @@ kotlin {
         }
 
         val jvmTest by getting {
-            dependsOn(commonTest)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -51,84 +50,40 @@ kotlin {
             dependsOn(jvmShared)
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependsOn(jvmTest)
         }
 
-        val jsMain by getting {
-            dependsOn(commonMain)
-        }
-
         val jsTest by getting {
-            dependsOn(commonTest)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-js")
             }
         }
 
-        val nativeMain by creating {
+        val nativeShared by creating {
             dependsOn(commonMain)
         }
 
-        val nativeTest by creating {
-            dependsOn(commonTest)
-        }
-
         val iosMain by getting {
-            dependsOn(nativeMain)
+            dependsOn(nativeShared)
         }
 
-        val iosArm32Main by getting {
-            dependsOn(nativeMain)
+        val macosMain by getting {
+            dependsOn(nativeShared)
         }
 
-        val iosArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosArm64Main)
-        }
-
-        val iosX64Main by getting {
-            dependsOn(nativeMain)
+        val watchosMain by getting {
+            dependsOn(nativeShared)
         }
 
         val tvosMain by getting {
-            dependsOn(nativeMain)
-        }
-
-        val tvosArm64Main by getting {
-            dependsOn(tvosMain)
-        }
-
-        val tvosX64Main by getting {
-            dependsOn(tvosMain)
-        }
-
-        val watchos32Main by creating {
-            dependsOn(nativeMain)
-        }
-
-        val watchosArm32Main by getting {
-            dependsOn(watchos32Main)
-        }
-
-        val watchosArm64Main by getting {
-            dependsOn(watchos32Main)
-        }
-
-        val watchosX64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val macosX64Main by getting {
-            dependsOn(nativeMain)
+            dependsOn(nativeShared)
         }
     }
 }
 
 android {
+    namespace = "com.mirego.trikot.foundation"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

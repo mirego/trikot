@@ -14,18 +14,7 @@ configurations {
 }
 
 kotlin {
-    android {
-        publishAllLibraryVariants()
-    }
-
-    jvm()
-    ios()
-    iosArm32("iosArm32")
-    iosSimulatorArm64()
-    tvos()
-    js(IR) {
-        browser()
-    }
+    configureKmmTargets(watchos = false, macosx = false)
 
     sourceSets {
         val commonMain by getting {
@@ -42,19 +31,11 @@ kotlin {
             }
         }
 
-        val jvmMain by getting {
-            dependsOn(commonMain)
-        }
-
         val jvmTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
-        }
-
-        val jsMain by getting {
-            dependsOn(commonMain)
         }
 
         val jsTest by getting {
@@ -71,44 +52,17 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
         }
-
-        val nativeMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val iosArm32Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosSimulatorArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosX64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val tvosArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val tvosX64Main by getting {
-            dependsOn(nativeMain)
-        }
     }
 }
 
 android {
+    namespace = "com.mirego.trikot.vmd"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

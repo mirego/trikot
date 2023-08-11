@@ -25,19 +25,11 @@ kotlin {
             }
         }
 
-        val jvmMain by getting {
-            dependsOn(commonMain)
-        }
-
         val jvmTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
-        }
-
-        val jsMain by getting {
-            dependsOn(commonMain)
         }
 
         val jsTest by getting {
@@ -59,7 +51,7 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
@@ -70,50 +62,11 @@ kotlin {
                 implementation("androidx.fragment:fragment-testing:1.4.0")
             }
         }
-
-        val iosMain by getting {
-            dependsOn(commonMain)
-        }
-
-        val iosArm32Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val iosArm64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val iosX64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val tvosMain by getting {
-            dependsOn(commonMain)
-        }
-
-        val watchosArm64Main by getting {
-            dependsOn(commonMain)
-        }
-
-        val watchosArm32Main by getting {
-            dependsOn(commonMain)
-        }
-
-        val watchosX64Main by getting {
-            dependsOn(commonMain)
-        }
-
-        val macosX64Main by getting {
-            dependsOn(commonMain)
-        }
     }
 }
 
 android {
+    namespace = "com.mirego.trikot.viewmodels"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
@@ -132,7 +85,7 @@ android {
     sourceSets {
         getByName("test") {
             manifest {
-                srcFile("src/androidTest/AndroidManifest.xml")
+                srcFile("src/androidUnitTest/AndroidManifest.xml")
             }
         }
     }

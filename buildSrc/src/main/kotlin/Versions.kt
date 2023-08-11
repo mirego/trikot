@@ -1,8 +1,8 @@
 object Versions {
-    const val KOTLIN = "1.8.10"
+    const val KOTLIN = "1.8.22"
     const val ATOMIC_FU = "0.20.0"
     const val ANDROID_GRADLE_PLUGIN = "7.4.0"
-    const val JETPACK_COMPOSE_COMPILER = "1.4.3"
+    const val JETPACK_COMPOSE_COMPILER = "1.4.8"
     const val JETPACK_COMPOSE_RUNTIME = "1.3.3"
     const val JETPACK_COMPOSE_FOUNDATION = "1.3.1"
     const val JETPACK_COMPOSE_UI_TOOLING = "1.3.3"
@@ -16,7 +16,7 @@ object Versions {
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.459"
     const val ANDROIDX_LIFECYCLE = "2.6.0-rc01"
     const val OKIO = "3.2.0"
-    const val KSP = "1.8.10-1.0.9"
+    const val KSP = "1.8.21-1.0.11"
     const val KOTLIN_POET = "1.14.2"
     const val ACCOMPANIST = "0.28.0"
 

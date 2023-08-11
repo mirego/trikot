@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.trikot.viewmodels.sample"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

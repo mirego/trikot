@@ -11,6 +11,7 @@ android {
         minSdk = Versions.Android.MIN_SDK
         targetSdk = Versions.Android.TARGET_SDK
 
+        namespace = "com.mirego.sample"
         applicationId = "com.mirego.sample"
         versionCode = 1
         versionName = "1.0"

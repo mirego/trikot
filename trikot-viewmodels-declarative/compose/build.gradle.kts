@@ -7,6 +7,7 @@ plugins {
 group = "com.mirego.trikot"
 
 android {
+    namespace = "com.mirego.trikot.vmd.compose"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
