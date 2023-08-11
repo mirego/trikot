@@ -62,6 +62,12 @@ kotlin {
                 implementation("androidx.fragment:fragment-testing:1.4.0")
             }
         }
+
+        val iosMain by getting
+
+        val tvosMain by getting {
+            dependsOn(iosMain)
+        }
     }
 }
 
