@@ -4,6 +4,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.UIThreadDispatchQueue
 import com.mirego.trikot.streams.reactive.BehaviorSubjectImpl
 import org.reactivestreams.Publisher
 
@@ -21,11 +22,17 @@ actual class ApplicationStatePublisher :
 
     override fun onFirstSubscription() {
         super.onFirstSubscription()
-        lifecycle.addObserver(this)
+
+        UIThreadDispatchQueue().dispatch {
+            lifecycle.addObserver(this)
+        }
     }
 
     override fun onNoSubscription() {
-        lifecycle.removeObserver(this)
+        UIThreadDispatchQueue().dispatch {
+            lifecycle.removeObserver(this)
+        }
+
         super.onNoSubscription()
     }
 
