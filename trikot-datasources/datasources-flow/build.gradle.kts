@@ -8,18 +8,7 @@ plugins {
 group = "com.mirego.trikot"
 
 kotlin {
-    android {
-        publishAllLibraryVariants()
-    }
-    jvm()
-    ios()
-    iosSimulatorArm64()
-    tvos()
-    watchos()
-    macosX64()
-    js(IR) {
-        browser()
-    }
+    configureKmmTargets()
 
     sourceSets {
         all {
@@ -55,7 +44,7 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -72,6 +61,7 @@ kotlin {
 }
 
 android {
+    namespace = "com.mirego.trikot.datasources.flow"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

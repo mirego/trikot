@@ -10,6 +10,7 @@ group = "com.trikot.viewmodels.sample"
 version = "0.0.1"
 
 android {
+    namespace = "com.mirego.trikot.viewmodels.sample"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

@@ -6,12 +6,13 @@ plugins {
 }
 
 android {
+    namespace = "com.mirego.sample"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
         targetSdk = Versions.Android.TARGET_SDK
 
-        applicationId = "com.mirego.sample.vmd.flow"
+        applicationId = "com.mirego.sample"
         versionCode = 1
         versionName = "1.0"
     }

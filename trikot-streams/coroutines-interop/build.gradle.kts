@@ -44,49 +44,18 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependsOn(jvmTest)
         }
 
-        val nativeTest by creating {
+        val nativeTest by getting {
             dependsOn(commonTest)
-        }
-
-        val iosX64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val iosSimulatorArm64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val macosX64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val tvosArm64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val tvosX64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val watchos32Test by creating {
-            dependsOn(nativeTest)
-        }
-
-        val watchosArm64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val watchosX64Test by getting {
-            dependsOn(nativeTest)
         }
     }
 }
 
 android {
+    namespace = "com.mirego.trikot.streams.coroutines"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

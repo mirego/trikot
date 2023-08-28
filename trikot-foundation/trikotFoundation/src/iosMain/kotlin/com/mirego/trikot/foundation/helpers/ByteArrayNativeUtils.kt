@@ -1,6 +1,7 @@
 package com.mirego.trikot.foundation.helpers
 
 import kotlinx.cinterop.addressOf
+import kotlinx.cinterop.convert
 import kotlinx.cinterop.usePinned
 import platform.Foundation.NSData
 import platform.Foundation.create
@@ -23,7 +24,7 @@ object ByteArrayNativeUtils {
         return byteArray.usePinned {
             NSData.create(
                 bytes = it.addressOf(0),
-                length = byteArray.size.toULong()
+                length = byteArray.size.convert()
             )
         }
     }
