@@ -20,6 +20,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.ListenerUtil
 import com.mirego.trikot.streams.reactive.just
 import com.mirego.trikot.streams.reactive.observe
+import com.mirego.trikot.viewmodels.android.R
 import com.mirego.trikot.viewmodels.mutable.MutableInputTextViewModel
 import com.mirego.trikot.viewmodels.properties.Color
 import com.mirego.trikot.viewmodels.properties.InputTextType
