@@ -72,7 +72,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mirego.trikot.viewmodels"
+    namespace = "com.mirego.trikot.viewmodels.android"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
