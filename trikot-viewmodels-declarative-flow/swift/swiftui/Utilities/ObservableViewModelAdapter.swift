@@ -10,7 +10,7 @@ public class ObservableViewModelAdapter<VM: VMDViewModel>: ObservableObject {
         self.viewModel = viewModel
         viewModel.propertyWillChange.watch { [weak self] propertyChange, closeable in
             self?.closeable = closeable
-            if let propertyChangeAnimation = propertyChange.animation {
+            if let propertyChangeAnimation = propertyChange?.animation {
                 withAnimation(propertyChangeAnimation.animation) {
                     self?.objectWillChange.send()
                 }
