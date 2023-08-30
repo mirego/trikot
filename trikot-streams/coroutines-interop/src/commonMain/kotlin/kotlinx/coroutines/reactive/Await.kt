@@ -2,6 +2,8 @@
  * Copyright 2016-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:Suppress("DEPRECATION")
+
 package kotlinx.coroutines.reactive
 
 import kotlinx.coroutines.CancellationException
@@ -14,6 +16,7 @@ import org.reactivestreams.Subscription
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.jvm.Synchronized
 
 /**
  * Awaits the first value from the given publisher without blocking the thread and returns the resulting value, or, if
@@ -115,12 +118,20 @@ private suspend fun <T> Publisher<T>.awaitOne(
             /** cancelling the new subscription due to rule 2.5, though the publisher would either have to
              * subscribe more than once, which would break 2.12, or leak this [Subscriber]. */
             if (subscription != null) {
-                s.cancel()
+                withSubscriptionLock {
+                    s.cancel()
+                }
                 return
             }
             subscription = s
-            cont.invokeOnCancellation { s.cancel() }
-            s.request(if (mode == Mode.FIRST || mode == Mode.FIRST_OR_DEFAULT) 1 else Long.MAX_VALUE)
+            cont.invokeOnCancellation {
+                withSubscriptionLock {
+                    s.cancel()
+                }
+            }
+            withSubscriptionLock {
+                s.request(if (mode == Mode.FIRST || mode == Mode.FIRST_OR_DEFAULT) 1 else Long.MAX_VALUE)
+            }
         }
 
         override fun onNext(t: T) {
@@ -147,12 +158,17 @@ private suspend fun <T> Publisher<T>.awaitOne(
                         return
                     }
                     seenValue = true
-                    sub.cancel()
+                    withSubscriptionLock {
+                        sub.cancel()
+                    }
                     cont.resume(t)
                 }
+
                 Mode.LAST, Mode.SINGLE, Mode.SINGLE_OR_DEFAULT -> {
                     if ((mode == Mode.SINGLE || mode == Mode.SINGLE_OR_DEFAULT) && seenValue) {
-                        sub.cancel()
+                        withSubscriptionLock {
+                            sub.cancel()
+                        }
                         /* the check for `cont.isActive` is needed in case `sub.cancel() above calls `onComplete` or
                          `onError` on its own. */
                         if (cont.isActive) {
@@ -184,6 +200,7 @@ private suspend fun <T> Publisher<T>.awaitOne(
                 (mode == Mode.FIRST_OR_DEFAULT || mode == Mode.SINGLE_OR_DEFAULT) -> {
                     cont.resume(default as T)
                 }
+
                 cont.isActive -> {
                     // the check for `cont.isActive` is just a slight optimization and doesn't affect correctness
                     cont.resumeWithException(NoSuchElementException("No value received via onNext for $mode"))
@@ -207,6 +224,14 @@ private suspend fun <T> Publisher<T>.awaitOne(
             }
             inTerminalState = true
             return true
+        }
+
+        /**
+         * Enforce rule 2.7: [Subscription.request] and [Subscription.cancel] must be executed serially
+         */
+        @Synchronized
+        private fun withSubscriptionLock(block: () -> Unit) {
+            block()
         }
     })
 }
