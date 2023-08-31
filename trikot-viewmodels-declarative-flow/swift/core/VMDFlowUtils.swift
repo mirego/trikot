@@ -2,7 +2,7 @@ import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
 public class ObservableFlowWrapper<T: AnyObject>: ObservableObject {
-    @Published public var value: T
+    @Published public var value: T?
     
     private var watcher: Closeable?
     

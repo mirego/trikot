@@ -20,7 +20,7 @@ fun interface Closeable {
     fun close()
 }
 
-class VMDFlow<T : Any?> internal constructor(
+class VMDFlow<out T> internal constructor(
     private val origin: Flow<T>,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 ) : Flow<T> by origin {
@@ -35,7 +35,7 @@ class VMDFlow<T : Any?> internal constructor(
     }
 }
 
-fun <T : Any?> Flow<T>.wrap(): VMDFlow<T> = VMDFlow(this)
+fun <T> Flow<T>.wrap(): VMDFlow<T> = VMDFlow(this)
 
 fun Flow<String>.asVMDTextContent(): Flow<VMDTextContent> = flow {
     this@asVMDTextContent.collect { emit(VMDTextContent(it)) }
