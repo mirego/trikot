@@ -4,6 +4,8 @@
 
 package kotlinx.coroutines.reactive
 
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.handleCoroutineException
@@ -104,7 +106,7 @@ private suspend fun <T> Publisher<T>.awaitOne(
     /* This implementation must obey
     https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#2-subscriber-code
     The numbers of rules are taken from there. */
-    subscribe(object : Subscriber<T> {
+    subscribe(object : Subscriber<T>, SynchronizedObject() {
         // It is unclear whether 2.13 implies (T: Any), but if so, it seems that we don't break anything by not adhering
         private var subscription: Subscription? = null
         private var value: T? = null
@@ -115,12 +117,20 @@ private suspend fun <T> Publisher<T>.awaitOne(
             /** cancelling the new subscription due to rule 2.5, though the publisher would either have to
              * subscribe more than once, which would break 2.12, or leak this [Subscriber]. */
             if (subscription != null) {
-                s.cancel()
+                withSubscriptionLock {
+                    s.cancel()
+                }
                 return
             }
             subscription = s
-            cont.invokeOnCancellation { s.cancel() }
-            s.request(if (mode == Mode.FIRST || mode == Mode.FIRST_OR_DEFAULT) 1 else Long.MAX_VALUE)
+            cont.invokeOnCancellation {
+                withSubscriptionLock {
+                    s.cancel()
+                }
+            }
+            withSubscriptionLock {
+                s.request(if (mode == Mode.FIRST || mode == Mode.FIRST_OR_DEFAULT) 1 else Long.MAX_VALUE)
+            }
         }
 
         override fun onNext(t: T) {
@@ -147,12 +157,17 @@ private suspend fun <T> Publisher<T>.awaitOne(
                         return
                     }
                     seenValue = true
-                    sub.cancel()
+                    withSubscriptionLock {
+                        sub.cancel()
+                    }
                     cont.resume(t)
                 }
+
                 Mode.LAST, Mode.SINGLE, Mode.SINGLE_OR_DEFAULT -> {
                     if ((mode == Mode.SINGLE || mode == Mode.SINGLE_OR_DEFAULT) && seenValue) {
-                        sub.cancel()
+                        withSubscriptionLock {
+                            sub.cancel()
+                        }
                         /* the check for `cont.isActive` is needed in case `sub.cancel() above calls `onComplete` or
                          `onError` on its own. */
                         if (cont.isActive) {
@@ -184,6 +199,7 @@ private suspend fun <T> Publisher<T>.awaitOne(
                 (mode == Mode.FIRST_OR_DEFAULT || mode == Mode.SINGLE_OR_DEFAULT) -> {
                     cont.resume(default as T)
                 }
+
                 cont.isActive -> {
                     // the check for `cont.isActive` is just a slight optimization and doesn't affect correctness
                     cont.resumeWithException(NoSuchElementException("No value received via onNext for $mode"))
@@ -208,6 +224,11 @@ private suspend fun <T> Publisher<T>.awaitOne(
             inTerminalState = true
             return true
         }
+
+        /**
+         * Enforce rule 2.7: [Subscription.request] and [Subscription.cancel] must be executed serially
+         */
+        private fun withSubscriptionLock(block: () -> Unit) = synchronized(this, block)
     })
 }
 

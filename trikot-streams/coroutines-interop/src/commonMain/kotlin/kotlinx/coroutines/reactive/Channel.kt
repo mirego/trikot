@@ -8,13 +8,11 @@ package kotlinx.coroutines.reactive
 import kotlinx.atomicfu.atomic
 import kotlinx.atomicfu.loop
 import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.internal.LockFreeLinkedListNode
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
+
 /* ktlint-enable no-wildcard-imports */
 
 /**
@@ -36,7 +34,7 @@ internal fun <T> Publisher<T>.toChannel(request: Int = 1): ReceiveChannel<T> {
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER", "SubscriberImplementation")
 private class SubscriptionChannel<T>(
     private val request: Int
-) : LinkedListChannel<T>(null), Subscriber<T> {
+) : BufferedChannel<T>(capacity = Channel.UNLIMITED), Subscriber<T> {
     init {
         require(request >= 0) { "Invalid request size: $request" }
     }
@@ -47,7 +45,7 @@ private class SubscriptionChannel<T>(
     // can be negative if we have receivers, but no subscription yet
     private val _requested = atomic(0)
 
-    // --------------------- AbstractChannel overrides -------------------------------
+    // --------------------- BufferedChannel overrides -------------------------------
     @Suppress("CANNOT_OVERRIDE_INVISIBLE_MEMBER")
     override fun onReceiveEnqueued() {
         _requested.loop { wasRequested ->
@@ -72,7 +70,7 @@ private class SubscriptionChannel<T>(
     }
 
     @Suppress("CANNOT_OVERRIDE_INVISIBLE_MEMBER")
-    override fun onClosedIdempotent(closed: LockFreeLinkedListNode) {
+    override fun onClosedIdempotent() {
         _subscription.getAndSet(null)?.cancel() // cancel exactly once
     }
 
