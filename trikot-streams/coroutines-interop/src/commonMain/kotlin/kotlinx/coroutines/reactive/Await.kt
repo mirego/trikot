@@ -2,10 +2,11 @@
  * Copyright 2016-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
  */
 
-@file:Suppress("DEPRECATION")
 
 package kotlinx.coroutines.reactive
 
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.handleCoroutineException
@@ -16,7 +17,6 @@ import org.reactivestreams.Subscription
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.jvm.Synchronized
 
 /**
  * Awaits the first value from the given publisher without blocking the thread and returns the resulting value, or, if
@@ -107,7 +107,7 @@ private suspend fun <T> Publisher<T>.awaitOne(
     /* This implementation must obey
     https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#2-subscriber-code
     The numbers of rules are taken from there. */
-    subscribe(object : Subscriber<T> {
+    subscribe(object : Subscriber<T>, SynchronizedObject() {
         // It is unclear whether 2.13 implies (T: Any), but if so, it seems that we don't break anything by not adhering
         private var subscription: Subscription? = null
         private var value: T? = null
@@ -229,10 +229,7 @@ private suspend fun <T> Publisher<T>.awaitOne(
         /**
          * Enforce rule 2.7: [Subscription.request] and [Subscription.cancel] must be executed serially
          */
-        @Synchronized
-        private fun withSubscriptionLock(block: () -> Unit) {
-            block()
-        }
+        private fun withSubscriptionLock(block: () -> Unit) = synchronized(this, block)
     })
 }
 
