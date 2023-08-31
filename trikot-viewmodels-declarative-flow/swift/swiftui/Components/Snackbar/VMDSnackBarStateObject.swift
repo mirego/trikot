@@ -11,19 +11,23 @@ public class VMDSnackBarStateObject: ObservableObject {
 
     public func startWatching(_ flow: VMDFlow<VMDSnackbarViewData>) {
         flow.watch { [weak self] viewData, closeable in
-            self?.message = viewData?.message ?? ""
-            self?.duration = viewData?.duration.toTimeInterval() ?? VMDSnackbarDuration.short_.toTimeInterval()
-            self?.isVisible = true
-            self?.withDismissAction = viewData?.withDismissAction ?? true
+            guard let self else { return }
 
-            if self?.closeableExecuter == nil {
-                self?.closeableExecuter = VMDCloseableExecuter(closeable: closeable)
+            if self.closeableExecuter == nil {
+                self.closeableExecuter = VMDCloseableExecuter(closeable: closeable)
             }
 
-            guard viewData?.duration != VMDSnackbarDuration.indefinite, let duration = self?.duration else { return }
+            guard let viewData else { return }
 
-            let delayTime = DispatchTime.now() + duration
-            DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.message = viewData.message
+            self.duration = viewData.duration.toTimeInterval()
+            self.isVisible = true
+            self.withDismissAction = viewData.withDismissAction
+
+            guard viewData.duration != VMDSnackbarDuration.indefinite else { return }
+
+            let delayTime = DispatchTime.now() + self.duration
+            DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
                 self?.isVisible = false
             }
         }
