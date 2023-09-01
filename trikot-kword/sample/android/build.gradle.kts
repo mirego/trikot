@@ -9,7 +9,6 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
 
         applicationId = "com.mirego.kword.sample"
         versionCode = 1
@@ -35,16 +34,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE_COMPILER
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     sourceSets {

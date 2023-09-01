@@ -76,7 +76,6 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 
     buildFeatures {
@@ -84,8 +83,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
+        sourceCompatibility(JavaVersion.VERSION_17)
+        targetCompatibility(JavaVersion.VERSION_17)
     }
 
     sourceSets {
@@ -100,25 +99,5 @@ android {
         unitTests {
             isIncludeAndroidResources = true
         }
-    }
-}
-
-// Fixes w: library included more than once: ~/.konan/kotlin-native-prebuilt-macos-XXX/klib/common/stdlib
-afterEvaluate {
-    val compilations = listOf("iosMain", "tvosMain").map {
-        kotlin.targets["metadata"].compilations[it]
-    }
-    compilations.forEach { compilation ->
-        compilation.compileKotlinTask.doFirst {
-            compilation.compileDependencyFiles = files(
-                compilation.compileDependencyFiles.filterNot { it.absolutePath.endsWith("klib/common/stdlib") }
-            )
-        }
-    }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
