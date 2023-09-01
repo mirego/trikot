@@ -49,13 +49,5 @@ tasks {
         val originalVersion = project.version.toString().replace("-dev\\w+".toRegex(), "")
         property("version", "$originalVersion-dev$gitCommits")
     }
-    val tagVersion by registering {
-        try {
-            val version = project.property("version")
-            "git tag $version".runCommand(workingDir = rootDir)
-            "git push origin --tags".runCommand(workingDir = rootDir)
-        } catch (e: Exception) {
-            println("Unable to tag: ${e.message}")
-        }
-    }
+    val tagVersion by registering(TagVersionTask::class)
 }
