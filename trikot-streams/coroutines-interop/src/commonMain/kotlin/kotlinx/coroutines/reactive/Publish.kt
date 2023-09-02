@@ -54,6 +54,7 @@ fun <T> publish(
 
 /** @suppress For internal use from other reactive integration modules only */
 @InternalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 fun <T> publishInternal(
     scope: CoroutineScope, // support for legacy publish in scope
     context: CoroutineContext,
