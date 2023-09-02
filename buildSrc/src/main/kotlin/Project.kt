@@ -9,6 +9,7 @@ object Project {
     const val TRIKOT_KWORD_SAMPLE_COMMON = ":trikot-kword:sample:common"
     const val TRIKOT_ANALYTICS = ":trikot-analytics:analytics"
     const val TRIKOT_VIEWMODELS = ":trikot-viewmodels:viewmodels"
+    const val TRIKOT_VIEWMODELS_DATABINDING = ":trikot-viewmodels:databinding"
     const val TRIKOT_VIEWMODELS_SAMPLE_COMMON = ":trikot-viewmodels:sample:common"
     const val TRIKOT_VIEWMODELS_DECLARATIVE = ":trikot-viewmodels-declarative:viewmodels-declarative"
     const val TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE = ":trikot-viewmodels-declarative:compose"
