@@ -18,8 +18,8 @@ object Versions {
     const val ACCOMPANIST = "0.28.0"
 
     object Android {
-        const val TARGET_SDK = 33
-        const val COMPILE_SDK = 33
+        const val TARGET_SDK = 34
+        const val COMPILE_SDK = 34
         const val MIN_SDK = 21
     }
     const val JVM_TOOLCHAIN = 17

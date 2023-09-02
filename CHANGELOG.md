@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Jetpack Compose Compiler `1.5.3`
 - Jetpack Compose Runtime `1.5.0`
 - Kotlinx Coroutines `1.7.3`
+- Android compile `34`
 
 ### Breaking Changes
 

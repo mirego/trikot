@@ -1,7 +1,7 @@
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-abstract class TagVersionTask: DefaultTask() {
+abstract class TagVersionTask : DefaultTask() {
     @TaskAction
     fun tagVersion() {
         try {
