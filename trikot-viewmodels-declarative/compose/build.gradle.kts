@@ -50,20 +50,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")
 }
 
-tasks {
-    val sourcesJar by creating(Jar::class) {
-        archiveClassifier.set("sources")
-        from(kotlin.sourceSets["main"].kotlin.srcDirs)
-    }
-}
-
 afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
                 artifactId = "viewmodels-declarative-compose"
-                artifact(tasks["sourcesJar"])
             }
         }
     }

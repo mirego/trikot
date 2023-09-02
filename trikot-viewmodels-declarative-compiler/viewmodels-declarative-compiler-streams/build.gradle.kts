@@ -15,23 +15,10 @@ dependencies {
     implementation(project(Project.TRIKOT_STREAMS))
 }
 
-tasks {
-    val sourcesJar by creating(Jar::class) {
-        from(sourceSets.main.get().allSource)
-        archiveClassifier.set("sources")
-    }
-
-    artifacts {
-        archives(sourcesJar)
-        archives(jar)
-    }
-}
-
 publishing {
     publications {
         create<MavenPublication>("binaryAndSources") {
             from(components["java"])
-            artifact(tasks["sourcesJar"])
         }
     }
 }

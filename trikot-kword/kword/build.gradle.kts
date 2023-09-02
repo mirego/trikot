@@ -11,7 +11,11 @@ kotlin {
 
     sourceSets {
         all {
-            languageSettings.optIn("kotlinx.cinterop.UnsafeNumber")
+            languageSettings {
+                optIn("kotlinx.cinterop.UnsafeNumber")
+                optIn("kotlinx.cinterop.ExperimentalForeignApi")
+                optIn("kotlinx.cinterop.BetaInteropApi")
+            }
         }
 
         val commonMain by getting {
