@@ -6,7 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
-> TBD
+> 2023-09-02
+
+### Updates
+
+- Kotlin 1.9.10
+- Gradle 8.3
+- JDK 17
+- Jetpack Compose Compiler `1.5.3`
+- Jetpack Compose Runtime `1.5.0`
+- Kotlinx Coroutines `1.7.3`
+
+### Breaking Changes
+
+[viewmodels] Android databindings into its own artefact
+_To migrate:_
+Add to your android module `implementation("com.mirego.trikot:viewmodels-databinding:$trikot_version")`
 
 ## 4.4.0
 
