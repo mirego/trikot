@@ -3,6 +3,7 @@ package com.mirego.trikot.datasources.flow
 import com.mirego.trikot.datasources.DataState
 import com.mirego.trikot.datasources.flow.storage.FlowDataSourceFileManager
 import com.mirego.trikot.datasources.flow.tests.MockFileManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -13,6 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class DiskCacheFlowDataSourceTests {
     private companion object {
         private const val BASE_PATH = "testBasePath"
