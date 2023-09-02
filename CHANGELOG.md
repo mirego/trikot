@@ -10,9 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Updates
 
-- Kotlin 1.9.10
-- Gradle 8.3
-- JDK 17
+- Kotlin `1.9.10`
+- Gradle `8.3`
+- JDK `17`
 - Jetpack Compose Compiler `1.5.3`
 - Jetpack Compose Runtime `1.5.0`
 - Kotlinx Coroutines `1.7.3`
