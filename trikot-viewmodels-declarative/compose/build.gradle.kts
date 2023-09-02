@@ -28,12 +28,6 @@ android {
     }
 }
 
-kotlin {
-    sourceSets.all {
-        languageSettings.optIn("coil.annotation.ExperimentalCoilApi")
-    }
-}
-
 dependencies {
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE))
     implementation(project(Project.TRIKOT_FOUNDATION))

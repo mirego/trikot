@@ -25,6 +25,7 @@ import io.ktor.content.ByteArrayContent
 import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
+import io.ktor.util.InternalAPI
 import io.ktor.util.flattenEntries
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -70,6 +71,7 @@ class KtorHttpRequestFactory(
     ) : HttpRequest, CoroutineScope {
         override val coroutineContext: CoroutineContext = Dispatchers.Unconfined
 
+        @OptIn(InternalAPI::class)
         override fun execute(cancellableManager: CancellableManager): Publisher<HttpResponse> {
             val publisher = Publishers.behaviorSubject<HttpResponse>()
 

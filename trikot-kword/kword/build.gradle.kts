@@ -10,14 +10,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("kotlinx.cinterop.UnsafeNumber")
-                optIn("kotlinx.cinterop.ExperimentalForeignApi")
-                optIn("kotlinx.cinterop.BetaInteropApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))

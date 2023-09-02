@@ -11,14 +11,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlinx.serialization.ExperimentalSerializationApi")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                optIn("kotlinx.coroutines.DelicateCoroutinesApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))

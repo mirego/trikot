@@ -25,6 +25,6 @@ actual class UIThreadDispatchQueue actual constructor() : TrikotDispatchQueue {
 
     private fun runQueueTask(block: DispatchBlock) {
         block()
-        count.decrement()
+        count.getAndDecrement()
     }
 }

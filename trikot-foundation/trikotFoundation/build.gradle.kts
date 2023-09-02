@@ -12,12 +12,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("kotlinx.cinterop.ExperimentalForeignApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api("org.jetbrains.kotlinx:atomicfu:${Versions.ATOMIC_FU}")

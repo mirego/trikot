@@ -54,12 +54,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.Experimental")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_FLOW))

@@ -2,11 +2,14 @@
  * Copyright 2016-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package kotlinx.coroutines.reactive
 
 /* ktlint-disable no-wildcard-imports */
 import kotlinx.atomicfu.atomic
 import kotlinx.atomicfu.loop
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.collect
 import org.reactivestreams.Publisher

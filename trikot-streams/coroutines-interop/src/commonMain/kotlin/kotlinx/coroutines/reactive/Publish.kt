@@ -1,6 +1,8 @@
 /*
  * Copyright 2016-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
  */
+@file:OptIn(InternalCoroutinesApi::class, DelicateCoroutinesApi::class)
+
 package kotlinx.coroutines.reactive
 
 /* ktlint-disable no-wildcard-imports */
@@ -11,7 +13,9 @@ import kotlinx.coroutines.intrinsics.*
 import kotlinx.coroutines.selects.*
 import kotlinx.coroutines.sync.*
 import org.reactivestreams.*
+import kotlin.concurrent.Volatile
 import kotlin.coroutines.*
+import kotlin.experimental.ExperimentalTypeInference
 import kotlin.jvm.*
 /* ktlint-enable no-wildcard-imports */
 
@@ -36,6 +40,7 @@ import kotlin.jvm.*
  *
  * @throws IllegalArgumentException if the provided [context] contains a [Job] instance.
  */
+@OptIn(ExperimentalTypeInference::class, DelicateCoroutinesApi::class)
 fun <T> publish(
     context: CoroutineContext = EmptyCoroutineContext,
     @BuilderInference block: suspend ProducerScope<T>.() -> Unit

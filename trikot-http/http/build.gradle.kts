@@ -10,13 +10,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("kotlin.ExperimentalStdlibApi")
-                optIn("io.ktor.util.InternalAPI")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(project(Project.TRIKOT_FOUNDATION))

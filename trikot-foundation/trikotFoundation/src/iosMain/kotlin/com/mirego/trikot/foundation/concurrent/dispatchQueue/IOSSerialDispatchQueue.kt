@@ -1,10 +1,12 @@
 package com.mirego.trikot.foundation.concurrent.dispatchQueue
 
+import kotlinx.cinterop.ExperimentalForeignApi
 import platform.darwin.DISPATCH_QUEUE_SERIAL
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_queue_create
 import platform.darwin.dispatch_queue_t
 
+@OptIn(ExperimentalForeignApi::class)
 open class IOSSerialDispatchQueue(identifier: String) : TrikotDispatchQueue {
     private val serialQueue = dispatch_queue_create(
         "com.mirego.trikot.foundation.serial_dispatch_queue.$identifier",
