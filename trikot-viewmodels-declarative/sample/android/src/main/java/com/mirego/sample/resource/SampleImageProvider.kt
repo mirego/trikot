@@ -1,11 +1,11 @@
 package com.mirego.sample.resource
 
 import android.content.Context
-import com.mirego.sample.R
 import com.mirego.sample.resources.SampleImageResource
 import com.mirego.trikot.viewmodels.declarative.configuration.VMDImageProvider
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 import com.mirego.trikot.viewmodels.declarative.properties.VMDNoImageResource
+import com.mirego.vmd.flow.sample.android.R
 
 class SampleImageProvider : VMDImageProvider {
     override fun resourceIdForResource(resource: VMDImageResource, context: Context): Int? {

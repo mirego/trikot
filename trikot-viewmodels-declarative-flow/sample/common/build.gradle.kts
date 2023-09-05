@@ -82,7 +82,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mirego.sample"
+    namespace = "com.mirego.vmd.flow.sample"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

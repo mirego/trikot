@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    namespace = "com.mirego.sample"
+    namespace = "com.mirego.vmd.sample.android"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
         targetSdk = Versions.Android.TARGET_SDK
 
-        applicationId = "com.mirego.sample"
+        applicationId = "com.mirego.vmd.sample.android"
         versionCode = 1
         versionName = "1.0"
     }
