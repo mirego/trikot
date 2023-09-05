@@ -1,12 +1,16 @@
 @file:Suppress("ktlint")
+@file:OptIn(ExperimentalForeignApi::class)
 
 package com.mirego.trikot.foundation.system
 
 import kotlinx.cinterop.CValue
+import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.cValue
 import platform.Foundation.NSOperatingSystemVersion
 import platform.Foundation.NSProcessInfo
 
+@OptIn(ExperimentalForeignApi::class, UnsafeNumber::class)
 @Suppress("EnumEntryName")
 enum class OSVersion(val platform: OSPlatform, val majorVersion: Int, val minorVersion: Int, val patchVersion: Int) {
     iOS_10(platform = OSPlatform.iOS, majorVersion = 10, minorVersion = 0, patchVersion = 0),

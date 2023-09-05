@@ -12,9 +12,10 @@ fun KotlinMultiplatformExtension.configureKmmTargets(
     macosx: Boolean = true,
 ) {
     targetHierarchy.default()
+    jvmToolchain(Versions.JVM_TOOLCHAIN)
 
     if (android) {
-        android {
+        androidTarget {
             publishAllLibraryVariants()
         }
     }

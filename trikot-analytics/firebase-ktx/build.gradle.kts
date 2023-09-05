@@ -18,21 +18,14 @@ dependencies {
 }
 
 android {
+    namespace = "com.mirego.trikot.analytics.firebase.ktx"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
-}
-
-tasks {
-    val sourcesJar by registering(Jar::class) {
-        from(android.sourceSets.getByName("main").java.srcDirs)
-        archiveClassifier.set("sources")
-    }
-
-    artifacts {
-        archives(sourcesJar)
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_17)
+        targetCompatibility(JavaVersion.VERSION_17)
     }
 }
 
@@ -42,7 +35,6 @@ afterEvaluate {
             create<MavenPublication>("firebaseAar") {
                 from(components["release"])
                 artifactId = "firebase-ktx"
-                artifact(tasks["sourcesJar"])
             }
         }
     }

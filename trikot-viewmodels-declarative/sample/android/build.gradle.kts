@@ -11,8 +11,8 @@ android {
         minSdk = Versions.Android.MIN_SDK
         targetSdk = Versions.Android.TARGET_SDK
 
-        namespace = "com.mirego.sample"
-        applicationId = "com.mirego.sample"
+        namespace = "com.mirego.vmd.flow.sample.android"
+        applicationId = "com.mirego.vmd.flow.sample.android"
         versionCode = 1
         versionName = "1.0"
     }
@@ -36,16 +36,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE_COMPILER
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     sourceSets {

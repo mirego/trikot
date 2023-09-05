@@ -11,14 +11,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlinx.serialization.ExperimentalSerializationApi")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                optIn("kotlinx.coroutines.DelicateCoroutinesApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
@@ -65,6 +57,5 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 }

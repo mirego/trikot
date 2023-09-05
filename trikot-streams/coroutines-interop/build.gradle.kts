@@ -10,17 +10,6 @@ kotlin {
     configureKmmTargets(js = false)
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("kotlinx.coroutines.InternalCoroutinesApi")
-                optIn("kotlin.experimental.ExperimentalTypeInference")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                optIn("kotlinx.coroutines.DelicateCoroutinesApi")
-                optIn("kotlinx.coroutines.FlowPreview")
-                optIn("kotlin.contracts.ExperimentalContracts")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(project(Project.TRIKOT_STREAMS))
@@ -59,6 +48,5 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 }

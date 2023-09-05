@@ -14,7 +14,6 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 
@@ -27,7 +26,8 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
 }
 
 kotlin {
-    android {
+    jvmToolchain(Versions.JVM_TOOLCHAIN)
+    androidTarget {
         publishLibraryVariants("release", "debug")
     }
 
@@ -49,17 +49,8 @@ kotlin {
         }
     }
 
-    ios {
-        binaries.framework {
-            configureFramework()
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            configureFramework()
-        }
-    }
+    ios()
+    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {

@@ -5,6 +5,7 @@ import com.mirego.trikot.datasources.extensions.getFirstError
 import com.mirego.trikot.datasources.extensions.isAnyDataStateError
 import com.mirego.trikot.datasources.extensions.isAnyDataStatePending
 import com.mirego.trikot.datasources.extensions.value
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -25,6 +26,7 @@ fun <T, R, E : Throwable> Flow<DataState<out T, out E>>.mapValue(
     }
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 fun <T, R, E : Throwable> Flow<DataState<out T, out E>>.flatMapLatestDataState(
     getSuccessTransform: suspend (data: T) -> Flow<DataState<R, E>>
 ): Flow<DataState<R, E>> {

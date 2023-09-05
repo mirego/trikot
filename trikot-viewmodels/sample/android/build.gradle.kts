@@ -33,7 +33,8 @@ android {
             applicationIdSuffix = ".debug"
         }
     }
-    packagingOptions {
+
+    packaging {
         resources {
             excludes += setOf("META-INF/*.kotlin_module")
             pickFirsts += setOf(
@@ -46,15 +47,12 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     lint {
@@ -68,6 +66,7 @@ configurations.forEach { it.exclude("org.reactivestreams") }
 
 dependencies {
     api(project(Project.TRIKOT_VIEWMODELS_SAMPLE_COMMON))
+    api(project(Project.TRIKOT_VIEWMODELS_DATABINDING))
 
     implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")

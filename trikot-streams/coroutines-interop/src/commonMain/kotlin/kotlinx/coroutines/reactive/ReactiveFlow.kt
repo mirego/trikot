@@ -2,6 +2,8 @@
  * Copyright 2016-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:OptIn(InternalCoroutinesApi::class)
+
 package kotlinx.coroutines.reactive
 
 /* ktlint-disable no-wildcard-imports */
@@ -13,6 +15,7 @@ import kotlinx.coroutines.flow.internal.*
 import kotlinx.coroutines.internal.*
 import kotlinx.coroutines.intrinsics.*
 import org.reactivestreams.*
+import kotlin.concurrent.Volatile
 import kotlin.coroutines.*
 import kotlin.jvm.*
 /* ktlint-enable no-wildcard-imports */

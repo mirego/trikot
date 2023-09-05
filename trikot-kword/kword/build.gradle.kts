@@ -10,10 +10,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings.optIn("kotlinx.cinterop.UnsafeNumber")
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
@@ -73,6 +69,5 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 }

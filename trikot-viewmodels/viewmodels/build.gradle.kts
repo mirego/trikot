@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("kapt")
     id("com.android.library")
     id("mirego.publish")
 }
@@ -43,23 +42,6 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-process:${Versions.ANDROIDX_LIFECYCLE}")
-                implementation("androidx.recyclerview:recyclerview:1.1.0")
-                implementation("androidx.appcompat:appcompat:1.2.0")
-                implementation("com.squareup.picasso:picasso:2.71828")
-                implementation("com.google.android.material:material:1.3.0")
-                implementation("javax.annotation:javax.annotation-api:1.3.2")
-            }
-        }
-
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-                implementation("androidx.test:core:1.4.1-alpha03")
-                implementation("androidx.test.ext:junit:1.1.3")
-                implementation("org.robolectric:robolectric:4.9.2")
-                implementation("androidx.fragment:fragment-testing:1.4.0")
             }
         }
 
@@ -72,53 +54,14 @@ kotlin {
 }
 
 android {
-    namespace = "com.mirego.trikot.viewmodels.android"
+    namespace = "com.mirego.trikot.viewmodels"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
-    }
-
-    buildFeatures {
-        dataBinding = true
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
-    }
-
-    sourceSets {
-        getByName("test") {
-            manifest {
-                srcFile("src/androidUnitTest/AndroidManifest.xml")
-            }
-        }
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-        }
-    }
-}
-
-// Fixes w: library included more than once: ~/.konan/kotlin-native-prebuilt-macos-XXX/klib/common/stdlib
-afterEvaluate {
-    val compilations = listOf("iosMain", "tvosMain").map {
-        kotlin.targets["metadata"].compilations[it]
-    }
-    compilations.forEach { compilation ->
-        compilation.compileKotlinTask.doFirst {
-            compilation.compileDependencyFiles = files(
-                compilation.compileDependencyFiles.filterNot { it.absolutePath.endsWith("klib/common/stdlib") }
-            )
-        }
-    }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        sourceCompatibility(JavaVersion.VERSION_17)
+        targetCompatibility(JavaVersion.VERSION_17)
     }
 }

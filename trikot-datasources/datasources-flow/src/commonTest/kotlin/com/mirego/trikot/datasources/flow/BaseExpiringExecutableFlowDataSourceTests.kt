@@ -2,6 +2,7 @@ package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
 import com.mirego.trikot.foundation.date.Date
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
@@ -14,6 +15,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class BaseExpiringExecutableFlowDataSourceTests {
     private val requestUseCache = BasicRequest("1", FlowDataSourceRequest.Type.USE_CACHE, 1000)
     private val requestRefreshCache = BasicRequest("1", FlowDataSourceRequest.Type.REFRESH_CACHE, 1000)

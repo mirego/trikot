@@ -89,7 +89,12 @@ button.buttonViewModel = searchViewModel.buttonViewModel
     sourceSets {
         commonMain {
             dependencies {
-                implementation "com.mirego.trikot:analytics:$trikot_version"
+                implementation "com.mirego.trikot:viewmodels:$trikot_version"
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation "com.mirego.trikot:viewmodels-databinding:$trikot_version"
             }
         }
     }

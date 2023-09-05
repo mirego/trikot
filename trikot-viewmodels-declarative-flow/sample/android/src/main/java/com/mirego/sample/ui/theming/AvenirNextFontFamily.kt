@@ -4,7 +4,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.mirego.sample.R
+import com.mirego.vmd.sample.android.R
 
 val AvenirNextFontFamily = FontFamily(
     fonts = listOf(

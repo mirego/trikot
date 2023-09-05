@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 import kotlin.coroutines.AbstractCoroutineContextElement
@@ -141,6 +142,7 @@ class CapturingHandler :
     }
 }
 
+@OptIn(ExperimentalContracts::class)
 internal suspend inline fun <reified E : Throwable> assertCallsExceptionHandlerWith(
     crossinline operation: suspend (CoroutineExceptionHandler) -> Unit
 ): E {

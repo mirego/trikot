@@ -28,7 +28,8 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
 }
 
 kotlin {
-    android()
+    jvmToolchain(Versions.JVM_TOOLCHAIN)
+    androidTarget()
 
     cocoapods {
         name = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
@@ -49,25 +50,10 @@ kotlin {
         }
     }
 
-    ios {
-        binaries.framework {
-            configureFramework()
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            configureFramework()
-        }
-    }
+    ios()
+    iosSimulatorArm64()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.Experimental")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_FLOW))
@@ -96,11 +82,10 @@ kotlin {
 }
 
 android {
-    namespace = "com.mirego.sample"
+    namespace = "com.mirego.vmd.flow.sample"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 }
 

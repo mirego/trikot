@@ -1,12 +1,14 @@
 package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.flow.storage.FlowDataSourceFileManager
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@OptIn(ExperimentalSerializationApi::class)
 class DiskCacheFlowDataSource<R : FlowDataSourceRequest, T : Any>(
     private val json: Json,
     private val dataSerializer: KSerializer<T>,

@@ -10,13 +10,6 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("kotlin.ExperimentalStdlibApi")
-                optIn("io.ktor.util.InternalAPI")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(project(Project.TRIKOT_FOUNDATION))
@@ -67,6 +60,5 @@ android {
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
-        targetSdk = Versions.Android.TARGET_SDK
     }
 }
