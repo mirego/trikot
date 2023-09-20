@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import com.mirego.trikot.viewmodels.declarative.components.VMDButtonViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
@@ -25,6 +26,7 @@ fun <C : VMDContent> VMDButton(
     propagateMinConstraints: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     indication: Indication? = rememberRipple(),
+    role: Role? = Role.Button,
     content: @Composable (BoxScope.(field: C) -> Unit)
 ) {
     val buttonViewModel: VMDButtonViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
@@ -35,7 +37,8 @@ fun <C : VMDContent> VMDButton(
                 enabled = buttonViewModel.isEnabled,
                 onClick = viewModel.actionBlock,
                 interactionSource = interactionSource,
-                indication = indication
+                indication = indication,
+                role = role
             ),
         contentAlignment = contentAlignment,
         propagateMinConstraints = propagateMinConstraints,
