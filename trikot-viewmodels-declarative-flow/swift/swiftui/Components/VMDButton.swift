@@ -30,6 +30,6 @@ public struct VMDButton<Label, Content: VMDContent>: View where Label: View {
             labelBuilder(viewModel.content)
         }
         .disabled(!viewModel.isEnabled)
-        .vmdModifier(viewModel)
+        .vmdModifier(isHidden: viewModel.isHidden, testIdentifier: viewModel.testIdentifier)
     }
 }
