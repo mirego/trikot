@@ -1,5 +1,5 @@
-import Introspect
 import SwiftUI
+import SwiftUIIntrospect
 import TRIKOT_FRAMEWORK_NAME
 
 public struct VMDTextField<Label>: View where Label: View {
@@ -89,7 +89,7 @@ public struct VMDTextField<Label>: View where Label: View {
                 viewModel.onReturnKeyTap()
             })
             .keyboardType(viewModel.keyboardType.uiKeyboardType)
-            .introspectTextField { textfield in
+            .introspect(.textField, on: .iOS(.v13, .v14)) { textfield in
                 textfield.returnKeyType = viewModel.keyboardReturnKeyType.uiReturnKeyType
             }
             .textContentType(viewModel.contentType?.uiTextContentType)
