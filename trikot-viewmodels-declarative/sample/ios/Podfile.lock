@@ -1,32 +1,32 @@
 PODS:
-  - Introspect (0.6.3)
   - Kingfisher (7.8.1)
   - ReachabilitySwift (5.0.0)
   - SwiftLint (0.52.3)
-  - Trikot/http (4.4.0):
+  - SwiftUIIntrospect (1.0.0)
+  - Trikot/http (5.0.0):
     - ReachabilitySwift (~> 5.0)
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/kword (4.4.0):
+  - Trikot/kword (5.0.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/streams (4.4.0):
+  - Trikot/streams (5.0.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative (4.4.0):
+  - Trikot/viewmodels.declarative (5.0.0):
     - Trikot/streams
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.Combine (4.4.0):
+  - Trikot/viewmodels.declarative.Combine (5.0.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.SwiftUI (4.4.0):
-    - Introspect (~> 0.1)
+  - Trikot/viewmodels.declarative.SwiftUI (5.0.0):
     - Kingfisher (~> 7.8.1)
+    - SwiftUIIntrospect (~> 1.0)
     - Trikot/viewmodels.declarative
     - Trikot/viewmodels.declarative.Combine
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.UIKit (4.4.0):
+  - Trikot/viewmodels.declarative.UIKit (5.0.0):
     - Kingfisher (~> 7.8.1)
     - Trikot/streams
     - Trikot/viewmodels.declarative
     - TRIKOT_FRAMEWORK_NAME
-  - TRIKOT_FRAMEWORK_NAME (4.4.0)
+  - TRIKOT_FRAMEWORK_NAME (5.0.0)
 
 DEPENDENCIES:
   - SwiftLint
@@ -40,10 +40,10 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Introspect
     - Kingfisher
     - ReachabilitySwift
     - SwiftLint
+    - SwiftUIIntrospect
 
 EXTERNAL SOURCES:
   Trikot:
@@ -52,13 +52,13 @@ EXTERNAL SOURCES:
     :path: "../common"
 
 SPEC CHECKSUMS:
-  Introspect: 186abf453adbdb6e061f05d51af7abc21b03ff69
   Kingfisher: 63f677311d36a3473f6b978584f8a3845d023dc5
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
-  Trikot: 549fe7108cdf582bf8dcf2818243c2ed30886f66
-  TRIKOT_FRAMEWORK_NAME: 1ef30287e3ed8361e23a266dc2bff3ba3643ddfc
+  SwiftUIIntrospect: 9f15bf51d1a7582e168a683debca38649f3e152e
+  Trikot: d9eb3792ffea05d91169b5235b5c7f11ec482332
+  TRIKOT_FRAMEWORK_NAME: 51e81763d6b9297b0da72e828d401ad73bf05457
 
 PODFILE CHECKSUM: 8057f57ba2a2db77f33517422839afd5282c408e
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.1
