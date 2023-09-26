@@ -97,7 +97,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
             contentScale = ContentScale.Crop
         )
 
-        ComponentShowcaseTitle(viewModel.complexPlaceholderImageTitle)
+        ComponentShowcaseTitle(viewModel.placeholderNoImageTitle)
 
         val imageModifier = Modifier
             .fillMaxWidth()
@@ -106,7 +106,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
 
         VMDImage(
             modifier = imageModifier,
-            viewModel = viewModel.complexPlaceholderImage,
+            viewModel = viewModel.placeholderNoImage,
             contentScale = ContentScale.Crop,
             placeholderContentScale = ContentScale.Crop,
             placeholder = { placeholderImageResource, state ->
