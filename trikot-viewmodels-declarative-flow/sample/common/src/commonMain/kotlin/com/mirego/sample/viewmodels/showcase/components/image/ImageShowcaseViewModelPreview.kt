@@ -1,6 +1,8 @@
 package com.mirego.sample.viewmodels.showcase.components.image
 
 import com.mirego.sample.resources.SampleImageResource
+import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
+import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
 import com.mirego.trikot.viewmodels.declarative.properties.VMDImageDescriptor
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithImage
@@ -28,6 +30,13 @@ class ImageShowcaseViewModelPreview : VMDViewModelImpl(MainScope()), ImageShowca
     override val placeholderImageTitle = text("Placeholder image")
     override val placeholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
 
-    override val complexPlaceholderImageTitle = text("Complex placeholder image")
-    override val complexPlaceholderImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
+    override val placeholderNoImageTitle = text("Placeholder no image")
+    override val placeholderNoImage = remoteImage(null, SampleImageResource.IMAGE_PLACEHOLDER)
+
+    override val placeholderInvalidImageTitle = text("Placeholder invalid image")
+    override val placeholderInvalidImage = remoteImage("https://invalidimageimageurl.ca/no_image.jpeg", SampleImageResource.IMAGE_PLACEHOLDER)
+
+    override val placeholderLoadingImageTitle = text("Long loading image")
+    override val placeholderLoadingImage = remoteImage("https://www.nasa.gov/sites/default/files/thumbnails/image/main_image_star-forming_region_carina_nircam_final-5mb.jpg", SampleImageResource.IMAGE_PLACEHOLDER)
+
 }

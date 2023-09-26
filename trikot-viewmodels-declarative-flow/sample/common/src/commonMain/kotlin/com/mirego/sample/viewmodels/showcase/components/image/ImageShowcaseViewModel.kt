@@ -21,6 +21,12 @@ interface ImageShowcaseViewModel : ShowcaseViewModel {
     val placeholderImageTitle: VMDTextViewModel
     val placeholderImage: VMDImageViewModel
 
-    val complexPlaceholderImageTitle: VMDTextViewModel
-    val complexPlaceholderImage: VMDImageViewModel
+    val placeholderNoImageTitle: VMDTextViewModel
+    val placeholderNoImage: VMDImageViewModel
+
+    val placeholderInvalidImageTitle: VMDTextViewModel
+    val placeholderInvalidImage: VMDImageViewModel
+
+    val placeholderLoadingImageTitle: VMDTextViewModel
+    val placeholderLoadingImage: VMDImageViewModel
 }

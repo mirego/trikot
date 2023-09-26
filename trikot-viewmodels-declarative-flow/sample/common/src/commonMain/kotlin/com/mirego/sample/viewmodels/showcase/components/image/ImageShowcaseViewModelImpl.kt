@@ -32,10 +32,27 @@ class ImageShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : S
         contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_IMAGE_TITLE]
     )
 
-    override val complexPlaceholderImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE])
-    override val complexPlaceholderImage = remoteImage(
+    override val placeholderNoImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_NO_IMAGE_TITLE])
+
+    override val placeholderNoImage = remoteImage(
         imageUrl = null,
         placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
-        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_COMPLEX_PLACEHOLDER_IMAGE_TITLE]
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_NO_IMAGE_TITLE]
+    )
+
+    override val placeholderInvalidImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_INVALID_IMAGE_TITLE])
+
+    override val placeholderInvalidImage = remoteImage(
+        imageUrl = "https://invalidimageimageurl.ca/no_image.jpeg",
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_INVALID_IMAGE_TITLE]
+    )
+
+    override val placeholderLoadingImageTitle = text(i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_LOADING_IMAGE_TITLE])
+
+    override val placeholderLoadingImage = remoteImage(
+        imageUrl = "https://www.nasa.gov/sites/default/files/thumbnails/image/main_image_star-forming_region_carina_nircam_final-5mb.jpg",
+        placeholderImageResource = SampleImageResource.IMAGE_PLACEHOLDER,
+        contentDescription = i18N[KWordTranslation.IMAGE_SHOWCASE_PLACEHOLDER_LOADING_IMAGE_TITLE]
     )
 }

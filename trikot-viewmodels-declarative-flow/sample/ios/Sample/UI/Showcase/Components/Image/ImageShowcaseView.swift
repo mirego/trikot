@@ -20,7 +20,7 @@ struct ImageShowcaseView: RootViewModelView {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 40) {
+                LazyVStack(alignment: .leading, spacing: 40) {
                     ComponentShowcaseSectionView(viewModel.localImageTitle) {
                         VMDImage(viewModel.localImage)
                             .resizable()
@@ -62,38 +62,42 @@ struct ImageShowcaseView: RootViewModelView {
                             })
                     }
 
-                    ComponentShowcaseSectionView(viewModel.complexPlaceholderImageTitle) {
-                        VMDImage(viewModel.complexPlaceholderImage)
+                    ComponentShowcaseSectionView(viewModel.placeholderNoImageTitle) {
+                        VMDImage(viewModel.placeholderNoImage)
                             .resizable()
-                            .placeholder({ status, progress, placeholderImage in
-                                Color.gray.opacity(0.25)
-                                    .frame(maxWidth: .infinity)
-                                    .aspectRatio(imageAspectRatio, contentMode: .fill)
-                                    .overlay(
-                                            VStack(spacing: 10) {
-                                            if let placeholderImage = placeholderImage {
-                                                placeholderImage
-                                                    .resizable()
-                                                    .aspectRatio(imageAspectRatio, contentMode: .fill)
-                                                    .frame(width: 50 * imageAspectRatio, height: 50)
-                                            }
+                            .placeholder { progress, placeholderImage in
+                                ImageShowcasePlaceHolder(
+                                    progress: progress,
+                                    placeholderImage: placeholderImage,
+                                    imageAspectRatio: imageAspectRatio
+                                )
+                            }
+                    }
 
-                                            switch status {
-                                            case .empty:
-                                                Text("There is no image to display")
-                                                    .style(.subheadline)
-                                            case .loading:
-                                                Text("Loading \(progress.fractionCompleted)")
-                                                    .style(.subheadline)
-                                            case .error:
-                                                Text("Unable to load the remote image")
-                                                    .style(.subheadline)
-                                            default:
-                                                EmptyView()
-                                            }
-                                        }
-                                    )
-                            })
+                    ComponentShowcaseSectionView(viewModel.placeholderInvalidImageTitle) {
+                        VMDImage(viewModel.placeholderInvalidImage)
+                            .resizable()
+                            .placeholder { progress, placeholderImage in
+                                ImageShowcasePlaceHolder(
+                                    progress: progress,
+                                    placeholderImage: placeholderImage,
+                                    imageAspectRatio: imageAspectRatio
+                                )
+                            }
+                    }
+
+                    ComponentShowcaseSectionView(viewModel.placeholderLoadingImageTitle) {
+                        VMDImage(viewModel.placeholderLoadingImage)
+                            .resizable()
+                            .placeholder { progress, placeholderImage in
+                                ImageShowcasePlaceHolder(
+                                    progress: progress,
+                                    placeholderImage: placeholderImage,
+                                    imageAspectRatio: imageAspectRatio
+                                )
+                            }
+                            .aspectRatio(imageAspectRatio, contentMode: .fill)
+                            .clipped()
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -114,5 +118,40 @@ struct ImageShowcaseViewPreviews: PreviewProvider {
         return PreviewView {
             ImageShowcaseView(viewModel: ImageShowcaseViewModelPreview())
         }
+    }
+}
+
+struct ImageShowcasePlaceHolder: View {
+    let progress: Progress
+    let placeholderImage: Image?
+    let imageAspectRatio: CGFloat
+
+    @Environment(\.vmdImageLoadingStatus) private var loadingStatus: VMDImageLoadingStatus
+
+    var body: some View {
+        Color.gray.opacity(0.25)
+            .frame(maxWidth: .infinity)
+            .aspectRatio(imageAspectRatio, contentMode: .fill)
+            .overlay(
+                    VStack(spacing: 10) {
+                    if let placeholderImage {
+                        placeholderImage
+                            .resizable()
+                            .aspectRatio(imageAspectRatio, contentMode: .fill)
+                            .frame(width: 50 * imageAspectRatio, height: 50)
+                    }
+
+                    switch loadingStatus {
+                    case .loading:
+                        Text("Loading \(progress.fractionCompleted)")
+                            .style(.subheadline)
+                    case .error:
+                        Text("Unable to load the remote image")
+                            .style(.subheadline)
+                    case .success:
+                        EmptyView()
+                    }
+                }
+            )
     }
 }

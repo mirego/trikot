@@ -2,13 +2,6 @@ import SwiftUI
 import TRIKOT_FRAMEWORK_NAME
 import Kingfisher
 
-public enum VMDImageLoadingStatus {
-    case empty
-    case loading
-    case success
-    case error
-}
-
 public struct VMDImage: View {
     public typealias LocalImageConfiguration = (Image) -> Image
     public typealias RemoteImageConfiguration = (KFImage, VMDImageResource) -> KFImage
@@ -21,7 +14,7 @@ public struct VMDImage: View {
     }
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDImageViewModel>
-    @State var loadingStatus: VMDImageLoadingStatus = .empty
+    @State var loadingStatus: VMDImageLoadingStatus = .loading
 
     public init(_ viewModel: VMDImageViewModel) {
         self.observableViewModel = viewModel.asObservable()
@@ -38,16 +31,25 @@ public struct VMDImage: View {
             })
             .accessibilityLabel(viewModel.contentDescription ?? "")
         } else if let remoteImage = viewModel.image as? VMDImageDescriptor.Remote {
-            remoteImageConfigurations.reduce(KFImage(remoteImage.imageURL), { current, config in
-                config(current, remoteImage.placeholderImageResource)
-            })
+            remoteImageConfigurations.reduce(
+                KFImage(remoteImage.imageURL)
+                    .onFailure { _ in
+                        loadingStatus = .error
+                    }
+                    .onSuccess { _ in
+                        loadingStatus = .success
+                    }, { current, config in
+                        config(current, remoteImage.placeholderImageResource)
+                    }
+            )
             .accessibilityLabel(viewModel.contentDescription ?? "")
+            .environment(\.vmdImageLoadingStatus, loadingStatus)
         } else {
             EmptyView()
         }
     }
 
-    public func configure(local configureLocalBlock: @escaping LocalImageConfiguration, remote configureRemoteBlock: @escaping (KFImage, VMDImageResource) -> KFImage) -> VMDImage {
+    public func configure(local configureLocalBlock: @escaping LocalImageConfiguration, remote configureRemoteBlock: @escaping RemoteImageConfiguration) -> VMDImage {
         if viewModel.image is VMDImageDescriptor.Local {
             return configureLocalImage(configureLocalBlock)
         } else if viewModel.image is VMDImageDescriptor.Remote {
@@ -67,4 +69,21 @@ public struct VMDImage: View {
         result.remoteImageConfigurations.append(block)
         return result
     }
+}
+
+public enum VMDImageLoadingStatus {
+    case loading
+    case success
+    case error
+}
+
+public struct VMDImageLoadingStatusKey: EnvironmentKey {
+    public static let defaultValue = VMDImageLoadingStatus.loading
+}
+
+public extension EnvironmentValues {
+  var vmdImageLoadingStatus: VMDImageLoadingStatus {
+    get { self[VMDImageLoadingStatusKey.self] }
+    set { self[VMDImageLoadingStatusKey.self] = newValue }
+  }
 }
