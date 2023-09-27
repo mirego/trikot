@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+### Updates
+
+### Breaking Changes
+
+## 5.0.0
+
 > 2023-09-02
 
 ### Updates
@@ -23,6 +29,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [viewmodels] Android databindings into its own artefact
 _To migrate:_
 Add to your android module `implementation("com.mirego.trikot:viewmodels-databinding:$trikot_version")`
+
+[VMD-flow] placeholder(status:progress:placeholderImage) was removed in favour of placeholder(progress, placeholderImage)
 
 ## 4.4.0
 
