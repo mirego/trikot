@@ -6,7 +6,7 @@ class TrikotBluetoothScanResult: NSObject, BluetoothScanResult {
     private let centralManager: CBCentralManager
     private let peripheral: CBPeripheral
     private var lostHeartbeatTimer: Foundation.Timer?
-    private var manufacturerData = behaviorSubject()
+    private var manufacturerData = Publishers().behaviorSubject(value: nil)
 
     var bluetoothDevice: TrikotBluetoothDevice?
 
@@ -14,7 +14,7 @@ class TrikotBluetoothScanResult: NSObject, BluetoothScanResult {
 
     var physicalAddress: String
 
-    var rssi: Publisher = behaviorSubject()
+    var rssi: Publisher = Publishers().behaviorSubject(value: nil)
 
     var onHeartBeatLost: (() -> Void)? {
         didSet {
