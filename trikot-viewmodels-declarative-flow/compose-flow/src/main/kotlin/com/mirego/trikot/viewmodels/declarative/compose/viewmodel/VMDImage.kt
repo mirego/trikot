@@ -396,7 +396,7 @@ fun RemoteImage(
         filterQuality = filterQuality
     ) {
         if (hasLoadingFailed || imageUrl == null) {
-            error(placeholderImage)
+            placeholderStateView(placeholderImage, PlaceholderState.ERROR)
         } else {
             when (painter.state) {
                 is AsyncImagePainter.State.Success -> {
