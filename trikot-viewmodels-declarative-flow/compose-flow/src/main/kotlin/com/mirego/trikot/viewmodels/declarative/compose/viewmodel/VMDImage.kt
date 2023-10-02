@@ -60,32 +60,6 @@ private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024 // 100 MB, taken from andr
 
 @Composable
 fun VMDImage(
-    viewModel: VMDImageViewModel,
-    modifier: Modifier = Modifier,
-    alignment: Alignment = Alignment.Center,
-    onState: ((AsyncImagePainter.State) -> Unit)? = null,
-    contentScale: ContentScale = ContentScale.Fit,
-    alpha: Float = DefaultAlpha,
-    colorFilter: ColorFilter? = null,
-    allowHardware: Boolean = true
-) {
-    val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
-
-    VMDImage(
-        imageDescriptor = imageViewModel.image,
-        modifier = modifier.vmdModifier(imageViewModel),
-        contentDescription = imageViewModel.contentDescription,
-        alignment = alignment,
-        onState = onState,
-        contentScale = contentScale,
-        alpha = alpha,
-        colorFilter = colorFilter,
-        allowHardware = allowHardware
-    )
-}
-
-@Composable
-fun VMDImage(
     imageDescriptor: VMDImageDescriptor,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
@@ -236,7 +210,7 @@ fun VMDImage(
     placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    error: @Composable (placeholderImageResource: VMDImageResource) -> Unit = { imageResource ->
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
             modifier = modifier,
@@ -244,8 +218,7 @@ fun VMDImage(
             colorFilter = colorFilter,
             contentDescription = viewModel.contentDescription
         )
-    },
-    loading: @Composable (placeholderImageResource: VMDImageResource) -> Unit = { _ -> }
+    }
 ) {
     val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
@@ -259,8 +232,7 @@ fun VMDImage(
         contentDescription = imageViewModel.contentDescription,
         placeholderContentScale = placeholderContentScale,
         imageDescriptor = imageViewModel.image,
-        error = error,
-        loading = loading
+        placeholderStateView = placeholderStateView
     )
 }
 
@@ -274,7 +246,7 @@ fun VMDImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String? = null,
-    error: @Composable (placeholderImageResource: VMDImageResource) -> Unit = { imageResource ->
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit = { imageResource, state ->
         RemoteImageDefaultPlaceholder(
             imageResource = imageResource,
             modifier = modifier,
@@ -283,7 +255,8 @@ fun VMDImage(
             contentDescription = contentDescription
         )
     },
-    loading: @Composable (placeholderImageResource: VMDImageResource) -> Unit = { _ -> }
+    allowHardware: Boolean = true,
+    onState: ((AsyncImagePainter.State) -> Unit)? = null,
 ) {
     when (imageDescriptor) {
         is Local -> {
@@ -303,12 +276,12 @@ fun VMDImage(
                 modifier = modifier,
                 imageUrl = imageDescriptor.url,
                 placeholderImage = imageDescriptor.placeholderImageResource,
-                error = error,
-                loading = loading,
+                placeholderStateView = placeholderStateView,
                 alignment = alignment,
                 contentScale = contentScale,
                 colorFilter = colorFilter,
-                contentDescription = contentDescription
+                contentDescription = contentDescription,
+                allowHardware = allowHardware
             )
         }
     }
@@ -392,8 +365,7 @@ fun RemoteImage(
     modifier: Modifier = Modifier,
     imageUrl: String?,
     placeholderImage: VMDImageResource = VMDImageResource.None,
-    error: @Composable (placeholderImageResource: VMDImageResource) -> Unit,
-    loading: @Composable (placeholderImageResource: VMDImageResource) -> Unit,
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit,
     alignment: Alignment = Alignment.Center,
     transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
     onState: ((AsyncImagePainter.State) -> Unit)? = null,
@@ -401,7 +373,8 @@ fun RemoteImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
-    contentDescription: String? = null
+    contentDescription: String? = null,
+    allowHardware: Boolean = true
 ) {
     var hasLoadingFailed by remember { mutableStateOf(false) }
     LaunchedEffect(imageUrl) {
@@ -409,7 +382,10 @@ fun RemoteImage(
     }
     SubcomposeAsyncImage(
         modifier = modifier,
-        model = imageUrl,
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(imageUrl)
+            .allowHardware(allowHardware)
+            .build(),
         contentDescription = contentDescription,
         transform = transform,
         alignment = alignment,
@@ -429,11 +405,11 @@ fun RemoteImage(
                 }
 
                 is AsyncImagePainter.State.Loading,
-                is AsyncImagePainter.State.Empty -> loading(placeholderImage)
+                is AsyncImagePainter.State.Empty -> placeholderStateView(placeholderImage, PlaceholderState.LOADING)
 
                 is AsyncImagePainter.State.Error -> {
                     hasLoadingFailed = true
-                    error(placeholderImage)
+                    placeholderStateView(placeholderImage, PlaceholderState.ERROR)
                 }
             }
         }
@@ -501,4 +477,9 @@ private fun transformOf(
         is AsyncImagePainter.State.Error -> state.copy(painter = placeholder)
         else -> state
     }
+}
+
+enum class PlaceholderState {
+    LOADING,
+    ERROR
 }

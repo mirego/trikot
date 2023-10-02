@@ -30,6 +30,7 @@ import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewM
 import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.PlaceholderState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 
@@ -145,17 +146,27 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                 .padding(16.dp)
                 .aspectRatio(imageAspectRatio),
             viewModel = viewModel.placeholderInvalidImage,
-            error = { image ->
-                Box(
-                    modifier = Modifier
-                        .background(Color.LightGray)
-                ) {
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "Unable to load the remote image",
-                        style = SampleTextStyle.subheadline,
-                        color = Color.Black
-                    )
+            placeholderStateView = { image, state ->
+                when (state) {
+                    PlaceholderState.LOADING -> Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray)
+                    ) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
+
+                    PlaceholderState.ERROR -> Box(
+                        modifier = Modifier
+                            .background(Color.LightGray)
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Unable to load the remote image",
+                            style = SampleTextStyle.subheadline,
+                            color = Color.Black
+                        )
+                    }
                 }
             }
         )
@@ -169,13 +180,27 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                 .padding(16.dp),
             viewModel = viewModel.remoteImage,
             contentScale = ContentScale.Crop,
-            loading = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.LightGray)
-                ) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            placeholderStateView = { image, state ->
+                when (state) {
+                    PlaceholderState.LOADING -> Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray)
+                    ) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
+
+                    PlaceholderState.ERROR -> Box(
+                        modifier = Modifier
+                            .background(Color.LightGray)
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Unable to load the remote image",
+                            style = SampleTextStyle.subheadline,
+                            color = Color.Black
+                        )
+                    }
                 }
             }
         )
