@@ -2,6 +2,7 @@ package com.mirego.sample.ui.showcase.components.image
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -131,6 +132,28 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                         is AsyncImagePainter.State.Error -> Text("Unable to load the remote image", style = SampleTextStyle.subheadline)
                         else -> {}
                     }
+                }
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.placeholderInvalidImageTitle)
+
+        VMDImage(
+            modifier = Modifier
+                .padding(16.dp)
+                .aspectRatio(imageAspectRatio),
+            viewModel = viewModel.placeholderInvalidImage,
+            error = { image ->
+                Box(
+                    modifier = Modifier
+                        .background(Color.LightGray)
+                ) {
+                    Text(
+                        modifier = Modifier.align(Alignment.Center),
+                        text = "Unable to load the remote image",
+                        style = SampleTextStyle.subheadline,
+                        color = Color.Black
+                    )
                 }
             }
         )
