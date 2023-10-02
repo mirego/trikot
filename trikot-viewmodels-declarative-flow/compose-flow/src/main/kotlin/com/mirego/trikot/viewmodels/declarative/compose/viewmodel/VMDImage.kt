@@ -172,6 +172,10 @@ fun VMDImage(
 }
 
 @Composable
+@Deprecated(
+    message = "Use the constructor with custom error and loading instead of custom placeholder",
+    replaceWith = ReplaceWith("VMDImage with custom error and loading instead of custom placeholder")
+)
 fun VMDImage(
     modifier: Modifier = Modifier,
     imageDescriptor: VMDImageDescriptor,
