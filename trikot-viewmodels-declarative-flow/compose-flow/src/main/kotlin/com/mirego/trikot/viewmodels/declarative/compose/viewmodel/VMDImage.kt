@@ -281,7 +281,8 @@ fun VMDImage(
                 contentScale = contentScale,
                 colorFilter = colorFilter,
                 contentDescription = contentDescription,
-                allowHardware = allowHardware
+                allowHardware = allowHardware,
+                onState = onState
             )
         }
     }

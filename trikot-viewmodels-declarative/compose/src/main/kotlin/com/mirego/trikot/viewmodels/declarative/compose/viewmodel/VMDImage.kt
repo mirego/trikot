@@ -6,13 +6,18 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LayoutModifier
@@ -23,6 +28,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Constraints
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Dimension
@@ -44,34 +51,6 @@ import kotlinx.coroutines.flow.mapNotNull
 
 private const val TAG = "VMDImage"
 private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024 // 100 MB, taken from android.graphics.RecordingCanvas
-
-@Composable
-fun VMDImage(
-    viewModel: VMDImageViewModel,
-    modifier: Modifier = Modifier,
-    alignment: Alignment = Alignment.Center,
-    onState: ((AsyncImagePainter.State) -> Unit)? = null,
-    contentScale: ContentScale = ContentScale.Fit,
-    alpha: Float = DefaultAlpha,
-    colorFilter: ColorFilter? = null,
-    allowHardware: Boolean = true
-) {
-    val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
-
-    VMDImage(
-        imageDescriptor = imageViewModel.image,
-        modifier = Modifier
-            .hidden(imageViewModel.isHidden)
-            .then(modifier),
-        contentDescription = imageViewModel.contentDescription,
-        alignment = alignment,
-        onState = onState,
-        contentScale = contentScale,
-        alpha = alpha,
-        colorFilter = colorFilter,
-        allowHardware = allowHardware
-    )
-}
 
 @Composable
 fun VMDImage(
@@ -162,6 +141,10 @@ fun VMDImage(
 }
 
 @Composable
+@Deprecated(
+    message = "Use the constructor with custom error and loading instead of custom placeholder",
+    replaceWith = ReplaceWith("VMDImage with custom error and loading instead of custom placeholder")
+)
 fun VMDImage(
     modifier: Modifier = Modifier,
     imageDescriptor: VMDImageDescriptor,
@@ -208,6 +191,94 @@ fun VMDImage(
                 allowHardware = allowHardware,
                 placeholder = placeholder,
                 asyncStateCallback = asyncStateCallback
+            )
+        }
+    }
+}
+
+@Composable
+fun VMDImage(
+    modifier: Modifier = Modifier,
+    viewModel: VMDImageViewModel,
+    alignment: Alignment = Alignment.Center,
+    contentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = contentScale,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit = { imageResource, state ->
+        RemoteImageDefaultPlaceholder(
+            imageResource = imageResource,
+            modifier = modifier,
+            contentScale = placeholderContentScale,
+            colorFilter = colorFilter,
+            contentDescription = viewModel.contentDescription
+        )
+    }
+) {
+    val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
+
+    VMDImage(
+        modifier = modifier
+            .hidden(imageViewModel.isHidden)
+            .then(modifier),
+        alpha = alpha,
+        alignment = alignment,
+        contentScale = contentScale,
+        colorFilter = colorFilter,
+        contentDescription = imageViewModel.contentDescription,
+        placeholderContentScale = placeholderContentScale,
+        imageDescriptor = imageViewModel.image,
+        placeholderStateView = placeholderStateView
+    )
+}
+
+@Composable
+fun VMDImage(
+    modifier: Modifier = Modifier,
+    imageDescriptor: VMDImageDescriptor,
+    alignment: Alignment = Alignment.Center,
+    contentScale: ContentScale = ContentScale.Fit,
+    placeholderContentScale: ContentScale = contentScale,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    contentDescription: String? = null,
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit = { imageResource, state ->
+        RemoteImageDefaultPlaceholder(
+            imageResource = imageResource,
+            modifier = modifier,
+            contentScale = placeholderContentScale,
+            colorFilter = colorFilter,
+            contentDescription = contentDescription
+        )
+    },
+    allowHardware: Boolean = true,
+    onState: ((AsyncImagePainter.State) -> Unit)? = null,
+) {
+    when (imageDescriptor) {
+        is Local -> {
+            LocalImage(
+                modifier = modifier,
+                imageResource = imageDescriptor.imageResource,
+                alignment = alignment,
+                contentScale = contentScale,
+                alpha = alpha,
+                colorFilter = colorFilter,
+                contentDescription = contentDescription
+            )
+        }
+
+        is Remote -> {
+            RemoteImage(
+                modifier = modifier,
+                imageUrl = imageDescriptor.url,
+                placeholderImage = imageDescriptor.placeholderImageResource,
+                placeholderStateView = placeholderStateView,
+                alignment = alignment,
+                contentScale = contentScale,
+                colorFilter = colorFilter,
+                contentDescription = contentDescription,
+                allowHardware = allowHardware,
+                onState = onState
             )
         }
     }
@@ -287,6 +358,62 @@ fun RemoteImage(
 }
 
 @Composable
+fun RemoteImage(
+    modifier: Modifier = Modifier,
+    imageUrl: String?,
+    placeholderImage: VMDImageResource = VMDImageResource.None,
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit,
+    alignment: Alignment = Alignment.Center,
+    transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
+    onState: ((AsyncImagePainter.State) -> Unit)? = null,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
+    contentDescription: String? = null,
+    allowHardware: Boolean = true
+) {
+    var hasLoadingFailed by remember { mutableStateOf(false) }
+    LaunchedEffect(imageUrl) {
+        hasLoadingFailed = false
+    }
+    SubcomposeAsyncImage(
+        modifier = modifier,
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(imageUrl)
+            .allowHardware(allowHardware)
+            .build(),
+        contentDescription = contentDescription,
+        transform = transform,
+        alignment = alignment,
+        onState = onState,
+        contentScale = contentScale,
+        alpha = alpha,
+        colorFilter = colorFilter,
+        filterQuality = filterQuality
+    ) {
+        if (hasLoadingFailed || imageUrl == null) {
+            placeholderStateView(placeholderImage, PlaceholderState.ERROR)
+        } else {
+            when (painter.state) {
+                is AsyncImagePainter.State.Success -> {
+                    hasLoadingFailed = false
+                    SubcomposeAsyncImageContent()
+                }
+
+                is AsyncImagePainter.State.Loading,
+                is AsyncImagePainter.State.Empty -> placeholderStateView(placeholderImage, PlaceholderState.LOADING)
+
+                is AsyncImagePainter.State.Error -> {
+                    hasLoadingFailed = true
+                    placeholderStateView(placeholderImage, PlaceholderState.ERROR)
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun RemoteImageDefaultPlaceholder(
     imageResource: VMDImageResource,
     modifier: Modifier = Modifier,
@@ -347,4 +474,9 @@ private fun transformOf(
         is AsyncImagePainter.State.Error -> state.copy(painter = placeholder)
         else -> state
     }
+}
+
+enum class PlaceholderState {
+    LOADING,
+    ERROR
 }
