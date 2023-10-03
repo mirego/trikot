@@ -54,6 +54,32 @@ private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024 // 100 MB, taken from andr
 
 @Composable
 fun VMDImage(
+    viewModel: VMDImageViewModel,
+    modifier: Modifier = Modifier,
+    alignment: Alignment = Alignment.Center,
+    onState: ((AsyncImagePainter.State) -> Unit)? = null,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    allowHardware: Boolean = true
+) {
+    val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
+
+    VMDImage(
+        imageDescriptor = imageViewModel.image,
+        modifier = modifier.vmdModifier(imageViewModel),
+        contentDescription = imageViewModel.contentDescription,
+        alignment = alignment,
+        onState = onState,
+        contentScale = contentScale,
+        alpha = alpha,
+        colorFilter = colorFilter,
+        allowHardware = allowHardware
+    )
+}
+
+@Composable
+fun VMDImage(
     imageDescriptor: VMDImageDescriptor,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
@@ -141,8 +167,8 @@ fun VMDImage(
 
 @Composable
 @Deprecated(
-    message = "Use the constructor with custom error and loading instead of custom placeholder",
-    replaceWith = ReplaceWith("VMDImage with custom error and loading instead of custom placeholder")
+    message = "Use the constructor with placeholderStateView instead of custom placeholder",
+    replaceWith = ReplaceWith("VMDImage with placeholderStateView instead of custom placeholder")
 )
 fun VMDImage(
     modifier: Modifier = Modifier,
@@ -201,18 +227,9 @@ fun VMDImage(
     viewModel: VMDImageViewModel,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
-    placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit = { imageResource, state ->
-        RemoteImageDefaultPlaceholder(
-            imageResource = imageResource,
-            modifier = modifier,
-            contentScale = placeholderContentScale,
-            colorFilter = colorFilter,
-            contentDescription = viewModel.contentDescription
-        )
-    }
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit
 ) {
     val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
@@ -224,7 +241,6 @@ fun VMDImage(
         contentScale = contentScale,
         colorFilter = colorFilter,
         contentDescription = imageViewModel.contentDescription,
-        placeholderContentScale = placeholderContentScale,
         imageDescriptor = imageViewModel.image,
         placeholderStateView = placeholderStateView
     )
@@ -236,19 +252,10 @@ fun VMDImage(
     imageDescriptor: VMDImageDescriptor,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
-    placeholderContentScale: ContentScale = contentScale,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String? = null,
-    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit = { imageResource, state ->
-        RemoteImageDefaultPlaceholder(
-            imageResource = imageResource,
-            modifier = modifier,
-            contentScale = placeholderContentScale,
-            colorFilter = colorFilter,
-            contentDescription = contentDescription
-        )
-    },
+    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit,
     allowHardware: Boolean = true,
     onState: ((AsyncImagePainter.State) -> Unit)? = null,
 ) {
