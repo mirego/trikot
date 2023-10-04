@@ -33,6 +33,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.PlaceholderState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
+import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 
 @Composable
 fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
@@ -146,7 +147,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                 .padding(16.dp)
                 .aspectRatio(imageAspectRatio),
             viewModel = viewModel.placeholderInvalidImage,
-            placeholderStateView = { image, state ->
+            placeholder = { _, state: PlaceholderState ->
                 when (state) {
                     PlaceholderState.LOADING -> Box(
                         modifier = Modifier
@@ -180,7 +181,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                 .padding(16.dp),
             viewModel = viewModel.remoteImage,
             contentScale = ContentScale.Crop,
-            placeholderStateView = { image, state ->
+            placeholder = { _, state: PlaceholderState ->
                 when (state) {
                     PlaceholderState.LOADING -> Box(
                         modifier = Modifier

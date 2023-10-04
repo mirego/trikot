@@ -126,6 +126,10 @@ fun VMDImage(
 }
 
 @Composable
+@Deprecated(
+    message = "Use the constructor with placeholder receiving PlaceholderState instead",
+    replaceWith = ReplaceWith("VMDImage with placeholder PlaceholderState instead")
+)
 fun VMDImage(
     modifier: Modifier = Modifier,
     viewModel: VMDImageViewModel,
@@ -167,8 +171,8 @@ fun VMDImage(
 
 @Composable
 @Deprecated(
-    message = "Use the constructor with placeholderStateView instead of custom placeholder",
-    replaceWith = ReplaceWith("VMDImage with placeholderStateView instead of custom placeholder")
+    message = "Use the constructor with placeholder receiving PlaceholderState instead",
+    replaceWith = ReplaceWith("VMDImage with placeholder PlaceholderState instead")
 )
 fun VMDImage(
     modifier: Modifier = Modifier,
@@ -229,7 +233,7 @@ fun VMDImage(
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit
+    placeholder: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit
 ) {
     val imageViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
@@ -242,7 +246,7 @@ fun VMDImage(
         colorFilter = colorFilter,
         contentDescription = imageViewModel.contentDescription,
         imageDescriptor = imageViewModel.image,
-        placeholderStateView = placeholderStateView
+        placeholder = placeholder
     )
 }
 
@@ -255,7 +259,7 @@ fun VMDImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     contentDescription: String? = null,
-    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit,
+    placeholder: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit,
     allowHardware: Boolean = true,
     onState: ((AsyncImagePainter.State) -> Unit)? = null,
 ) {
@@ -277,7 +281,7 @@ fun VMDImage(
                 modifier = modifier,
                 imageUrl = imageDescriptor.url,
                 placeholderImage = imageDescriptor.placeholderImageResource,
-                placeholderStateView = placeholderStateView,
+                placeholder = placeholder,
                 alignment = alignment,
                 contentScale = contentScale,
                 colorFilter = colorFilter,
@@ -367,7 +371,7 @@ fun RemoteImage(
     modifier: Modifier = Modifier,
     imageUrl: String?,
     placeholderImage: VMDImageResource = VMDImageResource.None,
-    placeholderStateView: @Composable (placeholderImageResource: VMDImageResource, state: PlaceholderState) -> Unit,
+    placeholder: @Composable (imageResource: VMDImageResource, placeholderState: PlaceholderState) -> Unit,
     alignment: Alignment = Alignment.Center,
     transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
     onState: ((AsyncImagePainter.State) -> Unit)? = null,
@@ -398,7 +402,7 @@ fun RemoteImage(
         filterQuality = filterQuality
     ) {
         if (hasLoadingFailed || imageUrl == null) {
-            placeholderStateView(placeholderImage, PlaceholderState.ERROR)
+            placeholder(placeholderImage, PlaceholderState.ERROR)
         } else {
             when (painter.state) {
                 is AsyncImagePainter.State.Success -> {
@@ -407,11 +411,11 @@ fun RemoteImage(
                 }
 
                 is AsyncImagePainter.State.Loading,
-                is AsyncImagePainter.State.Empty -> placeholderStateView(placeholderImage, PlaceholderState.LOADING)
+                is AsyncImagePainter.State.Empty -> placeholder(placeholderImage, PlaceholderState.LOADING)
 
                 is AsyncImagePainter.State.Error -> {
                     hasLoadingFailed = true
-                    placeholderStateView(placeholderImage, PlaceholderState.ERROR)
+                    placeholder(placeholderImage, PlaceholderState.ERROR)
                 }
             }
         }
