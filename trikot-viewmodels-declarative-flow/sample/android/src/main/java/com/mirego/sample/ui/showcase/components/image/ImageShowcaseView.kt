@@ -33,7 +33,6 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.PlaceholderState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
-import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
 
 @Composable
 fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
