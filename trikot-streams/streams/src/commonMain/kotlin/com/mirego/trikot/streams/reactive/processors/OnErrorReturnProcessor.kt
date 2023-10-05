@@ -5,7 +5,7 @@ import org.reactivestreams.Subscriber
 
 typealias OnErrorReturnProcessorBlock<T> = (Throwable) -> T
 
-class OnErrorReturnProcessor<T>(parentPublisher: Publisher<T>, private val block: OnErrorReturnProcessorBlock<T>) :
+internal class OnErrorReturnProcessor<T>(parentPublisher: Publisher<T>, private val block: OnErrorReturnProcessorBlock<T>) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

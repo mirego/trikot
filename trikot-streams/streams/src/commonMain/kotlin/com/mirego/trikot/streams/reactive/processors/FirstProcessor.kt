@@ -4,7 +4,7 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
-class FirstProcessor<T>(parentPublisher: Publisher<T>) :
+internal class FirstProcessor<T>(parentPublisher: Publisher<T>) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

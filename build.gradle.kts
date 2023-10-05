@@ -8,12 +8,6 @@ buildscript {
         mavenCentral()
     }
 
-    configurations.all {
-        resolutionStrategy {
-            force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
-        }
-    }
-
     dependencies {
         classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE_PLUGIN}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}")
@@ -48,25 +42,17 @@ subprojects {
     }
 }
 
-/**
- * Kotlin binary compatibility validator configuration
- * https://github.com/Kotlin/binary-compatibility-validator#setup
- */
 apiValidation {
-    /* Packages that are excluded from public API dumps even if they contain public API. */
-    // ignoredPackages.add("kotlinx.coroutines.internal")
-
-    /* Sub-projects that are excluded from API validation */
-    ignoredProjects.addAll(listOf("sample", "android", "common", "test-utils"))
-
-    /* Classes (fully qualified) that are excluded from public API dumps even if they contain public API. */
-    // ignoredClasses.addAll(listOf("", ""))
-
-    /* Set of annotations that exclude API from being public. */
-    // nonPublicMarkers.add("")
-
-    /* Flag to programmatically disable compatibility validator */
-    validationDisabled = false
+    ignoredProjects.addAll(
+        listOf(
+            "sample",
+            "android",
+            "common",
+            "viewmodels-declarative-compiler-core",
+            "viewmodels-declarative-compiler-flow",
+            "viewmodels-declarative-compiler-streams"
+        )
+    )
 }
 
 tasks {

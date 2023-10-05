@@ -5,7 +5,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-abstract class AbstractProcessor<T, R>(
+internal abstract class AbstractProcessor<T, R>(
     val parentPublisher: Publisher<T>
 ) : Processor<T, R> {
 

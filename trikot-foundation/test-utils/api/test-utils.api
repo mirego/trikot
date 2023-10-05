@@ -1,0 +1,41 @@
+public final class ConfigurableMockTimerFactory : com/mirego/trikot/foundation/timers/TimerFactory {
+	public synthetic fun <init> (JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun add-LRDsOJo (J)V
+	public final fun getRepeatableCall ()I
+	public final fun getSingleCall ()I
+	public final fun getTimers ()Ljava/util/List;
+	public fun repeatable-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/foundation/timers/Timer;
+	public final fun setRepeatableCall (I)V
+	public final fun setSingleCall (I)V
+	public final fun setTime-LRDsOJo (J)V
+	public fun single-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/foundation/timers/Timer;
+}
+
+public final class MockTimer : com/mirego/trikot/foundation/timers/Timer {
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public fun cancel ()V
+	public final fun executeBlock ()V
+	public final fun isCancelled ()Z
+}
+
+public final class TimerData {
+	public synthetic fun <init> (LMockTimer;JJZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (LMockTimer;JJZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()LMockTimer;
+	public final fun component2-UwyO8pc ()J
+	public final fun component3-UwyO8pc ()J
+	public final fun component4 ()Z
+	public final fun copy-vLdBGDU (LMockTimer;JJZ)LTimerData;
+	public static synthetic fun copy-vLdBGDU$default (LTimerData;LMockTimer;JJZILjava/lang/Object;)LTimerData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFireOffTime-UwyO8pc ()J
+	public final fun getFired ()Z
+	public final fun getRepeatTime-UwyO8pc ()J
+	public final fun getRepeatable ()Z
+	public final fun getTimer ()LMockTimer;
+	public fun hashCode ()I
+	public final fun setFired (Z)V
+	public fun toString ()Ljava/lang/String;
+}
+

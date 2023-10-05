@@ -7,7 +7,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispatchQueue: TrikotDispatchQueue) :
+internal class SubscribeOnProcessor<T>(parentPublisher: Publisher<T>, override val dispatchQueue: TrikotDispatchQueue) :
     AbstractProcessor<T, T>(parentPublisher = parentPublisher),
     TrikotQueueDispatcher {
 

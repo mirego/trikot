@@ -4,7 +4,7 @@ import com.mirego.trikot.foundation.concurrent.AtomicReference
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-abstract class ProcessorSubscription<T, R>(private val subscriber: Subscriber<in R>) :
+internal abstract class ProcessorSubscription<T, R>(private val subscriber: Subscriber<in R>) :
     Subscriber<T> {
     val activeSubscription = AtomicReference<Subscription>(
         object :

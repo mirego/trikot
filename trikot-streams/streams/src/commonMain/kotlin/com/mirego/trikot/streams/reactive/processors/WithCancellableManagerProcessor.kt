@@ -8,7 +8,7 @@ import org.reactivestreams.Subscription
 
 typealias WithCancellableManagerProcessorResultType<T> = Pair<CancellableManager, T>
 
-class WithCancellableManagerProcessor<T>(
+internal class WithCancellableManagerProcessor<T>(
     parentPublisher: Publisher<T>
 ) :
     AbstractProcessor<T, WithCancellableManagerProcessorResultType<T>>(parentPublisher) {

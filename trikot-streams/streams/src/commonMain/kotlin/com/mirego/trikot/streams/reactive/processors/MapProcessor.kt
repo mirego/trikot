@@ -6,7 +6,7 @@ import org.reactivestreams.Subscriber
 
 typealias MapProcessorBlock<T, R> = (T) -> R
 
-class MapProcessor<T, R>(parentPublisher: Publisher<T>, private val block: MapProcessorBlock<T, R>) :
+internal class MapProcessor<T, R>(parentPublisher: Publisher<T>, private val block: MapProcessorBlock<T, R>) :
     AbstractProcessor<T, R>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in R>): ProcessorSubscription<T, R> {

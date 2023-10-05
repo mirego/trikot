@@ -12,7 +12,7 @@ import org.reactivestreams.Subscription
 
 typealias SwitchMapProcessorBlock<T, R> = (T) -> Publisher<R>
 
-class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block: SwitchMapProcessorBlock<T, R>) :
+internal class SwitchMapProcessor<T, R>(parentPublisher: Publisher<T>, private var block: SwitchMapProcessorBlock<T, R>) :
     AbstractProcessor<T, R>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in R>): ProcessorSubscription<T, R> {

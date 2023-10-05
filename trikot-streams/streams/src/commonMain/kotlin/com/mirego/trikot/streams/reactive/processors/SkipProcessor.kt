@@ -5,7 +5,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import kotlin.math.max
 
-class SkipProcessor<T>(parentPublisher: Publisher<T>, private val n: Long) : AbstractProcessor<T, T>(parentPublisher) {
+internal class SkipProcessor<T>(parentPublisher: Publisher<T>, private val n: Long) : AbstractProcessor<T, T>(parentPublisher) {
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {
         return SkipProcessorSubscription(subscriber, n)
     }

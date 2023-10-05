@@ -5,7 +5,7 @@ import org.reactivestreams.Subscriber
 
 typealias FilterProcessorBlock<T> = (T) -> Boolean
 
-class FilterProcessor<T>(parentPublisher: Publisher<T>, private val block: FilterProcessorBlock<T>) :
+internal class FilterProcessor<T>(parentPublisher: Publisher<T>, private val block: FilterProcessorBlock<T>) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

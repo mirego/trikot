@@ -13,7 +13,7 @@ import org.reactivestreams.Subscription
 
 typealias RetryWhenPublisherBlock = (Publisher<out Throwable>) -> Publisher<out Any>
 
-class RetryWhenProcessor<T>(
+internal class RetryWhenProcessor<T>(
     parentPublisher: Publisher<T>,
     private val block: RetryWhenPublisherBlock
 ) : AbstractProcessor<T, T>(parentPublisher) {
@@ -22,7 +22,7 @@ class RetryWhenProcessor<T>(
     }
 }
 
-class RetryWhenSubscription<T>(
+internal class RetryWhenSubscription<T>(
     private val subscriber: Subscriber<in T>,
     private val parentPublisher: Publisher<T>,
     block: RetryWhenPublisherBlock
