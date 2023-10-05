@@ -62,6 +62,14 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/Co
 	public final fun getLambda-2$compose_release ()Lkotlin/jvm/functions/Function4;
 }
 
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/PlaceholderState : java/lang/Enum {
+	public static final field ERROR Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/PlaceholderState;
+	public static final field LOADING Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/PlaceholderState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/PlaceholderState;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/PlaceholderState;
+}
+
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDButtonKt {
 	public static final fun VMDButton-TC8WvNY (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDButtonViewModel;Landroidx/compose/ui/Alignment;ZLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/foundation/Indication;Landroidx/compose/ui/semantics/Role;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 }
@@ -87,7 +95,10 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VM
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDImageKt {
 	public static final fun LocalImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun RemoteImage (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function5;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;Landroidx/compose/ui/graphics/ColorFilter;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun RemoteImage-QgsmV_s (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function4;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ILjava/lang/String;ZLandroidx/compose/runtime/Composer;III)V
+	public static final fun VMDImage (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDImage (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ZLkotlin/jvm/functions/Function5;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDImage (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;Ljava/lang/String;Lkotlin/jvm/functions/Function4;ZLkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDImage (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;Ljava/lang/String;ZLkotlin/jvm/functions/Function5;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
 	public static final fun VMDImage (Lcom/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ZLandroidx/compose/runtime/Composer;II)V
 	public static final fun VMDImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ZLandroidx/compose/runtime/Composer;II)V
