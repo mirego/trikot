@@ -2,13 +2,16 @@ package com.mirego.sample.ui.showcase.components.image
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +30,7 @@ import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewM
 import com.mirego.sample.viewmodels.showcase.components.image.ImageShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.PlaceholderState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDImage
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 
@@ -130,6 +134,72 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
                         is AsyncImagePainter.State.Loading -> Text("Loading", style = SampleTextStyle.subheadline)
                         is AsyncImagePainter.State.Error -> Text("Unable to load the remote image", style = SampleTextStyle.subheadline)
                         else -> {}
+                    }
+                }
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.placeholderInvalidImageTitle)
+
+        VMDImage(
+            modifier = Modifier
+                .padding(16.dp)
+                .aspectRatio(imageAspectRatio),
+            viewModel = viewModel.placeholderInvalidImage,
+            placeholder = { _, state: PlaceholderState ->
+                when (state) {
+                    PlaceholderState.LOADING -> Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray)
+                    ) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
+
+                    PlaceholderState.ERROR -> Box(
+                        modifier = Modifier
+                            .background(Color.LightGray)
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Unable to load the remote image",
+                            style = SampleTextStyle.subheadline,
+                            color = Color.Black
+                        )
+                    }
+                }
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.remoteImageTitle)
+
+        VMDImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(imageAspectRatio)
+                .padding(16.dp),
+            viewModel = viewModel.remoteImage,
+            contentScale = ContentScale.Crop,
+            placeholder = { _, state: PlaceholderState ->
+                when (state) {
+                    PlaceholderState.LOADING -> Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray)
+                    ) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
+
+                    PlaceholderState.ERROR -> Box(
+                        modifier = Modifier
+                            .background(Color.LightGray)
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Unable to load the remote image",
+                            style = SampleTextStyle.subheadline,
+                            color = Color.Black
+                        )
                     }
                 }
             }
