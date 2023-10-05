@@ -1,0 +1,25 @@
+public abstract interface class com/mirego/trikot/kword/flow/FlowI18N {
+	public abstract fun changeLanguage (Ljava/lang/String;)V
+	public abstract fun get (Lcom/mirego/trikot/kword/KWordKey;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getCurrentI18N ()Lcom/mirego/trikot/kword/I18N;
+	public abstract fun getI18N ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getLanguageCode ()Ljava/lang/String;
+	public abstract fun reset ()V
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class com/mirego/trikot/kword/flow/FlowMultiLanguageI18N : com/mirego/trikot/kword/flow/FlowI18N {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public fun changeLanguage (Ljava/lang/String;)V
+	public fun get (Lcom/mirego/trikot/kword/KWordKey;)Lkotlinx/coroutines/flow/Flow;
+	public fun getCurrentI18N ()Lcom/mirego/trikot/kword/I18N;
+	public fun getI18N ()Lkotlinx/coroutines/flow/Flow;
+	public fun getLanguageCode ()Ljava/lang/String;
+	public fun reset ()V
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;)Lkotlinx/coroutines/flow/Flow;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Lkotlinx/coroutines/flow/Flow;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Lkotlinx/coroutines/flow/Flow;
+}
+

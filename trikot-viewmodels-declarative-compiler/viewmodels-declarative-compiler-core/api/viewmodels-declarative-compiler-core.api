@@ -1,0 +1,43 @@
+public abstract class com/mirego/trikot/viewmodels/declarative/compiler/BaseBuilderProcessor : com/google/devtools/ksp/processing/SymbolProcessor {
+	public fun <init> (Lcom/google/devtools/ksp/processing/KSPLogger;Lcom/mirego/trikot/viewmodels/declarative/compiler/BaseVMDCodeGenerator;)V
+	public fun process (Lcom/google/devtools/ksp/processing/Resolver;)Ljava/util/List;
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/compiler/BaseVMDCodeGenerator {
+	public fun <init> (Lcom/google/devtools/ksp/processing/CodeGenerator;Lcom/google/devtools/ksp/processing/KSPLogger;)V
+	public abstract fun addPublishedMemberInvocationStatement (Lcom/squareup/kotlinpoet/CodeBlock$Builder;Ljava/lang/String;)Lcom/squareup/kotlinpoet/CodeBlock$Builder;
+	public abstract fun addUpdatePropertyInvocationStatement (Lcom/squareup/kotlinpoet/CodeBlock$Builder;Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/kotlinpoet/CodeBlock$Builder;
+	public final fun generateViewModelParents (Ljava/util/List;)V
+	public abstract fun getDefaultSuperClass ()Lcom/squareup/kotlinpoet/TypeName;
+	public abstract fun getLifecycleComponentName ()Ljava/lang/String;
+	public abstract fun getLifecycleComponentType ()Lkotlin/reflect/KClass;
+	public abstract fun getPublishedPropertyType ()Lkotlin/reflect/KClass;
+	public abstract fun getPublisherName ()Ljava/lang/String;
+	public abstract fun getPublisherType ()Lkotlin/reflect/KClass;
+	public abstract fun getViewModelType ()Lkotlin/reflect/KClass;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compiler/VMDScanner {
+	public fun <init> (Lcom/google/devtools/ksp/processing/KSPLogger;)V
+	public final fun getViewModelMetaData (Lcom/google/devtools/ksp/processing/Resolver;Lcom/mirego/trikot/viewmodels/declarative/compiler/BaseVMDCodeGenerator;)Ljava/util/List;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compiler/ViewModelMetaData {
+	public fun <init> (Lcom/google/devtools/ksp/symbol/KSClassDeclaration;Ljava/util/List;Lcom/google/devtools/ksp/symbol/KSClassDeclaration;ZZ)V
+	public final fun component1 ()Lcom/google/devtools/ksp/symbol/KSClassDeclaration;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Lcom/google/devtools/ksp/symbol/KSClassDeclaration;
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun copy (Lcom/google/devtools/ksp/symbol/KSClassDeclaration;Ljava/util/List;Lcom/google/devtools/ksp/symbol/KSClassDeclaration;ZZ)Lcom/mirego/trikot/viewmodels/declarative/compiler/ViewModelMetaData;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/compiler/ViewModelMetaData;Lcom/google/devtools/ksp/symbol/KSClassDeclaration;Ljava/util/List;Lcom/google/devtools/ksp/symbol/KSClassDeclaration;ZZILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/compiler/ViewModelMetaData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAllFieldsArePublished ()Z
+	public final fun getHasAbstractMethods ()Z
+	public final fun getPublishedProperty ()Ljava/util/List;
+	public final fun getSuperClass ()Lcom/google/devtools/ksp/symbol/KSClassDeclaration;
+	public final fun getViewModelInterface ()Lcom/google/devtools/ksp/symbol/KSClassDeclaration;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

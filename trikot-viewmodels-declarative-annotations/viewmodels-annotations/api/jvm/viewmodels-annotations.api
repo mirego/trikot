@@ -1,0 +1,7 @@
+public abstract interface annotation class com/mirego/trikot/viewmodels/declarative/Published : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class com/mirego/trikot/viewmodels/declarative/PublishedSubClass : java/lang/annotation/Annotation {
+	public abstract fun superClass ()Ljava/lang/Class;
+}
+

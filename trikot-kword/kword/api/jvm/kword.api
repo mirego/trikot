@@ -1,0 +1,51 @@
+public class com/mirego/trikot/kword/DefaultI18N : com/mirego/trikot/kword/I18N {
+	public static final field Companion Lcom/mirego/trikot/kword/DefaultI18N$Companion;
+	public fun <init> ()V
+	public fun changeLocaleStrings (Lcom/mirego/trikot/kword/KWordSource;)V
+	public fun changeLocaleStrings (Ljava/util/Map;)V
+	public fun get (Lcom/mirego/trikot/kword/KWordKey;)Ljava/lang/String;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;)Ljava/lang/String;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Ljava/lang/String;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/kword/DefaultI18N$Companion {
+}
+
+public abstract interface class com/mirego/trikot/kword/I18N {
+	public abstract fun changeLocaleStrings (Lcom/mirego/trikot/kword/KWordSource;)V
+	public abstract fun changeLocaleStrings (Ljava/util/Map;)V
+	public abstract fun get (Lcom/mirego/trikot/kword/KWordKey;)Ljava/lang/String;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;)Ljava/lang/String;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Ljava/lang/String;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/kword/KWord : com/mirego/trikot/kword/DefaultI18N {
+	public static final field INSTANCE Lcom/mirego/trikot/kword/KWord;
+}
+
+public abstract interface class com/mirego/trikot/kword/KWordKey {
+	public abstract fun getTranslationKey ()Ljava/lang/String;
+}
+
+public abstract interface class com/mirego/trikot/kword/KWordSource {
+	public abstract fun get (Ljava/lang/String;)Ljava/lang/String;
+	public abstract fun getOptional (Ljava/lang/String;)Ljava/lang/String;
+	public abstract fun getStrings ()Ljava/util/Map;
+}
+
+public final class com/mirego/trikot/kword/KwordLoader {
+	public static final field INSTANCE Lcom/mirego/trikot/kword/KwordLoader;
+	public final fun setCurrentLanguageCode (Lcom/mirego/trikot/kword/I18N;Ljava/util/List;Ljava/lang/String;)V
+	public final fun setCurrentLanguageCode (Ljava/lang/String;Ljava/util/List;)V
+	public final fun setCurrentLanguageCodes (Lcom/mirego/trikot/kword/I18N;Ljava/util/List;[Ljava/lang/String;)V
+}
+
+public final class com/mirego/trikot/kword/MapKeywordSource : com/mirego/trikot/kword/KWordSource {
+	public fun <init> (Ljava/util/Map;)V
+	public fun get (Ljava/lang/String;)Ljava/lang/String;
+	public fun getOptional (Ljava/lang/String;)Ljava/lang/String;
+	public fun getStrings ()Ljava/util/Map;
+}
+

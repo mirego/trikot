@@ -1,0 +1,80 @@
+public final class com/mirego/trikot/analytics/AnalyticsConfiguration {
+	public static final field INSTANCE Lcom/mirego/trikot/analytics/AnalyticsConfiguration;
+	public final fun getAnalyticsManager ()Lcom/mirego/trikot/analytics/AnalyticsService;
+	public final fun setAnalyticsManager (Lcom/mirego/trikot/analytics/AnalyticsService;)V
+}
+
+public abstract interface class com/mirego/trikot/analytics/AnalyticsEvent {
+	public abstract fun getName ()Ljava/lang/String;
+}
+
+public abstract interface class com/mirego/trikot/analytics/AnalyticsService {
+	public static final field Companion Lcom/mirego/trikot/analytics/AnalyticsService$Companion;
+	public abstract fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun incrementUserProperties (Ljava/util/Map;)V
+	public abstract fun isEnabled ()Z
+	public abstract fun logout ()V
+	public abstract fun setEnabled (Z)V
+	public abstract fun setSuperProperties (Ljava/util/Map;)V
+	public abstract fun setUserProperties (Ljava/util/Map;)V
+	public abstract fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;)V
+	public abstract fun unsetAllSuperProperties ()V
+	public abstract fun unsetSuperProperties (Ljava/util/List;)V
+}
+
+public final class com/mirego/trikot/analytics/AnalyticsService$Companion : com/mirego/trikot/analytics/AnalyticsService {
+	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun getName ()Ljava/lang/String;
+	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
+	public fun incrementUserProperties (Ljava/util/Map;)V
+	public fun isEnabled ()Z
+	public fun logout ()V
+	public fun setEnabled (Z)V
+	public fun setSuperProperties (Ljava/util/Map;)V
+	public fun setUserProperties (Ljava/util/Map;)V
+	public fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;)V
+	public fun unsetAllSuperProperties ()V
+	public fun unsetSuperProperties (Ljava/util/List;)V
+}
+
+public final class com/mirego/trikot/analytics/AnalyticsServiceKt {
+	public static final fun identifyUser (Lcom/mirego/trikot/analytics/AnalyticsService;Ljava/lang/String;Lorg/reactivestreams/Publisher;)V
+	public static final fun logout (Lcom/mirego/trikot/analytics/AnalyticsService;Z)V
+	public static synthetic fun logout$default (Lcom/mirego/trikot/analytics/AnalyticsService;ZILjava/lang/Object;)V
+	public static final fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsService;Lcom/mirego/trikot/analytics/AnalyticsEvent;Lorg/reactivestreams/Publisher;)V
+}
+
+public final class com/mirego/trikot/analytics/AnalyticsServiceLogger : com/mirego/trikot/analytics/AnalyticsService {
+	public fun <init> (Lcom/mirego/trikot/analytics/AnalyticsService;)V
+	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun getName ()Ljava/lang/String;
+	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
+	public fun incrementUserProperties (Ljava/util/Map;)V
+	public fun isEnabled ()Z
+	public fun logout ()V
+	public fun setEnabled (Z)V
+	public fun setSuperProperties (Ljava/util/Map;)V
+	public fun setUserProperties (Ljava/util/Map;)V
+	public fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;)V
+	public fun unsetAllSuperProperties ()V
+	public fun unsetSuperProperties (Ljava/util/List;)V
+}
+
+public final class com/mirego/trikot/analytics/EmptyAnalyticsService : com/mirego/trikot/analytics/AnalyticsService {
+	public fun <init> ()V
+	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun getName ()Ljava/lang/String;
+	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
+	public fun incrementUserProperties (Ljava/util/Map;)V
+	public fun isEnabled ()Z
+	public fun logout ()V
+	public fun setEnabled (Z)V
+	public fun setSuperProperties (Ljava/util/Map;)V
+	public fun setUserProperties (Ljava/util/Map;)V
+	public fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;)V
+	public fun unsetAllSuperProperties ()V
+	public fun unsetSuperProperties (Ljava/util/List;)V
+}
+

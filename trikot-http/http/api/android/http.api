@@ -1,0 +1,284 @@
+public final class com/mirego/trikot/http/CachePolicy : java/lang/Enum {
+	public static final field RELOAD_IGNORING_CACHE_DATA Lcom/mirego/trikot/http/CachePolicy;
+	public static final field USE_PROTOCOL_CACHE_POLICY Lcom/mirego/trikot/http/CachePolicy;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/http/CachePolicy;
+	public static fun values ()[Lcom/mirego/trikot/http/CachePolicy;
+}
+
+public final class com/mirego/trikot/http/HTTPConstsKt {
+	public static final field ApplicationJSON Ljava/lang/String;
+	public static final field ApplicationOctetStream Ljava/lang/String;
+	public static final field ContentType Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/http/HttpConfiguration {
+	public static final field INSTANCE Lcom/mirego/trikot/http/HttpConfiguration;
+	public final fun getBaseUrl ()Ljava/lang/String;
+	public final fun getConnectivityPublisher ()Lorg/reactivestreams/Publisher;
+	public final fun getDefaultHttpHeaderProvider ()Lcom/mirego/trikot/http/HttpHeaderProvider;
+	public final fun getHttpRequestFactory ()Lcom/mirego/trikot/http/HttpRequestFactory;
+	public final fun getJson ()Lkotlinx/serialization/json/Json;
+	public final fun getNetworkDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public final fun setBaseUrl (Ljava/lang/String;)V
+	public final fun setConnectivityPublisher (Lorg/reactivestreams/Publisher;)V
+	public final fun setDefaultHttpHeaderProvider (Lcom/mirego/trikot/http/HttpHeaderProvider;)V
+	public final fun setHttpRequestFactory (Lcom/mirego/trikot/http/HttpRequestFactory;)V
+	public final fun setJson (Lkotlinx/serialization/json/Json;)V
+	public final fun setNetworkDispatchQueue (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+}
+
+public abstract interface class com/mirego/trikot/http/HttpHeaderProvider {
+	public abstract fun headerForURLRequest (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lcom/mirego/trikot/http/RequestBuilder;)Lorg/reactivestreams/Publisher;
+	public abstract fun processHttpError (Lcom/mirego/trikot/http/RequestBuilder;Ljava/lang/Throwable;)V
+}
+
+public final class com/mirego/trikot/http/HttpMethod : java/lang/Enum {
+	public static final field DELETE Lcom/mirego/trikot/http/HttpMethod;
+	public static final field GET Lcom/mirego/trikot/http/HttpMethod;
+	public static final field HEAD Lcom/mirego/trikot/http/HttpMethod;
+	public static final field PATCH Lcom/mirego/trikot/http/HttpMethod;
+	public static final field POST Lcom/mirego/trikot/http/HttpMethod;
+	public static final field PUT Lcom/mirego/trikot/http/HttpMethod;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/http/HttpMethod;
+	public static fun values ()[Lcom/mirego/trikot/http/HttpMethod;
+}
+
+public abstract interface class com/mirego/trikot/http/HttpRequest {
+	public abstract fun execute (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)Lorg/reactivestreams/Publisher;
+}
+
+public abstract interface class com/mirego/trikot/http/HttpRequestFactory {
+	public abstract fun request (Lcom/mirego/trikot/http/RequestBuilder;)Lcom/mirego/trikot/http/HttpRequest;
+}
+
+public abstract interface class com/mirego/trikot/http/HttpResponse {
+	public abstract fun getBodyByteArray ()[B
+	public abstract fun getHeaders ()Ljava/util/Map;
+	public abstract fun getSource ()Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+	public abstract fun getStatusCode ()I
+}
+
+public final class com/mirego/trikot/http/HttpResponse$ResponseSource : java/lang/Enum {
+	public static final field CACHE Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+	public static final field NETWORK Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+	public static final field UNKNOWN Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+	public static fun values ()[Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+}
+
+public final class com/mirego/trikot/http/HttpResponseException : java/lang/Exception {
+	public fun <init> (Lcom/mirego/trikot/http/HttpResponse;)V
+	public final fun getHttpResponse ()Lcom/mirego/trikot/http/HttpResponse;
+}
+
+public final class com/mirego/trikot/http/HttpResponseExtensionsKt {
+	public static final fun getBodyString (Lcom/mirego/trikot/http/HttpResponse;)Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/http/HttpStatusCode : java/lang/Enum {
+	public static final field ACCEPTED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field ALREADY_REPORTED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field BAD_GATEWAY Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field BAD_MAPPING Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field BAD_REQUEST Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field BANDWIDTH_LIMIT_EXCEEDED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field BLOCKED_BY_PARENTAL_CONTROLS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field CLIENT_CLOSED_REQUEST Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field CONFLICT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field CONTENT_DIFFERENT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field CONTINUE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field CREATED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field Companion Lcom/mirego/trikot/http/HttpStatusCode$Companion;
+	public static final field EARLY_HINTS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field ENHANCE_YOUR_CALM Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field EXPECTATION_FAILED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field FORBIDDEN Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field FOUND Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field GATEWAY_TIMEOUT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field GONE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field HTTP_VERSION_NOT_SUPPORTED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field IM_USED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field INSUFFICIENT_STORAGE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field INTERNAL_SERVER_ERROR Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field LENGTH_REQUIRED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field LOCKED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field LOOP_DETECTED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field METHOD_FAILURE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field METHOD_NOT_ALLOWED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field MOVED_PERMANENTLY Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field MULTIPLE_CHOICES Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field MULTI_STATUS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NETWORK_AUTHENTICATION_REQUIRED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NETWORK_CONNECT_TIMEOUT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NETWORK_READ_TIMEOUT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NON_AUTHORITATION_INFORMATION Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NOT_ACCEPTABLE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NOT_EXTENDED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NOT_FOUND Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NOT_IMPLEMENTED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NOT_MODIFIED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NO_CONTENT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field NO_RESPONSE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PARTIAL_CONTENT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PAYMENT_REQUIRED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PERMANENT_REDIRECT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PRECONDITION_FAILED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PRECONDITION_REQUIRED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PROCESSING Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field PROXY_AUTHENTICATION_REQUIRED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field REQUEST_ENTITY_TOO_LARGE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field REQUEST_HEADER_FIELDS_TOO_LARGE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field REQUEST_RANGE_UNSATISFIABLE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field REQUEST_TIMEOUT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field REQUEST_URI_TOO_LONG Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field RESET_CONTENT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field RETRY_WITH Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field SEE_OTHER Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field SERVICE_UNAVAILABLE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field SUCCESS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field SWITCHING_PROTOCOLS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field SWITCH_PROXY Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field TEAPOT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field TEMPORARY_REDIRECT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field TOO_MANY_REDIRECT Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field TOO_MANY_REQUESTS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNAUTHORIZED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNAVAILABLE_FOR_LEGAL_REASONS Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNKNOWN Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNORDERED_COLLECTION Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNPROCESSABLE_ENTITY Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNRECOVERABLE_ERROR Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UNSUPPORTED_MEDIA_TYPE Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field UPGRADE_REQUIRED Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field USE_PROXY Lcom/mirego/trikot/http/HttpStatusCode;
+	public static final field VARIANT_ALSO_NEGOTIATES Lcom/mirego/trikot/http/HttpStatusCode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getStatusCode ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/http/HttpStatusCode;
+	public static fun values ()[Lcom/mirego/trikot/http/HttpStatusCode;
+}
+
+public final class com/mirego/trikot/http/HttpStatusCode$Companion {
+	public final fun fromInt (I)Lcom/mirego/trikot/http/HttpStatusCode;
+}
+
+public final class com/mirego/trikot/http/RequestBuilder {
+	public fun <init> ()V
+	public final fun buildUrl ()Ljava/lang/String;
+	public final fun getBaseUrl ()Ljava/lang/String;
+	public final fun getBody ()Ljava/lang/Object;
+	public final fun getCachePolicy ()Lcom/mirego/trikot/http/CachePolicy;
+	public final fun getFollowRedirects ()Z
+	public final fun getHeaders ()Ljava/util/Map;
+	public final fun getMethod ()Lcom/mirego/trikot/http/HttpMethod;
+	public final fun getParameters ()Ljava/util/Map;
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getTimeout ()Ljava/lang/Integer;
+	public final fun setBaseUrl (Ljava/lang/String;)V
+	public final fun setBody (Ljava/lang/Object;)V
+	public final fun setCachePolicy (Lcom/mirego/trikot/http/CachePolicy;)V
+	public final fun setFollowRedirects (Z)V
+	public final fun setHeaders (Ljava/util/Map;)V
+	public final fun setMethod (Lcom/mirego/trikot/http/HttpMethod;)V
+	public final fun setParameters (Ljava/util/Map;)V
+	public final fun setPath (Ljava/lang/String;)V
+	public final fun setTimeout (Ljava/lang/Integer;)V
+}
+
+public final class com/mirego/trikot/http/android/AndroidConnectivityPublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl {
+	public fun <init> (Landroid/content/ContextWrapper;)V
+}
+
+public final class com/mirego/trikot/http/android/AndroidHttpLogger : io/ktor/client/plugins/logging/Logger {
+	public fun <init> ()V
+	public fun log (Ljava/lang/String;)V
+}
+
+public final class com/mirego/trikot/http/android/requestFactory/KtorHttpRequestFactory : com/mirego/trikot/http/HttpRequestFactory {
+	public synthetic fun <init> (Lio/ktor/client/plugins/logging/LogLevel;Lio/ktor/client/plugins/logging/Logger;Lio/ktor/client/HttpClient;JJJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lio/ktor/client/plugins/logging/LogLevel;Lio/ktor/client/plugins/logging/Logger;Lio/ktor/client/HttpClient;JJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun request (Lcom/mirego/trikot/http/RequestBuilder;)Lcom/mirego/trikot/http/HttpRequest;
+}
+
+public final class com/mirego/trikot/http/android/requestFactory/KtorHttpRequestFactory$KTorCoreHttpRequest : com/mirego/trikot/http/HttpRequest, kotlinx/coroutines/CoroutineScope {
+	public fun <init> (Lcom/mirego/trikot/http/RequestBuilder;Lio/ktor/client/HttpClient;)V
+	public fun execute (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)Lorg/reactivestreams/Publisher;
+	public fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class com/mirego/trikot/http/android/requestFactory/KtorHttpRequestFactory$KTorHttpResponse : com/mirego/trikot/http/HttpResponse {
+	public fun <init> (Lio/ktor/client/statement/HttpResponse;[B)V
+	public fun getBodyByteArray ()[B
+	public fun getHeaders ()Ljava/util/Map;
+	public fun getSource ()Lcom/mirego/trikot/http/HttpResponse$ResponseSource;
+	public fun getStatusCode ()I
+}
+
+public final class com/mirego/trikot/http/android/requestFactory/KtorHttpRequestFactoryKt {
+	public static final fun getKtorMethod (Lcom/mirego/trikot/http/HttpMethod;)Lio/ktor/http/HttpMethod;
+}
+
+public final class com/mirego/trikot/http/connectivity/ConnectivityState : java/lang/Enum {
+	public static final field CELLULAR Lcom/mirego/trikot/http/connectivity/ConnectivityState;
+	public static final field NONE Lcom/mirego/trikot/http/connectivity/ConnectivityState;
+	public static final field UNDEFINED Lcom/mirego/trikot/http/connectivity/ConnectivityState;
+	public static final field WIFI Lcom/mirego/trikot/http/connectivity/ConnectivityState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/http/connectivity/ConnectivityState;
+	public static fun values ()[Lcom/mirego/trikot/http/connectivity/ConnectivityState;
+}
+
+public final class com/mirego/trikot/http/exception/HttpRequestTimeoutException : java/lang/Throwable {
+	public fun <init> (Ljava/lang/Throwable;)V
+}
+
+public final class com/mirego/trikot/http/exception/HttpResponseNoInternetConnectionException : java/lang/Exception {
+	public fun <init> (Ljava/lang/Throwable;)V
+}
+
+public final class com/mirego/trikot/http/header/DefaultHttpHeaderProvider : com/mirego/trikot/http/HttpHeaderProvider {
+	public fun <init> ()V
+	public fun headerForURLRequest (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lcom/mirego/trikot/http/RequestBuilder;)Lorg/reactivestreams/Publisher;
+	public fun processHttpError (Lcom/mirego/trikot/http/RequestBuilder;Ljava/lang/Throwable;)V
+}
+
+public final class com/mirego/trikot/http/requestFactory/EmptyHttpRequestFactory : com/mirego/trikot/http/HttpRequestFactory {
+	public fun <init> ()V
+	public fun request (Lcom/mirego/trikot/http/RequestBuilder;)Lcom/mirego/trikot/http/HttpRequest;
+}
+
+public class com/mirego/trikot/http/requestPublisher/DeserializableHttpRequestPublisher : com/mirego/trikot/http/requestPublisher/HttpRequestPublisher {
+	public fun <init> (Lkotlinx/serialization/DeserializationStrategy;Lcom/mirego/trikot/http/RequestBuilder;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlinx/serialization/json/Json;)V
+	public synthetic fun <init> (Lkotlinx/serialization/DeserializationStrategy;Lcom/mirego/trikot/http/RequestBuilder;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlinx/serialization/json/Json;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getBuilder ()Lcom/mirego/trikot/http/RequestBuilder;
+	public fun processResponse (Lcom/mirego/trikot/http/HttpResponse;)Ljava/lang/Object;
+}
+
+public abstract class com/mirego/trikot/http/requestPublisher/HttpRequestPublisher : com/mirego/trikot/streams/reactive/executable/BaseExecutablePublisher {
+	public fun <init> ()V
+	public fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;Lcom/mirego/trikot/http/HttpRequestFactory;Lcom/mirego/trikot/http/HttpHeaderProvider;Lorg/reactivestreams/Publisher;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;Lcom/mirego/trikot/http/HttpRequestFactory;Lcom/mirego/trikot/http/HttpHeaderProvider;Lorg/reactivestreams/Publisher;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public abstract fun getBuilder ()Lcom/mirego/trikot/http/RequestBuilder;
+	public fun internalRun (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public abstract fun processResponse (Lcom/mirego/trikot/http/HttpResponse;)Ljava/lang/Object;
+}
+
+public class com/mirego/trikot/http/requestPublisher/NoResponseHttpRequestPublisher : com/mirego/trikot/http/requestPublisher/HttpRequestPublisher {
+	public fun <init> (Lcom/mirego/trikot/http/RequestBuilder;Lcom/mirego/trikot/http/HttpHeaderProvider;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/http/RequestBuilder;Lcom/mirego/trikot/http/HttpHeaderProvider;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getBuilder ()Lcom/mirego/trikot/http/RequestBuilder;
+	public synthetic fun processResponse (Lcom/mirego/trikot/http/HttpResponse;)Ljava/lang/Object;
+	public fun processResponse (Lcom/mirego/trikot/http/HttpResponse;)V
+}
+
+public class com/mirego/trikot/http/requestPublisher/ResponseHttpRequestPublisher : com/mirego/trikot/http/requestPublisher/HttpRequestPublisher {
+	public fun <init> (Lcom/mirego/trikot/http/RequestBuilder;Lcom/mirego/trikot/http/HttpHeaderProvider;Lcom/mirego/trikot/http/HttpRequestFactory;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/http/RequestBuilder;Lcom/mirego/trikot/http/HttpHeaderProvider;Lcom/mirego/trikot/http/HttpRequestFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getBuilder ()Lcom/mirego/trikot/http/RequestBuilder;
+	public fun processResponse (Lcom/mirego/trikot/http/HttpResponse;)Lcom/mirego/trikot/http/HttpResponse;
+	public synthetic fun processResponse (Lcom/mirego/trikot/http/HttpResponse;)Ljava/lang/Object;
+}
+

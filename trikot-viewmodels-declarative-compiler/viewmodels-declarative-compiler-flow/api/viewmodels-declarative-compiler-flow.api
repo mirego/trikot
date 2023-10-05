@@ -1,0 +1,22 @@
+public final class com/mirego/trikot/viewmodels/declarative/compiler/BuilderProcessor : com/mirego/trikot/viewmodels/declarative/compiler/BaseBuilderProcessor {
+	public fun <init> (Lcom/google/devtools/ksp/processing/CodeGenerator;Lcom/google/devtools/ksp/processing/KSPLogger;)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compiler/BuilderProcessorProvider : com/google/devtools/ksp/processing/SymbolProcessorProvider {
+	public fun <init> ()V
+	public fun create (Lcom/google/devtools/ksp/processing/SymbolProcessorEnvironment;)Lcom/google/devtools/ksp/processing/SymbolProcessor;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compiler/FlowVMDCodeGenerator : com/mirego/trikot/viewmodels/declarative/compiler/BaseVMDCodeGenerator {
+	public fun <init> (Lcom/google/devtools/ksp/processing/CodeGenerator;Lcom/google/devtools/ksp/processing/KSPLogger;)V
+	public fun addPublishedMemberInvocationStatement (Lcom/squareup/kotlinpoet/CodeBlock$Builder;Ljava/lang/String;)Lcom/squareup/kotlinpoet/CodeBlock$Builder;
+	public fun addUpdatePropertyInvocationStatement (Lcom/squareup/kotlinpoet/CodeBlock$Builder;Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/kotlinpoet/CodeBlock$Builder;
+	public fun getDefaultSuperClass ()Lcom/squareup/kotlinpoet/TypeName;
+	public fun getLifecycleComponentName ()Ljava/lang/String;
+	public fun getLifecycleComponentType ()Lkotlin/reflect/KClass;
+	public fun getPublishedPropertyType ()Lkotlin/reflect/KClass;
+	public fun getPublisherName ()Ljava/lang/String;
+	public fun getPublisherType ()Lkotlin/reflect/KClass;
+	public fun getViewModelType ()Lkotlin/reflect/KClass;
+}
+

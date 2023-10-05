@@ -19,6 +19,7 @@ buildscript {
 
 plugins {
     id("mirego.publish").version("1.0")
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
 }
 
 allprojects {
@@ -39,6 +40,27 @@ subprojects {
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         version.set("0.48.0")
     }
+}
+
+/**
+ * Kotlin binary compatibility validator configuration
+ * https://github.com/Kotlin/binary-compatibility-validator#setup
+ */
+apiValidation {
+    /* Packages that are excluded from public API dumps even if they contain public API. */
+    // ignoredPackages.add("kotlinx.coroutines.internal")
+
+    /* Sub-projects that are excluded from API validation */
+    ignoredProjects.addAll(listOf("sample", "android", "common", "test-utils"))
+
+    /* Classes (fully qualified) that are excluded from public API dumps even if they contain public API. */
+    // ignoredClasses.addAll(listOf("", ""))
+
+    /* Set of annotations that exclude API from being public. */
+    // nonPublicMarkers.add("")
+
+    /* Flag to programmatically disable compatibility validator */
+    validationDisabled = false
 }
 
 tasks {

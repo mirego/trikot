@@ -1,0 +1,73 @@
+public abstract class com/mirego/trikot/graphql/AbstractGraphqlQuery : com/mirego/trikot/graphql/GraphqlQuery {
+	public fun <init> (Lkotlinx/serialization/DeserializationStrategy;)V
+	public fun getDeserializer ()Lkotlinx/serialization/DeserializationStrategy;
+	public abstract fun getQuery ()Ljava/lang/String;
+	public fun getRequestBody ()Ljava/lang/String;
+	public fun getVariables ()Ljava/util/Map;
+}
+
+public final class com/mirego/trikot/graphql/GraphqlDataSource : com/mirego/trikot/datasources/BaseDataSource {
+	public fun <init> (Lcom/mirego/trikot/graphql/GraphqlPublisherFactory;Lcom/mirego/trikot/datasources/DataSource;Lcom/mirego/trikot/http/HttpHeaderProvider;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/graphql/GraphqlPublisherFactory;Lcom/mirego/trikot/datasources/DataSource;Lcom/mirego/trikot/http/HttpHeaderProvider;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun internalRead (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+	public fun internalRead (Lcom/mirego/trikot/graphql/GraphqlQueryDataSourceRequest;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+}
+
+public final class com/mirego/trikot/graphql/GraphqlJsonObject {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getBody ()Ljava/lang/String;
+}
+
+public abstract interface class com/mirego/trikot/graphql/GraphqlPublisherFactory {
+	public abstract fun create-moChb0s (Lcom/mirego/trikot/graphql/GraphqlQuery;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+}
+
+public final class com/mirego/trikot/graphql/GraphqlPublisherFactory$DefaultImpls {
+	public static synthetic fun create-moChb0s$default (Lcom/mirego/trikot/graphql/GraphqlPublisherFactory;Lcom/mirego/trikot/graphql/GraphqlQuery;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+}
+
+public final class com/mirego/trikot/graphql/GraphqlPublisherFactoryImpl : com/mirego/trikot/graphql/GraphqlPublisherFactory {
+	public fun <init> ()V
+	public fun create-moChb0s (Lcom/mirego/trikot/graphql/GraphqlQuery;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+}
+
+public abstract interface class com/mirego/trikot/graphql/GraphqlQuery {
+	public abstract fun getDeserializer ()Lkotlinx/serialization/DeserializationStrategy;
+	public abstract fun getRequestBody ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/graphql/GraphqlQueryDataSourceRequest : com/mirego/trikot/datasources/DataSourceRequest {
+	public synthetic fun <init> (Lcom/mirego/trikot/graphql/GraphqlQuery;Ljava/lang/String;Lcom/mirego/trikot/datasources/DataSourceRequest$Type;Lkotlin/time/Duration;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/graphql/GraphqlQuery;Ljava/lang/String;Lcom/mirego/trikot/datasources/DataSourceRequest$Type;Lkotlin/time/Duration;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/mirego/trikot/graphql/GraphqlQuery;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+	public final fun component4-FghU774 ()Lkotlin/time/Duration;
+	public final fun copy-Q2Q30fc (Lcom/mirego/trikot/graphql/GraphqlQuery;Ljava/lang/String;Lcom/mirego/trikot/datasources/DataSourceRequest$Type;Lkotlin/time/Duration;)Lcom/mirego/trikot/graphql/GraphqlQueryDataSourceRequest;
+	public static synthetic fun copy-Q2Q30fc$default (Lcom/mirego/trikot/graphql/GraphqlQueryDataSourceRequest;Lcom/mirego/trikot/graphql/GraphqlQuery;Ljava/lang/String;Lcom/mirego/trikot/datasources/DataSourceRequest$Type;Lkotlin/time/Duration;ILjava/lang/Object;)Lcom/mirego/trikot/graphql/GraphqlQueryDataSourceRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getCacheableId ()Ljava/lang/Object;
+	public fun getCacheableId ()Ljava/lang/String;
+	public final fun getQuery ()Lcom/mirego/trikot/graphql/GraphqlQuery;
+	public final fun getRequestTimeout-FghU774 ()Lkotlin/time/Duration;
+	public fun getRequestType ()Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/graphql/GraphqlQueryPublisher : com/mirego/trikot/http/requestPublisher/DeserializableHttpRequestPublisher {
+	public static final field Companion Lcom/mirego/trikot/graphql/GraphqlQueryPublisher$Companion;
+	public synthetic fun <init> (Lcom/mirego/trikot/graphql/GraphqlQuery;Ljava/lang/String;Ljava/lang/String;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/graphql/GraphqlQuery;Ljava/lang/String;Ljava/lang/String;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/mirego/trikot/graphql/GraphqlQueryPublisher$Companion {
+	public final fun createRequestBuilder-Q2Q30fc (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Duration;)Lcom/mirego/trikot/http/RequestBuilder;
+	public static synthetic fun createRequestBuilder-Q2Q30fc$default (Lcom/mirego/trikot/graphql/GraphqlQueryPublisher$Companion;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Duration;ILjava/lang/Object;)Lcom/mirego/trikot/http/RequestBuilder;
+}
+
+public final class com/mirego/trikot/graphql/QueryEscapingKt {
+	public static final fun escapeForGraphql (C)Ljava/lang/String;
+	public static final fun escapeForGraphql (Ljava/lang/String;)Ljava/lang/String;
+}
+

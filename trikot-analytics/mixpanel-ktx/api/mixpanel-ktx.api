@@ -1,0 +1,17 @@
+public final class com/mirego/trikot/analytics/MixpanelAnalyticsService : com/mirego/trikot/analytics/AnalyticsService {
+	public fun <init> (Landroid/content/Context;Ljava/lang/String;Z)V
+	public synthetic fun <init> (Landroid/content/Context;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun getName ()Ljava/lang/String;
+	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
+	public fun incrementUserProperties (Ljava/util/Map;)V
+	public fun isEnabled ()Z
+	public fun logout ()V
+	public fun setEnabled (Z)V
+	public fun setSuperProperties (Ljava/util/Map;)V
+	public fun setUserProperties (Ljava/util/Map;)V
+	public fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;)V
+	public fun unsetAllSuperProperties ()V
+	public fun unsetSuperProperties (Ljava/util/List;)V
+}
+

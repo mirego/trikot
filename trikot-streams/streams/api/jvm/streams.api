@@ -1,0 +1,918 @@
+public final class ScanWithSeedProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/StreamsConfiguration {
+	public static final field INSTANCE Lcom/mirego/trikot/streams/StreamsConfiguration;
+	public final fun getPublisherExecutionDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public final fun getSerialSubscriptionDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public final fun setPublisherExecutionDispatchQueue (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public final fun setSerialSubscriptionDispatchQueue (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+}
+
+public abstract class com/mirego/trikot/streams/attachable/AbstractAttachable : com/mirego/trikot/streams/attachable/Attachable {
+	public fun <init> ()V
+	public fun <init> (I)V
+	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun attach ()Lcom/mirego/trikot/streams/cancellable/Cancellable;
+	protected fun doAttach (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	protected fun doDetach ()V
+}
+
+public abstract interface class com/mirego/trikot/streams/attachable/Attachable {
+	public abstract fun attach ()Lcom/mirego/trikot/streams/cancellable/Cancellable;
+}
+
+public abstract interface class com/mirego/trikot/streams/cancellable/Cancellable {
+	public abstract fun cancel ()V
+}
+
+public final class com/mirego/trikot/streams/cancellable/CancellableManager : com/mirego/trikot/streams/cancellable/Cancellable {
+	public fun <init> ()V
+	public final fun add (Lcom/mirego/trikot/streams/cancellable/Cancellable;)Lcom/mirego/trikot/streams/cancellable/Cancellable;
+	public final fun add (Lkotlin/jvm/functions/Function0;)V
+	public fun cancel ()V
+}
+
+public final class com/mirego/trikot/streams/cancellable/CancellableManagerProvider : com/mirego/trikot/streams/cancellable/Cancellable {
+	public fun <init> ()V
+	public fun cancel ()V
+	public final fun cancelPreviousAndCreate ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
+}
+
+public abstract interface class com/mirego/trikot/streams/reactive/BehaviorSubject : com/mirego/trikot/streams/reactive/MutablePublisher {
+	public abstract fun complete ()V
+	public abstract fun getError ()Ljava/lang/Throwable;
+	public abstract fun getValue ()Ljava/lang/Object;
+	public abstract fun setError (Ljava/lang/Throwable;)V
+	public abstract fun setValue (Ljava/lang/Object;)V
+}
+
+public class com/mirego/trikot/streams/reactive/BehaviorSubjectImpl : com/mirego/trikot/streams/reactive/PublishSubjectImpl, com/mirego/trikot/streams/reactive/BehaviorSubject {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;)V
+	public synthetic fun <init> (Ljava/lang/Object;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	protected fun onNewSubscription (Lcom/mirego/trikot/streams/reactive/PublisherSubscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/ColdPublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/CombineLatest {
+	public static final field Companion Lcom/mirego/trikot/streams/reactive/CombineLatest$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/streams/reactive/CombineLatest$Companion {
+	public final fun combine2 (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public final fun combine3 (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+}
+
+public abstract class com/mirego/trikot/streams/reactive/CombineLatestResult {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public abstract fun copyForUpdate ()Lcom/mirego/trikot/streams/reactive/CombineLatestResult;
+	public fun getComponent1 ()Ljava/lang/Object;
+	public fun getComponent2 ()Ljava/lang/Object;
+	public fun getComponent3 ()Ljava/lang/Object;
+	public fun getComponent4 ()Ljava/lang/Object;
+	public fun getComponent5 ()Ljava/lang/Object;
+	public fun setComponent1 (Ljava/lang/Object;)V
+	public fun setComponent2 (Ljava/lang/Object;)V
+	public fun setComponent3 (Ljava/lang/Object;)V
+	public fun setComponent4 (Ljava/lang/Object;)V
+	public fun setComponent5 (Ljava/lang/Object;)V
+	public abstract fun shouldDispatch ()Z
+}
+
+public final class com/mirego/trikot/streams/reactive/CombineLatestResult2 : com/mirego/trikot/streams/reactive/CombineLatestResult {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/CombineLatestResult2;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/CombineLatestResult2;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/CombineLatestResult2;
+	public fun copyForUpdate ()Lcom/mirego/trikot/streams/reactive/CombineLatestResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getComponent1 ()Ljava/lang/Object;
+	public fun getComponent2 ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun setComponent1 (Ljava/lang/Object;)V
+	public fun setComponent2 (Ljava/lang/Object;)V
+	public fun shouldDispatch ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/CombineLatestResult3 : com/mirego/trikot/streams/reactive/CombineLatestResult {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/CombineLatestResult3;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/CombineLatestResult3;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/CombineLatestResult3;
+	public fun copyForUpdate ()Lcom/mirego/trikot/streams/reactive/CombineLatestResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getComponent1 ()Ljava/lang/Object;
+	public fun getComponent2 ()Ljava/lang/Object;
+	public fun getComponent3 ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun setComponent1 (Ljava/lang/Object;)V
+	public fun setComponent2 (Ljava/lang/Object;)V
+	public fun setComponent3 (Ljava/lang/Object;)V
+	public fun shouldDispatch ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/ConcretePublisher : org/reactivestreams/Publisher {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public final fun getPublisher ()Lorg/reactivestreams/Publisher;
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/ConcretePublisherKt {
+	public static final fun asConcretePublisher (Lorg/reactivestreams/Publisher;)Lcom/mirego/trikot/streams/reactive/ConcretePublisher;
+}
+
+public final class com/mirego/trikot/streams/reactive/JustPublisher : org/reactivestreams/Publisher {
+	public fun <init> (Ljava/lang/Iterable;)V
+	public final fun getValues ()Ljava/lang/Iterable;
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public abstract interface class com/mirego/trikot/streams/reactive/MutablePublisher : org/reactivestreams/Publisher {
+	public abstract fun complete ()V
+	public abstract fun getError ()Ljava/lang/Throwable;
+	public abstract fun getValue ()Ljava/lang/Object;
+	public abstract fun setError (Ljava/lang/Throwable;)V
+	public abstract fun setValue (Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/NeverPublisher : org/reactivestreams/Publisher {
+	public fun <init> ()V
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public abstract interface class com/mirego/trikot/streams/reactive/PublishSubject : com/mirego/trikot/streams/reactive/MutablePublisher {
+	public abstract fun complete ()V
+	public abstract fun getError ()Ljava/lang/Throwable;
+	public abstract fun getValue ()Ljava/lang/Object;
+	public abstract fun setError (Ljava/lang/Throwable;)V
+	public abstract fun setValue (Ljava/lang/Object;)V
+}
+
+public class com/mirego/trikot/streams/reactive/PublishSubjectImpl : com/mirego/trikot/streams/reactive/PublishSubject {
+	public fun <init> ()V
+	public fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	protected final fun cleanupValues ()V
+	public fun complete ()V
+	protected fun dispatchErrorToSubscribers (Ljava/lang/Throwable;)V
+	protected fun dispatchValueToSubscribers (Ljava/lang/Object;)V
+	protected final fun getCompleted ()Z
+	public fun getError ()Ljava/lang/Throwable;
+	protected final fun getHasSubscriptions ()Z
+	protected final fun getOnPublisherSubscriptionCancelled ()Lkotlin/jvm/functions/Function1;
+	public fun getValue ()Ljava/lang/Object;
+	protected fun onFirstSubscription ()V
+	protected fun onNewSubscription (Lcom/mirego/trikot/streams/reactive/PublisherSubscription;)V
+	protected fun onNoSubscription ()V
+	public fun setError (Ljava/lang/Throwable;)V
+	public fun setValue (Ljava/lang/Object;)V
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/PublisherExtensionsKt {
+	public static final fun concat (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun debounce-8Mi8wO0 (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun debounce-8Mi8wO0$default (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun delay-8Mi8wO0 (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun delay-8Mi8wO0$default (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun distinctUntilChanged (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun filter (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun filterNotNull (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun first (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun map (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun merge (Lorg/reactivestreams/Publisher;Ljava/util/List;)Lorg/reactivestreams/Publisher;
+	public static final fun merge (Lorg/reactivestreams/Publisher;[Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun observeOn (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)Lorg/reactivestreams/Publisher;
+	public static final fun onErrorResumeNext (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun onErrorReturn (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun reject (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun retryBackoff (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/reactive/backoff/BackoffPolicy;Lcom/mirego/trikot/foundation/timers/TimerFactory;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun retryBackoff$default (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/reactive/backoff/BackoffPolicy;Lcom/mirego/trikot/foundation/timers/TimerFactory;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun retryWhen (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun reverse (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun sample-8Mi8wO0 (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun sample-8Mi8wO0$default (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun scan (Lorg/reactivestreams/Publisher;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Lorg/reactivestreams/Publisher;
+	public static final fun scan (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function2;)Lorg/reactivestreams/Publisher;
+	public static final fun scanWith (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)Lorg/reactivestreams/Publisher;
+	public static final fun shared (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun skip (Lorg/reactivestreams/Publisher;J)Lcom/mirego/trikot/streams/reactive/processors/SkipProcessor;
+	public static final fun startWith (Lorg/reactivestreams/Publisher;Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun subscribe (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)V
+	public static final fun subscribe (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+	public static final fun subscribe (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)V
+	public static final fun subscribeOn (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)Lorg/reactivestreams/Publisher;
+	public static final fun switchMap (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun takeUntil (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun takeWhile (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun threadLocal (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun threadLocal$default (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun timeout-8Mi8wO0 (Lorg/reactivestreams/Publisher;JLjava/lang/String;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun timeout-8Mi8wO0$default (Lorg/reactivestreams/Publisher;JLjava/lang/String;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun withCancellableManager (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun withPreviousValue (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+}
+
+public class com/mirego/trikot/streams/reactive/PublisherSubscription : org/reactivestreams/Subscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun cancel ()V
+	public final fun dispatchCompleted ()V
+	public final fun dispatchError (Ljava/lang/Throwable;)V
+	public final fun dispatchValue (Ljava/lang/Object;)V
+	public final fun isCancelled ()Z
+	public fun request (J)V
+}
+
+public final class com/mirego/trikot/streams/reactive/Publishers {
+	public static final field INSTANCE Lcom/mirego/trikot/streams/reactive/Publishers;
+	public final fun behaviorSubject (Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public static synthetic fun behaviorSubject$default (Lcom/mirego/trikot/streams/reactive/Publishers;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public final fun completed ()Lorg/reactivestreams/Publisher;
+	public final fun empty ()Lorg/reactivestreams/Publisher;
+	public final fun error (Ljava/lang/Throwable;)Lorg/reactivestreams/Publisher;
+	public final fun fromIterable (Ljava/lang/Iterable;)Lorg/reactivestreams/Publisher;
+	public final fun frozenBehaviorSubject (Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public static synthetic fun frozenBehaviorSubject$default (Lcom/mirego/trikot/streams/reactive/Publishers;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public final fun frozenPublishSubject ()Lcom/mirego/trikot/streams/reactive/PublishSubject;
+	public final fun just (Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public final fun justMany ([Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public final fun never ()Lorg/reactivestreams/Publisher;
+	public final fun publishSubject ()Lcom/mirego/trikot/streams/reactive/PublishSubject;
+	public final fun range (II)Lorg/reactivestreams/Publisher;
+	public final fun repeat-KLykuaI (JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/functions/Function0;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun repeat-KLykuaI$default (Lcom/mirego/trikot/streams/reactive/Publishers;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public final fun timer-VtjQ1oo (JLcom/mirego/trikot/foundation/timers/TimerFactory;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun timer-VtjQ1oo$default (Lcom/mirego/trikot/streams/reactive/Publishers;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+}
+
+public final class com/mirego/trikot/streams/reactive/PublishersKt {
+	public static final fun asPublisher (Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun just (Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
+}
+
+public class com/mirego/trikot/streams/reactive/RefreshablePublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl {
+	public fun <init> (Lkotlin/jvm/functions/Function2;Ljava/lang/Object;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function2;Ljava/lang/Object;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	protected final fun doExecuteBlock ()V
+	protected final fun getShouldRefresh ()Lcom/mirego/trikot/foundation/concurrent/AtomicReference;
+	protected fun onFirstSubscription ()V
+	protected fun onNoSubscription ()V
+	public fun refresh ()V
+}
+
+public final class com/mirego/trikot/streams/reactive/RepeatablePublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl {
+	public synthetic fun <init> (JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/SharedExecutionPublisher : org/reactivestreams/Publisher {
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/StreamsProcessorException : java/lang/Exception {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/StreamsTimeoutException : java/lang/Exception {
+	public fun <init> (Ljava/lang/String;)V
+	public fun getMessage ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/SubscriberFromBlock : org/reactivestreams/Subscriber {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/TimerPublisher : org/reactivestreams/Publisher {
+	public synthetic fun <init> (JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public abstract class com/mirego/trikot/streams/reactive/backoff/Backoff {
+}
+
+public final class com/mirego/trikot/streams/reactive/backoff/Backoff$Next : com/mirego/trikot/streams/reactive/backoff/Backoff {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun copy-LRDsOJo (J)Lcom/mirego/trikot/streams/reactive/backoff/Backoff$Next;
+	public static synthetic fun copy-LRDsOJo$default (Lcom/mirego/trikot/streams/reactive/backoff/Backoff$Next;JILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/backoff/Backoff$Next;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDuration-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/backoff/Backoff$Stop : com/mirego/trikot/streams/reactive/backoff/Backoff {
+	public static final field INSTANCE Lcom/mirego/trikot/streams/reactive/backoff/Backoff$Stop;
+}
+
+public abstract interface class com/mirego/trikot/streams/reactive/backoff/BackoffPolicy {
+	public abstract fun nextBackoff ()Lcom/mirego/trikot/streams/reactive/backoff/Backoff;
+	public abstract fun reset ()V
+}
+
+public final class com/mirego/trikot/streams/reactive/backoff/ExponentialBackoffPolicy : com/mirego/trikot/streams/reactive/backoff/BackoffPolicy {
+	public synthetic fun <init> (JLjava/lang/Integer;JDILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JLjava/lang/Integer;JDLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun nextBackoff ()Lcom/mirego/trikot/streams/reactive/backoff/Backoff;
+	public fun reset ()V
+}
+
+public final class com/mirego/trikot/streams/reactive/executable/AlreadyStartedException : java/lang/RuntimeException {
+	public fun <init> ()V
+}
+
+public abstract class com/mirego/trikot/streams/reactive/executable/BaseExecutablePublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl, com/mirego/trikot/streams/reactive/executable/ExecutablePublisher {
+	public fun <init> ()V
+	public fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun cancel ()V
+	public fun complete ()V
+	public final fun dispatchError (Ljava/lang/Throwable;)V
+	public final fun dispatchSuccess (Ljava/lang/Object;)V
+	public final fun execute ()V
+	protected final fun getCancellableManager ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
+	public abstract fun internalRun (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+}
+
+public abstract interface class com/mirego/trikot/streams/reactive/executable/ExecutablePublisher : com/mirego/trikot/streams/cancellable/Cancellable, org/reactivestreams/Publisher {
+	public abstract fun execute ()V
+}
+
+public abstract class com/mirego/trikot/streams/reactive/processors/AbstractProcessor : org/reactivestreams/Processor {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public abstract fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+	public final fun getParentPublisher ()Lorg/reactivestreams/Publisher;
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/CombineLatestProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Ljava/util/List;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/CombineLatestProcessor$CombineProcessorProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Ljava/util/List;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/CombineLatestProcessorExtensionsKt {
+	public static final fun combine (Ljava/util/List;)Lorg/reactivestreams/Publisher;
+	public static final fun combine (Lorg/reactivestreams/Publisher;Ljava/util/List;)Lorg/reactivestreams/Publisher;
+	public static final fun combine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun safeCombine (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/ConcatProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lorg/reactivestreams/Publisher;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/ConcatProcessor$ConcatProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lorg/reactivestreams/Publisher;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/DebounceProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public synthetic fun <init> (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/DebounceProcessor$DebounceProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public synthetic fun <init> (Lorg/reactivestreams/Subscriber;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lorg/reactivestreams/Subscriber;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/DelayProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public synthetic fun <init> (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/DelayProcessor$DelayProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public synthetic fun <init> (Lorg/reactivestreams/Subscriber;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/DistinctUntilChangedProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/DistinctUntilChangedProcessor$DistinctUntilChangedProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/FilterProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/FilterProcessor$FilterProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public final fun getBlock ()Lkotlin/jvm/functions/Function1;
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/FirstProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/FirstProcessor$FirstProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;)V
+	public fun onComplete ()V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/MapProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/MapProcessor$MapProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/MergeProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Ljava/util/List;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/MergeProcessor$MergeProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Ljava/util/List;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple10 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component10 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun component8 ()Ljava/lang/Object;
+	public final fun component9 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple10;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple10;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple10;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEighth ()Ljava/lang/Object;
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getNinth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getTenth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple4 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple4;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple4;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple4;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple5 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple5;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple5;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple5;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple6 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple6;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple6;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple6;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple7 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple7;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple7;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple7;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple8 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun component8 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple8;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple8;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple8;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEighth ()Ljava/lang/Object;
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/NTuple9 {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun component8 ()Ljava/lang/Object;
+	public final fun component9 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple9;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/streams/reactive/processors/NTuple9;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/processors/NTuple9;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEighth ()Ljava/lang/Object;
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getNinth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public class com/mirego/trikot/streams/reactive/processors/ObserveOnProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/ObserveOnProcessor$ObserveOnProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotQueueDispatcher {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public fun getDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/OnErrorResumeNextProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/OnErrorResumeNextProcessor$OnErrorResumeNextProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/OnErrorReturnProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/OnErrorReturnProcessor$OnErrorReturnSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public abstract class com/mirego/trikot/streams/reactive/processors/ProcessorSubscription : org/reactivestreams/Subscriber {
+	public fun <init> (Lorg/reactivestreams/Subscriber;)V
+	protected final fun cancelActiveSubscription ()V
+	public final fun getActiveSubscription ()Lcom/mirego/trikot/foundation/concurrent/AtomicReference;
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;)V
+	public abstract fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/PublisherResult {
+	public fun <init> ()V
+	public final fun getCompleted ()Z
+	public final fun getValue ()Ljava/lang/Object;
+	public final fun setCompleted (Z)V
+	public final fun setValue (Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/RejectProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/RejectProcessor$RejectProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public final fun getBlock ()Lkotlin/jvm/functions/Function1;
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/RetryWhenProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/RetryWhenSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SampleProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public synthetic fun <init> (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lorg/reactivestreams/Publisher;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SampleProcessor$SampleProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public synthetic fun <init> (Lorg/reactivestreams/Subscriber;JLcom/mirego/trikot/foundation/timers/TimerFactory;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/ScanProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/ScanProcessor$ScanProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SharedProcessor : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl, org/reactivestreams/Processor {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;)V
+	public fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SkipProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;J)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SkipProcessor$SkipProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;J)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SubscribeOnProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotQueueDispatcher {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+	public fun getDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SubscribeOnProcessor$SubscribeOnProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotQueueDispatcher {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public fun getDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SwitchMapProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/SwitchMapProcessor$SwitchMapProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/TakeUntilProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/TakeUntilProcessor$TakeUntilProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun onComplete ()V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/TakeWhileProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/TakeWhileProcessor$TakeWhileProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;Lkotlin/jvm/functions/Function1;)V
+	public fun onComplete ()V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/TimeoutProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public synthetic fun <init> (JLcom/mirego/trikot/foundation/timers/TimerFactory;Ljava/lang/String;Lorg/reactivestreams/Publisher;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JLcom/mirego/trikot/foundation/timers/TimerFactory;Ljava/lang/String;Lorg/reactivestreams/Publisher;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/TimeoutProcessor$TimeoutProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public synthetic fun <init> (JLcom/mirego/trikot/foundation/timers/TimerFactory;Ljava/lang/String;Lorg/reactivestreams/Subscriber;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onComplete ()V
+	public fun onError (Ljava/lang/Throwable;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/WithCancellableManagerProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/WithCancellableManagerProcessor$WithCancellableManagerSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;)V
+	public fun onCancel (Lorg/reactivestreams/Subscription;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/WithPreviousValueProcessor : com/mirego/trikot/streams/reactive/processors/AbstractProcessor {
+	public fun <init> (Lorg/reactivestreams/Publisher;)V
+	public fun createSubscription (Lorg/reactivestreams/Subscriber;)Lcom/mirego/trikot/streams/reactive/processors/ProcessorSubscription;
+}
+
+public final class com/mirego/trikot/streams/reactive/processors/WithPreviousValueProcessor$WithPreviousValueProcessorSubscription : com/mirego/trikot/streams/reactive/processors/ProcessorSubscription {
+	public fun <init> (Lorg/reactivestreams/Subscriber;)V
+	public fun onNext (Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+}
+
+public final class com/mirego/trikot/streams/reactive/promise/CancelledPromiseException : com/mirego/trikot/streams/reactive/promise/PromiseException {
+	public static final field INSTANCE Lcom/mirego/trikot/streams/reactive/promise/CancelledPromiseException;
+}
+
+public final class com/mirego/trikot/streams/reactive/promise/EmptyPromiseException : com/mirego/trikot/streams/reactive/promise/PromiseException {
+	public static final field INSTANCE Lcom/mirego/trikot/streams/reactive/promise/EmptyPromiseException;
+}
+
+public final class com/mirego/trikot/streams/reactive/promise/Promise : org/reactivestreams/Publisher {
+	public static final field Companion Lcom/mirego/trikot/streams/reactive/promise/Promise$Companion;
+	public final fun finally (Lkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun finallyReturn (Lkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun onError (Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun onErrorReturn (Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun onSuccess (Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun onSuccessReturn (Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun subscribe (Lorg/reactivestreams/Subscriber;)V
+	public final fun then (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun thenReturn (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+}
+
+public final class com/mirego/trikot/streams/reactive/promise/Promise$Companion {
+	public final fun create (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function2;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public static synthetic fun create$default (Lcom/mirego/trikot/streams/reactive/promise/Promise$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun from (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public static synthetic fun from$default (Lcom/mirego/trikot/streams/reactive/promise/Promise$Companion;Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun reject (Ljava/lang/Throwable;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public final fun resolve (Ljava/lang/Object;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+}
+
+public abstract class com/mirego/trikot/streams/reactive/promise/PromiseException : java/lang/Exception {
+}
+
+public abstract interface class org/reactivestreams/Processor : org/reactivestreams/Publisher, org/reactivestreams/Subscriber {
+}
+
+public abstract interface class org/reactivestreams/Publisher {
+	public abstract fun subscribe (Lorg/reactivestreams/Subscriber;)V
+}
+
+public abstract interface class org/reactivestreams/Subscriber {
+	public abstract fun onComplete ()V
+	public abstract fun onError (Ljava/lang/Throwable;)V
+	public abstract fun onNext (Ljava/lang/Object;)V
+	public abstract fun onSubscribe (Lorg/reactivestreams/Subscription;)V
+}
+
+public abstract interface class org/reactivestreams/Subscription {
+	public abstract fun cancel ()V
+	public abstract fun request (J)V
+}
+

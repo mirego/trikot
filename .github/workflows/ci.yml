@@ -47,3 +47,6 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew check --parallel
+
+      - name: API check
+        run: ./gradlew apiCheck

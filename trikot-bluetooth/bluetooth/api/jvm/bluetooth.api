@@ -1,0 +1,87 @@
+public abstract interface class com/mirego/trikot/bluetooth/AttributeProfileCharacteristic {
+	public abstract fun getEvent ()Lorg/reactivestreams/Publisher;
+	public abstract fun getUuid ()Ljava/lang/String;
+	public abstract fun read ()V
+	public abstract fun watch ()V
+	public abstract fun watchWithIndication ()V
+	public abstract fun write ([B)V
+}
+
+public final class com/mirego/trikot/bluetooth/AttributeProfileCharacteristicEvent {
+	public fun <init> ([BLjava/lang/Throwable;)V
+	public final fun component1 ()[B
+	public final fun component2 ()Ljava/lang/Throwable;
+	public final fun copy ([BLjava/lang/Throwable;)Lcom/mirego/trikot/bluetooth/AttributeProfileCharacteristicEvent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/bluetooth/AttributeProfileCharacteristicEvent;[BLjava/lang/Throwable;ILjava/lang/Object;)Lcom/mirego/trikot/bluetooth/AttributeProfileCharacteristicEvent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Ljava/lang/Throwable;
+	public final fun getValue ()[B
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/bluetooth/AttributeProfileCharacteristicKt {
+	public static final fun getError (Lcom/mirego/trikot/bluetooth/AttributeProfileCharacteristic;)Lorg/reactivestreams/Publisher;
+	public static final fun getValue (Lcom/mirego/trikot/bluetooth/AttributeProfileCharacteristic;)Lorg/reactivestreams/Publisher;
+}
+
+public abstract interface class com/mirego/trikot/bluetooth/AttributeProfileService {
+	public abstract fun getCharacteristics ()Lorg/reactivestreams/Publisher;
+}
+
+public final class com/mirego/trikot/bluetooth/BluetoothCharacteristicException : java/lang/Exception {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class com/mirego/trikot/bluetooth/BluetoothConfiguration {
+	public static final field INSTANCE Lcom/mirego/trikot/bluetooth/BluetoothConfiguration;
+	public final fun getBluetoothManager ()Lcom/mirego/trikot/bluetooth/BluetoothManager;
+	public final fun setBluetoothManager (Lcom/mirego/trikot/bluetooth/BluetoothManager;)V
+}
+
+public abstract interface class com/mirego/trikot/bluetooth/BluetoothDevice {
+	public abstract fun getAttributeProfileServices ()Lorg/reactivestreams/Publisher;
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun getPhysicalAddress ()Ljava/lang/String;
+	public abstract fun isConnected ()Lorg/reactivestreams/Publisher;
+}
+
+public abstract interface class com/mirego/trikot/bluetooth/BluetoothManager {
+	public abstract fun getMissingPermissionsPublisher ()Lorg/reactivestreams/Publisher;
+	public abstract fun getStatePublisher ()Lorg/reactivestreams/Publisher;
+	public abstract fun scanForDevices (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/util/List;)Lorg/reactivestreams/Publisher;
+}
+
+public final class com/mirego/trikot/bluetooth/BluetoothManager$Permission : java/lang/Enum {
+	public static final field BLUETOOTH Lcom/mirego/trikot/bluetooth/BluetoothManager$Permission;
+	public static final field LOCATION Lcom/mirego/trikot/bluetooth/BluetoothManager$Permission;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/bluetooth/BluetoothManager$Permission;
+	public static fun values ()[Lcom/mirego/trikot/bluetooth/BluetoothManager$Permission;
+}
+
+public final class com/mirego/trikot/bluetooth/BluetoothManager$State : java/lang/Enum {
+	public static final field OFF Lcom/mirego/trikot/bluetooth/BluetoothManager$State;
+	public static final field ON Lcom/mirego/trikot/bluetooth/BluetoothManager$State;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/bluetooth/BluetoothManager$State;
+	public static fun values ()[Lcom/mirego/trikot/bluetooth/BluetoothManager$State;
+}
+
+public abstract interface class com/mirego/trikot/bluetooth/BluetoothScanResult {
+	public abstract fun connect (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)Lcom/mirego/trikot/bluetooth/BluetoothDevice;
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun getPhysicalAddress ()Ljava/lang/String;
+	public abstract fun getRssi ()Lorg/reactivestreams/Publisher;
+	public abstract fun manufacturerSpecificData (I)Lorg/reactivestreams/Publisher;
+}
+
+public final class com/mirego/trikot/bluetooth/EmptyBluetoothManager : com/mirego/trikot/bluetooth/BluetoothManager {
+	public fun <init> ()V
+	public fun getMissingPermissionsPublisher ()Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public synthetic fun getMissingPermissionsPublisher ()Lorg/reactivestreams/Publisher;
+	public fun getStatePublisher ()Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public synthetic fun getStatePublisher ()Lorg/reactivestreams/Publisher;
+	public fun scanForDevices (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/util/List;)Lorg/reactivestreams/Publisher;
+}
+

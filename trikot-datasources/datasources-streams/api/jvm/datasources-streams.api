@@ -1,0 +1,160 @@
+public abstract class com/mirego/trikot/datasources/BaseDataSource : com/mirego/trikot/datasources/DataSource {
+	public fun <init> ()V
+	public fun <init> (Lcom/mirego/trikot/datasources/DataSource;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/datasources/DataSource;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun cacheableIds ()Ljava/util/List;
+	public final fun clean (Ljava/lang/Object;)V
+	public final fun clean (Ljava/util/List;)V
+	public final fun cleanAll ()V
+	public fun delete (Ljava/lang/Object;)V
+	public abstract fun internalRead (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+	public final fun invalidate ()V
+	public fun read (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lorg/reactivestreams/Publisher;
+	protected final fun refreshPublisherWithId (Ljava/lang/Object;)V
+	public fun save (Lcom/mirego/trikot/datasources/DataSourceRequest;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/datasources/BaseDataSourceKt {
+	public static final fun refreshablePublisher (Lkotlin/Pair;)Lcom/mirego/trikot/streams/reactive/RefreshablePublisher;
+	public static final fun sharedPublisher (Lkotlin/Pair;)Lorg/reactivestreams/Publisher;
+}
+
+public abstract class com/mirego/trikot/datasources/BaseExpiringDataSource : com/mirego/trikot/datasources/BaseHotDataSource {
+	public fun <init> ()V
+	public fun <init> (Lcom/mirego/trikot/datasources/DataSource;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/datasources/DataSource;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun delete (Ljava/lang/Object;)V
+	public synthetic fun internalShouldRead (Lcom/mirego/trikot/datasources/DataSourceRequest;Lcom/mirego/trikot/datasources/DataState;)Z
+	public fun internalShouldRead (Lcom/mirego/trikot/datasources/ExpiringDataSourceRequest;Lcom/mirego/trikot/datasources/DataState;)Z
+}
+
+public abstract class com/mirego/trikot/datasources/BaseHotDataSource : com/mirego/trikot/datasources/DataSource {
+	public fun <init> ()V
+	public fun <init> (Lcom/mirego/trikot/datasources/DataSource;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/datasources/DataSource;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun cacheableIds ()Ljava/util/List;
+	public final fun clean (Ljava/lang/Object;)V
+	public final fun clean (Ljava/util/List;)V
+	public final fun cleanAll ()V
+	public fun delete (Ljava/lang/Object;)V
+	public abstract fun internalRead (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun internalShouldRead (Lcom/mirego/trikot/datasources/DataSourceRequest;Lcom/mirego/trikot/datasources/DataState;)Z
+	public fun read (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lorg/reactivestreams/Publisher;
+	public fun save (Lcom/mirego/trikot/datasources/DataSourceRequest;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/datasources/BaseHotDataSource$NullableValue {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/BaseHotDataSource$NullableValue;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/datasources/BaseHotDataSource$NullableValue;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/BaseHotDataSource$NullableValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/mirego/trikot/datasources/DataSource {
+	public abstract fun delete (Ljava/lang/Object;)V
+	public abstract fun read (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lorg/reactivestreams/Publisher;
+	public abstract fun save (Lcom/mirego/trikot/datasources/DataSourceRequest;Ljava/lang/Object;)V
+}
+
+public abstract interface class com/mirego/trikot/datasources/DataSourceRequest {
+	public abstract fun getCacheableId ()Ljava/lang/Object;
+	public abstract fun getRequestType ()Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+}
+
+public final class com/mirego/trikot/datasources/DataSourceRequest$Type : java/lang/Enum {
+	public static final field REFRESH_CACHE Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+	public static final field USE_CACHE Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+	public static fun values ()[Lcom/mirego/trikot/datasources/DataSourceRequest$Type;
+}
+
+public final class com/mirego/trikot/datasources/DataSourceState {
+	public static final field Companion Lcom/mirego/trikot/datasources/DataSourceState$Companion;
+	public fun <init> (ZLjava/lang/Object;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (ZLjava/lang/Object;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Throwable;
+	public final fun copy (ZLjava/lang/Object;Ljava/lang/Throwable;)Lcom/mirego/trikot/datasources/DataSourceState;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/datasources/DataSourceState;ZLjava/lang/Object;Ljava/lang/Throwable;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataSourceState;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Ljava/lang/Object;
+	public final fun getError ()Ljava/lang/Throwable;
+	public fun hashCode ()I
+	public final fun isLoading ()Z
+	public final fun mapData (Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/datasources/DataSourceState;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/datasources/DataSourceState$Companion {
+	public final fun dataLoaded (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataSourceState;
+	public final fun loading ()Lcom/mirego/trikot/datasources/DataSourceState;
+	public final fun withError (Ljava/lang/Throwable;)Lcom/mirego/trikot/datasources/DataSourceState;
+}
+
+public final class com/mirego/trikot/datasources/DataSourceStateKt {
+	public static final fun toDataSourceState (Lcom/mirego/trikot/datasources/DataState;)Lcom/mirego/trikot/datasources/DataSourceState;
+}
+
+public final class com/mirego/trikot/datasources/DataStateRefreshablePublisher : com/mirego/trikot/streams/reactive/RefreshablePublisher {
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lcom/mirego/trikot/datasources/DataState;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function2;Lcom/mirego/trikot/datasources/DataState;Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun refresh ()V
+}
+
+public abstract interface class com/mirego/trikot/datasources/ExpiringDataSourceRequest : com/mirego/trikot/datasources/DataSourceRequest {
+	public abstract fun getExpiredInMilliseconds ()J
+}
+
+public final class com/mirego/trikot/datasources/ExpiringValue {
+	public static final field Companion Lcom/mirego/trikot/datasources/ExpiringValue$Companion;
+	public fun <init> (Ljava/lang/Object;J)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()J
+	public final fun copy (Ljava/lang/Object;J)Lcom/mirego/trikot/datasources/ExpiringValue;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/datasources/ExpiringValue;Ljava/lang/Object;JILjava/lang/Object;)Lcom/mirego/trikot/datasources/ExpiringValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpiredEpoch ()J
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public final fun isExpired ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/datasources/ExpiringValue$Companion {
+	public final fun build (Ljava/lang/Object;Lcom/mirego/trikot/datasources/ExpiringDataSourceRequest;)Lcom/mirego/trikot/datasources/ExpiringValue;
+}
+
+public final class com/mirego/trikot/datasources/InvalidatableDataSource : com/mirego/trikot/datasources/DataSource, com/mirego/trikot/streams/cancellable/Cancellable {
+	public fun <init> (Lcom/mirego/trikot/datasources/BaseDataSource;Lorg/reactivestreams/Publisher;)V
+	public fun cancel ()V
+	public fun delete (Ljava/lang/Object;)V
+	public fun read (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lorg/reactivestreams/Publisher;
+	public fun save (Lcom/mirego/trikot/datasources/DataSourceRequest;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/datasources/MemoryCacheDataSource : com/mirego/trikot/datasources/BaseDataSource {
+	public fun <init> ()V
+	public fun delete (Ljava/lang/Object;)V
+	public fun internalRead (Lcom/mirego/trikot/datasources/DataSourceRequest;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+	public fun save (Lcom/mirego/trikot/datasources/DataSourceRequest;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/datasources/extensions/DataSourcePublisherExtensionsKt {
+	public static final fun filterIsData (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun filterIsError (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun filterValue (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun mapData (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun mapDataState (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun mapToDataState (Lorg/reactivestreams/Publisher;Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun mapToDataState$default (Lorg/reactivestreams/Publisher;Ljava/lang/Object;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+	public static final fun switchMapDataState (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static final fun switchMapDataState (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Lorg/reactivestreams/Publisher;
+	public static synthetic fun switchMapDataState$default (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/reactivestreams/Publisher;
+}
+
