@@ -173,10 +173,10 @@ public final class com/mirego/trikot/viewmodels/declarative/components/factory/V
 public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion {
 	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public final fun withImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static synthetic fun withImage$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public final fun withImageUrl (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static synthetic fun withImageUrl$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withImage$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withImageUrl (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withImageUrl$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public final fun withText (Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static synthetic fun withText$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public final fun withTextImage (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
@@ -450,22 +450,28 @@ public final class com/mirego/trikot/viewmodels/declarative/content/VMDIdentifia
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/content/VMDImageContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
-	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)V
+	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
-	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;
-	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContentDescription ()Ljava/lang/String;
 	public final fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
-	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;)V
+	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
-	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;
-	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContentDescription ()Ljava/lang/String;
 	public final fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -487,12 +493,15 @@ public final class com/mirego/trikot/viewmodels/declarative/content/VMDTextConte
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
-	public fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)V
+	public fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
-	public final fun copy (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;
-	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContentDescription ()Ljava/lang/String;
 	public final fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
 	public final fun getText ()Ljava/lang/String;
 	public fun hashCode ()I
@@ -705,16 +714,16 @@ public abstract interface class com/mirego/trikot/viewmodels/declarative/viewmod
 public final class com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSLKt {
 	public static final fun button (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static synthetic fun button$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static final fun buttonWithImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static final fun buttonWithImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static synthetic fun buttonWithImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static synthetic fun buttonWithImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static final fun buttonWithImageUrl (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static synthetic fun buttonWithImageUrl$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithImageUrl (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithImageUrl$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static final fun buttonWithText (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static synthetic fun buttonWithText$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static final fun buttonWithTextImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
-	public static synthetic fun buttonWithTextImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithTextImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithTextImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static final fun buttonWithTextPair (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static synthetic fun buttonWithTextPair$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static final fun determinateProgress (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;FFLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
