@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Updates
 
+### Breaking Changes
+
+## 5.1.0
+
+### Updates
+
 - Ktor `2.3.3`
 - AtomicFu `0.22.0`
 
