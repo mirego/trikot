@@ -10,7 +10,7 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.time.Duration
 
-class SampleProcessor<T>(
+internal class SampleProcessor<T>(
     parentPublisher: Publisher<T>,
     private val interval: Duration,
     private val timerFactory: TimerFactory = FoundationConfiguration.timerFactory

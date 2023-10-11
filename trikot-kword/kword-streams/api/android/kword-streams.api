@@ -1,0 +1,23 @@
+public abstract interface class com/mirego/trikot/kword/streams/DynamicI18N {
+	public abstract fun get (Lcom/mirego/trikot/kword/KWordKey;)Lorg/reactivestreams/Publisher;
+	public abstract fun getCurrentI18N ()Lcom/mirego/trikot/kword/I18N;
+	public abstract fun getI18N ()Lorg/reactivestreams/Publisher;
+	public abstract fun getLanguage ()Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public abstract fun reset ()V
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;)Lorg/reactivestreams/Publisher;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Lorg/reactivestreams/Publisher;
+	public abstract fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Lorg/reactivestreams/Publisher;
+}
+
+public final class com/mirego/trikot/kword/streams/MultiLanguageI18N : com/mirego/trikot/kword/streams/DynamicI18N {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public fun get (Lcom/mirego/trikot/kword/KWordKey;)Lorg/reactivestreams/Publisher;
+	public fun getCurrentI18N ()Lcom/mirego/trikot/kword/I18N;
+	public fun getI18N ()Lorg/reactivestreams/Publisher;
+	public fun getLanguage ()Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+	public fun reset ()V
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;)Lorg/reactivestreams/Publisher;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Lorg/reactivestreams/Publisher;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Lorg/reactivestreams/Publisher;
+}
+

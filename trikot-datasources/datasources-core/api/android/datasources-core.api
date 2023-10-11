@@ -1,0 +1,67 @@
+public abstract class com/mirego/trikot/datasources/DataState {
+	public static final field Companion Lcom/mirego/trikot/datasources/DataState$Companion;
+	public final fun hasData (ZZ)Z
+	public static synthetic fun hasData$default (Lcom/mirego/trikot/datasources/DataState;ZZILjava/lang/Object;)Z
+	public final fun isError (Z)Z
+	public static synthetic fun isError$default (Lcom/mirego/trikot/datasources/DataState;ZILjava/lang/Object;)Z
+	public final fun isPending (Z)Z
+	public static synthetic fun isPending$default (Lcom/mirego/trikot/datasources/DataState;ZILjava/lang/Object;)Z
+}
+
+public final class com/mirego/trikot/datasources/DataState$Companion {
+	public final fun data (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public final fun error (Ljava/lang/Throwable;Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public static synthetic fun error$default (Lcom/mirego/trikot/datasources/DataState$Companion;Ljava/lang/Throwable;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public final fun pending (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public static synthetic fun pending$default (Lcom/mirego/trikot/datasources/DataState$Companion;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+}
+
+public final class com/mirego/trikot/datasources/DataState$Data : com/mirego/trikot/datasources/DataState {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState$Data;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/datasources/DataState$Data;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState$Data;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/datasources/DataState$Error : com/mirego/trikot/datasources/DataState {
+	public fun <init> (Ljava/lang/Throwable;Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Throwable;Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Throwable;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Throwable;Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState$Error;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/datasources/DataState$Error;Ljava/lang/Throwable;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState$Error;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Ljava/lang/Throwable;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/datasources/DataState$Pending : com/mirego/trikot/datasources/DataState {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState$Pending;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/datasources/DataState$Pending;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState$Pending;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/datasources/extensions/DataStateExtensionsKt {
+	public static final fun data (Lcom/mirego/trikot/datasources/DataState;)Ljava/lang/Object;
+	public static final fun error (Lcom/mirego/trikot/datasources/DataState;)Ljava/lang/Throwable;
+	public static final fun getFirstError ([Lcom/mirego/trikot/datasources/DataState;)Ljava/lang/Throwable;
+	public static final fun isAnyDataStateError ([Lcom/mirego/trikot/datasources/DataState;)Z
+	public static final fun isAnyDataStatePending ([Lcom/mirego/trikot/datasources/DataState;)Z
+	public static final fun mapData (Lcom/mirego/trikot/datasources/DataState;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/datasources/DataState;
+	public static final fun runCatchingDataState (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/datasources/DataState;
+	public static final fun value (Lcom/mirego/trikot/datasources/DataState;)Ljava/lang/Object;
+}
+

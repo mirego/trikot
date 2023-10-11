@@ -9,7 +9,7 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.time.Duration
 
-class DelayProcessor<T>(
+internal class DelayProcessor<T>(
     parentPublisher: Publisher<T>,
     private val duration: Duration,
     private val timerFactory: TimerFactory

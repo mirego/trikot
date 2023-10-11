@@ -7,7 +7,7 @@ import com.mirego.trikot.foundation.concurrent.dispatchQueue.dispatch
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 
-open class ObserveOnProcessor<T>(
+internal open class ObserveOnProcessor<T>(
     parentPublisher: Publisher<T>,
     dispatchQueue: TrikotDispatchQueue
 ) : AbstractProcessor<T, T>(parentPublisher = parentPublisher) {

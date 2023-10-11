@@ -12,7 +12,7 @@ import org.reactivestreams.Subscription
 
 typealias OnErrorResumeNextBlock<T> = (Throwable) -> Publisher<T>
 
-class OnErrorResumeNextProcessor<T>(parentPublisher: Publisher<T>, private var block: OnErrorResumeNextBlock<T>) :
+internal class OnErrorResumeNextProcessor<T>(parentPublisher: Publisher<T>, private var block: OnErrorResumeNextBlock<T>) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

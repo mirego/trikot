@@ -1,0 +1,270 @@
+public abstract interface class androidx/databinding/DataBindingComponent {
+}
+
+public class androidx/databinding/library/baseAdapters/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/AndroidViewModelProviderFactory {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/AndroidViewModelProviderFactory$Companion;
+	public fun <init> ()V
+	public static final fun get (Ljava/lang/Object;Landroidx/activity/ComponentActivity;Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+	public static final fun get (Ljava/lang/Object;Landroidx/fragment/app/Fragment;Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+	public static final fun with (Ljava/lang/Object;Landroidx/activity/ComponentActivity;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+	public static final fun with (Ljava/lang/Object;Landroidx/fragment/app/Fragment;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+}
+
+public final class com/mirego/trikot/viewmodels/AndroidViewModelProviderFactory$Companion {
+	public final fun get (Ljava/lang/Object;Landroidx/activity/ComponentActivity;Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+	public final fun get (Ljava/lang/Object;Landroidx/fragment/app/Fragment;Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+	public final fun with (Ljava/lang/Object;Landroidx/activity/ComponentActivity;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+	public final fun with (Ljava/lang/Object;Landroidx/fragment/app/Fragment;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+}
+
+public final class com/mirego/trikot/viewmodels/AndroidViewModelProviderFactory$ParametrizedFactory : androidx/lifecycle/ViewModelProvider$Factory {
+	public fun <init> (Ljava/lang/Object;Ljava/util/List;)V
+	public fun create (Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class com/mirego/trikot/viewmodels/AndroidViewModelProviderFactoryKt {
+	public static final fun extraSerializedData (Landroid/content/Intent;Ljava/lang/String;)Landroid/content/Intent;
+	public static final fun extraSerializedData (Landroid/os/Bundle;Ljava/lang/String;)Landroid/os/Bundle;
+	public static final fun getExtraSerializedData (Landroidx/activity/ComponentActivity;)Ljava/lang/String;
+	public static final fun getExtraSerializedData (Landroidx/fragment/app/Fragment;)Ljava/lang/String;
+	public static final fun getViewModelController (Landroidx/activity/ComponentActivity;Ljava/lang/Object;Lkotlin/reflect/KClass;)Landroidx/lifecycle/ViewModel;
+	public static final fun getViewModelController (Landroidx/activity/ComponentActivity;Ljava/lang/Object;Lkotlin/reflect/KClass;Ljava/lang/String;)Landroidx/lifecycle/ViewModel;
+	public static final fun getViewModelController (Landroidx/fragment/app/Fragment;Ljava/lang/Object;Lkotlin/reflect/KClass;)Landroidx/lifecycle/ViewModel;
+	public static final fun getViewModelController (Landroidx/fragment/app/Fragment;Ljava/lang/Object;Lkotlin/reflect/KClass;Ljava/lang/String;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class com/mirego/trikot/viewmodels/ButtonViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/ButtonViewModelBinder;
+	public static final fun bind (Landroid/view/View;Lcom/mirego/trikot/viewmodels/ButtonViewModel;)V
+	public static final fun bind (Landroid/view/View;Lcom/mirego/trikot/viewmodels/ButtonViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bind (Landroid/widget/Button;Lcom/mirego/trikot/viewmodels/ButtonViewModel;)V
+	public static final fun bind (Landroid/widget/Button;Lcom/mirego/trikot/viewmodels/ButtonViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bind (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ButtonViewModel;)V
+	public static final fun bind (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ButtonViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bind (Landroid/widget/TextView;Lcom/mirego/trikot/viewmodels/ButtonViewModel;)V
+	public static final fun bind (Landroid/widget/TextView;Lcom/mirego/trikot/viewmodels/ButtonViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public final fun getNoButtonViewModel ()Lcom/mirego/trikot/viewmodels/ButtonViewModel;
+	public final fun getNoViewModelAction ()Lcom/mirego/trikot/streams/reactive/BehaviorSubject;
+}
+
+public final class com/mirego/trikot/viewmodels/ColorExtentionsKt {
+	public static final fun toColorStateList (Lcom/mirego/trikot/viewmodels/properties/StateSelector;)Landroid/content/res/ColorStateList;
+	public static final fun toIntColor (Lcom/mirego/trikot/viewmodels/properties/Color;)I
+}
+
+public final class com/mirego/trikot/viewmodels/HiddenVisibility : java/lang/Enum {
+	public static final field GONE Lcom/mirego/trikot/viewmodels/HiddenVisibility;
+	public static final field INVISIBLE Lcom/mirego/trikot/viewmodels/HiddenVisibility;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/HiddenVisibility;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/HiddenVisibility;
+}
+
+public final class com/mirego/trikot/viewmodels/ImageResourceExtensionsKt {
+	public static final fun asDrawable (Lcom/mirego/trikot/viewmodels/properties/StateSelector;Landroid/content/Context;Lcom/mirego/trikot/viewmodels/properties/StateSelector;)Landroid/graphics/drawable/Drawable;
+	public static final fun asDrawable (Lcom/mirego/trikot/viewmodels/resource/TrikotImageResource;Landroid/content/Context;Lcom/mirego/trikot/viewmodels/properties/StateSelector;)Landroid/graphics/drawable/Drawable;
+	public static synthetic fun asDrawable$default (Lcom/mirego/trikot/viewmodels/resource/TrikotImageResource;Landroid/content/Context;Lcom/mirego/trikot/viewmodels/properties/StateSelector;ILjava/lang/Object;)Landroid/graphics/drawable/Drawable;
+	public static final fun resourceId (Lcom/mirego/trikot/viewmodels/resource/TrikotImageResource;Landroid/content/Context;)Ljava/lang/Integer;
+}
+
+public final class com/mirego/trikot/viewmodels/ImageViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/ImageViewModelBinder;
+	public static final fun bind (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ImageViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Lcom/squareup/picasso/Transformation;Landroid/widget/ImageView$ScaleType;)V
+	public static synthetic fun bind$default (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ImageViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Lcom/squareup/picasso/Transformation;Landroid/widget/ImageView$ScaleType;ILjava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/viewmodels/InputTextViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/InputTextViewModelBinder;
+	public static final fun bind (Landroid/widget/EditText;Lcom/mirego/trikot/viewmodels/InputTextViewModel;)V
+	public static final fun bind (Landroid/widget/EditText;Lcom/mirego/trikot/viewmodels/InputTextViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public final fun getNoInputTextViewModel ()Lcom/mirego/trikot/viewmodels/InputTextViewModel;
+}
+
+public final class com/mirego/trikot/viewmodels/LabelViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/LabelViewModelBinder;
+	public static final fun bind (Landroid/widget/TextView;Lcom/mirego/trikot/viewmodels/LabelViewModel;)V
+	public static final fun bind (Landroid/widget/TextView;Lcom/mirego/trikot/viewmodels/LabelViewModel;Lcom/mirego/trikot/viewmodels/HiddenVisibility;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bind (Landroid/widget/TextView;Lcom/mirego/trikot/viewmodels/LabelViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bindWithoutTextPublishers (Landroid/widget/TextView;Lcom/mirego/trikot/viewmodels/LabelViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+}
+
+public final class com/mirego/trikot/viewmodels/LifecycleOwnerWrapper {
+	public fun <init> (Landroidx/lifecycle/LifecycleOwner;)V
+	public final fun component1 ()Landroidx/lifecycle/LifecycleOwner;
+	public final fun copy (Landroidx/lifecycle/LifecycleOwner;)Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Landroidx/lifecycle/LifecycleOwner;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLifecycleOwner ()Landroidx/lifecycle/LifecycleOwner;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/ListBinding {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/ListBinding;
+	public static final fun bind (Landroidx/recyclerview/widget/RecyclerView;Lcom/mirego/trikot/viewmodels/ListViewModel;)V
+	public static final fun bindList (Landroidx/recyclerview/widget/RecyclerView;Lcom/mirego/trikot/viewmodels/ListViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+}
+
+public final class com/mirego/trikot/viewmodels/PickerViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/PickerViewModelBinder;
+	public static final fun bind (Landroid/widget/Spinner;Lcom/mirego/trikot/viewmodels/PickerViewModel;)V
+	public static final fun bind (Landroid/widget/Spinner;Lcom/mirego/trikot/viewmodels/PickerViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+}
+
+public final class com/mirego/trikot/viewmodels/SliderViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/SliderViewModelBinder;
+	public static final fun bind (Landroid/widget/SeekBar;Lcom/mirego/trikot/viewmodels/SliderViewModel;)V
+	public static final fun bind (Landroid/widget/SeekBar;Lcom/mirego/trikot/viewmodels/SliderViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public final fun getNoSliderViewModel ()Lcom/mirego/trikot/viewmodels/SliderViewModel;
+}
+
+public final class com/mirego/trikot/viewmodels/TextViewExtensionsKt {
+	public static final fun getDrawableBottom (Landroid/widget/TextView;)Landroid/graphics/drawable/Drawable;
+	public static final fun getDrawableEnd (Landroid/widget/TextView;)Landroid/graphics/drawable/Drawable;
+	public static final fun getDrawableStart (Landroid/widget/TextView;)Landroid/graphics/drawable/Drawable;
+	public static final fun getDrawableTop (Landroid/widget/TextView;)Landroid/graphics/drawable/Drawable;
+	public static final fun setDrawableBottom (Landroid/widget/TextView;Landroid/graphics/drawable/Drawable;)V
+	public static final fun setDrawableEnd (Landroid/widget/TextView;Landroid/graphics/drawable/Drawable;)V
+	public static final fun setDrawableStart (Landroid/widget/TextView;Landroid/graphics/drawable/Drawable;)V
+	public static final fun setDrawableTop (Landroid/widget/TextView;Landroid/graphics/drawable/Drawable;)V
+}
+
+public final class com/mirego/trikot/viewmodels/ToggleSwitchViewModelBinder {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/ToggleSwitchViewModelBinder;
+	public static final fun bind (Landroidx/appcompat/widget/SwitchCompat;Lcom/mirego/trikot/viewmodels/ToggleSwitchViewModel;)V
+	public static final fun bind (Landroidx/appcompat/widget/SwitchCompat;Lcom/mirego/trikot/viewmodels/ToggleSwitchViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+}
+
+public final class com/mirego/trikot/viewmodels/ViewModelBinderKt {
+	public static final fun bindAction (Landroid/view/View;Lcom/mirego/trikot/viewmodels/ViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bindViewModel (Landroid/view/View;Lcom/mirego/trikot/viewmodels/ViewModel;)V
+	public static final fun bindViewModel (Landroid/view/View;Lcom/mirego/trikot/viewmodels/ViewModel;Lcom/mirego/trikot/viewmodels/HiddenVisibility;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+	public static final fun bindViewModel (Landroid/view/View;Lcom/mirego/trikot/viewmodels/ViewModel;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;)V
+}
+
+public final class com/mirego/trikot/viewmodels/ViewModelsHelperKt {
+	public static final fun asSpannableString (Lcom/mirego/trikot/viewmodels/text/RichText;Landroid/content/Context;)Landroid/text/SpannableString;
+}
+
+public final class com/mirego/trikot/viewmodels/adapter/GenericViewModelDiffCallback : androidx/recyclerview/widget/DiffUtil$ItemCallback {
+	public fun <init> ()V
+	public fun areContentsTheSame (Lcom/mirego/trikot/viewmodels/ListItemViewModel;Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
+	public synthetic fun areContentsTheSame (Ljava/lang/Object;Ljava/lang/Object;)Z
+	public fun areItemsTheSame (Lcom/mirego/trikot/viewmodels/ListItemViewModel;Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
+	public synthetic fun areItemsTheSame (Ljava/lang/Object;Ljava/lang/Object;)Z
+}
+
+public abstract class com/mirego/trikot/viewmodels/adapter/LifecycleAdapter : androidx/recyclerview/widget/ListAdapter {
+	public fun <init> (Landroidx/lifecycle/LifecycleOwner;Landroidx/recyclerview/widget/DiffUtil$ItemCallback;)V
+	public synthetic fun onBindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)V
+	public fun onBindViewHolder (Lcom/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder;I)V
+	public synthetic fun onViewAttachedToWindow (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public fun onViewAttachedToWindow (Lcom/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder;)V
+	public synthetic fun onViewDetachedFromWindow (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public fun onViewDetachedFromWindow (Lcom/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder;)V
+	public synthetic fun onViewRecycled (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public fun onViewRecycled (Lcom/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder;)V
+}
+
+public abstract class com/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder, androidx/lifecycle/LifecycleOwner {
+	public fun <init> (Landroid/view/View;)V
+	public final fun attach ()V
+	public final fun destroy ()V
+	public final fun detach ()V
+	public fun getLifecycle ()Landroidx/lifecycle/Lifecycle;
+	public fun onAttach ()V
+	public fun onDetach ()V
+}
+
+public final class com/mirego/trikot/viewmodels/adapter/NoDiffCallback : androidx/recyclerview/widget/DiffUtil$ItemCallback {
+	public fun <init> ()V
+	public fun areContentsTheSame (Ljava/lang/Object;Ljava/lang/Object;)Z
+	public fun areItemsTheSame (Ljava/lang/Object;Ljava/lang/Object;)Z
+}
+
+public class com/mirego/trikot/viewmodels/adapter/ViewModelAdapter : com/mirego/trikot/viewmodels/adapter/LifecycleAdapter {
+	public fun <init> (IILjava/lang/Integer;Landroidx/lifecycle/LifecycleOwner;Landroidx/recyclerview/widget/DiffUtil$ItemCallback;)V
+	public synthetic fun <init> (IILjava/lang/Integer;Landroidx/lifecycle/LifecycleOwner;Landroidx/recyclerview/widget/DiffUtil$ItemCallback;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (ILjava/lang/Integer;Landroidx/lifecycle/LifecycleOwner;Landroidx/recyclerview/widget/DiffUtil$ItemCallback;Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (ILjava/lang/Integer;Landroidx/lifecycle/LifecycleOwner;Landroidx/recyclerview/widget/DiffUtil$ItemCallback;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	protected final fun getItem (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Lcom/mirego/trikot/viewmodels/ListItemViewModel;
+	public fun getItemViewType (I)I
+	public synthetic fun onBindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)V
+	public synthetic fun onBindViewHolder (Lcom/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder;I)V
+	public fun onBindViewHolder (Lcom/mirego/trikot/viewmodels/adapter/ViewModelAdapter$ViewHolder;I)V
+	public synthetic fun onCreateViewHolder (Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public fun onCreateViewHolder (Landroid/view/ViewGroup;I)Lcom/mirego/trikot/viewmodels/adapter/ViewModelAdapter$ViewHolder;
+	public synthetic fun onViewRecycled (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public synthetic fun onViewRecycled (Lcom/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder;)V
+	public fun onViewRecycled (Lcom/mirego/trikot/viewmodels/adapter/ViewModelAdapter$ViewHolder;)V
+}
+
+public final class com/mirego/trikot/viewmodels/adapter/ViewModelAdapter$ViewHolder : com/mirego/trikot/viewmodels/adapter/LifecycleAdapter$LifecycleViewHolder, androidx/lifecycle/LifecycleOwner {
+	public fun <init> (Lcom/mirego/trikot/viewmodels/adapter/ViewModelAdapter;Landroidx/databinding/ViewDataBinding;)V
+	public final fun bind (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)V
+	public final fun getBinding ()Landroidx/databinding/ViewDataBinding;
+	public fun onAttach ()V
+	public fun onDetach ()V
+	public final fun setVariable (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)V
+	public final fun unbind ()V
+}
+
+public class com/mirego/trikot/viewmodels/android/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public class com/mirego/trikot/viewmodels/android/DataBinderMapperImpl : androidx/databinding/DataBinderMapper {
+	public fun <init> ()V
+	public fun collectDependencies ()Ljava/util/List;
+	public fun convertBrIdToString (I)Ljava/lang/String;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;[Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getLayoutId (Ljava/lang/String;)I
+}
+
+public class com/mirego/trikot/viewmodels/android/DataBindingTriggerClass {
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/resources/DefaulImageViewModelResourceProvider : com/mirego/trikot/viewmodels/resources/ImageViewModelResourceProvider {
+	public fun <init> ()V
+	public fun resourceIdFromResource (Lcom/mirego/trikot/viewmodels/resource/TrikotImageResource;Landroid/content/Context;)Ljava/lang/Integer;
+}
+
+public final class com/mirego/trikot/viewmodels/resources/DefaultTextAppearanceSpanResourceProvider : com/mirego/trikot/viewmodels/resources/TextAppearanceSpanResourceProvider {
+	public fun <init> ()V
+	public fun spanFromResource (Lcom/mirego/trikot/viewmodels/resource/TextAppearanceResource;Landroid/content/Context;)Landroid/text/ParcelableSpan;
+}
+
+public final class com/mirego/trikot/viewmodels/resources/ImageViewModelResourceManager {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/resources/ImageViewModelResourceManager;
+	public final fun getProvider ()Lcom/mirego/trikot/viewmodels/resources/ImageViewModelResourceProvider;
+	public final fun setProvider (Lcom/mirego/trikot/viewmodels/resources/ImageViewModelResourceProvider;)V
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/resources/ImageViewModelResourceProvider {
+	public abstract fun resourceIdFromResource (Lcom/mirego/trikot/viewmodels/resource/TrikotImageResource;Landroid/content/Context;)Ljava/lang/Integer;
+}
+
+public final class com/mirego/trikot/viewmodels/resources/TextAppearanceSpanResourceManager {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/resources/TextAppearanceSpanResourceManager;
+	public final fun getProvider ()Lcom/mirego/trikot/viewmodels/resources/TextAppearanceSpanResourceProvider;
+	public final fun setProvider (Lcom/mirego/trikot/viewmodels/resources/TextAppearanceSpanResourceProvider;)V
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/resources/TextAppearanceSpanResourceProvider {
+	public abstract fun spanFromResource (Lcom/mirego/trikot/viewmodels/resource/TextAppearanceResource;Landroid/content/Context;)Landroid/text/ParcelableSpan;
+}
+
+public final class com/mirego/trikot/viewmodels/utils/BindingUtils {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/utils/BindingUtils;
+	public final fun getLifecycleOwnerWrapperFromView (Landroid/view/View;)Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;
+}
+

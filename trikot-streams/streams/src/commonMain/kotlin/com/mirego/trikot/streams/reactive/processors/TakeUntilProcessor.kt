@@ -7,7 +7,7 @@ import org.reactivestreams.Subscriber
 
 typealias TakeUntilProcessorPredicate<T> = (T) -> Boolean
 
-class TakeUntilProcessor<T>(
+internal class TakeUntilProcessor<T>(
     parentPublisher: Publisher<T>,
     private val predicate: TakeUntilProcessorPredicate<T>
 ) : AbstractProcessor<T, T>(parentPublisher) {

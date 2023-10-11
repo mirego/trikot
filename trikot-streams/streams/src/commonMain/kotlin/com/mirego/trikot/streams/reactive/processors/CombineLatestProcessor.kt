@@ -10,7 +10,7 @@ import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 
-class CombineLatestProcessor<T>(
+internal class CombineLatestProcessor<T>(
     parentPublisher: Publisher<T>,
     private val publishers: List<Publisher<T>>
 ) :

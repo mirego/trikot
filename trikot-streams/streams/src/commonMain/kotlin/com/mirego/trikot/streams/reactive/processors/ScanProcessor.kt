@@ -7,7 +7,7 @@ import org.reactivestreams.Subscriber
 
 typealias ScanProcessorBlock<T> = (acc: T, current: T) -> T
 
-class ScanProcessor<T>(parentPublisher: Publisher<T>, private val initialValue: T?, private val block: ScanProcessorBlock<T>) :
+internal class ScanProcessor<T>(parentPublisher: Publisher<T>, private val initialValue: T?, private val block: ScanProcessorBlock<T>) :
     AbstractProcessor<T, T>(parentPublisher) {
 
     override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

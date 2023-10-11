@@ -9,7 +9,7 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.time.Duration
 
-class TimeoutProcessor<T>(
+internal class TimeoutProcessor<T>(
     private val duration: Duration,
     private val timerFactory: TimerFactory = FoundationConfiguration.timerFactory,
     private val timeoutMessage: String,

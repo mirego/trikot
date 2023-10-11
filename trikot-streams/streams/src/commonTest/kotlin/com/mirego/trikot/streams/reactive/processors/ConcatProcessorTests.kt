@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 class ConcatProcessorTests {
     lateinit var firstPublisher: BehaviorSubject<String>
     lateinit var secondPublisher: BehaviorSubject<String>
-    lateinit var processor: ConcatProcessor<String>
+    private lateinit var processor: ConcatProcessor<String>
     lateinit var accumulator: PublisherResultAccumulator<String>
 
     @BeforeTest

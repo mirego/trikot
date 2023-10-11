@@ -55,7 +55,7 @@ class SubscriberFromBlockTests {
         assertEquals(Long.MAX_VALUE, requestCount)
     }
 
-    class TriggerHappyProcessor<T>(parentPublisher: Publisher<T>, private val value: T) :
+    internal class TriggerHappyProcessor<T>(parentPublisher: Publisher<T>, private val value: T) :
         AbstractProcessor<T, T>(parentPublisher) {
 
         override fun createSubscription(subscriber: Subscriber<in T>): ProcessorSubscription<T, T> {

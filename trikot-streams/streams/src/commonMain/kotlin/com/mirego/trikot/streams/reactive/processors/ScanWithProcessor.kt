@@ -9,7 +9,7 @@ import org.reactivestreams.Subscription
 typealias ScanWithSeedSupplierBlock<T> = () -> T
 typealias ScanWithAccumulatorBlock<T, R> = (acc: R, current: T) -> R
 
-class ScanWithSeedProcessor<T, R>(
+internal class ScanWithSeedProcessor<T, R>(
     parentPublisher: Publisher<T>,
     private val seedSupplier: ScanWithSeedSupplierBlock<R>,
     private val accumulator: ScanWithAccumulatorBlock<T, R>

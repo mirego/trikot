@@ -8,7 +8,7 @@ import org.reactivestreams.Processor
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscription
 
-class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : BehaviorSubjectImpl<T>(), Processor<T, T> {
+internal class SharedProcessor<T>(private val parentPublisher: Publisher<T>) : BehaviorSubjectImpl<T>(), Processor<T, T> {
     private val cancellableManagerProvider = CancellableManagerProvider()
     private val subscriptionCancellableManager = AtomicReference(CancellableManager())
 

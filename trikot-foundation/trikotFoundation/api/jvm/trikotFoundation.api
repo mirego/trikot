@@ -1,0 +1,354 @@
+public final class com/mirego/trikot/foundation/Decuple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component10 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun component8 ()Ljava/lang/Object;
+	public final fun component9 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Decuple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Decuple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Decuple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEighth ()Ljava/lang/Object;
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getNinth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getTenth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/FoundationConfiguration {
+	public static final field INSTANCE Lcom/mirego/trikot/foundation/FoundationConfiguration;
+	public final fun getTimerFactory ()Lcom/mirego/trikot/foundation/timers/TimerFactory;
+	public final fun setTimerFactory (Lcom/mirego/trikot/foundation/timers/TimerFactory;)V
+}
+
+public final class com/mirego/trikot/foundation/Nonuple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun component8 ()Ljava/lang/Object;
+	public final fun component9 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Nonuple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Nonuple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Nonuple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEighth ()Ljava/lang/Object;
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getNinth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/Octuple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun component8 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Octuple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Octuple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Octuple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEighth ()Ljava/lang/Object;
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/Quadruple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Quadruple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Quadruple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Quadruple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/Quintuple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Quintuple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Quintuple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Quintuple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/Septuple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun component7 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Septuple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Septuple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Septuple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSeventh ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/Sextuple {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/lang/Object;
+	public final fun component5 ()Ljava/lang/Object;
+	public final fun component6 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mirego/trikot/foundation/Sextuple;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/foundation/Sextuple;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/Sextuple;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFifth ()Ljava/lang/Object;
+	public final fun getFirst ()Ljava/lang/Object;
+	public final fun getFourth ()Ljava/lang/Object;
+	public final fun getSecond ()Ljava/lang/Object;
+	public final fun getSixth ()Ljava/lang/Object;
+	public final fun getThird ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class com/mirego/trikot/foundation/concurrent/AbstractAtomicListReference {
+	public fun <init> ()V
+	public final fun getValue ()Ljava/util/List;
+	protected final fun mutateWhenReady (Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicListReference : com/mirego/trikot/foundation/concurrent/AbstractAtomicListReference {
+	public fun <init> ()V
+	public final fun add (Ljava/lang/Object;)Ljava/util/List;
+	public final fun addAll (Ljava/util/List;)Ljava/util/List;
+	public final fun remove (Ljava/lang/Object;)Ljava/util/List;
+	public final fun removeAll (Ljava/util/List;)Ljava/util/List;
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicNullableProperty : kotlin/properties/ReadWriteProperty {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public fun setValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicProperty : kotlin/properties/ReadWriteProperty {
+	public fun <init> (Ljava/lang/Object;)V
+	public fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public fun setValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicPropertyKt {
+	public static final fun atomic (Ljava/lang/Object;)Lcom/mirego/trikot/foundation/concurrent/AtomicProperty;
+	public static final fun atomicNullable (Ljava/lang/Object;)Lcom/mirego/trikot/foundation/concurrent/AtomicNullableProperty;
+	public static synthetic fun atomicNullable$default (Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/foundation/concurrent/AtomicNullableProperty;
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicReference {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun compareAndSet (Ljava/lang/Object;Ljava/lang/Object;)Z
+	public final fun compareAndSwap (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+	public final fun getValue ()Ljava/lang/Object;
+	public final fun setOrThrow (Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun setOrThrow (Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)V
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicReferenceKt {
+	public static final fun setOrThrow (Lcom/mirego/trikot/foundation/concurrent/AtomicReference;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/foundation/concurrent/AtomicStackReference : com/mirego/trikot/foundation/concurrent/AbstractAtomicListReference {
+	public fun <init> ()V
+	public final fun peek ()Ljava/lang/Object;
+	public final fun pop ()Ljava/lang/Object;
+	public final fun push (Ljava/lang/Object;)Ljava/util/List;
+}
+
+public final class com/mirego/trikot/foundation/concurrent/MrFreeze {
+	public static final field INSTANCE Lcom/mirego/trikot/foundation/concurrent/MrFreeze;
+	public final fun ensureNeverFrozen (Ljava/lang/Object;)V
+	public final fun freeze (Ljava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/mirego/trikot/foundation/concurrent/MrFreezeKt {
+	public static final fun freeze (Ljava/lang/Object;)Ljava/lang/Object;
+}
+
+public class com/mirego/trikot/foundation/concurrent/dispatchQueue/JvmDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
+	public fun <init> ()V
+	public fun <init> (J)V
+	public synthetic fun <init> (JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun dispatch (Lkotlin/jvm/functions/Function0;)V
+	public fun isSerial ()Z
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/OperationDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/JvmDispatchQueue, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
+	public fun <init> ()V
+}
+
+public class com/mirego/trikot/foundation/concurrent/dispatchQueue/SequentialDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotQueueDispatcher {
+	public static final field Companion Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/SequentialDispatchQueue$Companion;
+	public fun <init> (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public fun dispatch (Lkotlin/jvm/functions/Function0;)V
+	public fun getDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public fun isSerial ()Z
+	protected fun isSynchronous ()Z
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SequentialDispatchQueue$Companion {
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SerialSubscriptionDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/JvmDispatchQueue, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
+	public fun <init> ()V
+	public fun dispatch (Lkotlin/jvm/functions/Function0;)V
+	public fun isSerial ()Z
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousSerialQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/SequentialDispatchQueue {
+	public fun <init> ()V
+}
+
+public abstract interface class com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
+	public abstract fun dispatch (Lkotlin/jvm/functions/Function0;)V
+	public abstract fun isSerial ()Z
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue$DefaultImpls {
+	public static fun isSerial (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)Z
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueueKt {
+	public static final fun dispatch (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotQueueDispatcher;Lkotlin/jvm/functions/Function0;)V
+}
+
+public abstract interface class com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotQueueDispatcher {
+	public abstract fun getDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+}
+
+public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/UIThreadDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
+	public fun <init> ()V
+	public fun dispatch (Lkotlin/jvm/functions/Function0;)V
+	public fun isSerial ()Z
+}
+
+public final class com/mirego/trikot/foundation/date/Date {
+	public static final field DateFactory Lcom/mirego/trikot/foundation/date/Date$DateFactory;
+	public fun <init> (Lorg/threeten/bp/Instant;)V
+	public final fun compareTo (Lcom/mirego/trikot/foundation/date/Date;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEpoch ()J
+	public final fun getInstant ()Lorg/threeten/bp/Instant;
+	public final fun plus-LRDsOJo (J)Lcom/mirego/trikot/foundation/date/Date;
+	public final fun toISO8601 ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/date/Date$DateFactory {
+	public final fun fromEpochMillis (J)Lcom/mirego/trikot/foundation/date/Date;
+	public final fun fromISO8601 (Ljava/lang/String;)Lcom/mirego/trikot/foundation/date/Date;
+	public final fun getNow ()Lcom/mirego/trikot/foundation/date/Date;
+}
+
+public final class com/mirego/trikot/foundation/date/DateHelper {
+	public static final field INSTANCE Lcom/mirego/trikot/foundation/date/DateHelper;
+	public final fun compare (Lcom/mirego/trikot/foundation/date/Date;Lcom/mirego/trikot/foundation/date/Date;)I
+	public final fun equals (Lcom/mirego/trikot/foundation/date/Date;Ljava/lang/Object;)Z
+}
+
+public final class com/mirego/trikot/foundation/ref/WeakProperty : kotlin/properties/ReadWriteProperty {
+	public fun <init> ()V
+	public fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public fun setValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/foundation/ref/WeakPropertyKt {
+	public static final fun weakAtomicReference ()Lcom/mirego/trikot/foundation/ref/WeakProperty;
+}
+
+public final class com/mirego/trikot/foundation/ref/WeakReference {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun get ()Ljava/lang/Object;
+}
+
+public final class com/mirego/trikot/foundation/strings/NativeStringExtensionsKt {
+	public static final fun normalize (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/foundation/timers/DefaultTimerFactory : com/mirego/trikot/foundation/timers/TimerFactory {
+	public fun <init> ()V
+	public fun repeatable-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/foundation/timers/Timer;
+	public fun single-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/foundation/timers/Timer;
+}
+
+public final class com/mirego/trikot/foundation/timers/PlatformTimer : com/mirego/trikot/foundation/timers/Timer {
+	public synthetic fun <init> (JZLkotlin/jvm/functions/Function0;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun cancel ()V
+}
+
+public abstract interface class com/mirego/trikot/foundation/timers/Timer {
+	public abstract fun cancel ()V
+}
+
+public abstract interface class com/mirego/trikot/foundation/timers/TimerFactory {
+	public abstract fun repeatable-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/foundation/timers/Timer;
+	public abstract fun single-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lcom/mirego/trikot/foundation/timers/Timer;
+}
+

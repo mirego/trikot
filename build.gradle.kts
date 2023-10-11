@@ -19,6 +19,7 @@ buildscript {
 
 plugins {
     id("mirego.publish").version("1.0")
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
 }
 
 allprojects {
@@ -39,6 +40,19 @@ subprojects {
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         version.set("0.48.0")
     }
+}
+
+apiValidation {
+    ignoredProjects.addAll(
+        listOf(
+            "sample",
+            "android",
+            "common",
+            "viewmodels-declarative-compiler-core",
+            "viewmodels-declarative-compiler-flow",
+            "viewmodels-declarative-compiler-streams"
+        )
+    )
 }
 
 tasks {

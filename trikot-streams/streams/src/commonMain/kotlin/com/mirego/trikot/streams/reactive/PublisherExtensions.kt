@@ -283,7 +283,7 @@ fun <T, R> Publisher<T>.scanWith(
 }
 
 /** Suppress the first n items emitted by a Publisher **/
-fun <T> Publisher<T>.skip(n: Long) = SkipProcessor(this, n)
+internal fun <T> Publisher<T>.skip(n: Long) = SkipProcessor(this, n)
 
 /** Periodically looks at publisher and emits whichever item it has most recently emitted since the previous sampling. **/
 fun <T> Publisher<T>.sample(

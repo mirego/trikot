@@ -27,7 +27,7 @@ class TimeoutProcessorTests {
     }
     val publisher = MockPublisher()
 
-    val timeoutProcessor = TimeoutProcessor(2.seconds, mockTimerFactory, "", publisher)
+    private val timeoutProcessor = TimeoutProcessor(2.seconds, mockTimerFactory, "", publisher)
 
     @Test
     fun givenSubscribedProcessorWhenNoValueIsEmittedAndTimerExpireThenErrorIsThrown() {

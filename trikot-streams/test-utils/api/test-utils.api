@@ -1,0 +1,19 @@
+public final class com/mirego/trikot/streams/tests/MockPublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getGetHasSubscriptions ()Z
+}
+
+public final class com/mirego/trikot/streams/tests/PublishersTestUtilsKt {
+	public static final fun assertCompleted (Lorg/reactivestreams/Publisher;)V
+	public static final fun assertEquals (Lorg/reactivestreams/Publisher;Ljava/lang/Object;)V
+	public static final fun assertError (Lorg/reactivestreams/Publisher;Ljava/lang/Throwable;)V
+	public static final fun assertTrue (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public static final fun get (Lorg/reactivestreams/Publisher;)Ljava/lang/Object;
+	public static final fun get (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public static final fun getOnce (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public static final fun subscribe (Lorg/reactivestreams/Publisher;)V
+	public static final fun verify (Lorg/reactivestreams/Publisher;Ljava/lang/Object;Ljava/lang/Throwable;Z)V
+}
+

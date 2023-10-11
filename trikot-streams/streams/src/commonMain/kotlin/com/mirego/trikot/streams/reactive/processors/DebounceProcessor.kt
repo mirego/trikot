@@ -11,7 +11,7 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import kotlin.time.Duration
 
-class DebounceProcessor<T>(
+internal class DebounceProcessor<T>(
     parentPublisher: Publisher<T>,
     private val timeout: Duration,
     private val timerFactory: TimerFactory = FoundationConfiguration.timerFactory

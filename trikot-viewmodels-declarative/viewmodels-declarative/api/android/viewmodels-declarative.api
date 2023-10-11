@@ -1,0 +1,879 @@
+public abstract interface class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimation {
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Spring : com/mirego/trikot/viewmodels/declarative/animation/VMDAnimation {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Spring$Companion;
+	public static final field DampingRatioHighBouncy F
+	public static final field DampingRatioLowBouncy F
+	public static final field DampingRatioMediumBouncy F
+	public static final field DampingRatioNoBouncy F
+	public static final field StiffnessHigh F
+	public static final field StiffnessLow F
+	public static final field StiffnessMedium F
+	public static final field StiffnessMediumLow F
+	public static final field StiffnessVeryLow F
+	public fun <init> ()V
+	public fun <init> (FF)V
+	public synthetic fun <init> (FFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()F
+	public final fun component2 ()F
+	public final fun copy (FF)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Spring;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Spring;FFILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Spring;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDampingRatio ()F
+	public final fun getResponse ()D
+	public final fun getStiffness ()F
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Spring$Companion {
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Tween : com/mirego/trikot/viewmodels/declarative/animation/VMDAnimation {
+	public synthetic fun <init> (JJLcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJLcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun component2-UwyO8pc ()J
+	public final fun component3 ()Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing;
+	public final fun copy-NqJ4yvY (JJLcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing;)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Tween;
+	public static synthetic fun copy-NqJ4yvY$default (Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Tween;JJLcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation$Tween;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDelay-UwyO8pc ()J
+	public final fun getDelayInSeconds ()D
+	public final fun getDuration-UwyO8pc ()J
+	public final fun getDurationInSeconds ()D
+	public final fun getEasing ()Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationContext {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationContext$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationContext$Companion {
+	public final fun getAnimationStack ()Lcom/mirego/trikot/foundation/concurrent/AtomicStackReference;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing {
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$CubicBezier : com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing {
+	public fun <init> (FFFF)V
+	public final fun component1 ()F
+	public final fun component2 ()F
+	public final fun component3 ()F
+	public final fun component4 ()F
+	public final fun copy (FFFF)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$CubicBezier;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$CubicBezier;FFFFILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$CubicBezier;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getA ()F
+	public final fun getB ()F
+	public final fun getC ()F
+	public final fun getD ()F
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard : java/lang/Enum, com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing {
+	public static final field EaseIn Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard;
+	public static final field EaseInEaseOut Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard;
+	public static final field EaseOut Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard;
+	public static final field Linear Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimationEasing$Standard;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/animation/VMDAnimationKt {
+	public static final fun withAnimation (Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation;Lkotlin/jvm/functions/Function0;)V
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/components/VMDButtonViewModel : com/mirego/trikot/viewmodels/declarative/components/impl/VMDControlViewModelImpl {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public abstract fun getActionBlock ()Lkotlin/jvm/functions/Function0;
+	public abstract fun getContent ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDControlViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun isEnabled ()Z
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun getContentDescription ()Ljava/lang/String;
+	public abstract fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/components/VMDListViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public abstract fun getElements ()Ljava/util/List;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDLoadingViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun isLoading ()Z
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDPickerItemViewModel : com/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent, com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun isEnabled ()Z
+	public abstract fun setEnabled (Z)V
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel : com/mirego/trikot/viewmodels/declarative/components/VMDListViewModel, com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel$Companion;
+	public static final field NO_SELECTION I
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public abstract fun getSelectedIndex ()I
+	public abstract fun setSelectedIndex (I)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel$Companion {
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun getDetermination ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel : com/mirego/trikot/viewmodels/declarative/components/VMDControlViewModel {
+	public abstract fun getAutoCapitalization ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public abstract fun getAutoCorrect ()Z
+	public abstract fun getContentType ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public abstract fun getFormatText ()Lkotlin/jvm/functions/Function1;
+	public abstract fun getKeyboardReturnKeyType ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public abstract fun getKeyboardType ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public abstract fun getOnReturnKeyTap ()Lkotlin/jvm/functions/Function0;
+	public abstract fun getPlaceholder ()Ljava/lang/String;
+	public abstract fun getText ()Ljava/lang/String;
+	public abstract fun getTransformText ()Lkotlin/jvm/functions/Function1;
+	public abstract fun getUnformatText ()Lkotlin/jvm/functions/Function1;
+	public abstract fun onValueChange (Ljava/lang/String;)V
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun getText ()Ljava/lang/String;
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel : com/mirego/trikot/viewmodels/declarative/components/impl/VMDControlViewModelImpl {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public abstract fun getLabel ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	public abstract fun isOn ()Z
+	public fun onValueChange (Z)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion {
+	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withImage$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withImageUrl (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withImageUrl$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withText (Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withText$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withTextImage (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withTextImage$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public final fun withTextPair (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun withTextPair$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Button$Companion;Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image$Companion {
+	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public final fun local (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun local$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image$Companion;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public final fun remote (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun remote$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image$Companion;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public final fun withDescriptor (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun withDescriptor$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Image$Companion;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$List {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$List$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$List$Companion {
+	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$List$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public final fun of ([Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static synthetic fun of$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$List$Companion;[Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Loading {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Loading$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Loading$Companion {
+	public final fun active (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public static synthetic fun active$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Loading$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public final fun inactive (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public static synthetic fun inactive$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Loading$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Picker {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Picker$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Picker$Companion {
+	public final fun withElements (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel;
+	public static synthetic fun withElements$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Picker$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Progress {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Progress$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Progress$Companion {
+	public final fun determinate (FFLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public final fun determinate (FLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static synthetic fun determinate$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Progress$Companion;FFLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static synthetic fun determinate$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Progress$Companion;FLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public final fun indeterminate (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static synthetic fun indeterminate$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Progress$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion {
+	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+	public final fun withContent (Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+	public static synthetic fun withContent$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion;Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$TextField {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$TextField$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$TextField$Companion {
+	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl;
+	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$TextField$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl;
+	public final fun withPlaceholder (Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl;
+	public static synthetic fun withPlaceholder$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$TextField$Companion;Ljava/lang/String;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion {
+	public final fun empty (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun empty$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public final fun withImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun withImage$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public final fun withState (ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun withState$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public final fun withText (Ljava/lang/String;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun withText$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;Ljava/lang/String;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public final fun withTextImage (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun withTextImage$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public final fun withTextPair (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun withTextPair$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Toggle$Companion;Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;ZLcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl : com/mirego/trikot/viewmodels/declarative/components/VMDButtonViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;)V
+	public final fun bindContent (Lorg/reactivestreams/Publisher;)V
+	public fun getActionBlock ()Lkotlin/jvm/functions/Function0;
+	public fun getContent ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public final fun setAction (Lkotlin/jvm/functions/Function0;)V
+	public final fun setAction (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public fun setActionBlock (Lkotlin/jvm/functions/Function0;)V
+	public fun setContent (Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/impl/VMDContentPickerItemViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDPickerItemViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;Ljava/lang/String;ZZ)V
+	public synthetic fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;Ljava/lang/String;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getContent ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	public fun getIdentifier ()Ljava/lang/String;
+	public fun isEnabled ()Z
+	public fun isHidden ()Z
+	public fun setEnabled (Z)V
+	public fun setHidden (Z)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDControlViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDControlViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindEnabled (Lorg/reactivestreams/Publisher;)V
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun isEnabled ()Z
+	public fun setEnabled (Z)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindContentDescription (Lorg/reactivestreams/Publisher;)V
+	public final fun bindImage (Lorg/reactivestreams/Publisher;)V
+	public fun getContentDescription ()Ljava/lang/String;
+	public fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun setContentDescription (Ljava/lang/String;)V
+	public fun setImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl : com/mirego/trikot/viewmodels/declarative/components/VMDListViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindElements (Lorg/reactivestreams/Publisher;)V
+	public fun getElements ()Ljava/util/List;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun setElements (Ljava/util/List;)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDLoadingViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindIsLoading (Lorg/reactivestreams/Publisher;)V
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun isLoading ()Z
+	public fun setLoading (Z)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDPickerViewModelImpl : com/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/util/List;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Ljava/util/List;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getElements ()Ljava/util/List;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun getSelectedIndex ()I
+	public fun setSelectedIndex (I)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindDetermination (Lorg/reactivestreams/Publisher;)V
+	public fun getDetermination ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun setDetermination (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination;)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl : com/mirego/trikot/viewmodels/declarative/components/impl/VMDControlViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun addReturnKeyTapAction (Lkotlin/jvm/functions/Function0;)V
+	public final fun addReturnKeyTapAction (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V
+	public final fun bindAutoCapitalization (Lorg/reactivestreams/Publisher;)V
+	public final fun bindAutoCorrect (Lorg/reactivestreams/Publisher;)V
+	public final fun bindContentType (Lorg/reactivestreams/Publisher;)V
+	public final fun bindKeyboardReturnKeyType (Lorg/reactivestreams/Publisher;)V
+	public final fun bindKeyboardType (Lorg/reactivestreams/Publisher;)V
+	public final fun bindPlaceholder (Lorg/reactivestreams/Publisher;)V
+	public fun getAutoCapitalization ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public fun getAutoCorrect ()Z
+	public fun getContentType ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public fun getFormatText ()Lkotlin/jvm/functions/Function1;
+	public fun getKeyboardReturnKeyType ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public fun getKeyboardType ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public fun getOnReturnKeyTap ()Lkotlin/jvm/functions/Function0;
+	public final fun getOnReturnKeyTapPublisher ()Lcom/mirego/trikot/streams/reactive/PublishSubjectImpl;
+	public fun getPlaceholder ()Ljava/lang/String;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun getText ()Ljava/lang/String;
+	public fun getTransformText ()Lkotlin/jvm/functions/Function1;
+	public fun getUnformatText ()Lkotlin/jvm/functions/Function1;
+	public fun onValueChange (Ljava/lang/String;)V
+	public fun setAutoCapitalization (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;)V
+	public fun setAutoCorrect (Z)V
+	public fun setContentType (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;)V
+	public fun setFormatText (Lkotlin/jvm/functions/Function1;)V
+	public fun setKeyboardReturnKeyType (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;)V
+	public fun setKeyboardType (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;)V
+	public fun setPlaceholder (Ljava/lang/String;)V
+	public fun setText (Ljava/lang/String;)V
+	public fun setTransformText (Lkotlin/jvm/functions/Function1;)V
+	public fun setUnformatText (Lkotlin/jvm/functions/Function1;)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindText (Lorg/reactivestreams/Publisher;)V
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun getText ()Ljava/lang/String;
+	public fun setText (Ljava/lang/String;)V
+}
+
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl : com/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;)V
+	public final fun bindContent (Lorg/reactivestreams/Publisher;)V
+	public fun getLabel ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun isOn ()Z
+	public fun onValueChange (Z)V
+	public fun setLabel (Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;)V
+	public fun setOn (Z)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/configuration/TrikotViewModelDeclarative {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/configuration/TrikotViewModelDeclarative;
+	public final fun getImageProvider ()Lcom/mirego/trikot/viewmodels/declarative/configuration/VMDImageProvider;
+	public final fun initialize (Lcom/mirego/trikot/viewmodels/declarative/configuration/VMDImageProvider;)V
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/configuration/VMDImageProvider {
+	public abstract fun resourceIdForResource (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Landroid/content/Context;)Ljava/lang/Integer;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public abstract fun getIdentifier ()Ljava/lang/String;
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContentAbstract : com/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent {
+	public fun <init> ()V
+	public abstract fun getContent ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	public abstract fun getIdentifier ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContentWrapper : com/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContentAbstract {
+	public fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	public final fun copy (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContentWrapper;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContentWrapper;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContentWrapper;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getContent ()Lcom/mirego/trikot/viewmodels/declarative/content/VMDContent;
+	public fun getIdentifier ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDImageContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)V
+	public final fun component1 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageContent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;)V
+	public final fun component1 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
+	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDImageDescriptorContent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDNoContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDTextContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextContent;Ljava/lang/String;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextContent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public final fun copy (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextImagePairContent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent : com/mirego/trikot/viewmodels/declarative/content/VMDContent {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/content/VMDTextPairContent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFirst ()Ljava/lang/String;
+	public final fun getSecond ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate {
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController : androidx/lifecycle/ViewModel {
+	public fun <init> ()V
+	protected final fun getCancellableManager ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
+	public final fun getNavigationDelegate ()Lcom/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate;
+	public abstract fun getViewModel ()Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel;
+	public fun onAppear ()V
+	protected fun onAppearFirst ()V
+	protected fun onAppearSubsequent ()V
+	protected fun onCleared ()V
+	public fun onCreate ()V
+	public fun onDisappear ()V
+	public final fun setNavigationDelegate (Lcom/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate;)V
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/controller/VMDViewModelControllerFactory {
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/controller/ViewModelActivity : androidx/appcompat/app/AppCompatActivity, com/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/controller/ViewModelActivity$Companion;
+	protected field lifecycleOwnerWrapper Lcom/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper;
+	public fun <init> ()V
+	protected final fun getLifecycleOwnerWrapper ()Lcom/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper;
+	public final fun getViewModel ()Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel;
+	protected abstract fun getViewModelController ()Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	protected final fun getViewModelController (Lkotlin/reflect/KClass;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	protected final fun getViewModelController (Lkotlin/reflect/KClass;Ljava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	protected fun onCreate (Landroid/os/Bundle;)V
+	protected fun onDestroy ()V
+	protected fun onPause ()V
+	protected fun onResume ()V
+	protected final fun setLifecycleOwnerWrapper (Lcom/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper;)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/controller/ViewModelActivity$Companion {
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/controller/ViewModelFragment : androidx/fragment/app/Fragment, com/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/controller/ViewModelFragment$Companion;
+	public fun <init> ()V
+	public abstract fun getViewModelController ()Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	protected final fun getViewModelController (Lkotlin/reflect/KClass;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	protected final fun getViewModelController (Lkotlin/reflect/KClass;Ljava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	public fun onCreate (Landroid/os/Bundle;)V
+	public fun onDestroy ()V
+	public fun onPause ()V
+	public fun onResume ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/controller/ViewModelFragment$Companion {
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/controller/factory/AndroidViewModelProviderFactory {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/controller/factory/AndroidViewModelProviderFactory$Companion;
+	public fun <init> ()V
+	public static final fun get (Landroidx/fragment/app/Fragment;Ljava/lang/Object;Ljava/lang/Class;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	public static final fun get (Landroidx/fragment/app/FragmentActivity;Ljava/lang/Object;Ljava/lang/Class;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	public static final fun with (Landroidx/fragment/app/Fragment;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+	public static final fun with (Landroidx/fragment/app/FragmentActivity;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/controller/factory/AndroidViewModelProviderFactory$Companion {
+	public final fun get (Landroidx/fragment/app/Fragment;Ljava/lang/Object;Ljava/lang/Class;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	public final fun get (Landroidx/fragment/app/FragmentActivity;Ljava/lang/Object;Ljava/lang/Class;)Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController;
+	public final fun with (Landroidx/fragment/app/Fragment;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+	public final fun with (Landroidx/fragment/app/FragmentActivity;Ljava/lang/Object;)Landroidx/lifecycle/ViewModelProvider;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/controller/factory/AndroidViewModelProviderFactory$ParametrizedFactory : androidx/lifecycle/ViewModelProvider$Factory {
+	public fun <init> (Landroid/app/Application;Ljava/util/List;)V
+	public fun create (Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/controller/factory/ViewModelControllerFactoryProvidingApplication {
+	public abstract fun getViewModelControllerFactory ()Lcom/mirego/trikot/viewmodels/declarative/controller/VMDViewModelControllerFactory;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper {
+	public fun <init> (Landroidx/lifecycle/LifecycleOwner;)V
+	public final fun component1 ()Landroidx/lifecycle/LifecycleOwner;
+	public final fun copy (Landroidx/lifecycle/LifecycleOwner;)Lcom/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper;Landroidx/lifecycle/LifecycleOwner;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/lifecycle/LifecycleOwnerWrapper;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLifecycleOwner ()Landroidx/lifecycle/LifecycleOwner;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDColor {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/properties/VMDColor$Companion;
+	public fun <init> (IIIF)V
+	public synthetic fun <init> (IIIFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAlpha ()F
+	public final fun getBlue ()I
+	public final fun getGreen ()I
+	public final fun getRed ()I
+	public final fun hex (Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun hex$default (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDColor;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+	public final fun hexARGB (Ljava/lang/String;)Ljava/lang/String;
+	public final fun hexRGBA (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDColor$Companion {
+	public final fun getNone ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDColor;
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor {
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Local : com/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor {
+	public fun <init> (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)V
+	public final fun component1 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public final fun copy (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Local;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Local;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Local;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImageResource ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Remote : com/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor {
+	public fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public final fun copy (Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Remote;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Remote;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor$Remote;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPlaceholderImageResource ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/properties/VMDImageResource {
+	public static final field Companion Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource$Companion;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDImageResource$Companion {
+	public final fun getNone ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization : java/lang/Enum {
+	public static final field Characters Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public static final field None Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public static final field Sentences Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public static final field Words Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardAutoCapitalization;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType : java/lang/Enum {
+	public static final field Default Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static final field Done Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static final field Go Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static final field Next Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static final field Search Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static final field Send Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardReturnKeyType;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType : java/lang/Enum {
+	public static final field Ascii Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field Default Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field Email Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field Number Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field NumberPassword Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field Password Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field Phone Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field URL Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDNoImageResource : com/mirego/trikot/viewmodels/declarative/properties/VMDImageResource {
+	public fun <init> ()V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination {
+	public fun <init> ()V
+	public fun <init> (FF)V
+	public synthetic fun <init> (FFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()F
+	public final fun component2 ()F
+	public final fun copy (FF)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination;
+	public static synthetic fun copy$default (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination;FFILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDProgressDetermination;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProgress ()F
+	public final fun getProgressRatio ()F
+	public final fun getTotal ()F
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType : java/lang/Enum {
+	public static final field AddressCity Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field AddressCityAndState Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field AddressState Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field CountryName Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field CreditCardNumber Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field EmailAddress Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field FamilyName Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field FullStreetAddress Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field GivenName Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field JobTitle Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field Location Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field MiddleName Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field Name Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field NamePrefix Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field NameSuffix Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field NewPassword Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field Nickname Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field OneTimeCode Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field OrganizationName Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field Password Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field PostalCode Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field StreetAddressLine1 Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field StreetAddressLine2 Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field Sublocality Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field TelephoneNumber Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field URL Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static final field Username Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+	public static fun values ()[Lcom/mirego/trikot/viewmodels/declarative/properties/VMDTextContentType;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/utilities/VMDDispatchQueues {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/utilities/VMDDispatchQueues;
+	public final fun getUiQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/utilities/VMDMutablePublisherExtensionsKt {
+	public static final fun getValueOrThrow (Lcom/mirego/trikot/streams/reactive/MutablePublisher;)Ljava/lang/Object;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel : com/mirego/trikot/viewmodels/declarative/content/VMDContent, com/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPropertyChangeListener {
+	public abstract fun getPropertyDidChange ()Lcom/mirego/trikot/streams/reactive/ConcretePublisher;
+	public abstract fun getPropertyWillChange ()Lcom/mirego/trikot/streams/reactive/ConcretePublisher;
+	public abstract fun isHidden ()Z
+	public abstract fun publisherForProperty (Lkotlin/reflect/KProperty;)Lorg/reactivestreams/Publisher;
+	public abstract fun publisherForPropertyName (Ljava/lang/String;)Lorg/reactivestreams/Publisher;
+	public abstract fun setHidden (Z)V
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL {
+	public abstract fun getCancellableManager ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSLKt {
+	public static final fun button (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun button$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithImageUrl (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithImageUrl$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithText (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithText$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithTextImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithTextImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun buttonWithTextPair (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static synthetic fun buttonWithTextPair$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
+	public static final fun determinateProgress (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;FFLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static synthetic fun determinateProgress$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;FFLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static final fun image (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun image$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static final fun indeterminateProgress (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static synthetic fun indeterminateProgress$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static final fun list (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static final fun list (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static final fun list (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;[Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static synthetic fun list$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/util/List;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static synthetic fun list$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static synthetic fun list$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;[Lcom/mirego/trikot/viewmodels/declarative/content/VMDIdentifiableContent;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDListViewModelImpl;
+	public static final fun loading (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public static final fun loading (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;ZLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public static synthetic fun loading$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public static synthetic fun loading$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;ZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDLoadingViewModelImpl;
+	public static final fun localImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun localImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static final fun picker (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel;
+	public static synthetic fun picker$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel;
+	public static final fun remoteImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static synthetic fun remoteImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
+	public static final fun text (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+	public static synthetic fun text$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+	public static final fun textField (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl;
+	public static synthetic fun textField$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextFieldViewModelImpl;
+	public static final fun toggle (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun toggle$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static final fun toggleWithImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ZLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun toggleWithImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static final fun toggleWithText (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun toggleWithText$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static final fun toggleWithTextImage (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ZLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun toggleWithTextImage$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;ZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static final fun toggleWithTextPair (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+	public static synthetic fun toggleWithTextPair$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDToggleViewModelImpl;
+}
+
+public class com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel, com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL {
+	public fun <init> (Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun bindHidden (Lorg/reactivestreams/Publisher;)V
+	public final fun bindHiddenAnimated (Lorg/reactivestreams/Publisher;)V
+	public fun didChange (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;)V
+	public fun getCancellableManager ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
+	public fun getPropertyDidChange ()Lcom/mirego/trikot/streams/reactive/ConcretePublisher;
+	protected fun getPropertyMapping ()Ljava/util/Map;
+	public fun getPropertyWillChange ()Lcom/mirego/trikot/streams/reactive/ConcretePublisher;
+	public fun isHidden ()Z
+	public fun publisherForProperty (Lkotlin/reflect/KProperty;)Lorg/reactivestreams/Publisher;
+	public fun publisherForPropertyName (Ljava/lang/String;)Lorg/reactivestreams/Publisher;
+	public fun setHidden (Z)V
+	protected final fun updateAnimatedPropertyPublisher (Lkotlin/reflect/KProperty;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lorg/reactivestreams/Publisher;)V
+	protected final fun updatePropertyPublisher (Lkotlin/reflect/KProperty;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lorg/reactivestreams/Publisher;)V
+	public fun willChange (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPropertyChange {
+	public fun <init> (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation;)V
+	public synthetic fun <init> (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAnimation ()Lcom/mirego/trikot/viewmodels/declarative/animation/VMDAnimation;
+	public final fun getNewValue ()Ljava/lang/Object;
+	public final fun getOldValue ()Ljava/lang/Object;
+	public final fun getProperty ()Lkotlin/reflect/KProperty;
+}
+
+public abstract interface class com/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPropertyChangeListener {
+	public abstract fun didChange (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;)V
+	public abstract fun willChange (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;)V
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPublishedProperty : kotlin/properties/ObservableProperty {
+	public fun <init> (Ljava/lang/Object;Lcom/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPropertyChangeListener;)V
+	protected fun afterChange (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;)V
+	protected fun beforeChange (Lkotlin/reflect/KProperty;Ljava/lang/Object;Ljava/lang/Object;)Z
+	public fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public final fun getValuePublisher ()Lorg/reactivestreams/Publisher;
+	public fun setValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
+	public final fun updatePublisher (Lkotlin/reflect/KProperty;Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+	public final fun updatePublisherWithAnimation (Lkotlin/reflect/KProperty;Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPublishedPropertyDelegateKt {
+	public static final fun published (Ljava/lang/Object;Lcom/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPropertyChangeListener;)Lcom/mirego/trikot/viewmodels/declarative/viewmodel/internal/VMDPublishedProperty;
+}
+
