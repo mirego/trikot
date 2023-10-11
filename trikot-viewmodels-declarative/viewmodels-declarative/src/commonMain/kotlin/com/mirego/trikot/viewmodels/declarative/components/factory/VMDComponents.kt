@@ -114,11 +114,12 @@ object VMDComponents {
             fun withImage(
                 image: VMDImageResource,
                 cancellableManager: CancellableManager,
+                contentDescription: String? = null,
                 closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
             ) =
                 VMDButtonViewModelImpl(
                     cancellableManager,
-                    VMDImageContent(image)
+                    VMDImageContent(image, contentDescription)
                 )
                     .apply(closure)
 
@@ -126,6 +127,7 @@ object VMDComponents {
                 imageUrl: String,
                 placeholderImageResource: VMDImageResource = VMDImageResource.None,
                 cancellableManager: CancellableManager,
+                contentDescription: String? = null,
                 closure: VMDButtonViewModelImpl<VMDImageDescriptorContent>.() -> Unit = {}
             ) =
                 VMDButtonViewModelImpl(
@@ -134,7 +136,8 @@ object VMDComponents {
                         VMDImageDescriptor.Remote(
                             imageUrl,
                             placeholderImageResource = placeholderImageResource
-                        )
+                        ),
+                        contentDescription
                     )
                 )
                     .apply(closure)

@@ -60,7 +60,11 @@ struct ButtonShowcaseView: RootViewModelView {
             .navigationTitle(viewModel.title.text)
             .toolbar {
                 VMDButton(viewModel.closeButton) { (content: VMDImageContent) in
-                    content.image.image
+                    if let contentDescription = content.contentDescription {
+                        content.image.image.accessibilityLabel(contentDescription)
+                    } else {
+                        content.image.image
+                    }
                 }
             }
         }

@@ -8,5 +8,5 @@ import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithImage
 import kotlinx.coroutines.CoroutineScope
 
 abstract class ShowcaseViewModelImpl(coroutineScope: CoroutineScope) : ShowcaseViewModel, VMDViewModelImpl(coroutineScope) {
-    override val closeButton: VMDButtonViewModelImpl<VMDImageContent> = buttonWithImage(SampleImageResource.ICON_CLOSE)
+    override val closeButton: VMDButtonViewModelImpl<VMDImageContent> = buttonWithImage(SampleImageResource.ICON_CLOSE, contentDescription = "Close")
 }

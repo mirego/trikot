@@ -8,5 +8,6 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDImageResource
  */
 data class VMDTextImagePairContent(
     val text: String,
-    val image: VMDImageResource
+    val image: VMDImageResource,
+    val contentDescription: String? = null,
 ) : VMDContent

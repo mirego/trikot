@@ -14,7 +14,8 @@ fun ComponentShowcaseTopBar(viewModel: ShowcaseViewModel) {
         actions = {
             VMDButton(viewModel = viewModel.closeButton) {
                 LocalImage(
-                    imageResource = viewModel.closeButton.content.image
+                    imageResource = it.image,
+                    contentDescription = it.contentDescription,
                 )
             }
         }

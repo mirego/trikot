@@ -22,7 +22,7 @@ class ButtonShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) : 
     override val textImageButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_IMAGE_TITLE])
     override val textPairButtonTitle = text(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_PAIR_TITLE])
     override val textButton = buttonWithText(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL])
-    override val imageButton = buttonWithImage(SampleImageResource.ICON_CLOSE)
+    override val imageButton = buttonWithImage(SampleImageResource.ICON_CLOSE, contentDescription = i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL])
     override val textImageButton = buttonWithTextImage(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], SampleImageResource.ICON_CLOSE)
     override val textPairButton = buttonWithTextPair(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], i18N[KWordTranslation.BUTTON_SHOWCASE_SUBTITLE])
 }

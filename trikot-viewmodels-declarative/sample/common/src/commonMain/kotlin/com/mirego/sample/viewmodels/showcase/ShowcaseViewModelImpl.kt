@@ -8,5 +8,5 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDImageContent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 
 abstract class ShowcaseViewModelImpl(cancellableManager: CancellableManager) : ShowcaseViewModel, VMDViewModelImpl(cancellableManager) {
-    override val closeButton: VMDButtonViewModelImpl<VMDImageContent> = VMDComponents.Button.withImage(SampleImageResource.ICON_CLOSE, cancellableManager)
+    override val closeButton: VMDButtonViewModelImpl<VMDImageContent> = VMDComponents.Button.withImage(SampleImageResource.ICON_CLOSE, cancellableManager, contentDescription = "Close")
 }
