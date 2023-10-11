@@ -28,7 +28,7 @@ struct ButtonShowcaseView: RootViewModelView {
 
                     ComponentShowcaseSectionView(viewModel.imageButtonTitle) {
                         VMDButton(viewModel.imageButton) { imageContent in
-                            Image(imageContent.image)?.renderingMode(.template)
+                            Image(imageContent.image)?.renderingMode(.template).accessibilityLabel(imageContent.contentDescription ?? "")
                         }
                         .buttonStyle(.roundedShadow)
                     }
@@ -59,13 +59,7 @@ struct ButtonShowcaseView: RootViewModelView {
             }
             .navigationTitle(viewModel.title.text)
             .toolbar {
-                VMDButton(viewModel.closeButton) { (content: VMDImageContent) in
-                    if let contentDescription = content.contentDescription {
-                        content.image.image.accessibilityLabel(contentDescription)
-                    } else {
-                        content.image.image
-                    }
-                }
+                VMDImageButton(viewModel.closeButton)
             }
         }
     }
