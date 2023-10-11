@@ -20,7 +20,11 @@ class ButtonShowcaseViewModelImpl(i18N: I18N, cancellableManager: CancellableMan
     override val textImageButtonTitle: VMDTextViewModel = VMDComponents.Text.withContent(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_IMAGE_TITLE], cancellableManager)
     override val textPairButtonTitle: VMDTextViewModel = VMDComponents.Text.withContent(i18N[KWordTranslation.BUTTON_SHOWCASE_TEXT_PAIR_TITLE], cancellableManager)
     override val textButton: VMDButtonViewModelImpl<VMDTextContent> = VMDComponents.Button.withText(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], cancellableManager)
-    override val imageButton: VMDButtonViewModelImpl<VMDImageContent> = VMDComponents.Button.withImage(SampleImageResource.ICON_CLOSE, cancellableManager, contentDescription = i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL])
+    override val imageButton: VMDButtonViewModelImpl<VMDImageContent> = VMDComponents.Button.withImage(
+        SampleImageResource.ICON_CLOSE,
+        cancellableManager,
+        contentDescription = i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL]
+    )
     override val textImageButton: VMDButtonViewModelImpl<VMDTextImagePairContent> = VMDComponents.Button.withTextImage(
         VMDTextImagePairContent(i18N[KWordTranslation.BUTTON_SHOWCASE_LABEL], SampleImageResource.ICON_CLOSE),
         cancellableManager

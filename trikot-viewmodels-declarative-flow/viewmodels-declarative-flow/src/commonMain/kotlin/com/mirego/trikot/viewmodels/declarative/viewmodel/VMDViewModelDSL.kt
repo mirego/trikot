@@ -59,7 +59,8 @@ fun VMDViewModelDSL.buttonWithImage(
     image: VMDImageResource = VMDImageResource.None,
     action: () -> Unit = {},
     contentDescription: String? = null,
-    closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}) =
+    closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
+) =
     VMDComponents.Button.withImage(image, coroutineScope, contentDescription) {
         setAction(action)
         closure()
