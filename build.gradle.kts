@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.model.KotlinAndroidExtension
+val samplesEnabled = !extra.has("disable_samples")
 
 buildscript {
     repositories {
@@ -43,11 +43,17 @@ subprojects {
 }
 
 apiValidation {
+    if (samplesEnabled) {
+        ignoredProjects.addAll(
+            listOf(
+                "sample",
+                "android",
+                "common"
+            )
+        )
+    }
     ignoredProjects.addAll(
         listOf(
-            "sample",
-            "android",
-            "common",
             "viewmodels-declarative-compiler-core",
             "viewmodels-declarative-compiler-flow",
             "viewmodels-declarative-compiler-streams"
