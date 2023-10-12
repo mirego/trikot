@@ -49,13 +49,18 @@ fun VMDViewModelDSL.button(closure: VMDButtonViewModelImpl<VMDNoContent>.() -> U
     VMDComponents.Button.empty(cancellableManager, closure)
 
 fun VMDViewModelDSL.buttonWithText(text: String = "", action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDTextContent>.() -> Unit = {}) =
-    VMDComponents.Button.withText(text, cancellableManager).apply {
+    VMDComponents.Button.withText(text, cancellableManager) {
         setAction(action)
         closure()
     }
 
-fun VMDViewModelDSL.buttonWithImage(image: VMDImageResource = VMDImageResource.None, action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}) =
-    VMDComponents.Button.withImage(image, cancellableManager).apply {
+fun VMDViewModelDSL.buttonWithImage(
+    image: VMDImageResource = VMDImageResource.None,
+    action: () -> Unit = {},
+    contentDescription: String? = null,
+    closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
+) =
+    VMDComponents.Button.withImage(image, cancellableManager, contentDescription) {
         setAction(action)
         closure()
     }
@@ -66,7 +71,7 @@ fun VMDViewModelDSL.buttonWithImage(
     action: () -> Unit,
     closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
 ) =
-    VMDComponents.Button.withImage(initialImage, cancellableManager).apply {
+    VMDComponents.Button.withImage(initialImage, cancellableManager) {
         bindContent(image.map { VMDImageContent(it) })
         setAction(action)
         closure()
@@ -76,9 +81,10 @@ fun VMDViewModelDSL.buttonWithImageUrl(
     imageUrl: String = "",
     placeholderImageResource: VMDImageResource = VMDImageResource.None,
     action: () -> Unit = {},
+    contentDescription: String? = null,
     closure: VMDButtonViewModelImpl<VMDImageDescriptorContent>.() -> Unit = {}
 ) =
-    VMDComponents.Button.withImageUrl(imageUrl, placeholderImageResource, cancellableManager).apply {
+    VMDComponents.Button.withImageUrl(imageUrl, placeholderImageResource, cancellableManager, contentDescription) {
         setAction(action)
         closure()
     }
@@ -90,7 +96,7 @@ fun VMDViewModelDSL.buttonWithTextPair(first: String = "", second: String = "", 
             second
         ),
         cancellableManager
-    ).apply {
+    ) {
         setAction(action)
         closure()
     }
@@ -99,20 +105,22 @@ fun VMDViewModelDSL.buttonWithTextImage(
     text: String = "",
     image: VMDImageResource = VMDImageResource.None,
     action: () -> Unit = {},
+    contentDescription: String? = null,
     closure: VMDButtonViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
 ) =
     VMDComponents.Button.withTextImage(
         VMDTextImagePairContent(
             text,
-            image
+            image,
+            contentDescription
         ),
         cancellableManager
-    ).apply {
+    ) {
         setAction(action)
         closure()
     }
 
-fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closure: VMDTextFieldViewModelImpl.() -> Unit = {}) = VMDComponents.TextField.empty(cancellableManager).apply {
+fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closure: VMDTextFieldViewModelImpl.() -> Unit = {}) = VMDComponents.TextField.empty(cancellableManager) {
     this.text = text
     this.placeholder = placeholder
     closure()
@@ -162,19 +170,19 @@ fun VMDViewModelDSL.determinateProgress(progress: Float = 0f, total: Float = 1f,
     VMDComponents.Progress.determinate(progress, total, cancellableManager, closure)
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: List<C> = emptyList(), closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty<C>(cancellableManager).apply {
+    VMDComponents.List.empty(cancellableManager) {
         this.elements = elements
         closure()
     }
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(vararg elements: C, closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty<C>(cancellableManager).apply {
+    VMDComponents.List.empty(cancellableManager) {
         this.elements = elements.toList()
         closure()
     }
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: Publisher<List<C>>, closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty<C>(cancellableManager).apply {
+    VMDComponents.List.empty(cancellableManager) {
         bindElements(elements)
         closure()
     }

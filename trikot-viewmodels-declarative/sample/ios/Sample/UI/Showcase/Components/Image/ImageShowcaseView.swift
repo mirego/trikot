@@ -101,9 +101,7 @@ struct ImageShowcaseView: RootViewModelView {
             }
             .navigationTitle(viewModel.title.text)
             .toolbar {
-                VMDButton(viewModel.closeButton) { (content: VMDImageContent) in
-                    content.image.image
-                }
+                VMDImageButton(viewModel.closeButton)
             }
         }
     }

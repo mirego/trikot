@@ -3,30 +3,30 @@ PODS:
   - ReachabilitySwift (5.0.0)
   - SwiftLint (0.52.3)
   - SwiftUIIntrospect (1.0.0)
-  - Trikot/http (5.0.0):
+  - Trikot/http (5.2.0):
     - ReachabilitySwift (~> 5.0)
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/kword (5.0.0):
+  - Trikot/kword (5.2.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/streams (5.0.0):
+  - Trikot/streams (5.2.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative (5.0.0):
+  - Trikot/viewmodels.declarative (5.2.0):
     - Trikot/streams
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.Combine (5.0.0):
+  - Trikot/viewmodels.declarative.Combine (5.2.0):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.SwiftUI (5.0.0):
+  - Trikot/viewmodels.declarative.SwiftUI (5.2.0):
     - Kingfisher (~> 7.8.1)
     - SwiftUIIntrospect (~> 1.0)
     - Trikot/viewmodels.declarative
     - Trikot/viewmodels.declarative.Combine
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.UIKit (5.0.0):
+  - Trikot/viewmodels.declarative.UIKit (5.2.0):
     - Kingfisher (~> 7.8.1)
     - Trikot/streams
     - Trikot/viewmodels.declarative
     - TRIKOT_FRAMEWORK_NAME
-  - TRIKOT_FRAMEWORK_NAME (5.0.0)
+  - TRIKOT_FRAMEWORK_NAME (5.2.0)
 
 DEPENDENCIES:
   - SwiftLint
@@ -56,9 +56,9 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
   SwiftUIIntrospect: 9f15bf51d1a7582e168a683debca38649f3e152e
-  Trikot: d9eb3792ffea05d91169b5235b5c7f11ec482332
-  TRIKOT_FRAMEWORK_NAME: 51e81763d6b9297b0da72e828d401ad73bf05457
+  Trikot: 8620cedeffcf2c1176494b0ac908fb5ba4931bfa
+  TRIKOT_FRAMEWORK_NAME: 3de35e817211f9144a14244326539aa7320c6306
 
 PODFILE CHECKSUM: 8057f57ba2a2db77f33517422839afd5282c408e
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0

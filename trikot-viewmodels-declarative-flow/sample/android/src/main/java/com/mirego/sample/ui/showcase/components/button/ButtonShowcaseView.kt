@@ -65,7 +65,8 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
                 modifier = Modifier
                     .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
                     .padding(4.dp),
-                imageResource = content.image
+                imageResource = content.image,
+                contentDescription = content.contentDescription,
             )
         }
 
@@ -83,7 +84,8 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
             ) {
                 LocalImage(
                     modifier = Modifier.padding(end = 8.dp),
-                    imageResource = content.image
+                    imageResource = content.image,
+                    contentDescription = content.contentDescription,
                 )
                 Text(
                     text = content.text,

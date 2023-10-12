@@ -50,13 +50,18 @@ fun VMDViewModelDSL.button(closure: VMDButtonViewModelImpl<VMDNoContent>.() -> U
     VMDComponents.Button.empty(coroutineScope, closure)
 
 fun VMDViewModelDSL.buttonWithText(text: String = "", action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDTextContent>.() -> Unit = {}) =
-    VMDComponents.Button.withText(text, coroutineScope).apply {
+    VMDComponents.Button.withText(text, coroutineScope) {
         setAction(action)
         closure()
     }
 
-fun VMDViewModelDSL.buttonWithImage(image: VMDImageResource = VMDImageResource.None, action: () -> Unit = {}, closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}) =
-    VMDComponents.Button.withImage(image, coroutineScope).apply {
+fun VMDViewModelDSL.buttonWithImage(
+    image: VMDImageResource = VMDImageResource.None,
+    action: () -> Unit = {},
+    contentDescription: String? = null,
+    closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
+) =
+    VMDComponents.Button.withImage(image, coroutineScope, contentDescription) {
         setAction(action)
         closure()
     }
@@ -67,7 +72,7 @@ fun VMDViewModelDSL.buttonWithImage(
     action: () -> Unit,
     closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
 ) =
-    VMDComponents.Button.withImage(initialImage, coroutineScope).apply {
+    VMDComponents.Button.withImage(initialImage, coroutineScope) {
         bindContent(image.map { VMDImageContent(it) })
         setAction(action)
         closure()
@@ -77,9 +82,10 @@ fun VMDViewModelDSL.buttonWithImageUrl(
     imageUrl: String = "",
     placeholderImageResource: VMDImageResource = VMDImageResource.None,
     action: () -> Unit = {},
+    contentDescription: String? = null,
     closure: VMDButtonViewModelImpl<VMDImageDescriptorContent>.() -> Unit = {}
 ) =
-    VMDComponents.Button.withImageUrl(imageUrl, placeholderImageResource, coroutineScope).apply {
+    VMDComponents.Button.withImageUrl(imageUrl, placeholderImageResource, coroutineScope, contentDescription) {
         setAction(action)
         closure()
     }
@@ -91,7 +97,7 @@ fun VMDViewModelDSL.buttonWithTextPair(first: String = "", second: String = "", 
             second
         ),
         coroutineScope
-    ).apply {
+    ) {
         setAction(action)
         closure()
     }
@@ -100,20 +106,22 @@ fun VMDViewModelDSL.buttonWithTextImage(
     text: String = "",
     image: VMDImageResource = VMDImageResource.None,
     action: () -> Unit = {},
+    contentDescription: String? = null,
     closure: VMDButtonViewModelImpl<VMDTextImagePairContent>.() -> Unit = {}
 ) =
     VMDComponents.Button.withTextImage(
         VMDTextImagePairContent(
             text,
-            image
+            image,
+            contentDescription
         ),
         coroutineScope
-    ).apply {
+    ) {
         setAction(action)
         closure()
     }
 
-fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closure: VMDTextFieldViewModelImpl.() -> Unit = {}) = VMDComponents.TextField.empty(coroutineScope).apply {
+fun VMDViewModelDSL.textField(text: String = "", placeholder: String = "", closure: VMDTextFieldViewModelImpl.() -> Unit = {}) = VMDComponents.TextField.empty(coroutineScope) {
     this.text = text
     this.placeholder = placeholder
     closure()
@@ -163,19 +171,19 @@ fun VMDViewModelDSL.determinateProgress(progress: Float = 0f, total: Float = 1f,
     VMDComponents.Progress.determinate(progress, total, coroutineScope, closure)
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: List<C> = emptyList(), closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty<C>(coroutineScope).apply {
+    VMDComponents.List.empty(coroutineScope) {
         this.elements = elements
         closure()
     }
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(vararg elements: C, closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty<C>(coroutineScope).apply {
+    VMDComponents.List.empty(coroutineScope) {
         this.elements = elements.toList()
         closure()
     }
 
 fun <C : VMDIdentifiableContent> VMDViewModelDSL.list(elements: Flow<List<C>>, closure: VMDListViewModelImpl<C>.() -> Unit = {}) =
-    VMDComponents.List.empty<C>(coroutineScope).apply {
+    VMDComponents.List.empty(coroutineScope) {
         bindElements(elements)
         closure()
     }

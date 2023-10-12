@@ -171,11 +171,12 @@ object VMDComponents {
             fun withImage(
                 image: VMDImageResource,
                 coroutineScope: CoroutineScope,
+                contentDescription: String? = null,
                 closure: VMDButtonViewModelImpl<VMDImageContent>.() -> Unit = {}
             ) =
                 VMDButtonViewModelImpl(
                     coroutineScope,
-                    VMDImageContent(image)
+                    VMDImageContent(image, contentDescription)
                 )
                     .apply(closure)
 
@@ -183,6 +184,7 @@ object VMDComponents {
                 imageUrl: String,
                 placeholderImageResource: VMDImageResource = VMDImageResource.None,
                 coroutineScope: CoroutineScope,
+                contentDescription: String? = null,
                 closure: VMDButtonViewModelImpl<VMDImageDescriptorContent>.() -> Unit = {}
             ) =
                 VMDButtonViewModelImpl(
@@ -191,7 +193,8 @@ object VMDComponents {
                         VMDImageDescriptor.Remote(
                             imageUrl,
                             placeholderImageResource = placeholderImageResource
-                        )
+                        ),
+                        contentDescription
                     )
                 )
                     .apply(closure)
