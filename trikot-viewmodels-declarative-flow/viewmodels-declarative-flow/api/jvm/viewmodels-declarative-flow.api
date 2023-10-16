@@ -377,10 +377,11 @@ public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDControl
 	public fun setEnabled (Z)V
 }
 
-public final class com/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDHtmlTextViewModel {
+public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDHtmlTextViewModel {
 	public fun <init> (Lkotlinx/coroutines/CoroutineScope;)V
 	public final fun bindHtml (Lkotlinx/coroutines/flow/Flow;)V
 	public fun getHtml ()Ljava/lang/String;
+	protected fun getPropertyMapping ()Ljava/util/Map;
 	public fun getUrlActionBlock ()Lkotlin/jvm/functions/Function1;
 	public fun setHtml (Ljava/lang/String;)V
 	public final fun setUrlAction (Lkotlin/jvm/functions/Function1;)V

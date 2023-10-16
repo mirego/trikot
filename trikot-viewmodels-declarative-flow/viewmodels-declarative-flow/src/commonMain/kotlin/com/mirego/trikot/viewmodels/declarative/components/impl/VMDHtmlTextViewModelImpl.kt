@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
-class VMDHtmlTextViewModelImpl(coroutineScope: CoroutineScope) :
+open class VMDHtmlTextViewModelImpl(coroutineScope: CoroutineScope) :
     VMDViewModelImpl(coroutineScope), VMDHtmlTextViewModel {
 
     private val htmlDelegate = emit("", this, coroutineScope)
