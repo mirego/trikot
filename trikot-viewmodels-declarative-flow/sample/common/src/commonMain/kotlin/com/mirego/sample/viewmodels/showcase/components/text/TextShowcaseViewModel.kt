@@ -1,6 +1,7 @@
 package com.mirego.sample.viewmodels.showcase.components.text
 
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModel
+import com.mirego.trikot.viewmodels.declarative.components.VMDHtmlTextViewModel
 import com.mirego.trikot.viewmodels.declarative.components.VMDTextViewModel
 
 interface TextShowcaseViewModel : ShowcaseViewModel {
@@ -20,4 +21,6 @@ interface TextShowcaseViewModel : ShowcaseViewModel {
     val caption1: VMDTextViewModel
     val caption2: VMDTextViewModel
     val richText: VMDTextViewModel
+    val htmlText: VMDHtmlTextViewModel
+    val htmlTextWithLinks: VMDHtmlTextViewModel
 }

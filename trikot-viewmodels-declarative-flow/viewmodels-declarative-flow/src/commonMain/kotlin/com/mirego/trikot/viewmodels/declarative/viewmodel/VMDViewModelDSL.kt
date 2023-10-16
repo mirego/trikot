@@ -3,6 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.viewmodel
 import com.mirego.trikot.viewmodels.declarative.components.VMDPickerItemViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDHtmlTextViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDImageViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDListViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDLoadingViewModelImpl
@@ -31,6 +32,9 @@ interface VMDViewModelDSL {
 
 fun VMDViewModelDSL.text(content: String = "", spans: List<VMDRichTextSpan> = emptyList(), closure: VMDTextViewModelImpl.() -> Unit = {}) =
     VMDComponents.Text.withSpans(content, spans, coroutineScope, closure)
+
+fun VMDViewModelDSL.htmlText(content: String = "", closure: VMDHtmlTextViewModelImpl.() -> Unit = {}) =
+    VMDComponents.Text.withHtml(content, coroutineScope, closure)
 
 fun VMDViewModelDSL.localImage(image: VMDImageResource = VMDImageResource.None, contentDescription: String? = null, closure: VMDImageViewModelImpl.() -> Unit = {}) =
     VMDComponents.Image.local(image, coroutineScope, contentDescription, closure)

@@ -3,6 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.components.factory
 import com.mirego.trikot.viewmodels.declarative.components.VMDPickerItemViewModel
 import com.mirego.trikot.viewmodels.declarative.components.VMDPickerViewModel
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDButtonViewModelImpl
+import com.mirego.trikot.viewmodels.declarative.components.impl.VMDHtmlTextViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDImageViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDListViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDLoadingViewModelImpl
@@ -87,6 +88,28 @@ object VMDComponents {
                     .apply {
                         bindText(contentFlow)
                         bindSpans(spansFlow)
+                    }
+                    .apply(closure)
+
+            fun withHtml(
+                html: String,
+                coroutineScope: CoroutineScope,
+                closure: VMDHtmlTextViewModelImpl.() -> Unit
+            ) =
+                VMDHtmlTextViewModelImpl(coroutineScope)
+                    .apply {
+                        this.html = html
+                    }
+                    .apply(closure)
+
+            fun withHtml(
+                htmlFlow: Flow<String>,
+                coroutineScope: CoroutineScope,
+                closure: VMDHtmlTextViewModelImpl.() -> Unit
+            ) =
+                VMDHtmlTextViewModelImpl(coroutineScope)
+                    .apply {
+                        bindHtml(htmlFlow)
                     }
                     .apply(closure)
         }

@@ -3,6 +3,7 @@ package com.mirego.sample.ui.showcase.components.text
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseNavigationDelegate
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModel
@@ -20,6 +21,10 @@ class TextShowcaseActivity : ViewModelActivity<TextShowcaseViewModelController, 
         setContent {
             TextShowcaseView(textShowcaseViewModel = viewModel)
         }
+    }
+
+    override fun showMessage(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun close() {

@@ -9,8 +9,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.resource.SampleTextStyleProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
@@ -20,6 +25,7 @@ import com.mirego.sample.ui.theming.medium
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelPreview
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDHtmlText
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 
@@ -37,7 +43,8 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             VMDText(
@@ -117,6 +124,27 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
 
             VMDText(
                 viewModel = viewModel.richText
+            )
+
+            VMDHtmlText(
+                viewModel = viewModel.htmlText,
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    lineHeight = 30.sp,
+                    fontWeight = FontWeight.Light,
+                    color = Color.Red
+                ),
+            )
+
+            VMDHtmlText(
+                viewModel = viewModel.htmlTextWithLinks,
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    color = Color.Black
+                ),
+                urlSpanStyle = SpanStyle(
+                    color = Color.Green
+                ),
             )
         }
     }
