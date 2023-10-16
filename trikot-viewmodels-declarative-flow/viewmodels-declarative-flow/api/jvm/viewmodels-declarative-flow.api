@@ -101,6 +101,11 @@ public abstract interface class com/mirego/trikot/viewmodels/declarative/compone
 	public abstract fun isEnabled ()Z
 }
 
+public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDHtmlTextViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
+	public abstract fun getHtml ()Ljava/lang/String;
+	public abstract fun getUrlActionBlock ()Lkotlin/jvm/functions/Function1;
+}
+
 public abstract interface class com/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModel {
 	public abstract fun getContentDescription ()Ljava/lang/String;
 	public abstract fun getImage ()Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;
@@ -293,6 +298,8 @@ public final class com/mirego/trikot/viewmodels/declarative/components/factory/V
 	public final fun withContent (Lkotlinx/coroutines/flow/Flow;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
 	public static synthetic fun withContent$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion;Ljava/lang/String;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
 	public static synthetic fun withContent$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion;Lkotlinx/coroutines/flow/Flow;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
+	public final fun withHtml (Ljava/lang/String;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl;
+	public final fun withHtml (Lkotlinx/coroutines/flow/Flow;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl;
 	public final fun withSpans (Ljava/lang/String;Ljava/util/List;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
 	public final fun withSpans (Lkotlinx/coroutines/flow/Flow;Lkotlinx/coroutines/flow/Flow;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
 	public static synthetic fun withSpans$default (Lcom/mirego/trikot/viewmodels/declarative/components/factory/VMDComponents$Text$Companion;Ljava/lang/String;Ljava/util/List;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDTextViewModelImpl;
@@ -368,6 +375,17 @@ public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDControl
 	protected fun getPropertyMapping ()Ljava/util/Map;
 	public fun isEnabled ()Z
 	public fun setEnabled (Z)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDHtmlTextViewModel {
+	public fun <init> (Lkotlinx/coroutines/CoroutineScope;)V
+	public final fun bindHtml (Lkotlinx/coroutines/flow/Flow;)V
+	public fun getHtml ()Ljava/lang/String;
+	public fun getUrlActionBlock ()Lkotlin/jvm/functions/Function1;
+	public fun setHtml (Ljava/lang/String;)V
+	public final fun setUrlAction (Lkotlin/jvm/functions/Function1;)V
+	public final fun setUrlAction (Lkotlinx/coroutines/flow/Flow;Lkotlin/jvm/functions/Function1;)V
+	public fun setUrlActionBlock (Lkotlin/jvm/functions/Function1;)V
 }
 
 public class com/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl : com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelImpl, com/mirego/trikot/viewmodels/declarative/components/VMDImageViewModel {
@@ -877,6 +895,8 @@ public final class com/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewMod
 	public static synthetic fun buttonWithTextPair$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDButtonViewModelImpl;
 	public static final fun determinateProgress (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;FFLkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
 	public static synthetic fun determinateProgress$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;FFLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
+	public static final fun htmlText (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl;
+	public static synthetic fun htmlText$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDHtmlTextViewModelImpl;
 	public static final fun image (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
 	public static synthetic fun image$default (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDImageViewModelImpl;
 	public static final fun indeterminateProgress (Lcom/mirego/trikot/viewmodels/declarative/viewmodel/VMDViewModelDSL;Lkotlin/jvm/functions/Function1;)Lcom/mirego/trikot/viewmodels/declarative/components/impl/VMDProgressViewModelImpl;
