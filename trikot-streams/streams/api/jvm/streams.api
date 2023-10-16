@@ -209,6 +209,7 @@ public final class com/mirego/trikot/streams/reactive/PublisherExtensionsKt {
 	public static final fun scan (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function2;)Lorg/reactivestreams/Publisher;
 	public static final fun scanWith (Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)Lorg/reactivestreams/Publisher;
 	public static final fun shared (Lorg/reactivestreams/Publisher;)Lorg/reactivestreams/Publisher;
+	public static final fun skip (Lorg/reactivestreams/Publisher;J)Lorg/reactivestreams/Publisher;
 	public static final fun startWith (Lorg/reactivestreams/Publisher;Ljava/lang/Object;)Lorg/reactivestreams/Publisher;
 	public static final fun subscribe (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;)V
 	public static final fun subscribe (Lorg/reactivestreams/Publisher;Lcom/mirego/trikot/streams/cancellable/CancellableManager;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
