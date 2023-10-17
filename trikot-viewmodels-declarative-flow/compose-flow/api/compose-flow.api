@@ -104,6 +104,10 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VM
 	public static final fun VMDDropDownMenuItem (Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerViewModel;Lcom/mirego/trikot/viewmodels/declarative/components/VMDPickerItemViewModel;ILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function5;Landroidx/compose/runtime/Composer;II)V
 }
 
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDHtmlTextKt {
+	public static final fun VMDHtmlText-VhcvRP8 (Lcom/mirego/trikot/viewmodels/declarative/components/VMDHtmlTextViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextStyle;ZIILkotlin/jvm/functions/Function1;ILandroidx/compose/ui/text/SpanStyle;Landroidx/compose/runtime/Composer;II)V
+}
+
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDImageKt {
 	public static final fun LocalImage (Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun RemoteImage (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lcom/mirego/trikot/viewmodels/declarative/properties/VMDImageResource;Lkotlin/jvm/functions/Function5;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;Landroidx/compose/ui/graphics/ColorFilter;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V

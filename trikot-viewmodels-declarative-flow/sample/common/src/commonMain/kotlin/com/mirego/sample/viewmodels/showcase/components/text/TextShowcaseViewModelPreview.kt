@@ -3,10 +3,12 @@ package com.mirego.sample.viewmodels.showcase.components.text
 import com.mirego.sample.extensions.rangeOf
 import com.mirego.sample.resources.SampleImageResource
 import com.mirego.sample.resources.SampleTextStyleResource
+import com.mirego.trikot.viewmodels.declarative.components.VMDHtmlTextViewModel
 import com.mirego.trikot.viewmodels.declarative.properties.VMDRichTextSpan
 import com.mirego.trikot.viewmodels.declarative.properties.VMDSpanStyleResourceTransform
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.buttonWithImage
+import com.mirego.trikot.viewmodels.declarative.viewmodel.htmlText
 import com.mirego.trikot.viewmodels.declarative.viewmodel.text
 import kotlinx.coroutines.MainScope
 
@@ -57,4 +59,8 @@ class TextShowcaseViewModelPreview : VMDViewModelImpl(MainScope()), TextShowcase
             )
         )
     )
+
+    override val htmlText: VMDHtmlTextViewModel = htmlText("<em>html text</em>")
+
+    override val htmlTextWithLinks: VMDHtmlTextViewModel = htmlText("<a href=\"https://mirego.com\">html link</a>")
 }

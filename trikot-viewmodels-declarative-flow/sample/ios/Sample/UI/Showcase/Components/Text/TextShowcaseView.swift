@@ -75,6 +75,28 @@ struct TextShowcaseView: RootViewModelView {
                         VMDText(viewModel.richText)
                             .style(.body)
                     }
+                    
+                    Group {
+                        VMDHtmlText(
+                            viewModel.htmlText,
+                            style: VMDHtmlTextStyle(
+                                fontSize: 20,
+                                lineHeight: 30,
+                                fontWeight: .light
+                            ),
+                            color: .red
+                        )
+                        
+                        VMDHtmlText(
+                            viewModel.htmlTextWithLinks,
+                            style: VMDHtmlTextStyle(
+                                fontSize: 12,
+                                lineHeight: 12
+                            ),
+                            color: .black,
+                            linkTextAttributes: [ .foregroundColor: UIColor.green ]
+                        )
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()

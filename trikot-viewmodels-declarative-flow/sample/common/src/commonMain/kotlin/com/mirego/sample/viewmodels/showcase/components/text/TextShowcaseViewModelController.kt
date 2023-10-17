@@ -9,5 +9,8 @@ class TextShowcaseViewModelController(i18N: I18N) : VMDViewModelController<TextS
     override fun onCreate() {
         super.onCreate()
         viewModel.closeButton.setAction { navigationDelegate?.close() }
+        viewModel.htmlTextWithLinks.setUrlAction {
+            navigationDelegate?.showMessage(it)
+        }
     }
 }
