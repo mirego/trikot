@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.mirego.trikot.viewmodels.declarative.components.VMDPickerItemViewModel
 import com.mirego.trikot.viewmodels.declarative.components.VMDPickerViewModel
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 
 @Composable
 fun <E : VMDPickerItemViewModel> VMDDropDownMenu(
@@ -35,7 +35,9 @@ fun <E : VMDPickerItemViewModel> VMDDropDownMenu(
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
-        modifier = modifier.vmdModifier(pickerViewModel),
+        modifier = Modifier
+            .hidden(pickerViewModel.isHidden)
+            .then(modifier),
         offset = offset,
         properties = properties
     ) {
@@ -67,7 +69,9 @@ fun <E : VMDPickerItemViewModel> VMDDropDownMenuItem(
             onClick()
         },
         text = text,
-        modifier = modifier.vmdModifier(pickerItemViewModel),
+        modifier = Modifier
+            .hidden(pickerItemViewModel.isHidden)
+            .then(modifier),
         enabled = pickerItemViewModel.isEnabled,
         contentPadding = contentPadding,
         colors = colors,

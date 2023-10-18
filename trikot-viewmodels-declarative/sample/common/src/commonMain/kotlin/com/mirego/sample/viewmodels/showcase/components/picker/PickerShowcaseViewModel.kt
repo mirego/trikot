@@ -9,4 +9,6 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 interface PickerShowcaseViewModel : ShowcaseViewModel {
     val textPickerTitle: VMDTextViewModel
     val textPicker: VMDPickerViewModel<VMDContentPickerItemViewModelImpl<VMDTextContent>>
+    val textPickerTitle2: VMDTextViewModel
+    val textPicker2: VMDPickerViewModel<VMDContentPickerItemViewModelImpl<VMDTextContent>>
 }
