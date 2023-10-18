@@ -101,8 +101,6 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
                 viewModel = viewModel.indeterminateProgress
             )
         }
-
-
     }
 }
 

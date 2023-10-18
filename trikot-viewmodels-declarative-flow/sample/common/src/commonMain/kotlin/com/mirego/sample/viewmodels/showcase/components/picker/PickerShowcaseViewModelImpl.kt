@@ -3,7 +3,6 @@ package com.mirego.sample.viewmodels.showcase.components.picker
 import com.mirego.sample.KWordTranslation
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
-import com.mirego.trikot.viewmodels.declarative.components.VMDPickerViewModel
 import com.mirego.trikot.viewmodels.declarative.components.impl.VMDContentPickerItemViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.content.VMDTextContent
 import com.mirego.trikot.viewmodels.declarative.viewmodel.picker

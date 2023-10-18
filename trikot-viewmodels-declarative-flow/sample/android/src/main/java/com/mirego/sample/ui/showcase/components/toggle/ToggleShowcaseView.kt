@@ -42,7 +42,6 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                 .fillMaxWidth()
                 .verticalScroll(state = rememberScrollState())
         ) {
-
             ComponentShowcaseTitle(viewModel.checkboxTitle)
 
             VMDCheckbox(

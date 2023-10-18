@@ -233,7 +233,6 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
                 viewModel = viewModel.richText
             )
         }
-
     }
 }
 
