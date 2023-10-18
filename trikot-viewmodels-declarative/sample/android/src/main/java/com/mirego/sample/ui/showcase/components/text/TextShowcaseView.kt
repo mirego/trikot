@@ -37,6 +37,7 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(state = rememberScrollState())
+                .padding(bottom = 16.dp)
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
@@ -201,7 +202,7 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun TextShowcaseViewPreview() {
+private fun TextShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     TextShowcaseView(textShowcaseViewModel = TextShowcaseViewModelPreview())
 }

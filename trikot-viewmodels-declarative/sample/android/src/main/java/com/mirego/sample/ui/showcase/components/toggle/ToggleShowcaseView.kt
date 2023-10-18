@@ -177,7 +177,7 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
 
         VMDSwitch(
             modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
+                .padding(16.dp)
                 .fillMaxWidth(),
             viewModel = viewModel.textPairToggle,
             label = { content ->
@@ -332,7 +332,7 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
 
         com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
             modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
+                .padding(16.dp)
                 .fillMaxWidth(),
             viewModel = viewModel.textPairToggle,
             label = { content ->
@@ -355,7 +355,7 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun ToggleShowcaseViewPreview() {
+private fun ToggleShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     ToggleShowcaseView(toggleShowcaseViewModel = ToggleShowcaseViewModelPreview())
 }

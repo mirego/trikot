@@ -104,7 +104,7 @@ fun TextFieldShowcaseView(textFieldShowcaseViewModel: TextFieldShowcaseViewModel
 
 @Preview(showSystemUi = true)
 @Composable
-fun TextFieldShowcaseViewPreview() {
+private fun TextFieldShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     TextFieldShowcaseView(textFieldShowcaseViewModel = TextFieldShowcaseViewModelPreview())
 }

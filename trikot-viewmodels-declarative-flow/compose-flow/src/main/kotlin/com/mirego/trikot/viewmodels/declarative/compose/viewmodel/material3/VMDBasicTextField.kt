@@ -27,7 +27,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsStat
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.FormattedVisualTransformation
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun VMDBasicTextField(
     viewModel: VMDTextFieldViewModel,

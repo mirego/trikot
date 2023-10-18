@@ -47,7 +47,7 @@ fun VMDLinearProgressIndicator(
 
 @Preview
 @Composable
-fun DeterminateLinearProgressIndicatorPreview() {
+private fun DeterminateLinearProgressIndicatorPreview() {
     val progressViewModel = VMDComponents.Progress.determinate(0.25f, MainScope())
     VMDLinearProgressIndicator(
         modifier = Modifier.fillMaxWidth(),

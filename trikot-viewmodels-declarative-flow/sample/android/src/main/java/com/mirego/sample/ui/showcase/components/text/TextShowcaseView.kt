@@ -239,7 +239,7 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun TextShowcaseViewPreview() {
+private fun TextShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider(), SampleTextStyleProvider())
     TextShowcaseView(textShowcaseViewModel = TextShowcaseViewModelPreview())
 }

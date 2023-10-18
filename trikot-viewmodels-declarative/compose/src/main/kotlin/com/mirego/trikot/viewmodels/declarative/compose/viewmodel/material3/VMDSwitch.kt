@@ -70,7 +70,7 @@ fun <C : VMDContent> VMDSwitch(
 
 @Preview
 @Composable
-fun EnabledSwitchPreview() {
+private fun EnabledSwitchPreview() {
     val toggleViewModel =
         VMDComponents.Toggle.withState(true, CancellableManager())
     VMDSwitch(viewModel = toggleViewModel)
@@ -78,7 +78,7 @@ fun EnabledSwitchPreview() {
 
 @Preview
 @Composable
-fun DisabledSwitchPreview() {
+private fun DisabledSwitchPreview() {
     val toggleViewModel =
         VMDComponents.Toggle.withState(false, CancellableManager())
     VMDSwitch(viewModel = toggleViewModel)
@@ -86,7 +86,7 @@ fun DisabledSwitchPreview() {
 
 @Preview
 @Composable
-fun SimpleTextSwitchPreview() {
+private fun SimpleTextSwitchPreview() {
     val toggleViewModel =
         VMDComponents.Toggle.withText("Label", true, CancellableManager())
     VMDSwitch(viewModel = toggleViewModel, label = { Text(it.text) })

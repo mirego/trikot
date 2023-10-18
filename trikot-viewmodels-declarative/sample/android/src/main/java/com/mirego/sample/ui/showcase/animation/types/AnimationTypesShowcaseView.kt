@@ -116,6 +116,6 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
 
 @Preview(showSystemUi = true)
 @Composable
-fun AnimationTypesShowcaseViewPreview() {
+private fun AnimationTypesShowcaseViewPreview() {
     AnimationTypesShowcaseView(animationTypesShowcaseViewModel = AnimationTypesShowcaseViewModelPreview())
 }

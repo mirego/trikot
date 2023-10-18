@@ -54,7 +54,7 @@ fun VMDCircularProgressIndicator(
 
 @Preview
 @Composable
-fun DeterminateCircularProgressIndicatorPreview() {
+private fun DeterminateCircularProgressIndicatorPreview() {
     val progressViewModel = VMDComponents.Progress.determinate(0.25f, MainScope())
     VMDCircularProgressIndicator(
         viewModel = progressViewModel

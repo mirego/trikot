@@ -106,6 +106,6 @@ fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun ProgressShowcaseViewPreview() {
+private fun ProgressShowcaseViewPreview() {
     ProgressShowcaseView(progressShowcaseViewModel = ProgressShowcaseViewModelPreview())
 }
