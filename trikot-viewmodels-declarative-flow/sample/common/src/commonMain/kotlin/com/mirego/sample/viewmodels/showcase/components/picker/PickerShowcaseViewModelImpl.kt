@@ -21,12 +21,28 @@ class PickerShowcaseViewModelImpl(i18N: I18N, coroutineScope: CoroutineScope) :
             VMDContentPickerItemViewModelImpl(coroutineScope, VMDTextContent("Item 3"), "item_3")
         )
     )
+    override val textPicker2 = picker(
+        listOf(
+            VMDContentPickerItemViewModelImpl(coroutineScope, VMDTextContent("Item 1"), "item_1"),
+            VMDContentPickerItemViewModelImpl(coroutineScope, VMDTextContent("Item 2"), "item_2"),
+            VMDContentPickerItemViewModelImpl(coroutineScope, VMDTextContent("Item 3"), "item_3")
+        )
+    )
 
     override val textPickerTitle = text(i18N[KWordTranslation.PICKER_SHOWCASE_TEXT]) {
         val initialValue = text
         bindText(
             textPicker.flowForProperty(textPicker::selectedIndex).map { index ->
                 textPicker.elements.getOrNull(index)?.content?.text ?: initialValue
+            }
+        )
+    }
+
+    override val textPickerTitle2 = text(i18N[KWordTranslation.PICKER_SHOWCASE_TEXT]) {
+        val initialValue = text
+        bindText(
+            textPicker2.flowForProperty(textPicker::selectedIndex).map { index ->
+                textPicker2.elements.getOrNull(index)?.content?.text ?: initialValue
             }
         )
     }

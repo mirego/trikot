@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -29,13 +30,14 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(state = rememberScrollState())
     ) {
         ComponentShowcaseTopBar(viewModel)
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .verticalScroll(state = rememberScrollState())
+                .padding(bottom = 16.dp)
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
@@ -113,13 +115,94 @@ fun TextShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
                 viewModel = viewModel.caption2,
                 style = SampleTextStyle.caption2
             )
+
+            Text(
+                modifier = Modifier.padding(top = 16.dp),
+                text = "Material 3",
+                style = SampleTextStyle.largeTitle
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.largeTitle,
+                style = SampleTextStyle.largeTitle
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.title1,
+                style = SampleTextStyle.title1
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.title1Bold,
+                style = SampleTextStyle.title1.bold()
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.title2,
+                style = SampleTextStyle.title2
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.title2Bold,
+                style = SampleTextStyle.title2.bold()
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.title3,
+                style = SampleTextStyle.title3
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.headline,
+                style = SampleTextStyle.headline
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.body,
+                style = SampleTextStyle.body
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.bodyMedium,
+                style = SampleTextStyle.body.medium()
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.button,
+                style = SampleTextStyle.button
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.callout,
+                style = SampleTextStyle.callout
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.subheadline,
+                style = SampleTextStyle.subheadline
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.footnote,
+                style = SampleTextStyle.footnote
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.caption1,
+                style = SampleTextStyle.caption1
+            )
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDText(
+                viewModel = viewModel.caption2,
+                style = SampleTextStyle.caption2
+            )
         }
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
-fun TextShowcaseViewPreview() {
+private fun TextShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     TextShowcaseView(textShowcaseViewModel = TextShowcaseViewModelPreview())
 }

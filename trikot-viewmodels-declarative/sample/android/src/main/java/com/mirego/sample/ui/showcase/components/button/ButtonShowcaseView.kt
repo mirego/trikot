@@ -124,7 +124,7 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun ButtonShowcaseViewPreview() {
+private fun ButtonShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     ButtonShowcaseView(buttonShowcaseViewModel = ButtonShowcaseViewModelPreview())
 }

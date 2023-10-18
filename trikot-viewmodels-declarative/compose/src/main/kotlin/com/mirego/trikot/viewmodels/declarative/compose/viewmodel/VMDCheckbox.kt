@@ -69,21 +69,21 @@ fun <C : VMDContent> VMDCheckbox(
 
 @Preview
 @Composable
-fun EnabledToggleCheckboxPreview() {
+private fun EnabledToggleCheckboxPreview() {
     val toggleViewModel = VMDComponents.Toggle.withState(true, CancellableManager())
     VMDCheckbox(viewModel = toggleViewModel)
 }
 
 @Preview
 @Composable
-fun DisabledToggleCheckboxPreview() {
+private fun DisabledToggleCheckboxPreview() {
     val toggleViewModel = VMDComponents.Toggle.withState(false, CancellableManager())
     VMDCheckbox(viewModel = toggleViewModel)
 }
 
 @Preview
 @Composable
-fun SimpleTextToggleCheckboxPreview() {
+private fun SimpleTextToggleCheckboxPreview() {
     val toggleViewModel = VMDComponents.Toggle.withText("Label", true, CancellableManager())
     VMDCheckbox(viewModel = toggleViewModel, label = { Text(it.text) })
 }

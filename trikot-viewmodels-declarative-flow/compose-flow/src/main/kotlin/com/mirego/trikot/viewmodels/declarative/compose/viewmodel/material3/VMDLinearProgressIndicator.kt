@@ -1,10 +1,9 @@
-package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
+package com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProgressIndicatorDefaults
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -21,8 +20,8 @@ import kotlinx.coroutines.MainScope
 fun VMDLinearProgressIndicator(
     modifier: Modifier = Modifier,
     viewModel: VMDProgressViewModel,
-    color: Color = MaterialTheme.colors.primary,
-    backgroundColor: Color = color.copy(alpha = ProgressIndicatorDefaults.IndicatorBackgroundOpacity)
+    color: Color = ProgressIndicatorDefaults.linearColor,
+    trackColor: Color = ProgressIndicatorDefaults.linearTrackColor
 ) {
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
     val animatedProgress by animateFloatAsState(targetValue = viewModel.determination?.progressRatio ?: 0f)
@@ -33,14 +32,14 @@ fun VMDLinearProgressIndicator(
         LinearProgressIndicator(
             modifier = newModifier,
             color = color,
-            backgroundColor = backgroundColor
+            trackColor = trackColor
         )
     } else {
         LinearProgressIndicator(
             modifier = newModifier,
             progress = animatedProgress,
             color = color,
-            backgroundColor = backgroundColor
+            trackColor = trackColor
         )
     }
 }

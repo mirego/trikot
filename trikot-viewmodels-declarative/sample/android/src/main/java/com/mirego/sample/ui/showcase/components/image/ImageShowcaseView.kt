@@ -139,7 +139,7 @@ fun ImageShowcaseView(imageShowcaseViewModel: ImageShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun ImageShowcaseViewPreview() {
+private fun ImageShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     ImageShowcaseView(imageShowcaseViewModel = ImageShowcaseViewModelPreview())
 }

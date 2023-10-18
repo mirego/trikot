@@ -177,7 +177,162 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
 
         VMDSwitch(
             modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
+                .padding(16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.textPairToggle,
+            label = { content ->
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = content.first,
+                        style = SampleTextStyle.body
+                    )
+                    Text(
+                        text = content.second,
+                        style = SampleTextStyle.caption1
+                    )
+                }
+            }
+        )
+
+        androidx.compose.material3.Text(
+            text = "Material 3",
+            style = SampleTextStyle.largeTitle
+        )
+
+        ComponentShowcaseTitle(viewModel.textCheckboxTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.textToggle,
+            label = { Text(it.text, style = SampleTextStyle.body) }
+        )
+
+        ComponentShowcaseTitle(viewModel.imageCheckboxTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.imageToggle,
+            label = { content ->
+                LocalImage(
+                    imageResource = content.image,
+                    colorFilter = ColorFilter.tint(Color.Black)
+                )
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.textImageCheckboxTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.textImageToggle,
+            label = { content ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    LocalImage(
+                        imageResource = content.image,
+                        colorFilter = ColorFilter.tint(Color.Black)
+                    )
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body
+                    )
+                }
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.textPairCheckboxTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.textPairToggle,
+            label = { content ->
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = content.first,
+                        style = SampleTextStyle.body
+                    )
+                    Text(
+                        text = content.second,
+                        style = SampleTextStyle.caption1
+                    )
+                }
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.switchTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+            modifier = Modifier.padding(start = 10.dp, top = 16.dp, end = 16.dp),
+            viewModel = viewModel.emptyToggle
+        )
+
+        ComponentShowcaseTitle(viewModel.textSwitchTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.textToggle,
+            label = { Text(it.text, style = SampleTextStyle.body) }
+        )
+
+        ComponentShowcaseTitle(viewModel.imageSwitchTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.imageToggle,
+            label = { content ->
+                LocalImage(
+                    imageResource = content.image,
+                    colorFilter = ColorFilter.tint(Color.Black)
+                )
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.textImageSwitchTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            viewModel = viewModel.textImageToggle,
+            label = { content ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    LocalImage(
+                        imageResource = content.image,
+                        colorFilter = ColorFilter.tint(Color.Black)
+                    )
+                    Text(
+                        modifier = Modifier.padding(start = 8.dp),
+                        text = content.text,
+                        style = SampleTextStyle.body
+                    )
+                }
+            }
+        )
+
+        ComponentShowcaseTitle(viewModel.textPairSwitchTitle)
+
+        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+            modifier = Modifier
+                .padding(16.dp)
                 .fillMaxWidth(),
             viewModel = viewModel.textPairToggle,
             label = { content ->
@@ -200,7 +355,7 @@ fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun ToggleShowcaseViewPreview() {
+private fun ToggleShowcaseViewPreview() {
     TrikotViewModelDeclarative.initialize(SampleImageProvider())
     ToggleShowcaseView(toggleShowcaseViewModel = ToggleShowcaseViewModelPreview())
 }

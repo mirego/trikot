@@ -1,66 +1,74 @@
-package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
+package com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchColors
-import androidx.compose.material.SwitchDefaults
-import androidx.compose.material.Text
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxColors
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
-import com.mirego.trikot.streams.cancellable.CancellableManager
 import com.mirego.trikot.viewmodels.declarative.components.VMDToggleViewModel
 import com.mirego.trikot.viewmodels.declarative.components.factory.VMDComponents
-import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
+import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLabeledComponent
 import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
+import kotlinx.coroutines.MainScope
 
 @Composable
-fun VMDSwitch(
+fun VMDCheckbox(
     modifier: Modifier = Modifier,
     componentModifier: Modifier = Modifier,
     viewModel: VMDToggleViewModel<VMDNoContent>,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    colors: SwitchColors = SwitchDefaults.colors()
+    colors: CheckboxColors = CheckboxDefaults.colors()
 ) {
-    VMDSwitch(
+    VMDCheckbox(
         modifier = modifier,
         componentModifier = componentModifier,
         viewModel = viewModel,
         label = {},
+        interactionSource = interactionSource,
         colors = colors
     )
 }
 
 @Composable
-fun <C : VMDContent> VMDSwitch(
+fun <C : VMDContent> VMDCheckbox(
     modifier: Modifier = Modifier,
     componentModifier: Modifier = Modifier,
     viewModel: VMDToggleViewModel<C>,
     label: @Composable (RowScope.(field: C) -> Unit),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    colors: SwitchColors = SwitchDefaults.colors()
+    colors: CheckboxColors = CheckboxDefaults.colors()
 ) {
     val toggleViewModel: VMDToggleViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     VMDLabeledComponent(
-        modifier = Modifier
-            .hidden(toggleViewModel.isHidden)
-            .then(modifier),
+        modifier = modifier
+            .toggleable(
+                value = toggleViewModel.isOn,
+                role = Role.Checkbox,
+                onValueChange = { checked -> viewModel.onValueChange(checked) },
+            )
+            .vmdModifier(toggleViewModel),
         label = { label(toggleViewModel.label) },
         content = {
-            Switch(
+            Checkbox(
+                onCheckedChange = null,
                 modifier = componentModifier,
                 enabled = toggleViewModel.isEnabled,
                 checked = toggleViewModel.isOn,
-                colors = colors,
                 interactionSource = interactionSource,
-                onCheckedChange = { checked -> viewModel.onValueChange(checked) }
+                colors = colors,
             )
         }
     )
@@ -68,24 +76,21 @@ fun <C : VMDContent> VMDSwitch(
 
 @Preview
 @Composable
-private fun EnabledSwitchPreview() {
-    val toggleViewModel =
-        VMDComponents.Toggle.withState(true, CancellableManager())
-    VMDSwitch(viewModel = toggleViewModel)
+private fun EnabledToggleCheckboxPreview() {
+    val toggleViewModel = VMDComponents.Toggle.withState(true, MainScope())
+    VMDCheckbox(viewModel = toggleViewModel)
 }
 
 @Preview
 @Composable
-private fun DisabledSwitchPreview() {
-    val toggleViewModel =
-        VMDComponents.Toggle.withState(false, CancellableManager())
-    VMDSwitch(viewModel = toggleViewModel)
+private fun DisabledToggleCheckboxPreview() {
+    val toggleViewModel = VMDComponents.Toggle.withState(false, MainScope())
+    VMDCheckbox(viewModel = toggleViewModel)
 }
 
 @Preview
 @Composable
-private fun SimpleTextSwitchPreview() {
-    val toggleViewModel =
-        VMDComponents.Toggle.withText("Label", true, CancellableManager())
-    VMDSwitch(viewModel = toggleViewModel, label = { Text(it.text) })
+private fun SimpleTextToggleCheckboxPreview() {
+    val toggleViewModel = VMDComponents.Toggle.withText("Label", true, MainScope())
+    VMDCheckbox(viewModel = toggleViewModel, label = { Text(it.text) })
 }
