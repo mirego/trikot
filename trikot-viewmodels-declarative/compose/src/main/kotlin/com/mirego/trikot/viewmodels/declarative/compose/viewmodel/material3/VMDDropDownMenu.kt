@@ -75,7 +75,7 @@ fun <E : VMDPickerItemViewModel> VMDDropDownMenuItem(
         enabled = pickerItemViewModel.isEnabled,
         contentPadding = contentPadding,
         colors = colors,
-        leadingIcon =  leadingIcon,
+        leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         interactionSource = interactionSource
     )
