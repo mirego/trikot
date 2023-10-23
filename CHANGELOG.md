@@ -10,6 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
+## 5.2.0
+
+### Breaking Changes
+
+- [VMD] Added contentDescription to Image Contents
+- [stream] Changed visibility on several classes to internal.
+- [stream] Updated skip function to return Publisher instead of SkipProcessor
+
 ## 5.1.0
 
 ### Updates
