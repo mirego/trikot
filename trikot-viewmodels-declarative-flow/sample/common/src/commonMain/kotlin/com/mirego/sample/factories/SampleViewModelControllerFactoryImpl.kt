@@ -11,6 +11,7 @@ import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcas
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelController
+import com.mirego.sample.viewmodels.tv.HomeTvViewModelController
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KWord
 
@@ -50,4 +51,6 @@ class SampleViewModelControllerFactoryImpl : SampleViewModelControllerFactory {
 
     override fun snackbarShowcase() =
         SnackbarShowcaseViewModelController(i18N)
+
+    override fun homeTv() = HomeTvViewModelController(i18N)
 }
