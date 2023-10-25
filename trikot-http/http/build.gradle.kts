@@ -27,7 +27,7 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
                 implementation("org.jetbrains.kotlin:kotlin-reflect")
                 implementation("junit:junit:4.13.2")
-                implementation("io.mockk:mockk-common:1.12.2")
+                implementation("io.mockk:mockk-common:1.12.3")
             }
         }
 

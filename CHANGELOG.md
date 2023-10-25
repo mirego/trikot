@@ -8,9 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Updates
 
+- Gradle to `8.4`
+- AGP to `8.1.2`
+- Ktlint to `11.6.1`
+- Ktor to `2.3.5`
+- Kotlin Serialization to `1.6.0`
+- Kotlin Wrappers Extensions to `1.0.1-pre.628`
+- Androidx Lifecycle to `2.6.2`
+- ThreeTen Android Backport to `1.4.6`
+
 ### Breaking Changes
 
 ## 5.2.0
+
+> 2023-10-23
 
 ### Breaking Changes
 
@@ -19,6 +30,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [stream] Updated skip function to return Publisher instead of SkipProcessor
 
 ## 5.1.0
+
+> 2023-10-05
 
 ### Updates
 
