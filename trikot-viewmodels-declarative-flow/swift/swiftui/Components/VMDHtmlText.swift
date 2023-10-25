@@ -6,14 +6,14 @@ public struct VMDHtmlText: View {
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDHtmlTextViewModel>
     
     private let style: VMDHtmlTextStyle
-    private let color: Color
+    private let color: SwiftUI.Color
     private let numberOfLines: Int
     private let linkTextAttributes: [NSAttributedString.Key : Any]?
     
     public init(
         _ viewModel: VMDHtmlTextViewModel,
         style: VMDHtmlTextStyle,
-        color: Color,
+        color: SwiftUI.Color,
         numberOfLines: Int = 0,
         linkTextAttributes: [NSAttributedString.Key : Any]? = nil
     ) {
@@ -44,7 +44,7 @@ private struct HTMLText: UIViewRepresentable {
 
     private let html: String
     private let style: VMDHtmlTextStyle
-    private let color: Color
+    private let color: SwiftUI.Color
     private let numberOfLines: Int
     private let linkTextAttributes: [NSAttributedString.Key : Any]?
     private let onOpenURL: ((String) -> Void)?
@@ -52,7 +52,7 @@ private struct HTMLText: UIViewRepresentable {
     init(
         html: String,
         style: VMDHtmlTextStyle,
-        color: Color,
+        color: SwiftUI.Color,
         numberOfLines: Int = 0,
         linkTextAttributes: [NSAttributedString.Key : Any]? = nil,
         onOpenURL: ((String) -> Void)? = nil
