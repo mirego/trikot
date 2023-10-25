@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_FLOW))
     implementation(project(Project.TRIKOT_FOUNDATION))
-
+    implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE_FLOW))
     api("androidx.compose.foundation:foundation:${Versions.JETPACK_COMPOSE_RUNTIME}")
     api("androidx.compose.material:material:${Versions.JETPACK_COMPOSE_RUNTIME}")
     api("androidx.compose.runtime:runtime:${Versions.JETPACK_COMPOSE_RUNTIME}")

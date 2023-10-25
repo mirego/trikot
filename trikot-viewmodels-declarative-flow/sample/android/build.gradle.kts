@@ -47,7 +47,8 @@ android {
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs +
             listOf(
-                "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+                "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+                "-opt-in=androidx.compose.material3.ExperimentalTvMaterial3Api"
             )
     }
 
@@ -67,10 +68,13 @@ android {
 dependencies {
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_SAMPLE_COMMON_FLOW))
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE_FLOW))
+    implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_COMPOSE_TV_FLOW))
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("androidx.lifecycle:lifecycle-common-java8:${Versions.ANDROIDX_LIFECYCLE}")
+    implementation("androidx.tv:tv-foundation:${Versions.JETPACK_COMPOSE_TV}")
+    implementation("androidx.tv:tv-material:${Versions.JETPACK_COMPOSE_TV}")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("com.squareup.picasso:picasso:2.71828")
