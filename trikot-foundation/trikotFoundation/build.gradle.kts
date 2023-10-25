@@ -28,7 +28,7 @@ kotlin {
         val jvmShared by creating {
             dependsOn(commonMain)
             dependencies {
-                implementation("com.jakewharton.threetenabp:threetenabp:1.2.1")
+                implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
             }
         }
 
