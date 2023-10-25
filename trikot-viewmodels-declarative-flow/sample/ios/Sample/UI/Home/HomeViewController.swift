@@ -2,11 +2,7 @@ import UIKit
 import Trikot
 import TRIKOT_FRAMEWORK_NAME
 
-class HomeViewController: BaseViewModelViewController<HomeViewModelController, HomeViewModel, HomeView, HomeNavigationDelegate> {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .darkContent
-    }
-}
+class HomeViewController: BaseViewModelViewController<HomeViewModelController, HomeViewModel, HomeView, HomeNavigationDelegate> {}
 
 extension HomeViewController: HomeNavigationDelegate {
     func navigateToTextShowcase() {
