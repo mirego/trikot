@@ -163,7 +163,7 @@ public struct VMDHtmlTextStyle {
     public var fontFamily: String
     public var fontWeight: VMDHtmlTextWeight
     public var relativeTextStyle: SwiftUI.Font.TextStyle
-
+    
     public init(
         fontSize: CGFloat,
         lineHeight: CGFloat,
