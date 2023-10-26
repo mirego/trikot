@@ -23,7 +23,7 @@ struct HomeView: RootViewModelView {
                         VMDButton(element.button) { textContent in
                             Text(textContent.text)
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     }
                 }
             }
