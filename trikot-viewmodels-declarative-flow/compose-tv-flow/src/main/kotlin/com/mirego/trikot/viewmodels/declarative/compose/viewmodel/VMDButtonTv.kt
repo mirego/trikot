@@ -1,6 +1,7 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
@@ -36,9 +37,11 @@ fun <C : VMDContent> VMDButtonTv(
     colors: ButtonColors = ButtonDefaults.colors(),
     shape: ButtonShape = ButtonDefaults.shape(),
     scale: ButtonScale = ButtonDefaults.scale(),
-    content: @Composable (RowScope.(field: C) -> Unit)
+    content: @Composable (RowScope.(field: C, isFocused: Boolean) -> Unit)
 ) {
     val buttonViewModel: VMDButtonViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
+
+    val isFocused = interactionSource.collectIsFocusedAsState().value
 
     Button(
         modifier = modifier
@@ -53,6 +56,6 @@ fun <C : VMDContent> VMDButtonTv(
         colors = colors,
         shape = shape,
         scale = scale,
-        content = { content(buttonViewModel.content) }
+        content = { content(buttonViewModel.content, isFocused) }
     )
 }

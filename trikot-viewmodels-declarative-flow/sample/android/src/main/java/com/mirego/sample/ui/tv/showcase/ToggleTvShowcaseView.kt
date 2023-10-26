@@ -163,18 +163,6 @@ fun ToggleTvShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                     VMDSwitchTv(
                         modifier = Modifier
                             .padding(16.dp),
-                        viewModel = viewModel.emptyToggle
-                    )
-                    VMDTextTv(
-                        viewModel = viewModel.switchTitle
-                    )
-                }
-            }
-            item {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    VMDSwitchTv(
-                        modifier = Modifier
-                            .padding(16.dp),
                         viewModel = viewModel.textToggle,
                         label = { content ->
                             Text(
@@ -196,6 +184,7 @@ fun ToggleTvShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                         viewModel = viewModel.imageToggle,
                         label = { content ->
                             LocalImage(
+                                modifier = Modifier.padding(end = 6.dp),
                                 imageResource = content.image,
                                 colorFilter = ColorFilter.tint(Color.Black)
                             )
@@ -214,6 +203,7 @@ fun ToggleTvShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                         viewModel = viewModel.textImageToggle,
                         label = { content ->
                             Row(
+                                modifier = Modifier.padding(end = 6.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 LocalImage(
@@ -241,6 +231,7 @@ fun ToggleTvShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
                         viewModel = viewModel.textPairToggle,
                         label = { content ->
                             Column(
+                                modifier = Modifier.padding(end = 6.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(

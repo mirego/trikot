@@ -26,6 +26,7 @@ import androidx.tv.material3.DrawerValue
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.NavigationDrawer
 import androidx.tv.material3.Text
+import com.mirego.sample.ui.tv.showcase.ButtonTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.TextTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.ToggleTvShowcaseView
 import com.mirego.sample.viewmodels.tv.HomeMenuSectionItem
@@ -57,6 +58,7 @@ private fun HomeContentView(viewModel: HomeTvViewModel, selectedIndex: MutableSt
     when (val sectionViewModel = viewModel.menuItems[selectedIndex.value]) {
         is HomeMenuSectionItem.TextShowcase -> TextTvShowcaseView(sectionViewModel.viewModel)
         is HomeMenuSectionItem.ToggleShowcase -> ToggleTvShowcaseView(sectionViewModel.viewModel)
+        is HomeMenuSectionItem.ButtonShowcase -> ButtonTvShowcaseView(sectionViewModel.viewModel)
     }
 }
 

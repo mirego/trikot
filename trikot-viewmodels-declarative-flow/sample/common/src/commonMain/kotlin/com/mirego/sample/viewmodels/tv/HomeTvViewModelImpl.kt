@@ -1,6 +1,7 @@
 package com.mirego.sample.viewmodels.tv
 
 import com.mirego.sample.KWordTranslation
+import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseViewModelImpl
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelImpl
 import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
@@ -16,6 +17,10 @@ class HomeTvViewModelImpl(
         HomeMenuSectionItem.TextShowcase(
             title = i18N[KWordTranslation.TEXT_SHOWCASE_TITLE],
             viewModel = TextShowcaseViewModelImpl(i18N, coroutineScope)
+        ),
+        HomeMenuSectionItem.ButtonShowcase(
+            title = i18N[KWordTranslation.BUTTON_SHOWCASE_TITLE],
+            viewModel = ButtonShowcaseViewModelImpl(i18N, coroutineScope)
         ),
         HomeMenuSectionItem.ToggleShowcase(
             title = i18N[KWordTranslation.TOGGLE_SHOWCASE_TITLE],
