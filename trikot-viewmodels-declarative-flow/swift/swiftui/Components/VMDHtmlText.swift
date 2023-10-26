@@ -162,14 +162,14 @@ public struct VMDHtmlTextStyle {
     public var lineHeight: CGFloat
     public var fontFamily: String
     public var fontWeight: VMDHtmlTextWeight
-    public var relativeTextStyle: Font.TextStyle
-    
+    public var relativeTextStyle: SwiftUI.Font.TextStyle
+
     public init(
         fontSize: CGFloat,
         lineHeight: CGFloat,
         fontFamily: String = "-apple-system",
         fontWeight: VMDHtmlTextWeight = VMDHtmlTextWeight.normal,
-        relativeTextStyle: Font.TextStyle = .body
+        relativeTextStyle: SwiftUI.Font.TextStyle = .body
     ) {
         self.fontSize = fontSize
         self.lineHeight = lineHeight
@@ -201,7 +201,7 @@ public enum VMDHtmlTextWeight: Int {
     public static let w900 = VMDHtmlTextWeight.black
 }
 
-private extension Font.TextStyle {
+private extension SwiftUI.Font.TextStyle {
     var uiFontTextStyle: UIFont.TextStyle {
         switch self {
         case .largeTitle: return .largeTitle
