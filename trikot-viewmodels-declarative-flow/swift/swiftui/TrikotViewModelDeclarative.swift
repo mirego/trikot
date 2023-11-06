@@ -45,26 +45,26 @@ public class TrikotViewModelDeclarative {
 
 private class FallbackImageProvider: VMDImageProvider {
     func imageForResource(imageResource: VMDImageResource) -> Image? {
-        return Image(uiImage: UIImage(color: .red, size: CGSize(width: 12, height: 12))!)
+        return Image(uiImage: UIImage.from(color: .red, size: CGSize(width: 24, height: 24))!)
     }
 }
 
 private extension UIImage {
-    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+    static func from(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
         let rect = CGRect(origin: .zero, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        if let currentContext = UIGraphicsGetCurrentContext() {
-            color.setFill()
-            currentContext.fillEllipse(in: rect.insetBy(dx: size.width / 4, dy: size.height / 4))
+        
+        let currentContext = UIGraphicsGetCurrentContext()
+        
+        color.setFill()
+        currentContext?.fillEllipse(in: rect.insetBy(dx: size.width / 4, dy: size.height / 4))
 
-            UIColor.black.setStroke()
-            UIRectFrame(rect)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            guard let cgImage = image?.cgImage else { return nil }
-            self.init(cgImage: cgImage)
-        } else {
-            return nil
-        }
+        UIColor.black.setStroke()
+        UIRectFrame(rect)
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return image!
     }
 }
