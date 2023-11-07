@@ -1,11 +1,18 @@
+import SwiftUI
+import Trikot
 import TRIKOT_FRAMEWORK_NAME
 
 public class TrikotViewModelDeclarative {
     public static let shared: TrikotViewModelDeclarative = TrikotViewModelDeclarative()
 
+    var isRunningInPreview: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
+
     var imageProvider: VMDImageProvider {
         guard let internalImageProvider = internalImageProvider else {
-            fatalError("TrikotViewModelDeclarative must be initialized before use")
+            guard isRunningInPreview else { fatalError("TrikotViewModelDeclarative must be initialized before use") }
+            return FallbackImageProvider()
         }
 
         return internalImageProvider
@@ -13,7 +20,8 @@ public class TrikotViewModelDeclarative {
 
     var spanStyleProvider: VMDSpanStyleProvider {
         guard let internalSpanStyleProvider = internalSpanStyleProvider else {
-            fatalError("TrikotViewModelDeclarative must be initialized before use")
+            guard isRunningInPreview else { fatalError("TrikotViewModelDeclarative must be initialized before use") }
+            return DefaultSpanStyleProvider()
         }
 
         return internalSpanStyleProvider
@@ -32,5 +40,11 @@ public class TrikotViewModelDeclarative {
     ) {
         internalImageProvider = imageProvider
         internalSpanStyleProvider = spanStyleProvider
+    }
+}
+
+private class FallbackImageProvider: VMDImageProvider {
+    func imageForResource(imageResource: VMDImageResource) -> Image? {
+        return Image(systemName: "exclamationmark.brakesignal")
     }
 }
