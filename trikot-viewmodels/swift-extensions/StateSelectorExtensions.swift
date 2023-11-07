@@ -37,17 +37,17 @@ extension StateSelector where T == TrikotImageResource {
 }
 
 func stateSelectorDefaultValue<T>(_ stateSelector: StateSelector<T>) -> T? {
-    return stateSelector.default_
+    return stateSelector.defaultState
 }
 
 func stateSelectorHighlightedValue<T>(_ stateSelector: StateSelector<T>) -> T? {
-    return stateSelector.highlighted ?? stateSelector.default_
+    return stateSelector.highlighted ?? stateSelector.defaultState
 }
 
 func stateSelectorSelectedValue<T>(_ stateSelector: StateSelector<T>) -> T? {
-    return stateSelector.selected ?? stateSelector.default_
+    return stateSelector.selected ?? stateSelector.defaultState
 }
 
 func stateSelectorDisabledValue<T>(_ stateSelector: StateSelector<T>) -> T? {
-    return stateSelector.disabled ?? stateSelector.default_
+    return stateSelector.disabled ?? stateSelector.defaultState
 }
