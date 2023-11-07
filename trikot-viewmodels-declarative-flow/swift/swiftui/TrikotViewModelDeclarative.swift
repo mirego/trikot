@@ -1,4 +1,5 @@
 import SwiftUI
+import Trikot
 import TRIKOT_FRAMEWORK_NAME
 
 public class TrikotViewModelDeclarative {
@@ -44,26 +45,6 @@ public class TrikotViewModelDeclarative {
 
 private class FallbackImageProvider: VMDImageProvider {
     func imageForResource(imageResource: VMDImageResource) -> Image? {
-        return Image(uiImage: UIImage.from(color: .red, size: CGSize(width: 24, height: 24))!)
-    }
-}
-
-private extension UIImage {
-    static func from(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
-        let rect = CGRect(origin: .zero, size: size)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        
-        let currentContext = UIGraphicsGetCurrentContext()
-        
-        color.setFill()
-        currentContext?.fillEllipse(in: rect.insetBy(dx: size.width / 4, dy: size.height / 4))
-
-        UIColor.black.setStroke()
-        UIRectFrame(rect)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return image!
+        return Image(systemName: "exclamationmark.brakesignal")
     }
 }
