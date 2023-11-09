@@ -2,7 +2,6 @@
 
 package com.mirego.sample.ui.tv
 
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
@@ -27,6 +26,7 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.NavigationDrawer
 import androidx.tv.material3.Text
 import com.mirego.sample.ui.tv.showcase.ButtonTvShowcaseView
+import com.mirego.sample.ui.tv.showcase.CarouselTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.TextTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.ToggleTvShowcaseView
 import com.mirego.sample.viewmodels.tv.HomeMenuSectionItem
@@ -59,6 +59,7 @@ private fun HomeContentView(viewModel: HomeTvViewModel, selectedIndex: MutableSt
         is HomeMenuSectionItem.TextShowcase -> TextTvShowcaseView(sectionViewModel.viewModel)
         is HomeMenuSectionItem.ToggleShowcase -> ToggleTvShowcaseView(sectionViewModel.viewModel)
         is HomeMenuSectionItem.ButtonShowcase -> ButtonTvShowcaseView(sectionViewModel.viewModel)
+        is HomeMenuSectionItem.CarouselShowcase -> CarouselTvShowcaseView(sectionViewModel.viewModel)
     }
 }
 
@@ -68,7 +69,8 @@ private fun OpenDrawerMenuView(viewModel: HomeTvViewModel, selectedIndex: Mutabl
         targetValue = when (drawerValue) {
             DrawerValue.Closed -> 48.dp
             DrawerValue.Open -> 200.dp
-        }, label = "drawerWidth"
+        },
+        label = "drawerWidth"
     )
     Column(
         Modifier
@@ -93,5 +95,3 @@ private fun OpenDrawerMenuView(viewModel: HomeTvViewModel, selectedIndex: Mutabl
         }
     }
 }
-
-

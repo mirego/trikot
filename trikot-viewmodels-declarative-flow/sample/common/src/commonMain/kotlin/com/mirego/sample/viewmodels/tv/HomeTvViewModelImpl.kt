@@ -2,6 +2,7 @@ package com.mirego.sample.viewmodels.tv
 
 import com.mirego.sample.KWordTranslation
 import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseViewModelImpl
+import com.mirego.sample.viewmodels.showcase.components.carousel.CarouselShowcaseViewModelImpl
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelImpl
 import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelImpl
 import com.mirego.trikot.kword.I18N
@@ -25,6 +26,10 @@ class HomeTvViewModelImpl(
         HomeMenuSectionItem.ToggleShowcase(
             title = i18N[KWordTranslation.TOGGLE_SHOWCASE_TITLE],
             viewModel = ToggleShowcaseViewModelImpl(i18N, coroutineScope)
+        ),
+        HomeMenuSectionItem.CarouselShowcase(
+            title = i18N[KWordTranslation.CAROUSEL_SHOWCASE_TITLE],
+            viewModel = CarouselShowcaseViewModelImpl(i18N, coroutineScope)
         )
     )
 }

@@ -7,4 +7,3 @@ interface MenuSectionItem {
         get() = null
     val title: String
 }
-

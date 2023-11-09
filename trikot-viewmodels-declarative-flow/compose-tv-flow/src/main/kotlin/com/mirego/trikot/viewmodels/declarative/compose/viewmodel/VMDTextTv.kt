@@ -1,6 +1,5 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
-
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

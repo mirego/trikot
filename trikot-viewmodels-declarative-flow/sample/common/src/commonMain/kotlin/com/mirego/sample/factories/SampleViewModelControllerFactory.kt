@@ -11,7 +11,6 @@ import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcas
 import com.mirego.sample.viewmodels.showcase.components.text.TextShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.textfield.TextFieldShowcaseViewModelController
 import com.mirego.sample.viewmodels.showcase.components.toggle.ToggleShowcaseViewModelController
-import com.mirego.sample.viewmodels.tv.HomeTvViewModel
 import com.mirego.sample.viewmodels.tv.HomeTvViewModelController
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControllerFactory
 

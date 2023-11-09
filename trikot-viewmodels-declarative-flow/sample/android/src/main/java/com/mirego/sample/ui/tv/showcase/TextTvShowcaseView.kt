@@ -45,7 +45,7 @@ fun TextTvShowcaseView(textShowcaseViewModel: TextShowcaseViewModel) {
         contentPadding = PaddingValues(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(textItems){textItem ->
+        items(textItems) { textItem ->
             Card(
                 onClick = { }
             ) {
