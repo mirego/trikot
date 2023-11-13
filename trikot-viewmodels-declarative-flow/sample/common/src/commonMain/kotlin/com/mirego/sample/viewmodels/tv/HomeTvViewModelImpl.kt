@@ -30,6 +30,10 @@ class HomeTvViewModelImpl(
         HomeMenuSectionItem.CarouselShowcase(
             title = i18N[KWordTranslation.CAROUSEL_SHOWCASE_TITLE],
             viewModel = CarouselShowcaseViewModelImpl(i18N, coroutineScope)
+        ),
+        HomeMenuSectionItem.TopNavigationShowcase(
+            title = i18N[KWordTranslation.TOP_NAVIGATION_SHOWCASE_TITLE],
+            viewModel = CarouselShowcaseViewModelImpl(i18N, coroutineScope)
         )
     )
 }

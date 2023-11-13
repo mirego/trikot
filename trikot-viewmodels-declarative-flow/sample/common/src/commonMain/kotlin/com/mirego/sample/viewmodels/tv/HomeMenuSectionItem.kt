@@ -25,4 +25,9 @@ sealed interface HomeMenuSectionItem : MenuSectionItem {
         override val viewModel: CarouselShowcaseViewModel,
         override val title: String
     ) : HomeMenuSectionItem
+
+    data class TopNavigationShowcase(
+        override val viewModel: CarouselShowcaseViewModel,
+        override val title: String
+    ) : HomeMenuSectionItem
 }

@@ -27,6 +27,7 @@ import androidx.tv.material3.NavigationDrawer
 import androidx.tv.material3.Text
 import com.mirego.sample.ui.tv.showcase.ButtonTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.CarouselTvShowcaseView
+import com.mirego.sample.ui.tv.showcase.TabRowTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.TextTvShowcaseView
 import com.mirego.sample.ui.tv.showcase.ToggleTvShowcaseView
 import com.mirego.sample.viewmodels.tv.HomeMenuSectionItem
@@ -60,6 +61,7 @@ private fun HomeContentView(viewModel: HomeTvViewModel, selectedIndex: MutableSt
         is HomeMenuSectionItem.ToggleShowcase -> ToggleTvShowcaseView(sectionViewModel.viewModel)
         is HomeMenuSectionItem.ButtonShowcase -> ButtonTvShowcaseView(sectionViewModel.viewModel)
         is HomeMenuSectionItem.CarouselShowcase -> CarouselTvShowcaseView(sectionViewModel.viewModel)
+        is HomeMenuSectionItem.TopNavigationShowcase -> TabRowTvShowcaseView(sectionViewModel.viewModel)
     }
 }
 
