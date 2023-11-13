@@ -20,8 +20,16 @@ struct TextFieldShowcaseView: RootViewModelView {
             ScrollView {
                 VStack(alignment: .leading) {
                     HStack {
-                        VMDTextField<EmptyView>(viewModel.textField)
+                        if #available(iOS 15, *) {
+                            VMDTextField<EmptyView>(viewModel.textField) { placeholder in
+                                Text(placeholder)
+                                    .foregroundColor(.red)
+                            }
                             .textFieldStyle(.roundedBorder)
+                        } else {
+                            VMDTextField<EmptyView>(viewModel.textField)
+                                .textFieldStyle(.roundedBorder)
+                        }
 
                         VMDButton(viewModel.clearButton) { textContent in
                             Text(textContent.text)
