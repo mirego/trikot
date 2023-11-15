@@ -4,6 +4,7 @@ import TRIKOT_FRAMEWORK_NAME
 
 public struct VMDTextField<Label>: View where Label: View {
     private let labelBuilder: (() -> Label)?
+    private let promptBuilder: ((String) -> Text?)?
     private let onFocusChange: ((Bool) -> Void)?
 
     @ObservedObject private var observableViewModel: ObservableViewModelAdapter<VMDTextFieldViewModel>
@@ -16,7 +17,7 @@ public struct VMDTextField<Label>: View where Label: View {
 
     private var prompt: Text? {
         if !viewModel.placeholder.isEmpty {
-            return Text(viewModel.placeholder)
+            return promptBuilder?(viewModel.placeholder) ?? Text(viewModel.placeholder)
         } else {
             return nil
         }
@@ -27,6 +28,7 @@ public struct VMDTextField<Label>: View where Label: View {
     public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = nil
+        self.promptBuilder = nil
         self.onFocusChange = onFocusChange
         _text = State(initialValue: viewModel.formatText(viewModel.transformText(viewModel.text)))
     }
@@ -34,8 +36,27 @@ public struct VMDTextField<Label>: View where Label: View {
     public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, @ViewBuilder label: @escaping () -> Label) {
         self.observableViewModel = viewModel.asObservable()
         self.labelBuilder = label
+        self.promptBuilder = nil
         self.onFocusChange = onFocusChange
         _text = State(initialValue: viewModel.formatText(viewModel.transformText(viewModel.text)))
+    }
+    
+    @available(iOS 15, *)
+    public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, prompt: @escaping (String) -> Text?) {
+        self.observableViewModel = viewModel.asObservable()
+        self.labelBuilder = nil
+        self.promptBuilder = prompt
+        self.onFocusChange = onFocusChange
+        _text = State(initialValue: viewModel.transformedAndFormattedText)
+    }
+    
+    @available(iOS 15, *)
+    public init(_ viewModel: VMDTextFieldViewModel, onFocusChange: ((Bool) -> Void)? = nil, prompt: @escaping (String) -> Text?, @ViewBuilder label: @escaping () -> Label) {
+        self.observableViewModel = viewModel.asObservable()
+        self.labelBuilder = label
+        self.promptBuilder = prompt
+        self.onFocusChange = onFocusChange
+        _text = State(initialValue: viewModel.transformedAndFormattedText)
     }
 
     public var body: some View {
@@ -108,5 +129,11 @@ public struct VMDTextField<Label>: View where Label: View {
         let unformattedText = viewModel.unformatText(value)
         text = viewModel.formatText(viewModel.transformText(unformattedText))
         viewModel.onValueChange(text: unformattedText)
+    }
+}
+
+extension VMDTextFieldViewModel {
+    var transformedAndFormattedText: String {
+        formatText(transformText(text))
     }
 }
