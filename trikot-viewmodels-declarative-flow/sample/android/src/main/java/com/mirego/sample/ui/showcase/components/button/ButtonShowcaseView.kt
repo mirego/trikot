@@ -34,6 +34,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsStat
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDElevatedButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDFilledTonalButton
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 
 @Composable
@@ -128,14 +129,14 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
             }
         }
 
-        ComponentShowcaseTitle("Material 3 Elevated Button")
-
         Column(
             Modifier
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            ComponentShowcaseTitle("Material 3 Elevated Button")
+
             VMDElevatedButton(viewModel.textButton) { content ->
                 Text(
                     text = content.text,
@@ -156,6 +157,26 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
                     text = content.text,
                     style = SampleTextStyle.body.medium(),
                     color = MaterialTheme.colors.primary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Button")
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.onPrimary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Tonal Button")
+
+            VMDFilledTonalButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.onSecondary
                 )
             }
         }
