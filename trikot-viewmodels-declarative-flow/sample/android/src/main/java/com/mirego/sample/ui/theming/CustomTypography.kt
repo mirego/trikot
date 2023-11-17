@@ -10,6 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -215,7 +216,7 @@ fun TextStyle.normal(): TextStyle {
 }
 
 fun TextStyle.medium(): TextStyle {
-    return copy(fontWeight = FontWeight.Medium)
+    return copy(fontWeight = FontWeight.Medium, platformStyle = PlatformTextStyle(includeFontPadding = false))
 }
 
 fun TextStyle.semibold(): TextStyle {
