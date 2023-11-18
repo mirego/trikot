@@ -36,6 +36,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDF
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDOutlinedButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDTextButton
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDButton as VMDMaterial3Button
 
 @Composable
 fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
@@ -162,7 +163,7 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
 
             ComponentShowcaseTitle("Material 3 Filled Button")
 
-            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDButton(viewModel.textButton) { content ->
+            VMDMaterial3Button(viewModel.textButton) { content ->
                 Text(
                     text = content.text,
                     style = SampleTextStyle.body.medium(),
