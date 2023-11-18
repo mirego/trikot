@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,7 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.resource.SampleImageProvider
@@ -35,7 +33,10 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDElevatedButton
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDFilledTonalButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDOutlinedButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDTextButton
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDButton as VMDMaterial3Button
 
 @Composable
 fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
@@ -162,7 +163,7 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
 
             ComponentShowcaseTitle("Material 3 Filled Button")
 
-            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDButton(viewModel.textButton) { content ->
+            VMDMaterial3Button(viewModel.textButton) { content ->
                 Text(
                     text = content.text,
                     style = SampleTextStyle.body.medium(),
@@ -177,6 +178,26 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
                     text = content.text,
                     style = SampleTextStyle.body.medium(),
                     color = MaterialTheme.colors.onSecondary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Outlined Button")
+
+            VMDOutlinedButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.primary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Text Button")
+
+            VMDTextButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.primary
                 )
             }
         }

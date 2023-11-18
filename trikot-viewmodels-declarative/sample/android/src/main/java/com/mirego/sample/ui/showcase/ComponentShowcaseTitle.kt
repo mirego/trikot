@@ -16,3 +16,11 @@ fun ComponentShowcaseTitle(textViewModel: VMDTextViewModel) {
         style = SampleTextStyle.title2
     )
 }
+
+@Composable
+fun ComponentShowcaseTitle(text: String) {
+    androidx.compose.material3.Text(
+        text = text,
+        style = SampleTextStyle.title2
+    )
+}
