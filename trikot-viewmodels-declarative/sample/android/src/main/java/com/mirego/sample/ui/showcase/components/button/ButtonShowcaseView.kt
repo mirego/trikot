@@ -1,10 +1,14 @@
 package com.mirego.sample.ui.showcase.components.button
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -14,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.resource.SampleImageProvider
@@ -26,7 +31,12 @@ import com.mirego.sample.viewmodels.showcase.components.button.ButtonShowcaseVie
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDElevatedButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDFilledTonalButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDOutlinedButton
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDTextButton
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDButton as VMDMaterial3Button
 
 @Composable
 fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
@@ -116,6 +126,78 @@ fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
                     text = content.second,
                     style = SampleTextStyle.body,
                     color = MaterialTheme.colors.onPrimary
+                )
+            }
+        }
+
+        Column(
+            Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            ComponentShowcaseTitle("Material 3 Elevated Button")
+
+            VMDElevatedButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.primary
+                )
+            }
+
+            VMDElevatedButton(viewModel.textImageButton) { content ->
+                LocalImage(
+                    imageResource = content.image,
+                    contentDescription = content.contentDescription,
+                    modifier = Modifier.size(18.dp),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.primary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Button")
+
+            VMDMaterial3Button(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.onPrimary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Tonal Button")
+
+            VMDFilledTonalButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.onSecondary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Outlined Button")
+
+            VMDOutlinedButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.primary
+                )
+            }
+
+            ComponentShowcaseTitle("Material 3 Filled Text Button")
+
+            VMDTextButton(viewModel.textButton) { content ->
+                Text(
+                    text = content.text,
+                    style = SampleTextStyle.body.medium(),
+                    color = MaterialTheme.colors.primary
                 )
             }
         }
