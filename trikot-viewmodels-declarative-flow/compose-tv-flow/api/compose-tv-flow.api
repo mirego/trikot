@@ -1,0 +1,36 @@
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDCheckboxTvKt {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDCheckboxTvKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function4;
+	public static field lambda-2 Lkotlin/jvm/functions/Function4;
+	public fun <init> ()V
+	public final fun getLambda-1$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda-2$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDSwitchTvKt {
+	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDSwitchTvKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function4;
+	public static field lambda-2 Lkotlin/jvm/functions/Function4;
+	public fun <init> ()V
+	public final fun getLambda-1$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda-2$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDButtonTvKt {
+	public static final fun VMDButtonTv-121YqSk (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDButtonViewModel;Landroidx/tv/material3/ButtonGlow;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/foundation/layout/PaddingValues;Landroidx/tv/material3/ButtonBorder;FLandroidx/tv/material3/ButtonColors;Landroidx/tv/material3/ButtonShape;Landroidx/tv/material3/ButtonScale;Lkotlin/jvm/functions/Function5;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDCheckboxTvKt {
+	public static final fun VMDCheckboxTv (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/tv/material3/CheckboxColors;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDCheckboxTv (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Lkotlin/jvm/functions/Function4;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/tv/material3/CheckboxColors;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDSwitchTvKt {
+	public static final fun VMDSwitchTv (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/tv/material3/SwitchColors;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDSwitchTv (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Lkotlin/jvm/functions/Function4;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/tv/material3/SwitchColors;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDTextTvKt {
+	public static final fun VMDTextTv--4IGK_g (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel;JJLandroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JIZILjava/util/Map;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/runtime/Composer;III)V
+}
+
