@@ -1,6 +1,7 @@
 package com.mirego.trikot.kword.internal
 
 import com.mirego.trikot.kword.KWord
+import java.io.File
 import java.io.IOException
 
 internal actual object PlatformTranslationLoader {

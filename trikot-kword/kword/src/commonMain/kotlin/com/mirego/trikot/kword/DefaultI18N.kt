@@ -1,8 +1,9 @@
 package com.mirego.trikot.kword
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import okio.FileSystem
 
-open class DefaultI18N : I18N {
+open class DefaultI18N(private val debugMode: Boolean = false) : I18N {
     private val sourceRef: AtomicReference<KWordSource> =
         AtomicReference(MapKeywordSource(HashMap()))
     private val source: KWordSource
@@ -19,6 +20,9 @@ open class DefaultI18N : I18N {
     }
 
     override operator fun get(key: KWordKey): String {
+        if (debugMode) {
+            return key.translationKey
+        }
         return t(key)
     }
 

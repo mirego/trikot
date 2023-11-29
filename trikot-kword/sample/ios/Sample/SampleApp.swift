@@ -15,10 +15,18 @@ extension FlowMultiLanguageI18N {
     static var sample: FlowMultiLanguageI18N = {
         let languageCodes = ["en", "fr"]
         var i18NList: [I18N] = []
+//        let fileSystem = FileSystem.companion.SYSTEM
+//        let internalStoragePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.absoluteString ?? nil
 
         languageCodes.forEach { languageCode in
-            let i18N = DefaultI18N()
-            KwordLoader.shared.setCurrentLanguageCode(i18N: i18N, basePaths: ["translation"], code: languageCode)
+            let i18N = DefaultI18N(debugMode: false)
+            KwordLoader.shared.setCurrentLanguageCode(
+                i18N: i18N,
+                basePaths: ["translation"],
+                fileSystem: nil,
+                cacheDirPath: nil,
+                code: languageCode
+            )
             i18NList.append(i18N)
         }
 

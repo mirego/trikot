@@ -1,3 +1,5 @@
+import Versions.OKIO
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -14,6 +16,8 @@ kotlin {
             dependencies {
                 api(project(Project.TRIKOT_FOUNDATION))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
+                implementation("io.ktor:ktor-client-core:${Versions.KTOR}")
+                implementation("com.squareup.okio:okio:3.6.0")
             }
         }
 
@@ -41,6 +45,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:${Versions.KOTLIN_WRAPPERS_EXTENSIONS}")
+                implementation("com.squareup.okio:okio-nodefilesystem:$OKIO")
             }
         }
 
@@ -53,6 +58,10 @@ kotlin {
 
         val androidMain by getting {
             dependsOn(jvmMain)
+            dependencies {
+                api("io.ktor:ktor-client-logging-jvm:${Versions.KTOR}")
+                implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
+            }
         }
 
         val androidUnitTest by getting {

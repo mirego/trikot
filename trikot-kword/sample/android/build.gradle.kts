@@ -62,4 +62,5 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
+    implementation("com.squareup.okio:okio:3.6.0")
 }

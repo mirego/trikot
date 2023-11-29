@@ -1,6 +1,5 @@
 package com.mirego.trikot.kword.internal
 
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 internal expect object PlatformTranslationLoader {

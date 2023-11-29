@@ -8,6 +8,7 @@ import com.mirego.trikot.kword.android.AndroidKWord
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControllerFactory
 import com.mirego.trikot.viewmodels.declarative.controller.factory.ViewModelControllerFactoryProvidingApplication
+import okio.FileSystem
 
 class TrikotApplication : Application(), ViewModelControllerFactoryProvidingApplication {
 
@@ -15,7 +16,7 @@ class TrikotApplication : Application(), ViewModelControllerFactoryProvidingAppl
         super.onCreate()
 
         TrikotViewModelDeclarative.initialize(SampleImageProvider(), SampleTextStyleProvider())
-        AndroidKWord.setCurrentLanguageCode("en")
+        AndroidKWord.setCurrentLanguageCode("en", FileSystem.SYSTEM)
     }
 
     override val viewModelControllerFactory: VMDViewModelControllerFactory =

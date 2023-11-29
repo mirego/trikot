@@ -11,6 +11,7 @@ import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControllerFactory
 import com.mirego.trikot.viewmodels.declarative.controller.factory.ViewModelControllerFactoryProvidingApplication
+import okio.FileSystem
 
 class TrikotApplication : Application(), ViewModelControllerFactoryProvidingApplication {
 
@@ -20,7 +21,7 @@ class TrikotApplication : Application(), ViewModelControllerFactoryProvidingAppl
         HttpConfiguration.connectivityPublisher = AndroidConnectivityPublisher(this).distinctUntilChanged()
         HttpConfiguration.httpRequestFactory = KtorHttpRequestFactory()
         TrikotViewModelDeclarative.initialize(SampleImageProvider())
-        AndroidKWord.setCurrentLanguageCode("en")
+        AndroidKWord.setCurrentLanguageCode("en", FileSystem.SYSTEM)
     }
 
     override val viewModelControllerFactory: VMDViewModelControllerFactory =

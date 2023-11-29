@@ -1,7 +1,6 @@
 package com.mirego.trikot.kword.android
 
 import com.mirego.trikot.kword.DefaultI18N
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.File
 
