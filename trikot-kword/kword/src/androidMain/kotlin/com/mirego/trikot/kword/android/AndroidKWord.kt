@@ -3,9 +3,7 @@ package com.mirego.trikot.kword.android
 import android.content.Context
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KwordLoader
-import com.mirego.trikot.kword.internal.PlatformTranslationSaver
 import okio.FileSystem
-import okio.Path.Companion.toPath
 
 object AndroidKWord {
     private val DEFAULT_PATHS = listOf(

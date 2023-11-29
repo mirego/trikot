@@ -1,9 +1,9 @@
 package com.mirego.trikot.kword
 
 import com.mirego.trikot.kword.internal.PlatformTranslationLoader
-import com.mirego.trikot.kword.internal.encodeTranslationFile
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import kotlinx.coroutines.CoroutineScope
@@ -12,8 +12,11 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import okio.BufferedSource
+import okio.FileNotFoundException
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import okio.buffer
@@ -28,168 +31,118 @@ object KwordLoader {
     }
 
     fun setCurrentLanguageCodes(i18N: I18N, basePaths: List<String>, fileSystem: FileSystem?, cacheDirPath: String?, vararg codes: String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            fetchRemoteTranslationFile(i18N, fileSystem, cacheDirPath, *codes)
-        }
-
         val map = mutableMapOf<String, String>()
+        val cachedMap = mutableMapOf<String, String>()
         basePaths.forEach { basePath ->
             val variant = mutableListOf<String>()
+            val variantCombinations = mutableListOf<String>()
             codes.forEach { code ->
                 variant.add(code)
                 val variantPath = variant.joinToString(".")
+                variantCombinations.add(variantPath)
                 val filePath = "$basePath.$variantPath.json"
                 PlatformTranslationLoader.loadTranslations(filePath)
                     ?.let { map.putAll(it) }
                     ?: run { println("path not found $filePath") }
             }
+            fetchCachedTranslationFiles(fileSystem, cacheDirPath, cachedMap, variantCombinations.toList())
+            fetchRemoteTranslationFiles(i18N, fileSystem, cacheDirPath, map, variantCombinations.toList())
         }
+        map.putAll(cachedMap)
         i18N.changeLocaleStrings(map)
     }
 
-    suspend fun fetchRemoteTranslationFile(i18N: I18N, fileSystem: FileSystem?, cacheDirPath: String?, vararg codes: String){
-        val client = HttpClient()
-
-        val variant = mutableListOf<String>()
-        val variantCombinations = mutableListOf<String>()
-        codes.forEach { code ->
-            variant.add(code)
-            variantCombinations.add(variant.joinToString("."))
-        }
-
-        try {
-            coroutineScope {
-                val map = mutableMapOf<String, String>()
-
-                variantCombinations.map { variantCombination ->
-                    async {
-                        client.get("https://fdca-70-28-93-175.ngrok-free.app/export") {
-                            parameter("language", variantCombination)
-                            parameter("project_id", "915cd661-ef3a-4b89-ac60-fb82ef90a61a")
-//            parameter("document_path", "core")
-                            parameter("document_format", "simple_json")
-                        }.body<String>().let { jsonStringified ->
-                            Json.decodeFromString<Map<String, String>>(jsonStringified)
-                        }.let {
-
-
-
-//                            fileSystem?.let {  fileSystemVal ->
-//                                cacheDirPath?.let { cacheDirPathVal ->
-//                                    val okioPath = "${cacheDirPathVal}/translations/".toPath()
-//
-//                                    val destinationPath = okioPath / "en.json"
-//
-//                                    val source: BufferedSource = fileSystemVal.source(destinationPath).buffer()
-//                                    val result = source.readUtf8()
-//                                    val x = Json.decodeFromString<Map<String, String>>(result)
-//                                    println("@@@@ JSON before saving: ${x["tab_home"]}")
-//                                }
-//                            }
-
-
-
-
-                            println("@@@ yipp")
-                            saveTranslations(variantCombination, it, fileSystem, cacheDirPath)
-//                            PlatformTranslationLoader.loadTranslationsFromDisk(variantCombination)
-                            it
-                        }
+    private fun fetchCachedTranslationFiles(fileSystem: FileSystem?, basePath: String?, map: MutableMap<String, String>, languageCodes: List<String>) {
+        fileSystem?.let { fileSystemVal ->
+            basePath?.let { basePathVal ->
+                val okioPath = "$basePathVal/translations".toPath()
+                languageCodes.forEach { languageCode ->
+                    try {
+                        val destinationPath = okioPath / "translation.$languageCode.json"
+                        val source: BufferedSource = fileSystemVal.source(destinationPath).buffer()
+                        val result = source.readUtf8()
+                        val fetchedMap = Json.decodeFromString<Map<String, String>>(result)
+                        map.putAll(fetchedMap)
+                    } catch (e: FileNotFoundException) {
+                        println("@@ File not found: $e")
                     }
-                }.awaitAll().forEach { translationMap ->
-                    map.putAll(translationMap)
                 }
-
-                client.close()
-                i18N.changeLocaleStrings(map)
             }
-        } catch (_: Exception) {
-
         }
     }
 
-
-//    fun saveTranslationsIGuess(path: String, map: Map<String, String>) {
-//        println("@@ SAVE YEP")
-//        val pathK = "README.md".toPath()
-//
-//        FileSystem.
-//
-//        val readmeContent = FileSystem.SYSTEM  .SYSTEM.read(pathK) {
-//            readUtf8()
-//        }
-//
-//        val updatedContent = readmeContent.replace("red", "blue")
-//
-//        FileSystem.SYSTEM.write(pathK) {
-//            writeUtf8(updatedContent)
-//        }
-////        val jsonMap = encodeTranslationFile(map)
-////        val filename = "translations.$path.json"
-////
-////        val basePath: Path = FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "trikot_data_source"
-////
-////        val fullPath = basePath / filename
-////        FileSystem.SYSTEM_TEMPORARY_DIRECTORY
-////        fullPath.parent?.let { FileSystem.createDirectories(it) }
-////        fileSystem.write(fullPath) {
-////            writeUtf8(value)
-//        }
-//
-////        val file = File()
-////        println("@@ ${file.absolutePath}")
-////        file.writeText(jsonMap)
-////        println("@@ SAVE END")
-//    }
-
-    fun saveTranslations(path: String, map: Map<String, String>, fileSystem: FileSystem?, cacheDirPath: String?) {
-        val jsonMap = encodeTranslationFile(map)
-        fileSystem?.let {  fileSystemVal ->
-            cacheDirPath?.let { cacheDirPathVal ->
-                val okioPath = "${cacheDirPathVal}/translations/".toPath()
-                if(!fileSystemVal.exists(okioPath)){
-                    println("@@ ---- $okioPath")
-                    try {
-                        fileSystemVal.createDirectory(okioPath, true)
-                    } catch (e: Exception) {
-                        println("@@ $e")
+    private fun fetchRemoteTranslationFiles(i18N: I18N, fileSystem: FileSystem?, basePath: String?, map: MutableMap<String, String>, languageCodes: List<String>) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val client = HttpClient()
+            coroutineScope {
+                languageCodes.map { variantCombination ->
+                    async {
+                        try {
+                            client.get("https://fdca-70-28-93-175.ngrok-free.app/export") {
+                                parameter("language", variantCombination)
+                                parameter("project_id", "915cd661-ef3a-4b89-ac60-fb82ef90a61a")
+//                          parameter("document_path", "core")
+                                parameter("document_format", "simple_json")
+                            }.body<String>().let { jsonStringified ->
+                                Json.decodeFromString<Map<String, String>>(jsonStringified)
+                            }.also {
+                                fileSystem?.let { fileSystemVal ->
+                                    basePath?.let { basePathVal ->
+                                        saveTranslations(variantCombination, it, fileSystemVal, basePathVal)
+                                    }
+                                }
+                            }.let {
+                                Result.success(it)
+                            }
+                        } catch (e: ClientRequestException) {
+                            println("@@ Request failed for $variantCombination: $e")
+                            Result.failure(e)
+                        } catch (e: Exception) {
+                            println("@@ General error occurred: $e")
+                            Result.failure(e)
+                        }
                     }
+                }.awaitAll().forEach { result ->
+                    result.fold(
+                        onSuccess = {
+                            println("@@ Add map to map")
+                            map.putAll(it)
+                        },
+                        onFailure = {}
+                    )
+                }.also {
+                    println("@@ Add map to i18n")
+                    i18N.changeLocaleStrings(map)
                 }
+                client.close()
+            }
+        }
+    }
 
-                val destinationPath = okioPath / "en.json"
-                fileSystemVal.write(destinationPath) {
-                    writeUtf8(jsonMap)
-                }
-
-                val source: BufferedSource = fileSystemVal.source(destinationPath).buffer()
-                val result = source.readUtf8()
-                val x = Json.decodeFromString<Map<String, String>>(result)
-                println("@@@@ JSON: ${x["tab_home"]}")
+    private fun saveTranslations(languageCode: String, map: Map<String, String>, fileSystem: FileSystem, basePath: String) {
+        val jsonMap = encodeTranslationFile(map)
+        val okioPath = "$basePath/translations".toPath()
+        if (!fileSystem.exists(okioPath)) {
+            try {
+                fileSystem.createDirectory(okioPath, true)
+            } catch (e: Exception) {
+                println("@@@ CANNOT CREATE DIR $e")
             }
         }
 
+        val destinationPath = okioPath / "translation.$languageCode.json"
+        fileSystem.write(destinationPath) {
+            writeUtf8(jsonMap)
+        }
+    }
 
+    private fun encodeTranslationFile(jsonContent: Map<String, String>): String {
+        val json = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+            allowSpecialFloatingPointValues = true
+        }
 
-
-//        println("@@ ${FileSystem.SYSTEM.exists(okioPath)}")
-//        val jsonMap = encodeTranslationFile(map)
-//        val filename = "translations.$path.json"
-//
-//        val basePath: Path = FileSystem.SYSTEM.di / "trikot_data_source"
-//
-//        val fullPath = basePath / filename
-//
-//
-//        fullPath.parent?.let { fileSystem.createDirectories(it) }
-//        fileSystem.write(fullPath) {
-//            writeUtf8(value)
-//        }
-//
-//        FileSystem.SYSTEM
-
-//        val file = File()
-//        println("@@ ${file.absolutePath}")
-//        file.writeText(jsonMap)
-//        println("@@ SAVE END")
+        return json.encodeToString(MapSerializer(String.serializer(), String.serializer()), jsonContent)
     }
 }

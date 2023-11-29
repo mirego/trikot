@@ -70,6 +70,12 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
         }
+
+        val appleMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:${Versions.KTOR}")
+            }
+        }
     }
 }
 
