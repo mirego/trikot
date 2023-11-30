@@ -4,9 +4,9 @@ import com.mirego.trikot.datasources.flow.BaseExpiringExecutableFlowDataSource
 import com.mirego.trikot.datasources.flow.DataSourceUtils
 import com.mirego.trikot.datasources.flow.ExpiringFlowDataSourceRequest
 import com.mirego.trikot.datasources.flow.FlowDataSourceRequest
-import kotlin.time.Duration.Companion.minutes
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
+import kotlin.time.Duration.Companion.minutes
 
 open class GenericDataSource<T>(
     json: Json,
