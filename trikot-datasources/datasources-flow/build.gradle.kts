@@ -43,6 +43,12 @@ kotlin {
             }
         }
 
+        val jsMain by getting {
+            dependencies {
+                implementation("com.squareup.okio:okio-nodefilesystem:${Versions.OKIO}")
+            }
+        }
+
         val jsTest by getting {
             dependsOn(commonTest)
             dependencies {
