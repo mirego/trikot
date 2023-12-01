@@ -19,11 +19,6 @@ public abstract class com/mirego/trikot/datasources/flow/BaseFlowDataSource : co
 	protected fun shouldRead (Lcom/mirego/trikot/datasources/flow/FlowDataSourceRequest;Lcom/mirego/trikot/datasources/DataState;)Z
 }
 
-public final class com/mirego/trikot/datasources/flow/DataSourceUtils {
-	public static final field INSTANCE Lcom/mirego/trikot/datasources/flow/DataSourceUtils;
-	public final fun buildExpiringValue (Ljava/lang/Object;Lcom/mirego/trikot/datasources/flow/ExpiringFlowDataSourceRequest;)Lcom/mirego/trikot/datasources/flow/FlowDataSourceExpiringValue;
-}
-
 public final class com/mirego/trikot/datasources/flow/DiskCacheFlowDataSource : com/mirego/trikot/datasources/flow/BaseFlowDataSource {
 	public fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Lcom/mirego/trikot/datasources/flow/storage/FlowDataSourceFileManager;Lcom/mirego/trikot/datasources/flow/FlowDataSource;Ljava/lang/String;ZLkotlin/coroutines/CoroutineContext;)V
 	public synthetic fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Lcom/mirego/trikot/datasources/flow/storage/FlowDataSourceFileManager;Lcom/mirego/trikot/datasources/flow/FlowDataSource;Ljava/lang/String;ZLkotlin/coroutines/CoroutineContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
@@ -156,7 +151,8 @@ public final class com/mirego/trikot/datasources/flow/filesystem/NativeFileSyste
 }
 
 public final class com/mirego/trikot/datasources/flow/generic/FileSystemDataSource : com/mirego/trikot/datasources/flow/BaseExpiringExecutableFlowDataSource {
-	public fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Ljava/lang/String;)V
+	public fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lokio/FileSystem;)V
+	public synthetic fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lokio/FileSystem;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun internalRead (Lcom/mirego/trikot/datasources/flow/FlowDataSourceRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun save (Lcom/mirego/trikot/datasources/flow/ExpiringFlowDataSourceRequest;Lcom/mirego/trikot/datasources/flow/FlowDataSourceExpiringValue;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public synthetic fun save (Lcom/mirego/trikot/datasources/flow/FlowDataSourceRequest;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

@@ -10,16 +10,16 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import okio.FileNotFoundException
+import okio.FileSystem
 import okio.Path
 import okio.Path.Companion.toPath
 
 class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
     private val json: Json,
     private val dataSerializer: KSerializer<T>,
-    private val diskCachePath: String
+    private val diskCachePath: String,
+    private val fileManager: FileSystem = NativeFileSystem.fileSystem
 ) : BaseExpiringExecutableFlowDataSource<R, T>() {
-
-    private val fileManager = NativeFileSystem.fileSystem
 
     override suspend fun internalRead(request: R): FlowDataSourceExpiringValue<T> {
         return withContext(DataSourceDispatchers.IO) {
