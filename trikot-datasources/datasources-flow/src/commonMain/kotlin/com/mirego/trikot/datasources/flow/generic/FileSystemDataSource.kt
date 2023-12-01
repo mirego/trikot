@@ -21,14 +21,14 @@ class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
     private val fileManager: FileSystem = NativeFileSystem.fileSystem
 ) : BaseExpiringExecutableFlowDataSource<R, T>() {
 
-    override suspend fun internalRead(request: R): FlowDataSourceExpiringValue<T> {
+    public override suspend fun internalRead(request: R): FlowDataSourceExpiringValue<T> {
         return withContext(DataSourceDispatchers.IO) {
             val filePath = buildFilePath(request)
             try {
                 val data = json.decodeFromString(dataSerializer, getFileAsString(filePath))
                 FlowDataSourceExpiringValue(
                     value = data,
-                    expiredEpoch = (NativeFileSystem.fileSystem.metadata(filePath).lastModifiedAtMillis ?: 0) + request.expiredInMilliseconds
+                    expiredEpoch = lastModifiedAtMillisMetadata(filePath) + request.expiredInMilliseconds
                 )
             } catch (exception: SerializationException) {
                 fileManager.deleteRecursively(filePath)
@@ -63,6 +63,12 @@ class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
         fileManager.write(filePath) {
             writeUtf8(value)
         }
+    }
+
+    private fun lastModifiedAtMillisMetadata(filePath: Path) = try {
+        fileManager.metadata(filePath).lastModifiedAtMillis ?: 0
+    } catch (e: FileNotFoundException) {
+        0
     }
 
     private fun buildFilePath(request: R) = "$diskCachePath/${request.cacheableId}.json".toPath()

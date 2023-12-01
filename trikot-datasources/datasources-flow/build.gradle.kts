@@ -26,6 +26,7 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES}")
+                implementation("com.squareup.okio:okio-fakefilesystem:${Versions.OKIO}")
             }
         }
 
