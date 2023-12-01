@@ -150,13 +150,7 @@ public final class com/mirego/trikot/datasources/flow/extensions/DataStateFlowEx
 	public static final fun withPreviousValue (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public class com/mirego/trikot/datasources/flow/generic/GenericDataSource : com/mirego/trikot/datasources/flow/BaseExpiringExecutableFlowDataSource {
-	public fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Ljava/lang/String;)V
-	public synthetic fun internalRead (Lcom/mirego/trikot/datasources/flow/FlowDataSourceRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	protected fun internalRead (Lcom/mirego/trikot/datasources/flow/generic/GenericDataSourceRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public final class com/mirego/trikot/datasources/flow/generic/GenericDataSourceRequest : com/mirego/trikot/datasources/flow/ExpiringFlowDataSourceRequest {
+public final class com/mirego/trikot/datasources/flow/generic/FileSystemDataSource : com/mirego/trikot/datasources/flow/ExpiringFlowDataSourceRequest {
 	public fun <init> (Ljava/lang/String;JLcom/mirego/trikot/datasources/flow/FlowDataSourceRequest$Type;Lkotlin/jvm/functions/Function1;)V
 	public synthetic fun <init> (Ljava/lang/String;JLcom/mirego/trikot/datasources/flow/FlowDataSourceRequest$Type;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;

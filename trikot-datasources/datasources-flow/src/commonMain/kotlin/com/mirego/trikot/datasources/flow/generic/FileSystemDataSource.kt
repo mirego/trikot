@@ -13,7 +13,7 @@ import okio.FileNotFoundException
 import okio.Path
 import okio.Path.Companion.toPath
 
-class GenericDiskDataSource<R : ExpiringFlowDataSourceRequest, T>(
+class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
     private val json: Json,
     private val dataSerializer: KSerializer<T>,
     private val diskCachePath: String
