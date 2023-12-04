@@ -21,7 +21,7 @@ class TrikotApplication : Application(), ViewModelControllerFactoryProvidingAppl
         HttpConfiguration.connectivityPublisher = AndroidConnectivityPublisher(this).distinctUntilChanged()
         HttpConfiguration.httpRequestFactory = KtorHttpRequestFactory()
         TrikotViewModelDeclarative.initialize(SampleImageProvider())
-        AndroidKWord.setCurrentLanguageCode("en", FileSystem.SYSTEM)
+        AndroidKWord.setCurrentLanguageCode("en")
     }
 
     override val viewModelControllerFactory: VMDViewModelControllerFactory =

@@ -16,7 +16,7 @@ class TrikotApplication : Application(), ViewModelControllerFactoryProvidingAppl
         super.onCreate()
 
         TrikotViewModelDeclarative.initialize(SampleImageProvider(), SampleTextStyleProvider())
-        AndroidKWord.setCurrentLanguageCode("en", FileSystem.SYSTEM)
+        AndroidKWord.setCurrentLanguageCode("en")
     }
 
     override val viewModelControllerFactory: VMDViewModelControllerFactory =
