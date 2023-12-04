@@ -19,9 +19,6 @@ open class DefaultI18N(private val debugMode: Boolean = false) : I18N {
     }
 
     override operator fun get(key: KWordKey): String {
-        if (debugMode) {
-            return key.translationKey
-        }
         return t(key)
     }
 
@@ -30,6 +27,9 @@ open class DefaultI18N(private val debugMode: Boolean = false) : I18N {
     }
 
     override fun t(key: KWordKey, count: Int, vararg arguments: Pair<String, String>): String {
+        if (debugMode) {
+            return key.translationKey
+        }
         val keyWithCount = "${key.translationKey}_$count"
         val targetString = source.getOptional(keyWithCount)
 
@@ -47,6 +47,9 @@ open class DefaultI18N(private val debugMode: Boolean = false) : I18N {
         key: KWordKey,
         arguments: Map<String, String> = emptyMap()
     ): String {
+        if (debugMode) {
+            return key.translationKey
+        }
         return translationArgumentsParser.replaceInTranslation(
             source.get(key.translationKey),
             arguments,

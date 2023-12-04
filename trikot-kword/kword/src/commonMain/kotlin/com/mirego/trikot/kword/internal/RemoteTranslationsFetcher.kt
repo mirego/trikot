@@ -4,7 +4,9 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.get
+import io.ktor.http.isSuccess
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -57,14 +59,22 @@ class RemoteTranslationsFetcher(
         languageCode: String
     ): Result<Map<String, String>> {
         try {
-            return httpClient.get(translationsUrl)
-                .body<String>().let { encodedJson ->
-                    Json.decodeFromString<Map<String, String>>(encodedJson)
-                }.let { fetchedMap ->
-                    internalCacheWrapper.saveTranslationsToCache(baseFileName, fetchedMap, languageCode)
-                    Result.success(fetchedMap)
+            httpClient.get(translationsUrl).let { response ->
+                if (response.status.isSuccess()) {
+                    return response.body<String>().let { encodedJson ->
+                        Json.decodeFromString<Map<String, String>>(encodedJson)
+                    }.let { fetchedMap ->
+                        internalCacheWrapper.saveTranslationsToCache(baseFileName, fetchedMap, languageCode)
+                        Result.success(fetchedMap)
+                    }
+                } else {
+                    return Result.failure(IllegalStateException("Failed to fetch translations. HTTP status code: ${response.status.value}"))
                 }
+            }
         } catch (e: ClientRequestException) {
+            println(e)
+            return Result.failure(e)
+        } catch (e: ServerResponseException) {
             println(e)
             return Result.failure(e)
         } catch (e: SerializationException) {
