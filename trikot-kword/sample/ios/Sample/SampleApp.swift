@@ -17,14 +17,19 @@ extension FlowMultiLanguageI18N {
         var i18NList: [I18N] = []
         let fileSystem = FileSystem.companion.SYSTEM
         let internalStoragePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.relativePath ?? nil
+        let remoteTranslationsUrl = "https://fa1b-70-28-93-175.ngrok-free.app/export"
+        let accentProjectId = "915cd661-ef3a-4b89-ac60-fb82ef90a61a"
 
         languageCodes.forEach { languageCode in
             let i18N = DefaultI18N(debugMode: false)
+            
             KwordLoader.shared.setCurrentLanguageCode(
                 i18N: i18N,
                 basePaths: ["translation"],
                 fileSystem: fileSystem,
                 cacheDirPath: internalStoragePath,
+                translationFileUrl: remoteTranslationsUrl,
+                accentProjectId: accentProjectId,
                 code: languageCode
             )
             i18NList.append(i18N)

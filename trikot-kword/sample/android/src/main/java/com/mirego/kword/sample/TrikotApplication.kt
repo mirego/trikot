@@ -18,10 +18,14 @@ class TrikotApplication : Application() {
     private fun createI18NMap(): FlowMultiLanguageI18N {
         val context = this.baseContext
         val i18NEn = DefaultI18N(false).apply {
-            AndroidKWord.setCurrentLanguageCode(this, FileSystem.SYSTEM, context, "en")
+            AndroidKWord.setupFileSystem(FileSystem.SYSTEM, context)
+            AndroidKWord.setupRemoteTranslationsSource("https://fa1b-70-28-93-175.ngrok-free.app/export", "915cd661-ef3a-4b89-ac60-fb82ef90a61a")
+            AndroidKWord.setCurrentLanguageCode(this, "en")
         }
         val i18NFr = DefaultI18N(false).apply {
-            AndroidKWord.setCurrentLanguageCode(this, FileSystem.SYSTEM, context, "fr")
+            AndroidKWord.setupFileSystem(FileSystem.SYSTEM, context)
+            AndroidKWord.setupRemoteTranslationsSource("https://fa1b-70-28-93-175.ngrok-free.app/export", "915cd661-ef3a-4b89-ac60-fb82ef90a61a")
+            AndroidKWord.setCurrentLanguageCode(this, "fr")
         }
         return FlowMultiLanguageI18N("en", mapOf("en" to i18NEn, "fr" to i18NFr))
     }

@@ -11,10 +11,6 @@ internal actual object PlatformTranslationLoader {
             null
         }
 
-    actual fun loadTranslationsFromDisk(variant: String): Map<String, String>? {
-        return null
-    }
-
     private fun mapOf(jsObject: dynamic): Map<String, String> =
         entriesOf(jsObject).toMap()
 

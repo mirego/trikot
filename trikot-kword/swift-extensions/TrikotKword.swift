@@ -8,38 +8,56 @@ public class TrikotKword: NSObject {
     ]
     
     public static let shared = TrikotKword()
+    
+    private var fileSystem: FileSystem? = nil
+    private var storageDirPath: String? = nil
+
+    private var remoteTranslationsUrl: String? = nil
+    private var accentProjectId: String? = nil
+    
+    private func setupFileSystem(
+        fileSystem: FileSystem,
+        fileManager: FileManager
+    ) {
+        self.fileSystem = fileSystem
+        storageDirPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first?.relativePath
+    }
+    
+    private func setupRemoteTranslationSource(
+        translationsUrl: String,
+        accentProjectId: String
+    ) {
+        remoteTranslationsUrl = translationsUrl
+        self.accentProjectId = accentProjectId
+    }
 
     public func setCurrentLanguage(
         _ languageCode: String,
-        basePaths: [String] = TrikotKword.translationBasePaths,
-        fileSystem: FileSystem?,
-        internalStoragePath: String?
+        basePaths: [String] = TrikotKword.translationBasePaths
     ) {
-        setCurrentLanguage(i18N: KWord.shared, basePaths: basePaths, fileSystem: fileSystem, internalStoragePath: internalStoragePath, codes: languageCode)
+        setCurrentLanguage(i18N: KWord.shared, basePaths: basePaths, codes: languageCode)
     }
 
     public func setCurrentLanguage(
         i18N: I18N,
         languageCode: String,
-        fileSystem: FileSystem?,
-        internalStoragePath: String?,
         basePaths: [String] = TrikotKword.translationBasePaths
     ) {
-        setCurrentLanguage(i18N: i18N, basePaths: basePaths, fileSystem: fileSystem, internalStoragePath: internalStoragePath, codes: languageCode)
+        setCurrentLanguage(i18N: i18N, basePaths: basePaths, codes: languageCode)
     }
 
     public func setCurrentLanguage(
         i18N: I18N,
         basePaths: [String] = TrikotKword.translationBasePaths,
-        fileSystem: FileSystem?,
-        internalStoragePath: String?,
         codes: String...
     ) {
         KwordLoader.shared.setCurrentLanguageCodes(
             i18N: i18N, 
             basePaths: basePaths,
             fileSystem: fileSystem,
-            cacheDirPath: internalStoragePath,
+            cacheDirPath: storageDirPath,
+            translationFileUrl: remoteTranslationsUrl,
+            accentProjectId: accentProjectId,
             codes: KotlinArray<NSString>(size: Int32(codes.count)) { index in
             codes[index.intValue] as NSString
             }
