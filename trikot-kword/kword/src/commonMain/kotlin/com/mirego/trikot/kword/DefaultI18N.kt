@@ -1,7 +1,6 @@
 package com.mirego.trikot.kword
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
-import okio.FileSystem
 
 open class DefaultI18N(private val debugMode: Boolean = false) : I18N {
     private val sourceRef: AtomicReference<KWordSource> =

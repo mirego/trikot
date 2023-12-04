@@ -34,7 +34,12 @@ class RemoteTranslationsFetcher(
                 coroutineScope.launch {
                     languageCodes.map { languageCode ->
                         async {
-                            val translationsUrl = buildTranslationsUrl(baseTranslationsUrlVal, translationsVersionVal, languageCode, baseFileName)
+                            val translationsUrl = buildTranslationsUrl(
+                                baseTranslationsUrlVal,
+                                translationsVersionVal,
+                                languageCode,
+                                baseFileName
+                            )
                             buildHttpRequest(httpClient, translationsUrl, baseFileName, languageCode)
                         }
                     }.also {
@@ -45,7 +50,12 @@ class RemoteTranslationsFetcher(
         }
     }
 
-    private suspend fun buildHttpRequest(httpClient: HttpClient, translationsUrl: String, baseFileName: String, languageCode: String): Result<Map<String, String>> {
+    private suspend fun buildHttpRequest(
+        httpClient: HttpClient,
+        translationsUrl: String,
+        baseFileName: String,
+        languageCode: String
+    ): Result<Map<String, String>> {
         try {
             return httpClient.get(translationsUrl)
                 .body<String>().let { encodedJson ->

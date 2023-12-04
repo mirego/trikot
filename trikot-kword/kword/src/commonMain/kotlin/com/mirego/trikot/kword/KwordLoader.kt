@@ -12,19 +12,19 @@ import kotlinx.coroutines.launch
 import okio.FileSystem
 
 object KwordLoader {
-    fun setCurrentLanguageCode(code: String, basePaths: List<String>, fileSystem: FileSystem?, internalStoragePath: String?, translationFileUrl: String?, appVersion: String?) {
-        setCurrentLanguageCodes(KWord, basePaths, fileSystem, internalStoragePath, translationFileUrl, appVersion, code)
+    fun setCurrentLanguageCode(code: String, basePaths: List<String>, fileSystem: FileSystem?, cacheDirectoryPath: String?, translationFileUrl: String?, appVersion: String?) {
+        setCurrentLanguageCodes(KWord, basePaths, fileSystem, cacheDirectoryPath, translationFileUrl, appVersion, code)
     }
 
-    fun setCurrentLanguageCode(i18N: I18N, basePaths: List<String>, fileSystem: FileSystem?, cacheDirPath: String?, translationFileUrl: String?, appVersion: String?, code: String) {
-        setCurrentLanguageCodes(i18N, basePaths, fileSystem, cacheDirPath, translationFileUrl, appVersion, code)
+    fun setCurrentLanguageCode(i18N: I18N, basePaths: List<String>, fileSystem: FileSystem?, cacheDirectoryPath: String?, translationFileUrl: String?, appVersion: String?, code: String) {
+        setCurrentLanguageCodes(i18N, basePaths, fileSystem, cacheDirectoryPath, translationFileUrl, appVersion, code)
     }
 
-    fun setCurrentLanguageCodes(i18N: I18N, basePaths: List<String>, fileSystem: FileSystem?, cacheDirPath: String?, translationFileUrl: String?, appVersion: String?, vararg codes: String) {
+    fun setCurrentLanguageCodes(i18N: I18N, basePaths: List<String>, fileSystem: FileSystem?, cacheDirectoryPath: String?, translationFileUrl: String?, appVersion: String?, vararg codes: String) {
         val sharedHttpClient = HttpClient()
         val coroutineScope = CoroutineScope(Dispatchers.Unconfined)
 
-        val internalCacheWrapper = InternalCacheWrapper(cacheDirPath, appVersion, fileSystem)
+        val internalCacheWrapper = InternalCacheWrapper(cacheDirectoryPath, appVersion, fileSystem)
         val remoteTranslationsFetcher = RemoteTranslationsFetcher(translationFileUrl, appVersion, internalCacheWrapper, coroutineScope)
 
         val bundledTranslationsMap = mutableMapOf<String, String>()

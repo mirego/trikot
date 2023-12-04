@@ -11,14 +11,14 @@ object AndroidKWord {
     )
 
     private var fileSystem: FileSystem? = null
-    private var storageDirPath: String? = null
+    private var cacheDirectoryPath: String? = null
 
     private var remoteTranslationsUrl: String? = null
     private var appVersion: String? = null
 
     fun setupFileSystem(fileSystem: FileSystem, context: Context) {
         this.fileSystem = fileSystem
-        this.storageDirPath = context.cacheDir?.path
+        this.cacheDirectoryPath = context.cacheDir?.path
     }
 
     fun setupRemoteTranslationsSource(translationsUrl: String, appVersion: String) {
@@ -27,14 +27,14 @@ object AndroidKWord {
     }
 
     fun setCurrentLanguageCode(code: String) {
-        KwordLoader.setCurrentLanguageCode(code, DEFAULT_PATHS, fileSystem, storageDirPath, remoteTranslationsUrl, appVersion)
+        KwordLoader.setCurrentLanguageCode(code, DEFAULT_PATHS, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion)
     }
 
     fun setCurrentLanguageCode(i18N: I18N, code: String) {
-        KwordLoader.setCurrentLanguageCode(i18N, DEFAULT_PATHS, fileSystem, storageDirPath, remoteTranslationsUrl, appVersion, code)
+        KwordLoader.setCurrentLanguageCode(i18N, DEFAULT_PATHS, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, code)
     }
 
     fun setCurrentLanguageCodes(i18N: I18N, vararg codes: String) {
-        KwordLoader.setCurrentLanguageCodes(i18N, DEFAULT_PATHS, fileSystem, storageDirPath, remoteTranslationsUrl, appVersion, *codes)
+        KwordLoader.setCurrentLanguageCodes(i18N, DEFAULT_PATHS, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, *codes)
     }
 }

@@ -10,31 +10,28 @@ public class TrikotKword: NSObject {
     public static let shared = TrikotKword()
     
     private var fileSystem: FileSystem? = nil
-    private var storageDirPath: String? = nil
+    private var storageDirectoryPath: String? = nil
 
     private var remoteTranslationsUrl: String? = nil
-    private var accentProjectId: String? = nil
+    private var appVersion: String? = nil
     
     private func setupFileSystem(
         fileSystem: FileSystem,
         fileManager: FileManager
     ) {
         self.fileSystem = fileSystem
-        storageDirPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first?.relativePath
+        storageDirectoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first?.relativePath
     }
     
     private func setupRemoteTranslationSource(
         translationsUrl: String,
-        accentProjectId: String
+        appVersion: String
     ) {
         remoteTranslationsUrl = translationsUrl
-        self.accentProjectId = accentProjectId
+        self.appVersion = appVersion
     }
 
-    public func setCurrentLanguage(
-        _ languageCode: String,
-        basePaths: [String] = TrikotKword.translationBasePaths
-    ) {
+    public func setCurrentLanguage(_ languageCode: String, basePaths: [String] = TrikotKword.translationBasePaths) {
         setCurrentLanguage(i18N: KWord.shared, basePaths: basePaths, codes: languageCode)
     }
 
@@ -55,9 +52,9 @@ public class TrikotKword: NSObject {
             i18N: i18N, 
             basePaths: basePaths,
             fileSystem: fileSystem,
-            cacheDirPath: storageDirPath,
+            cacheDirectoryPath: storageDirectoryPath,
             translationFileUrl: remoteTranslationsUrl,
-            accentProjectId: accentProjectId,
+            appVersion: appVersion,
             codes: KotlinArray<NSString>(size: Int32(codes.count)) { index in
             codes[index.intValue] as NSString
             }

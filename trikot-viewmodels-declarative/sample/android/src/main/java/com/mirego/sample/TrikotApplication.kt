@@ -11,7 +11,6 @@ import com.mirego.trikot.streams.reactive.distinctUntilChanged
 import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDeclarative
 import com.mirego.trikot.viewmodels.declarative.controller.VMDViewModelControllerFactory
 import com.mirego.trikot.viewmodels.declarative.controller.factory.ViewModelControllerFactoryProvidingApplication
-import okio.FileSystem
 
 class TrikotApplication : Application(), ViewModelControllerFactoryProvidingApplication {
 

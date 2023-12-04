@@ -2,8 +2,6 @@ package com.mirego.trikot.kword.js
 
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.KwordLoader
-import kotlinext.js.Context
-import okio.FileSystem
 
 object JsKWord {
     private val DEFAULT_PATHS = listOf(

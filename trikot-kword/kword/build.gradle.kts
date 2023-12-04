@@ -17,7 +17,7 @@ kotlin {
                 api(project(Project.TRIKOT_FOUNDATION))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
                 implementation("io.ktor:ktor-client-core:${Versions.KTOR}")
-                implementation("com.squareup.okio:okio:3.6.0")
+                implementation("com.squareup.okio:okio:${Versions.OKIO}")
             }
         }
 
@@ -45,7 +45,14 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:${Versions.KOTLIN_WRAPPERS_EXTENSIONS}")
-                implementation("com.squareup.okio:okio-nodefilesystem:$OKIO")
+                implementation("com.squareup.okio:okio-nodefilesystem:${Versions.OKIO}")
+            }
+        }
+
+        val appleMain by getting {
+            dependsOn(commonMain)
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:${Versions.KTOR}")
             }
         }
 
@@ -59,7 +66,6 @@ kotlin {
         val androidMain by getting {
             dependsOn(jvmMain)
             dependencies {
-                api("io.ktor:ktor-client-logging-jvm:${Versions.KTOR}")
                 implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
             }
         }
@@ -68,12 +74,6 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
-            }
-        }
-
-        val appleMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-darwin:${Versions.KTOR}")
             }
         }
     }
