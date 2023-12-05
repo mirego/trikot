@@ -1,5 +1,6 @@
 package com.mirego.trikot.kword.internal
 
+import com.mirego.trikot.kword.I18N
 import io.ktor.client.HttpClient
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
@@ -10,6 +11,7 @@ import io.ktor.http.isSuccess
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
@@ -86,6 +88,27 @@ class RemoteTranslationsFetcher(
         } catch (e: NoTransformationFoundException) {
             println(e)
             return Result.failure(e)
+        }
+    }
+
+    fun applyFetchedTranslations(
+        i18N: I18N,
+        baseMap: MutableMap<String, String>,
+        sharedHttpClient: HttpClient
+    ) {
+        coroutineScope.launch {
+            requestsList.awaitAll()
+                .forEach { result ->
+                    result.fold(
+                        onSuccess = {
+                            baseMap.putAll(it)
+                        },
+                        onFailure = {}
+                    )
+                }.also {
+                    i18N.changeLocaleStrings(baseMap)
+                    sharedHttpClient.close()
+                }
         }
     }
 

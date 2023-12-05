@@ -6,6 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class DebugModeI18NTests {
+
     companion object {
         val STRINGS = mapOf(
             "foo_key" to "foo",

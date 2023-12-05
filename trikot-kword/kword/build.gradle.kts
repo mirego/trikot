@@ -18,6 +18,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
                 implementation("io.ktor:ktor-client-core:${Versions.KTOR}")
                 implementation("com.squareup.okio:okio:${Versions.OKIO}")
+                implementation("com.squareup.okio:okio-fakefilesystem:3.0.0")
             }
         }
 

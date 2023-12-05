@@ -50,29 +50,6 @@ object KwordLoader {
 
         bundledTranslationsMap.putAll(cachedTranslationsMap)
         i18N.changeLocaleStrings(bundledTranslationsMap)
-        applyFetchedTranslations(i18N, remoteTranslationsFetcher.requestsList, bundledTranslationsMap, sharedHttpClient, coroutineScope)
-    }
-
-    private fun applyFetchedTranslations(
-        i18N: I18N,
-        listOfRequests: List<Deferred<Result<Map<String, String>>>>,
-        baseMap: MutableMap<String, String>,
-        sharedHttpClient: HttpClient,
-        coroutineScope: CoroutineScope
-    ) {
-        coroutineScope.launch {
-            listOfRequests.awaitAll()
-                .forEach { result ->
-                    result.fold(
-                        onSuccess = {
-                            baseMap.putAll(it)
-                        },
-                        onFailure = {}
-                    )
-                }.also {
-                    i18N.changeLocaleStrings(baseMap)
-                    sharedHttpClient.close()
-                }
-        }
+        remoteTranslationsFetcher.applyFetchedTranslations(i18N, bundledTranslationsMap, sharedHttpClient)
     }
 }
