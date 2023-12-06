@@ -4,6 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.mirego.trikot.streams.reactive.promise.Promise
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = true) :
     AnalyticsService {
@@ -23,6 +26,13 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
 
     private var superProperties = emptyMap<String, Any>()
 
+    @Deprecated(
+        message = "Deprecated. Please use distinctDeviceId()",
+        replaceWith = ReplaceWith(
+            expression = "distinctDeviceId()",
+            imports = ["com.mirego.trikot.analytics.distinctDeviceId"]
+        )
+    )
     override fun distinctAppId() = Promise.create<String> { resolve, reject ->
         firebaseAnalytics.appInstanceId
             .addOnCompleteListener { task ->
@@ -37,6 +47,23 @@ class FirebaseAnalyticsService(context: Context, analyticsEnabled: Boolean = tru
             }
             .addOnCanceledListener {
                 reject(Throwable("Canceled"))
+            }
+    }
+
+    override suspend fun distinctDeviceId() = suspendCancellableCoroutine { continuation ->
+        firebaseAnalytics.appInstanceId
+            .addOnCompleteListener { task ->
+                val result = task.result
+                if (task.isSuccessful && result != null) {
+                    continuation.resume(result)
+                } else if (!task.isSuccessful) {
+                    continuation.cancel(Throwable(task.exception))
+                } else {
+                    continuation.cancel(Throwable("Empty result"))
+                }
+            }
+            .addOnCanceledListener {
+                continuation.cancel(Throwable("Canceled"))
             }
     }
 
