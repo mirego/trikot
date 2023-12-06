@@ -145,15 +145,6 @@ public final class com/mirego/trikot/datasources/flow/extensions/DataStateFlowEx
 	public static final fun withPreviousValue (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public final class com/mirego/trikot/datasources/flow/generic/FileSystemDataSource : com/mirego/trikot/datasources/flow/BaseExpiringExecutableFlowDataSource {
-	public fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lokio/FileSystem;)V
-	public synthetic fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lokio/FileSystem;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun internalRead (Lcom/mirego/trikot/datasources/flow/ExpiringFlowDataSourceRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public synthetic fun internalRead (Lcom/mirego/trikot/datasources/flow/FlowDataSourceRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun save (Lcom/mirego/trikot/datasources/flow/ExpiringFlowDataSourceRequest;Lcom/mirego/trikot/datasources/flow/FlowDataSourceExpiringValue;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public synthetic fun save (Lcom/mirego/trikot/datasources/flow/FlowDataSourceRequest;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
 public abstract interface class com/mirego/trikot/datasources/flow/storage/FlowDataSourceFileManager {
 	public abstract fun deleteFile (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getFileAsString (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
