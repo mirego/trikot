@@ -23,7 +23,7 @@ public class MixpanelAnalyticsService: AnalyticsService {
     }
 
     public func distinctDeviceId() -> NSString {
-        Mixpanel.mainInstance().distinctId
+        Mixpanel.mainInstance().distinctId as NSString
     }
 
     public func identifyUser(userId: String, properties: [String: Any]) {

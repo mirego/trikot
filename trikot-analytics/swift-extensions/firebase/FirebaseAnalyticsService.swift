@@ -21,7 +21,7 @@ public class FirebaseAnalyticsService: AnalyticsService {
     }
 
     public func distinctDeviceId() -> NSString {
-        Analytics.appInstanceID()
+        Analytics.appInstanceID() as! NSString
     }
 
     public func identifyUser(userId: String, properties: [String: Any]) {
