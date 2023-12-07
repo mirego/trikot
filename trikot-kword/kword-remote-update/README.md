@@ -30,12 +30,13 @@ val i18N = DefaultI18N().apply {
 ```
 
 ### iOS
+
 ```swift
 let translationsBaseUrl = "https://apptranslations.com/translations"
 let translationsVersion = "v1.23"
 let fileSystem = OkioFileSystem.companion.SYSTEM
 let fileManager = FileManager.default
-        
+
 KwordRemoteUpdate.shared.setupFileSystem(fileSystem: fileSystem, fileManager: fileManager)
 KwordRemoteUpdate.shared.setupRemoteTranslationsSource(translationsUrl: remoteTranslationsUrl, appVersion: translationsVersion)
 

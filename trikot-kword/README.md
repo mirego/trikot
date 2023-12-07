@@ -132,11 +132,10 @@ fun setI18N(debugModeEnabled: Boolean = false, i18N: I18N = DefaultI18N(debugMod
 ### iOS
 
 ```swift
-func configureI18n(debugModeEnabled: Bool) { 
+func configureI18n(debugModeEnabled: Bool) {
     self.i18n = DefaultI18N(debugMode: isDebugEnabled)
 }
 ```
-
 
 # Tooling
 
