@@ -94,6 +94,7 @@ KWord.t(KWordTranslation.PLURAL, 17)
                 export "com.mirego.trikot:kword:$trikot_version"
                 export "com.mirego.trikot:kword-streams:$trikot_version" // If needed for multilingual support
                 export "com.mirego.trikot:kword-flow:$trikot_version" // If needed for multilingual support
+                export "com.mirego.trikot:kword-remote-update:$trikot_version" // If needed for remote translations update
             }
         }
     }
@@ -103,6 +104,7 @@ KWord.t(KWordTranslation.PLURAL, 17)
                  implementation "com.mirego.trikot:kword:$trikot_version"
                  implementation "com.mirego.trikot:kword-streams:$trikot_version" // If needed for multilingual support
                  implementation "com.mirego.trikot:kword-flow:$trikot_version" // If needed for multilingual support
+                 implementation "com.mirego.trikot:kword-remote-update:$trikot_version" // If needed for remote translations update
             }
         }
     }
@@ -111,6 +113,34 @@ KWord.t(KWordTranslation.PLURAL, 17)
 ### iOS
 
 See [swift extensions](./swift-extensions/README.md)
+
+# Debug mode
+
+I18N debug mode can be enabled to display the translation keys instead of the translated text.
+
+### Android
+
+for simple usage:
+
+```kotlin
+fun setI18N(debugModeEnabled: Boolean = false, i18N: I18N = DefaultI18N(debugModeEnabled)) = i18N.apply {
+    AndroidKWord.setCurrentLanguageCode(
+        this,
+        LanguageUtils.currentLanguage(Locale.getDefault().language).code
+    )
+}
+```
+
+### iOS
+
+for simple usage:
+
+```swift
+func configureI18n(debugModeEnabled: Bool) { 
+    self.i18n = DefaultI18N(debugMode: isDebugEnabled)
+}
+```
+
 
 # Tooling
 

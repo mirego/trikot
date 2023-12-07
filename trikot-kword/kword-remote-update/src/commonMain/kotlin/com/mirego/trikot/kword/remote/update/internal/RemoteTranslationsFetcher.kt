@@ -6,7 +6,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -15,15 +15,13 @@ import kotlinx.serialization.json.Json
 class RemoteTranslationsFetcher(
     private val baseTranslationsUrl: String?,
     private val translationsVersion: String?,
-    private val internalCacheWrapper: InternalCacheWrapper,
-    private val coroutineScope: CoroutineScope
+    private val internalCacheWrapper: InternalCacheWrapper
 ) {
-    val requestsList = mutableListOf<Deferred<Result<Map<String, String>>>>()
-
     fun fetchRemoteTranslations(
+        i18N: I18N,
         baseFileName: String,
-        languageCodes: List<String>,
-        httpClient: HttpClient
+        baseMap: MutableMap<String, String>,
+        languageCodes: List<String>
     ) {
         baseTranslationsUrl?.let { baseTranslationsUrlVal ->
             translationsVersion?.let { translationsVersionVal ->
@@ -31,7 +29,8 @@ class RemoteTranslationsFetcher(
                     return
                 }
 
-                coroutineScope.launch {
+                val sharedHttpClient = HttpClient()
+                CoroutineScope(Dispatchers.Unconfined).launch {
                     languageCodes.map { languageCode ->
                         async {
                             val translationsUrl = buildTranslationsUrl(
@@ -40,11 +39,11 @@ class RemoteTranslationsFetcher(
                                 languageCode,
                                 baseFileName
                             )
-                            println("@@ $translationsUrl")
-                            buildHttpRequest(httpClient, translationsUrl, baseFileName, languageCode)
+                            buildHttpRequest(sharedHttpClient, translationsUrl, baseFileName, languageCode)
                         }
-                    }.also {
-                        requestsList.addAll(it)
+                    }.awaitAll().also { requestsResults ->
+                        applyFetchedTranslations(i18N, baseMap, requestsResults)
+                        sharedHttpClient.close()
                     }
                 }
             }
@@ -76,26 +75,22 @@ class RemoteTranslationsFetcher(
         }
     }
 
-    fun applyFetchedTranslations(
+    private fun applyFetchedTranslations(
         i18N: I18N,
         baseMap: MutableMap<String, String>,
-        sharedHttpClient: HttpClient
+        requestsResults: List<Result<Map<String, String>>>
     ) {
-        coroutineScope.launch {
-            requestsList.awaitAll()
-                .forEach { result ->
-                    result.fold(
-                        onSuccess = {
-                            baseMap.putAll(it)
-                        },
-                        onFailure = {}
-                    )
-                }.also {
-                    if (baseMap.isNotEmpty()) {
-                        i18N.changeLocaleStrings(baseMap)
-                    }
-                    sharedHttpClient.close()
-                }
+        requestsResults.forEach { result ->
+            result.fold(
+                onSuccess = {
+                    baseMap.putAll(it)
+                },
+                onFailure = {}
+            )
+        }.also {
+            if (baseMap.isNotEmpty()) {
+                i18N.changeLocaleStrings(baseMap)
+            }
         }
     }
 

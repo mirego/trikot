@@ -21,7 +21,7 @@ actual object KwordRemoteUpdate {
         this.appVersion = appVersion
     }
 
-    fun setCurrentLanguageCodes(i18N: I18N, vararg codes: String) {
+    fun updateTranslations(i18N: I18N, vararg codes: String) {
         TranslationsLoader.setCurrentLanguageCodes(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, *codes)
     }
 }

@@ -22,11 +22,11 @@ class TrikotApplication : Application() {
         KwordRemoteUpdate.setupRemoteTranslationsSource(translationsUrl, translationsVersion)
         val i18NEn = DefaultI18N().apply {
             AndroidKWord.setCurrentLanguageCode(this, "en")
-            KwordRemoteUpdate.setCurrentLanguageCodes(this, "en")
+            KwordRemoteUpdate.updateTranslations(this, "en")
         }
         val i18NFr = DefaultI18N().apply {
             AndroidKWord.setCurrentLanguageCode(this, "fr")
-            KwordRemoteUpdate.setCurrentLanguageCodes(this, "fr")
+            KwordRemoteUpdate.updateTranslations(this, "fr")
         }
         return FlowMultiLanguageI18N("en", mapOf("en" to i18NEn, "fr" to i18NFr))
     }
