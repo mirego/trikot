@@ -64,5 +64,3 @@ if (samplesEnabled) {
     include(":trikot-viewmodels-declarative-flow:sample:common")
     include(":trikot-viewmodels-declarative-flow:sample:android")
 }
-include("trikot-kword:kword-remote-update")
-findProject(":trikot-kword:kword-remote-update")?.name = "kword-remote-update"
