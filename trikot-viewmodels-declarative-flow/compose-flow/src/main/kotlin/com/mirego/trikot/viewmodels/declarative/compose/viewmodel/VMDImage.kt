@@ -469,8 +469,8 @@ private val ContentScale.scale: Scale
 private fun Constraints.toSizeOrNull() = when {
     isZero -> null
     else -> Size(
-        width = if (hasBoundedWidth) Dimension(maxWidth) else Dimension.Original,
-        height = if (hasBoundedHeight) Dimension(maxHeight) else Dimension.Original
+        width = if (hasBoundedWidth) Dimension(maxWidth) else Dimension.Undefined,
+        height = if (hasBoundedHeight) Dimension(maxHeight) else Dimension.Undefined
     )
 }
 
