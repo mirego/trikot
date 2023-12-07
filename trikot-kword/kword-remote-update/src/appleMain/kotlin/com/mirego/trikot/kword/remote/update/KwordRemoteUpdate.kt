@@ -1,13 +1,15 @@
 package com.mirego.trikot.kword.remote.update
 
 import com.mirego.trikot.kword.I18N
+import kotlinx.cinterop.UnsafeNumber
 import okio.FileSystem
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
-import platform.Foundation.NSUserDomainMask
 import platform.Foundation.NSURL
+import platform.Foundation.NSUserDomainMask
 
-object IosTranslationsLoader {
+@OptIn(UnsafeNumber::class)
+actual object KwordRemoteUpdate {
     private var fileSystem: FileSystem? = null
     private var cacheDirectoryPath: String? = null
 
@@ -32,7 +34,7 @@ object IosTranslationsLoader {
     }
 
     fun setCurrentLanguageCode(i18N: I18N, code: String) {
-        TranslationsLoader.setCurrentLanguageCode(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, code)
+        TranslationsLoader.setCurrentLanguageCodes(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, code)
     }
 
     fun setCurrentLanguageCodes(i18N: I18N, vararg codes: String) {

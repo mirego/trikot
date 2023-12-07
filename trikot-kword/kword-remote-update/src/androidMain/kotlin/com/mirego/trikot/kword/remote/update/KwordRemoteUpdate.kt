@@ -4,7 +4,7 @@ import android.content.Context
 import com.mirego.trikot.kword.I18N
 import okio.FileSystem
 
-object AndroidLiveTranslations {
+actual object KwordRemoteUpdate {
     private var fileSystem: FileSystem? = null
     private var cacheDirectoryPath: String? = null
 
@@ -19,10 +19,6 @@ object AndroidLiveTranslations {
     fun setupRemoteTranslationsSource(translationsUrl: String, appVersion: String) {
         remoteTranslationsUrl = translationsUrl
         this.appVersion = appVersion
-    }
-
-    fun setCurrentLanguageCode(i18N: I18N, code: String) {
-        TranslationsLoader.setCurrentLanguageCode(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, code)
     }
 
     fun setCurrentLanguageCodes(i18N: I18N, vararg codes: String) {

@@ -23,9 +23,9 @@ extension FlowMultiLanguageI18N {
             let i18N = DefaultI18N(debugMode: false)
             KwordLoader.shared.setCurrentLanguageCode(i18N: i18N, basePaths: ["translation"], code: languageCode)
             
-            IosTranslationsLoader.shared.setupFileSystem(fileSystem: FileSystem.companion.SYSTEM, fileManager: FileManager.default)
-            IosTranslationsLoader.shared.setupRemoteTranslationsSource(translationsUrl: translationsUrl, appVersion: translationsVersion)
-            IosTranslationsLoader.shared.setCurrentLanguageCode(i18N: i18N, code: languageCode)
+            KwordRemoteUpdate.shared.setupFileSystem(fileSystem: FileSystem.companion.SYSTEM, fileManager: FileManager.default)
+            KwordRemoteUpdate.shared.setupRemoteTranslationsSource(translationsUrl: translationsUrl, appVersion: translationsVersion)
+            KwordRemoteUpdate.shared.setCurrentLanguageCode(i18N: i18N, code: languageCode)
             i18NList.append(i18N)
         }
 

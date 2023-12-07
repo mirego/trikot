@@ -72,19 +72,7 @@ class RemoteTranslationsFetcher(
                     return Result.failure(IllegalStateException("Failed to fetch translations. HTTP status code: ${response.status.value}"))
                 }
             }
-        } catch (e: ClientRequestException) {
-            println(e)
-            return Result.failure(e)
-        } catch (e: ServerResponseException) {
-            println(e)
-            return Result.failure(e)
-        } catch (e: SerializationException) {
-            println(e)
-            return Result.failure(e)
-        } catch (e: IllegalArgumentException) {
-            println(e)
-            return Result.failure(e)
-        } catch (e: NoTransformationFoundException) {
+        } catch (e: Exception) {
             println(e)
             return Result.failure(e)
         }

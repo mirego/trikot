@@ -28,17 +28,6 @@ kotlin {
             }
         }
 
-        val jvmMain by getting {
-            dependsOn(commonMain)
-        }
-
-        val jvmTest by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test")
-                implementation("org.jetbrains.kotlin:kotlin-test-junit")
-            }
-        }
-
         val jsMain by getting {
             dependsOn(commonMain)
             dependencies {
@@ -55,7 +44,7 @@ kotlin {
         }
 
         val androidMain by getting {
-            dependsOn(jvmMain)
+            dependsOn(commonMain)
             dependencies {
                 implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
             }

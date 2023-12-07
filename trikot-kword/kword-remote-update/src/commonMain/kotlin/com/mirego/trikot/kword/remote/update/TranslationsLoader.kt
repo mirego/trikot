@@ -11,13 +11,9 @@ import okio.FileSystem
 internal object TranslationsLoader {
     val BASE_FILE_NAME = "translation"
 
-    internal fun setCurrentLanguageCode(i18N: I18N, fileSystem: FileSystem?, cacheDirectoryPath: String?, translationFileUrl: String?, appVersion: String?, code: String) {
-        setCurrentLanguageCodes(i18N, fileSystem, cacheDirectoryPath, translationFileUrl, appVersion, code)
-    }
-
     internal fun setCurrentLanguageCodes(i18N: I18N, fileSystem: FileSystem?, cacheDirectoryPath: String?, translationFileUrl: String?, appVersion: String?, vararg codes: String) {
         val sharedHttpClient = HttpClient()
-        val coroutineScope = CoroutineScope(Dispatchers.Default)
+        val coroutineScope = CoroutineScope(Dispatchers.Unconfined)
 
         val internalCacheWrapper = InternalCacheWrapper(cacheDirectoryPath, appVersion, fileSystem)
         val remoteTranslationsFetcher = RemoteTranslationsFetcher(translationFileUrl, appVersion, internalCacheWrapper, coroutineScope)
@@ -32,13 +28,13 @@ internal object TranslationsLoader {
             variantCombinations.add(variantPath)
         }
 
-//        internalCacheWrapper.loadTranslationsFromCache(BASE_FILE_NAME, cachedTranslationsMap, variantCombinations.toList())
+        internalCacheWrapper.loadTranslationsFromCache(BASE_FILE_NAME, cachedTranslationsMap, variantCombinations.toList())
         remoteTranslationsFetcher.fetchRemoteTranslations(BASE_FILE_NAME, variantCombinations.toList(), sharedHttpClient)
 
         if (cachedTranslationsMap.isNotEmpty()) {
             i18N.changeLocaleStrings(cachedTranslationsMap)
         }
 
- //       remoteTranslationsFetcher.applyFetchedTranslations(i18N, cachedTranslationsMap, sharedHttpClient)
+        remoteTranslationsFetcher.applyFetchedTranslations(i18N, cachedTranslationsMap, sharedHttpClient)
     }
 }
