@@ -1,8 +1,6 @@
 package com.mirego.trikot.kword.remote.update.internal
 
-import com.mirego.trikot.kword.DefaultI18N
 import com.mirego.trikot.kword.I18N
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
