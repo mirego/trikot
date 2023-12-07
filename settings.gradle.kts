@@ -39,6 +39,7 @@ include(":trikot-kword:kword")
 include(":trikot-kword:kword-flow")
 include(":trikot-kword:kword-streams")
 include(":trikot-kword:kword-plugin")
+include(":trikot-kword:kword-remote-update")
 include(":trikot-viewmodels:viewmodels")
 include(":trikot-viewmodels:databinding")
 include(":trikot-viewmodels-declarative:viewmodels-declarative")
@@ -63,3 +64,5 @@ if (samplesEnabled) {
     include(":trikot-viewmodels-declarative-flow:sample:common")
     include(":trikot-viewmodels-declarative-flow:sample:android")
 }
+include("trikot-kword:kword-remote-update")
+findProject(":trikot-kword:kword-remote-update")?.name = "kword-remote-update"

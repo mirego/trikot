@@ -5,7 +5,7 @@ import com.mirego.trikot.kword.flow.FlowI18N
 
 class TextProvider(private val i18N: FlowI18N) {
     val text = i18N[KWordTranslation.TEXT].wrap()
-    val buttonText = i18N[KWordTranslation.BUTTON_CHANGE_LANGUAGE].wrap()
+    val buttonText = i18N[KWordTranslation.TAB_HOME].wrap()
 
     fun toggleLanguage() {
         if (i18N.getLanguageCode() == "en") {

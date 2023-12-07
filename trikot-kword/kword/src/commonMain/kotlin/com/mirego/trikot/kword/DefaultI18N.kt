@@ -2,7 +2,7 @@ package com.mirego.trikot.kword
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 
-open class DefaultI18N : I18N {
+open class DefaultI18N(private val debugMode: Boolean = false) : I18N {
     private val sourceRef: AtomicReference<KWordSource> =
         AtomicReference(MapKeywordSource(HashMap()))
     private val source: KWordSource
@@ -27,6 +27,10 @@ open class DefaultI18N : I18N {
     }
 
     override fun t(key: KWordKey, count: Int, vararg arguments: Pair<String, String>): String {
+        if (debugMode) {
+            return key.translationKey
+        }
+
         val keyWithCount = "${key.translationKey}_$count"
         val targetString = source.getOptional(keyWithCount)
 
@@ -44,6 +48,10 @@ open class DefaultI18N : I18N {
         key: KWordKey,
         arguments: Map<String, String> = emptyMap()
     ): String {
+        if (debugMode) {
+            return key.translationKey
+        }
+
         return translationArgumentsParser.replaceInTranslation(
             source.get(key.translationKey),
             arguments,
