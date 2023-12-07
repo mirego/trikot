@@ -6,7 +6,7 @@ object Versions {
     const val JETPACK_COMPOSE_RUNTIME = "1.5.0"
     const val JETPACK_COMPOSE_MATERIAL_3 = "1.1.1"
     const val JETPACK_COMPOSE_TV = "1.0.0-alpha10"
-    const val COIL = "2.0.0-rc03"
+    const val COIL = "2.5.0"
     const val KTLINT = "11.6.1"
     const val KOTLINX_SERIALIZATION = "1.6.0"
     const val KOTLINX_COROUTINES = "1.7.3"
