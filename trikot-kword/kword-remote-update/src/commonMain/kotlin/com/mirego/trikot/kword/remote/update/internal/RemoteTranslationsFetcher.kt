@@ -1,17 +1,15 @@
 package com.mirego.trikot.kword.remote.update.internal
 
 import com.mirego.trikot.kword.I18N
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.plugins.*
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.http.isSuccess
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
 class RemoteTranslationsFetcher(

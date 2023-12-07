@@ -3,7 +3,7 @@ package com.mirego.trikot.kword.remote.update
 import com.mirego.trikot.kword.I18N
 import com.mirego.trikot.kword.remote.update.internal.InternalCacheWrapper
 import com.mirego.trikot.kword.remote.update.internal.RemoteTranslationsFetcher
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okio.FileSystem
