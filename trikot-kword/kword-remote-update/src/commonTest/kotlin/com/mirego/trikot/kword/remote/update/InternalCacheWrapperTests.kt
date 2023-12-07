@@ -35,7 +35,7 @@ class InternalCacheWrapperTests {
         )
         internalCacheWrapper.saveTranslationsToCache(BASE_FILE_NAME, baseMap, ENGLISH_LANGUAGE_CODE)
 
-        assertTrue { fileSystem.exists("translations/${APP_VERSION}/${BASE_FILE_NAME}.${ENGLISH_LANGUAGE_CODE}.json".toPath()) }
+        assertTrue(fileSystem.exists("translations/$APP_VERSION/$BASE_FILE_NAME.$ENGLISH_LANGUAGE_CODE.json".toPath()))
     }
 
     @Test
@@ -74,7 +74,8 @@ class InternalCacheWrapperTests {
                 "bar_key" to "bar",
                 "foo_key2" to "foo2",
                 "bar_key2" to "bar2"
-            ), finalTranslationsMap
+            ),
+            finalTranslationsMap
         )
     }
 
@@ -98,7 +99,8 @@ class InternalCacheWrapperTests {
                 "foo_key" to "foo",
                 "bar_key" to "bar",
                 "bar_key2" to "bar2"
-            ), finalTranslationsMap
+            ),
+            finalTranslationsMap
         )
     }
 }
