@@ -4,7 +4,7 @@ import TRIKOT_FRAMEWORK_NAME
 public class ObservableFlowWrapper<T: AnyObject>: ObservableObject {
     @Published public var value: T
     
-    private var watcher: Closeable__?
+    private var watcher: Closeable?
     
     init(_ flow: CFlow<T>, initial value: T) {
         self.value = value
