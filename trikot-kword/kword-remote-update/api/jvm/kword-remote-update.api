@@ -1,0 +1,4 @@
+public final class com/mirego/trikot/kword/remote/update/KwordRemoteUpdate {
+	public static final field INSTANCE Lcom/mirego/trikot/kword/remote/update/KwordRemoteUpdate;
+}
+
