@@ -11,7 +11,7 @@ import okio.IOException
 import okio.Path.Companion.toPath
 import okio.buffer
 
-class InternalCacheWrapper(
+internal class InternalCacheWrapper(
     private val internalStoragePath: String?,
     private val translationsVersion: String?,
     private val fileSystem: FileSystem?

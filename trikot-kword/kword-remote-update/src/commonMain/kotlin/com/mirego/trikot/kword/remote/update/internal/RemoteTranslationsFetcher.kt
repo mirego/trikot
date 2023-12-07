@@ -12,7 +12,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-class RemoteTranslationsFetcher(
+internal class RemoteTranslationsFetcher(
     private val baseTranslationsUrl: String?,
     private val translationsVersion: String?,
     private val internalCacheWrapper: InternalCacheWrapper
