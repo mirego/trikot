@@ -120,8 +120,6 @@ I18N debug mode can be enabled to display the translation keys instead of the tr
 
 ### Android
 
-for simple usage:
-
 ```kotlin
 fun setI18N(debugModeEnabled: Boolean = false, i18N: I18N = DefaultI18N(debugModeEnabled)) = i18N.apply {
     AndroidKWord.setCurrentLanguageCode(
@@ -132,8 +130,6 @@ fun setI18N(debugModeEnabled: Boolean = false, i18N: I18N = DefaultI18N(debugMod
 ```
 
 ### iOS
-
-for simple usage:
 
 ```swift
 func configureI18n(debugModeEnabled: Bool) { 

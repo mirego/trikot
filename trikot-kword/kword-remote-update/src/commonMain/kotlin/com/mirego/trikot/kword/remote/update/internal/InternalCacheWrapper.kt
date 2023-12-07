@@ -1,5 +1,7 @@
 package com.mirego.trikot.kword.remote.update.internal
 
+import com.mirego.trikot.kword.DefaultI18N
+import com.mirego.trikot.kword.I18N
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
@@ -20,7 +22,7 @@ class InternalCacheWrapper(
         allowSpecialFloatingPointValues = true
     }
 
-    fun loadTranslationsFromCache(baseFileName: String, baseMap: MutableMap<String, String>, languageCodes: List<String>) {
+    fun loadTranslationsFromCache(i18N: I18N, baseFileName: String, baseMap: MutableMap<String, String>, languageCodes: List<String>) {
         fileSystem?.let { fileSystemVal ->
             internalStoragePath?.let { internalStoragePathVal ->
                 translationsVersion?.let { translationsVersionVal ->
@@ -36,13 +38,13 @@ class InternalCacheWrapper(
                             val result = source.readUtf8()
                             val loadedMap = json.decodeFromString<Map<String, String>>(result)
                             baseMap.putAll(loadedMap)
-                        } catch (e: IOException) {
-                            println(e)
-                        } catch (e: SerializationException) {
-                            println(e)
-                        } catch (e: IllegalArgumentException) {
+                        } catch (e: Exception) {
                             println(e)
                         }
+                    }
+
+                    if (baseMap.isNotEmpty()) {
+                        i18N.changeLocaleStrings(baseMap)
                     }
                 }
             }

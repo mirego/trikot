@@ -10,6 +10,11 @@ kword-remote-update provides the necessary tools to let applications load pre-do
 
 # kword-remote-update usage
 
+Before updating the translations with the `KwordRemoteUpdate` object, `KwordRemoteUpdate.setupFileSystem(...)` and `KwordRemoteUpdate.setupRemoteTranslationsSource(...)` might need to be called depending on your use case.
+
+- if `KwordRemoteUpdate.setupFileSystem(...)` is not called, translations will not be loaded from cache and will not be saved to cache once downloaded.
+- if `KwordRemoteUpdate.setupRemoteTranslationsSource(...)` is not called, translations will only be loaded from cache, and nothing will be downloaded or saved.
+
 ### Android
 
 ```kotlin

@@ -21,18 +21,9 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(project(Project.TRIKOT_STREAMS_TEST_UTILS))
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                 implementation("com.squareup.okio:okio-fakefilesystem:${Versions.OKIO}")
-            }
-        }
-
-        val jsMain by getting {
-            dependsOn(commonMain)
-            dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:${Versions.KOTLIN_WRAPPERS_EXTENSIONS}")
             }
         }
 

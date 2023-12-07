@@ -25,7 +25,6 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
     baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
     transitiveExport = true
     isStatic = false
-    export(project(Project.TRIKOT_KWORD_REMOTE_UPDATE))
     export(project(Project.TRIKOT_KWORD))
     export(project(Project.TRIKOT_KWORD_FLOW))
 }
@@ -61,7 +60,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Project.TRIKOT_KWORD))
-                api(project(Project.TRIKOT_KWORD_REMOTE_UPDATE))
                 api(project(Project.TRIKOT_KWORD_FLOW))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
             }

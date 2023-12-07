@@ -51,10 +51,8 @@ android {
 
 dependencies {
     implementation(project(Project.TRIKOT_KWORD))
-    implementation(project(Project.TRIKOT_KWORD_REMOTE_UPDATE))
     implementation(project(Project.TRIKOT_KWORD_FLOW))
     implementation(project(Project.TRIKOT_KWORD_SAMPLE_COMMON))
-    implementation("com.squareup.okio:okio:3.2.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("com.google.android.material:material:1.6.0")
