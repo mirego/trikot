@@ -4,24 +4,24 @@ import android.content.Context
 import com.mirego.trikot.kword.I18N
 import okio.FileSystem
 
-actual object KwordRemoteUpdate {
+class KwordRemoteUpdate {
     private var fileSystem: FileSystem? = null
     private var cacheDirectoryPath: String? = null
 
     private var remoteTranslationsUrl: String? = null
-    private var appVersion: String? = null
+    private var translationsVersion: String? = null
 
     fun setupFileSystem(fileSystem: FileSystem, context: Context) {
         this.fileSystem = fileSystem
         this.cacheDirectoryPath = context.cacheDir?.path
     }
 
-    fun setupRemoteTranslationsSource(translationsUrl: String, appVersion: String) {
+    fun setupRemoteTranslationsSource(translationsUrl: String, translationsVersion: String) {
         remoteTranslationsUrl = translationsUrl
-        this.appVersion = appVersion
+        this.translationsVersion = translationsVersion
     }
 
     fun updateTranslations(i18N: I18N, vararg codes: String) {
-        TranslationsLoader.setCurrentLanguageCodes(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, *codes)
+        TranslationsLoader.updateTranslations(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, translationsVersion, *codes)
     }
 }

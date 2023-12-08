@@ -8,16 +8,16 @@ import okio.FileSystem
 internal object TranslationsLoader {
     private const val BASE_FILE_NAME = "translation"
 
-    internal fun setCurrentLanguageCodes(
+    internal fun updateTranslations(
         i18N: I18N,
         fileSystem: FileSystem?,
         cacheDirectoryPath: String?,
         translationFileUrl: String?,
-        appVersion: String?,
+        translationsVersion: String?,
         vararg codes: String
     ) {
-        val internalCacheWrapper = InternalCacheWrapper(cacheDirectoryPath, appVersion, fileSystem)
-        val remoteTranslationsFetcher = RemoteTranslationsFetcher(translationFileUrl, appVersion, internalCacheWrapper)
+        val internalCacheWrapper = InternalCacheWrapper(cacheDirectoryPath, translationsVersion, fileSystem)
+        val remoteTranslationsFetcher = RemoteTranslationsFetcher(translationFileUrl, translationsVersion, internalCacheWrapper)
 
         val languageCodes = mutableListOf<String>()
         val languageCodesCombinations = mutableListOf<String>()

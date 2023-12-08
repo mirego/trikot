@@ -17,7 +17,7 @@ extension FlowMultiLanguageI18N {
         var i18NList: [I18N] = []
 
         languageCodes.forEach { languageCode in
-            let i18N = DefaultI18N(debugMode: false)
+            let i18N = DefaultI18N()
             KwordLoader.shared.setCurrentLanguageCode(i18N: i18N, basePaths: ["translation"], code: languageCode)
             i18NList.append(i18N)
         }

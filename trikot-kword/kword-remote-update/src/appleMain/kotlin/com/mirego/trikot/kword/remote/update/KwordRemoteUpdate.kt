@@ -9,12 +9,12 @@ import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 
 @OptIn(UnsafeNumber::class)
-actual object KwordRemoteUpdate {
+class KwordRemoteUpdate {
     private var fileSystem: FileSystem? = null
     private var cacheDirectoryPath: String? = null
 
     private var remoteTranslationsUrl: String? = null
-    private var appVersion: String? = null
+    private var translationsVersion: String? = null
 
     fun setupFileSystem(fileSystem: FileSystem, fileManager: NSFileManager) {
         val cacheDirectoryPath = fileManager.URLsForDirectory(
@@ -28,16 +28,16 @@ actual object KwordRemoteUpdate {
         }
     }
 
-    fun setupRemoteTranslationsSource(translationsUrl: String, appVersion: String) {
+    fun setupRemoteTranslationsSource(translationsUrl: String, translationsVersion: String) {
         remoteTranslationsUrl = translationsUrl
-        this.appVersion = appVersion
+        this.translationsVersion = translationsVersion
     }
 
     fun updateTranslationsForLanguage(i18N: I18N, code: String) {
-        TranslationsLoader.setCurrentLanguageCodes(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, code)
+        TranslationsLoader.updateTranslations(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, translationsVersion, code)
     }
 
     fun updateTranslationsForLanguages(i18N: I18N, vararg codes: String) {
-        TranslationsLoader.setCurrentLanguageCodes(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, appVersion, *codes)
+        TranslationsLoader.updateTranslations(i18N, fileSystem, cacheDirectoryPath, remoteTranslationsUrl, translationsVersion, *codes)
     }
 }

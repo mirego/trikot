@@ -5,9 +5,7 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import okio.FileSystem
-import okio.IOException
 import okio.Path.Companion.toPath
-import okio.buffer
 
 internal class InternalCacheWrapper(
     private val internalStoragePath: String?,
@@ -32,10 +30,12 @@ internal class InternalCacheWrapper(
                     languageCodes.forEach { languageCode ->
                         try {
                             val fullSourcePath = baseDirectoryPath / buildFileName(baseFileName, languageCode)
-                            val source = fileSystemVal.source(fullSourcePath).buffer()
-                            val result = source.readUtf8()
-                            val loadedMap = json.decodeFromString<Map<String, String>>(result)
-                            baseMap.putAll(loadedMap)
+                            val cachedTranslations = fileSystemVal.read(fullSourcePath) {
+                                readUtf8()
+                            }.let {
+                                json.decodeFromString<Map<String, String>>(it)
+                            }
+                            baseMap.putAll(cachedTranslations)
                         } catch (e: Exception) {
                             println(e)
                         }
@@ -74,7 +74,7 @@ internal class InternalCacheWrapper(
                         fileSystemVal.write(fullDestinationPath) {
                             writeUtf8(jsonMap)
                         }
-                    } catch (e: IOException) {
+                    } catch (e: Exception) {
                         println(e)
                     }
                 }

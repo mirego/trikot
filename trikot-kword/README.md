@@ -116,12 +116,14 @@ See [swift extensions](./swift-extensions/README.md)
 
 # Debug mode
 
-I18N debug mode can be enabled to display the translation keys instead of the translated text.
+I18N debug mode can be used to display the translation keys (e.g. `home_welcome_message`) instead of the translated strings (e.g. `Welcome!`). In the app's bootstrap, simply instantiate a `DebugI18N()` instead of the usual`DefaultI18N()` to enable the feature.
 
 ### Android
 
 ```kotlin
-fun setI18N(debugModeEnabled: Boolean = false, i18N: I18N = DefaultI18N(debugModeEnabled)) = i18N.apply {
+val setI8N(DebugI18N())
+
+fun setI18N(i18N: I18N = DefaultI18N()) = i18N.apply {
     AndroidKWord.setCurrentLanguageCode(
         this,
         LanguageUtils.currentLanguage(Locale.getDefault().language).code
@@ -133,7 +135,7 @@ fun setI18N(debugModeEnabled: Boolean = false, i18N: I18N = DefaultI18N(debugMod
 
 ```swift
 func configureI18n(debugModeEnabled: Bool) {
-    self.i18n = DefaultI18N(debugMode: isDebugEnabled)
+    self.i18n = DebugI18N()
 }
 ```
 

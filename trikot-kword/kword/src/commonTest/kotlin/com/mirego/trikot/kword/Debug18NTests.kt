@@ -5,7 +5,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class DebugModeI18NTests {
+class Debug18NTests {
 
     companion object {
         val STRINGS = mapOf(
@@ -15,32 +15,33 @@ class DebugModeI18NTests {
             "hi_my_name_is_key" to "Hi my name is {{name}}"
         )
     }
-    private val debugModeI18N = DefaultI18N(true)
+
+    private val debugI18N = DebugI18N()
 
     @BeforeTest
     fun setup() {
-        debugModeI18N.changeLocaleStrings(STRINGS)
+        debugI18N.changeLocaleStrings(STRINGS)
     }
 
     @Test
     fun givenStringWithLocalizedReplacements() {
-        assertEquals("foo_key", debugModeI18N["foo_key".toKWordKey])
-        assertEquals("bar_key", debugModeI18N["bar_key".toKWordKey])
-        assertEquals("foo_bar_key", debugModeI18N["foo_bar_key".toKWordKey])
+        assertEquals("foo_key", debugI18N["foo_key".toKWordKey])
+        assertEquals("bar_key", debugI18N["bar_key".toKWordKey])
+        assertEquals("foo_bar_key", debugI18N["foo_bar_key".toKWordKey])
     }
 
     @Test
     fun givenStringWithArguments() {
-        assertEquals("hi_my_name_is_key", debugModeI18N.t("hi_my_name_is_key".toKWordKey, "name" to "Bob"))
+        assertEquals("hi_my_name_is_key", debugI18N.t("hi_my_name_is_key".toKWordKey, "name" to "Bob"))
     }
 
     @Test
     fun givenStringWithMissingArguments() {
-        assertEquals("hi_my_name_is_key", debugModeI18N.t("hi_my_name_is_key".toKWordKey))
+        assertEquals("hi_my_name_is_key", debugI18N.t("hi_my_name_is_key".toKWordKey))
     }
 
     @Test
     fun givenStringWithLocalizedReplacementsAndArguments() {
-        assertEquals("foo_bar_key", debugModeI18N.t("foo_bar_key".toKWordKey, "bar_key" to "rab"))
+        assertEquals("foo_bar_key", debugI18N.t("foo_bar_key".toKWordKey, "bar_key" to "rab"))
     }
 }

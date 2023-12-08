@@ -7,6 +7,7 @@ import io.ktor.client.request.get
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ internal class RemoteTranslationsFetcher(
                 }
 
                 val sharedHttpClient = HttpClient()
-                CoroutineScope(Dispatchers.Unconfined).launch {
+                CoroutineScope(Dispatchers.IO).launch {
                     languageCodes.map { languageCode ->
                         async {
                             val translationsUrl = buildTranslationsUrl(
@@ -39,7 +40,7 @@ internal class RemoteTranslationsFetcher(
                                 languageCode,
                                 baseFileName
                             )
-                            buildHttpRequest(sharedHttpClient, translationsUrl, baseFileName, languageCode)
+                            fetchTranslations(sharedHttpClient, translationsUrl, baseFileName, languageCode)
                         }
                     }.awaitAll().also { requestsResults ->
                         applyFetchedTranslations(i18N, baseMap, requestsResults)
@@ -50,7 +51,7 @@ internal class RemoteTranslationsFetcher(
         }
     }
 
-    private suspend fun buildHttpRequest(
+    private suspend fun fetchTranslations(
         httpClient: HttpClient,
         translationsUrl: String,
         baseFileName: String,
@@ -95,5 +96,5 @@ internal class RemoteTranslationsFetcher(
     }
 
     private fun buildTranslationsUrl(baseTranslationsUrl: String, translationsVersion: String, languageCode: String, baseFileName: String) =
-        "$baseTranslationsUrl/$translationsVersion/$baseFileName.$languageCode.json"
+        "${baseTranslationsUrl.trimEnd('/')}/$translationsVersion/$languageCode/$baseFileName.json"
 }

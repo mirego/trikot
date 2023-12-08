@@ -7,7 +7,7 @@ plugins {
 group = "com.mirego.trikot"
 
 kotlin {
-    configureKmmTargets()
+    configureKmmTargets(js = false)
 
     sourceSets {
         val commonMain by getting {
@@ -24,13 +24,6 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                 implementation("com.squareup.okio:okio-fakefilesystem:${Versions.OKIO}")
-            }
-        }
-
-        val jsTest by getting {
-            dependsOn(commonTest)
-            dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test-js")
             }
         }
 
