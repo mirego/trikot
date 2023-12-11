@@ -16,6 +16,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
                 implementation("io.ktor:ktor-client-core:${Versions.KTOR}")
                 implementation("com.squareup.okio:okio:${Versions.OKIO}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
             }
         }
 
@@ -24,6 +25,8 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                 implementation("com.squareup.okio:okio-fakefilesystem:${Versions.OKIO}")
+                implementation("io.ktor:ktor-client-mock:${Versions.KTOR}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES}")
             }
         }
 

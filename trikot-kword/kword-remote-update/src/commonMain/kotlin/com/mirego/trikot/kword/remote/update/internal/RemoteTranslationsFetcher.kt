@@ -3,6 +3,7 @@ package com.mirego.trikot.kword.remote.update.internal
 import com.mirego.trikot.kword.I18N
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.CoroutineScope
@@ -16,13 +17,15 @@ import kotlinx.serialization.json.Json
 internal class RemoteTranslationsFetcher(
     private val baseTranslationsUrl: String?,
     private val translationsVersion: String?,
-    private val internalCacheWrapper: InternalCacheWrapper
+    private val internalCacheWrapper: InternalCacheWrapper,
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 ) {
     fun fetchRemoteTranslations(
         i18N: I18N,
         baseFileName: String,
         baseMap: MutableMap<String, String>,
-        languageCodes: List<String>
+        languageCodes: List<String>,
+        httpClientEngine: HttpClientEngine? = null
     ) {
         baseTranslationsUrl?.let { baseTranslationsUrlVal ->
             translationsVersion?.let { translationsVersionVal ->
@@ -30,8 +33,11 @@ internal class RemoteTranslationsFetcher(
                     return
                 }
 
-                val sharedHttpClient = HttpClient()
-                CoroutineScope(Dispatchers.IO).launch {
+                val sharedHttpClient = httpClientEngine?.let {
+                    HttpClient(it)
+                } ?: HttpClient()
+
+                coroutineScope.launch {
                     languageCodes.map { languageCode ->
                         async {
                             val translationsUrl = buildTranslationsUrl(
