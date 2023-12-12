@@ -12,6 +12,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import kotlinx.serialization.json.Json
 
 internal class RemoteTranslationsFetcher(
@@ -39,14 +40,16 @@ internal class RemoteTranslationsFetcher(
 
                 coroutineScope.launch {
                     languageCodes.map { languageCode ->
-                        async {
-                            val translationsUrl = buildTranslationsUrl(
-                                baseTranslationsUrlVal,
-                                translationsVersionVal,
-                                languageCode,
-                                baseFileName
-                            )
-                            fetchTranslations(sharedHttpClient, translationsUrl, baseFileName, languageCode)
+                        supervisorScope {
+                            async {
+                                val translationsUrl = buildTranslationsUrl(
+                                    baseTranslationsUrlVal,
+                                    translationsVersionVal,
+                                    languageCode,
+                                    baseFileName
+                                )
+                                fetchTranslations(sharedHttpClient, translationsUrl, baseFileName, languageCode)
+                            }
                         }
                     }.awaitAll().also { requestsResults ->
                         applyFetchedTranslations(i18N, baseMap, requestsResults)
