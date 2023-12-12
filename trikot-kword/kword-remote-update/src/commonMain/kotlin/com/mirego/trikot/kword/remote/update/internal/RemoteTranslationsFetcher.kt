@@ -39,8 +39,8 @@ internal class RemoteTranslationsFetcher(
                 } ?: HttpClient()
 
                 coroutineScope.launch {
-                    supervisorScope {
-                        languageCodes.map { languageCode ->
+                    languageCodes.map { languageCode ->
+                        supervisorScope {
                             async {
                                 val translationsUrl = buildTranslationsUrl(
                                     baseTranslationsUrlVal,
@@ -50,10 +50,10 @@ internal class RemoteTranslationsFetcher(
                                 )
                                 fetchTranslations(sharedHttpClient, translationsUrl, baseFileName, languageCode)
                             }
-                        }.awaitAll().also { requestsResults ->
-                            applyFetchedTranslations(i18N, baseMap, requestsResults)
-                            sharedHttpClient.close()
                         }
+                    }.awaitAll().also { requestsResults ->
+                        applyFetchedTranslations(i18N, baseMap, requestsResults)
+                        sharedHttpClient.close()
                     }
                 }
             }
