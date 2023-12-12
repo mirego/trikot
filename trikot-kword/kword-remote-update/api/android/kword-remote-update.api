@@ -1,0 +1,7 @@
+public final class com/mirego/trikot/kword/remote/update/KwordRemoteUpdate {
+	public fun <init> ()V
+	public final fun setupFileSystem (Lokio/FileSystem;Landroid/content/Context;)V
+	public final fun setupRemoteTranslationsSource (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun updateTranslations (Lcom/mirego/trikot/kword/I18N;[Ljava/lang/String;)V
+}
+

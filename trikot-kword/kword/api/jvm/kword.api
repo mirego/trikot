@@ -1,3 +1,13 @@
+public final class com/mirego/trikot/kword/DebugI18N : com/mirego/trikot/kword/I18N {
+	public fun <init> ()V
+	public fun changeLocaleStrings (Lcom/mirego/trikot/kword/KWordSource;)V
+	public fun changeLocaleStrings (Ljava/util/Map;)V
+	public fun get (Lcom/mirego/trikot/kword/KWordKey;)Ljava/lang/String;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;)Ljava/lang/String;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;I[Lkotlin/Pair;)Ljava/lang/String;
+	public fun t (Lcom/mirego/trikot/kword/KWordKey;[Lkotlin/Pair;)Ljava/lang/String;
+}
+
 public class com/mirego/trikot/kword/DefaultI18N : com/mirego/trikot/kword/I18N {
 	public static final field Companion Lcom/mirego/trikot/kword/DefaultI18N$Companion;
 	public fun <init> ()V

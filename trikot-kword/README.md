@@ -94,6 +94,7 @@ KWord.t(KWordTranslation.PLURAL, 17)
                 export "com.mirego.trikot:kword:$trikot_version"
                 export "com.mirego.trikot:kword-streams:$trikot_version" // If needed for multilingual support
                 export "com.mirego.trikot:kword-flow:$trikot_version" // If needed for multilingual support
+                export "com.mirego.trikot:kword-remote-update:$trikot_version" // If needed for remote translations update
             }
         }
     }
@@ -103,6 +104,7 @@ KWord.t(KWordTranslation.PLURAL, 17)
                  implementation "com.mirego.trikot:kword:$trikot_version"
                  implementation "com.mirego.trikot:kword-streams:$trikot_version" // If needed for multilingual support
                  implementation "com.mirego.trikot:kword-flow:$trikot_version" // If needed for multilingual support
+                 implementation "com.mirego.trikot:kword-remote-update:$trikot_version" // If needed for remote translations update
             }
         }
     }
@@ -111,6 +113,31 @@ KWord.t(KWordTranslation.PLURAL, 17)
 ### iOS
 
 See [swift extensions](./swift-extensions/README.md)
+
+# Debug mode
+
+I18N debug mode can be used to display the translation keys (e.g. `home_welcome_message`) instead of the translated strings (e.g. `Welcome!`). In the app's bootstrap, simply instantiate a `DebugI18N()` instead of the usual`DefaultI18N()` to enable the feature.
+
+### Android
+
+```kotlin
+val setI8N(DebugI18N())
+
+fun setI18N(i18N: I18N = DefaultI18N()) = i18N.apply {
+    AndroidKWord.setCurrentLanguageCode(
+        this,
+        LanguageUtils.currentLanguage(Locale.getDefault().language).code
+    )
+}
+```
+
+### iOS
+
+```swift
+func configureI18n(debugModeEnabled: Bool) {
+    self.i18n = DebugI18N()
+}
+```
 
 # Tooling
 

@@ -6,6 +6,7 @@ object Project {
     const val TRIKOT_KWORD = ":trikot-kword:kword"
     const val TRIKOT_KWORD_STREAMS = ":trikot-kword:kword-streams"
     const val TRIKOT_KWORD_FLOW = ":trikot-kword:kword-flow"
+    const val TRIKOT_KWORD_REMOTE_UPDATE = ":trikot-kword:kword-remote-update"
     const val TRIKOT_KWORD_SAMPLE_COMMON = ":trikot-kword:sample:common"
     const val TRIKOT_ANALYTICS = ":trikot-analytics:analytics"
     const val TRIKOT_VIEWMODELS = ":trikot-viewmodels:viewmodels"
