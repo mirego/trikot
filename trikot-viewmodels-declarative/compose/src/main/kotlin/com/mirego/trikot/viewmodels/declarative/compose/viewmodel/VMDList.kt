@@ -24,8 +24,8 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDIdentifiableContent
 @Deprecated("Use either VMDLazyColumn instead")
 @Composable
 fun <C : VMDIdentifiableContent> VMDList(
-    modifier: Modifier = Modifier,
     viewModel: VMDListViewModel<C>,
+    modifier: Modifier = Modifier,
     state: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,

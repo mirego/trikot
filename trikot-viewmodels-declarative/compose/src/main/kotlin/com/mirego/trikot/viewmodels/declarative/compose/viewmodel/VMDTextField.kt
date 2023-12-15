@@ -25,8 +25,8 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.Forma
 
 @Composable
 fun VMDTextField(
-    modifier: Modifier = Modifier,
     viewModel: VMDTextFieldViewModel,
+    modifier: Modifier = Modifier,
     textStyle: TextStyle = LocalTextStyle.current,
     placeHolderStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,

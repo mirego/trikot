@@ -20,8 +20,8 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsStat
 
 @Composable
 fun VMDCircularProgressIndicator(
-    modifier: Modifier = Modifier,
     viewModel: VMDProgressViewModel,
+    modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.primary,
     strokeWidth: Dp = ProgressIndicatorDefaults.CircularStrokeWidth,
     trackColor: Color = ProgressIndicatorDefaults.circularTrackColor,

@@ -18,8 +18,8 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsStat
 
 @Composable
 fun VMDLinearProgressIndicator(
-    modifier: Modifier = Modifier,
     viewModel: VMDProgressViewModel,
+    modifier: Modifier = Modifier,
     color: Color = ProgressIndicatorDefaults.linearColor,
     trackColor: Color = ProgressIndicatorDefaults.linearTrackColor
 ) {

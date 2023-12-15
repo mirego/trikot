@@ -20,8 +20,8 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDContent
 
 @Composable
 fun <C : VMDContent> VMDButton(
-    modifier: Modifier = Modifier,
     viewModel: VMDButtonViewModel<C>,
+    modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.Center,
     propagateMinConstraints: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
