@@ -71,16 +71,16 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/Pl
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDButtonKt {
-	public static final fun VMDButton-TC8WvNY (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDButtonViewModel;Landroidx/compose/ui/Alignment;ZLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/foundation/Indication;Landroidx/compose/ui/semantics/Role;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDButton-TC8WvNY (Lcom/mirego/trikot/viewmodels/declarative/components/VMDButtonViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;ZLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/foundation/Indication;Landroidx/compose/ui/semantics/Role;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDCheckboxKt {
-	public static final fun VMDCheckbox (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material/CheckboxColors;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDCheckbox (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Lkotlin/jvm/functions/Function4;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material/CheckboxColors;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDCheckbox (Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material/CheckboxColors;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDCircularProgressIndicatorKt {
-	public static final fun VMDCircularProgressIndicator-DUhRLBM (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;JFJILandroidx/compose/runtime/Composer;II)V
+	public static final fun VMDCircularProgressIndicator-DUhRLBM (Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;Landroidx/compose/ui/Modifier;JFJILandroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDDropDownMenuKt {
@@ -101,40 +101,40 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VM
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDLabeledComponentKt {
-	public static final fun VMDLabeledComponent (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDLabeledComponent (Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDLazyColumnKt {
-	public static final fun VMDLazyColumn (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDLazyColumn (Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDLazyColumnIndexed (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function5;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDLazyRowKt {
-	public static final fun VMDLazyRow (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Horizontal;Landroidx/compose/ui/Alignment$Vertical;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDLazyRow (Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Horizontal;Landroidx/compose/ui/Alignment$Vertical;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDLazyRowIndexed (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Horizontal;Landroidx/compose/ui/Alignment$Vertical;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function5;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDLinearProgressIndicatorKt {
-	public static final fun VMDLinearProgressIndicator-eaDK9VM (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;JJLandroidx/compose/runtime/Composer;II)V
+	public static final fun VMDLinearProgressIndicator-eaDK9VM (Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;Landroidx/compose/ui/Modifier;JJLandroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDListKt {
-	public static final fun VMDList (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDList (Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDSectionedList (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDListViewModel;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDSwitchKt {
-	public static final fun VMDSwitch (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material/SwitchColors;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDSwitch (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Lkotlin/jvm/functions/Function4;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material/SwitchColors;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDSwitch (Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material/SwitchColors;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDTextFieldKt {
-	public static final fun VMDTextField (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/foundation/text/KeyboardActions;ZZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material/TextFieldColors;Landroidx/compose/runtime/Composer;III)V
+	public static final fun VMDTextField (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/foundation/text/KeyboardActions;ZZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material/TextFieldColors;Landroidx/compose/runtime/Composer;III)V
 	public static final fun buildKeyboardActions (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/foundation/text/KeyboardActions;)Landroidx/compose/foundation/text/KeyboardActions;
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDTextKt {
-	public static final fun VMDText--4IGK_g (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel;JJLandroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JIZIILkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/runtime/Composer;III)V
+	public static final fun VMDText--4IGK_g (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JIZIILkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/runtime/Composer;III)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/ComposableSingletons$VMDCheckboxKt {
@@ -165,7 +165,7 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ma
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDCircularProgressIndicatorKt {
-	public static final fun VMDCircularProgressIndicator-DUhRLBM (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;JFJILandroidx/compose/runtime/Composer;II)V
+	public static final fun VMDCircularProgressIndicator-DUhRLBM (Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;Landroidx/compose/ui/Modifier;JFJILandroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDDropDownMenuKt {
@@ -182,7 +182,7 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ma
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDLinearProgressIndicatorKt {
-	public static final fun VMDLinearProgressIndicator-eaDK9VM (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;JJLandroidx/compose/runtime/Composer;II)V
+	public static final fun VMDLinearProgressIndicator-eaDK9VM (Lcom/mirego/trikot/viewmodels/declarative/components/VMDProgressViewModel;Landroidx/compose/ui/Modifier;JJLandroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDOutlinedButtonKt {
@@ -190,8 +190,8 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ma
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDSwitchKt {
-	public static final fun VMDSwitch (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material3/SwitchColors;Landroidx/compose/runtime/Composer;II)V
 	public static final fun VMDSwitch (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Lkotlin/jvm/functions/Function4;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material3/SwitchColors;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VMDSwitch (Lcom/mirego/trikot/viewmodels/declarative/components/VMDToggleViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/material3/SwitchColors;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDTextButtonKt {
@@ -199,11 +199,11 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ma
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDTextFieldKt {
-	public static final fun VMDTextField (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/foundation/text/KeyboardActions;ZZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material3/TextFieldColors;Landroidx/compose/runtime/Composer;III)V
+	public static final fun VMDTextField (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/foundation/text/KeyboardActions;ZZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material3/TextFieldColors;Landroidx/compose/runtime/Composer;III)V
 	public static final fun buildKeyboardActions (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/foundation/text/KeyboardActions;)Landroidx/compose/foundation/text/KeyboardActions;
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/material3/VMDTextKt {
-	public static final fun VMDText--4IGK_g (Landroidx/compose/ui/Modifier;Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel;JJLandroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JIZIILkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/runtime/Composer;III)V
+	public static final fun VMDText--4IGK_g (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextViewModel;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JIZIILkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/runtime/Composer;III)V
 }
 
