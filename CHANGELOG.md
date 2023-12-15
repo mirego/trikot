@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+### Breaking Changes
+
+- [VMD] Change parameters order for some Compose components
+
 ### Updates
 
 - Gradle to `8.4`
