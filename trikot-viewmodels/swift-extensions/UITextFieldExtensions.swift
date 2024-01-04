@@ -53,7 +53,7 @@ extension UITextField {
                 observe(inputTextViewModel.editorAction) { [weak self] (action: InputTextEditorAction) in
                     if action != ViewModelAction.Companion.init().None {
                         self?.addAction(events: .editingDidEndOnExit, { _ in
-                            action.execute()
+                            action.execute(actionContext: nil)
                         })
                     } else {
                         self?.removeAction(events: .editingDidEndOnExit)
