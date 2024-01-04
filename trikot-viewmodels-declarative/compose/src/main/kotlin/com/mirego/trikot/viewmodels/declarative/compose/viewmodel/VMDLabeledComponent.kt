@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun VMDLabeledComponent(
-    modifier: Modifier = Modifier,
     label: @Composable RowScope.() -> Unit,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier,

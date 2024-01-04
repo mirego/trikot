@@ -22,9 +22,9 @@ import com.mirego.trikot.viewmodels.declarative.content.VMDNoContent
 
 @Composable
 fun VMDCheckbox(
+    viewModel: VMDToggleViewModel<VMDNoContent>,
     modifier: Modifier = Modifier,
     componentModifier: Modifier = Modifier,
-    viewModel: VMDToggleViewModel<VMDNoContent>,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: CheckboxColors = CheckboxDefaults.colors()
 ) {

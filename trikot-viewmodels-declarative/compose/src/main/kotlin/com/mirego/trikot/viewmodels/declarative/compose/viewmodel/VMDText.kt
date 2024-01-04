@@ -22,8 +22,8 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsStat
 
 @Composable
 fun VMDText(
-    modifier: Modifier = Modifier,
     viewModel: VMDTextViewModel,
+    modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
