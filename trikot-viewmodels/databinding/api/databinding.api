@@ -267,3 +267,4 @@ public final class com/mirego/trikot/viewmodels/utils/BindingUtils {
 	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/utils/BindingUtils;
 	public final fun getLifecycleOwnerWrapperFromView (Landroid/view/View;)Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;
 }
+
