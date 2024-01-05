@@ -1,6 +1,6 @@
 package com.mirego.trikot.datasources.flow
 
-import com.mirego.trikot.foundation.date.Date
+import kotlinx.datetime.Clock
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -17,5 +17,5 @@ class ExpiringExecutableFlowDataSource<T>(
 ) : BaseExpiringExecutableFlowDataSource<ExpiringExecutableFlowDataSourceRequest<T>, T>(cacheDataSource, coroutineContext) {
 
     override suspend fun internalRead(request: ExpiringExecutableFlowDataSourceRequest<T>) =
-        FlowDataSourceExpiringValue(request.block(), Date.now.epoch + request.expiredInMilliseconds)
+        FlowDataSourceExpiringValue(request.block(), Clock.System.now().toEpochMilliseconds() + request.expiredInMilliseconds)
 }

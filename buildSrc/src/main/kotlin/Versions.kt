@@ -10,6 +10,7 @@ object Versions {
     const val KTLINT = "11.6.1"
     const val KOTLINX_SERIALIZATION = "1.6.0"
     const val KOTLINX_COROUTINES = "1.7.3"
+    const val KOTLINX_DATETIME = "0.5.0"
     const val KTOR = "2.3.5"
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.628"
     const val ANDROIDX_LIFECYCLE = "2.6.2"

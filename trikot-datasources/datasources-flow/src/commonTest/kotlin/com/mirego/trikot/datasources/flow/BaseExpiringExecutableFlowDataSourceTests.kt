@@ -1,7 +1,6 @@
 package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
-import com.mirego.trikot.foundation.date.Date
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.first
@@ -11,6 +10,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
 import kotlin.coroutines.CoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -33,7 +33,8 @@ class BaseExpiringExecutableFlowDataSourceTests {
     @Test
     fun whenCacheIsValidThenReadReturnsCacheData() = runTest {
         val initialData = TestData("value")
-        val cacheDataSource = CacheTestDataSource(FlowDataSourceExpiringValue(initialData, Date.now.epoch + 1000), testDispatcher)
+
+        val cacheDataSource = CacheTestDataSource(FlowDataSourceExpiringValue(initialData, Clock.System.now().toEpochMilliseconds() + 1000), testDispatcher)
         val mainDataSource = TestDataSource({ awaitCancellation() }, cacheDataSource, testDispatcher)
 
         assertEquals(DataState.data(initialData), mainDataSource.readValue(requestUseCache).first())
@@ -57,7 +58,7 @@ class BaseExpiringExecutableFlowDataSourceTests {
         val cacheDataSource = CacheTestDataSource(FlowDataSourceExpiringValue(initialData, 0), testDispatcher)
         val mainDataSource = TestDataSource({
             mutex.withLock {
-                FlowDataSourceExpiringValue(newData, Date.now.epoch + 1000)
+                FlowDataSourceExpiringValue(newData, Clock.System.now().toEpochMilliseconds() + 1000)
             }
         }, cacheDataSource, testDispatcher)
 
@@ -73,7 +74,7 @@ class BaseExpiringExecutableFlowDataSourceTests {
     @Test
     fun whenCacheIsValidThenReadWith_REFRESH_CACHE_ReturnsPendingWithData() = runTest {
         val initialData = TestData("value")
-        val cacheDataSource = CacheTestDataSource(FlowDataSourceExpiringValue(initialData, Date.now.epoch + 1000), testDispatcher)
+        val cacheDataSource = CacheTestDataSource(FlowDataSourceExpiringValue(initialData, Clock.System.now().toEpochMilliseconds() + 1000), testDispatcher)
         val mainDataSource = TestDataSource({ awaitCancellation() }, cacheDataSource, testDispatcher)
 
         assertEquals(DataState.pending(initialData), mainDataSource.readValue(requestRefreshCache).first())
