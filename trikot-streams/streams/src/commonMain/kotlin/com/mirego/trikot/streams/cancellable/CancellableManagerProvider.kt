@@ -13,7 +13,7 @@ class CancellableManagerProvider : Cancellable {
             internalCancellableManagerRef.getAndSet(cancellableManager).cancel()
             serialQueue.dispatch {
                 if (isCancelled.value) {
-                    internalCancellableManagerRef.value.cancel()
+                    cancellableManager.cancel()
                 }
             }
         }
