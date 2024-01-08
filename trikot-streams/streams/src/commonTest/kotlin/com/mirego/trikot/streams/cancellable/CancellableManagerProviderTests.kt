@@ -24,4 +24,15 @@ class CancellableManagerProviderTests {
 
         assertTrue { cancelled }
     }
+
+    @Test
+    fun requestingACancellableManagerFromACancelledProviderReturnsACancelledCancellableManager() {
+        val cancellableManagerProvider = CancellableManagerProvider()
+        cancellableManagerProvider.cancel()
+        val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
+        var cancelled = false
+        cancellableManager.add { cancelled = true }
+
+        assertTrue { cancelled }
+    }
 }
