@@ -1,20 +1,29 @@
 package com.mirego.trikot.streams.cancellable
 
 import com.mirego.trikot.foundation.concurrent.AtomicReference
+import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
 
 class CancellableManagerProvider : Cancellable {
-    private val cancellableManager = CancellableManager()
+    private val serialQueue = SynchronousSerialQueue()
     private val internalCancellableManagerRef = AtomicReference(CancellableManager())
+    private val isCancelled = AtomicReference(false)
 
     fun cancelPreviousAndCreate(): CancellableManager {
-        internalCancellableManagerRef.value.cancel()
-        return CancellableManager().also {
-            internalCancellableManagerRef.setOrThrow(internalCancellableManagerRef.value, it)
-            cancellableManager.add(it)
+        return CancellableManager().also { cancellableManager ->
+            internalCancellableManagerRef.getAndSet(cancellableManager).cancel()
+            serialQueue.dispatch {
+                if (isCancelled.value) {
+                    cancellableManager.cancel()
+                }
+            }
         }
     }
 
     override fun cancel() {
-        cancellableManager.cancel()
+        serialQueue.dispatch {
+            if (isCancelled.compareAndSet(isCancelled.value, true)) {
+                internalCancellableManagerRef.value.cancel()
+            }
+        }
     }
 }

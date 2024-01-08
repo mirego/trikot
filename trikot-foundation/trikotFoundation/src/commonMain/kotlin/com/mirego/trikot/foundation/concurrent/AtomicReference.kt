@@ -23,6 +23,10 @@ class AtomicReference<T>(value: T) {
     fun compareAndSwap(expected: T, new: T): T {
         return if (compareAndSet(expected, new)) new else value
     }
+
+    fun getAndSet(new: T): T {
+        return atomicValue.getAndSet(new)
+    }
 }
 
 fun <T> AtomicReference<T>.setOrThrow(new: T) = setOrThrow(value, new)
