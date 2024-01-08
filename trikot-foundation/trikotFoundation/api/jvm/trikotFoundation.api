@@ -203,6 +203,7 @@ public final class com/mirego/trikot/foundation/concurrent/AtomicReference {
 	public fun <init> (Ljava/lang/Object;)V
 	public final fun compareAndSet (Ljava/lang/Object;Ljava/lang/Object;)Z
 	public final fun compareAndSwap (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+	public final fun getAndSet (Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun getValue ()Ljava/lang/Object;
 	public final fun setOrThrow (Ljava/lang/Object;Ljava/lang/Object;)V
 	public final fun setOrThrow (Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)V
