@@ -1,16 +1,17 @@
 package com.mirego.trikot.datasources
 
-import com.mirego.trikot.foundation.date.Date
+import kotlinx.datetime.Clock
 
 data class ExpiringValue<T>(
     val value: T,
     val expiredEpoch: Long
 ) {
-    fun isExpired(): Boolean = expiredEpoch < Date.now.epoch
+    fun isExpired(): Boolean = expiredEpoch < Clock.System.now().toEpochMilliseconds()
 
     companion object {
+
         fun <T> build(value: T, request: ExpiringDataSourceRequest): ExpiringValue<T> =
-            ExpiringValue(value, Date.now.epoch + request.expiredInMilliseconds)
+            ExpiringValue(value, Clock.System.now().toEpochMilliseconds() + request.expiredInMilliseconds)
     }
 }
 

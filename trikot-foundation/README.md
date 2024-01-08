@@ -37,15 +37,7 @@ string == "Ou sont les buches de Noel durant l'ete?" // true
 
 ## Dates (Basic from and to ISO8601)
 
-Multiplatform iso date implementation
-
-```kotlin
-val now = Date.now()            // GMT
-val date = now + 5.seconds
-val isoDate = date.toISO8601()  // yyyy-MM-dd:mm:dd:ssZ
-val otherDate = Date.fromISO8601(isoDate)
-otherDate == date               // true
-```
+Multiplatform iso date implementation is provided by `kotlinx-datetime`
 
 ## Dispatch Queues
 

@@ -13,11 +13,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Project.TRIKOT_FOUNDATION))
                 api(project(Project.TRIKOT_DATASOURCES_CORE))
                 implementation("com.squareup.okio:okio:${Versions.OKIO}")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLINX_SERIALIZATION}")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:${Versions.KOTLINX_DATETIME}")
             }
         }
 

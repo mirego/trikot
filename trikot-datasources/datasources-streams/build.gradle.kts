@@ -12,9 +12,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Project.TRIKOT_FOUNDATION))
                 implementation(project(Project.TRIKOT_STREAMS))
                 api(project(Project.TRIKOT_DATASOURCES_CORE))
+
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:${Versions.KOTLINX_DATETIME}")
             }
         }
 

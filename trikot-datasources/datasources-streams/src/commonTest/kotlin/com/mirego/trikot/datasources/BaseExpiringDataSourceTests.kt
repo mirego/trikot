@@ -1,10 +1,10 @@
 package com.mirego.trikot.datasources
 
 import com.mirego.trikot.datasources.testutils.assertEquals
-import com.mirego.trikot.foundation.date.Date
 import com.mirego.trikot.streams.reactive.BehaviorSubject
 import com.mirego.trikot.streams.reactive.Publishers
 import com.mirego.trikot.streams.reactive.promise.Promise
+import kotlinx.datetime.Clock
 import kotlin.test.Test
 
 class BaseExpiringDataSourceTests {
@@ -25,7 +25,7 @@ class BaseExpiringDataSourceTests {
 
     @Test
     fun whenCacheIsValidThenReadReturnsCacheData() {
-        val initialData = ExpiringValue(TestData("value"), Date.now.epoch + 1000)
+        val initialData = ExpiringValue(TestData("value"), Clock.System.now().toEpochMilliseconds() + 1000)
         val cacheDataSource = CacheTestDataSource(initialData)
         val readPublisher: BehaviorSubject<ExpiringValue<TestData>> = Publishers.behaviorSubject()
         val readPromise = Promise.from(readPublisher)
@@ -61,14 +61,14 @@ class BaseExpiringDataSourceTests {
 
         val publisher = mainDataSource.read(requestUseCache1)
         publisher.assertEquals(DataState.pending(initialData))
-        val newData = ExpiringValue(TestData("new data"), Date.now.epoch + 1000)
+        val newData = ExpiringValue(TestData("new data"), Clock.System.now().toEpochMilliseconds() + 1000)
         readPublisher.value = newData
         publisher.assertEquals(DataState.data(newData))
     }
 
     @Test
     fun whenCacheIsValidThenReadWith_REFRESH_CACHE_ReturnsPendingWithData() {
-        val initialData = ExpiringValue(TestData("value"), Date.now.epoch + 1000)
+        val initialData = ExpiringValue(TestData("value"), Clock.System.now().toEpochMilliseconds() + 1000)
         val cacheDataSource = CacheTestDataSource(initialData)
         val readPublisher: BehaviorSubject<ExpiringValue<TestData>> = Publishers.behaviorSubject()
         val readPromise = Promise.from(readPublisher)
