@@ -23,6 +23,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
+## 5.3.0
+
+> 2024-01-09
+
+### Updates
+
+- [VMD] Android tv bindings
+- [VMD] VMDTextField custom prompt
+- [Datasource] Generic open datasources
+- [KWord] Add new remote update module for live string updates support
+
 ## 5.2.0
 
 > 2023-10-23

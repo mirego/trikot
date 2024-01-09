@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
-    spec.version                  = '5.3.0'
+    spec.version                  = '0.0.1'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
