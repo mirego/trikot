@@ -1,9 +1,9 @@
 package com.mirego.trikot.graphql
 
 fun String.escapeForGraphql(): String {
-    return this.fold("") { current, value ->
-        current + value.escapeForGraphql()
-    }
+    return this.fold(StringBuilder()) { builder, value ->
+        builder.append(value.escapeForGraphql())
+    }.toString()
 }
 
 fun Char.escapeForGraphql(): String {
