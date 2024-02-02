@@ -54,6 +54,14 @@ public final class com/mirego/trikot/datasources/DataState$Pending : com/mirego/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class com/mirego/trikot/datasources/StateDataKt {
+	public static final fun stateDataData (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public static final fun stateDataError (Ljava/lang/Throwable;Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public static synthetic fun stateDataError$default (Ljava/lang/Throwable;Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public static final fun stateDataPending (Ljava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+	public static synthetic fun stateDataPending$default (Ljava/lang/Object;ILjava/lang/Object;)Lcom/mirego/trikot/datasources/DataState;
+}
+
 public final class com/mirego/trikot/datasources/extensions/DataStateExtensionsKt {
 	public static final fun data (Lcom/mirego/trikot/datasources/DataState;)Ljava/lang/Object;
 	public static final fun error (Lcom/mirego/trikot/datasources/DataState;)Ljava/lang/Throwable;
