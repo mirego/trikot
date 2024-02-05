@@ -11,7 +11,7 @@ data class ExpiringExecutableFlowDataSourceRequest<T>(
     val block: suspend () -> T
 ) : ExpiringFlowDataSourceRequest
 
-class ExpiringExecutableFlowDataSource<T>(
+open class ExpiringExecutableFlowDataSource<T>(
     cacheDataSource: FlowDataSource<ExpiringExecutableFlowDataSourceRequest<T>, FlowDataSourceExpiringValue<T>>? = null,
     coroutineContext: CoroutineContext = EmptyCoroutineContext
 ) : BaseExpiringExecutableFlowDataSource<ExpiringExecutableFlowDataSourceRequest<T>, T>(cacheDataSource, coroutineContext) {
