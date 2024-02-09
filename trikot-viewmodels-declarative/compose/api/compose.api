@@ -129,7 +129,7 @@ public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VM
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDTextFieldKt {
-	public static final fun VMDTextField (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/foundation/text/KeyboardActions;ZZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material/TextFieldColors;Landroidx/compose/runtime/Composer;III)V
+	public static final fun VMDTextField (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/foundation/text/KeyboardActions;ZZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material/TextFieldColors;Landroidx/compose/runtime/Composer;III)V
 	public static final fun buildKeyboardActions (Lcom/mirego/trikot/viewmodels/declarative/components/VMDTextFieldViewModel;Landroidx/compose/foundation/text/KeyboardActions;)Landroidx/compose/foundation/text/KeyboardActions;
 }
 
