@@ -30,7 +30,7 @@ fun VMDTextField(
     textStyle: TextStyle = LocalTextStyle.current,
     placeHolderStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
+    placeholder: @Composable ((String) -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardActions: KeyboardActions = KeyboardActions(),
@@ -56,7 +56,7 @@ fun VMDTextField(
         enabled = textFieldViewModel.isEnabled,
         label = label,
         placeholder = {
-            Text(
+            placeholder?.invoke(textFieldViewModel.placeholder) ?: Text(
                 text = textFieldViewModel.placeholder,
                 style = placeHolderStyle
             )
