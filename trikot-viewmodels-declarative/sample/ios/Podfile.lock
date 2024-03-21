@@ -1,10 +1,10 @@
 PODS:
   - Kingfisher (7.10.1)
-  - ReachabilitySwift (5.0.0)
+  - ReachabilitySwift (5.2.1)
   - SwiftLint (0.52.3)
   - SwiftUIIntrospect (1.0.0)
   - Trikot/http (5.4.0):
-    - ReachabilitySwift (~> 5.0)
+    - ReachabilitySwift (~> 5.2)
     - TRIKOT_FRAMEWORK_NAME
   - Trikot/kword (5.4.0):
     - TRIKOT_FRAMEWORK_NAME
@@ -53,10 +53,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kingfisher: bc5abe80a8e0144537ef1dd5a0b2621b04f7f439
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
   SwiftUIIntrospect: 9f15bf51d1a7582e168a683debca38649f3e152e
-  Trikot: 0192eb1b5555dda955003d6e1f95362b9c7678ec
+  Trikot: 05f591b69097bbaeec7a5a0fdff6a2a5842620f9
   TRIKOT_FRAMEWORK_NAME: 78d24f3b4e7e2cd3da313a33db4aa2d375293c36
 
 PODFILE CHECKSUM: 8057f57ba2a2db77f33517422839afd5282c408e

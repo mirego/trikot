@@ -31,7 +31,7 @@ Pod::Spec.new do |spec|
   # Http
   spec.subspec 'http' do |subspec|
     subspec.source_files = 'trikot-http/swift-extensions/*.swift'
-    subspec.dependency 'ReachabilitySwift', '~> 5.0'
+    subspec.dependency 'ReachabilitySwift', '~> 5.2'
   end
 
   # View Model

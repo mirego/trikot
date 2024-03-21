@@ -6,10 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
-### Updates
-
-- Kingfisher to `7.10.1`
-
 ### Breaking Changes
 
 - [VMD] Change parameters order for some Compose components
@@ -25,6 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Kotlin Wrappers Extensions to `1.0.1-pre.628`
 - Androidx Lifecycle to `2.6.2`
 - ThreeTen Android Backport to `1.4.6`
+- Kingfisher to `7.10.1`
+- ReachabilitySwift to `5.2`
 
 ### Breaking Changes
 
