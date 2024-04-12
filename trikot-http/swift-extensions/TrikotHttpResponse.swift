@@ -13,7 +13,7 @@ public class TrikotHttpResponse: NSObject, HttpResponse {
 
     @objc
     public init(data: Data?, response: URLResponse?) {
-        var headers = [String: String]()
+        var headers: [String: String] = [:]
         source = HttpResponseResponseSource.unknown
         if let response = response as? HTTPURLResponse {
             response.allHeaderFields.forEach {(arg) in
