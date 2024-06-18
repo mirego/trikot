@@ -3,6 +3,7 @@ package com.mirego.trikot.datasources.flow.generic
 import com.mirego.trikot.datasources.flow.BaseExpiringExecutableFlowDataSource
 import com.mirego.trikot.datasources.flow.DataSourceDispatchers
 import com.mirego.trikot.datasources.flow.ExpiringFlowDataSourceRequest
+import com.mirego.trikot.datasources.flow.FlowDataSource
 import com.mirego.trikot.datasources.flow.FlowDataSourceExpiringValue
 import com.mirego.trikot.datasources.flow.filesystem.NativeFileSystem
 import kotlinx.coroutines.withContext
@@ -14,16 +15,21 @@ import okio.FileSystem
 import okio.Path
 import okio.Path.Companion.toPath
 
-class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
+open class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
     private val json: Json,
     private val dataSerializer: KSerializer<T>,
     private val diskCachePath: String,
-    private val fileManager: FileSystem = NativeFileSystem.fileSystem
-) : BaseExpiringExecutableFlowDataSource<R, T>() {
+    private val fileManager: FileSystem = NativeFileSystem.fileSystem,
+    cacheDataSource: FlowDataSource<R, FlowDataSourceExpiringValue<T>>? = null,
+) : BaseExpiringExecutableFlowDataSource<R, T>(cacheDataSource) {
 
     public override suspend fun internalRead(request: R): FlowDataSourceExpiringValue<T> {
+        if (shouldSkipRequest(request)) {
+            throw Throwable("Skipping internal read")
+        }
+
         return withContext(DataSourceDispatchers.IO) {
-            val filePath = buildFilePath(request)
+            val filePath = buildFilePath(request.cacheableId)
             try {
                 val data = json.decodeFromString(dataSerializer, getFileAsString(filePath))
                 FlowDataSourceExpiringValue(
@@ -38,16 +44,35 @@ class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
     }
 
     override suspend fun save(request: R, data: FlowDataSourceExpiringValue<T>?) {
+        if (shouldSkipRequest(request)) {
+            return
+        }
+
         data?.value?.let { dataToSave ->
             withContext(DataSourceDispatchers.IO) {
                 try {
-                    val filePath = buildFilePath(request)
+                    val filePath = buildFilePath(request.cacheableId)
                     saveStringValueToFile(filePath, json.encodeToString(dataSerializer, dataToSave))
                 } catch (exception: Throwable) {
                     println("Failed to save json to disk cache. Error: $exception")
                 }
             }
         }
+    }
+
+    override suspend fun delete(cacheableId: String) {
+        withContext(DataSourceDispatchers.IO) {
+            try {
+                val filePath = buildFilePath(cacheableId)
+                fileManager.delete(filePath)
+            } catch (exception: Throwable) {
+                println("Failed to delete file to disk. Error: $exception")
+            }
+        }
+    }
+
+    open fun shouldSkipRequest(request: R): Boolean {
+        return false
     }
 
     private fun getFileAsString(filePath: Path) = if (fileManager.exists(filePath)) {
@@ -71,5 +96,5 @@ class FileSystemDataSource<R : ExpiringFlowDataSourceRequest, T>(
         0
     }
 
-    private fun buildFilePath(request: R) = "$diskCachePath/${request.cacheableId}.json".toPath()
+    private fun buildFilePath(cacheableId: String) = "$diskCachePath/$cacheableId.json".toPath()
 }
