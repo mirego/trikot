@@ -32,14 +32,6 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
         }
-
-        val androidUnitTest by getting {
-            dependsOn(jvmTest)
-        }
-
-        val nativeTest by getting {
-            dependsOn(commonTest)
-        }
     }
 }
 

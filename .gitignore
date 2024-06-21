@@ -70,6 +70,7 @@ fastlane/test_output
 
 # Android project
 .gradle
+.kotlin
 .android
 local.properties
 .idea/

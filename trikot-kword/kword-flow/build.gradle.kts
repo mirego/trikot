@@ -33,14 +33,12 @@ kotlin {
         }
 
         val jsMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
             }
         }
 
         val jsTest by getting {
-            dependsOn(commonTest)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-js")
             }

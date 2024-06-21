@@ -9,9 +9,9 @@ actual class UIThreadDispatchQueue actual constructor() : TrikotDispatchQueue {
 
     private val mainLooperHandler: Handler = Handler(Looper.getMainLooper())
 
-    override fun isSerial() = true
+    actual override fun isSerial() = true
 
-    override fun dispatch(block: DispatchBlock) {
+    actual override fun dispatch(block: DispatchBlock) {
         val currentCount: Int = count.incrementAndGet()
         if (Looper.myLooper() == Looper.getMainLooper() && currentCount == 1) {
             runQueueTask(block)

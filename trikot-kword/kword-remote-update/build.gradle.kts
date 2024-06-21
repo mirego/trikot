@@ -31,7 +31,6 @@ kotlin {
         }
 
         val androidMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("io.ktor:ktor-client-android:${Versions.KTOR}")
             }
@@ -49,7 +48,6 @@ kotlin {
         }
 
         val appleMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("io.ktor:ktor-client-darwin:${Versions.KTOR}")
             }

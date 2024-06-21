@@ -14,8 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Updates
 
-- Gradle to `8.4`
-- AGP to `8.1.2`
+- Kotlin `2.0.0`
+- Gradle to `8.8`
+- AGP to `8.5.0`
 - Ktlint to `11.6.1`
 - Ktor to `2.3.5`
 - Kotlin Serialization to `1.6.0`

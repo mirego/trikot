@@ -24,15 +24,10 @@ kotlin {
                 implementation("org.jetbrains.kotlin:kotlin-test-common")
                 implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                 implementation("org.jetbrains.kotlin:kotlin-test")
-                implementation("org.jetbrains.kotlin:kotlin-test-junit")
                 implementation("org.jetbrains.kotlin:kotlin-reflect")
                 implementation("junit:junit:4.13.2")
                 implementation("io.mockk:mockk-common:1.12.3")
             }
-        }
-
-        val jvmMain by getting {
-            dependsOn(commonMain)
         }
 
         val jvmTest by getting {
@@ -43,7 +38,6 @@ kotlin {
         }
 
         val androidMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 api("io.ktor:ktor-client-logging-jvm:${Versions.KTOR}")
                 implementation("io.ktor:ktor-client-android:${Versions.KTOR}")

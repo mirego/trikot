@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
-    spec.version                  = '0.0.1'
+    spec.version                  = '5.4.0-SNAPSHOT'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
@@ -10,6 +10,21 @@ Pod::Spec.new do |spec|
     spec.libraries                = 'c++'
                 
                 
+                
+    if !Dir.exist?('build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework') || Dir.empty?('build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework')
+        raise "
+
+        Kotlin framework 'TRIKOT_FRAMEWORK_NAME' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :trikot-viewmodels-declarative-flow:sample:common:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
+                
+    spec.xcconfig = {
+        'ENABLE_USER_SCRIPT_SANDBOXING' => 'NO',
+    }
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':trikot-viewmodels-declarative-flow:sample:common',

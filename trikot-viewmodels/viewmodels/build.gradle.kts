@@ -32,23 +32,15 @@ kotlin {
         }
 
         val jsTest by getting {
-            dependsOn(commonTest)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-js")
             }
         }
 
         val androidMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-process:${Versions.ANDROIDX_LIFECYCLE}")
             }
-        }
-
-        val iosMain by getting
-
-        val tvosMain by getting {
-            dependsOn(iosMain)
         }
     }
 }

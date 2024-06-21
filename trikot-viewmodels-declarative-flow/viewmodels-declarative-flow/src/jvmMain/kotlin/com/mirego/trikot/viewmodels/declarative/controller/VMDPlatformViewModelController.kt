@@ -13,7 +13,7 @@ actual abstract class VMDPlatformViewModelController {
 
     val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob() + exceptionHandler)
 
-    actual open fun onCleared() {
+    protected actual open fun onCleared() {
         coroutineScope.cancel()
     }
 }
