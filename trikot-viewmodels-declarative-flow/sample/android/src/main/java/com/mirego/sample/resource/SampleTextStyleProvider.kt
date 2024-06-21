@@ -1,5 +1,7 @@
 package com.mirego.sample.resource
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.mirego.sample.resources.SampleTextStyleResource
@@ -8,6 +10,7 @@ import com.mirego.trikot.viewmodels.declarative.properties.VMDNoTextStyleResourc
 import com.mirego.trikot.viewmodels.declarative.properties.VMDTextStyleResource
 
 class SampleTextStyleProvider : VMDTextStyleProvider {
+    @Composable
     override fun textStyleForResource(resource: VMDTextStyleResource): TextStyle? =
         when (resource) {
             is VMDNoTextStyleResource -> null
@@ -15,9 +18,11 @@ class SampleTextStyleProvider : VMDTextStyleProvider {
             else -> null
         }
 
-    private fun mapSampleStyleResource(resource: VMDTextStyleResource): TextStyle? =
+    @Composable
+    private fun mapSampleStyleResource(resource: SampleTextStyleResource): TextStyle =
         when (resource) {
-            SampleTextStyleResource.HIGHLIGHTED -> TextStyle(background = Color.Yellow)
-            else -> null
+            SampleTextStyleResource.HIGHLIGHTED -> TextStyle(background = LocalHighlightColor.current)
         }
 }
+
+private val LocalHighlightColor = compositionLocalOf { Color.Yellow }
