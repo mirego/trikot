@@ -1,5 +1,6 @@
 package com.mirego.sample.resource
 
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -20,6 +21,6 @@ class SampleTextStyleProvider : VMDTextStyleProvider {
     @Composable
     private fun mapSampleStyleResource(resource: SampleTextStyleResource): TextStyle =
         when (resource) {
-            SampleTextStyleResource.HIGHLIGHTED -> TextStyle(background = Color.Yellow)
+            SampleTextStyleResource.HIGHLIGHTED -> TextStyle(background = Color.Yellow, color = LocalContentColor.current)
         }
 }
