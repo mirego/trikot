@@ -8,6 +8,7 @@ import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
 import kotlin.reflect.full.isSuperclassOf
 import kotlin.reflect.full.primaryConstructor
@@ -18,6 +19,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
+@OptIn(ExperimentalCompilerApi::class)
 class FlowVMDCodeGeneratorTest {
 
     private fun compileSources(vararg kotlinSource: SourceFile): KotlinCompilation.Result =
