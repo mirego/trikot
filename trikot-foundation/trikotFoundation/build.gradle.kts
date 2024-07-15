@@ -11,7 +11,11 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                api("org.jetbrains.kotlinx:atomicfu:${Versions.ATOMIC_FU}")
+            }
+        }
 
         val commonTest by getting {
             dependencies {
