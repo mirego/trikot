@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Kingfisher to `7.10.1`
 - ReachabilitySwift to `5.2`
 - AtomicFu to `0.24.0`
-- Accompanist to `0.34.0` 
+- Accompanist to `0.34.0`
 - Okio to `3.9.0`
 - Jetpack Compose Compiler plugin to `2.0.0`
 - Jetpack Compose Runtime to `1.6.8`
