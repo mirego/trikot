@@ -254,10 +254,6 @@ public class com/mirego/trikot/foundation/concurrent/dispatchQueue/SequentialDis
 public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SequentialDispatchQueue$Companion {
 }
 
-public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SerialSubscriptionDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/JvmDispatchQueue, com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
-	public fun <init> ()V
-}
-
 public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/SynchronousDispatchQueue : com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
 	public fun <init> ()V
 	public fun dispatch (Lkotlin/jvm/functions/Function0;)V

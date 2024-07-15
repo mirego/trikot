@@ -42,6 +42,12 @@ kotlin {
                 implementation("androidx.lifecycle:lifecycle-process:${Versions.ANDROIDX_LIFECYCLE}")
             }
         }
+
+        val iosMain by getting
+
+        val tvosMain by getting {
+            dependsOn(iosMain)
+        }
     }
 }
 

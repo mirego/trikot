@@ -45,6 +45,12 @@ kotlin {
             }
         }
 
+        val jvmMain by getting
+
+        val androidMain by getting {
+            dependsOn(jvmMain)
+        }
+
         val androidUnitTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")

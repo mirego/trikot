@@ -2,9 +2,8 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("mirego.publish")
+    id("org.jetbrains.kotlinx.atomicfu")
 }
-
-apply(plugin = "kotlinx-atomicfu")
 
 group = "com.mirego.trikot"
 
@@ -12,11 +11,7 @@ kotlin {
     configureKmmTargets()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api("org.jetbrains.kotlinx:atomicfu:${Versions.ATOMIC_FU}")
-            }
-        }
+        val commonMain by getting
 
         val commonTest by getting {
             dependencies {

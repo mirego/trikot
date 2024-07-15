@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 val samplesEnabled = !extra.has("disable_samples")
 
 buildscript {
@@ -31,6 +34,12 @@ allprojects {
         maven("https://jitpack.io")
         maven("https://plugins.gradle.org/m2/")
         maven("https://s3.amazonaws.com/mirego-maven/public")
+    }
+
+    tasks.withType<KotlinCompilationTask<*>> {
+        compilerOptions {
+            freeCompilerArgs.add("-Xexpect-actual-classes")
+        }
     }
 }
 

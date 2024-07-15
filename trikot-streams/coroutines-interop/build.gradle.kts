@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("mirego.publish")
+    id("org.jetbrains.kotlinx.atomicfu")
 }
 
 group = "com.mirego.trikot.streams"
@@ -14,7 +15,6 @@ kotlin {
             dependencies {
                 implementation(project(Project.TRIKOT_STREAMS))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
-                implementation("org.jetbrains.kotlinx:atomicfu:${Versions.ATOMIC_FU}")
             }
         }
 

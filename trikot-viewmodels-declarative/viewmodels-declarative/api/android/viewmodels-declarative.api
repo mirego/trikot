@@ -534,7 +534,12 @@ public final class com/mirego/trikot/viewmodels/declarative/content/VMDTextPairC
 public abstract interface class com/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate {
 }
 
-public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController : androidx/lifecycle/ViewModel {
+public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDPlatformViewModelController : androidx/lifecycle/ViewModel {
+	public fun <init> ()V
+	protected fun onCleared ()V
+}
+
+public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController : com/mirego/trikot/viewmodels/declarative/controller/VMDPlatformViewModelController {
 	public fun <init> ()V
 	protected final fun getCancellableManager ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
 	public final fun getNavigationDelegate ()Lcom/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate;

@@ -526,7 +526,7 @@ public abstract interface class com/mirego/trikot/viewmodels/declarative/control
 
 public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDPlatformViewModelController {
 	public fun <init> ()V
-	public fun onCleared ()V
+	protected fun onCleared ()V
 }
 
 public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDViewModelController : com/mirego/trikot/viewmodels/declarative/controller/VMDPlatformViewModelController {
@@ -537,7 +537,7 @@ public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDVie
 	public fun onAppear ()V
 	protected fun onAppearFirst ()V
 	protected fun onAppearSubsequent ()V
-	public fun onCleared ()V
+	protected fun onCleared ()V
 	public fun onCreate ()V
 	public fun onDisappear ()V
 	public final fun setNavigationDelegate (Lcom/mirego/trikot/viewmodels/declarative/controller/VMDNavigationDelegate;)V

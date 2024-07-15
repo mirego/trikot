@@ -622,7 +622,7 @@ public abstract interface class com/mirego/trikot/viewmodels/declarative/control
 public abstract class com/mirego/trikot/viewmodels/declarative/controller/VMDPlatformViewModelController {
 	public fun <init> ()V
 	public final fun getCoroutineScope ()Lkotlinx/coroutines/CoroutineScope;
-	public fun onCleared ()V
+	protected fun onCleared ()V
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/controller/VMDPlatformViewModelControllerKt {
