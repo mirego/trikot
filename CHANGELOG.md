@@ -18,13 +18,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Gradle to `8.8`
 - AGP to `8.5.0`
 - Ktlint to `11.6.1`
-- Ktor to `2.3.5`
+- Ktor to `2.3.12`
 - Kotlin Serialization to `1.6.0`
 - Kotlin Wrappers Extensions to `1.0.1-pre.628`
 - Androidx Lifecycle to `2.6.2`
 - ThreeTen Android Backport to `1.4.6`
 - Kingfisher to `7.10.1`
 - ReachabilitySwift to `5.2`
+- AtomicFu to `0.24.0`
+- Accompanist to `0.34.0` 
+- Okio to `3.9.0`
+- Jetpack Compose Compiler plugin to `2.0.0`
+- Jetpack Compose Runtime to `1.6.8`
 
 ### Breaking Changes
 
