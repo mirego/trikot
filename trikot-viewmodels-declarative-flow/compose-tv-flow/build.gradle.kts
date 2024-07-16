@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("mirego.publish")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 group = "com.mirego.trikot"
@@ -19,9 +20,6 @@ android {
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_17)
         targetCompatibility(JavaVersion.VERSION_17)
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.JETPACK_COMPOSE_COMPILER
     }
     sourceSets.configureEach {
         java.srcDirs("src/$name/kotlin")

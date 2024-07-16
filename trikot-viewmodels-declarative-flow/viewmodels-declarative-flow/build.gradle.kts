@@ -40,14 +40,12 @@ kotlin {
         }
 
         val jsTest by getting {
-            dependsOn(commonTest)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-js")
             }
         }
 
         val androidMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")

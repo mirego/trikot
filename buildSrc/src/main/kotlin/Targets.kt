@@ -1,7 +1,5 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 fun KotlinMultiplatformExtension.configureKmmTargets(
     js: Boolean = true,
     android: Boolean = true,
@@ -11,7 +9,7 @@ fun KotlinMultiplatformExtension.configureKmmTargets(
     watchos: Boolean = true,
     macosx: Boolean = true,
 ) {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
     jvmToolchain(Versions.JVM_TOOLCHAIN)
 
     if (android) {
@@ -23,15 +21,18 @@ fun KotlinMultiplatformExtension.configureKmmTargets(
         jvm()
     }
     if (ios) {
-        ios()
+        iosX64()
+        iosArm64()
         iosSimulatorArm64()
     }
     if (tvos) {
-        tvos()
+        tvosX64()
+        tvosArm64()
         tvosSimulatorArm64()
     }
     if (watchos) {
-        watchos()
+        watchosX64()
+        watchosArm32()
         watchosSimulatorArm64()
     }
     if (macosx) {

@@ -2,6 +2,7 @@ package com.mirego.trikot.foundation.date
 
 import com.mirego.trikot.foundation.system.OSVersion
 import com.mirego.trikot.foundation.system.osVersionAtLeast
+import kotlinx.cinterop.UnsafeNumber
 import platform.Foundation.NSDate
 import platform.Foundation.NSISO8601DateFormatWithFractionalSeconds
 import platform.Foundation.NSISO8601DateFormatWithInternetDateTime
@@ -48,6 +49,7 @@ actual class Date(val nsDate: NSDate) {
             return Date(NSDate(timeIntervalSinceReferenceDate = (epoch.toDouble() / 1000.0) - epochReferenceDateDelta))
         }
 
+        @OptIn(UnsafeNumber::class)
         @ExperimentalUnsignedTypes
         private fun getFormatterWithCorrespondingFormatOptions(date: String): NSISO8601DateFormatter =
             when {

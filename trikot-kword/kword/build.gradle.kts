@@ -25,10 +25,6 @@ kotlin {
             }
         }
 
-        val jvmMain by getting {
-            dependsOn(commonMain)
-        }
-
         val jvmTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
@@ -37,7 +33,6 @@ kotlin {
         }
 
         val jsMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:${Versions.KOTLIN_WRAPPERS_EXTENSIONS}")
@@ -45,11 +40,12 @@ kotlin {
         }
 
         val jsTest by getting {
-            dependsOn(commonTest)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-js")
             }
         }
+
+        val jvmMain by getting
 
         val androidMain by getting {
             dependsOn(jvmMain)

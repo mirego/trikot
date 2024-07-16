@@ -2,5 +2,8 @@ package com.mirego.trikot.viewmodels.declarative.controller
 
 import androidx.lifecycle.ViewModel
 
-@Suppress("NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS")
-actual typealias VMDPlatformViewModelController = ViewModel
+actual abstract class VMDPlatformViewModelController actual constructor() : ViewModel() {
+    actual override fun onCleared() {
+        super.onCleared()
+    }
+}

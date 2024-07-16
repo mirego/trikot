@@ -53,7 +53,8 @@ kotlin {
         }
     }
 
-    ios()
+    iosX64()
+    iosArm64()
     iosSimulatorArm64()
 
     sourceSets {
@@ -64,18 +65,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
             }
             kotlin.srcDir(kword.generatedDir)
-        }
-
-        val androidMain by getting {
-            dependsOn(commonMain)
-        }
-
-        val iosMain by getting {
-            dependsOn(commonMain)
-        }
-
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
         }
     }
 }

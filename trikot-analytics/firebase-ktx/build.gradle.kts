@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library")
-    id("kotlin-platform-android")
+    id("kotlin-android")
     id("maven-publish")
     id("mirego.publish")
 }

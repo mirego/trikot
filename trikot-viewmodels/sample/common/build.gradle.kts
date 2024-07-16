@@ -49,7 +49,8 @@ kotlin {
         }
     }
 
-    ios()
+    iosX64()
+    iosArm64()
     iosSimulatorArm64()
 
     sourceSets {
@@ -67,17 +68,12 @@ kotlin {
             }
         }
         val androidMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
                 implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.ANDROIDX_LIFECYCLE}")
                 implementation("androidx.lifecycle:lifecycle-viewmodel:${Versions.ANDROIDX_LIFECYCLE}")
                 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_LIFECYCLE}")
             }
-        }
-
-        val iosMain by getting {
-            dependsOn(commonMain)
         }
     }
 }

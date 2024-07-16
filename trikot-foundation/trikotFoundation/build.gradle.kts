@@ -2,9 +2,8 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("mirego.publish")
+    id("org.jetbrains.kotlinx.atomicfu")
 }
-
-apply(plugin = "kotlinx-atomicfu")
 
 group = "com.mirego.trikot"
 
