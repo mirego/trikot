@@ -76,7 +76,7 @@ tasks {
         destinationFile.set(file("${rootDir}/gradle.properties"))
         properties(java.util.Properties().apply { load(destinationFile.asFile.get().reader()) }.mapKeys { it.key.toString() })
         val gitCommits = "git rev-list --count HEAD".runCommand(workingDir = rootDir)
-        val originalVersion = project.version.toString().replace("-dev\\w+".toRegex(), "")
+        val originalVersion = project.version.toString().replace("-dev\\w+".toRegex(), "").replace("-SNAPSHOT".toRegex(), "")
         property("version", "$originalVersion-dev$gitCommits")
     }
     val tagVersion by registering(TagVersionTask::class)
