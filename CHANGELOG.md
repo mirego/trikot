@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
+### Updates
+
+### Breaking Changes
+
+## 5.4.0
+
+> 2024-08-06
+
+### Breaking Changes
+
 - [VMD] Change parameters order for some Compose components
 - [VMD] Change VMDTextField's signature on Android
 - [VMD] Change VMDTextStyleProvider::textStyleForResource signature (now Composable)
@@ -30,8 +40,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Okio to `3.9.0`
 - Jetpack Compose Compiler plugin to `2.0.0`
 - Jetpack Compose Runtime to `1.6.8`
-
-### Breaking Changes
 
 ## 5.3.0
 
