@@ -7,7 +7,16 @@ class EmptyAnalyticsService : AnalyticsService {
 
     override var isEnabled = false
 
+    @Deprecated(
+        message = "Deprecated. Please use distinctDeviceId()",
+        replaceWith = ReplaceWith(
+            expression = "distinctDeviceId()",
+            imports = ["com.mirego.trikot.analytics.distinctDeviceId"]
+        )
+    )
     override fun distinctAppId() = Promise.resolve("ANALYTICS_SERVICE_NOT_CONFIGURED_DISTINCT_ID")
+
+    override suspend fun distinctDeviceId() = "ANALYTICS_SERVICE_NOT_CONFIGURED_DISTINCT_ID"
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
     }
