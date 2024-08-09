@@ -3,20 +3,38 @@ package com.mirego.kword
 import com.squareup.kotlinpoet.*
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFile
+import org.gradle.api.provider.Property
+import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import java.io.File
 import java.util.Locale
 
-open class KWordEnumGenerate : DefaultTask() {
-    @Internal
-    val extension: KWordExtension = project.extensions.getByType(KWordExtension::class.java)
+internal abstract class KWordEnumGenerate : DefaultTask() {
+
+    @get:InputFiles
+    abstract val translationFiles: ConfigurableFileCollection
+
+    @get:Input
+    abstract val enumClassName: Property<String>
+
+    @get:InputDirectory
+    abstract val generatedDir: DirectoryProperty
+
+    @get:OutputFile
+    val generatedClassFile: Provider<RegularFile> get() =
+        generatedDir.file(enumClassName.map { it.replace(".", "/") + ".kt" })
 
     @TaskAction
     fun generate() {
-        val generatedClassName = ClassName.bestGuess(getEnumClassName())
+        logger.warn("Generating KWord enum for ${enumClassName.get()}")
+        logger.warn("Translation files: ${translationFiles.files}")
+        val generatedClassName = ClassName.bestGuess(enumClassName.get())
         val enumBuilder = enumBuilder(generatedClassName)
         addEnumConstants(enumBuilder)
         writeFile(generatedClassName, enumBuilder)
@@ -24,6 +42,14 @@ open class KWordEnumGenerate : DefaultTask() {
 
     private fun enumBuilder(generatedClassName: ClassName): TypeSpec.Builder {
         return TypeSpec.enumBuilder(generatedClassName)
+            .primaryConstructor(
+                FunSpec.constructorBuilder()
+                    .addParameter("translationKey", String::class)
+                    .build())
+            .addProperty(
+                PropertySpec.builder("translationKey", String::class, KModifier.OVERRIDE)
+                    .initializer("translationKey")
+                    .build())
             .addSuperinterface(ClassName.bestGuess("com.mirego.trikot.kword.KWordKey"))
     }
 
@@ -32,11 +58,7 @@ open class KWordEnumGenerate : DefaultTask() {
             .map { key -> underscoreKey(key) to key }
             .forEach {
                 enumBuilder.addEnumConstant(it.first, TypeSpec.anonymousClassBuilder()
-                    .addProperty(
-                        PropertySpec.builder("translationKey", String::class, KModifier.OVERRIDE)
-                            .initializer("%S", it.second)
-                            .build()
-                    )
+                    .addSuperclassConstructorParameter("%S", it.second)
                     .build())
             }
     }
@@ -46,12 +68,12 @@ open class KWordEnumGenerate : DefaultTask() {
             .indent("    ")
             .addType(enumBuilder.build())
             .build()
-            .writeTo(getGeneratedDir())
+            .writeTo(generatedDir.get().asFile)
     }
 
     private fun parseKeys(): List<String> {
         val keys = mutableSetOf<String>()
-        getTranslationFiles().forEach {
+        translationFiles.forEach {
             val translations = JsonSlurper().parse(it) as Map<String, Any>
             keys.addAll(translations.keys)
         }
@@ -62,24 +84,5 @@ open class KWordEnumGenerate : DefaultTask() {
         fun underscoreKey(key: String): String {
             return key.replace(Regex("([A-Z])"), "_$1").replace(".", "_").uppercase(Locale.ENGLISH)
         }
-    }
-
-    @InputFiles
-    fun getTranslationFiles(): List<File> =
-        extension.translationFile?.let { listOf(it) } ?: extension.translationFiles
-
-    @Internal
-    fun getEnumClassName(): String {
-        return extension.enumClassName ?: ""
-    }
-
-    @Internal
-    fun getGeneratedDir(): File {
-        return extension.generatedDir ?: File("")
-    }
-
-    @OutputFile
-    fun getGeneratedClassFile(): File {
-        return File(getGeneratedDir(), getEnumClassName().replace(".", "/") + ".kt")
     }
 }

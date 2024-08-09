@@ -1,0 +1,18 @@
+public abstract class com/mirego/kword/KWordExtension {
+	public fun <init> ()V
+	public abstract fun getEnumClassName ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGeneratedDir ()Lorg/gradle/api/file/DirectoryProperty;
+	public abstract fun getTranslationFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public abstract fun getTranslationFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
+}
+
+public final class com/mirego/kword/KWordPlugin : org/gradle/api/Plugin {
+	public static final field Companion Lcom/mirego/kword/KWordPlugin$Companion;
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class com/mirego/kword/KWordPlugin$Companion {
+}
+
