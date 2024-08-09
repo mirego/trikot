@@ -20,7 +20,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import java.util.Locale
 
-internal abstract class KWordEnumGenerate : DefaultTask() {
+abstract class KWordEnumGenerate : DefaultTask() {
 
     @get:InputFiles
     abstract val translationFiles: ConfigurableFileCollection
