@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
@@ -77,10 +79,6 @@ android {
     }
 }
 
-project.afterEvaluate {
-    tasks
-        .filter { task -> task.name.startsWith("compile") && task.name.contains("Kotlin") }
-        .forEach { task ->
-            task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
-        }
+tasks.withType<KotlinCompilationTask<*>> {
+    dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
 }
