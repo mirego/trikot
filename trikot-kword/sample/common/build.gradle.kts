@@ -16,9 +16,9 @@ configurations {
 }
 
 kword {
-    translationFile.set(file("src/commonMain/resources/translations/translation.en.json"))
-    enumClassName.set("com.mirego.sample.KWordTranslation")
-    generatedDir.set(file("src/commonMain/generated"))
+    translationFile = file("src/commonMain/resources/translations/translation.en.json")
+    enumClassName = "com.mirego.sample.KWordTranslation"
+    generatedDir = file("src/commonMain/generated")
 }
 
 fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
