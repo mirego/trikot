@@ -2,7 +2,8 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("2.0.1")
+    id("mirego.kword").version("5.5.0-SNAPSHOT")
+//    id("mirego.kword").version("5.4.0")
 }
 
 group = "com.mirego.sample"

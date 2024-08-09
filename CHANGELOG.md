@@ -7,8 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Upcoming
 
 ### Breaking Changes
+
 - [kword] Gradle plugin DSL changed. All properties are now lazy.
-Instead of
+  Instead of
+
 ```kotlin
   translationFile = file("src/commonMain/resources/translations/translation.en.json")
   enumClassName = "com.mirego.sample.KWordTranslation"
@@ -16,6 +18,7 @@ Instead of
 ```
 
 Do this
+
 ```kotlin
   translationFile.set(file("src/commonMain/resources/translations/translation.en.json"))
   enumClassName.set("com.mirego.sample.KWordTranslation")

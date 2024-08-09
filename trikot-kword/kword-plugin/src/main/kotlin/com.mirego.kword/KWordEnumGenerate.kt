@@ -1,6 +1,11 @@
 package com.mirego.kword
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
@@ -45,11 +50,13 @@ internal abstract class KWordEnumGenerate : DefaultTask() {
             .primaryConstructor(
                 FunSpec.constructorBuilder()
                     .addParameter("translationKey", String::class)
-                    .build())
+                    .build()
+            )
             .addProperty(
                 PropertySpec.builder("translationKey", String::class, KModifier.OVERRIDE)
                     .initializer("translationKey")
-                    .build())
+                    .build()
+            )
             .addSuperinterface(ClassName.bestGuess("com.mirego.trikot.kword.KWordKey"))
     }
 
@@ -57,9 +64,12 @@ internal abstract class KWordEnumGenerate : DefaultTask() {
         parseKeys()
             .map { key -> underscoreKey(key) to key }
             .forEach {
-                enumBuilder.addEnumConstant(it.first, TypeSpec.anonymousClassBuilder()
-                    .addSuperclassConstructorParameter("%S", it.second)
-                    .build())
+                enumBuilder.addEnumConstant(
+                    it.first,
+                    TypeSpec.anonymousClassBuilder()
+                        .addSuperclassConstructorParameter("%S", it.second)
+                        .build()
+                )
             }
     }
 
