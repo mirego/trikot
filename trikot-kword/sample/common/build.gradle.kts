@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jlleitschuh.gradle.ktlint.tasks.KtLintCheckTask
 
 plugins {
     id("com.android.library")
@@ -77,6 +78,10 @@ android {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
     }
+}
+
+tasks.withType<KtLintCheckTask> {
+    dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
 }
 
 tasks.withType<KotlinCompilationTask<*>> {
