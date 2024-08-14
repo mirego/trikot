@@ -1,8 +1,11 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jlleitschuh.gradle.ktlint.tasks.KtLintCheckTask
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("2.0.1")
+    id("mirego.kword").version("5.4.0")
 }
 
 group = "com.mirego.sample"
@@ -77,10 +80,10 @@ android {
     }
 }
 
-project.afterEvaluate {
-    tasks
-        .filter { task -> task.name.startsWith("compile") && task.name.contains("Kotlin") }
-        .forEach { task ->
-            task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
-        }
+tasks.withType<KtLintCheckTask> {
+    dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
+}
+
+tasks.withType<KotlinCompilationTask<*>> {
+    dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
 }

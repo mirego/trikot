@@ -8,9 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
-### Updates
+- [kword] Gradle plugin DSL changed. All properties are now lazy.
+  Instead of
 
-### Breaking Changes
+```kotlin
+  translationFile = file("src/commonMain/resources/translations/translation.en.json")
+  enumClassName = "com.mirego.sample.KWordTranslation"
+  generatedDir = file("src/commonMain/generated")
+```
+
+Do this
+
+```kotlin
+  translationFile.set(file("src/commonMain/resources/translations/translation.en.json"))
+  enumClassName.set("com.mirego.sample.KWordTranslation")
+  generatedDir.set(file("src/commonMain/generated"))
+```
+
+### Updates
 
 ## 5.4.0
 

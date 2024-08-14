@@ -1,17 +1,10 @@
 plugins {
-    id("groovy")
+    kotlin("jvm")
     id("mirego.publish")
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
 }
 
 dependencies {
     implementation(gradleApi())
-    implementation(localGroovy())
     implementation("com.squareup:kotlinpoet:${Versions.KOTLIN_POET}")
 }
 
