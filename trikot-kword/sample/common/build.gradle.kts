@@ -5,7 +5,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("5.4.0")
+    id("mirego.kword").version("5.5.0-dev2721")
 }
 
 group = "com.mirego.sample"
@@ -19,9 +19,9 @@ configurations {
 }
 
 kword {
-    translationFile = file("src/commonMain/resources/translations/translation.en.json")
-    enumClassName = "com.mirego.sample.KWordTranslation"
-    generatedDir = file("src/commonMain/generated")
+    translationFile.set(file("src/commonMain/resources/translations/translation.en.json"))
+    enumClassName.set("com.mirego.sample.KWordTranslation")
+    generatedDir.set(file("src/commonMain/generated"))
 }
 
 fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
