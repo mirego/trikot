@@ -17,6 +17,7 @@ Pod::Spec.new do |spec|
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
   spec.ios.deployment_target = '10.0'
+  spec.tvos.deployment_target = '10.0'
   spec.osx.deployment_target = '10.9'
 
   # Streams
