@@ -16,6 +16,9 @@ Pod::Spec.new do |spec|
 
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
+  spec.ios.deployment_target = '10.0'
+  spec.osx.deployment_target = '10.9'
+
   # Streams
   spec.subspec 'streams' do |subspec|
     subspec.source_files  = "trikot-streams/swift-extensions/*.swift"
