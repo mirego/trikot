@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
@@ -85,6 +87,7 @@ android {
 }
 
 project.afterEvaluate {
+    tasks.named("runKtlintCheckOverCommonMainSourceSet").dependsOn("kwordGenerateEnum")
     tasks
         .filter { task -> task.name.startsWith("compile") && task.name.contains("Kotlin") }
         .forEach { task ->
