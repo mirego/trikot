@@ -32,13 +32,17 @@ internal class CombineLatestProcessor<T>(
 
         override fun onSubscribe(s: Subscription) {
             super.onSubscribe(s)
-            subscribeToCombinedPublishersIfNeeded()
+            serialQueue.dispatch {
+                subscribeToCombinedPublishersIfNeeded()
+            }
         }
 
         override fun onCancel(s: Subscription) {
             super.onCancel(s)
-            cancellableManagerProvider.cancel()
-            hasSubscribed.compareAndSet(true, false)
+            serialQueue.dispatch {
+                cancellableManagerProvider.cancel()
+                hasSubscribed.compareAndSet(true, false)
+            }
         }
 
         override fun onNext(t: T, subscriber: Subscriber<in List<T?>>) {
