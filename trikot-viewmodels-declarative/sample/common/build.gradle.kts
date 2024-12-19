@@ -87,9 +87,8 @@ android {
 }
 
 project.afterEvaluate {
-    tasks.named("runKtlintCheckOverCommonMainSourceSet").dependsOn("kwordGenerateEnum")
     tasks
-        .filter { task -> task.name.startsWith("compile") && task.name.contains("Kotlin") }
+        .filter { task -> (task.name.startsWith("compile") && task.name.contains("Kotlin")) || task.name.contains("KtlintCheckOver") }
         .forEach { task ->
             task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
         }
