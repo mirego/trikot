@@ -9,7 +9,7 @@ class CancellableManager : Cancellable, VerifiableCancelledState {
     private val queueList = AtomicListReference<Cancellable>()
 
     private var isCancelledDelegate = atomic(false)
-    override var isCancelled: Boolean by isCancelledDelegate
+    override val isCancelled: Boolean by isCancelledDelegate
 
     fun <T : Cancellable> add(cancellable: T): T {
         queueList.add(cancellable)
