@@ -39,6 +39,9 @@ class Promise<T> internal constructor(
         }
     }
 
+    private val isParentCancellableCancelled: Boolean
+        get() = onParentCancellation.isCancelled
+
     /**
      * When a result is received, we want to make sure we're considered as "cancelled" by the provided cancellableManager if any.
      * This allows to use `CancellableManager::cleanCancelledChildren` with promises to clean up finished promises
@@ -60,7 +63,7 @@ class Promise<T> internal constructor(
             .subscribe(
                 internalCancellableManager,
                 onNext = { value ->
-                    if (!onParentCancellation.isCancelled) {
+                    if (!isParentCancellableCancelled) {
                         result.value = value
                         result.complete()
 
@@ -68,14 +71,14 @@ class Promise<T> internal constructor(
                     }
                 },
                 onError = { error ->
-                    if (!onParentCancellation.isCancelled) {
+                    if (!isParentCancellableCancelled) {
                         result.error = error
 
                         onResultReceived()
                     }
                 },
                 onCompleted = {
-                    if (!onParentCancellation.isCancelled) {
+                    if (!isParentCancellableCancelled) {
                         if (result.value == null && result.error == null) {
                             result.error = EmptyPromiseException
                         }
