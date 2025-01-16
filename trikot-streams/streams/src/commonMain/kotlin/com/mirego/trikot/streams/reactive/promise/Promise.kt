@@ -49,7 +49,7 @@ class Promise<T> internal constructor(
      *
      * We don't want the `onParentCancellation::cancel()` to run since the provided cancellableManager was not cancelled,
      * so we don't call `cancel()` directly, but instead modify the `isCancelled` value manually.
-      */
+     */
     private fun onResultReceived() {
         onParentCancellation.isCancelled = true
         internalCancellableManager.cancel()
