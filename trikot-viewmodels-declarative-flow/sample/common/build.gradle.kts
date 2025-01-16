@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("5.5.0-dev2721")
+    id("mirego.kword").version("5.5.0-dev2726")
 }
 
 group = "com.mirego.sample"
@@ -14,7 +14,7 @@ configurations {
 }
 
 kword {
-    translationFile.set(file("src/commonMain/resources/translations/translation.en.json"))
+    translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
     enumClassName.set("com.mirego.sample.KWordTranslation")
     generatedDir.set(file("src/commonMain/generated"))
 }
