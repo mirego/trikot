@@ -23,17 +23,24 @@ public abstract interface class com/mirego/trikot/streams/cancellable/Cancellabl
 	public abstract fun cancel ()V
 }
 
-public final class com/mirego/trikot/streams/cancellable/CancellableManager : com/mirego/trikot/streams/cancellable/Cancellable {
+public final class com/mirego/trikot/streams/cancellable/CancellableManager : com/mirego/trikot/streams/cancellable/Cancellable, com/mirego/trikot/streams/cancellable/VerifiableCancelledState {
 	public fun <init> ()V
 	public final fun add (Lcom/mirego/trikot/streams/cancellable/Cancellable;)Lcom/mirego/trikot/streams/cancellable/Cancellable;
 	public final fun add (Lkotlin/jvm/functions/Function0;)V
 	public fun cancel ()V
+	public final fun cleanCancelledChildren ()V
+	public fun isCancelled ()Z
 }
 
-public final class com/mirego/trikot/streams/cancellable/CancellableManagerProvider : com/mirego/trikot/streams/cancellable/Cancellable {
+public final class com/mirego/trikot/streams/cancellable/CancellableManagerProvider : com/mirego/trikot/streams/cancellable/Cancellable, com/mirego/trikot/streams/cancellable/VerifiableCancelledState {
 	public fun <init> ()V
 	public fun cancel ()V
 	public final fun cancelPreviousAndCreate ()Lcom/mirego/trikot/streams/cancellable/CancellableManager;
+	public fun isCancelled ()Z
+}
+
+public abstract interface class com/mirego/trikot/streams/cancellable/VerifiableCancelledState {
+	public abstract fun isCancelled ()Z
 }
 
 public abstract interface class com/mirego/trikot/streams/reactive/BehaviorSubject : com/mirego/trikot/streams/reactive/MutablePublisher {
