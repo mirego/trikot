@@ -15,9 +15,7 @@ class KWordPlugin : Plugin<Project> {
             it.group = TASKS_GROUP
             it.description = "Generate keys enum based on json translation file."
             it.enumClassName.set(extension.enumClassName)
-            it.translationFiles.setFrom(
-                extension.translationFiles + extension.translationFile
-            )
+            it.translationFiles.setFrom(extension.translationFiles)
             it.generatedDir.set(extension.generatedDir)
         }
     }
