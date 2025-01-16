@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Breaking Changes
 
 - [kword] Gradle plugin DSL changed. All properties are now lazy.
+  `translationFile` was replaced with `translationFiles` to support multiple translation files.
+
   Instead of
 
 ```kotlin
@@ -20,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Do this
 
 ```kotlin
-  translationFile.set(file("src/commonMain/resources/translations/translation.en.json"))
+  translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
   enumClassName.set("com.mirego.sample.KWordTranslation")
   generatedDir.set(file("src/commonMain/generated"))
 ```
