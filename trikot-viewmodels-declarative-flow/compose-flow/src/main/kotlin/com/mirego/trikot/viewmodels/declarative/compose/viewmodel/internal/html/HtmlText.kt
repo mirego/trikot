@@ -50,7 +50,7 @@ import androidx.core.text.HtmlCompat
 
 private val LIST_REGEX = "(<li\\s*[^>]*>)(.*)(</li>)".toRegex()
 
-@OptIn(ExperimentalTextApi::class)
+@ExperimentalTextApi
 @Composable
 internal fun HtmlText(
     text: String,
@@ -109,7 +109,7 @@ private fun String.addBullets() =
         "$startTag&nbsp;&nbsp;&nbsp;&nbsp;• $inside$endTag"
     }
 
-@OptIn(ExperimentalTextApi::class)
+@ExperimentalTextApi
 @Composable
 private fun String.asHTML(
     fontSize: TextUnit,

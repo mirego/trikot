@@ -3,6 +3,7 @@ package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
@@ -16,6 +17,7 @@ import com.mirego.trikot.viewmodels.declarative.compose.extensions.vmdModifier
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.html.HtmlText
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.internal.html.linkTextColor
 
+@ExperimentalTextApi
 @Composable
 fun VMDHtmlText(
     viewModel: VMDHtmlTextViewModel,
