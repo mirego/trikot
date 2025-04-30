@@ -35,9 +35,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.UrlAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,9 +48,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.takeOrElse
 import androidx.core.text.HtmlCompat
 
-private const val URL_TAG = "url_tag"
 private val LIST_REGEX = "(<li\\s*[^>]*>)(.*)(</li>)".toRegex()
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
 internal fun HtmlText(
     text: String,
@@ -78,9 +80,9 @@ internal fun HtmlText(
             onTextLayout = onTextLayout,
             onClick = {
                 content
-                    .getStringAnnotations(URL_TAG, it, it)
+                    .getUrlAnnotations(it, it)
                     .firstOrNull()
-                    ?.let { stringAnnotation -> linkClicked(stringAnnotation.item) }
+                    ?.let { stringAnnotation -> linkClicked(stringAnnotation.item.url) }
             },
         )
     } else {
@@ -107,6 +109,7 @@ private fun String.addBullets() =
         "$startTag&nbsp;&nbsp;&nbsp;&nbsp;• $inside$endTag"
     }
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
 private fun String.asHTML(
     fontSize: TextUnit,
@@ -135,9 +138,8 @@ private fun String.asHTML(
                 is SubscriptSpan -> span.spanStyle()
 
                 is URLSpan -> {
-                    addStringAnnotation(
-                        tag = URL_TAG,
-                        annotation = span.url,
+                    addUrlAnnotation(
+                        urlAnnotation = UrlAnnotation(url = span.url),
                         start = start,
                         end = end,
                     )
