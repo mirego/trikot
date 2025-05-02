@@ -25,8 +25,8 @@ import io.ktor.content.ByteArrayContent
 import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
-import io.ktor.util.InternalAPI
 import io.ktor.util.flattenEntries
+import io.ktor.utils.io.InternalAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
