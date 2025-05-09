@@ -264,5 +264,4 @@ class CombineLatestProcessorTests {
             assertEquals("final_$thirdIndex", values[2])
         }
     }
-
 }
