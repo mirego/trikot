@@ -210,4 +210,58 @@ class CombineLatestProcessorTests {
         assertEquals("b", secondValueReceived)
         assertEquals("c", thirdValueReceived)
     }
+
+    @Test
+    fun combineWithMultiplePublishers_initializesStateSafelyAndCombinesValues() {
+        val publishers = listOf(
+            MockPublisher("a1"),
+            MockPublisher("b1"),
+            MockPublisher("c1"),
+            MockPublisher("d1"),
+            MockPublisher("e1")
+        )
+
+        val receivedValues = mutableMapOf<String, MutableList<String?>>()
+
+        val totalCombinations = 5
+        for (i in 0 until totalCombinations) {
+            val secondIndex = (i + 1) % publishers.size
+            val thirdIndex = (i + 2) % publishers.size
+
+            val mainPublisher = publishers[i]
+            val secondPublisher = publishers[secondIndex]
+            val thirdPublisher = publishers[thirdIndex]
+
+            val combinationId = "combo_$i"
+            receivedValues[combinationId] = mutableListOf(null, null, null)
+
+            mainPublisher.safeCombine(secondPublisher, thirdPublisher)
+                .subscribe(CancellableManager()) { (value1, value2, value3) ->
+                    receivedValues[combinationId]?.let {
+                        it[0] = value1
+                        it[1] = value2
+                        it[2] = value3
+                    }
+                }
+
+            publishers.forEach { publisher ->
+                publisher.value += "_updated"
+            }
+        }
+
+        publishers.forEachIndexed { index, publisher ->
+            publisher.value = "final_$index"
+        }
+
+        for (i in 0 until totalCombinations) {
+            val secondIndex = (i + 1) % publishers.size
+            val thirdIndex = (i + 2) % publishers.size
+
+            val values = receivedValues["combo_$i"] ?: error("Missing values for combination $i")
+
+            assertEquals("final_$i", values[0])
+            assertEquals("final_$secondIndex", values[1])
+            assertEquals("final_$thirdIndex", values[2])
+        }
+    }
 }

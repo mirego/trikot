@@ -115,8 +115,8 @@ fun <T, R1, R2> Publisher<T>.safeCombine(publisher1: Publisher<R1>, publisher2: 
     return (this as Publisher<Any>).combine(listOf(publisher1, publisher2) as List<Publisher<Any>>)
         .filter { list ->
             list[0] as? T != null &&
-                list[1] as? T != null &&
-                list[2] as? T != null
+                list[1] as? R1 != null &&
+                list[2] as? R2 != null
         }
         .map { list ->
             Triple(list[0] as T, list[1] as R1, list[2] as R2)

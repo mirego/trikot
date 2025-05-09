@@ -1,6 +1,5 @@
 package com.mirego.trikot.streams.reactive.processors
 
-import com.mirego.trikot.foundation.concurrent.AtomicListReference
 import com.mirego.trikot.foundation.concurrent.AtomicReference
 import com.mirego.trikot.foundation.concurrent.dispatchQueue.SynchronousSerialQueue
 import com.mirego.trikot.streams.cancellable.CancellableManagerProvider
@@ -25,7 +24,7 @@ internal class CombineLatestProcessor<T>(
         private val publishers: List<Publisher<T>>
     ) : ProcessorSubscription<T, List<T?>>(subscriber) {
         private val cancellableManagerProvider = CancellableManagerProvider()
-        private val publishersResult = AtomicListReference<PublisherResult<T>>()
+        private val publishersResult = AtomicReference<List<PublisherResult<T>>>(emptyList())
         private val hasSubscribed = AtomicReference(false)
         private val parentPublisherResultIndex = 0
         private val serialQueue = SynchronousSerialQueue()
@@ -80,11 +79,9 @@ internal class CombineLatestProcessor<T>(
         private fun subscribeToCombinedPublishersIfNeeded() {
             if (hasSubscribed.compareAndSet(false, true)) {
                 val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
-                publishersResult.removeAll(publishersResult.value)
+                val newPublisherResultsList = List(publishers.size + 1) { PublisherResult<T>() }
 
-                repeat(publishers.size + 1) {
-                    publishersResult.add(PublisherResult())
-                }
+                publishersResult.compareAndSet(publishersResult.value, newPublisherResultsList)
 
                 publishers.forEachIndexed { index, publisher ->
                     val publisherResultIndex = index + 1
