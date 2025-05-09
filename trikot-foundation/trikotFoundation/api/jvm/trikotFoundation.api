@@ -169,6 +169,7 @@ public abstract class com/mirego/trikot/foundation/concurrent/AbstractAtomicList
 	public fun <init> ()V
 	public final fun getValue ()Ljava/util/List;
 	protected final fun mutateWhenReady (Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public final fun set (Ljava/util/List;)V
 }
 
 public final class com/mirego/trikot/foundation/concurrent/AtomicListReference : com/mirego/trikot/foundation/concurrent/AbstractAtomicListReference {
@@ -205,6 +206,7 @@ public final class com/mirego/trikot/foundation/concurrent/AtomicReference {
 	public final fun compareAndSwap (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun getAndSet (Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun getValue ()Ljava/lang/Object;
+	public final fun set (Ljava/lang/Object;)V
 	public final fun setOrThrow (Ljava/lang/Object;Ljava/lang/Object;)V
 	public final fun setOrThrow (Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)V
 }
