@@ -6,6 +6,8 @@ class AtomicReference<T>(value: T) {
 
     val value: T get() = atomicValue.value
 
+    fun set(new: T) { atomicValue.value = new }
+
     fun compareAndSet(expected: T, new: T): Boolean = atomicValue.compareAndSet(expected, new)
 
     fun setOrThrow(expected: T, new: T) = setOrThrow(expected, new, null)

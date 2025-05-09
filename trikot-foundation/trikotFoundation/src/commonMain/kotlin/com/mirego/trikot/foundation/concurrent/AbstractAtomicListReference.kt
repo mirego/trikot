@@ -14,4 +14,8 @@ abstract class AbstractAtomicListReference<T> {
             mutateWhenReady(block)
         }
     }
+
+    fun set(newValue: List<T>) {
+        internalReference.set(newValue)
+    }
 }

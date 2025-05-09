@@ -80,11 +80,12 @@ internal class CombineLatestProcessor<T>(
         private fun subscribeToCombinedPublishersIfNeeded() {
             if (hasSubscribed.compareAndSet(false, true)) {
                 val cancellableManager = cancellableManagerProvider.cancelPreviousAndCreate()
-                publishersResult.removeAll(publishersResult.value)
-
+                val newPublisherResultsList = mutableListOf<PublisherResult<T>>()
                 repeat(publishers.size + 1) {
-                    publishersResult.add(PublisherResult())
+                    newPublisherResultsList.add(PublisherResult())
                 }
+
+                publishersResult.set(newPublisherResultsList)
 
                 publishers.forEachIndexed { index, publisher ->
                     val publisherResultIndex = index + 1
