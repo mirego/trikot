@@ -37,7 +37,7 @@ dependencies {
     api("androidx.compose.material3:material3:${Versions.JETPACK_COMPOSE_MATERIAL_3}")
     api("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     api("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    api("io.coil-kt:coil-compose:${Versions.COIL}")
+    api("io.coil-kt:coil-compose:${Versions.COIL_COMPOSE}")
     implementation("com.google.accompanist:accompanist-drawablepainter:${Versions.ACCOMPANIST}")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")

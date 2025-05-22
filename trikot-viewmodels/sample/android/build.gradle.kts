@@ -72,5 +72,5 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.ANDROIDX_LIFECYCLE}")
     implementation("com.google.android.material:material:1.2.1")
-    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("io.coil-kt.coil3:coil:${Versions.COIL}")
 }
