@@ -29,6 +29,29 @@ object ImageViewModelBinder {
 
     @JvmStatic
     @BindingAdapter(
+        value = ["view_model", "imageLoader", "lifecycleOwnerWrapper", "transformation", "placeholderScaleType"],
+        requireAll = false
+    )
+    fun bind(
+        imageView: ImageView,
+        imageViewModel: ImageViewModel?,
+        imageLoader: ImageLoader? = null,
+        lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
+        transformation: Transformation? = null,
+        placeholderScaleType: ImageView.ScaleType? = null
+    ) {
+        bind(
+            imageView,
+            imageViewModel,
+            imageLoader,
+            lifecycleOwnerWrapper,
+            transformations = transformation?.let { listOf(it) },
+            placeholderScaleType = placeholderScaleType
+        )
+    }
+
+    @JvmStatic
+    @BindingAdapter(
         value = ["view_model", "imageLoader", "lifecycleOwnerWrapper", "transformations", "placeholderScaleType"],
         requireAll = false
     )

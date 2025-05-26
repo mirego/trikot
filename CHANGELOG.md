@@ -27,6 +27,41 @@ Do this
   generatedDir.set(file("src/commonMain/generated"))
 ```
 
+- [viewmodels] Picasso was replaced with Coil.
+  _To migrate:_
+
+  - Replace `com.squareup.picasso:picasso:2.71828` with `io.coil-kt.coil3:3.1.0` in your Android modules.
+  - Optional: replace `jp.wasabeef:picasso-transformations` with `com.github.Commit451.coil-transformations:transformations:3.0.7` in your Android modules for image transformations.
+
+  By default, `ImageViewModelBinder.bind(...)` remains mostly the same as before, except for transformations that must be reimplemented using the interface `coil3.transform.Transformation`. Also, a new parameter `imageLoader` was added to override the default cache. Documentation to override Coil's cache was added to the module's [README.md](./trikot-viewmodels/README.md).
+
+  Instead of
+
+  ```kotlin
+  val transformation = jp.wasabeef.picasso.transformations
+
+  ImageViewModelBinder.bind(
+    imageView,
+    imageViewModel,
+    lifecycleOwnerWrapper,
+    transformation, // Custom transformation that implements [com.squareup.picasso.Transformation].
+    placeholderScaleType
+  )
+  ```
+
+  Do this
+
+  ```kotlin
+  ImageViewModelBinder.bind(
+    imageView,
+    imageViewModel,
+    imageLoader, // New optional parameter to use a custom cache
+    lifecycleOwnerWrapper,
+    listOf(transformation), // Custom transformation that implements [coil3.transform.Transformation]. Multiple transformations are now accepted.
+    placeholderScaleType
+  )
+  ```
+
 ### Updates
 
 ## 5.4.0
