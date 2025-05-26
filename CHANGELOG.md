@@ -55,10 +55,10 @@ Do this
   ImageViewModelBinder.bind(
     imageView = imageView,
     imageViewModel = imageViewModel,
-    imageLoader = imageLoader, // New optional parameter to use a custom cache
     lifecycleOwnerWrapper = lifecycleOwnerWrapper,
     transformations = listOf(transformation), // Custom transformation that implements [coil3.transform.Transformation]. Multiple transformations are now accepted.
-    placeholderScaleType = placeholderScaleType
+    placeholderScaleType = placeholderScaleType,
+    imageLoader = imageLoader // New optional parameter to use a custom cache
   )
   ```
 

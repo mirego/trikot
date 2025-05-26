@@ -29,16 +29,16 @@ object ImageViewModelBinder {
 
     @JvmStatic
     @BindingAdapter(
-        value = ["view_model", "imageLoader", "lifecycleOwnerWrapper", "transformations", "placeholderScaleType"],
+        value = ["view_model", "lifecycleOwnerWrapper", "transformations", "placeholderScaleType", "imageLoader"],
         requireAll = false
     )
     fun bind(
         imageView: ImageView,
         imageViewModel: ImageViewModel?,
-        imageLoader: ImageLoader? = null,
         lifecycleOwnerWrapper: LifecycleOwnerWrapper? = null,
         transformations: List<Transformation>? = null,
-        placeholderScaleType: ImageView.ScaleType? = null
+        placeholderScaleType: ImageView.ScaleType? = null,
+        imageLoader: ImageLoader? = null
     ) {
         val safeLifecycleOwnerWrapper = lifecycleOwnerWrapper ?: BindingUtils.getLifecycleOwnerWrapperFromView(imageView)
         (imageViewModel ?: NoImageViewModel).let {
