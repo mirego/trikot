@@ -75,9 +75,7 @@ public final class com/mirego/trikot/viewmodels/ImageResourceExtensionsKt {
 
 public final class com/mirego/trikot/viewmodels/ImageViewModelBinder {
 	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/ImageViewModelBinder;
-	public static final fun bind (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ImageViewModel;Lcoil3/ImageLoader;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Lcoil3/transform/Transformation;Landroid/widget/ImageView$ScaleType;)V
 	public static final fun bind (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ImageViewModel;Lcoil3/ImageLoader;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Ljava/util/List;Landroid/widget/ImageView$ScaleType;)V
-	public static synthetic fun bind$default (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ImageViewModel;Lcoil3/ImageLoader;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Lcoil3/transform/Transformation;Landroid/widget/ImageView$ScaleType;ILjava/lang/Object;)V
 	public static synthetic fun bind$default (Landroid/widget/ImageView;Lcom/mirego/trikot/viewmodels/ImageViewModel;Lcoil3/ImageLoader;Lcom/mirego/trikot/viewmodels/LifecycleOwnerWrapper;Ljava/util/List;Landroid/widget/ImageView$ScaleType;ILjava/lang/Object;)V
 }
 
