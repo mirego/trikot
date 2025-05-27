@@ -99,3 +99,49 @@ button.buttonViewModel = searchViewModel.buttonViewModel
         }
     }
 ```
+
+## Image caching for image views
+
+#### Android
+
+Under the hood, Android uses [Coil3](https://coil-kt.github.io/coil/) to load and cache images for image views (`ImageView`). It employs two caching layers: **memory** for quick access, and **disk cache** to persist images across app restarts. By default, Coil’s `SingletonImageLoader` is used along with its default cache sizes.
+
+If needed, you can override Coil's default `SingletonImageLoader` cache size in your app.
+
+```kotlin
+SingletonImageLoader.setSafe {
+    ImageLoader.Builder(context)
+        .memoryCache {
+            MemoryCache.Builder()
+                .maxSizePercent(context, 0.2)
+                .build()
+        }
+        .diskCache {
+            DiskCache.Builder()
+                .directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
+                .maxSizePercent(0.02)
+                .build()
+        }
+        ...
+        .build()
+}
+```
+
+Refer to [Coil's `ImageLoader` documentation](https://coil-kt.github.io/coil/image_loaders/) for specifications.
+
+Alternatively, if you need more control, you can directly pass a custom `ImageLoader` to the `ImageView`:
+
+```kotlin
+val imageLoader = ImageLoader.Builder(context)
+    ...
+    .build()
+```
+
+```xml
+<ImageView
+    ...
+    app:view_model="@{viewModel.imageViewModel}"
+    app:imageLoader="@{imageLoader}"
+    app:lifecycleOwnerWrapper="@{lifecycleOwnerWrapper}"
+    />
+```
