@@ -1,8 +1,9 @@
 package com.mirego.trikot.datasources.flow
 
-import kotlinx.datetime.Clock
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 data class ExpiringExecutableFlowDataSourceRequest<T>(
     override val cacheableId: String,
@@ -11,6 +12,7 @@ data class ExpiringExecutableFlowDataSourceRequest<T>(
     val block: suspend () -> T
 ) : ExpiringFlowDataSourceRequest
 
+@OptIn(ExperimentalTime::class)
 open class ExpiringExecutableFlowDataSource<T>(
     cacheDataSource: FlowDataSource<ExpiringExecutableFlowDataSourceRequest<T>, FlowDataSourceExpiringValue<T>>? = null,
     coroutineContext: CoroutineContext = EmptyCoroutineContext

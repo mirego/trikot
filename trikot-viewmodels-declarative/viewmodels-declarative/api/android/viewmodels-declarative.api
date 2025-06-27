@@ -609,6 +609,8 @@ public final class com/mirego/trikot/viewmodels/declarative/controller/factory/A
 public final class com/mirego/trikot/viewmodels/declarative/controller/factory/AndroidViewModelProviderFactory$ParametrizedFactory : androidx/lifecycle/ViewModelProvider$Factory {
 	public fun <init> (Landroid/app/Application;Ljava/util/List;)V
 	public fun create (Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+	public fun create (Ljava/lang/Class;Landroidx/lifecycle/viewmodel/CreationExtras;)Landroidx/lifecycle/ViewModel;
+	public fun create (Lkotlin/reflect/KClass;Landroidx/lifecycle/viewmodel/CreationExtras;)Landroidx/lifecycle/ViewModel;
 }
 
 public abstract interface class com/mirego/trikot/viewmodels/declarative/controller/factory/ViewModelControllerFactoryProvidingApplication {

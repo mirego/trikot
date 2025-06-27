@@ -266,7 +266,7 @@ public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/Synchro
 
 public abstract interface class com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue {
 	public abstract fun dispatch (Lkotlin/jvm/functions/Function0;)V
-	public abstract fun isSerial ()Z
+	public fun isSerial ()Z
 }
 
 public final class com/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue$DefaultImpls {

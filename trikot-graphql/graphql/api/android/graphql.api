@@ -20,6 +20,7 @@ public final class com/mirego/trikot/graphql/GraphqlJsonObject {
 
 public abstract interface class com/mirego/trikot/graphql/GraphqlPublisherFactory {
 	public abstract fun create-moChb0s (Lcom/mirego/trikot/graphql/GraphqlQuery;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
+	public static synthetic fun create-moChb0s$default (Lcom/mirego/trikot/graphql/GraphqlPublisherFactory;Lcom/mirego/trikot/graphql/GraphqlQuery;Lcom/mirego/trikot/http/HttpHeaderProvider;Lkotlin/time/Duration;ILjava/lang/Object;)Lcom/mirego/trikot/streams/reactive/executable/ExecutablePublisher;
 }
 
 public final class com/mirego/trikot/graphql/GraphqlPublisherFactory$DefaultImpls {

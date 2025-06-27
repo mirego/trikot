@@ -69,8 +69,8 @@ public abstract interface class com/mirego/trikot/viewmodels/LabelViewModel : co
 
 public abstract interface class com/mirego/trikot/viewmodels/ListItemViewModel : com/mirego/trikot/viewmodels/ViewModel {
 	public abstract fun getComparableId ()Ljava/lang/String;
-	public abstract fun haveTheSameContent (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
-	public abstract fun isTheSame (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
+	public fun haveTheSameContent (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
+	public fun isTheSame (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
 	public abstract fun setComparableId (Ljava/lang/String;)V
 }
 
@@ -151,6 +151,10 @@ public final class com/mirego/trikot/viewmodels/lifecycle/ApplicationState : jav
 
 public final class com/mirego/trikot/viewmodels/lifecycle/ApplicationStatePublisher : com/mirego/trikot/streams/reactive/BehaviorSubjectImpl, androidx/lifecycle/DefaultLifecycleObserver, org/reactivestreams/Publisher {
 	public fun <init> ()V
+	public fun onCreate (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onDestroy (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onPause (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onResume (Landroidx/lifecycle/LifecycleOwner;)V
 	public fun onStart (Landroidx/lifecycle/LifecycleOwner;)V
 	public fun onStop (Landroidx/lifecycle/LifecycleOwner;)V
 }
