@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
+- Minimum Kotlin compiler version `2.2.0` must be use in order to consume the library
+
+- `kotlinx-datetime` version `0.7.0` no longer provide the `Instant` nor the `Clock` classes. In order to prevent runtime issues, update the `kotlinx-datetime` dependency to `0.7.0` in your project (see https://github.com/Kotlin/kotlinx-datetime?tab=readme-ov-file#deprecation-of-instant).
+
 - [kword] Gradle plugin DSL changed. All properties are now lazy.
   `translationFile` was replaced with `translationFiles` to support multiple translation files.
 
