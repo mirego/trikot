@@ -10,12 +10,13 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Clock
 import kotlin.coroutines.CoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalTime::class)
 class BaseExpiringExecutableFlowDataSourceTests {
     private val requestUseCache = BasicRequest("1", FlowDataSourceRequest.Type.USE_CACHE, 1000)
     private val requestRefreshCache = BasicRequest("1", FlowDataSourceRequest.Type.REFRESH_CACHE, 1000)
