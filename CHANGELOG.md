@@ -33,7 +33,6 @@ Do this
 
 - [viewmodels] Picasso was replaced with Coil.
   _To migrate:_
-
   - Replace `com.squareup.picasso:picasso:2.71828` with `io.coil-kt.coil3:3.1.0` in your Android modules.
   - Optional: replace `jp.wasabeef:picasso-transformations` with `com.github.Commit451.coil-transformations:transformations:3.0.7` in your Android modules for image transformations.
 
