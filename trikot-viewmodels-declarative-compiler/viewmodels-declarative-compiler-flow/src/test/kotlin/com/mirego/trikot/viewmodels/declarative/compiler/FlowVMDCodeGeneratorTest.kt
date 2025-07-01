@@ -2,10 +2,10 @@ package com.mirego.trikot.viewmodels.declarative.compiler
 
 import com.mirego.trikot.viewmodels.declarative.viewmodel.VMDViewModelImpl
 import com.mirego.trikot.viewmodels.declarative.viewmodel.internal.VMDFlowProperty
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
-import com.tschuchort.compiletesting.kspWithCompilation
-import com.tschuchort.compiletesting.symbolProcessorProviders
+import com.tschuchort.compiletesting.configureKsp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
@@ -22,12 +22,13 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCompilerApi::class)
 class FlowVMDCodeGeneratorTest {
 
-    private fun compileSources(vararg kotlinSource: SourceFile): KotlinCompilation.Result =
+    private fun compileSources(vararg kotlinSource: SourceFile): JvmCompilationResult =
         KotlinCompilation().apply {
             sources = kotlinSource.toList()
-            symbolProcessorProviders = listOf(BuilderProcessorProvider())
             inheritClassPath = true
-            kspWithCompilation = true
+            configureKsp(useKsp2 = true) {
+                symbolProcessorProviders.addAll(listOf(BuilderProcessorProvider()))
+            }
             compile()
         }.compile()
 

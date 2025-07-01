@@ -18,7 +18,7 @@ object Versions {
     const val KSP = "2.2.0-2.0.2"
     const val KOTLIN_POET = "1.18.1"
     const val ACCOMPANIST = "0.34.0"
-    const val COMPILE_TESTING_KSP = "1.6.0"
+    const val KOTLIN_COMPILE_TESTING = "0.7.1"
 
     object Android {
         const val TARGET_SDK = 35
