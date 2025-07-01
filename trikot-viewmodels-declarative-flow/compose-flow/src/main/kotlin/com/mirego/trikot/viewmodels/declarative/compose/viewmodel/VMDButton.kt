@@ -5,7 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -25,14 +25,15 @@ fun <C : VMDContent> VMDButton(
     contentAlignment: Alignment = Alignment.Center,
     propagateMinConstraints: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    indication: Indication? = rememberRipple(),
+    indication: Indication? = ripple(),
     role: Role? = Role.Button,
     content: @Composable (BoxScope.(field: C) -> Unit)
 ) {
     val buttonViewModel: VMDButtonViewModel<C> by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())
 
     Box(
-        modifier = modifier.vmdModifier(buttonViewModel)
+        modifier = modifier
+            .vmdModifier(buttonViewModel)
             .clickable(
                 enabled = buttonViewModel.isEnabled,
                 onClick = viewModel.actionBlock,
