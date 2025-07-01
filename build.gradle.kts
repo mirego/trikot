@@ -21,7 +21,7 @@ buildscript {
 
 plugins {
     id("mirego.publish").version("1.0")
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.0"
     id("org.jetbrains.kotlin.plugin.compose") version Versions.KOTLIN apply false
 }
 

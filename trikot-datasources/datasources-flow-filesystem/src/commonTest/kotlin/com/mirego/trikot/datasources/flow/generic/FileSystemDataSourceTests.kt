@@ -5,7 +5,6 @@ import com.mirego.trikot.datasources.flow.FlowDataSourceExpiringValue
 import com.mirego.trikot.datasources.flow.FlowDataSourceRequest
 import com.mirego.trikot.datasources.flow.filesystem.NativeFileSystem
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Clock
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -19,7 +18,10 @@ import kotlin.test.assertFails
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 class FileSystemDataSourceTests {
     private val diskCachePath = "testDiskCachePath"
     private val json = Json

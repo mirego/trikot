@@ -1,7 +1,9 @@
 package com.mirego.trikot.datasources
 
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 data class ExpiringValue<T>(
     val value: T,
     val expiredEpoch: Long

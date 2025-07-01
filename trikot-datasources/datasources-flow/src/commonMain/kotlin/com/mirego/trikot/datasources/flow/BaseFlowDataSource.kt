@@ -6,6 +6,7 @@ import com.mirego.trikot.datasources.flow.extensions.withPreviousDataStateValue
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ExperimentalForInheritanceCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -117,7 +118,7 @@ abstract class BaseFlowDataSource<R : FlowDataSourceRequest, T>(
     }
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalForInheritanceCoroutinesApi::class)
 private class CachedDataFlow<R : FlowDataSourceRequest, T>(
     scope: CoroutineScope,
     initialRequest: R,

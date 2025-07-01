@@ -1,19 +1,15 @@
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDCheckboxTvKt {
 	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDCheckboxTvKt;
-	public static field lambda-1 Lkotlin/jvm/functions/Function4;
-	public static field lambda-2 Lkotlin/jvm/functions/Function4;
 	public fun <init> ()V
-	public final fun getLambda-1$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
-	public final fun getLambda-2$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-334361670$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$1304452855$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDSwitchTvKt {
 	public static final field INSTANCE Lcom/mirego/trikot/viewmodels/declarative/compose/viewmodel/ComposableSingletons$VMDSwitchTvKt;
-	public static field lambda-1 Lkotlin/jvm/functions/Function4;
-	public static field lambda-2 Lkotlin/jvm/functions/Function4;
 	public fun <init> ()V
-	public final fun getLambda-1$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
-	public final fun getLambda-2$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$1604217208$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$620417426$compose_tv_flow_release ()Lkotlin/jvm/functions/Function4;
 }
 
 public final class com/mirego/trikot/viewmodels/declarative/compose/viewmodel/VMDButtonTvKt {

@@ -24,7 +24,7 @@ fun VMDCircularProgressIndicator(
     viewModel: VMDProgressViewModel,
     color: Color = MaterialTheme.colorScheme.primary,
     strokeWidth: Dp = ProgressIndicatorDefaults.CircularStrokeWidth,
-    trackColor: Color = ProgressIndicatorDefaults.circularTrackColor,
+    trackColor: Color = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
     strokeCap: StrokeCap = StrokeCap.Square
 ) {
     val progressViewModel: VMDProgressViewModel by viewModel.observeAsState(excludedProperties = if (modifier.isOverridingAlpha()) listOf(viewModel::isHidden) else emptyList())

@@ -36,10 +36,10 @@ fun VMDLinearProgressIndicator(
         )
     } else {
         LinearProgressIndicator(
+            progress = { animatedProgress },
             modifier = newModifier,
-            progress = animatedProgress,
             color = color,
-            trackColor = trackColor
+            trackColor = trackColor,
         )
     }
 }

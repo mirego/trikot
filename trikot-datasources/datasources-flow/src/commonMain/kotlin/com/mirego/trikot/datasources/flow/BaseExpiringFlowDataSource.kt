@@ -2,14 +2,16 @@ package com.mirego.trikot.datasources.flow
 
 import com.mirego.trikot.datasources.DataState
 import com.mirego.trikot.datasources.flow.extensions.mapValue
-import kotlinx.datetime.Clock
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 interface ExpiringFlowDataSourceRequest : FlowDataSourceRequest {
     val expiredInMilliseconds: Long
 }
 
+@OptIn(ExperimentalTime::class)
 data class FlowDataSourceExpiringValue<T>(
     val value: T,
     val expiredEpoch: Long

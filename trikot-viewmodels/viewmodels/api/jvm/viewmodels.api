@@ -69,8 +69,8 @@ public abstract interface class com/mirego/trikot/viewmodels/LabelViewModel : co
 
 public abstract interface class com/mirego/trikot/viewmodels/ListItemViewModel : com/mirego/trikot/viewmodels/ViewModel {
 	public abstract fun getComparableId ()Ljava/lang/String;
-	public abstract fun haveTheSameContent (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
-	public abstract fun isTheSame (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
+	public fun haveTheSameContent (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
+	public fun isTheSame (Lcom/mirego/trikot/viewmodels/ListItemViewModel;)Z
 	public abstract fun setComparableId (Ljava/lang/String;)V
 }
 

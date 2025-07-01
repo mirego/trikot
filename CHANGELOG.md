@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Breaking Changes
 
+- Minimum Kotlin compiler version `2.2.0` must be use in order to consume this library
+
+- `kotlinx-datetime` version `0.7.0` no longer provide the `Instant` nor the `Clock` classes. In order to prevent runtime issues, update the `kotlinx-datetime` dependency to `0.7.0` in your project and use the `kotlin.time` imports (see https://github.com/Kotlin/kotlinx-datetime?tab=readme-ov-file#deprecation-of-instant).
+
 - [kword] Gradle plugin DSL changed. All properties are now lazy.
   `translationFile` was replaced with `translationFiles` to support multiple translation files.
 
@@ -29,7 +33,6 @@ Do this
 
 - [viewmodels] Picasso was replaced with Coil.
   _To migrate:_
-
   - Replace `com.squareup.picasso:picasso:2.71828` with `io.coil-kt.coil3:3.1.0` in your Android modules.
   - Optional: replace `jp.wasabeef:picasso-transformations` with `com.github.Commit451.coil-transformations:transformations:3.0.7` in your Android modules for image transformations.
 

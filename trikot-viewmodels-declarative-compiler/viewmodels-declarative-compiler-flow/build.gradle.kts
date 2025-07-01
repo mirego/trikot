@@ -14,7 +14,7 @@ dependencies {
     implementation(project(Project.TRIKOT_VIEWMODELS_DECLARATIVE_FLOW))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}")
 
-    testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:${Versions.COMPILE_TESTING_KSP}")
+    testImplementation("dev.zacsweers.kctfork:ksp:${Versions.KOTLIN_COMPILE_TESTING}")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("org.jetbrains.kotlin:kotlin-reflect:${Versions.KOTLIN}")
