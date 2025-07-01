@@ -14,7 +14,7 @@ object Versions {
     const val KTOR = "2.3.12"
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.760"
     const val ANDROIDX_LIFECYCLE = "2.8.2"
-    const val OKIO = "3.10.2"
+    const val OKIO = "3.14.0"
     const val KSP = "2.2.0-2.0.2"
     const val KOTLIN_POET = "1.18.1"
     const val ACCOMPANIST = "0.34.0"
