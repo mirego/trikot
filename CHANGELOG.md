@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - [kword] Gradle plugin DSL changed. All properties are now lazy.
   `translationFile` was replaced with `translationFiles` to support multiple translation files.
+- `enumClassName` was renamed to `targetClassName` and it generates constant for improved performance.
 
   Instead of
 
@@ -27,7 +28,7 @@ Do this
 
 ```kotlin
   translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
-  enumClassName.set("com.mirego.sample.KWordTranslation")
+  targetClassName.set("com.mirego.sample.KWordTranslation")
   generatedDir.set(file("src/commonMain/generated"))
 ```
 

@@ -11,10 +11,10 @@ class KWordPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create("kword", KWordExtension::class.java)
 
-        project.tasks.create("kwordGenerateEnum", KWordEnumGenerate::class.java) {
+        project.tasks.create("kwordGenerateConst", KWordConstGenerate::class.java) {
             it.group = TASKS_GROUP
-            it.description = "Generate keys enum based on json translation file."
-            it.enumClassName.set(extension.enumClassName)
+            it.description = "Generate keys const based on json translation file."
+            it.targetClassName.set(extension.targetClassName)
             it.translationFiles.setFrom(extension.translationFiles)
             it.generatedDir.set(extension.generatedDir)
         }

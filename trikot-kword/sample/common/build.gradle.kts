@@ -5,7 +5,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("5.5.0-dev2726")
+    id("mirego.kword").version("5.5.0-SNAPSHOT")
 }
 
 group = "com.mirego.sample"
@@ -20,7 +20,7 @@ configurations {
 
 kword {
     translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
-    enumClassName.set("com.mirego.sample.KWordTranslation")
+    targetClassName.set("com.mirego.sample.KWordTranslation")
     generatedDir.set(file("src/commonMain/generated"))
 }
 
@@ -81,9 +81,9 @@ android {
 }
 
 tasks.withType<KtLintCheckTask> {
-    dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
+    dependsOn(tasks.withType<com.mirego.kword.KWordConstGenerate>())
 }
 
 tasks.withType<KotlinCompilationTask<*>> {
-    dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
+    dependsOn(tasks.withType<com.mirego.kword.KWordConstGenerate>())
 }
