@@ -86,5 +86,6 @@ project.afterEvaluate {
         .filter { task -> (task.name.startsWith("compile") && task.name.contains("Kotlin")) || task.name.contains("KtlintCheckOver") }
         .forEach { task ->
             task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
+//            task.dependsOn(tasks.withType<com.mirego.kword.KWordConstGenerate>())
         }
 }
