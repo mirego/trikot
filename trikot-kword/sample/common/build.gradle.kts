@@ -24,6 +24,13 @@ kword {
     generatedDir.set(file("src/commonMain/generated"))
 }
 
+ktlint {
+    filter {
+        exclude("**/KWordTranslation.kt")
+        exclude { it.file.path.contains("/generated/") }
+    }
+}
+
 fun org.jetbrains.kotlin.gradle.plugin.mpp.Framework.configureFramework() {
     baseName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
     transitiveExport = true
