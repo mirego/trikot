@@ -1,3 +1,10 @@
+public abstract class com/mirego/kword/KWordExtension {
+	public fun <init> ()V
+	public abstract fun getGeneratedDir ()Lorg/gradle/api/file/DirectoryProperty;
+	public abstract fun getTargetClassName ()Lorg/gradle/api/provider/Property;
+	public abstract fun getTranslationFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
+}
+
 public abstract class com/mirego/kword/KWordGenerate : org/gradle/api/DefaultTask {
 	public static final field Companion Lcom/mirego/kword/KWordGenerate$Companion;
 	public fun <init> ()V
@@ -10,13 +17,6 @@ public abstract class com/mirego/kword/KWordGenerate : org/gradle/api/DefaultTas
 
 public final class com/mirego/kword/KWordGenerate$Companion {
 	public final fun underscoreKey (Ljava/lang/String;)Ljava/lang/String;
-}
-
-public abstract class com/mirego/kword/KWordExtension {
-	public fun <init> ()V
-	public abstract fun getGeneratedDir ()Lorg/gradle/api/file/DirectoryProperty;
-	public abstract fun getTargetClassName ()Lorg/gradle/api/provider/Property;
-	public abstract fun getTranslationFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
 }
 
 public final class com/mirego/kword/KWordPlugin : org/gradle/api/Plugin {
