@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("5.5.0-SNAPSHOT")
+    id("mirego.kword").version("5.5.0-dev2733")
 }
 
 group = "com.mirego.sample"
@@ -92,6 +92,6 @@ project.afterEvaluate {
     tasks
         .filter { task -> (task.name.startsWith("compile") && task.name.contains("Kotlin")) || task.name.contains("KtlintCheckOver") }
         .forEach { task ->
-            task.dependsOn(tasks.withType<com.mirego.kword.KWordConstGenerate>())
+            task.dependsOn(tasks.withType<com.mirego.kword.KWordGenerate>())
         }
 }

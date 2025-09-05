@@ -11,7 +11,7 @@ class KWordPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create("kword", KWordExtension::class.java)
 
-        project.tasks.create("kwordGenerateConst", KWordConstGenerate::class.java) {
+        project.tasks.create("kwordGenerate", KWordGenerate::class.java) {
             it.group = TASKS_GROUP
             it.description = "Generate keys const based on json translation file."
             it.targetClassName.set(extension.targetClassName)

@@ -20,13 +20,13 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import java.util.Locale
 
-abstract class KWordConstGenerate : DefaultTask() {
+abstract class KWordGenerate : DefaultTask() {
 
     @get:InputFiles
     abstract val translationFiles: ConfigurableFileCollection
 
     @get:Input
-    abstract val targetClassName: Property<String> // Renamed from enumClassName
+    abstract val targetClassName: Property<String>
 
     @get:OutputDirectory
     abstract val generatedDir: DirectoryProperty
@@ -34,13 +34,13 @@ abstract class KWordConstGenerate : DefaultTask() {
     @get:OutputFile
     val generatedClassFile: Provider<RegularFile>
         get() =
-            generatedDir.file(targetClassName.map { it.replace(".", "/") + ".kt" }) // Updated to use targetClassName
+            generatedDir.file(targetClassName.map { it.replace(".", "/") + ".kt" })
 
     @TaskAction
     fun generate() {
-        logger.warn("Generating KWord consts for ${targetClassName.get()}") // Updated to use targetClassName
+        logger.warn("Generating KWord consts for ${targetClassName.get()}")
         logger.warn("Translation files: ${translationFiles.files}")
-        val generatedClassName = ClassName.bestGuess(targetClassName.get()) // Updated to use targetClassName
+        val generatedClassName = ClassName.bestGuess(targetClassName.get())
         val kwordKeyInterface = ClassName("com.mirego.trikot.kword", "KWordKey")
 
         val constructorSpec = FunSpec.constructorBuilder()

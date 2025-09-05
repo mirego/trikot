@@ -5,7 +5,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("5.5.0-SNAPSHOT")
+    id("mirego.kword").version("5.5.0-dev2733")
 }
 
 group = "com.mirego.sample"
@@ -88,9 +88,9 @@ android {
 }
 
 tasks.withType<KtLintCheckTask> {
-    dependsOn(tasks.withType<com.mirego.kword.KWordConstGenerate>())
+    dependsOn(tasks.withType<com.mirego.kword.KWordGenerate>())
 }
 
 tasks.withType<KotlinCompilationTask<*>> {
-    dependsOn(tasks.withType<com.mirego.kword.KWordConstGenerate>())
+    dependsOn(tasks.withType<com.mirego.kword.KWordGenerate>())
 }

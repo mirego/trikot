@@ -32,7 +32,7 @@ kotlin {
      }
 }
 
-tasks.findAll { it.name.startsWith('compile') }.each { it.dependsOn('kwordGenerateConst') }
+tasks.findAll { it.name.startsWith('compile') }.each { it.dependsOn('kwordGenerate') }
 ```
 
 This will generate an enum Named KWordTranslation containing all the keys contained in your translationFile.

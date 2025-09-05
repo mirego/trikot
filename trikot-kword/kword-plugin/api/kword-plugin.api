@@ -1,5 +1,5 @@
-public abstract class com/mirego/kword/KWordConstGenerate : org/gradle/api/DefaultTask {
-	public static final field Companion Lcom/mirego/kword/KWordConstGenerate$Companion;
+public abstract class com/mirego/kword/KWordGenerate : org/gradle/api/DefaultTask {
+	public static final field Companion Lcom/mirego/kword/KWordGenerate$Companion;
 	public fun <init> ()V
 	public final fun generate ()V
 	public final fun getGeneratedClassFile ()Lorg/gradle/api/provider/Provider;
@@ -8,7 +8,7 @@ public abstract class com/mirego/kword/KWordConstGenerate : org/gradle/api/Defau
 	public abstract fun getTranslationFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
 }
 
-public final class com/mirego/kword/KWordConstGenerate$Companion {
+public final class com/mirego/kword/KWordGenerate$Companion {
 	public final fun underscoreKey (Ljava/lang/String;)Ljava/lang/String;
 }
 

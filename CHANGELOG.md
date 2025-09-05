@@ -15,22 +15,39 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [kword] Gradle plugin DSL changed. All properties are now lazy.
   `translationFile` was replaced with `translationFiles` to support multiple translation files.
 - `enumClassName` was renamed to `targetClassName` and it generates constant for improved performance.
+- Gradle task has been renamed from `kwordGenerateEnum` to `kwordGenerate`.
 
-  Instead of
-
+  
+Instead of
+  
 ```kotlin
   translationFile = file("src/commonMain/resources/translations/translation.en.json")
   enumClassName = "com.mirego.sample.KWordTranslation"
   generatedDir = file("src/commonMain/generated")
 ```
 
-Do this
+  Do this
 
 ```kotlin
   translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
   targetClassName.set("com.mirego.sample.KWordTranslation")
   generatedDir.set(file("src/commonMain/generated"))
 ```
+
+  Replace task dependencies from 
+  
+```kotlin
+  dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
+```
+
+  to
+  
+```kotlin
+  dependsOn(tasks.withType<com.mirego.kword.KWordGenerate>())
+```
+
+*Note that you may have to comment this line to sync your project the first time.*
+
 
 - [viewmodels] Picasso was replaced with Coil.
   _To migrate:_
