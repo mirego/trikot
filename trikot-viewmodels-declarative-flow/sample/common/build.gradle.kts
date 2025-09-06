@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("mirego.kword").version("5.5.0-dev2733")
+    id("mirego.kword").version("5.5.0-dev2726")
 }
 
 group = "com.mirego.sample"
@@ -15,7 +15,7 @@ configurations {
 
 kword {
     translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
-    targetClassName.set("com.mirego.sample.KWordTranslation")
+    enumClassName.set("com.mirego.sample.KWordTranslation")
     generatedDir.set(file("src/commonMain/generated"))
 }
 
@@ -92,6 +92,6 @@ project.afterEvaluate {
     tasks
         .filter { task -> (task.name.startsWith("compile") && task.name.contains("Kotlin")) || task.name.contains("KtlintCheckOver") }
         .forEach { task ->
-            task.dependsOn(tasks.withType<com.mirego.kword.KWordGenerate>())
+            task.dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
         }
 }
