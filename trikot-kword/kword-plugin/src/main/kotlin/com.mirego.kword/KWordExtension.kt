@@ -7,7 +7,7 @@ import org.gradle.api.provider.Property
 abstract class KWordExtension {
     abstract val translationFiles: ConfigurableFileCollection
 
-    abstract val enumClassName: Property<String>
+    abstract val targetClassName: Property<String>
 
     abstract val generatedDir: DirectoryProperty
 }

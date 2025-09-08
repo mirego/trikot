@@ -2,7 +2,7 @@
 
 Trikot.KWord provides the necessary tools to make localisation happen in Kotlin Multiplatform application.
 
-- A gradle plugin that generates Kotlin `enum` from [Accent](https://www.accent.reviews/) localisation files
+- A gradle plugin that generates constants from [Accent](https://www.accent.reviews/) localisation files
 - Kotlin Multiplatform dependencies to interact with the localisation
 - Swift and Android extensions to change current locale to use.
 
@@ -15,7 +15,7 @@ plugins {
 
 kword {
     translationFile 'src/commonMain/resources/translations/translation.fr.json'
-    enumClassName 'com.myproject.common.localization.KWordTranslation'
+    targetClassName 'com.myproject.common.localization.KWordTranslation'
     generatedDir 'src/commonMain/generated'
 }
 
@@ -32,7 +32,7 @@ kotlin {
      }
 }
 
-tasks.findAll { it.name.startsWith('compile') }.each { it.dependsOn('kwordGenerateEnum') }
+tasks.findAll { it.name.startsWith('compile') }.each { it.dependsOn('kwordGenerate') }
 ```
 
 This will generate an enum Named KWordTranslation containing all the keys contained in your translationFile.
