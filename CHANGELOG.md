@@ -17,16 +17,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `enumClassName` was renamed to `targetClassName` and it generates constant for improved performance.
 - Gradle task has been renamed from `kwordGenerateEnum` to `kwordGenerate`.
 
-  
 Instead of
-  
+
 ```kotlin
   translationFile = file("src/commonMain/resources/translations/translation.en.json")
   enumClassName = "com.mirego.sample.KWordTranslation"
   generatedDir = file("src/commonMain/generated")
 ```
 
-  Do this
+Do this
 
 ```kotlin
   translationFiles.setFrom(file("src/commonMain/resources/translations/translation.en.json"))
@@ -34,20 +33,19 @@ Instead of
   generatedDir.set(file("src/commonMain/generated"))
 ```
 
-  Replace task dependencies from 
-  
+Replace task dependencies from
+
 ```kotlin
   dependsOn(tasks.withType<com.mirego.kword.KWordEnumGenerate>())
 ```
 
-  to
-  
+to
+
 ```kotlin
   dependsOn(tasks.withType<com.mirego.kword.KWordGenerate>())
 ```
 
-*Note that you may have to comment this line to sync your project the first time.*
-
+_Note that you may have to comment this line to sync your project the first time._
 
 - [viewmodels] Picasso was replaced with Coil.
   _To migrate:_
