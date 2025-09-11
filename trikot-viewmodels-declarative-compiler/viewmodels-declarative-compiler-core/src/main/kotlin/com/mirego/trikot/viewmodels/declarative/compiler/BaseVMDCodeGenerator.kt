@@ -94,10 +94,20 @@ abstract class BaseVMDCodeGenerator(
         logger.logging("Creating file:")
         logger.logging("     packageName: $packageName")
         logger.logging("     className: $className")
-
+        val viewModelFile = viewModelMetaData.viewModelInterface.containingFile
+        val dependencies = if (viewModelFile != null) {
+            Dependencies(
+                false,
+                viewModelFile
+            )
+        } else {
+            Dependencies(
+                false,
+            )
+        }
         OutputStreamWriter(
             codeGenerator.createNewFile(
-                dependencies = Dependencies(false),
+                dependencies = dependencies,
                 packageName = packageName,
                 fileName = className
             ),
