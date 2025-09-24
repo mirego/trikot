@@ -37,7 +37,8 @@ let package = Package(
         // Streams
         .target(
             name: "TrikotStreams",
-            path: "trikot-streams/swift-extensions"
+            path: "trikot-streams/swift-extensions",
+            exclude: ["combine"]
         ),
 
         // Streams Combine
