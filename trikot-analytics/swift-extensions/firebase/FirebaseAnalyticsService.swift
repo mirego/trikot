@@ -1,6 +1,6 @@
 import FirebaseAnalytics
 import Foundation
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public class FirebaseAnalyticsService: AnalyticsService {
     public var name: String = "FirebaseAnalytics"

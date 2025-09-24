@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public struct VMDToggle<Label, Content>: View where Label: View, Content: VMDContent {
     private let labelBuilder: ((Content) -> Label)?

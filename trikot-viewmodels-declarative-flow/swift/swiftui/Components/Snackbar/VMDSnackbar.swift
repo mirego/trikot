@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public struct VMDSnackbar<Content>: View where Content: View {
     private let viewDataFlow: VMDFlow<VMDSnackbarViewData>

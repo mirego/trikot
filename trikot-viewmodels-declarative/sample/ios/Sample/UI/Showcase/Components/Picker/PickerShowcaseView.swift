@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 struct PickerShowcaseView: RootViewModelView {
     typealias VM = PickerShowcaseViewModel

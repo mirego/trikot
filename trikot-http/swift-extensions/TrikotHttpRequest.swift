@@ -1,5 +1,5 @@
 import Foundation
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public class TrikotHttpRequest: NSObject, HttpRequest {
     private struct Constants {

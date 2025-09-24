@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public protocol ImageViewModelResourceProvider {
     func image(fromResource resource: TrikotImageResource?) -> UIImage?

@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public protocol VMDImageProviderUIKit {
     func imageForResource(imageResource: VMDImageResource) -> UIImage?

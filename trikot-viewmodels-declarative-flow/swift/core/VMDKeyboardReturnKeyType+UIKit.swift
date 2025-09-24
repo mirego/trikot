@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public extension VMDKeyboardReturnKeyType {
     public var uiReturnKeyType: UIReturnKeyType {

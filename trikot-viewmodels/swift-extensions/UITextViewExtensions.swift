@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 extension UITextView {
     public var trikotLabelViewModel: LabelViewModel? {

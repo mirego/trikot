@@ -1,6 +1,6 @@
 import Foundation
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public class TrikotKword: NSObject {
     public static let translationBasePaths = [

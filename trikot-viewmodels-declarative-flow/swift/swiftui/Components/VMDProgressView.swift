@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public struct VMDProgressView<Label, CurrentValueLabel>: View where Label : View, CurrentValueLabel : View {
     private var viewModel: VMDProgressViewModel {

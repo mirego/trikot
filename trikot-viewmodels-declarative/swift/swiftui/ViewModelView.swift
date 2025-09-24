@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public protocol ViewModelView: View {
     associatedtype VM: VMDViewModel

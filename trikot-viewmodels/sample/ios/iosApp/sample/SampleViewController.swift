@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class ListViewController: UIViewController {
     private let sampleView = ListView(frame: .zero)

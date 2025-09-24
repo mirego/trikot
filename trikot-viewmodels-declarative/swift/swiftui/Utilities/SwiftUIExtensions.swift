@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 extension ForEach where ID == String, Content : View, Data.Element : VMDIdentifiableContent {
     public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {

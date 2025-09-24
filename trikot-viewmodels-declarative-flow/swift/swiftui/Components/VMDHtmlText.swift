@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 import UIKit
 
 public struct VMDHtmlText: View {

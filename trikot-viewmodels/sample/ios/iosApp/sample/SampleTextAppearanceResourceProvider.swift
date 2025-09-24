@@ -1,5 +1,5 @@
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class SampleTextAppearanceResourceProvider: TextAppearanceViewModelResourceProvider {
     func textAppearance(fromResource resource: TextAppearanceResource) -> TextAppearanceAttributes? {

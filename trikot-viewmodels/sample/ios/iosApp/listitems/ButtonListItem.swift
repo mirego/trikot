@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class ButtonListItem: UIView {
     private let button = UIButton(frame: .zero)

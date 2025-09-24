@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public typealias VMDSpanStyle = [NSAttributedString.Key: Any]
 

@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class ToggleShowcaseViewController: BaseViewModelViewController<ToggleShowcaseViewModelController, ToggleShowcaseViewModel, ToggleShowcaseView, ToggleShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

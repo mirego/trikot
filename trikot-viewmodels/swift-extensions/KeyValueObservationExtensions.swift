@@ -1,5 +1,5 @@
 import Foundation
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class KeyValueObservationHolder: NSObject, Cancellable {
     let kvo: NSKeyValueObservation

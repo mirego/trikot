@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public struct VMDList<RowContent, Identifiable, Content>: View where RowContent: View, Identifiable: VMDIdentifiableContent, Content: VMDContent {
     private let rowContentBuilder: (Content) -> RowContent

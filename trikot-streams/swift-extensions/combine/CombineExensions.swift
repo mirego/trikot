@@ -1,8 +1,8 @@
 import Combine
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public class PublisherAdapter<T>: Combine.Publisher {
-    private let publisher: TRIKOT_FRAMEWORK_NAME.Publisher
+    private let publisher: Jasper.Publisher
 
     public typealias Output = T
 
@@ -12,12 +12,12 @@ public class PublisherAdapter<T>: Combine.Publisher {
         publisher.subscribe(s: SubscriberAdapter(subscriber))
     }
 
-    public init(_ publisher: TRIKOT_FRAMEWORK_NAME.Publisher) {
+    public init(_ publisher: Jasper.Publisher) {
         self.publisher = publisher
     }
 }
 
-public class SubscriberAdapter<S: Combine.Subscriber>: TRIKOT_FRAMEWORK_NAME.Subscriber {
+public class SubscriberAdapter<S: Combine.Subscriber>: Jasper.Subscriber {
     private let subscriber: S
 
     public init(_ subscriber: S) {
@@ -46,15 +46,15 @@ public class SubscriberAdapter<S: Combine.Subscriber>: TRIKOT_FRAMEWORK_NAME.Sub
         }
     }
 
-    public func onSubscribe(s: TRIKOT_FRAMEWORK_NAME.Subscription) {
+    public func onSubscribe(s: Jasper.Subscription) {
         subscriber.receive(subscription: SubscriptionAdapter(s))
     }
 }
 
 public class SubscriptionAdapter: Combine.Subscription {
-    private let subscription: TRIKOT_FRAMEWORK_NAME.Subscription
+    private let subscription: Jasper.Subscription
 
-    init(_ subscription: TRIKOT_FRAMEWORK_NAME.Subscription) {
+    init(_ subscription: Jasper.Subscription) {
         self.subscription = subscription
     }
 
@@ -71,7 +71,7 @@ public class SubscriptionAdapter: Combine.Subscription {
     }
 }
 
-extension TRIKOT_FRAMEWORK_NAME.Publisher {
+extension Jasper.Publisher {
     public func asCombinePublisher<T>(type: T.Type) -> AnyPublisher<T, Never> {
         AnyPublisher(PublisherAdapter<T>(self))
     }

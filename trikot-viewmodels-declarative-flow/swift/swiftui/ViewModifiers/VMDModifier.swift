@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 struct VmdModifier: ViewModifier {
     let isHidden: Bool

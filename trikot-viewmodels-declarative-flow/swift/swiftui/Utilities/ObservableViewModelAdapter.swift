@@ -1,6 +1,6 @@
 import SwiftUI
 import Combine
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public class ObservableViewModelAdapter<VM: VMDViewModel>: ObservableObject {
     public let viewModel: VM

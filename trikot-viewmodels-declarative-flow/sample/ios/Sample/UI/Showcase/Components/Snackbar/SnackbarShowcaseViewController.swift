@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class SnackbarShowcaseViewController: BaseViewModelViewController<SnackbarShowcaseViewModelController, SnackbarShowcaseViewModel, SnackbarShowcaseView, SnackbarShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

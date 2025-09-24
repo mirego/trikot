@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class ImageListItem: UIView {
     private let image = UIImageView(frame: .zero)

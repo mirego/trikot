@@ -1,5 +1,5 @@
 import Kingfisher
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 import UIKit
 
 private let BUTTON_VIEW_MODEL_IMAGE_HANDLER_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)

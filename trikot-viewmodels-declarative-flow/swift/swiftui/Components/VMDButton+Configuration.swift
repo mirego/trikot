@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public extension VMDButton {
     func externalActionHandler(_ action: @escaping (_ action: () -> Void) -> Void) -> VMDButton {

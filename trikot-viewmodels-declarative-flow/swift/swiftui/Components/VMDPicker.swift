@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public struct VMDPicker<Label, Content: VMDContent>: View where Label: View {
     private let labelBuilder: (Content) -> Label

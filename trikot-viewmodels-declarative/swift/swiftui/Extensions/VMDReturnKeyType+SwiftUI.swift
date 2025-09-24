@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 @available(iOS 15.0, *)
 extension VMDKeyboardReturnKeyType {

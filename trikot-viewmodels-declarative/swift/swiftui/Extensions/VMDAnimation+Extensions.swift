@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public extension VMDAnimation {
     var animation: SwiftUI.Animation? {

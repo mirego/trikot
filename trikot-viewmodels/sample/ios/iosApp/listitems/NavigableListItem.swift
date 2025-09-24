@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class NavigableListItem: UIView {
     private let title = UILabel(frame: .zero)

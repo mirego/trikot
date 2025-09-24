@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftUIIntrospect
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 public struct VMDTextField<Label>: View where Label: View {
     private let labelBuilder: (() -> Label)?

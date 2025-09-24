@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import Jasper
 
 class ViewListItem: UIView {
     private let view = UIView(frame: .zero)
