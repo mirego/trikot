@@ -44,8 +44,7 @@ let package = Package(
         .target(
             name: "TrikotStreamsCombine",
             dependencies: ["TrikotStreams"],
-            path: "trikot-streams/swift-extensions/combine",
-            sources: ["*.swift"]
+            path: "trikot-streams/swift-extensions/combine"
         ),
 
         // Http
@@ -54,8 +53,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Reachability", package: "Reachability.swift")
             ],
-            path: "trikot-http/swift-extensions",
-            sources: ["*.swift"]
+            path: "trikot-http/swift-extensions"
         ),
 
         // View Models
@@ -63,8 +61,7 @@ let package = Package(
             name: "TrikotViewModels",
             dependencies: ["TrikotStreams"],
             path: "trikot-viewmodels/swift-extensions",
-            exclude: ["UISliderExtensions.swift", "UISwitchExtensions.swift", "UIPickerExtensions.swift"],
-            sources: ["*.swift"]
+            exclude: ["UISliderExtensions.swift", "UISwitchExtensions.swift", "UIPickerExtensions.swift"]
         ),
 
         // View Models Kingfisher
@@ -75,24 +72,21 @@ let package = Package(
                 "TrikotViewModels",
                 .product(name: "Kingfisher", package: "Kingfisher")
             ],
-            path: "trikot-viewmodels/swift-extensions/kingfisher",
-            sources: ["*.swift"]
+            path: "trikot-viewmodels/swift-extensions/kingfisher"
         ),
 
         // View Models Declarative
         .target(
             name: "TrikotViewModelsDeclarative",
             dependencies: ["TrikotStreams"],
-            path: "trikot-viewmodels-declarative/swift/core",
-            sources: ["**/*.swift"]
+            path: "trikot-viewmodels-declarative/swift/core"
         ),
 
         // View Models Declarative Combine
         .target(
             name: "TrikotViewModelsDeclarativeCombine",
             dependencies: ["TrikotViewModelsDeclarative"],
-            path: "trikot-viewmodels-declarative/swift/combine",
-            sources: ["**/*.swift"]
+            path: "trikot-viewmodels-declarative/swift/combine"
         ),
 
         // View Models Declarative UIKit
@@ -103,8 +97,7 @@ let package = Package(
                 "TrikotViewModelsDeclarative",
                 .product(name: "Kingfisher", package: "Kingfisher")
             ],
-            path: "trikot-viewmodels-declarative/swift/uikit",
-            sources: ["**/*.swift"]
+            path: "trikot-viewmodels-declarative/swift/uikit"
         ),
 
         // View Models Declarative SwiftUI
@@ -116,15 +109,13 @@ let package = Package(
                 .product(name: "Kingfisher", package: "Kingfisher"),
                 .product(name: "SwiftUIIntrospect", package: "swiftui-introspect")
             ],
-            path: "trikot-viewmodels-declarative/swift/swiftui",
-            sources: ["**/*.swift"]
+            path: "trikot-viewmodels-declarative/swift/swiftui"
         ),
 
         // View Models Declarative Flow
         .target(
             name: "TrikotViewModelsDeclarativeFlow",
-            path: "trikot-viewmodels-declarative-flow/swift/core",
-            sources: ["**/*.swift"]
+            path: "trikot-viewmodels-declarative-flow/swift/core"
         ),
 
         // View Models Declarative SwiftUI Flow
@@ -135,8 +126,7 @@ let package = Package(
                 .product(name: "Kingfisher", package: "Kingfisher"),
                 .product(name: "SwiftUIIntrospect", package: "swiftui-introspect")
             ],
-            path: "trikot-viewmodels-declarative-flow/swift/swiftui",
-            sources: ["**/*.swift"]
+            path: "trikot-viewmodels-declarative-flow/swift/swiftui"
         ),
 
         // Analytics Firebase
@@ -145,8 +135,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk")
             ],
-            path: "trikot-analytics/swift-extensions/firebase",
-            sources: ["*.swift"]
+            path: "trikot-analytics/swift-extensions/firebase"
         ),
 
         // Analytics Mixpanel
@@ -155,22 +144,19 @@ let package = Package(
             dependencies: [
                 .product(name: "Mixpanel", package: "mixpanel-swift")
             ],
-            path: "trikot-analytics/swift-extensions/mixpanel",
-            sources: ["*.swift"]
+            path: "trikot-analytics/swift-extensions/mixpanel"
         ),
 
         // Kword
         .target(
             name: "TrikotKword",
-            path: "trikot-kword/swift-extensions",
-            sources: ["*.swift"]
+            path: "trikot-kword/swift-extensions"
         ),
 
         // Bluetooth
         .target(
             name: "TrikotBluetooth",
-            path: "trikot-bluetooth/swift-extensions",
-            sources: ["*.swift"]
+            path: "trikot-bluetooth/swift-extensions"
         )
     ]
 )
