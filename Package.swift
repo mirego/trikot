@@ -61,7 +61,7 @@ let package = Package(
             name: "TrikotViewModels",
             dependencies: ["TrikotStreams"],
             path: "trikot-viewmodels/swift-extensions",
-            exclude: ["UISliderExtensions.swift", "UISwitchExtensions.swift", "UIPickerExtensions.swift"]
+            exclude: ["UISliderExtensions.swift", "UISwitchExtensions.swift", "UIPickerExtensions.swift", "kingfisher"]
         ),
 
         // View Models Kingfisher
