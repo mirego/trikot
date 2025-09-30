@@ -49,6 +49,7 @@ _Note that you may have to comment this line to sync your project the first time
 
 - [viewmodels] Picasso was replaced with Coil.
   _To migrate:_
+
   - Replace `com.squareup.picasso:picasso:2.71828` with `io.coil-kt.coil3:3.1.0` in your Android modules.
   - Optional: replace `jp.wasabeef:picasso-transformations` with `com.github.Commit451.coil-transformations:transformations:3.0.7` in your Android modules for image transformations.
 
@@ -80,6 +81,21 @@ _Note that you may have to comment this line to sync your project the first time
     imageLoader = imageLoader // New optional parameter to use a custom cache
   )
   ```
+
+- [VMD] Coil was upgraded to coil3.
+  - While it is not necessary to migrate your coil dependency you will have to change some imports when using VMDImage
+
+```kotlin
+      import coil.compose.AsyncImagePainter
+```
+
+```kotlin
+      import coil3.compose.AsyncImagePainter
+```
+
+    _To migrate:_
+
+- Follow [Coil official migration](https://coil-kt.github.io/coil/upgrading_to_coil3/)
 
 ### Updates
 
