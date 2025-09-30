@@ -1,6 +1,6 @@
 package com.mirego.sample.ui.showcase
 
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import com.mirego.sample.viewmodels.showcase.ShowcaseViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.LocalImage

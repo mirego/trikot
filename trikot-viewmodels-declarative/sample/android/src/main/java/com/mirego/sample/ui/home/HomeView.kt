@@ -1,14 +1,14 @@
 package com.mirego.sample.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -27,10 +27,14 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 fun HomeView(homeViewModel: HomeViewModel) {
     val viewModel: HomeViewModel by homeViewModel.observeAsState()
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        TopAppBar(title = { Text(text = viewModel.title) })
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            TopAppBar(title = { Text(text = viewModel.title) })
+        }
+    ) { paddingValues ->
 
-        VMDSectionedList(viewModel = viewModel.sections) { sections ->
+        VMDSectionedList(viewModel = viewModel.sections, modifier = Modifier.padding(paddingValues)) { sections ->
             sections.forEach { section ->
                 stickyHeader {
                     VMDText(
@@ -38,7 +42,7 @@ fun HomeView(homeViewModel: HomeViewModel) {
                         viewModel = section.title,
                         fontSize = 22.sp
                     )
-                    Divider(color = Color.LightGray)
+                    HorizontalDivider(color = Color.LightGray)
                 }
 
                 items(section.elements, key = { item -> item.identifier }) { element ->
@@ -57,7 +61,7 @@ fun HomeView(homeViewModel: HomeViewModel) {
                             )
                         }
                     )
-                    Divider(color = Color.LightGray)
+                    HorizontalDivider(color = Color.LightGray)
                 }
             }
         }

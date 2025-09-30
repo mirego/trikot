@@ -6,7 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,325 +32,332 @@ import com.mirego.trikot.viewmodels.declarative.configuration.TrikotViewModelDec
 fun ToggleShowcaseView(toggleShowcaseViewModel: ToggleShowcaseViewModel) {
     val viewModel: ToggleShowcaseViewModel by toggleShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(state = rememberScrollState())
-    ) {
-        ComponentShowcaseTopBar(viewModel)
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
+        }
+    ) { paddingValues ->
 
-        ComponentShowcaseTitle(viewModel.checkboxTitle)
-
-        VMDCheckbox(
+        Column(
             modifier = Modifier
-                .padding(start = 2.dp, top = 16.dp, end = 16.dp),
-            viewModel = viewModel.emptyToggle
-        )
+                .fillMaxWidth()
+                .padding(paddingValues)
+                .verticalScroll(state = rememberScrollState())
+        ) {
+            ComponentShowcaseTitle(viewModel.checkboxTitle)
 
-        ComponentShowcaseTitle(viewModel.textCheckboxTitle)
+            VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 2.dp, top = 16.dp, end = 16.dp),
+                viewModel = viewModel.emptyToggle
+            )
 
-        VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textToggle,
-            label = { Text(it.text, style = SampleTextStyle.body) }
-        )
+            ComponentShowcaseTitle(viewModel.textCheckboxTitle)
 
-        ComponentShowcaseTitle(viewModel.imageCheckboxTitle)
+            VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textToggle,
+                label = { Text(it.text, style = SampleTextStyle.body) }
+            )
 
-        VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.imageToggle,
-            label = { content ->
-                LocalImage(
-                    imageResource = content.image,
-                    colorFilter = ColorFilter.tint(Color.Black)
-                )
-            }
-        )
+            ComponentShowcaseTitle(viewModel.imageCheckboxTitle)
 
-        ComponentShowcaseTitle(viewModel.textImageCheckboxTitle)
-
-        VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textImageToggle,
-            label = { content ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.imageToggle,
+                label = { content ->
                     LocalImage(
                         imageResource = content.image,
                         colorFilter = ColorFilter.tint(Color.Black)
                     )
-                    Text(
-                        text = content.text,
-                        style = SampleTextStyle.body
-                    )
                 }
-            }
-        )
+            )
 
-        ComponentShowcaseTitle(viewModel.textPairCheckboxTitle)
+            ComponentShowcaseTitle(viewModel.textImageCheckboxTitle)
 
-        VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textPairToggle,
-            label = { content ->
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = content.first,
-                        style = SampleTextStyle.body
-                    )
-                    Text(
-                        text = content.second,
-                        style = SampleTextStyle.caption1
-                    )
+            VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textImageToggle,
+                label = { content ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        LocalImage(
+                            imageResource = content.image,
+                            colorFilter = ColorFilter.tint(Color.Black)
+                        )
+                        Text(
+                            text = content.text,
+                            style = SampleTextStyle.body
+                        )
+                    }
                 }
-            }
-        )
+            )
 
-        ComponentShowcaseTitle(viewModel.switchTitle)
+            ComponentShowcaseTitle(viewModel.textPairCheckboxTitle)
 
-        VMDSwitch(
-            modifier = Modifier.padding(start = 10.dp, top = 16.dp, end = 16.dp),
-            viewModel = viewModel.emptyToggle
-        )
+            VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textPairToggle,
+                label = { content ->
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = content.first,
+                            style = SampleTextStyle.body
+                        )
+                        Text(
+                            text = content.second,
+                            style = SampleTextStyle.caption1
+                        )
+                    }
+                }
+            )
 
-        ComponentShowcaseTitle(viewModel.textSwitchTitle)
+            ComponentShowcaseTitle(viewModel.switchTitle)
 
-        VMDSwitch(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textToggle,
-            label = { Text(it.text, style = SampleTextStyle.body) }
-        )
+            VMDSwitch(
+                modifier = Modifier.padding(start = 10.dp, top = 16.dp, end = 16.dp),
+                viewModel = viewModel.emptyToggle
+            )
 
-        ComponentShowcaseTitle(viewModel.imageSwitchTitle)
+            ComponentShowcaseTitle(viewModel.textSwitchTitle)
 
-        VMDSwitch(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.imageToggle,
-            label = { content ->
-                LocalImage(
-                    imageResource = content.image,
-                    colorFilter = ColorFilter.tint(Color.Black)
-                )
-            }
-        )
+            VMDSwitch(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textToggle,
+                label = { Text(it.text, style = SampleTextStyle.body) }
+            )
 
-        ComponentShowcaseTitle(viewModel.textImageSwitchTitle)
+            ComponentShowcaseTitle(viewModel.imageSwitchTitle)
 
-        VMDSwitch(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textImageToggle,
-            label = { content ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            VMDSwitch(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.imageToggle,
+                label = { content ->
                     LocalImage(
                         imageResource = content.image,
                         colorFilter = ColorFilter.tint(Color.Black)
                     )
-                    Text(
-                        modifier = Modifier.padding(start = 8.dp),
-                        text = content.text,
-                        style = SampleTextStyle.body
-                    )
                 }
-            }
-        )
+            )
 
-        ComponentShowcaseTitle(viewModel.textPairSwitchTitle)
+            ComponentShowcaseTitle(viewModel.textImageSwitchTitle)
 
-        VMDSwitch(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textPairToggle,
-            label = { content ->
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = content.first,
-                        style = SampleTextStyle.body
-                    )
-                    Text(
-                        text = content.second,
-                        style = SampleTextStyle.caption1
-                    )
+            VMDSwitch(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textImageToggle,
+                label = { content ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        LocalImage(
+                            imageResource = content.image,
+                            colorFilter = ColorFilter.tint(Color.Black)
+                        )
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = content.text,
+                            style = SampleTextStyle.body
+                        )
+                    }
                 }
-            }
-        )
+            )
 
-        androidx.compose.material3.Text(
-            text = "Material 3",
-            style = SampleTextStyle.largeTitle
-        )
+            ComponentShowcaseTitle(viewModel.textPairSwitchTitle)
 
-        ComponentShowcaseTitle(viewModel.textCheckboxTitle)
+            VMDSwitch(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textPairToggle,
+                label = { content ->
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = content.first,
+                            style = SampleTextStyle.body
+                        )
+                        Text(
+                            text = content.second,
+                            style = SampleTextStyle.caption1
+                        )
+                    }
+                }
+            )
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textToggle,
-            label = { Text(it.text, style = SampleTextStyle.body) }
-        )
+            androidx.compose.material3.Text(
+                text = "Material 3",
+                style = SampleTextStyle.largeTitle
+            )
 
-        ComponentShowcaseTitle(viewModel.imageCheckboxTitle)
+            ComponentShowcaseTitle(viewModel.textCheckboxTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.imageToggle,
-            label = { content ->
-                LocalImage(
-                    imageResource = content.image,
-                    colorFilter = ColorFilter.tint(Color.Black)
-                )
-            }
-        )
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textToggle,
+                label = { Text(it.text, style = SampleTextStyle.body) }
+            )
 
-        ComponentShowcaseTitle(viewModel.textImageCheckboxTitle)
+            ComponentShowcaseTitle(viewModel.imageCheckboxTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textImageToggle,
-            label = { content ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.imageToggle,
+                label = { content ->
                     LocalImage(
                         imageResource = content.image,
                         colorFilter = ColorFilter.tint(Color.Black)
                     )
-                    Text(
-                        text = content.text,
-                        style = SampleTextStyle.body
-                    )
                 }
-            }
-        )
+            )
 
-        ComponentShowcaseTitle(viewModel.textPairCheckboxTitle)
+            ComponentShowcaseTitle(viewModel.textImageCheckboxTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textPairToggle,
-            label = { content ->
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = content.first,
-                        style = SampleTextStyle.body
-                    )
-                    Text(
-                        text = content.second,
-                        style = SampleTextStyle.caption1
-                    )
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textImageToggle,
+                label = { content ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        LocalImage(
+                            imageResource = content.image,
+                            colorFilter = ColorFilter.tint(Color.Black)
+                        )
+                        Text(
+                            text = content.text,
+                            style = SampleTextStyle.body
+                        )
+                    }
                 }
-            }
-        )
+            )
 
-        ComponentShowcaseTitle(viewModel.switchTitle)
+            ComponentShowcaseTitle(viewModel.textPairCheckboxTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
-            modifier = Modifier.padding(start = 10.dp, top = 16.dp, end = 16.dp),
-            viewModel = viewModel.emptyToggle
-        )
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDCheckbox(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textPairToggle,
+                label = { content ->
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = content.first,
+                            style = SampleTextStyle.body
+                        )
+                        Text(
+                            text = content.second,
+                            style = SampleTextStyle.caption1
+                        )
+                    }
+                }
+            )
 
-        ComponentShowcaseTitle(viewModel.textSwitchTitle)
+            ComponentShowcaseTitle(viewModel.switchTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textToggle,
-            label = { Text(it.text, style = SampleTextStyle.body) }
-        )
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+                modifier = Modifier.padding(start = 10.dp, top = 16.dp, end = 16.dp),
+                viewModel = viewModel.emptyToggle
+            )
 
-        ComponentShowcaseTitle(viewModel.imageSwitchTitle)
+            ComponentShowcaseTitle(viewModel.textSwitchTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.imageToggle,
-            label = { content ->
-                LocalImage(
-                    imageResource = content.image,
-                    colorFilter = ColorFilter.tint(Color.Black)
-                )
-            }
-        )
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textToggle,
+                label = { Text(it.text, style = SampleTextStyle.body) }
+            )
 
-        ComponentShowcaseTitle(viewModel.textImageSwitchTitle)
+            ComponentShowcaseTitle(viewModel.imageSwitchTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textImageToggle,
-            label = { content ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.imageToggle,
+                label = { content ->
                     LocalImage(
                         imageResource = content.image,
                         colorFilter = ColorFilter.tint(Color.Black)
                     )
-                    Text(
-                        modifier = Modifier.padding(start = 8.dp),
-                        text = content.text,
-                        style = SampleTextStyle.body
-                    )
                 }
-            }
-        )
+            )
 
-        ComponentShowcaseTitle(viewModel.textPairSwitchTitle)
+            ComponentShowcaseTitle(viewModel.textImageSwitchTitle)
 
-        com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.textPairToggle,
-            label = { content ->
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = content.first,
-                        style = SampleTextStyle.body
-                    )
-                    Text(
-                        text = content.second,
-                        style = SampleTextStyle.caption1
-                    )
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textImageToggle,
+                label = { content ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        LocalImage(
+                            imageResource = content.image,
+                            colorFilter = ColorFilter.tint(Color.Black)
+                        )
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = content.text,
+                            style = SampleTextStyle.body
+                        )
+                    }
                 }
-            }
-        )
+            )
+
+            ComponentShowcaseTitle(viewModel.textPairSwitchTitle)
+
+            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDSwitch(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.textPairToggle,
+                label = { content ->
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = content.first,
+                            style = SampleTextStyle.body
+                        )
+                        Text(
+                            text = content.second,
+                            style = SampleTextStyle.caption1
+                        )
+                    }
+                }
+            )
+        }
     }
 }
 

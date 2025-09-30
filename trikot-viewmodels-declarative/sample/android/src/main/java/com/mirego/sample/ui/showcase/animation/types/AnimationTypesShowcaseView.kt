@@ -14,7 +14,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
@@ -58,19 +59,26 @@ private fun animateHorizontalAlignmentAsState(
 fun AnimationTypesShowcaseView(animationTypesShowcaseViewModel: AnimationTypesShowcaseViewModel) {
     val viewModel: AnimationTypesShowcaseViewModel by animationTypesShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(state = rememberScrollState())
-    ) {
-        ComponentShowcaseTopBar(viewModel)
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
+        }
+    ) { paddingValues ->
 
-        AnimationSection(viewModel.linear)
-        AnimationSection(viewModel.easeIn)
-        AnimationSection(viewModel.easeOut)
-        AnimationSection(viewModel.easeInEaseOut)
-        AnimationSection(viewModel.cubicBezier)
-        AnimationSection(viewModel.spring)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(paddingValues)
+                .verticalScroll(state = rememberScrollState())
+        ) {
+            AnimationSection(viewModel.linear)
+            AnimationSection(viewModel.easeIn)
+            AnimationSection(viewModel.easeOut)
+            AnimationSection(viewModel.easeInEaseOut)
+            AnimationSection(viewModel.cubicBezier)
+            AnimationSection(viewModel.spring)
+        }
     }
 }
 
@@ -87,7 +95,12 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
         animationSpec = linearAnimatedProperty.animationSpec()
     )
 
-    Column(modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 16.dp), horizontalAlignment = horizontalAlignment) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+        horizontalAlignment = horizontalAlignment
+    ) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             VMDText(
                 viewModel = viewModel.title,
@@ -108,9 +121,14 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
             }
         }
 
-        Canvas(modifier = Modifier.size(30.dp).padding(top = 10.dp), onDraw = {
-            drawCircle(Color.Red)
-        })
+        Canvas(
+            modifier = Modifier
+                .size(30.dp)
+                .padding(top = 10.dp),
+            onDraw = {
+                drawCircle(Color.Red)
+            }
+        )
     }
 }
 

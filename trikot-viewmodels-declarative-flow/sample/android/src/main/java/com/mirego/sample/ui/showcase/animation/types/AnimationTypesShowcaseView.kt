@@ -13,8 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
@@ -58,19 +59,26 @@ private fun animateHorizontalAlignmentAsState(
 fun AnimationTypesShowcaseView(animationTypesShowcaseViewModel: AnimationTypesShowcaseViewModel) {
     val viewModel: AnimationTypesShowcaseViewModel by animationTypesShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(state = rememberScrollState())
-    ) {
-        ComponentShowcaseTopBar(viewModel)
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
+        }
+    ) { paddingValues ->
 
-        AnimationSection(viewModel.linear)
-        AnimationSection(viewModel.easeIn)
-        AnimationSection(viewModel.easeOut)
-        AnimationSection(viewModel.easeInEaseOut)
-        AnimationSection(viewModel.cubicBezier)
-        AnimationSection(viewModel.spring)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(paddingValues)
+                .verticalScroll(state = rememberScrollState())
+        ) {
+            AnimationSection(viewModel.linear)
+            AnimationSection(viewModel.easeIn)
+            AnimationSection(viewModel.easeOut)
+            AnimationSection(viewModel.easeInEaseOut)
+            AnimationSection(viewModel.cubicBezier)
+            AnimationSection(viewModel.spring)
+        }
     }
 }
 
@@ -104,11 +112,11 @@ private fun AnimationSection(animationTypeViewModel: AnimationTypeShowcaseViewMo
             ) { content ->
                 Text(
                     modifier = Modifier
-                        .background(MaterialTheme.colors.background, shape = RoundedCornerShape(6.dp))
+                        .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(6.dp))
                         .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                     text = content.text,
                     style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.primary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }

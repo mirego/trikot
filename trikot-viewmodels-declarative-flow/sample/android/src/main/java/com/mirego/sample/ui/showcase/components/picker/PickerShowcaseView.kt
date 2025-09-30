@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,17 +30,19 @@ fun PickerShowcaseView(pickerShowcaseViewModel: PickerShowcaseViewModel) {
     var expanded2 by remember { mutableStateOf(false) }
     val viewModel: PickerShowcaseViewModel by pickerShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        ComponentShowcaseTopBar(viewModel)
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
+        }
+    ) { paddingValues ->
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(paddingValues)
                 .verticalScroll(state = rememberScrollState())
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp)
         ) {
             Row(
                 Modifier

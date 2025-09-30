@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.BaseSampleActivity
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseNavigationDelegate
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.animation.types.AnimationTypesShowcaseViewModelController
-import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
 class AnimationTypesShowcaseActivity :
-    ViewModelActivity<AnimationTypesShowcaseViewModelController, AnimationTypesShowcaseViewModel, AnimationTypesShowcaseNavigationDelegate>(), AnimationTypesShowcaseNavigationDelegate {
+    BaseSampleActivity<AnimationTypesShowcaseViewModelController, AnimationTypesShowcaseViewModel, AnimationTypesShowcaseNavigationDelegate>(), AnimationTypesShowcaseNavigationDelegate {
 
     override val viewModelController: AnimationTypesShowcaseViewModelController by lazy {
         getViewModelController(AnimationTypesShowcaseViewModelController::class)

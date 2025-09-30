@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar
 import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseViewModel
@@ -23,33 +25,39 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDText
 fun ListShowcaseView(listShowcaseViewModel: ListShowcaseViewModel) {
     val viewModel: ListShowcaseViewModel by listShowcaseViewModel.observeAsState()
 
-    Box(
-        Modifier.fillMaxSize()
-    ) {
-        ComponentShowcaseTopBar(viewModel)
-
-        VMDLazyRow(
-            modifier = Modifier.padding(top = 80.dp),
-            viewModel = viewModel.listViewModel,
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp)
-        ) { element ->
-            VMDText(viewModel = element.content)
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
         }
+    ) { paddingValues ->
 
-        VMDLazyColumnIndexed(
-            modifier = Modifier
-                .padding(top = 150.dp)
-                .fillMaxWidth(),
-            viewModel = viewModel.listViewModel,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp)
-        ) { index, element ->
-            Column {
-                if (index != 0) {
-                    Divider(modifier = Modifier.padding(bottom = 16.dp))
-                }
+        Box(
+            Modifier.fillMaxSize().padding(paddingValues)
+        ) {
+            VMDLazyRow(
+                modifier = Modifier.padding(top = 80.dp),
+                viewModel = viewModel.listViewModel,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(16.dp)
+            ) { element ->
                 VMDText(viewModel = element.content)
+            }
+
+            VMDLazyColumnIndexed(
+                modifier = Modifier
+                    .padding(top = 150.dp)
+                    .fillMaxWidth(),
+                viewModel = viewModel.listViewModel,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(16.dp)
+            ) { index, element ->
+                Column {
+                    if (index != 0) {
+                        HorizontalDivider(modifier = Modifier.padding(bottom = 16.dp), color = Color.LightGray)
+                    }
+                    VMDText(viewModel = element.content)
+                }
             }
         }
     }

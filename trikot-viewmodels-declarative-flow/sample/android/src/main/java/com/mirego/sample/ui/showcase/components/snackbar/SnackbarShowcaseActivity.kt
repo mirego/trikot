@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.BaseSampleActivity
 import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcaseNavigationDelegate
 import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.components.snackbar.SnackbarShowcaseViewModelController
-import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
-class SnackbarShowcaseActivity : ViewModelActivity<SnackbarShowcaseViewModelController, SnackbarShowcaseViewModel, SnackbarShowcaseNavigationDelegate>(), SnackbarShowcaseNavigationDelegate {
+class SnackbarShowcaseActivity : BaseSampleActivity<SnackbarShowcaseViewModelController, SnackbarShowcaseViewModel, SnackbarShowcaseNavigationDelegate>(), SnackbarShowcaseNavigationDelegate {
     override val viewModelController: SnackbarShowcaseViewModelController by lazy {
         getViewModelController(SnackbarShowcaseViewModelController::class)
     }

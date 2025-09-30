@@ -2,6 +2,7 @@ package com.mirego.sample.ui.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.BaseSampleActivity
 import com.mirego.sample.ui.showcase.animation.types.AnimationTypesShowcaseActivity
 import com.mirego.sample.ui.showcase.components.button.ButtonShowcaseActivity
 import com.mirego.sample.ui.showcase.components.image.ImageShowcaseActivity
@@ -14,9 +15,8 @@ import com.mirego.sample.ui.showcase.components.toggle.ToggleShowcaseActivity
 import com.mirego.sample.viewmodels.home.HomeNavigationDelegate
 import com.mirego.sample.viewmodels.home.HomeViewModel
 import com.mirego.sample.viewmodels.home.HomeViewModelController
-import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
-class HomeActivity : ViewModelActivity<HomeViewModelController, HomeViewModel, HomeNavigationDelegate>(), HomeNavigationDelegate {
+class HomeActivity : BaseSampleActivity<HomeViewModelController, HomeViewModel, HomeNavigationDelegate>(), HomeNavigationDelegate {
 
     override val viewModelController: HomeViewModelController by lazy {
         getViewModelController(HomeViewModelController::class)

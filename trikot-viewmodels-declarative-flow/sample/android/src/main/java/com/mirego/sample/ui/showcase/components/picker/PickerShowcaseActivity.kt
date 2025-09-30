@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.BaseSampleActivity
 import com.mirego.sample.viewmodels.showcase.components.picker.PickerShowcaseNavigationDelegate
 import com.mirego.sample.viewmodels.showcase.components.picker.PickerShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.components.picker.PickerShowcaseViewModelController
-import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
-class PickerShowcaseActivity : ViewModelActivity<PickerShowcaseViewModelController, PickerShowcaseViewModel, PickerShowcaseNavigationDelegate>(), PickerShowcaseNavigationDelegate {
+class PickerShowcaseActivity : BaseSampleActivity<PickerShowcaseViewModelController, PickerShowcaseViewModel, PickerShowcaseNavigationDelegate>(), PickerShowcaseNavigationDelegate {
 
     override val viewModelController: PickerShowcaseViewModelController by lazy {
         getViewModelController(PickerShowcaseViewModelController::class)
