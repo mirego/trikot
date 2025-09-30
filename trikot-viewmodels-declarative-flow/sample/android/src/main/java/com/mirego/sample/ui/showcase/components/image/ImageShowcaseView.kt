@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImagePainter
+import coil3.compose.AsyncImagePainter
 import com.mirego.sample.resource.SampleImageProvider
 import com.mirego.sample.ui.showcase.ComponentShowcaseTitle
 import com.mirego.sample.ui.showcase.ComponentShowcaseTopBar

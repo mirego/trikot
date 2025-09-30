@@ -1,6 +1,5 @@
 package com.mirego.trikot.viewmodels.declarative.compose.viewmodel
 
-import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -8,6 +7,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,16 +26,18 @@ import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Constraints
-import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.SubcomposeAsyncImageContent
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import coil.size.Dimension
-import coil.size.Scale
-import coil.size.Size
-import coil.size.SizeResolver
+import coil3.BitmapImage
+import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
+import coil3.compose.SubcomposeAsyncImage
+import coil3.compose.SubcomposeAsyncImageContent
+import coil3.compose.rememberAsyncImagePainter
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.size.Dimension
+import coil3.size.Scale
+import coil3.size.Size
+import coil3.size.SizeResolver
 import com.mirego.trikot.viewmodels.declarative.components.VMDImageViewModel
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.hidden
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.isOverridingAlpha
@@ -341,16 +343,16 @@ fun RemoteImage(
             .build()
     )
 
-    val state = coilPainter.state
+    val state by coilPainter.state.collectAsState()
     asyncStateCallback?.invoke(state)
 
     Box(
         modifier = modifier.then(sizeResolver)
     ) {
-        when (state) {
+        when (val state = state) {
             is AsyncImagePainter.State.Success -> {
-                val drawable = state.result.drawable
-                if (drawable !is BitmapDrawable || drawable.bitmap.allocationByteCount <= MAX_BITMAP_SIZE) {
+                val image = state.result.image
+                if (image !is BitmapImage || image.bitmap.allocationByteCount <= MAX_BITMAP_SIZE) {
                     Image(
                         painter = coilPainter,
                         modifier = Modifier.matchParentSize(),
@@ -360,7 +362,7 @@ fun RemoteImage(
                         contentDescription = contentDescription
                     )
                 } else {
-                    Log.e(TAG, "Unable to load bitmap: size too large (${drawable.bitmap.allocationByteCount})")
+                    Log.e(TAG, "Unable to load bitmap: size too large (${image.bitmap.allocationByteCount})")
                     placeholder(placeholderImage, state)
                 }
             }
@@ -408,7 +410,8 @@ fun RemoteImage(
         if (hasLoadingFailed || imageUrl == null) {
             placeholder(placeholderImage, PlaceholderState.ERROR)
         } else {
-            when (painter.state) {
+            val state by painter.state.collectAsState()
+            when (state) {
                 is AsyncImagePainter.State.Success -> {
                     hasLoadingFailed = false
                     SubcomposeAsyncImageContent()
