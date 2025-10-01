@@ -81,6 +81,21 @@ _Note that you may have to comment this line to sync your project the first time
   )
   ```
 
+- [VMD] Coil was upgraded to coil3.
+  - While it is not necessary to migrate your coil dependency you will have to change some imports when using VMDImage
+
+```kotlin
+      import coil.compose.AsyncImagePainter
+```
+
+```kotlin
+      import coil3.compose.AsyncImagePainter
+```
+
+    _To migrate:_
+
+- Follow [Coil official migration](https://coil-kt.github.io/coil/upgrading_to_coil3/)
+
 ### Updates
 
 ## 5.4.0

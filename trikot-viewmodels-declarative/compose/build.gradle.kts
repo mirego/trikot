@@ -36,7 +36,8 @@ dependencies {
     api("androidx.compose.material3:material3:${Versions.JETPACK_COMPOSE_MATERIAL_3}")
     api("androidx.compose.runtime:runtime:${Versions.JETPACK_COMPOSE_RUNTIME}")
     api("androidx.compose.ui:ui-tooling:${Versions.JETPACK_COMPOSE_RUNTIME}")
-    api("io.coil-kt:coil-compose:${Versions.COIL_COMPOSE}")
+    api("io.coil-kt.coil3:coil-compose:${Versions.COIL}")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:${Versions.COIL}")
 
     testImplementation(kotlin("test"))
 
