@@ -11,8 +11,7 @@ abstract class BaseSampleActivity<VMC : VMDViewModelController<VM, N>, VM : VMDV
     ViewModelActivity<VMC, VM, N>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
     }
 }
