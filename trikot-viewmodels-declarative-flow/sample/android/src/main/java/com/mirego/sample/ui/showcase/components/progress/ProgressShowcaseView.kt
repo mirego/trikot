@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,15 +26,17 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDLinearProgr
 fun ProgressShowcaseView(progressShowcaseViewModel: ProgressShowcaseViewModel) {
     val viewModel: ProgressShowcaseViewModel by progressShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        ComponentShowcaseTopBar(viewModel)
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
+        }
+    ) { paddingValues ->
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(paddingValues)
                 .verticalScroll(state = rememberScrollState())
                 .padding(horizontal = 16.dp)
                 .padding(bottom = 16.dp),

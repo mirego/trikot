@@ -8,11 +8,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -61,11 +61,11 @@ fun SnackbarShowcaseView(snackbarShowcaseViewModel: SnackbarShowcaseViewModel) {
                 ) { content ->
                     Text(
                         modifier = Modifier
-                            .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
+                            .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(6.dp))
                             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                         text = content.text,
                         style = SampleTextStyle.body.medium(),
-                        color = MaterialTheme.colors.onPrimary
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }

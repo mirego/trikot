@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +23,7 @@ import com.mirego.sample.viewmodels.showcase.components.picker.PickerShowcaseVie
 import com.mirego.trikot.viewmodels.declarative.compose.extensions.observeAsState
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDDropDownMenu
 import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.VMDDropDownMenuItem
+import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDDropDownMenuItem
 
 @Composable
 fun PickerShowcaseView(pickerShowcaseViewModel: PickerShowcaseViewModel) {
@@ -29,72 +31,79 @@ fun PickerShowcaseView(pickerShowcaseViewModel: PickerShowcaseViewModel) {
     var expanded2 by remember { mutableStateOf(false) }
     val viewModel: PickerShowcaseViewModel by pickerShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(state = rememberScrollState())
-    ) {
-        ComponentShowcaseTopBar(viewModel)
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
+        }
+    ) { paddingValues ->
 
-        Row(
-            Modifier
+        Column(
+            modifier = Modifier
                 .fillMaxWidth()
-                .clickable {
-                    expanded = true
-                }
+                .padding(paddingValues)
+                .verticalScroll(state = rememberScrollState())
         ) {
-            ComponentShowcaseTitle(viewModel.textPickerTitle)
-        }
-
-        VMDDropDownMenu(
-            viewModel = viewModel.textPicker,
-            expanded = expanded,
-            onDismissRequest = {
-                expanded = false
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        expanded = true
+                    }
+            ) {
+                ComponentShowcaseTitle(viewModel.textPickerTitle)
             }
-        ) { item, index ->
-            VMDDropDownMenuItem(
-                pickerViewModel = viewModel.textPicker,
-                viewModel = item,
-                index = index,
-                onClick = { expanded = false }
-            ) { pickerItem, _ ->
-                Text(text = pickerItem.content.text)
-            }
-        }
 
-        androidx.compose.material3.Text(
-            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
-            text = "Material 3",
-            style = SampleTextStyle.largeTitle
-        )
-
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .clickable {
-                    expanded2 = true
+            VMDDropDownMenu(
+                viewModel = viewModel.textPicker,
+                expanded = expanded,
+                onDismissRequest = {
+                    expanded = false
                 }
-        ) {
-            ComponentShowcaseTitle(viewModel.textPickerTitle2)
-        }
-
-        VMDDropDownMenu(
-            viewModel = viewModel.textPicker2,
-            expanded = expanded2,
-            onDismissRequest = {
-                expanded2 = false
-            }
-        ) { item, index ->
-            com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDDropDownMenuItem(
-                pickerViewModel = viewModel.textPicker2,
-                viewModel = item,
-                index = index,
-                onClick = { expanded2 = false },
-                text = {
-                    Text(text = item.content.text)
+            ) { item, index ->
+                VMDDropDownMenuItem(
+                    pickerViewModel = viewModel.textPicker,
+                    viewModel = item,
+                    index = index,
+                    onClick = { expanded = false }
+                ) { pickerItem, _ ->
+                    Text(text = pickerItem.content.text)
                 }
+            }
+
+            androidx.compose.material3.Text(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+                text = "Material 3",
+                style = SampleTextStyle.largeTitle
             )
+
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        expanded2 = true
+                    }
+            ) {
+                ComponentShowcaseTitle(viewModel.textPickerTitle2)
+            }
+
+            VMDDropDownMenu(
+                viewModel = viewModel.textPicker2,
+                expanded = expanded2,
+                onDismissRequest = {
+                    expanded2 = false
+                }
+            ) { item, index ->
+                VMDDropDownMenuItem(
+                    pickerViewModel = viewModel.textPicker2,
+                    viewModel = item,
+                    index = index,
+                    onClick = { expanded2 = false },
+                    text = {
+                        Text(text = item.content.text)
+                    }
+                )
+            }
         }
     }
 }

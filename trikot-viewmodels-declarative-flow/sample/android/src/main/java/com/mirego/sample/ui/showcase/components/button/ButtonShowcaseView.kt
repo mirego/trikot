@@ -12,8 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -42,163 +43,170 @@ import com.mirego.trikot.viewmodels.declarative.compose.viewmodel.material3.VMDB
 fun ButtonShowcaseView(buttonShowcaseViewModel: ButtonShowcaseViewModel) {
     val viewModel: ButtonShowcaseViewModel by buttonShowcaseViewModel.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(state = rememberScrollState())
-    ) {
-        ComponentShowcaseTopBar(viewModel)
-
-        ComponentShowcaseTitle(viewModel.textButtonTitle)
-
-        VMDButton(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.textButton
-        ) { content ->
-            Text(
-                modifier = Modifier
-                    .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
-                    .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
-                text = content.text,
-                style = SampleTextStyle.body.medium(),
-                color = MaterialTheme.colors.onPrimary
-            )
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            ComponentShowcaseTopBar(viewModel)
         }
-
-        ComponentShowcaseTitle(viewModel.imageButtonTitle)
-
-        VMDButton(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.imageButton
-        ) { content ->
-            LocalImage(
-                modifier = Modifier
-                    .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
-                    .padding(4.dp),
-                imageResource = content.image,
-                contentDescription = content.contentDescription,
-            )
-        }
-
-        ComponentShowcaseTitle(viewModel.textImageButtonTitle)
-
-        VMDButton(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.textImageButton
-        ) { content ->
-            Row(
-                modifier = Modifier
-                    .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
-                    .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                LocalImage(
-                    modifier = Modifier.padding(end = 8.dp),
-                    imageResource = content.image,
-                    contentDescription = content.contentDescription,
-                )
-                Text(
-                    text = content.text,
-                    style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-        }
-
-        ComponentShowcaseTitle(viewModel.textPairButtonTitle)
-
-        VMDButton(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            viewModel = viewModel.textPairButton
-        ) { content ->
-            Column(
-                modifier = Modifier
-                    .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(6.dp))
-                    .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = content.first,
-                    style = SampleTextStyle.title2,
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = content.second,
-                    style = SampleTextStyle.body,
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-        }
+    ) { paddingValues ->
 
         Column(
-            Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(paddingValues)
+                .verticalScroll(state = rememberScrollState())
         ) {
-            ComponentShowcaseTitle("Material 3 Elevated Button")
+            ComponentShowcaseTitle(viewModel.textButtonTitle)
 
-            VMDElevatedButton(viewModel.textButton) { content ->
+            VMDButton(
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+                viewModel = viewModel.textButton
+            ) { content ->
                 Text(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(6.dp))
+                        .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                     text = content.text,
                     style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.primary
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
 
-            VMDElevatedButton(viewModel.textImageButton) { content ->
+            ComponentShowcaseTitle(viewModel.imageButtonTitle)
+
+            VMDButton(
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+                viewModel = viewModel.imageButton
+            ) { content ->
                 LocalImage(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(6.dp))
+                        .padding(4.dp),
                     imageResource = content.image,
                     contentDescription = content.contentDescription,
-                    modifier = Modifier.size(18.dp),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = content.text,
-                    style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.primary
                 )
             }
 
-            ComponentShowcaseTitle("Material 3 Filled Button")
+            ComponentShowcaseTitle(viewModel.textImageButtonTitle)
 
-            VMDMaterial3Button(viewModel.textButton) { content ->
-                Text(
-                    text = content.text,
-                    style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.onPrimary
-                )
+            VMDButton(
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+                viewModel = viewModel.textImageButton
+            ) { content ->
+                Row(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(6.dp))
+                        .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    LocalImage(
+                        modifier = Modifier.padding(end = 8.dp),
+                        imageResource = content.image,
+                        contentDescription = content.contentDescription,
+                    )
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
             }
 
-            ComponentShowcaseTitle("Material 3 Filled Tonal Button")
+            ComponentShowcaseTitle(viewModel.textPairButtonTitle)
 
-            VMDFilledTonalButton(viewModel.textButton) { content ->
-                Text(
-                    text = content.text,
-                    style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.onSecondary
-                )
+            VMDButton(
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+                viewModel = viewModel.textPairButton
+            ) { content ->
+                Column(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(6.dp))
+                        .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = content.first,
+                        style = SampleTextStyle.title2,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                    Text(
+                        text = content.second,
+                        style = SampleTextStyle.body,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
             }
 
-            ComponentShowcaseTitle("Material 3 Filled Outlined Button")
+            Column(
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                ComponentShowcaseTitle("Material 3 Elevated Button")
 
-            VMDOutlinedButton(viewModel.textButton) { content ->
-                Text(
-                    text = content.text,
-                    style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.primary
-                )
-            }
+                VMDElevatedButton(viewModel.textButton) { content ->
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
 
-            ComponentShowcaseTitle("Material 3 Filled Text Button")
+                VMDElevatedButton(viewModel.textImageButton) { content ->
+                    LocalImage(
+                        imageResource = content.image,
+                        contentDescription = content.contentDescription,
+                        modifier = Modifier.size(18.dp),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
 
-            VMDTextButton(viewModel.textButton) { content ->
-                Text(
-                    text = content.text,
-                    style = SampleTextStyle.body.medium(),
-                    color = MaterialTheme.colors.primary
-                )
+                ComponentShowcaseTitle("Material 3 Filled Button")
+
+                VMDMaterial3Button(viewModel.textButton) { content ->
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+
+                ComponentShowcaseTitle("Material 3 Filled Tonal Button")
+
+                VMDFilledTonalButton(viewModel.textButton) { content ->
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.onSecondary
+                    )
+                }
+
+                ComponentShowcaseTitle("Material 3 Filled Outlined Button")
+
+                VMDOutlinedButton(viewModel.textButton) { content ->
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                ComponentShowcaseTitle("Material 3 Filled Text Button")
+
+                VMDTextButton(viewModel.textButton) { content ->
+                    Text(
+                        text = content.text,
+                        style = SampleTextStyle.body.medium(),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
     }

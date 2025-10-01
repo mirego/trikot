@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import com.mirego.sample.ui.BaseSampleActivity
 import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseNavigationDelegate
 import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseViewModel
 import com.mirego.sample.viewmodels.showcase.components.list.ListShowcaseViewModelController
-import com.mirego.trikot.viewmodels.declarative.controller.ViewModelActivity
 
-class ListShowcaseActivity : ViewModelActivity<ListShowcaseViewModelController, ListShowcaseViewModel, ListShowcaseNavigationDelegate>(), ListShowcaseNavigationDelegate {
+class ListShowcaseActivity : BaseSampleActivity<ListShowcaseViewModelController, ListShowcaseViewModel, ListShowcaseNavigationDelegate>(), ListShowcaseNavigationDelegate {
 
     override val viewModelController: ListShowcaseViewModelController by lazy {
         getViewModelController(ListShowcaseViewModelController::class)
