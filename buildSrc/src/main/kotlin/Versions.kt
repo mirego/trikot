@@ -10,7 +10,7 @@ object Versions {
     const val KOTLINX_SERIALIZATION = "1.7.0"
     const val KOTLINX_COROUTINES = "1.10.2"
     const val KOTLINX_DATETIME = "0.7.0"
-    const val KTOR = "2.3.12"
+    const val KTOR = "3.2.2" // Don't update to 3.3.x, there is an issue with Kotlin 2.2.0 compiler's JS backend
     const val KOTLIN_WRAPPERS_EXTENSIONS = "1.0.1-pre.760"
     const val ANDROIDX_LIFECYCLE = "2.8.2"
     const val OKIO = "3.14.0"
