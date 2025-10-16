@@ -99,7 +99,7 @@ _Note that you may have to comment this line to sync your project the first time
 - [HTTP] Ktor was upgraded to '3.3.1'
   - No API changes, but having both Ktor 2.x and 3.x in the same project will cause runtime issues. Make sure you upgrade your Ktor dependency to 3.3.1 in your project.
   - See [Ktor 3.0.0 migration guide](https://ktor.io/docs/migrating-3.html#ktor-client) for more details.
-  
+
 ### Updates
 
 ## 5.4.0
