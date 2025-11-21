@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+### Updates
+
+### Breaking Changes
+
+## 6.0.0
+
 ### Breaking Changes
 
 - Minimum Kotlin compiler version `2.2.0` must be use in order to consume this library
