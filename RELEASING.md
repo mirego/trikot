@@ -2,8 +2,8 @@
 
 1. Checkout `origin/master`.
 1. Update the `CHANGELOG.md` file with the changes of this release (the format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-    * Copy the template for the next unreleased version at the top.
-    * Rename the previous unreleased version to the new version.
+   - Copy the template for the next unreleased version at the top.
+   - Rename the previous unreleased version to the new version.
 1. Update the version in `gradle.properties` and remove the `-SNAPSHOT` suffix.
 1. Commit the changes.
 1. Run the [Release workflow](https://github.com/mirego/trikot/actions/workflows/release.yml).
