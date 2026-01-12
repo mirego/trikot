@@ -7,7 +7,11 @@ import com.mirego.trikot.http.HttpRequestFactory
 import com.mirego.trikot.http.HttpResponse
 import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.http.exception.HttpRequestTimeoutException
+import com.mirego.trikot.http.exception.HttpResponseNoInternetConnectionException
 import com.mirego.trikot.streams.cancellable.CancellableManager
+import java.net.ConnectException
+import java.net.NoRouteToHostException
+import java.net.UnknownHostException
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
@@ -119,6 +123,9 @@ class KtorHttpRequestFactory(
                     } else {
                         publisher.error = when (ex) {
                             is KtorRequestTimeoutException -> HttpRequestTimeoutException(ex)
+                            is UnknownHostException,
+                            is ConnectException,
+                            is NoRouteToHostException -> HttpResponseNoInternetConnectionException(ex)
                             else -> ex
                         }
                     }
