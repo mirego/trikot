@@ -6,8 +6,8 @@ import com.mirego.trikot.http.HttpRequest
 import com.mirego.trikot.http.HttpRequestFactory
 import com.mirego.trikot.http.HttpResponse
 import com.mirego.trikot.http.RequestBuilder
+import com.mirego.trikot.http.exception.HttpNetworkUnreachableException
 import com.mirego.trikot.http.exception.HttpRequestTimeoutException
-import com.mirego.trikot.http.exception.HttpResponseNoInternetConnectionException
 import com.mirego.trikot.streams.cancellable.CancellableManager
 import java.net.ConnectException
 import java.net.NoRouteToHostException
@@ -125,7 +125,7 @@ class KtorHttpRequestFactory(
                             is KtorRequestTimeoutException -> HttpRequestTimeoutException(ex)
                             is UnknownHostException,
                             is ConnectException,
-                            is NoRouteToHostException -> HttpResponseNoInternetConnectionException(ex)
+                            is NoRouteToHostException -> HttpNetworkUnreachableException(ex)
                             else -> ex
                         }
                     }
