@@ -198,6 +198,10 @@ public final class com/mirego/trikot/http/connectivity/ConnectivityState : java/
 	public static fun values ()[Lcom/mirego/trikot/http/connectivity/ConnectivityState;
 }
 
+public final class com/mirego/trikot/http/exception/HttpNetworkUnreachableException : java/lang/Exception {
+	public fun <init> (Ljava/lang/Throwable;)V
+}
+
 public final class com/mirego/trikot/http/exception/HttpRequestTimeoutException : java/lang/Throwable {
 	public fun <init> (Ljava/lang/Throwable;)V
 }
