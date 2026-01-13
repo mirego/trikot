@@ -9,9 +9,6 @@ import com.mirego.trikot.http.RequestBuilder
 import com.mirego.trikot.http.exception.HttpNetworkUnreachableException
 import com.mirego.trikot.http.exception.HttpRequestTimeoutException
 import com.mirego.trikot.streams.cancellable.CancellableManager
-import java.net.ConnectException
-import java.net.NoRouteToHostException
-import java.net.UnknownHostException
 import com.mirego.trikot.streams.reactive.Publishers
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
@@ -35,6 +32,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.reactivestreams.Publisher
+import java.net.ConnectException
+import java.net.NoRouteToHostException
+import java.net.UnknownHostException
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
