@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Updates
 
-- [http] Handle network resolution failures with new `HttpResponseNoInternetConnectionException`
+- [http] Handle network resolution failures with new `HttpNetworkUnreachableException`
 
 ### Breaking Changes
 
