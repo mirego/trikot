@@ -30,6 +30,7 @@ public final class com/mirego/trikot/streams/cancellable/CancellableManager : co
 	public fun cancel ()V
 	public final fun cleanCancelledChildren ()V
 	public fun isCancelled ()Z
+	public final fun remove (Lcom/mirego/trikot/streams/cancellable/Cancellable;)V
 }
 
 public final class com/mirego/trikot/streams/cancellable/CancellableManagerProvider : com/mirego/trikot/streams/cancellable/Cancellable, com/mirego/trikot/streams/cancellable/VerifiableCancelledState {
