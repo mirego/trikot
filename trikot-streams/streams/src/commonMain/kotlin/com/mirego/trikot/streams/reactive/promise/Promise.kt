@@ -16,7 +16,7 @@ import org.reactivestreams.Subscriber
 
 class Promise<T> internal constructor(
     upstream: Publisher<T>,
-    cancellableManager: CancellableManager? = null
+    private val cancellableManager: CancellableManager? = null
 ) : Publisher<T> {
 
     private val serialQueue = SynchronousSerialQueue()
@@ -49,10 +49,14 @@ class Promise<T> internal constructor(
      *
      * We don't want the `onParentCancellation::cancel()` to run since the provided cancellableManager was not cancelled,
      * so we don't call `cancel()` directly, but instead modify the `isCancelled` value manually.
+     *
+     * We remove ourselves from the parent cancellableManager so the Promise can be garbage collected rather than being
+     * retained until the parent cancellableManager is cancelled.
      */
     private fun onResultReceived() {
         onParentCancellation.isCancelled = true
         internalCancellableManager.cancel()
+        cancellableManager?.remove(onParentCancellation)
     }
 
     init {
