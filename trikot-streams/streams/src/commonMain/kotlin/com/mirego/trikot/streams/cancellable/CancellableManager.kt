@@ -7,6 +7,8 @@ import kotlinx.atomicfu.atomic
 class CancellableManager : Cancellable, VerifiableCancelledState {
     private val serialQueue = SynchronousSerialQueue()
     private val queueList = AtomicListReference<Cancellable>()
+    internal val queueListSize: Int
+        get() = queueList.value.size
 
     private var isCancelledDelegate = atomic(false)
     override val isCancelled: Boolean by isCancelledDelegate
@@ -28,6 +30,12 @@ class CancellableManager : Cancellable, VerifiableCancelledState {
                 }
             }
         )
+    }
+
+    fun remove(cancellable: Cancellable) {
+        serialQueue.dispatch {
+            queueList.remove(cancellable)
+        }
     }
 
     fun cleanCancelledChildren() {

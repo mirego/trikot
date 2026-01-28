@@ -57,6 +57,51 @@ class CancellableManagerTests {
     }
 
     @Test
+    fun ifRemoveIsCalled_thenChildIsNotCalledOnParentCancellation() {
+        val parentCancellableManager = CancellableManager()
+        var cancelCounter = 0
+
+        val child1 = TestableCancellable(onCancelCalled = { cancelCounter++ })
+        val child2 = TestableCancellable(onCancelCalled = { cancelCounter++ })
+        val child3 = TestableCancellable(onCancelCalled = { cancelCounter++ })
+
+        parentCancellableManager.add(child1)
+        parentCancellableManager.add(child2)
+        parentCancellableManager.add(child3)
+
+        // Remove child2 before parent cancellation
+        parentCancellableManager.remove(child2)
+
+        parentCancellableManager.cancel()
+
+        // Only child1 and child3 should be cancelled
+        assertEquals(2, cancelCounter)
+        assertTrue(child1.isCancelled)
+        assertFalse(child2.isCancelled)
+        assertTrue(child3.isCancelled)
+    }
+
+    @Test
+    fun ifRemoveIsCalledOnAlreadyCancelledManager_thenNothingHappens() {
+        val parentCancellableManager = CancellableManager()
+        var cancelCounter = 0
+
+        val child = TestableCancellable(onCancelCalled = { cancelCounter++ })
+        parentCancellableManager.add(child)
+
+        parentCancellableManager.cancel()
+
+        assertEquals(1, cancelCounter)
+        assertTrue(child.isCancelled)
+
+        // Removing after cancellation should not cause issues
+        parentCancellableManager.remove(child)
+
+        // Cancel counter should still be 1
+        assertEquals(1, cancelCounter)
+    }
+
+    @Test
     fun ifCleanCancelledChildrenIsCalled_thenOnlyCancelRemainingChildOnParentCancellation() {
         val parentCancellableManager = CancellableManager()
         val childList = mutableListOf<TestableCancellable>()
