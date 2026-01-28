@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Updates
 
 - [http] Handle network resolution failures with new `HttpNetworkUnreachableException`
+- [streams] Allow Promises to be garbage collected when completed even if the provided cancellableManager is not cancelled yet.
 
 ### Breaking Changes
 
