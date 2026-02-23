@@ -9,7 +9,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
-import java.util.Properties
+import java.util.jar.JarFile
 
 @CacheableTask
 abstract class SyncSwiftExtensionsTask : DefaultTask() {
@@ -26,70 +26,80 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
     @TaskAction
     fun sync() {
         val framework = frameworkName.get()
-        val requestedModules = modules.get()
+        val manifest = discoverModules()
+        val modulesToSync = modules.get().ifEmpty { manifest.keys.sorted() }
         val outDir = outputDir.get().asFile
 
-        // Load manifest from classpath resources
-        val manifest = loadManifest()
-
-        // If no modules specified, sync all available modules
-        val modulesToSync = if (requestedModules.isEmpty()) manifest.keys.sorted() else requestedModules
-
-        // Clean existing .swift files in the output directory
-        if (outDir.exists()) {
-            outDir.walkTopDown()
-                .filter { it.isFile && it.extension == "swift" }
-                .forEach { it.delete() }
-            // Remove empty directories left behind
-            outDir.walkBottomUp()
-                .filter { it.isDirectory && it != outDir && (it.listFiles()?.isEmpty() == true) }
-                .forEach { it.delete() }
-        }
+        cleanOutputDirectory(outDir)
 
         var totalFiles = 0
 
         for (moduleKey in modulesToSync) {
             val files = manifest[moduleKey]
             if (files == null) {
-                logger.warn("No Swift files found for module '$moduleKey' in manifest. Available modules: ${manifest.keys.sorted()}")
+                logger.warn("Unknown module '$moduleKey'. Available: ${manifest.keys.sorted()}")
                 continue
             }
 
-            val moduleOutDir = File(outDir, moduleKey)
-            moduleOutDir.mkdirs()
+            val moduleOutDir = File(outDir, moduleKey).apply { mkdirs() }
 
             for (fileName in files) {
-                val resourcePath = "swift-extensions/$moduleKey/$fileName"
-                val inputStream = javaClass.classLoader.getResourceAsStream(resourcePath)
-                if (inputStream == null) {
-                    logger.warn("Resource not found: $resourcePath")
-                } else {
-                    val content = inputStream.bufferedReader().readText()
-
-                    val processed = content.lineSequence()
-                        .filter { line -> !line.matches(Regex("^import Trikot\\s*$")) }
-                        .joinToString("\n") { line ->
-                            line.replace("TRIKOT_FRAMEWORK_NAME", framework)
-                        }
-
-                    File(moduleOutDir, fileName).writeText(processed)
-                    totalFiles++
+                val content = readResource("$RESOURCES_PREFIX$moduleKey/$fileName")
+                if (content == null) {
+                    logger.warn("Resource not found: $RESOURCES_PREFIX$moduleKey/$fileName")
+                    continue
                 }
+
+                val processed = content.lineSequence()
+                    .filter { !IMPORT_TRIKOT.matches(it) }
+                    .joinToString("\n") { it.replace(FRAMEWORK_PLACEHOLDER, framework) }
+
+                File(moduleOutDir, fileName).writeText(processed)
+                totalFiles++
             }
         }
 
         logger.lifecycle("Synced $totalFiles Swift files for modules: $modulesToSync")
     }
 
-    private fun loadManifest(): Map<String, List<String>> {
-        val stream = javaClass.classLoader.getResourceAsStream("swift-extensions/manifest.properties")
-            ?: error("Could not find swift-extensions/manifest.properties in plugin resources. Is the plugin JAR built correctly?")
+    private fun cleanOutputDirectory(outDir: File) {
+        if (!outDir.exists()) return
 
-        val props = Properties()
-        props.load(stream)
+        outDir.walkTopDown()
+            .filter { it.isFile && it.extension == "swift" }
+            .forEach { it.delete() }
 
-        return props.entries.associate { (key, value) ->
-            key.toString() to value.toString().split(",").filter { it.isNotBlank() }
+        outDir.walkBottomUp()
+            .filter { it.isDirectory && it != outDir && it.listFiles().isNullOrEmpty() }
+            .forEach { it.delete() }
+    }
+
+    private fun readResource(path: String): String? =
+        javaClass.classLoader.getResourceAsStream(path)?.bufferedReader()?.readText()
+
+    /**
+     * Scan the plugin JAR to discover available modules and their Swift files.
+     * The JAR contains entries like `swift-extensions/<module>/<file>.swift`.
+     */
+    private fun discoverModules(): Map<String, List<String>> {
+        val jarFile = JarFile(File(javaClass.protectionDomain.codeSource.location.toURI()))
+        return jarFile.use { jar ->
+            jar.entries().asSequence()
+                .map { it.name }
+                .filter { it.startsWith(RESOURCES_PREFIX) && it.endsWith(".swift") }
+                .map { path ->
+                    val relative = path.removePrefix(RESOURCES_PREFIX)
+                    val slash = relative.indexOf('/')
+                    relative.substring(0, slash) to relative.substring(slash + 1)
+                }
+                .groupBy({ it.first }, { it.second })
+                .mapValues { (_, files) -> files.sorted() }
         }
+    }
+
+    companion object {
+        private const val FRAMEWORK_PLACEHOLDER = "TRIKOT_FRAMEWORK_NAME"
+        private const val RESOURCES_PREFIX = "swift-extensions/"
+        private val IMPORT_TRIKOT = Regex("^import Trikot\\s*$")
     }
 }

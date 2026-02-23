@@ -15,65 +15,37 @@ gradlePlugin {
     }
 }
 
-val swiftModules = buildMap<String, String> {
-    rootProject.projectDir.listFiles()
-        ?.filter { it.isDirectory && it.name.startsWith("trikot-") }
-        ?.sorted()
-        ?.forEach { trikotDir ->
-            val swiftExtDir = File(trikotDir, "swift-extensions")
-            if (swiftExtDir.isDirectory) {
-                val moduleKey = trikotDir.name.removePrefix("trikot-")
+val swiftModules: Map<String, String> = rootProject.projectDir.listFiles()
+    .orEmpty()
+    .filter { it.isDirectory && it.name.startsWith("trikot-") }
+    .sorted()
+    .flatMap { trikotDir ->
+        val moduleKey = trikotDir.name.removePrefix("trikot-")
+        val swiftExtDir = File(trikotDir, "swift-extensions")
+        if (!swiftExtDir.isDirectory) return@flatMap emptyList()
 
-                // Root-level .swift files → module key "<name>"
-                if (swiftExtDir.listFiles()?.any { it.isFile && it.extension == "swift" } == true) {
-                    put(moduleKey, "${trikotDir.name}/swift-extensions")
-                }
-
-                // Sub-directories → module key "<name>-<sub>"
-                swiftExtDir.listFiles()
-                    ?.filter { it.isDirectory }
-                    ?.sorted()
-                    ?.forEach { subDir ->
-                        if (subDir.listFiles()?.any { it.isFile && it.extension == "swift" } == true) {
-                            put("$moduleKey-${subDir.name}", "${trikotDir.name}/swift-extensions/${subDir.name}")
-                        }
-                    }
+        buildList {
+            if (swiftExtDir.hasSwiftFiles()) {
+                add(moduleKey to "${trikotDir.name}/swift-extensions")
             }
+            swiftExtDir.listFiles().orEmpty()
+                .filter { it.isDirectory && it.hasSwiftFiles() }
+                .sorted()
+                .forEach { subDir ->
+                    add("$moduleKey-${subDir.name}" to "${trikotDir.name}/swift-extensions/${subDir.name}")
+                }
         }
-}
+    }
+    .toMap()
+
+fun File.hasSwiftFiles(): Boolean = listFiles().orEmpty().any { it.isFile && it.extension == "swift" }
 
 tasks.named<Copy>("processResources") {
-    val manifestEntries = mutableMapOf<String, List<String>>()
-
     swiftModules.forEach { (moduleKey, sourcePath) ->
-        val sourceDir = rootProject.file(sourcePath)
-        from(sourceDir) {
+        from(rootProject.file(sourcePath)) {
             include("*.swift")
             into("swift-extensions/$moduleKey")
         }
-
-        val swiftFiles = sourceDir.listFiles()
-            ?.filter { it.isFile && it.extension == "swift" }
-            ?.map { it.name }
-            ?.sorted()
-            ?: emptyList()
-        if (swiftFiles.isNotEmpty()) {
-            manifestEntries[moduleKey] = swiftFiles
-        }
-    }
-
-    doFirst {
-        val manifestFile = File(temporaryDir, "swift-extensions/manifest.properties")
-        manifestFile.parentFile.mkdirs()
-        val content = manifestEntries.entries
-            .sortedBy { it.key }
-            .joinToString("\n") { (key, files) ->
-                "$key=${files.joinToString(",")}"
-            }
-        manifestFile.writeText(content)
-    }
-    from(temporaryDir) {
-        include("swift-extensions/manifest.properties")
     }
 }
 
