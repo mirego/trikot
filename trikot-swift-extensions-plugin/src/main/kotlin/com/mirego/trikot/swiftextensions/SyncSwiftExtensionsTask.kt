@@ -32,6 +32,9 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
         // Load manifest from classpath resources
         val manifest = loadManifest()
 
+        // If no modules specified, sync all available modules
+        val modulesToSync = if (requestedModules.isEmpty()) manifest.keys.sorted() else requestedModules
+
         // Clean existing .swift files in the output directory
         if (outDir.exists()) {
             outDir.walkTopDown()
@@ -45,7 +48,7 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
 
         var totalFiles = 0
 
-        for (moduleKey in requestedModules) {
+        for (moduleKey in modulesToSync) {
             val files = manifest[moduleKey]
             if (files == null) {
                 logger.warn("No Swift files found for module '$moduleKey' in manifest. Available modules: ${manifest.keys.sorted()}")
@@ -75,7 +78,7 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
             }
         }
 
-        logger.lifecycle("Synced $totalFiles Swift files for modules: $requestedModules")
+        logger.lifecycle("Synced $totalFiles Swift files for modules: $modulesToSync")
     }
 
     private fun loadManifest(): Map<String, List<String>> {

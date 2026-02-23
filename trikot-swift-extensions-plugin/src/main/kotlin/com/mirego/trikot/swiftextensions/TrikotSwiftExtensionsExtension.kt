@@ -9,7 +9,5 @@ import javax.inject.Inject
 abstract class TrikotSwiftExtensionsExtension @Inject constructor(objects: ObjectFactory) {
     val frameworkName: Property<String> = objects.property(String::class.java)
     val outputDir: DirectoryProperty = objects.directoryProperty()
-    val modules: ListProperty<String> = objects.listProperty(String::class.java).convention(
-        listOf("streams", "viewmodels", "viewmodels-kingfisher", "http", "kword")
-    )
+    val modules: ListProperty<String> = objects.listProperty(String::class.java).convention(emptyList())
 }

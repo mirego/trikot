@@ -15,17 +15,32 @@ gradlePlugin {
     }
 }
 
-val swiftModules = mapOf(
-    "streams" to "trikot-streams/swift-extensions",
-    "streams-combine" to "trikot-streams/swift-extensions/combine",
-    "viewmodels" to "trikot-viewmodels/swift-extensions",
-    "viewmodels-kingfisher" to "trikot-viewmodels/swift-extensions/kingfisher",
-    "http" to "trikot-http/swift-extensions",
-    "kword" to "trikot-kword/swift-extensions",
-    "bluetooth" to "trikot-bluetooth/swift-extensions",
-    "analytics-firebase" to "trikot-analytics/swift-extensions/firebase",
-    "analytics-mixpanel" to "trikot-analytics/swift-extensions/mixpanel",
-)
+val swiftModules = buildMap<String, String> {
+    rootProject.projectDir.listFiles()
+        ?.filter { it.isDirectory && it.name.startsWith("trikot-") }
+        ?.sorted()
+        ?.forEach { trikotDir ->
+            val swiftExtDir = File(trikotDir, "swift-extensions")
+            if (swiftExtDir.isDirectory) {
+                val moduleKey = trikotDir.name.removePrefix("trikot-")
+
+                // Root-level .swift files → module key "<name>"
+                if (swiftExtDir.listFiles()?.any { it.isFile && it.extension == "swift" } == true) {
+                    put(moduleKey, "${trikotDir.name}/swift-extensions")
+                }
+
+                // Sub-directories → module key "<name>-<sub>"
+                swiftExtDir.listFiles()
+                    ?.filter { it.isDirectory }
+                    ?.sorted()
+                    ?.forEach { subDir ->
+                        if (subDir.listFiles()?.any { it.isFile && it.extension == "swift" } == true) {
+                            put("$moduleKey-${subDir.name}", "${trikotDir.name}/swift-extensions/${subDir.name}")
+                        }
+                    }
+            }
+        }
+}
 
 tasks.named<Copy>("processResources") {
     val manifestEntries = mutableMapOf<String, List<String>>()
