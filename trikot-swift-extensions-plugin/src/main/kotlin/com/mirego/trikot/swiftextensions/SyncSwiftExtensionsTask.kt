@@ -26,40 +26,40 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
     @TaskAction
     fun sync() {
         val framework = frameworkName.get()
-        val manifest = discoverModules()
-        val modulesToSync = modules.get().ifEmpty { manifest.keys.sorted() }
+        val requestedModules = modules.get().toSet()
         val outDir = outputDir.get().asFile
 
         cleanOutputDirectory(outDir)
 
+        val jarFile = JarFile(File(javaClass.protectionDomain.codeSource.location.toURI()))
         var totalFiles = 0
 
-        for (moduleKey in modulesToSync) {
-            val files = manifest[moduleKey]
-            if (files == null) {
-                logger.warn("Unknown module '$moduleKey'. Available: ${manifest.keys.sorted()}")
-                continue
-            }
+        jarFile.use { jar ->
+            for (entry in jar.entries()) {
+                if (!entry.name.startsWith(RESOURCES_PREFIX) || !entry.name.endsWith(".swift")) continue
 
-            val moduleOutDir = File(outDir, moduleKey).apply { mkdirs() }
+                val relative = entry.name.removePrefix(RESOURCES_PREFIX)
+                val slash = relative.indexOf('/')
+                if (slash == -1) continue
 
-            for (fileName in files) {
-                val content = readResource("$RESOURCES_PREFIX$moduleKey/$fileName")
-                if (content == null) {
-                    logger.warn("Resource not found: $RESOURCES_PREFIX$moduleKey/$fileName")
-                    continue
-                }
+                val moduleKey = relative.substring(0, slash)
+                val fileName = relative.substring(slash + 1)
 
+                // Skip modules the consumer didn't ask for (empty = sync all)
+                if (requestedModules.isNotEmpty() && moduleKey !in requestedModules) continue
+
+                val content = jar.getInputStream(entry).bufferedReader().readText()
                 val processed = content.lineSequence()
                     .filter { !IMPORT_TRIKOT.matches(it) }
                     .joinToString("\n") { it.replace(FRAMEWORK_PLACEHOLDER, framework) }
 
+                val moduleOutDir = File(outDir, moduleKey).apply { mkdirs() }
                 File(moduleOutDir, fileName).writeText(processed)
                 totalFiles++
             }
         }
 
-        logger.lifecycle("Synced $totalFiles Swift files for modules: $modulesToSync")
+        logger.lifecycle("Synced $totalFiles Swift files")
     }
 
     private fun cleanOutputDirectory(outDir: File) {
@@ -72,29 +72,6 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
         outDir.walkBottomUp()
             .filter { it.isDirectory && it != outDir && it.listFiles().isNullOrEmpty() }
             .forEach { it.delete() }
-    }
-
-    private fun readResource(path: String): String? =
-        javaClass.classLoader.getResourceAsStream(path)?.bufferedReader()?.readText()
-
-    /**
-     * Scan the plugin JAR to discover available modules and their Swift files.
-     * The JAR contains entries like `swift-extensions/<module>/<file>.swift`.
-     */
-    private fun discoverModules(): Map<String, List<String>> {
-        val jarFile = JarFile(File(javaClass.protectionDomain.codeSource.location.toURI()))
-        return jarFile.use { jar ->
-            jar.entries().asSequence()
-                .map { it.name }
-                .filter { it.startsWith(RESOURCES_PREFIX) && it.endsWith(".swift") }
-                .map { path ->
-                    val relative = path.removePrefix(RESOURCES_PREFIX)
-                    val slash = relative.indexOf('/')
-                    relative.substring(0, slash) to relative.substring(slash + 1)
-                }
-                .groupBy({ it.first }, { it.second })
-                .mapValues { (_, files) -> files.sorted() }
-        }
     }
 
     companion object {
