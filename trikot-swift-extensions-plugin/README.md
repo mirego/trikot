@@ -7,6 +7,7 @@ Gradle plugin that syncs Trikot's iOS Swift extensions into consumer projects. T
 Each Trikot module can ship Swift extensions in a `swift-extensions/` directory (e.g. `trikot-viewmodels/swift-extensions/`). The plugin packages all of these into its JAR at build time, auto-discovering modules and files from the filesystem — no manual manifest is needed.
 
 At sync time, the plugin:
+
 1. Copies the requested Swift files into the consumer's output directory
 2. Replaces `import TRIKOT_FRAMEWORK_NAME` with the consumer's configured framework name
 3. Removes `import Trikot` lines (no longer needed outside CocoaPods)
@@ -41,11 +42,11 @@ trikotSwiftExtensions {
 
 ### Properties
 
-| Property        | Type             | Default       | Description                                          |
-| --------------- | ---------------- | ------------- | ---------------------------------------------------- |
-| `frameworkName` | `String`         | —             | The KMP framework name used in `import` statements.  |
-| `outputDir`     | `Directory`      | —             | Directory where Swift extension files are written.   |
-| `modules`       | `List<String>`   | all available | Trikot modules to sync. Empty list syncs everything. |
+| Property        | Type           | Default       | Description                                          |
+| --------------- | -------------- | ------------- | ---------------------------------------------------- |
+| `frameworkName` | `String`       | —             | The KMP framework name used in `import` statements.  |
+| `outputDir`     | `Directory`    | —             | Directory where Swift extension files are written.   |
+| `modules`       | `List<String>` | all available | Trikot modules to sync. Empty list syncs everything. |
 
 ## Usage
 
@@ -76,17 +77,17 @@ ios/TrikotExtensions/
 
 Modules are auto-discovered from `trikot-*/swift-extensions/` directories. Currently available:
 
-| Module                 | Dependencies     | Description                         |
-| ---------------------- | ---------------- | ----------------------------------- |
-| `streams`              | —                | Publisher extensions                 |
-| `streams-combine`      | —                | Combine framework interop           |
-| `viewmodels`           | —                | UIKit view model bindings            |
-| `viewmodels-kingfisher`| Kingfisher       | Image loading with Kingfisher       |
-| `http`                 | Reachability     | HTTP client and connectivity        |
-| `kword`                | —                | i18n string extensions              |
-| `bluetooth`            | —                | CoreBluetooth extensions            |
-| `analytics-firebase`   | FirebaseAnalytics| Firebase analytics service          |
-| `analytics-mixpanel`   | Mixpanel         | Mixpanel analytics service          |
+| Module                  | Dependencies      | Description                   |
+| ----------------------- | ----------------- | ----------------------------- |
+| `streams`               | —                 | Publisher extensions          |
+| `streams-combine`       | —                 | Combine framework interop     |
+| `viewmodels`            | —                 | UIKit view model bindings     |
+| `viewmodels-kingfisher` | Kingfisher        | Image loading with Kingfisher |
+| `http`                  | Reachability      | HTTP client and connectivity  |
+| `kword`                 | —                 | i18n string extensions        |
+| `bluetooth`             | —                 | CoreBluetooth extensions      |
+| `analytics-firebase`    | FirebaseAnalytics | Firebase analytics service    |
+| `analytics-mixpanel`    | Mixpanel          | Mixpanel analytics service    |
 
 ## Adding Swift extensions to a Trikot module
 
