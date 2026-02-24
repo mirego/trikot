@@ -53,6 +53,7 @@ include(":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler
 include(":trikot-viewmodels-declarative-compiler:viewmodels-declarative-compiler-flow")
 include(":trikot-bluetooth:bluetooth")
 include(":trikot-graphql:graphql")
+include(":trikot-swift-extensions-plugin")
 
 if (samplesEnabled) {
     include(":trikot-kword:sample:common")

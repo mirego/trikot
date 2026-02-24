@@ -33,6 +33,7 @@
 | [trikot.viewmodels.declarative](./trikot-viewmodels-declarative)                   | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
 | [trikot.viewmodels.declarative-flow](./trikot-viewmodels-declarative-flow)         | ViewModels for declarative framework (Jetpack compose and SwiftUI). |
 | [trikot.viewmodels.declarative-compiler](./trikot-viewmodels-declarative-compiler) | Gradle plugin to generate declarative Viewmodels boilerplate code.  |
+| [trikot.swift-extensions](./trikot-swift-extensions-plugin)                        | Gradle plugin to sync iOS Swift extensions into consumer projects.  |
 
 ## Getting started
 
