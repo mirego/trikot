@@ -624,6 +624,7 @@ public final class com/mirego/trikot/viewmodels/declarative/properties/VMDKeyboa
 
 public final class com/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType : java/lang/Enum {
 	public static final field Ascii Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
+	public static final field Decimal Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
 	public static final field Default Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
 	public static final field Email Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
 	public static final field Number Lcom/mirego/trikot/viewmodels/declarative/properties/VMDKeyboardType;
