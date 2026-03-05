@@ -51,7 +51,8 @@ public class KFImageViewModelHandler: ImageViewModelHandler {
         let cancellableManagerProvider = CancellableManagerProvider()
         cancellableManager.add(cancellable: cancellableManagerProvider)
 
-        imageView.observe(cancellableManager: cancellableManager, publisher: imageFlowPublisher) {[weak self] (imageFlow: ImageFlow) in
+        imageView.observe(cancellableManager: cancellableManager, publisher: imageFlowPublisher) {[weak self, weak imageView] (imageFlow: ImageFlow) in
+            guard let imageView else { return }
             self?.doLoadImageFlow(
                 cancellableManager: cancellableManagerProvider.cancelPreviousAndCreate(),
                 imageViewModel: imageViewModel,
