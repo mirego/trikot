@@ -10,6 +10,8 @@ public extension VMDKeyboardType {
             return .asciiCapable
         case .number:
             return .numberPad
+        case .decimal:
+            return .decimalPad
         case .email:
             return .emailAddress
         case .password:

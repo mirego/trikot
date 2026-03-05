@@ -17,6 +17,7 @@ val TrikotKeyboardType.composeValue: ComposeKeyboardType
         TrikotKeyboardType.NumberPassword -> ComposeKeyboardType.NumberPassword
         TrikotKeyboardType.Phone -> ComposeKeyboardType.Phone
         TrikotKeyboardType.URL -> ComposeKeyboardType.Uri
+        TrikotKeyboardType.Decimal -> ComposeKeyboardType.Decimal
     }
 
 val VMDKeyboardReturnKeyType.composeValue: ImeAction
