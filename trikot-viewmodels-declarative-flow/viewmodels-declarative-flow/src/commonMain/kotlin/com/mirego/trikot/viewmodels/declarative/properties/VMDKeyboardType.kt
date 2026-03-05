@@ -14,5 +14,6 @@ enum class VMDKeyboardType {
     Password,
     NumberPassword,
     Phone,
-    URL
+    URL,
+    Decimal
 }
