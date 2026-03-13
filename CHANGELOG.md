@@ -4,15 +4,13 @@ All notable changes to the library will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## Upcoming
+## 6.1.0
 
 ### Updates
 
 - [http] Handle network resolution failures with new `HttpNetworkUnreachableException`
 - [streams] Allow Promises to be garbage collected when completed even if the provided cancellableManager is not cancelled yet.
 - [swift-extensions] New `trikotSwiftExtensions` Gradle plugin that copies Trikot's iOS Swift extensions into consumer projects. This replaces CocoaPods subspecs for distributing Swift extensions, enabling SPM-based projects to use Trikot without CocoaPods. Modules and files are auto-discovered from `trikot-*/swift-extensions/` directories.
-
-### Breaking Changes
 
 ## 6.0.0
 
