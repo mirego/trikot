@@ -101,7 +101,7 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
 
         val callback = object : ScanCallback() {
             val foundDevice = ConcurrentHashMap<String, BluetoothScanResult>()
-            
+
             @Volatile var failed = false
 
             override fun onBatchScanResults(results: MutableList<ScanResult>?) {
