@@ -101,8 +101,10 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
 
         val callback = object : ScanCallback() {
             val foundDevice = ConcurrentHashMap<String, BluetoothScanResult>()
+            @Volatile var failed = false
 
             override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+                if (failed) return
                 super.onBatchScanResults(results)
                 results?.let {
                     results.forEach {
@@ -113,10 +115,12 @@ class AndroidBluetoothManager(val context: Context) : BluetoothManager {
 
             override fun onScanFailed(errorCode: Int) {
                 super.onScanFailed(errorCode)
+                failed = true
                 devicesPublisher.error = Exception("$errorCode")
             }
 
             override fun onScanResult(callbackType: Int, result: ScanResult?) {
+                if (failed) return
                 super.onScanResult(callbackType, result)
                 result?.let {
                     if (callbackType == ScanSettings.CALLBACK_TYPE_MATCH_LOST) {
