@@ -213,13 +213,11 @@ public class DefaultImageViewModelHandler: ImageViewModelHandler {
                     }
                 }
             }
-            cancellableManager.add(cancellable: dataTask)
+            cancellableManager.add { dataTask.cancel() }
             dataTask.resume()
         }
     }
 }
-
-extension URLSessionTask: Cancellable {}
 
 private extension UIImage {
     var cacheCost: Int {
