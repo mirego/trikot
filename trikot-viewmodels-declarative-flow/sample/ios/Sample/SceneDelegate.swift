@@ -1,6 +1,6 @@
 import UIKit
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public class TrikotViewModelDeclarative {
     public static let shared: TrikotViewModelDeclarative = TrikotViewModelDeclarative()

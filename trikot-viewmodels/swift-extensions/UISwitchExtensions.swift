@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 extension UISwitch {
 
@@ -37,7 +37,7 @@ extension UISwitch {
     
     @objc
     func onValueChanged(sender: UISwitch) {
-        if #available(iOS 10.0, *), let style = impactFeedbackStyle() {
+        if let style = impactFeedbackStyle() {
             UIImpactFeedbackGenerator(style: getFeedbackStyle(style: style)).impactOccurred()
         }
         guard let toggleSwitchViewModel = trikotToggleSwitchViewModel else { return }
@@ -66,7 +66,6 @@ extension UISwitch {
         case rigid
     }
     
-    @available(iOS 10.0, *)
     private func getFeedbackStyle(style: FeedbackStyle) -> UIImpactFeedbackGenerator.FeedbackStyle {
         switch style {
         case .light:
@@ -76,17 +75,9 @@ extension UISwitch {
         case .heavy:
             return .heavy
         case .soft:
-            if #available(iOS 13.0, *) {
-                return .soft
-            } else {
-                return .light
-            }
+            return .soft
         case .rigid:
-            if #available(iOS 13.0, *) {
-                return .rigid
-            } else {
-                return .heavy
-            }
+            return .rigid
         }
     }
 }

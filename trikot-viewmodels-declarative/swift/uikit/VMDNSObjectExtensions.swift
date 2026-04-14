@@ -1,5 +1,5 @@
 import Kingfisher
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 import UIKit
 
 public protocol ViewModelDeclarativeCompatible : AnyObject {

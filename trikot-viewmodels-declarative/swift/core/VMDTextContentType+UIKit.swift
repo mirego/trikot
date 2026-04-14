@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public extension VMDTextContentType {
     public var uiTextContentType: UITextContentType? {
@@ -55,17 +55,9 @@ public extension VMDTextContentType {
         case .password:
             return .password
         case .newpassword:
-            if #available(iOS 12.0, *) {
-                return .newPassword
-            } else {
-                return nil
-            }
+            return .newPassword
         case .onetimecode:
-            if #available(iOS 12.0, *) {
-                return .oneTimeCode
-            } else {
-                return nil
-            }
+            return .oneTimeCode
         default:
             return nil
         }

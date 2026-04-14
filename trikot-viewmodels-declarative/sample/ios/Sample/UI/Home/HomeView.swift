@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 struct HomeView: RootViewModelView {
     typealias VM = HomeViewModel
@@ -23,7 +23,7 @@ struct HomeView: RootViewModelView {
                         VMDButton(element.button) { textContent in
                             Text(textContent.text)
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     }
                 }
             }

@@ -1,6 +1,6 @@
 import Foundation
 import Mixpanel
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public class MixpanelAnalyticsService: AnalyticsService {
     public init(enableAnalytics: Bool = true) {

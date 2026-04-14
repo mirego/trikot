@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public struct VMDText: View {
     public typealias TextConfiguration = (Text) -> Text

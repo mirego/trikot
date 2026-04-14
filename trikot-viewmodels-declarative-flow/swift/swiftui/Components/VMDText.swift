@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public struct VMDText: View {
     public typealias TextConfiguration = (Text) -> Text
@@ -27,11 +27,7 @@ public struct VMDText: View {
         if viewModel.spans.isEmpty {
             return Text(viewModel.text)
         } else {
-            if #available(iOS 15, *) {
-                return Text(AttributedString(text: viewModel.text, spans: viewModel.spans))
-            } else {
-                return Text(viewModel.text)
-            }
+            return Text(AttributedString(text: viewModel.text, spans: viewModel.spans))
         }
     }
 

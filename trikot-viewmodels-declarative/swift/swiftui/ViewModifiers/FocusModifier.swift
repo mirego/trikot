@@ -1,6 +1,5 @@
 import SwiftUI
 
-@available(iOS 15, *)
 struct FocusModifier: ViewModifier {
 
     @FocusState var focused: Bool
@@ -20,7 +19,6 @@ struct FocusModifier: ViewModifier {
     }
 }
 
-@available(iOS 15, *)
 extension View{
     func focusMe(_ state: Binding<Bool>) -> some View {
         self.modifier(FocusModifier(state))

@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public class VMDSnackBarStateObject: ObservableObject {
     @Published public var message = ""
