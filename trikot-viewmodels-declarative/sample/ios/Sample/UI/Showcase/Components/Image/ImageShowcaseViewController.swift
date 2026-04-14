@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 class ImageShowcaseViewController: BaseViewModelViewController<ImageShowcaseViewModelController, ImageShowcaseViewModel, ImageShowcaseView, ImageShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

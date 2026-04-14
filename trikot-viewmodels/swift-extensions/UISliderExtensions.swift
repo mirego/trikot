@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 extension UISlider {
     private struct AssosiatedKeys {
@@ -30,7 +30,7 @@ extension UISlider {
         guard let integerValue = Int32(String(format: "%.0f", self.value)) else { return }
 
         if integerValue != oldValue() {
-            if #available(iOS 10.0, *), let style = impactFeedbackStyle() {
+            if let style = impactFeedbackStyle() {
                 UIImpactFeedbackGenerator(style: getFeedbackStyle(style: style)).impactOccurred()
             }
             oldValue(value: integerValue)
@@ -62,7 +62,6 @@ extension UISlider {
         case rigid
     }
     
-    @available(iOS 10.0, *)
     private func getFeedbackStyle(style: FeedbackStyle) -> UIImpactFeedbackGenerator.FeedbackStyle {
         switch style {
         case .light:
@@ -72,17 +71,9 @@ extension UISlider {
         case .heavy:
             return .heavy
         case .soft:
-            if #available(iOS 13.0, *) {
-                return .soft
-            } else {
-                return .light
-            }
+            return .soft
         case .rigid:
-            if #available(iOS 13.0, *) {
-                return .rigid
-            } else {
-                return .heavy
-            }
+            return .rigid
         }
     }
 }

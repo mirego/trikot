@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 class HeaderListItem: UIView {
     private let title = UILabel(frame: .zero)

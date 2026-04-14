@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 class ProgressShowcaseViewController: BaseViewModelViewController<ProgressShowcaseViewModelController, ProgressShowcaseViewModel, ProgressShowcaseView, ProgressShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

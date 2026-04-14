@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 class ListViewController: UIViewController {
     private let sampleView = ListView(frame: .zero)

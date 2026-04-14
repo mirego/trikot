@@ -10,7 +10,7 @@ plugins {
 
 group = "com.mirego.sample"
 
-val frameworkName = "TRIKOT_FRAMEWORK_NAME"
+val frameworkName = Project.TRIKOT_SAMPLES_FRAMEWORK_NAME
 
 configurations {
     create("testApi") {}

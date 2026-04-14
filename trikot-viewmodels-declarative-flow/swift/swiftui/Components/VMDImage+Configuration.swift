@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 public extension VMDImage {
     func resizable() -> VMDImage {

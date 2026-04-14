@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 class HomeViewController: BaseViewModelViewController<HomeViewModelController, HomeViewModel, HomeView, HomeNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

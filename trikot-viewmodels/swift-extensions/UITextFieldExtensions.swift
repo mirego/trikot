@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 extension UITextField {
     public var trikotInputTextViewModel: InputTextViewModel? {

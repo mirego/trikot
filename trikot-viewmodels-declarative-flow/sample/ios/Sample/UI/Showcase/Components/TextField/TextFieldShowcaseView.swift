@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 struct TextFieldShowcaseView: RootViewModelView {
     typealias VM = TextFieldShowcaseViewModel
@@ -20,16 +20,11 @@ struct TextFieldShowcaseView: RootViewModelView {
             ScrollView {
                 VStack(alignment: .leading) {
                     HStack {
-                        if #available(iOS 15, *) {
-                            VMDTextField<EmptyView>(viewModel.textField) { placeholder in
-                                Text(placeholder)
-                                    .foregroundColor(.red)
-                            }
-                            .textFieldStyle(.roundedBorder)
-                        } else {
-                            VMDTextField<EmptyView>(viewModel.textField)
-                                .textFieldStyle(.roundedBorder)
+                        VMDTextField<EmptyView>(viewModel.textField) { placeholder in
+                            Text(placeholder)
+                                .foregroundColor(.red)
                         }
+                        .textFieldStyle(.roundedBorder)
 
                         VMDButton(viewModel.clearButton) { textContent in
                             Text(textContent.text)

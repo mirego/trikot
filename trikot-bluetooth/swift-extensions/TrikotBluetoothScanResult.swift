@@ -1,4 +1,4 @@
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 import CoreBluetooth
 
 class TrikotBluetoothScanResult: NSObject, BluetoothScanResult {

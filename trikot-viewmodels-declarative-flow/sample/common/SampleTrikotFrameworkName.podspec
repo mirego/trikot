@@ -1,20 +1,20 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'TRIKOT_FRAMEWORK_NAME'
+    spec.name                     = 'SampleTrikotFrameworkName'
     spec.version                  = '6.1.0-SNAPSHOT'
     spec.homepage                 = 'www.mirego.com'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = 'BSD-3'
     spec.summary                  = 'Trikot-viewmodels-declarative sample'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/SampleTrikotFrameworkName.framework'
     spec.libraries                = 'c++'
                 
                 
                 
-    if !Dir.exist?('build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework') || Dir.empty?('build/cocoapods/framework/TRIKOT_FRAMEWORK_NAME.framework')
+    if !Dir.exist?('build/cocoapods/framework/SampleTrikotFrameworkName.framework') || Dir.empty?('build/cocoapods/framework/SampleTrikotFrameworkName.framework')
         raise "
 
-        Kotlin framework 'TRIKOT_FRAMEWORK_NAME' doesn't exist yet, so a proper Xcode project can't be generated.
+        Kotlin framework 'SampleTrikotFrameworkName' doesn't exist yet, so a proper Xcode project can't be generated.
         'pod install' should be executed after running ':generateDummyFramework' Gradle task:
 
             ./gradlew :trikot-viewmodels-declarative-flow:sample:common:generateDummyFramework
@@ -28,12 +28,12 @@ Pod::Spec.new do |spec|
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':trikot-viewmodels-declarative-flow:sample:common',
-        'PRODUCT_MODULE_NAME' => 'TRIKOT_FRAMEWORK_NAME',
+        'PRODUCT_MODULE_NAME' => 'SampleTrikotFrameworkName',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build TRIKOT_FRAMEWORK_NAME',
+            :name => 'Build SampleTrikotFrameworkName',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT

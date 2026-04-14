@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 struct ButtonShowcaseView: RootViewModelView {
     typealias VM = ButtonShowcaseViewModel

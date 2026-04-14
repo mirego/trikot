@@ -26,5 +26,5 @@ object Project {
     const val TRIKOT_DATASOURCES_CORE = ":trikot-datasources:datasources-core"
     const val TRIKOT_DATASOURCES_STREAMS = ":trikot-datasources:datasources-streams"
     const val TRIKOT_DATASOURCES_FLOW = ":trikot-datasources:datasources-flow"
-    const val TRIKOT_SAMPLES_FRAMEWORK_NAME = "TRIKOT_FRAMEWORK_NAME"
+    const val TRIKOT_SAMPLES_FRAMEWORK_NAME = "SampleTrikotFrameworkName"
 }

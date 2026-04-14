@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 struct SnackbarShowcaseView: RootViewModelView {
     typealias VM = SnackbarShowcaseViewModel
@@ -24,7 +24,7 @@ struct SnackbarShowcaseView: RootViewModelView {
                             VMDButton(button) { textContent in
                                 Text(textContent.text)
                             }
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)

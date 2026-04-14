@@ -1,4 +1,4 @@
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 import UIKit
 
 extension ViewModelDeclarativeWrapper where Base : UISwitch {

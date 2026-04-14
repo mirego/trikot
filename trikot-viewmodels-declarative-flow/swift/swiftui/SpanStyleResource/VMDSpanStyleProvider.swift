@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import SampleTrikotFrameworkName
 
 public typealias VMDSpanStyle = [NSAttributedString.Key: Any]
 
@@ -12,7 +12,6 @@ public struct DefaultSpanStyleProvider: VMDSpanStyleProvider {
     public func spanStyleForResource(textStyleResource: VMDTextStyleResource) -> VMDSpanStyle? { nil }
 }
 
-@available(iOS 15, *)
 internal extension AttributedString {
     init(text: String, spans: [VMDRichTextSpan]) {
         let attributedString = NSMutableAttributedString(string: text)
