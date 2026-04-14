@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension UIButton {
     private struct AssociatedKeys {

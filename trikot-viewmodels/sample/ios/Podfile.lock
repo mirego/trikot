@@ -1,24 +1,24 @@
 PODS:
   - Kingfisher (7.10.1)
-  - SampleTrikotFrameworkName (0.0.1)
   - SwiftLint (0.52.3)
-  - Trikot/streams (6.1.0-SNAPSHOT):
-    - SampleTrikotFrameworkName
-  - Trikot/viewmodels (6.1.0-SNAPSHOT):
-    - SampleTrikotFrameworkName
+  - Trikot/streams (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/viewmodels (6.1.0):
     - Trikot/streams
-  - Trikot/viewmodels.Kingfisher (6.1.0-SNAPSHOT):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.Kingfisher (6.1.0):
     - Kingfisher (~> 7.10.1)
-    - SampleTrikotFrameworkName
     - Trikot/streams
     - Trikot/viewmodels
+    - TrikotFrameworkName
+  - TrikotFrameworkName (0.0.1)
 
 DEPENDENCIES:
-  - SampleTrikotFrameworkName (from `../common`)
   - SwiftLint
   - Trikot/streams (from `../../..`)
   - Trikot/viewmodels (from `../../..`)
   - Trikot/viewmodels.Kingfisher (from `../../..`)
+  - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
   trunk:
@@ -26,17 +26,17 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
-  SampleTrikotFrameworkName:
-    :path: "../common"
   Trikot:
     :path: "../../.."
+  TrikotFrameworkName:
+    :path: "../common"
 
 SPEC CHECKSUMS:
   Kingfisher: bc5abe80a8e0144537ef1dd5a0b2621b04f7f439
-  SampleTrikotFrameworkName: 0fa1d9a7ef0dc5510303f6515ed0214cd14764eb
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
-  Trikot: 2e3e14b931cbd1436e5b2ec62b601e0c312b68db
+  Trikot: daf6b39be8e667882715ad7f3974b3459f68453d
+  TrikotFrameworkName: 78d8047fabb8ec6a67eca9ef896c4b856a88dbe9
 
-PODFILE CHECKSUM: f521a08ca5c63185037e0c69bd95f10423228788
+PODFILE CHECKSUM: 415e1013af8f898a2002d77e22915efde213eddd
 
 COCOAPODS: 1.13.0

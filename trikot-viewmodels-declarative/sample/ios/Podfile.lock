@@ -1,33 +1,32 @@
 PODS:
   - Kingfisher (7.10.1)
   - ReachabilitySwift (5.2.1)
-  - SampleTrikotFrameworkName (6.1.0-SNAPSHOT)
   - SwiftLint (0.52.3)
-  - Trikot/http (6.1.0-SNAPSHOT):
+  - Trikot/http (6.1.0):
     - ReachabilitySwift (~> 5.2)
-    - SampleTrikotFrameworkName
-  - Trikot/kword (6.1.0-SNAPSHOT):
-    - SampleTrikotFrameworkName
-  - Trikot/streams (6.1.0-SNAPSHOT):
-    - SampleTrikotFrameworkName
-  - Trikot/viewmodels.declarative (6.1.0-SNAPSHOT):
-    - SampleTrikotFrameworkName
+    - TrikotFrameworkName
+  - Trikot/kword (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/streams (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative (6.1.0):
     - Trikot/streams
-  - Trikot/viewmodels.declarative.Combine (6.1.0-SNAPSHOT):
-    - SampleTrikotFrameworkName
-  - Trikot/viewmodels.declarative.SwiftUI (6.1.0-SNAPSHOT):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative.Combine (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative.SwiftUI (6.1.0):
     - Kingfisher (~> 7.10.1)
-    - SampleTrikotFrameworkName
     - Trikot/viewmodels.declarative
     - Trikot/viewmodels.declarative.Combine
-  - Trikot/viewmodels.declarative.UIKit (6.1.0-SNAPSHOT):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative.UIKit (6.1.0):
     - Kingfisher (~> 7.10.1)
-    - SampleTrikotFrameworkName
     - Trikot/streams
     - Trikot/viewmodels.declarative
+    - TrikotFrameworkName
+  - TrikotFrameworkName (6.1.0-SNAPSHOT)
 
 DEPENDENCIES:
-  - SampleTrikotFrameworkName (from `../common`)
   - SwiftLint
   - Trikot/http (from `../../..`)
   - Trikot/kword (from `../../..`)
@@ -35,6 +34,7 @@ DEPENDENCIES:
   - Trikot/viewmodels.declarative (from `../../..`)
   - Trikot/viewmodels.declarative.SwiftUI (from `../../..`)
   - Trikot/viewmodels.declarative.UIKit (from `../../..`)
+  - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
   trunk:
@@ -43,18 +43,18 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
-  SampleTrikotFrameworkName:
-    :path: "../common"
   Trikot:
     :path: "../../.."
+  TrikotFrameworkName:
+    :path: "../common"
 
 SPEC CHECKSUMS:
   Kingfisher: bc5abe80a8e0144537ef1dd5a0b2621b04f7f439
   ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
-  SampleTrikotFrameworkName: f64b184c26873fcf5626a5da537787fb5e1d623d
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
-  Trikot: 2e3e14b931cbd1436e5b2ec62b601e0c312b68db
+  Trikot: daf6b39be8e667882715ad7f3974b3459f68453d
+  TrikotFrameworkName: 2d5f4a087b6c9ee4e2b4ef53225249dff3955eef
 
-PODFILE CHECKSUM: 31183295c76fb72c5ea3f273fe653479d97d610c
+PODFILE CHECKSUM: 6ec6122018106d0f608ae2589da7f8d3e213b03f
 
 COCOAPODS: 1.16.2

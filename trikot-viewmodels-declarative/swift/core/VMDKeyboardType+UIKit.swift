@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public extension VMDKeyboardType {
     var uiKeyboardType: UIKeyboardType {

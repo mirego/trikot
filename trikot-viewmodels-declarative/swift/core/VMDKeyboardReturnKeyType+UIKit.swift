@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public extension VMDKeyboardReturnKeyType {
     public var uiReturnKeyType: UIReturnKeyType {

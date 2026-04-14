@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class SnackbarShowcaseViewController: BaseViewModelViewController<SnackbarShowcaseViewModelController, SnackbarShowcaseViewModel, SnackbarShowcaseView, SnackbarShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension UIPickerView {
     private struct AssociatedKeys {

@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension VMDImageDescriptor.Remote {
     var imageURL: URL? {

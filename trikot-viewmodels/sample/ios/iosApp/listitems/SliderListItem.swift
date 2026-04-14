@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class SliderListItem: UIView {
     private let slider = UISlider()

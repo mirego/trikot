@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public struct TextAppearanceAttributes {
     public let attributes: [NSAttributedString.Key: Any]

@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension Publisher {
     func asBehaviorSubject() -> BehaviorSubject {

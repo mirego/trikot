@@ -1,5 +1,5 @@
 import Kingfisher
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 import UIKit
 
 extension UIBarButtonItem: ViewModelDeclarativeCompatible { }

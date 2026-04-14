@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class ObservableFlowWrapper<T: AnyObject>: ObservableObject {
     @Published public var value: T

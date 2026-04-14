@@ -1,6 +1,6 @@
 import UIKit
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 open class ViewModelViewController<VMC: VMDViewModelController<VM, N>, VM, V: RootViewModelView, N: VMDNavigationDelegate>: UIHostingController<V>, VMDNavigationDelegate where VM == V.VM {
 

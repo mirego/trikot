@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public protocol ViewModelView: View {
     associatedtype VM: VMDViewModel

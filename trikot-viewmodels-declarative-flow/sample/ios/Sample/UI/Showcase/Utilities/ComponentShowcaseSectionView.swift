@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 struct ComponentShowcaseSectionView<Content: View>: View {
     private let titleTextViewModel: VMDTextViewModel

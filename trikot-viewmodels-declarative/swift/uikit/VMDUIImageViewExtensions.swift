@@ -1,5 +1,5 @@
 import Kingfisher
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 import UIKit
 
 private let IMAGE_VIEW_MODEL_HANDLER_KEY = UnsafeMutablePointer<Int8>.allocate(capacity: 1)

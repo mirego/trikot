@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public struct VMDList<RowContent, Identifiable, Content>: View where RowContent: View, Identifiable: VMDIdentifiableContent, Content: VMDContent {
     private let rowContentBuilder: (Content) -> RowContent

@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public struct VMDPicker<Label, Content: VMDContent>: View where Label: View {
     private let labelBuilder: (Content) -> Label

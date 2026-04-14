@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class TrikotHttpRequest: NSObject, HttpRequest {
     private struct Constants {

@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class TextFieldShowcaseViewController: BaseViewModelViewController<TextFieldShowcaseViewModelController, TextFieldShowcaseViewModel, TextFieldShowcaseView, TextFieldShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

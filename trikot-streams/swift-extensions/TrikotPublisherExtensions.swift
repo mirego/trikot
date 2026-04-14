@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension NSObject {
     private final class iOSCancellableManagerHolder {

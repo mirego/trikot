@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public protocol VMDImageProviderUIKit {
     func imageForResource(imageResource: VMDImageResource) -> UIImage?

@@ -1,6 +1,6 @@
 import SwiftUI
 import Combine
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class ObservableViewModelAdapter<VM: VMDViewModel>: ObservableObject {
     public let viewModel: VM

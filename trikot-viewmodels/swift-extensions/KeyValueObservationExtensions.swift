@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class KeyValueObservationHolder: NSObject, Cancellable {
     let kvo: NSKeyValueObservation

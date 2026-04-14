@@ -1,5 +1,5 @@
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 open class TrikotHttpRequestFactory: NSObject, HttpRequestFactory {
     private let httpLogLevel: TrikotHttpLogLevel

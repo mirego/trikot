@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class ToggleSwitchListItem: UIView {
     private let switchItem = UISwitch()

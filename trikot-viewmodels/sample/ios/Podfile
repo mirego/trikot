@@ -3,12 +3,12 @@ platform :ios, platformVersion
 
 install! 'cocoapods', :disable_input_output_paths => true
 
-ENV['TRIKOT_FRAMEWORK_NAME']='SampleTrikotFrameworkName'
+ENV['TRIKOT_FRAMEWORK_NAME']='TrikotFrameworkName'
 
 target 'iosApp' do
   use_frameworks!
   pod 'SwiftLint'
-  pod 'SampleTrikotFrameworkName', :path => '../common'
+  pod 'TrikotFrameworkName', :path => '../common'
   pod 'Trikot/viewmodels', :path => '../../..'
   pod 'Trikot/viewmodels.Kingfisher', :path => '../../..'
   pod 'Trikot/streams', :path => '../../..', :inhibit_warnings => true

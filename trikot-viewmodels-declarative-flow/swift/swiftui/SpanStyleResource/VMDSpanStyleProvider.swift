@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public typealias VMDSpanStyle = [NSAttributedString.Key: Any]
 

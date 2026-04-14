@@ -1,4 +1,4 @@
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 import Trikot
 import UIKit
 

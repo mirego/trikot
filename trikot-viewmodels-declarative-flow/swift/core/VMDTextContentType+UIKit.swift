@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public extension VMDTextContentType {
     public var uiTextContentType: UITextContentType? {

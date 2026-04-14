@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public struct VMDTextField<Label>: View where Label: View {
     private let labelBuilder: (() -> Label)?

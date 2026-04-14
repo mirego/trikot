@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class ButtonListItem: UIView {
     private let button = UIButton(frame: .zero)

@@ -1,6 +1,6 @@
 import FirebaseAnalytics
 import Foundation
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class FirebaseAnalyticsService: AnalyticsService {
     public var name: String = "FirebaseAnalytics"

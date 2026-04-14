@@ -1,6 +1,6 @@
 import Foundation
 import Reachability
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class TrikotConnectivityService {
     public static let shared = TrikotConnectivityService()

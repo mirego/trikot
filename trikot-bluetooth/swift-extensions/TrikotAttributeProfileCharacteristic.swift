@@ -1,4 +1,4 @@
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 import CoreBluetooth
 
 class TrikotAttributeProfileCharacteristic: NSObject, AttributeProfileCharacteristic {

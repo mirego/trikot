@@ -1,6 +1,6 @@
 import UIKit
 import Kingfisher
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public protocol KFImageUrlRequestModifierDelegate: AnyObject {
     func requestModifier(for url: URL) -> ImageDownloadRequestModifier

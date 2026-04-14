@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 struct VmdModifier: ViewModifier {
     let isHidden: Bool

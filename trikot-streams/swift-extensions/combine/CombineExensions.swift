@@ -1,8 +1,8 @@
 import Combine
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class PublisherAdapter<T>: Combine.Publisher {
-    private let publisher: SampleTrikotFrameworkName.Publisher
+    private let publisher: TrikotFrameworkName.Publisher
 
     public typealias Output = T
 
@@ -12,12 +12,12 @@ public class PublisherAdapter<T>: Combine.Publisher {
         publisher.subscribe(s: SubscriberAdapter(subscriber))
     }
 
-    public init(_ publisher: SampleTrikotFrameworkName.Publisher) {
+    public init(_ publisher: TrikotFrameworkName.Publisher) {
         self.publisher = publisher
     }
 }
 
-public class SubscriberAdapter<S: Combine.Subscriber>: SampleTrikotFrameworkName.Subscriber {
+public class SubscriberAdapter<S: Combine.Subscriber>: TrikotFrameworkName.Subscriber {
     private let subscriber: S
 
     public init(_ subscriber: S) {
@@ -46,15 +46,15 @@ public class SubscriberAdapter<S: Combine.Subscriber>: SampleTrikotFrameworkName
         }
     }
 
-    public func onSubscribe(s: SampleTrikotFrameworkName.Subscription) {
+    public func onSubscribe(s: TrikotFrameworkName.Subscription) {
         subscriber.receive(subscription: SubscriptionAdapter(s))
     }
 }
 
 public class SubscriptionAdapter: Combine.Subscription {
-    private let subscription: SampleTrikotFrameworkName.Subscription
+    private let subscription: TrikotFrameworkName.Subscription
 
-    init(_ subscription: SampleTrikotFrameworkName.Subscription) {
+    init(_ subscription: TrikotFrameworkName.Subscription) {
         self.subscription = subscription
     }
 
@@ -71,7 +71,7 @@ public class SubscriptionAdapter: Combine.Subscription {
     }
 }
 
-extension SampleTrikotFrameworkName.Publisher {
+extension TrikotFrameworkName.Publisher {
     public func asCombinePublisher<T>(type: T.Type) -> AnyPublisher<T, Never> {
         AnyPublisher(PublisherAdapter<T>(self))
     }

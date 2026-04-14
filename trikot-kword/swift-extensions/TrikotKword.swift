@@ -1,6 +1,6 @@
 import Foundation
 import Trikot
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public class TrikotKword: NSObject {
     public static let translationBasePaths = [

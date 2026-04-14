@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public protocol ImageViewModelResourceProvider {
     func image(fromResource resource: TrikotImageResource?) -> UIImage?

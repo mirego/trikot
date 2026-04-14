@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension UITextView {
     public var trikotLabelViewModel: LabelViewModel? {

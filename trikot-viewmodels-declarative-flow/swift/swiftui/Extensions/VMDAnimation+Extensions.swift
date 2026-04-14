@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public extension VMDAnimation {
     var animation: SwiftUI.Animation? {

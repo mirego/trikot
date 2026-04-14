@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public struct VMDSnackbar<Content>: View where Content: View {
     private let viewDataFlow: VMDFlow<VMDSnackbarViewData>

@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 extension VMDKeyboardReturnKeyType {
     public var submitLabel: SubmitLabel {

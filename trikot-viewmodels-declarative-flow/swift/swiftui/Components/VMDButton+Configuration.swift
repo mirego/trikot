@@ -1,5 +1,5 @@
 import SwiftUI
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 public extension VMDButton {
     func externalActionHandler(_ action: @escaping (_ action: () -> Void) -> Void) -> VMDButton {

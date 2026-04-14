@@ -1,5 +1,5 @@
 import UIKit
-import SampleTrikotFrameworkName
+import TrikotFrameworkName
 
 class PickerListItem: UIView {
     private let pickerItem = UIPickerView()
