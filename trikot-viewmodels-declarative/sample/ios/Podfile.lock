@@ -2,31 +2,29 @@ PODS:
   - Kingfisher (7.10.1)
   - ReachabilitySwift (5.2.1)
   - SwiftLint (0.52.3)
-  - SwiftUIIntrospect (1.0.0)
-  - Trikot/http (5.5.0-SNAPSHOT):
+  - Trikot/http (6.1.0-SNAPSHOT):
     - ReachabilitySwift (~> 5.2)
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/kword (5.5.0-SNAPSHOT):
+  - Trikot/kword (6.1.0-SNAPSHOT):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/streams (5.5.0-SNAPSHOT):
+  - Trikot/streams (6.1.0-SNAPSHOT):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative (5.5.0-SNAPSHOT):
+  - Trikot/viewmodels.declarative (6.1.0-SNAPSHOT):
     - Trikot/streams
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.Combine (5.5.0-SNAPSHOT):
+  - Trikot/viewmodels.declarative.Combine (6.1.0-SNAPSHOT):
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.SwiftUI (5.5.0-SNAPSHOT):
+  - Trikot/viewmodels.declarative.SwiftUI (6.1.0-SNAPSHOT):
     - Kingfisher (~> 7.10.1)
-    - SwiftUIIntrospect (~> 1.0)
     - Trikot/viewmodels.declarative
     - Trikot/viewmodels.declarative.Combine
     - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.UIKit (5.5.0-SNAPSHOT):
+  - Trikot/viewmodels.declarative.UIKit (6.1.0-SNAPSHOT):
     - Kingfisher (~> 7.10.1)
     - Trikot/streams
     - Trikot/viewmodels.declarative
     - TRIKOT_FRAMEWORK_NAME
-  - TRIKOT_FRAMEWORK_NAME (5.5.0-SNAPSHOT)
+  - TRIKOT_FRAMEWORK_NAME (6.1.0-SNAPSHOT)
 
 DEPENDENCIES:
   - SwiftLint
@@ -43,7 +41,6 @@ SPEC REPOS:
     - Kingfisher
     - ReachabilitySwift
     - SwiftLint
-    - SwiftUIIntrospect
 
 EXTERNAL SOURCES:
   Trikot:
@@ -55,9 +52,8 @@ SPEC CHECKSUMS:
   Kingfisher: bc5abe80a8e0144537ef1dd5a0b2621b04f7f439
   ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
-  SwiftUIIntrospect: 9f15bf51d1a7582e168a683debca38649f3e152e
-  Trikot: 800d5c7937d265a2ee701dfd49c0a0ce4741438c
-  TRIKOT_FRAMEWORK_NAME: d1e1f18e11fcd960a64712c7780ee069da621d57
+  Trikot: 121ce6aa18c2c64ad24bbd3248e7e3729d4eb084
+  TRIKOT_FRAMEWORK_NAME: 6e51a99359b190f52db55dc46f89de033bfc60c7
 
 PODFILE CHECKSUM: 8057f57ba2a2db77f33517422839afd5282c408e
 
