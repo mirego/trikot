@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+## 6.2.0
+
+### Updates
+
+- [VMD] Remove SwiftUIIntrospect dependency
+
+### Fixes
+
+- [bluetooth] Prevent `AndroidBluetoothManager`'s `ScanCallback` from publishing a value after it has failed
+- [viewmodels] Fix `URLSessionTask` `Cancellable` conformance breaking under Xcode 26
+
 ## 6.1.0
 
 ### Updates
