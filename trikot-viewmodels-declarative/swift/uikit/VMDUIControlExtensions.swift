@@ -1,4 +1,4 @@
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 import UIKit
 
 extension ViewModelDeclarativeWrapper where Base : UIControl {

@@ -1,6 +1,6 @@
 import SwiftUI
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 struct TextShowcaseView: RootViewModelView {
     typealias VM = TextShowcaseViewModel
@@ -93,7 +93,7 @@ struct TextShowcaseView: RootViewModelView {
                                 fontSize: 12,
                                 lineHeight: 12
                             ),
-                            color: .black,
+                            color: .primary,
                             linkTextAttributes: [ .foregroundColor: UIColor.green ]
                         )
                     }

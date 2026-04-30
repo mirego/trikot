@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 import Kingfisher
 
 public struct VMDImage: View {

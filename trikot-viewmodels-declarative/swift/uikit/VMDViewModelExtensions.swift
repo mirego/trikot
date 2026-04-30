@@ -1,5 +1,5 @@
 import Foundation
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 extension VMDViewModel {
     public func publisher<T, V>(for property: KeyPath<T, V>) -> PublisherAdapter<V> {

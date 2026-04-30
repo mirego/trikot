@@ -2,29 +2,29 @@ PODS:
   - Kingfisher (7.10.1)
   - ReachabilitySwift (5.2.1)
   - SwiftLint (0.52.3)
-  - Trikot/http (6.1.0-SNAPSHOT):
+  - Trikot/http (6.1.0):
     - ReachabilitySwift (~> 5.2)
-    - TRIKOT_FRAMEWORK_NAME
-  - Trikot/kword (6.1.0-SNAPSHOT):
-    - TRIKOT_FRAMEWORK_NAME
-  - Trikot/streams (6.1.0-SNAPSHOT):
-    - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative (6.1.0-SNAPSHOT):
+    - TrikotFrameworkName
+  - Trikot/kword (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/streams (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative (6.1.0):
     - Trikot/streams
-    - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.Combine (6.1.0-SNAPSHOT):
-    - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.SwiftUI (6.1.0-SNAPSHOT):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative.Combine (6.1.0):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative.SwiftUI (6.1.0):
     - Kingfisher (~> 7.10.1)
     - Trikot/viewmodels.declarative
     - Trikot/viewmodels.declarative.Combine
-    - TRIKOT_FRAMEWORK_NAME
-  - Trikot/viewmodels.declarative.UIKit (6.1.0-SNAPSHOT):
+    - TrikotFrameworkName
+  - Trikot/viewmodels.declarative.UIKit (6.1.0):
     - Kingfisher (~> 7.10.1)
     - Trikot/streams
     - Trikot/viewmodels.declarative
-    - TRIKOT_FRAMEWORK_NAME
-  - TRIKOT_FRAMEWORK_NAME (6.1.0-SNAPSHOT)
+    - TrikotFrameworkName
+  - TrikotFrameworkName (6.1.0-SNAPSHOT)
 
 DEPENDENCIES:
   - SwiftLint
@@ -34,7 +34,7 @@ DEPENDENCIES:
   - Trikot/viewmodels.declarative (from `../../..`)
   - Trikot/viewmodels.declarative.SwiftUI (from `../../..`)
   - Trikot/viewmodels.declarative.UIKit (from `../../..`)
-  - TRIKOT_FRAMEWORK_NAME (from `../common`)
+  - TrikotFrameworkName (from `../common`)
 
 SPEC REPOS:
   trunk:
@@ -45,16 +45,16 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Trikot:
     :path: "../../.."
-  TRIKOT_FRAMEWORK_NAME:
+  TrikotFrameworkName:
     :path: "../common"
 
 SPEC CHECKSUMS:
   Kingfisher: bc5abe80a8e0144537ef1dd5a0b2621b04f7f439
   ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
   SwiftLint: 76ec9c62ad369cff2937474cb34c9af3fa270b7b
-  Trikot: 121ce6aa18c2c64ad24bbd3248e7e3729d4eb084
-  TRIKOT_FRAMEWORK_NAME: 6e51a99359b190f52db55dc46f89de033bfc60c7
+  Trikot: daf6b39be8e667882715ad7f3974b3459f68453d
+  TrikotFrameworkName: 2d5f4a087b6c9ee4e2b4ef53225249dff3955eef
 
-PODFILE CHECKSUM: 8057f57ba2a2db77f33517422839afd5282c408e
+PODFILE CHECKSUM: 6ec6122018106d0f608ae2589da7f8d3e213b03f
 
 COCOAPODS: 1.16.2

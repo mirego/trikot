@@ -1,5 +1,5 @@
 import Foundation
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 public class TrikotHttpResponse: NSObject, HttpResponse {
 

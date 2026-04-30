@@ -1,5 +1,5 @@
 import SwiftUI
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 import Trikot
 
 public struct VMDForEach<RowContent, Identifiable, Content, DividerContent>: DynamicViewContent where RowContent: View, DividerContent: View, Identifiable: VMDIdentifiableContent, Content: VMDContent {

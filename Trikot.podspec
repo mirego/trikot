@@ -16,20 +16,20 @@ Pod::Spec.new do |spec|
 
   spec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
 
-  spec.ios.deployment_target = '10.0'
+  spec.ios.deployment_target = '15.0'
   spec.tvos.deployment_target = '10.0'
   spec.osx.deployment_target = '10.9'
 
   # Streams
   spec.subspec 'streams' do |subspec|
     subspec.source_files  = "trikot-streams/swift-extensions/*.swift"
-    subspec.ios.deployment_target = '8.0'
+    subspec.ios.deployment_target = '15.0'
     subspec.tvos.deployment_target = '9.0'
   end
 
   spec.subspec 'streams.Combine' do |subspec|
     subspec.source_files = 'trikot-streams/swift-extensions/combine/*.swift'
-    subspec.ios.deployment_target = '13.0'
+    subspec.ios.deployment_target = '15.0'
   end
 
   # Http
@@ -43,7 +43,7 @@ Pod::Spec.new do |spec|
     subspec.source_files  = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.source_files = "trikot-viewmodels/swift-extensions/*.swift"
     subspec.tvos.exclude_files = "trikot-viewmodels/swift-extensions/UISliderExtensions.swift", "trikot-viewmodels/swift-extensions/UISwitchExtensions.swift", "trikot-viewmodels/swift-extensions/UIPickerExtensions.swift"
-    subspec.ios.deployment_target = '12.0'
+    subspec.ios.deployment_target = '15.0'
     subspec.tvos.deployment_target = '12.0'
     subspec.dependency 'Trikot/streams'
   end
@@ -51,7 +51,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'viewmodels.Kingfisher' do |subspec|
     subspec.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
     subspec.tvos.source_files = 'trikot-viewmodels/swift-extensions/kingfisher/*.swift'
-    subspec.ios.deployment_target = '12.0'
+    subspec.ios.deployment_target = '15.0'
     subspec.tvos.deployment_target = '12.0'
     subspec.dependency 'Trikot/streams'
     subspec.dependency 'Trikot/viewmodels'
@@ -96,13 +96,13 @@ Pod::Spec.new do |spec|
   # Analytics
   spec.subspec 'analytics.Firebase' do |subspec|
     subspec.source_files = 'trikot-analytics/swift-extensions/firebase/*.swift'
-    subspec.ios.deployment_target  = '10.0'
+    subspec.ios.deployment_target  = '15.0'
     subspec.dependency 'Firebase/Analytics'
   end
 
   spec.subspec 'analytics.Mixpanel' do |subspec|
     subspec.source_files = 'trikot-analytics/swift-extensions/mixpanel/*.swift'
-    subspec.ios.deployment_target  = '10.0'
+    subspec.ios.deployment_target  = '15.0'
     subspec.dependency 'Mixpanel-swift'
   end
 
@@ -114,7 +114,7 @@ Pod::Spec.new do |spec|
   # Bluetooth
   spec.subspec 'bluetooth' do |subspec|
     subspec.source_files  = "trikot-bluetooth/swift-extensions/*.swift"
-    subspec.ios.deployment_target  = '10.0'
+    subspec.ios.deployment_target  = '15.0'
     subspec.dependency ENV['TRIKOT_FRAMEWORK_NAME']
   end
 

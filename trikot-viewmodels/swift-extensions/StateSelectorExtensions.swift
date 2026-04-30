@@ -1,4 +1,4 @@
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 extension StateSelector where T == Color {
     public func defaultValue() -> T? {

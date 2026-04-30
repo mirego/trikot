@@ -1,6 +1,6 @@
 import UIKit
 import Trikot
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 class PickerShowcaseViewController: BaseViewModelViewController<PickerShowcaseViewModelController, PickerShowcaseViewModel, PickerShowcaseView, PickerShowcaseNavigationDelegate> {
     override var preferredStatusBarStyle: UIStatusBarStyle {

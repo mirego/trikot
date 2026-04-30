@@ -1,13 +1,13 @@
-platformVersion = '14.0'
+platformVersion = '15.0'
 
 platform :ios, platformVersion
 
-ENV['TRIKOT_FRAMEWORK_NAME']='TRIKOT_FRAMEWORK_NAME'
+ENV['TRIKOT_FRAMEWORK_NAME']='TrikotFrameworkName'
 
 target 'Sample' do
   use_frameworks!
 
-  pod 'TRIKOT_FRAMEWORK_NAME', :path => '../common'
+  pod 'TrikotFrameworkName', :path => '../common'
   pod 'Trikot/viewmodels.declarative', :path => '../../..'
   pod 'Trikot/viewmodels.declarative.UIKit', :path => '../../..'
   pod 'Trikot/viewmodels.declarative.SwiftUI', :path => '../../..'

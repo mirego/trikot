@@ -1,4 +1,4 @@
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 
 class Collector<T>: FlowCollector {
     let callback:(T) -> Void

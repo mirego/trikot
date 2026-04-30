@@ -1,5 +1,5 @@
 import UIKit
-import TRIKOT_FRAMEWORK_NAME
+import TrikotFrameworkName
 import Trikot
 import Kingfisher
 
