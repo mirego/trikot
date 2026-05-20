@@ -84,11 +84,11 @@ Pod::Spec.new do |spec|
 
     # View Model Declarative Flow
     spec.subspec 'viewmodels.declarative.flow' do |subspec|
-      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/core/**/*.swift'
+      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift-extensions/*.swift'
     end
 
     spec.subspec 'viewmodels.declarative.SwiftUI.flow' do |subspec|
-      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift/swiftui/**/*.swift'
+      subspec.source_files = 'trikot-viewmodels-declarative-flow/swift-extensions/swiftui/**/*.swift'
       subspec.dependency 'Trikot/viewmodels.declarative.flow'
       subspec.dependency 'Kingfisher', '~> 7.10.1'
     end
