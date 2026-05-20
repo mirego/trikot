@@ -45,7 +45,6 @@ fun File.hasSwiftFilesRecursively(): Boolean = walkTopDown().any { it.isFile && 
 tasks.named<Copy>("processResources") {
     swiftModules.forEach { module ->
         from(rootProject.file(module.sourcePath)) {
-            // Root modules are flat; sub-modules may organize files into nested directories.
             include(if (module.isSubmodule) "**/*.swift" else "*.swift")
             into("swift-extensions/${module.key}")
         }
