@@ -85,19 +85,19 @@ ios/TrikotExtensions/
 
 Modules are auto-discovered from `trikot-*/swift-extensions/` directories. Currently available:
 
-| Module                                 | Dependencies      | Description                                   |
-| -------------------------------------- | ----------------- | --------------------------------------------- |
-| `streams`                              | —                 | Publisher extensions                          |
-| `streams-combine`                      | —                 | Combine framework interop                     |
-| `viewmodels`                           | —                 | UIKit view model bindings                     |
-| `viewmodels-kingfisher`                | Kingfisher        | Image loading with Kingfisher                 |
-| `viewmodels-declarative-flow`          | —                 | Declarative view model flow extensions        |
-| `viewmodels-declarative-flow-swiftui`  | Kingfisher        | SwiftUI bindings for declarative flow         |
-| `http`                                 | Reachability      | HTTP client and connectivity                  |
-| `kword`                                | —                 | i18n string extensions                        |
-| `bluetooth`                            | —                 | CoreBluetooth extensions                      |
-| `analytics-firebase`                   | FirebaseAnalytics | Firebase analytics service                    |
-| `analytics-mixpanel`                   | Mixpanel          | Mixpanel analytics service                    |
+| Module                                | Dependencies      | Description                            |
+| ------------------------------------- | ----------------- | -------------------------------------- |
+| `streams`                             | —                 | Publisher extensions                   |
+| `streams-combine`                     | —                 | Combine framework interop              |
+| `viewmodels`                          | —                 | UIKit view model bindings              |
+| `viewmodels-kingfisher`               | Kingfisher        | Image loading with Kingfisher          |
+| `viewmodels-declarative-flow`         | —                 | Declarative view model flow extensions |
+| `viewmodels-declarative-flow-swiftui` | Kingfisher        | SwiftUI bindings for declarative flow  |
+| `http`                                | Reachability      | HTTP client and connectivity           |
+| `kword`                               | —                 | i18n string extensions                 |
+| `bluetooth`                           | —                 | CoreBluetooth extensions               |
+| `analytics-firebase`                  | FirebaseAnalytics | Firebase analytics service             |
+| `analytics-mixpanel`                  | Mixpanel          | Mixpanel analytics service             |
 
 ## Adding Swift extensions to a Trikot module
 
