@@ -43,7 +43,7 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
                 if (slash == -1) continue
 
                 val moduleKey = relative.substring(0, slash)
-                val fileName = relative.substring(slash + 1)
+                val relativePath = relative.substring(slash + 1)
 
                 // Skip modules the consumer didn't ask for (empty = sync all)
                 if (requestedModules.isNotEmpty() && moduleKey !in requestedModules) continue
@@ -53,8 +53,10 @@ abstract class SyncSwiftExtensionsTask : DefaultTask() {
                     .filter { !IMPORT_TRIKOT.matches(it) }
                     .joinToString("\n") { it.replace(FRAMEWORK_PLACEHOLDER, framework) }
 
-                val moduleOutDir = File(outDir, moduleKey).apply { mkdirs() }
-                File(moduleOutDir, fileName).writeText(processed)
+                val moduleOutDir = File(outDir, moduleKey)
+                val outFile = File(moduleOutDir, relativePath)
+                outFile.parentFile?.mkdirs()
+                outFile.writeText(processed)
                 totalFiles++
             }
         }

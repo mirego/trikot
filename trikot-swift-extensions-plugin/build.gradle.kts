@@ -15,7 +15,9 @@ gradlePlugin {
     }
 }
 
-val swiftModules: Map<String, String> = rootProject.projectDir.listFiles()
+data class SwiftModule(val key: String, val sourcePath: String, val isSubmodule: Boolean)
+
+val swiftModules: List<SwiftModule> = rootProject.projectDir.listFiles()
     .orEmpty()
     .filter { it.isDirectory && it.name.startsWith("trikot-") }
     .sorted()
@@ -25,26 +27,26 @@ val swiftModules: Map<String, String> = rootProject.projectDir.listFiles()
         if (!swiftExtDir.isDirectory) return@flatMap emptyList()
 
         buildList {
-            if (swiftExtDir.hasSwiftFiles()) {
-                add(moduleKey to "${trikotDir.name}/swift-extensions")
+            if (swiftExtDir.hasDirectSwiftFiles()) {
+                add(SwiftModule(moduleKey, "${trikotDir.name}/swift-extensions", isSubmodule = false))
             }
             swiftExtDir.listFiles().orEmpty()
-                .filter { it.isDirectory && it.hasSwiftFiles() }
+                .filter { it.isDirectory && it.hasSwiftFilesRecursively() }
                 .sorted()
                 .forEach { subDir ->
-                    add("$moduleKey-${subDir.name}" to "${trikotDir.name}/swift-extensions/${subDir.name}")
+                    add(SwiftModule("$moduleKey-${subDir.name}", "${trikotDir.name}/swift-extensions/${subDir.name}", isSubmodule = true))
                 }
         }
     }
-    .toMap()
 
-fun File.hasSwiftFiles(): Boolean = listFiles().orEmpty().any { it.isFile && it.extension == "swift" }
+fun File.hasDirectSwiftFiles(): Boolean = listFiles().orEmpty().any { it.isFile && it.extension == "swift" }
+fun File.hasSwiftFilesRecursively(): Boolean = walkTopDown().any { it.isFile && it.extension == "swift" }
 
 tasks.named<Copy>("processResources") {
-    swiftModules.forEach { (moduleKey, sourcePath) ->
-        from(rootProject.file(sourcePath)) {
-            include("*.swift")
-            into("swift-extensions/$moduleKey")
+    swiftModules.forEach { module ->
+        from(rootProject.file(module.sourcePath)) {
+            include(if (module.isSubmodule) "**/*.swift" else "*.swift")
+            into("swift-extensions/${module.key}")
         }
     }
 }

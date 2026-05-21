@@ -56,7 +56,7 @@ Run the sync task:
 ./gradlew syncTrikotSwiftExtensions
 ```
 
-This will populate the output directory with one subdirectory per module:
+This will populate the output directory with one subdirectory per module. Sub-modules preserve any internal directory structure they declare on disk:
 
 ```
 ios/TrikotExtensions/
@@ -70,24 +70,34 @@ ios/TrikotExtensions/
     ...
   viewmodels-kingfisher/
     KFImageViewModelHandler.swift
-  ...
+  viewmodels-declarative-flow-swiftui/
+    TrikotViewModelDeclarative.swift
+    Components/
+      VMDButton.swift
+      Snackbar/
+        VMDSnackbar.swift
+    Extensions/
+      VMDAnimation+Extensions.swift
+    ...
 ```
 
 ## Available modules
 
 Modules are auto-discovered from `trikot-*/swift-extensions/` directories. Currently available:
 
-| Module                  | Dependencies      | Description                   |
-| ----------------------- | ----------------- | ----------------------------- |
-| `streams`               | —                 | Publisher extensions          |
-| `streams-combine`       | —                 | Combine framework interop     |
-| `viewmodels`            | —                 | UIKit view model bindings     |
-| `viewmodels-kingfisher` | Kingfisher        | Image loading with Kingfisher |
-| `http`                  | Reachability      | HTTP client and connectivity  |
-| `kword`                 | —                 | i18n string extensions        |
-| `bluetooth`             | —                 | CoreBluetooth extensions      |
-| `analytics-firebase`    | FirebaseAnalytics | Firebase analytics service    |
-| `analytics-mixpanel`    | Mixpanel          | Mixpanel analytics service    |
+| Module                                | Dependencies      | Description                            |
+| ------------------------------------- | ----------------- | -------------------------------------- |
+| `streams`                             | —                 | Publisher extensions                   |
+| `streams-combine`                     | —                 | Combine framework interop              |
+| `viewmodels`                          | —                 | UIKit view model bindings              |
+| `viewmodels-kingfisher`               | Kingfisher        | Image loading with Kingfisher          |
+| `viewmodels-declarative-flow`         | —                 | Declarative view model flow extensions |
+| `viewmodels-declarative-flow-swiftui` | Kingfisher        | SwiftUI bindings for declarative flow  |
+| `http`                                | Reachability      | HTTP client and connectivity           |
+| `kword`                               | —                 | i18n string extensions                 |
+| `bluetooth`                           | —                 | CoreBluetooth extensions               |
+| `analytics-firebase`                  | FirebaseAnalytics | Firebase analytics service             |
+| `analytics-mixpanel`                  | Mixpanel          | Mixpanel analytics service             |
 
 ## Adding Swift extensions to a Trikot module
 
@@ -99,7 +109,7 @@ trikot-mymodule/
     MyExtension.swift
 ```
 
-Sub-modules are supported via subdirectories:
+Sub-modules are supported via subdirectories one level deep. Each first-level subdirectory of `swift-extensions/` becomes its own module key:
 
 ```
 trikot-mymodule/
@@ -108,5 +118,20 @@ trikot-mymodule/
     subfeature/
       SubExtension.swift       # module key: "mymodule-subfeature"
 ```
+
+The **root module** is flat — only `.swift` files placed directly under `swift-extensions/` are included. **Sub-modules** may organize their files into nested subdirectories for readability; the structure is preserved end-to-end into the consumer's output directory:
+
+```
+trikot-mymodule/
+  swift-extensions/
+    subfeature/
+      SubExtension.swift               # → outputDir/mymodule-subfeature/SubExtension.swift
+      Components/
+        ComponentA.swift               # → outputDir/mymodule-subfeature/Components/ComponentA.swift
+        Detail/
+          Helper.swift                 # → outputDir/mymodule-subfeature/Components/Detail/Helper.swift
+```
+
+Note: deeper nested directories are **organization within a sub-module**, not new module keys. Only the first level under `swift-extensions/` is promoted to a module.
 
 Use `import TRIKOT_FRAMEWORK_NAME` in your Swift files — it will be replaced with the consumer's framework name at sync time.
