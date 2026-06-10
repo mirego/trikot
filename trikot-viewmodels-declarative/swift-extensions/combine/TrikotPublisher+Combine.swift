@@ -1,4 +1,5 @@
 import Combine
+import Foundation
 import TRIKOT_FRAMEWORK_NAME
 
 public extension TRIKOT_FRAMEWORK_NAME.Publisher {
