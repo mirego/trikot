@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - [swift-extensions] Sub-modules now preserve nested directory structures. Files placed in subdirectories of a sub-module (e.g. `swift-extensions/swiftui/Components/VMDButton.swift`) keep their relative path end-to-end into the consumer's output directory. The root module remains flat by convention.
 - [swift-extensions] Migrate `viewmodels.declarative.flow` and `viewmodels.declarative.SwiftUI.flow` from the CocoaPods subspec layout to the `trikotSwiftExtensions` plugin. Source files moved from `trikot-viewmodels-declarative-flow/swift/{core,swiftui}/**` to `trikot-viewmodels-declarative-flow/swift-extensions/**`, preserving the original `Components/`, `Extensions/`, `Utilities/`, etc. organization under `swiftui/`. New module keys: `viewmodels-declarative-flow`, `viewmodels-declarative-flow-swiftui`.
+- [swift-extensions] Migrate publisher-based `viewmodels-declarative` Swift extensions to the `trikotSwiftExtensions` plugin. Source files moved from `trikot-viewmodels-declarative/swift/{combine,core,swiftui,uikit}/**` to `trikot-viewmodels-declarative/swift-extensions/**`. New module keys: `viewmodels-declarative-combine`, `viewmodels-declarative-core`, `viewmodels-declarative-swiftui`, `viewmodels-declarative-uikit`. CocoaPods subspec paths updated accordingly.
 
 ## 6.2.0
 

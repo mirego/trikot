@@ -21,11 +21,11 @@ public extension VMDText {
         configure { $0.strikethrough(active, color: color) }
     }
 
-    func font(_ font: Font?) -> VMDText {
+    func font(_ font: SwiftUI.Font?) -> VMDText {
         configure { $0.font(font) }
     }
 
-    func fontWeight(_ weight: Font.Weight?) -> VMDText {
+    func fontWeight(_ weight: SwiftUI.Font.Weight?) -> VMDText {
         configure { $0.fontWeight(weight) }
     }
 

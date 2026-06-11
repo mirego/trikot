@@ -60,23 +60,23 @@ Pod::Spec.new do |spec|
 
   # View Model Declarative
   spec.subspec 'viewmodels.declarative' do |subspec|
-    subspec.source_files = 'trikot-viewmodels-declarative/swift/core/**/*.swift'
+    subspec.source_files = 'trikot-viewmodels-declarative/swift-extensions/core/**/*.swift'
     subspec.dependency 'Trikot/streams'
   end
 
   spec.subspec 'viewmodels.declarative.Combine' do |subspec|
-    subspec.source_files = 'trikot-viewmodels-declarative/swift/combine/**/*.swift'
+    subspec.source_files = 'trikot-viewmodels-declarative/swift-extensions/combine/**/*.swift'
   end
 
   spec.subspec 'viewmodels.declarative.UIKit' do |subspec|
-    subspec.source_files = 'trikot-viewmodels-declarative/swift/uikit/**/*.swift'
+    subspec.source_files = 'trikot-viewmodels-declarative/swift-extensions/uikit/**/*.swift'
     subspec.dependency 'Trikot/streams'
     subspec.dependency 'Trikot/viewmodels.declarative'
     subspec.dependency 'Kingfisher', '~> 7.10.1'
   end
 
   spec.subspec 'viewmodels.declarative.SwiftUI' do |subspec|
-    subspec.source_files = 'trikot-viewmodels-declarative/swift/swiftui/**/*.swift'
+    subspec.source_files = 'trikot-viewmodels-declarative/swift-extensions/swiftui/**/*.swift'
     subspec.dependency 'Trikot/viewmodels.declarative'
     subspec.dependency 'Trikot/viewmodels.declarative.Combine'
     subspec.dependency 'Kingfisher', '~> 7.10.1'
