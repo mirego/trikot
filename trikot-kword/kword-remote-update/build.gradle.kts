@@ -56,7 +56,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mirego.trikot.kword"
+    namespace = "com.mirego.trikot.kword.remoteupdate"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK

@@ -47,7 +47,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mirego.trikot.datasources.flow"
+    namespace = "com.mirego.trikot.datasources.flow.filesystem"
     defaultConfig {
         compileSdk = Versions.Android.COMPILE_SDK
         minSdk = Versions.Android.MIN_SDK
