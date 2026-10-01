@@ -27,3 +27,11 @@ interface HttpResponse {
         CACHE
     }
 }
+
+/**
+ * Optional fast path for [bodyString]. Platform responses may implement this to supply a
+ * natively decoded UTF-8 string instead of Kotlin's `decodeToString()`.
+ */
+interface NativeBodyStringHttpResponse {
+    val nativeBodyString: String?
+}
