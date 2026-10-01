@@ -167,10 +167,6 @@ public final class com/mirego/trikot/http/HttpStatusCode$Companion {
 	public final fun fromInt (I)Lcom/mirego/trikot/http/HttpStatusCode;
 }
 
-public abstract interface class com/mirego/trikot/http/NativeBodyStringHttpResponse {
-	public abstract fun getNativeBodyString ()Ljava/lang/String;
-}
-
 public final class com/mirego/trikot/http/RequestBuilder {
 	public fun <init> ()V
 	public final fun buildUrl ()Ljava/lang/String;
