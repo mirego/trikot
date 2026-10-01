@@ -20,12 +20,14 @@ public final class com/mirego/trikot/http/HttpConfiguration {
 	public final fun getHttpRequestFactory ()Lcom/mirego/trikot/http/HttpRequestFactory;
 	public final fun getJson ()Lkotlinx/serialization/json/Json;
 	public final fun getNetworkDispatchQueue ()Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;
+	public final fun getUseNativeBodyStringDecoder ()Z
 	public final fun setBaseUrl (Ljava/lang/String;)V
 	public final fun setConnectivityPublisher (Lorg/reactivestreams/Publisher;)V
 	public final fun setDefaultHttpHeaderProvider (Lcom/mirego/trikot/http/HttpHeaderProvider;)V
 	public final fun setHttpRequestFactory (Lcom/mirego/trikot/http/HttpRequestFactory;)V
 	public final fun setJson (Lkotlinx/serialization/json/Json;)V
 	public final fun setNetworkDispatchQueue (Lcom/mirego/trikot/foundation/concurrent/dispatchQueue/TrikotDispatchQueue;)V
+	public final fun setUseNativeBodyStringDecoder (Z)V
 }
 
 public abstract interface class com/mirego/trikot/http/HttpHeaderProvider {

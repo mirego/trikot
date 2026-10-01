@@ -22,6 +22,8 @@ object HttpConfiguration {
     private val internalBaseUrl = AtomicReference("")
     private val internalJson =
         AtomicReference(defaultJsonConfiguration())
+    private val internalUseNativeBodyStringDecoder =
+        AtomicReference(false)
 
     private fun defaultJsonConfiguration(): Json {
         return Json {
@@ -99,5 +101,21 @@ object HttpConfiguration {
         }
         set(value) {
             internalJson.setOrThrow(internalJson.value, value)
+        }
+
+    /**
+     * When true, [bodyString] prefers a platform-native UTF-8 decode when the response
+     * provides one (JS: browser `TextDecoder` via [NativeBodyStringHttpResponse]).
+     * When false (default), always uses Kotlin `ByteArray.decodeToString()`.
+     */
+    var useNativeBodyStringDecoder: Boolean
+        get() {
+            return internalUseNativeBodyStringDecoder.value
+        }
+        set(value) {
+            internalUseNativeBodyStringDecoder.setOrThrow(
+                internalUseNativeBodyStringDecoder.value,
+                value
+            )
         }
 }
