@@ -1,3 +1,10 @@
+public class com/mirego/trikot/analytics/SimpleTrackableViewModelAction : com/mirego/trikot/viewmodels/properties/ViewModelAction {
+	public fun <init> (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun execute ()V
+	public fun execute (Ljava/lang/Object;)V
+}
+
 public class com/mirego/trikot/analytics/TrackableViewModelAction : com/mirego/trikot/viewmodels/properties/ViewModelAction {
 	public fun <init> (Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;Lkotlin/jvm/functions/Function1;)V
 	public fun <init> (Lcom/mirego/trikot/analytics/AnalyticsEvent;Lorg/reactivestreams/Publisher;Lkotlin/jvm/functions/Function1;)V

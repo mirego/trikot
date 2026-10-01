@@ -14,7 +14,16 @@ class AnalyticsServiceLogger(private val analyticsService: AnalyticsService) : A
 
     private val superProperties = AtomicReference<AnalyticsPropertiesType>(mapOf())
 
+    @Deprecated(
+        message = "Deprecated. Please use distinctDeviceId()",
+        replaceWith = ReplaceWith(
+            expression = "distinctDeviceId()",
+            imports = ["com.mirego.trikot.analytics.distinctDeviceId"]
+        )
+    )
     override fun distinctAppId() = analyticsService.distinctAppId()
+
+    override suspend fun distinctDeviceId() = analyticsService.distinctDeviceId()
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         println(
