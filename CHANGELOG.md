@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+## 6.3.0
+
 ### Updates
 
 - [http] JS: optional native `TextDecoder` for `bodyString` (faster UTF-8 on large JSON). Off by default; enable with `HttpConfiguration.useNativeBodyStringDecoder = true`. Falls back to Kotlin `decodeToString()` when disabled or when `TextDecoder` is unavailable.
