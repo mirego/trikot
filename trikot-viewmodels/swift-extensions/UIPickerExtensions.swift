@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
@@ -62,3 +63,4 @@ extension UIPickerView: UIPickerViewDataSource {
         return elements?[row] ?? nil
     }
 }
+#endif
