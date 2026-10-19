@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 import TRIKOT_FRAMEWORK_NAME
 
@@ -86,3 +87,4 @@ extension UISlider {
         }
     }
 }
+#endif
