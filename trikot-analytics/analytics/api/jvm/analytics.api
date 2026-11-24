@@ -11,6 +11,7 @@ public abstract interface class com/mirego/trikot/analytics/AnalyticsEvent {
 public abstract interface class com/mirego/trikot/analytics/AnalyticsService {
 	public static final field Companion Lcom/mirego/trikot/analytics/AnalyticsService$Companion;
 	public abstract fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public abstract fun distinctDeviceId (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getName ()Ljava/lang/String;
 	public abstract fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
 	public abstract fun incrementUserProperties (Ljava/util/Map;)V
@@ -26,6 +27,7 @@ public abstract interface class com/mirego/trikot/analytics/AnalyticsService {
 
 public final class com/mirego/trikot/analytics/AnalyticsService$Companion : com/mirego/trikot/analytics/AnalyticsService {
 	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun distinctDeviceId (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getName ()Ljava/lang/String;
 	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
 	public fun incrementUserProperties (Ljava/util/Map;)V
@@ -40,15 +42,18 @@ public final class com/mirego/trikot/analytics/AnalyticsService$Companion : com/
 }
 
 public final class com/mirego/trikot/analytics/AnalyticsServiceKt {
+	public static final fun identifyUser (Lcom/mirego/trikot/analytics/AnalyticsService;Ljava/lang/String;Ljava/util/Map;)V
 	public static final fun identifyUser (Lcom/mirego/trikot/analytics/AnalyticsService;Ljava/lang/String;Lorg/reactivestreams/Publisher;)V
 	public static final fun logout (Lcom/mirego/trikot/analytics/AnalyticsService;Z)V
 	public static synthetic fun logout$default (Lcom/mirego/trikot/analytics/AnalyticsService;ZILjava/lang/Object;)V
+	public static final fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsService;Lcom/mirego/trikot/analytics/AnalyticsEvent;Ljava/util/Map;)V
 	public static final fun trackEvent (Lcom/mirego/trikot/analytics/AnalyticsService;Lcom/mirego/trikot/analytics/AnalyticsEvent;Lorg/reactivestreams/Publisher;)V
 }
 
 public final class com/mirego/trikot/analytics/AnalyticsServiceLogger : com/mirego/trikot/analytics/AnalyticsService {
 	public fun <init> (Lcom/mirego/trikot/analytics/AnalyticsService;)V
 	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun distinctDeviceId (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getName ()Ljava/lang/String;
 	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
 	public fun incrementUserProperties (Ljava/util/Map;)V
@@ -65,6 +70,7 @@ public final class com/mirego/trikot/analytics/AnalyticsServiceLogger : com/mire
 public final class com/mirego/trikot/analytics/EmptyAnalyticsService : com/mirego/trikot/analytics/AnalyticsService {
 	public fun <init> ()V
 	public fun distinctAppId ()Lcom/mirego/trikot/streams/reactive/promise/Promise;
+	public fun distinctDeviceId (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getName ()Ljava/lang/String;
 	public fun identifyUser (Ljava/lang/String;Ljava/util/Map;)V
 	public fun incrementUserProperties (Ljava/util/Map;)V

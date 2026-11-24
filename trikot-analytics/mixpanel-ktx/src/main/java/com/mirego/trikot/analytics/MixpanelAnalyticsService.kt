@@ -25,7 +25,16 @@ class MixpanelAnalyticsService(
 
     override val name: String = "MixpanelAnalytics"
 
+    @Deprecated(
+        message = "Deprecated. Please use distinctDeviceId()",
+        replaceWith = ReplaceWith(
+            expression = "distinctDeviceId()",
+            imports = ["com.mirego.trikot.analytics.distinctDeviceId"]
+        )
+    )
     override fun distinctAppId() = Promise.resolve(mixpanelAnalytics.distinctId)
+
+    override suspend fun distinctDeviceId(): String = mixpanelAnalytics.distinctId
 
     override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
         mixpanelAnalytics.identify(userId)

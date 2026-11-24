@@ -22,6 +22,10 @@ public class MixpanelAnalyticsService: AnalyticsService {
         PromiseCompanion().resolve(value: Mixpanel.mainInstance().distinctId) as! Promise<NSString>
     }
 
+    public func distinctDeviceId() -> NSString {
+        Mixpanel.mainInstance().distinctId as NSString
+    }
+
     public func identifyUser(userId: String, properties: [String: Any]) {
         Mixpanel.mainInstance().identify(distinctId: userId)
         Mixpanel.mainInstance().people.set(properties: properties.asMixpanelProperties)

@@ -20,7 +20,19 @@ interface AnalyticsService {
     /*
     The distinctAppId associated with the current device
      */
+    @Deprecated(
+        message = "Deprecated. Please use distinctDeviceId()",
+        replaceWith = ReplaceWith(
+            expression = "distinctDeviceId()",
+            imports = ["com.mirego.trikot.analytics.distinctDeviceId"]
+        )
+    )
     fun distinctAppId(): Promise<String>
+
+    /*
+    The distinctDeviceId associated with the current device
+     */
+    suspend fun distinctDeviceId(): String
 
     /*
     userId: Id of the logged in user
@@ -76,7 +88,16 @@ interface AnalyticsService {
                 currentAnalyticsService().isEnabled = value
             }
 
+        @Deprecated(
+            message = "Deprecated. Please use distinctDeviceId()",
+            replaceWith = ReplaceWith(
+                expression = "distinctDeviceId()",
+                imports = ["com.mirego.trikot.analytics.distinctDeviceId"]
+            )
+        )
         override fun distinctAppId() = currentAnalyticsService().distinctAppId()
+
+        override suspend fun distinctDeviceId() = currentAnalyticsService().distinctDeviceId()
 
         override fun identifyUser(userId: String, properties: AnalyticsPropertiesType) {
             currentAnalyticsService().identifyUser(userId, properties)
@@ -116,6 +137,13 @@ interface AnalyticsService {
 event: Event to track, will be store using toString() method
 properties: Publisher of property to store with the event. Publisher MUST return a value.
  */
+@Deprecated(
+    message = "Deprecated. Please use the one without a Publisher",
+    replaceWith = ReplaceWith(
+        expression = "trackEvent(event, propertiesMap)",
+        imports = ["com.mirego.trikot.analytics.trackEvent"]
+    )
+)
 fun AnalyticsService.trackEvent(
     event: AnalyticsEvent,
     properties: Publisher<AnalyticsPropertiesType>
@@ -126,13 +154,39 @@ fun AnalyticsService.trackEvent(
 }
 
 /*
+event: Event to track, will be store using toString() method
+properties: Property to store with the event.
+ */
+fun AnalyticsService.trackEvent(
+    event: AnalyticsEvent,
+    propertiesMap: AnalyticsPropertiesType
+) {
+    trackEvent(event, propertiesMap)
+}
+
+/*
  userId: Id of the logged in user
  properties: Publisher of property to store with the event. Publisher MUST return a value.
  */
+@Deprecated(
+    message = "Deprecated. Please use the one without a Publisher",
+    replaceWith = ReplaceWith(
+        expression = "trackEvent(event, propertiesMap)",
+        imports = ["com.mirego.trikot.analytics.identifyUser"]
+    )
+)
 fun AnalyticsService.identifyUser(userId: String, properties: Publisher<AnalyticsPropertiesType>) {
     properties.first().subscribe(CancellableManager()) {
         identifyUser(userId, it)
     }
+}
+
+/*
+ userId: Id of the logged in user
+ properties: Property to store with the event.
+ */
+fun AnalyticsService.identifyUser(userId: String, propertiesMap: AnalyticsPropertiesType) {
+    identifyUser(userId, propertiesMap)
 }
 
 /*
