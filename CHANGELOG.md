@@ -4,7 +4,11 @@ All notable changes to the library will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## Upcoming
+## 6.4.0
+
+### Fixes
+
+- [viewmodels] Guard iOS-only Swift extensions (`UIPickerExtensions`, `UISliderExtensions`, `UISwitchExtensions`) with `#if os(iOS)`. These bindings rely on `UIPickerView`/`UISlider`/`UISwitch`/`UIImpactFeedbackGenerator`, unavailable on tvOS. Unblocks tvOS builds for consumers syncing the viewmodels module.
 
 ## 6.3.0
 
